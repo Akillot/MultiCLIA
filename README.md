@@ -24,7 +24,7 @@ MathCLIA supports the following operations:
 4. **divide**: Divide the first number by subsequent numbers.
 
 ## Example
-
+```
 -------------------
 Enter your numbers.
 -------------------
@@ -82,3 +82,4 @@ Operations:
 -------------------
 Your choice is: exit
 -------------------
+```
