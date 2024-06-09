@@ -39,7 +39,8 @@ Operations:
 2. subtract
 3. multi
 4. divide
-5. exit
+5. power
+6. exit
 -------------------
 Your choice is: multi
 -------------------
