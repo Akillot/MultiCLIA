@@ -22,6 +22,7 @@ MathCLIA supports the following operations:
 2. **subtract**: Subtract subsequent numbers from the first one.
 3. **multi**: Multiply all the numbers together.
 4. **divide**: Divide the first number by subsequent numbers.
+4. **power**: Raise the first number to the power of each subsequent number sequentially.
 
 ## Example
 ```
@@ -38,7 +39,8 @@ Operations:
 2. subtract
 3. multi
 4. divide
-5. exit
+5. power
+6. exit
 -------------------
 Your choice is: multi
 -------------------
