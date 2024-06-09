@@ -8,11 +8,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println(" ");
 
-        while(true) {
             while(true) {
                 try {
                     System.out.println("-------------------\nEnter your numbers.");
-                    System.out.println("-------------------\nUse a 'SPACE' \nTo split numbers.\n-------------------");
+                    System.out.println("-------------------\nUse a 'SPACE'\nTo split numbers.\n-------------------");
                     String mathStatementString = scanner.nextLine();
                     operationMenu();
                     System.out.print("Your choice is: ");
@@ -45,7 +44,6 @@ public class Main {
                 }
             }
         }
-    }
 
     static void sum(String mathStatement) {
         String[] nums = mathStatement.split(" ");
@@ -171,7 +169,7 @@ public class Main {
                 }
             }
 
-            System.out.println("Answer: " + answer + "\n-------------------");
+            System.out.println("Answer: " + answer + "\n-------------------\n");
         }
     }
 
