@@ -1,9 +1,5 @@
 import java.util.Scanner;
-
 public class Main {
-    public Main() {
-    }
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(" ");
@@ -21,8 +17,8 @@ public class Main {
                         case "sum":
                             Operations.sum(mathStatementString);
                             break;
-                        case "subtract":
-                            Operations.subtract(mathStatementString);
+                        case "sub":
+                            Operations.sub(mathStatementString);
                             break;
                         case "multi":
                             Operations.multi(mathStatementString);
@@ -30,8 +26,8 @@ public class Main {
                         case "divide":
                             Operations.divide(mathStatementString);
                             break;
-                        case "power":
-                            Operations.power(mathStatementString);
+                        case "pow":
+                            Operations.pow(mathStatementString);
                             break;
                         case "exit":
                             return;
@@ -39,8 +35,7 @@ public class Main {
                             System.out.println("Invalid operation.\n-------------------\n");
                     }
                 } catch (Exception ex) {
-                    Exception e = ex;
-                    System.out.println("Error: " + e.getMessage());
+                    System.out.println("Error: " + ex.getMessage());
                 }
             }
         }
