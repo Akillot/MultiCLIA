@@ -32,11 +32,11 @@ public class Main {
                         case "exit":
                             return;
                         default:
-                            System.out.println("Invalid operation.\n-------------------\n");
+                            System.out.println("Invalid operation.\n-------------------\n ");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error: " + ex.getMessage());
                 }
             }
-        }
+    }
 }
