@@ -119,6 +119,11 @@ public class Operations {
 
     // Show list of operations
     static void operationMenu() {
-        System.out.println("-------------------\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. divide[/]\n5. pow[^]\n6. exit\n-------------------");
+        System.out.println("-------------------\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. divide[/]\n5. pow[^]\n6. info[?]\n7. exit\n-------------------");
+    }
+
+    // Show version
+    static void versionInfo() {
+        System.out.println("Current version:\n0.2.1");
     }
 }

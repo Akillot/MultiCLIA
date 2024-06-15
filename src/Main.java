@@ -29,6 +29,9 @@ public class Main {
                         case "pow":
                             Operations.pow(mathStatementString);
                             break;
+                        case "info":
+                            Operations.versionInfo();
+                            break;
                         case "exit":
                             return;
                         default:
