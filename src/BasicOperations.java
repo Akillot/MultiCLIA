@@ -119,11 +119,11 @@ public class BasicOperations {
 
     // Show list of operations
     static void operationMenu() {
-        System.out.println(AdditionalOperations.border + "\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. div[/]\n5. pow[^]\n6. info[?]\n7. exit[x]\n" + AdditionalOperations.border);
+        System.out.println(AdditionalOperations.border + "\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. div[/]\n5. pow[^]\n6. info[i]\n7. exit[x]\n" + AdditionalOperations.border);
     }
 
     // Show version
     static void versionInfo() {
-        System.out.println("Current version:\n0.2.2");
+        System.out.println("Current version:\n0.2.3");
     }
 }
