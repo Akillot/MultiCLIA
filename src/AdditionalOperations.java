@@ -2,15 +2,12 @@ import java.util.Random;
 
 public class AdditionalOperations {
     static String border = "-------------------";
-
     static void changeBorder() {
+        System.out.println(" ");
         String[] tableStyleArray = {"+++++++++++++++++++", "===================",
-                "<><><><><@><><><><>", "<.><.><.>^<.><.><.>", "+-+-+-+-+-+-+-+-+-+",
-                "~~~~~~~~~~~~~~~~~~~", "...................",};
+                "~+~+~+~+~+~+~+~+~+~", "~-~-~-~-~-~-~-~-~-~", "+-+-+-+-+-+-+-+-+-+",
+                "~~~~~~~~~~~~~~~~~~~", "...................", "*******************"};
         Random rand = new Random();
-        for (int i = 0; i < tableStyleArray.length; i++) {
-            tableStyleArray[i] = tableStyleArray[rand.nextInt(tableStyleArray.length)];
-            border = String.valueOf(tableStyleArray[i]);
-        }
+        border = tableStyleArray[rand.nextInt(tableStyleArray.length)];
     }
 }

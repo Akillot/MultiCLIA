@@ -11,7 +11,7 @@ public class Main {
                     String mathStatementString = scanner.nextLine().trim();
 
                     if (mathStatementString.isEmpty()) {
-                        System.out.println("You have not entered any numbers.");
+                        System.out.println(AdditionalOperations.border + "\n" + "No numbers entered.");
                         continue;
                     }
 
@@ -43,7 +43,6 @@ public class Main {
                             break;
                         case "info":
                         case "i":
-                        case "?":
                             BasicOperations.versionInfo();
                             break;
                         case "exit":
