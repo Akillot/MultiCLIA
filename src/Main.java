@@ -1,12 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("\ndd-MM-yyyy \nHH:mm:ss");
+        String formattedTime = localTime.format(myFormatter);
         System.out.println();
 
             while(true) {
                 try {
                     System.out.println(AdditionalOperations.border + "\nEnter your numbers.");
+                    System.out.println(ConsoleColors.PURPLE + "Time is: " + formattedTime + ConsoleColors.RESET);
                     System.out.println(AdditionalOperations.border + "\nUse a 'SPACE'\nTo split numbers.\n" + AdditionalOperations.border);
                     String mathStatementString = scanner.nextLine().trim();
 
@@ -15,7 +22,7 @@ public class Main {
                         continue;
                     }
 
-                    BasicOperations.operationMenu();
+                    BasicOperations.commandList();
                     System.out.print("Your choice is: ");
                     String operation = scanner.nextLine().trim().toLowerCase();
                     System.out.println(AdditionalOperations.border);
@@ -49,8 +56,14 @@ public class Main {
                         case "x":
                             System.out.println("Exiting the program...");
                             return;
-                        case "abracadabra":
+                        case "border-magic":
                             AdditionalOperations.changeBorder();
+                            break;
+                        case "text-magic":
+
+                            break;
+                        case "back-magic":
+
                             break;
                         default:
                             System.out.println("Invalid operation.\n" + AdditionalOperations.border + "\n");
