@@ -1,4 +1,4 @@
-public class BasicOperations {
+public class MathOperations {
     static double result;
     // Summation
     static  void sum(String mathStatement) {
@@ -13,7 +13,7 @@ public class BasicOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AdditionalOperations.border + "\n");
+        System.out.println("Answer: " + result + "\n" + AppearanceFeatures.border + "\n");
     }
 
     // Subtraction
@@ -38,7 +38,7 @@ public class BasicOperations {
                 System.out.println(nums[i] + " is not a number");
             }
         }
-        System.out.println("Answer: " + result + "\n" + AdditionalOperations.border + "\n");
+        System.out.println("Answer: " + result + "\n" + AppearanceFeatures.border + "\n");
     }
 
     // Multiplication
@@ -58,7 +58,7 @@ public class BasicOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AdditionalOperations.border + "\n");
+        System.out.println("Answer: " + result + "\n" + AppearanceFeatures.border + "\n");
     }
 
     // Division
@@ -88,7 +88,7 @@ public class BasicOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AdditionalOperations.border + "\n");
+        System.out.println("Answer: " + result + "\n" + AppearanceFeatures.border + "\n");
     }
 
     // Power
@@ -114,16 +114,6 @@ public class BasicOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AdditionalOperations.border + "\n");
-    }
-
-    // Show list of operations
-    static void commandList() {
-        System.out.println(AdditionalOperations.border + "\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. div[/]\n5. pow[^]\n6. info[i]\n7. exit[x]\n" + AdditionalOperations.border);
-    }
-
-    // Show version
-    static void versionInfo() {
-        System.out.println("Current version:\n0.2.3");
+        System.out.println("Answer: " + result + "\n" + AppearanceFeatures.border + "\n");
     }
 }
