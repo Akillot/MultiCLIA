@@ -12,61 +12,62 @@ public class Main {
 
             while(true) {
                 try {
-                    System.out.println(AdditionalOperations.border + "\nEnter your numbers.");
-                    System.out.println(ConsoleColors.PURPLE + "Time is: " + formattedTime + ConsoleColors.RESET);
-                    System.out.println(AdditionalOperations.border + "\nUse a 'SPACE'\nTo split numbers.\n" + AdditionalOperations.border);
+                    System.out.println();
+                    System.out.println(AppearanceFeatures.border + "\nEnter your numbers.");
+                    System.out.println("Time is: " + formattedTime);
+                    System.out.println(AppearanceFeatures.border + "\nUse a 'SPACE'\nTo split numbers.\n" + AppearanceFeatures.border);
                     String mathStatementString = scanner.nextLine().trim();
 
                     if (mathStatementString.isEmpty()) {
-                        System.out.println(AdditionalOperations.border + "\n" + "No numbers entered.");
+                        System.out.println(AppearanceFeatures.border + "\n" + "No numbers entered.");
                         continue;
                     }
 
-                    BasicOperations.commandList();
+                    AdditionalOperations.commandList();
                     System.out.print("Your choice is: ");
                     String operation = scanner.nextLine().trim().toLowerCase();
-                    System.out.println(AdditionalOperations.border);
+                    System.out.println(AppearanceFeatures.border);
 
                     switch (operation) {
                         case "sum":
                         case "+":
-                            BasicOperations.sum(mathStatementString);
+                            MathOperations.sum(mathStatementString);
                             break;
                         case "sub":
                         case "-":
-                            BasicOperations.sub(mathStatementString);
+                            MathOperations.sub(mathStatementString);
                             break;
                         case "multi":
                         case "*":
-                            BasicOperations.multi(mathStatementString);
+                            MathOperations.multi(mathStatementString);
                             break;
                         case "div":
                         case "/":
-                            BasicOperations.divide(mathStatementString);
+                            MathOperations.divide(mathStatementString);
                             break;
                         case "pow":
                         case "^":
-                            BasicOperations.pow(mathStatementString);
+                            MathOperations.pow(mathStatementString);
                             break;
                         case "info":
                         case "i":
-                            BasicOperations.versionInfo();
+                            AdditionalOperations.versionInfo();
                             break;
                         case "exit":
                         case "x":
                             System.out.println("Exiting the program...");
                             return;
                         case "border-magic":
-                            AdditionalOperations.changeBorder();
+                            AppearanceFeatures.changeBorder();
                             break;
                         case "text-magic":
-
+                            AppearanceFeatures.changeColor();
                             break;
                         case "back-magic":
 
                             break;
                         default:
-                            System.out.println("Invalid operation.\n" + AdditionalOperations.border + "\n");
+                            System.out.println("Invalid operation.\n" + AppearanceFeatures.border + "\n");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error: " + ex.getMessage());

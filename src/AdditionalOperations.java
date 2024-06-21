@@ -1,23 +1,13 @@
-import java.util.Random;
 
 public class AdditionalOperations {
-    static String border = "-------------------";
-    static void changeBorder() {
-        System.out.println(" ");
-        String[] tableStyleArray = {"+++++++++++++++++++", "===================",
-                "~+~+~+~+~+~+~+~+~+~", "~-~-~-~-~-~-~-~-~-~", "+-+-+-+-+-+-+-+-+-+",
-                "~~~~~~~~~~~~~~~~~~~", "...................", "*******************"};
-        Random rand = new Random();
-        border = tableStyleArray[rand.nextInt(tableStyleArray.length)];
+    // Show list of operations
+    static void commandList() {
+        System.out.println(AppearanceFeatures.border + "\nOperations:\n1. sum[+]\n2. sub[-]" +
+                "\n3. multi[*]\n4. div[/]\n5. pow[^]\n6. info[i]\n7. exit[x]\n" + AppearanceFeatures.border);
     }
 
-   /* static void changeColor() {
-        //Random rand = new Random();
-        System.out.println("To which color do you want to change: " +
-                "\nColors:" + ConsoleColors.BLACK + "\n1. Black" + ConsoleColors.RESET +
-                ConsoleColors.RED + "\n2. Red" + ConsoleColors.RESET + ConsoleColors.GREEN + "\n3. Green" + ConsoleColors.RESET +
-                ConsoleColors.YELLOW + "\n4. Yellow" + ConsoleColors.RESET + ConsoleColors.BLUE + "\n5. Blue" + ConsoleColors.RESET +
-                ConsoleColors.PURPLE +"\n6. Purple" + ConsoleColors.RESET + ConsoleColors.CYAN + "\n7. Cyan" + ConsoleColors.RESET +
-                ConsoleColors.WHITE + "\n8. White" + ConsoleColors.RESET + "\n9. Close\n");
-    }*/
+    // Show version
+    static void versionInfo() {
+        System.out.println("Current version:\n0.2.3");
+    }
 }
