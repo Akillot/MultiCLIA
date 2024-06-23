@@ -19,7 +19,7 @@ public class Main {
                     String mathStatementString = scanner.nextLine().trim();
 
                     if (mathStatementString.isEmpty()) {
-                        System.out.println(AppearanceFeatures.border + "\n" + "No numbers entered.");
+                        System.out.print(AppearanceFeatures.border + AppearanceFeatures.RED + "\n" + "No numbers entered." + AppearanceFeatures.RESET);
                         continue;
                     }
 
@@ -66,8 +66,11 @@ public class Main {
                         case "back-magic":
 
                             break;
+                        case "theme-magic":
+                            AppearanceFeatures.changeTheme();
+                            break;
                         default:
-                            System.out.println("Invalid operation.\n" + AppearanceFeatures.border + "\n");
+                            System.out.println(AppearanceFeatures.RED + "Invalid operation.\n" + AppearanceFeatures.RESET + AppearanceFeatures.border + "\n");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error: " + ex.getMessage());

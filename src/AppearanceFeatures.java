@@ -2,6 +2,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class AppearanceFeatures {
+
+    public static final String WHITE = "\033[0;38m";
+
     public static final String RESET = "\033[0m";
     public static final String BLACK = "\033[0;30m";
     public static final String RED = "\033[0;31m";
@@ -11,6 +14,7 @@ public class AppearanceFeatures {
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
     public static final String GRAY = "\033[0;37m";
+    public static final String GRAY_BACKGROUND = "\033[47m";
 
     public static final String BLACK_BACKGROUND = "\033[40m";
     public static final String RED_BACKGROUND = "\033[41m";
@@ -19,7 +23,8 @@ public class AppearanceFeatures {
     public static final String BLUE_BACKGROUND = "\033[44m";
     public static final String PURPLE_BACKGROUND = "\033[45m";
     public static final String CYAN_BACKGROUND = "\033[46m";
-    public static final String WHITE_BACKGROUND = "\033[47m";
+    public static final String WHITE_BACKGROUND = "\033[38m";
+    static Scanner scanner = new Scanner(System.in);
 
     static String border = "-------------------";
 
@@ -40,84 +45,84 @@ public class AppearanceFeatures {
             colorNum = rand.nextInt(0, 10);
             switch (colorNum) {
                 case 0:
-                    System.out.println(AppearanceFeatures.BLACK);
+                    System.out.println(BLACK);
                     break;
                 case 1:
-                    System.out.println(AppearanceFeatures.RED);
+                    System.out.println(RED);
                     break;
                 case 2:
-                    System.out.println(AppearanceFeatures.GREEN);
+                    System.out.println(GREEN);
                     break;
                 case 3:
-                    System.out.println(AppearanceFeatures.YELLOW);
+                    System.out.println(YELLOW);
                     break;
                 case 4:
-                    System.out.println(AppearanceFeatures.BLUE);
+                    System.out.println(BLUE);
                     break;
                 case 5:
-                    System.out.println(AppearanceFeatures.PURPLE);
+                    System.out.println(PURPLE);
                     break;
                 case 6:
-                    System.out.println(AppearanceFeatures.CYAN);
+                    System.out.println(CYAN);
                     break;
                 case 7:
-                    System.out.println(AppearanceFeatures.GRAY);
+                    System.out.println(GRAY);
+                    break;
+                case 8:
+                    System.out.println(WHITE);
                     break;
             }
         }
     }
 
-    static void changeColorRainbow() {
+    /*static void changeColorRainbow() {
         while (true) {
 
             System.out.println();
         }
-    }
+    }*/
 
     static void changeColor() {
-        System.out.print("To which color do you want to change: " +
-                "\nColors:" + AppearanceFeatures.BLACK + "\n1. Black" + AppearanceFeatures.RESET +
-                AppearanceFeatures.RED + "\n2. Red" + AppearanceFeatures.RESET + AppearanceFeatures.GREEN + "\n3. Green" + AppearanceFeatures.RESET +
-                AppearanceFeatures.YELLOW + "\n4. Yellow" + AppearanceFeatures.RESET + AppearanceFeatures.BLUE + "\n5. Blue" + AppearanceFeatures.RESET +
-                AppearanceFeatures.PURPLE + "\n6. Purple" + AppearanceFeatures.RESET + AppearanceFeatures.CYAN + "\n7. Cyan" + AppearanceFeatures.RESET +
-                AppearanceFeatures.GRAY + "\n8. grey" + AppearanceFeatures.RESET + "\n9. Exit[x]" + "\n" + border + " \nYour choice is: ");
+        System.out.print("To which color\ndo you want to change: " +
+                RED + "\n1. Red" + RESET + GREEN + "\n2. Green" + RESET +
+                YELLOW + "\n3. Yellow" + RESET + BLUE + "\n4. Blue" + RESET +
+                PURPLE + "\n5. Purple" + RESET + CYAN + "\n6. Cyan" + RESET +
+                GRAY + "\n7. grey" + RESET + "\n8. grey" + WHITE + "\n9. Exit[x]" + "\n" + border + " \nYour choice is: ");
 
-        Scanner scanner = new Scanner(System.in);
         String colorChoice = scanner.nextLine().toLowerCase();
         System.out.println(border);
 
         switch (colorChoice) {
-            case "black":
-            case "1":
-                System.out.println(AppearanceFeatures.BLACK);
-                break;
             case "red":
-            case "2":
-                System.out.println(AppearanceFeatures.RED);
+            case "1":
+                System.out.println(RED);
                 break;
             case "green":
-            case "3":
-                System.out.println(AppearanceFeatures.GREEN);
+            case "2":
+                System.out.println(GREEN);
                 break;
             case "yellow":
-            case "4":
-                System.out.println(AppearanceFeatures.YELLOW);
+            case "3":
+                System.out.println(YELLOW);
                 break;
             case "blue":
-            case "5":
-                System.out.println(AppearanceFeatures.BLUE);
+            case "4":
+                System.out.println(BLUE);
                 break;
             case "purple":
-            case "6":
-                System.out.println(AppearanceFeatures.PURPLE);
+            case "5":
+                System.out.println(PURPLE);
                 break;
             case "cyan":
-            case "7":
-                System.out.println(AppearanceFeatures.CYAN);
+            case "6":
+                System.out.println(CYAN);
                 break;
             case "grey":
+            case "7":
+                System.out.println(GRAY);
+                break;
             case "8":
-                System.out.println(AppearanceFeatures.GRAY);
+                System.out.println(WHITE);
                 break;
             case "x":
             case "exit":
@@ -131,4 +136,23 @@ public class AppearanceFeatures {
 
     }
 
+    static void changeTheme() {
+        System.out.print("To which theme\ndo you want to change: " + RED_BACKGROUND + GRAY +
+                "\n1. Light" + "\n2. Exit[x]" + "\n" + border + " \nYour choice is: ");
+
+        String themeChoice = scanner.nextLine().toLowerCase();
+        System.out.println(border);
+
+        switch (themeChoice) {
+            case "light":
+            case "1":
+                System.out.println(WHITE_BACKGROUND + BLACK);
+                break;
+            case "x":
+            case "exit":
+            case "2":
+                System.out.println("Exiting...");
+                break;
+        }
+    }
 }
