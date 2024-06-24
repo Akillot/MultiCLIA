@@ -8,6 +8,6 @@ public class AdditionalOperations {
 
     // Show version
     static void versionInfo() {
-        System.out.println("Current version:\n0.2.3");
+        System.out.println("Current version:\n0.2.5");
     }
 }

@@ -63,12 +63,6 @@ public class Main {
                         case "text-magic":
                             AppearanceFeatures.changeColor();
                             break;
-                        case "back-magic":
-
-                            break;
-                        case "theme-magic":
-                            AppearanceFeatures.changeTheme();
-                            break;
                         default:
                             System.out.println(AppearanceFeatures.RED + "Invalid operation.\n" + AppearanceFeatures.RESET + AppearanceFeatures.border + "\n");
                     }
