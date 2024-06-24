@@ -14,16 +14,6 @@ public class AppearanceFeatures {
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
     public static final String GRAY = "\033[0;37m";
-    public static final String GRAY_BACKGROUND = "\033[47m";
-
-    public static final String BLACK_BACKGROUND = "\033[40m";
-    public static final String RED_BACKGROUND = "\033[41m";
-    public static final String GREEN_BACKGROUND = "\033[42m";
-    public static final String YELLOW_BACKGROUND = "\033[43m";
-    public static final String BLUE_BACKGROUND = "\033[44m";
-    public static final String PURPLE_BACKGROUND = "\033[45m";
-    public static final String CYAN_BACKGROUND = "\033[46m";
-    public static final String WHITE_BACKGROUND = "\033[38m";
     static Scanner scanner = new Scanner(System.in);
 
     static String border = "-------------------";
@@ -131,27 +121,6 @@ public class AppearanceFeatures {
                 break;
             case "text-random":
                 changeColorRandom();
-                break;
-        }
-
-    }
-
-    static void changeTheme() {
-        System.out.print("To which theme\ndo you want to change: " + RED_BACKGROUND + GRAY +
-                "\n1. Light" + "\n2. Exit[x]" + "\n" + border + " \nYour choice is: ");
-
-        String themeChoice = scanner.nextLine().toLowerCase();
-        System.out.println(border);
-
-        switch (themeChoice) {
-            case "light":
-            case "1":
-                System.out.println(WHITE_BACKGROUND + BLACK);
-                break;
-            case "x":
-            case "exit":
-            case "2":
-                System.out.println("Exiting...");
                 break;
         }
     }
