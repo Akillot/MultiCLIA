@@ -30,41 +30,48 @@ public class Main {
 
                     switch (operation) {
                         case "sum":
+                        case "1":
                         case "+":
                             MathOperations.sum(mathStatementString);
                             break;
                         case "sub":
+                        case "2":
                         case "-":
                             MathOperations.sub(mathStatementString);
                             break;
                         case "multi":
+                        case "3":
                         case "*":
                             MathOperations.multi(mathStatementString);
                             break;
                         case "div":
+                        case "4":
                         case "/":
                             MathOperations.divide(mathStatementString);
                             break;
                         case "pow":
+                        case "5":
                         case "^":
                             MathOperations.pow(mathStatementString);
                             break;
+                        case "6":
+                        case "magic":
+                        case "_":
+                            AppearanceFeatures.basicChanges();
+                            break;
                         case "info":
+                        case "7":
                         case "i":
                             AdditionalOperations.versionInfo();
                             break;
                         case "exit":
+                        case "8":
                         case "x":
                             System.out.println("Exiting the program...");
                             return;
-                        case "border-magic":
-                            AppearanceFeatures.changeBorder();
-                            break;
-                        case "text-magic":
-                            AppearanceFeatures.changeColor();
-                            break;
                         default:
-                            System.out.println(AppearanceFeatures.RED + "Invalid operation.\n" + AppearanceFeatures.RESET + AppearanceFeatures.border + "\n");
+                            System.out.println(AppearanceFeatures.RED + "Invalid operation.\n" +
+                                    AppearanceFeatures.RESET + AppearanceFeatures.border + "\n");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error: " + ex.getMessage());

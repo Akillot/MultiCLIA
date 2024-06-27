@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class AppearanceFeatures {
 
     public static final String WHITE = "\033[0;38m";
-
     public static final String RESET = "\033[0m";
     public static final String BLACK = "\033[0;30m";
     public static final String RED = "\033[0;31m";
@@ -14,24 +13,25 @@ public class AppearanceFeatures {
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
     public static final String GRAY = "\033[0;37m";
+
     static Scanner scanner = new Scanner(System.in);
+    static String border = WHITE + "-------------------" + RESET;
 
-    static String border = "-------------------";
-
+    //Method which contains styles of border
     static void changeBorder() {
         System.out.println(" ");
         String[] tableStyleArray = {"+++++++++++++++++++", "===================",
                 "~+~+~+~+~+~+~+~+~+~", "~-~-~-~-~-~-~-~-~-~", "+-+-+-+-+-+-+-+-+-+",
                 "~~~~~~~~~~~~~~~~~~~", "...................", "*******************",
-                "I-I-I-I-I-I-I-I-I-I", "I0I0I0I0I0I0I0I0I0I"};
+                "I-I-I-I-I-I-I-I-I-I", "_-_-_-_-_-_-_-_-_-_"};
         Random rand = new Random();
         border = tableStyleArray[rand.nextInt(tableStyleArray.length)];
     }
 
+    //Method for changing color of text randomly
     static void changeColorRandom() {
         Random rand = new Random();
         int colorNum;
-        for (int i = 0; i < 200; i++) {
             colorNum = rand.nextInt(0, 10);
             switch (colorNum) {
                 case 0:
@@ -62,27 +62,57 @@ public class AppearanceFeatures {
                     System.out.println(WHITE);
                     break;
             }
+    }
+
+    //Method for changing color of border
+    static void changeBorderColor(String choiceColor) {
+        switch (choiceColor) {
+            case "red":
+            case "1":
+                border = RED + "-------------------" + RESET;
+                break;
+            case "green":
+            case "2":
+                border = GREEN + "-------------------" + RESET;
+                break;
+            case "yellow":
+            case "3":
+                border = YELLOW + "-------------------" + RESET;
+                break;
+            case "blue":
+            case "4":
+                border = BLUE + "-------------------" + RESET;
+                break;
+            case "purple":
+            case "5":
+                border = PURPLE + "-------------------" + RESET;
+                break;
+            case "cyan":
+            case "6":
+                border = CYAN + "-------------------" + RESET;
+                break;
+            case "gray":
+            case "7":
+                border = GRAY + "-------------------" + RESET;
+                break;
+            case "white":
+            case "8":
+                border = WHITE + "-------------------" + RESET;
+                break;
+            case "x":
+            case "exit":
+            case "9":
+                System.out.println("Exiting...");
+                break;
+            case "text-random":
+                changeColorRandom();
+                break;
         }
     }
 
-    /*static void changeColorRainbow() {
-        while (true) {
-
-            System.out.println();
-        }
-    }*/
-
-    static void changeColor() {
-        System.out.print("To which color\ndo you want to change: " +
-                RED + "\n1. Red" + RESET + GREEN + "\n2. Green" + RESET +
-                YELLOW + "\n3. Yellow" + RESET + BLUE + "\n4. Blue" + RESET +
-                PURPLE + "\n5. Purple" + RESET + CYAN + "\n6. Cyan" + RESET +
-                GRAY + "\n7. grey" + RESET + "\n8. grey" + WHITE + "\n9. Exit[x]" + "\n" + border + " \nYour choice is: ");
-
-        String colorChoice = scanner.nextLine().toLowerCase();
-        System.out.println(border);
-
-        switch (colorChoice) {
+    //Method for changing text color
+    static void changeTextColor(String choiceColor) {
+        switch (choiceColor) {
             case "red":
             case "1":
                 System.out.println(RED);
@@ -107,7 +137,7 @@ public class AppearanceFeatures {
             case "6":
                 System.out.println(CYAN);
                 break;
-            case "grey":
+            case "gray":
             case "7":
                 System.out.println(GRAY);
                 break;
@@ -122,6 +152,59 @@ public class AppearanceFeatures {
             case "text-random":
                 changeColorRandom();
                 break;
+        }
+    }
+
+    //Method to show a list of colors
+    static void listOfColors() {
+        System.out.print("To which color\ndo you want to change: " +
+                RED + "\n1. Red" + RESET + GREEN + "\n2. Green" + RESET +
+                YELLOW + "\n3. Yellow" + RESET + BLUE + "\n4. Blue" + RESET +
+                PURPLE + "\n5. Purple" + RESET + CYAN + "\n6. Cyan" + RESET +
+                GRAY + "\n7. Gray" + RESET + WHITE + "\n8. White" + "\n9. Exit[x]" + RESET + "\n" + border + " \nYour choice is: ");
+    }
+
+    // Method for changing color of border or text
+    static void changeColor() {
+        System.out.println("Pick the color of \nwhat you want to change.\n" + border);
+        System.out.println("1. Text[abc]\n2. Border[---]\n3. Exit[x]\n" + border + " \nYour choice is: ");
+        String partColorChoice = scanner.nextLine().toLowerCase();
+        System.out.println(border);
+        String choiceColor;
+
+        if (partColorChoice.equals("1") || partColorChoice.equalsIgnoreCase("abc")
+                || partColorChoice.equalsIgnoreCase("text")) {
+            listOfColors();
+            choiceColor = scanner.nextLine().toLowerCase();
+            System.out.println("\n" + border);
+            changeTextColor(choiceColor);
+        } else if (partColorChoice.equals("2") || partColorChoice.equalsIgnoreCase("---")
+                || partColorChoice.equalsIgnoreCase("border")) {
+            listOfColors();
+            choiceColor = scanner.nextLine().toLowerCase();
+            System.out.println("\n" + border);
+            changeBorderColor(choiceColor);
+        } else if (partColorChoice.equals("3") || partColorChoice.equalsIgnoreCase("x")
+                || partColorChoice.equalsIgnoreCase("Exit")) {
+            System.out.println("Exiting...\n");
+        }
+    }
+
+    //Method for choosing basic changes of color or border
+    static void basicChanges() {
+        System.out.println("Choose what you\nwant to change.\n" + border);
+        System.out.println("1. Color[~]\n2. Border[-]\n3. Exit[x]\n" + border + " \nYour choice is: ");
+        String basicChangesChoice = scanner.nextLine().toLowerCase();
+        System.out.println(border);
+        if (basicChangesChoice.equals("1") || basicChangesChoice.equals("~") ||
+                basicChangesChoice.equalsIgnoreCase("color")) {
+            changeColor();
+        } else if (basicChangesChoice.equals("2") || basicChangesChoice.equals("-") ||
+                basicChangesChoice.equalsIgnoreCase("border")) {
+            changeBorder();
+        } else if (basicChangesChoice.equals("3") || basicChangesChoice.equalsIgnoreCase("x") ||
+                basicChangesChoice.equalsIgnoreCase("exit")) {
+            System.out.println("Exiting...\n");
         }
     }
 }
