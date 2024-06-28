@@ -64,40 +64,40 @@ public class AppearanceFeatures {
             }
     }
 
-    //Method for changing color of border
+    // 4. Method for changing color of border
     static void changeBorderColor(String choiceColor) {
         switch (choiceColor) {
             case "red":
             case "1":
-                border = RED + "-------------------" + RESET;
+                border = RED + border + RESET;
                 break;
             case "green":
             case "2":
-                border = GREEN + "-------------------" + RESET;
+                border = GREEN + border + RESET;
                 break;
             case "yellow":
             case "3":
-                border = YELLOW + "-------------------" + RESET;
+                border = YELLOW + border + RESET;
                 break;
             case "blue":
             case "4":
-                border = BLUE + "-------------------" + RESET;
+                border = BLUE + border + RESET;
                 break;
             case "purple":
             case "5":
-                border = PURPLE + "-------------------" + RESET;
+                border = PURPLE + border + RESET;
                 break;
             case "cyan":
             case "6":
-                border = CYAN + "-------------------" + RESET;
+                border = CYAN + border + RESET;
                 break;
             case "gray":
             case "7":
-                border = GRAY + "-------------------" + RESET;
+                border = GRAY + border + RESET;
                 break;
             case "white":
             case "8":
-                border = WHITE + "-------------------" + RESET;
+                border = WHITE + border + RESET;
                 break;
             case "x":
             case "exit":
@@ -110,7 +110,7 @@ public class AppearanceFeatures {
         }
     }
 
-    //Method for changing text color
+    // 3. Method for changing text color
     static void changeTextColor(String choiceColor) {
         switch (choiceColor) {
             case "red":
@@ -155,7 +155,7 @@ public class AppearanceFeatures {
         }
     }
 
-    //Method to show a list of colors
+    // 5. Method to show a list of colors
     static void listOfColors() {
         System.out.print("To which color\ndo you want to change: " +
                 RED + "\n1. Red" + RESET + GREEN + "\n2. Green" + RESET +
@@ -164,7 +164,7 @@ public class AppearanceFeatures {
                 GRAY + "\n7. Gray" + RESET + WHITE + "\n8. White" + "\n9. Exit[x]" + RESET + "\n" + border + " \nYour choice is: ");
     }
 
-    // Method for changing color of border or text
+    // 2. Method for changing color of border or text
     static void changeColor() {
         System.out.println("Pick the color of \nwhat you want to change.\n" + border);
         System.out.println("1. Text[abc]\n2. Border[---]\n3. Exit[x]\n" + border + " \nYour choice is: ");
@@ -176,21 +176,23 @@ public class AppearanceFeatures {
                 || partColorChoice.equalsIgnoreCase("text")) {
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
-            System.out.println("\n" + border);
+            System.out.println(border);
             changeTextColor(choiceColor);
+
         } else if (partColorChoice.equals("2") || partColorChoice.equalsIgnoreCase("---")
                 || partColorChoice.equalsIgnoreCase("border")) {
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
-            System.out.println("\n" + border);
+            System.out.println(border);
             changeBorderColor(choiceColor);
+
         } else if (partColorChoice.equals("3") || partColorChoice.equalsIgnoreCase("x")
                 || partColorChoice.equalsIgnoreCase("Exit")) {
             System.out.println("Exiting...\n");
         }
     }
 
-    //Method for choosing basic changes of color or border
+    // 1. Method for choosing basic changes of color or border
     static void basicChanges() {
         System.out.println("Choose what you\nwant to change.\n" + border);
         System.out.println("1. Color[~]\n2. Border[-]\n3. Exit[x]\n" + border + " \nYour choice is: ");
