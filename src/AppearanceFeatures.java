@@ -5,7 +5,6 @@ public class AppearanceFeatures {
 
     public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
-    public static final String BLACK = "\033[0;30m";
     public static final String RED = "\033[0;31m";
     public static final String GREEN = "\033[0;32m";
     public static final String YELLOW = "\033[0;33m";
@@ -34,9 +33,6 @@ public class AppearanceFeatures {
         int colorNum;
             colorNum = rand.nextInt(0, 10);
             switch (colorNum) {
-                case 0:
-                    System.out.println(BLACK);
-                    break;
                 case 1:
                     System.out.println(RED);
                     break;
@@ -114,39 +110,31 @@ public class AppearanceFeatures {
     static void changeTextColor(String choiceColor) {
         switch (choiceColor) {
             case "red":
-            case "1":
-                System.out.println(RED);
+                System.out.print(RED);
                 break;
             case "green":
-            case "2":
-                System.out.println(GREEN);
+                System.out.print(GREEN);
                 break;
             case "yellow":
-            case "3":
-                System.out.println(YELLOW);
+                System.out.print(YELLOW);
                 break;
             case "blue":
-            case "4":
-                System.out.println(BLUE);
+                System.out.print(BLUE);
                 break;
             case "purple":
-            case "5":
-                System.out.println(PURPLE);
+                System.out.print(PURPLE);
                 break;
             case "cyan":
-            case "6":
-                System.out.println(CYAN);
+                System.out.print(CYAN);
                 break;
             case "gray":
-            case "7":
-                System.out.println(GRAY);
+                System.out.print(GRAY);
                 break;
-            case "8":
-                System.out.println(WHITE);
+            case "white":
+                System.out.print(WHITE);
                 break;
             case "x":
             case "exit":
-            case "9":
                 System.out.println("Exiting...");
                 break;
             case "text-random":
