@@ -6,15 +6,22 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("\ndd-MM-yyyy \nHH:mm:ss");
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("\ndd-MM-yyyy \nHH:mm");
         String formattedTime = localTime.format(myFormatter);
         System.out.println();
+
+        System.out.println("\n" + AppearanceFeatures.border);
+        System.out.print("    +---------+" + "\n    |" + AppearanceFeatures.RED + "M" + AppearanceFeatures.RESET +
+                AppearanceFeatures.GREEN + "u" + AppearanceFeatures.RESET +
+                AppearanceFeatures.YELLOW + "l" + AppearanceFeatures.RESET +
+                AppearanceFeatures.BLUE + "t" + AppearanceFeatures.RESET +
+                AppearanceFeatures.PURPLE + "i" + AppearanceFeatures.RESET + "CLIA|\n" + "    +---------+");
 
             while(true) {
                 try {
                     System.out.println();
+                    System.out.println(AppearanceFeatures.border + "\nTime is: " + formattedTime);
                     System.out.println(AppearanceFeatures.border + "\nEnter your numbers.");
-                    System.out.println("Time is: " + formattedTime);
                     System.out.println(AppearanceFeatures.border + "\nUse a 'SPACE'\nTo split numbers.\n" + AppearanceFeatures.border);
                     String mathStatementString = scanner.nextLine().trim();
 
