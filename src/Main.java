@@ -26,7 +26,7 @@ public class Main {
                     String mathStatementString = scanner.nextLine().trim();
 
                     if (mathStatementString.isEmpty()) {
-                        System.out.print(AppearanceFeatures.border + AppearanceFeatures.RED + "\n" + "No numbers entered." + AppearanceFeatures.RESET);
+                        System.out.print(AppearanceFeatures.border + "\n" + "No numbers entered." + AppearanceFeatures.RESET);
                         continue;
                     }
 
@@ -77,8 +77,7 @@ public class Main {
                             System.out.println("Exiting the program...");
                             return;
                         default:
-                            System.out.println(AppearanceFeatures.RED + "Invalid operation.\n" +
-                                    AppearanceFeatures.RESET + AppearanceFeatures.border + "\n");
+                            System.out.println("Invalid operation.\n" + AppearanceFeatures.border + "\n");
                     }
                 } catch (Exception ex) {
                     System.out.println("Error: " + ex.getMessage());

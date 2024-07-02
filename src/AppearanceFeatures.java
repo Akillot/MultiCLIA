@@ -22,42 +22,9 @@ public class AppearanceFeatures {
         String[] tableStyleArray = {"+++++++++++++++++++", "===================",
                 "~+~+~+~+~+~+~+~+~+~", "~-~-~-~-~-~-~-~-~-~", "+-+-+-+-+-+-+-+-+-+",
                 "~~~~~~~~~~~~~~~~~~~", "...................", "*******************",
-                "I-I-I-I-I-I-I-I-I-I", "_-_-_-_-_-_-_-_-_-_"};
+                "_-_-_-_-_-_-_-_-_-_", "···················"};
         Random rand = new Random();
         border = tableStyleArray[rand.nextInt(tableStyleArray.length)];
-    }
-
-    //Method for changing color of text randomly
-    static void changeColorRandom() {
-        Random rand = new Random();
-        int colorNum;
-            colorNum = rand.nextInt(0, 10);
-            switch (colorNum) {
-                case 1:
-                    System.out.println(RED);
-                    break;
-                case 2:
-                    System.out.println(GREEN);
-                    break;
-                case 3:
-                    System.out.println(YELLOW);
-                    break;
-                case 4:
-                    System.out.println(BLUE);
-                    break;
-                case 5:
-                    System.out.println(PURPLE);
-                    break;
-                case 6:
-                    System.out.println(CYAN);
-                    break;
-                case 7:
-                    System.out.println(GRAY);
-                    break;
-                case 8:
-                    System.out.println(WHITE);
-                    break;
-            }
     }
 
     // 4. Method for changing color of border
@@ -100,9 +67,6 @@ public class AppearanceFeatures {
             case "9":
                 System.out.println("Exiting...");
                 break;
-            case "text-random":
-                changeColorRandom();
-                break;
         }
     }
 
@@ -137,9 +101,6 @@ public class AppearanceFeatures {
             case "exit":
                 System.out.println("Exiting...");
                 break;
-            case "text-random":
-                changeColorRandom();
-                break;
         }
     }
 
@@ -156,27 +117,35 @@ public class AppearanceFeatures {
     static void changeColor() {
         System.out.println("Pick the color of \nwhat you want to change.\n" + border);
         System.out.println("1. Text[abc]\n2. Border[---]\n3. Exit[x]\n" + border + " \nYour choice is: ");
+
         String partColorChoice = scanner.nextLine().toLowerCase();
         System.out.println(border);
         String choiceColor;
 
-        if (partColorChoice.equals("1") || partColorChoice.equalsIgnoreCase("abc")
-                || partColorChoice.equalsIgnoreCase("text")) {
+        switch (partColorChoice) {
+            case "1":
+            case "abc":
+            case "text":
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
             System.out.println(border);
             changeTextColor(choiceColor);
+                break;
 
-        } else if (partColorChoice.equals("2") || partColorChoice.equalsIgnoreCase("---")
-                || partColorChoice.equalsIgnoreCase("border")) {
+            case "2":
+            case "---":
+            case "border":
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
             System.out.println(border);
             changeBorderColor(choiceColor);
+                break;
 
-        } else if (partColorChoice.equals("3") || partColorChoice.equalsIgnoreCase("x")
-                || partColorChoice.equalsIgnoreCase("Exit")) {
+            case "3":
+            case "exit":
+            case "x":
             System.out.println("Exiting...\n");
+                break;
         }
     }
 
