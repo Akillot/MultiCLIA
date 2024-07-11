@@ -1,3 +1,8 @@
+import additional.AdditionalOperations;
+import appearance.AppearanceFeatures;
+import calculator.MathOperations;
+import layout.layoutSettings;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -76,6 +81,10 @@ public class Main {
                         case "x":
                             System.out.println("Exiting the program...");
                             return;
+                        case "9":
+                        case "layout":
+                            layoutSettings.interfaceConstructor(100, 200);
+                            break;
                         default:
                             System.out.println("Invalid operation.\n" + AppearanceFeatures.border + "\n");
                     }

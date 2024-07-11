@@ -1,3 +1,5 @@
+package appearance;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,7 +16,7 @@ public class AppearanceFeatures {
     public static final String GRAY = "\033[0;37m";
 
     static Scanner scanner = new Scanner(System.in);
-    static String border = WHITE + "-------------------" + RESET;
+    public static String border = WHITE + "-------------------" + RESET;
 
     //Method which contains styles of border
     static void changeBorder() {
@@ -116,7 +118,7 @@ public class AppearanceFeatures {
     // 2. Method for changing color of border or text
     static void changeColor() {
         System.out.println("Pick the color of \nwhat you want to change.\n" + border);
-        System.out.println("1. Text[abc]\n2. Border[---]\n3. Exit[x]\n" + border + " \nYour choice is: ");
+        System.out.println("1. Text[_]\n2. Border[-]\n3. Exit[x]\n" + border + " \nYour choice is: ");
 
         String partColorChoice = scanner.nextLine().toLowerCase();
         System.out.println(border);
@@ -124,7 +126,7 @@ public class AppearanceFeatures {
 
         switch (partColorChoice) {
             case "1":
-            case "abc":
+            case "_":
             case "text":
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
@@ -133,7 +135,7 @@ public class AppearanceFeatures {
                 break;
 
             case "2":
-            case "---":
+            case "-":
             case "border":
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
@@ -150,7 +152,7 @@ public class AppearanceFeatures {
     }
 
     // 1. Method for choosing basic changes of color or border
-    static void basicChanges() {
+    public static void basicChanges() {
         System.out.println("Choose what you\nwant to change.\n" + border);
         System.out.println("1. Color[~]\n2. Border[-]\n3. Exit[x]\n" + border + " \nYour choice is: ");
         String basicChangesChoice = scanner.nextLine().toLowerCase();

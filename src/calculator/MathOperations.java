@@ -1,7 +1,11 @@
+package calculator;
+
+import appearance.AppearanceFeatures;
+
 public class MathOperations {
     static double result;
     // Summation
-    static  void sum(String mathStatement) {
+    public static void sum(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         result = 0;
         for (String num : nums) {
@@ -17,7 +21,7 @@ public class MathOperations {
     }
 
     // Subtraction
-    static void sub(String mathStatement) {
+    public static void sub(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
             System.out.println("No numbers to subtract.");
@@ -42,7 +46,7 @@ public class MathOperations {
     }
 
     // Multiplication
-    static void multi(String mathStatement) {
+    public static void multi(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
             System.out.println("No numbers to multiply.");
@@ -62,7 +66,7 @@ public class MathOperations {
     }
 
     // Division
-    static void divide(String mathStatement) {
+    public static void divide(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
             System.out.println("No numbers to divide.");
@@ -75,6 +79,7 @@ public class MathOperations {
             System.out.println(nums[0] + " is not a number");
             return;
         }
+        //hello
         for (int i = 1; i < nums.length; i++) {
             try {
                 double numDouble = Double.parseDouble(nums[i]);
@@ -92,7 +97,7 @@ public class MathOperations {
     }
 
     // Power
-    static void pow(String mathStatement) {
+    public static void pow(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
             System.out.println("No numbers to process.");
