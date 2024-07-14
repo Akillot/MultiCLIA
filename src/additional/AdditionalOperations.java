@@ -1,17 +1,12 @@
 package additional;
 
-import appearance.AppearanceFeatures;
+import settings.AppearanceSettings;
 
 public class AdditionalOperations {
-    // Show list of operations
-    public static void commandList() {
-        System.out.println(AppearanceFeatures.border + "\nOperations:\n1. sum[+]\n2. sub[-]" +
-                "\n3. multi[*]\n4. div[/]\n5. pow[^]\n6. magic[_]" + "\n7. info[i]\n8. exit[x]\n9. layout\n" + AppearanceFeatures.border);
-    }
 
-    // Show version
-    public static void versionInfo() {
-        System.out.println("Current version:\n" + AppearanceFeatures.PURPLE + "0.2.7" +
-                AppearanceFeatures.RESET + "\n" + AppearanceFeatures.border);
+    // Show list of operations
+    public static void showCommandList() {
+        System.out.println(AppearanceSettings.border + "\nOperations:\n1. sum[+]\n2. sub[-]" +
+                "\n3. multi[*]\n4. div[/]\n5. pow[^]\n\n6. settings\n7. exit[x]\n" + AppearanceSettings.border);
     }
 }

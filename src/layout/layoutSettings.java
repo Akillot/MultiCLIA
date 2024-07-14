@@ -1,10 +1,20 @@
 package layout;
 
+import settings.AppearanceSettings;
+
 public class layoutSettings {
     // private int width;
     // private int height;
 
-    public static void interfaceConstructor(int width, int height) {
+    public static void showLogo() {
+        System.out.print("    +---------+" + "\n    |" + AppearanceSettings.RED + "M" + AppearanceSettings.RESET +
+                AppearanceSettings.GREEN + "u" + AppearanceSettings.RESET +
+                AppearanceSettings.YELLOW + "l" + AppearanceSettings.RESET +
+                AppearanceSettings.BLUE + "t" + AppearanceSettings.RESET +
+                AppearanceSettings.PURPLE + "i" + AppearanceSettings.RESET + "CLIA|\n" + "    +---------+");
+    }
+
+   /* public static void interfaceConstructor(int width, int height) {
         Character[] borderSymbols = new Character[]{'-', '|', '+'};
 
         for (int x = 0; x < width; x++) {
@@ -28,5 +38,5 @@ public class layoutSettings {
                 }
             }
         }
-    }
+    }*/
 }
