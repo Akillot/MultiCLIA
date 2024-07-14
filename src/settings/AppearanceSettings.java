@@ -1,9 +1,9 @@
-package appearance;
+package settings;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class AppearanceFeatures {
+public class AppearanceSettings {
 
     public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
