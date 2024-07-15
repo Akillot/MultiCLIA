@@ -2,44 +2,34 @@ package calculator;
 
 import additional.AdditionalOperations;
 import layout.LayoutSettings;
-import settings.AppearanceSettings;
 import settings.BasicSettings;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static settings.AppearanceSettings.RESET;
-import static settings.AppearanceSettings.border;
 
 public class Calculator {
     public static void calculator() {
         Scanner scanner = new Scanner(System.in);
-        LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("\ndd-MM-yyyy \nHH:mm");
-        String formattedTime = localTime.format(myFormatter);
         System.out.println();
 
-        System.out.println("\n" + AppearanceSettings.border);
+        System.out.println("\n" + LayoutSettings.fullBorder);
         LayoutSettings.showLogo();
 
         while (true) {
             try {
                 System.out.println();
-                System.out.println(border + "\nTime is: " + formattedTime);
-                System.out.println(border + "\nEnter your numbers.");
-                System.out.println(border + "\nUse a 'SPACE'\nTo split numbers.\n" + border);
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    System.out.print(border + "\n" + "No numbers entered." + RESET);
+                    System.out.print(LayoutSettings.fullBorder + "\n" + "No numbers entered." + RESET);
                     continue;
                 }
 
                 AdditionalOperations.showCommandList();
                 System.out.print("Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
-                System.out.println(border);
+                System.out.println(LayoutSettings.fullBorder);
 
                 switch (operation) {
                     case "sum":
@@ -69,7 +59,7 @@ public class Calculator {
                         break;
                     case "6":
                     case "settings":
-                        BasicSettings.versionInfo();
+                        BasicSettings.showVersionInfo();
                         break;
                     case "exit":
                     case "7":
@@ -77,7 +67,7 @@ public class Calculator {
                         System.out.println("Exiting the program...");
                         return;
                     default:
-                        System.out.println("Invalid operation.\n" + border + "\n");
+                        System.out.println("Invalid operation.\n" + LayoutSettings.fullBorder + "\n");
 
                 }
             } catch (Exception ex) {

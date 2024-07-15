@@ -1,5 +1,7 @@
 package settings;
 
+import layout.LayoutSettings;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,17 +18,16 @@ public class AppearanceSettings {
     public static final String GRAY = "\033[0;37m";
 
     static Scanner scanner = new Scanner(System.in);
-    public static String border = WHITE + "-------------------" + RESET;
 
     //Method which contains styles of border
     static void changeBorder() {
         System.out.println(" ");
-        String[] tableStyleArray = {"+++++++++++++++++++", "===================",
-                "~+~+~+~+~+~+~+~+~+~", "~-~-~-~-~-~-~-~-~-~", "+-+-+-+-+-+-+-+-+-+",
-                "~~~~~~~~~~~~~~~~~~~", "...................", "*******************",
-                "_-_-_-_-_-_-_-_-_-_", "···················"};
+        String[] tableStyleArray = {"+++++++++++++++++", "=================",
+                "~+~+~+~+~+~+~+~+~", "~-~-~-~-~-~-~-~-~", "+-+-+-+-+-+-+-+-+",
+                "~~~~~~~~~~~~~~~~~", ".................", "*****************",
+                "_-_-_-_-_-_-_-_-_", "·················"};
         Random rand = new Random();
-        border = tableStyleArray[rand.nextInt(tableStyleArray.length)];
+        LayoutSettings.fullBorder = tableStyleArray[rand.nextInt(tableStyleArray.length)];
     }
 
     // 4. Method for changing color of border
@@ -34,35 +35,35 @@ public class AppearanceSettings {
         switch (choiceColor) {
             case "red":
             case "1":
-                border = RED + border + RESET;
+                LayoutSettings.fullBorder = RED + LayoutSettings.fullBorder + RESET;
                 break;
             case "green":
             case "2":
-                border = GREEN + border + RESET;
+                LayoutSettings.fullBorder = GREEN + LayoutSettings.fullBorder + RESET;
                 break;
             case "yellow":
             case "3":
-                border = YELLOW + border + RESET;
+                LayoutSettings.fullBorder = YELLOW + LayoutSettings.fullBorder + RESET;
                 break;
             case "blue":
             case "4":
-                border = BLUE + border + RESET;
+                LayoutSettings.fullBorder = BLUE + LayoutSettings.fullBorder + RESET;
                 break;
             case "purple":
             case "5":
-                border = PURPLE + border + RESET;
+                LayoutSettings.fullBorder = PURPLE + LayoutSettings.fullBorder + RESET;
                 break;
             case "cyan":
             case "6":
-                border = CYAN + border + RESET;
+                LayoutSettings.fullBorder = CYAN + LayoutSettings.fullBorder + RESET;
                 break;
             case "gray":
             case "7":
-                border = GRAY + border + RESET;
+                LayoutSettings.fullBorder = GRAY + LayoutSettings.fullBorder + RESET;
                 break;
             case "white":
             case "8":
-                border = WHITE + border + RESET;
+                LayoutSettings.fullBorder = WHITE + LayoutSettings.fullBorder + RESET;
                 break;
             case "x":
             case "exit":
@@ -112,16 +113,16 @@ public class AppearanceSettings {
                 RED + "\n1. Red" + RESET + GREEN + "\n2. Green" + RESET +
                 YELLOW + "\n3. Yellow" + RESET + BLUE + "\n4. Blue" + RESET +
                 PURPLE + "\n5. Purple" + RESET + CYAN + "\n6. Cyan" + RESET +
-                GRAY + "\n7. Gray" + RESET + WHITE + "\n8. White" + "\n9. Exit[x]" + RESET + "\n" + border + " \nYour choice is: ");
+                GRAY + "\n7. Gray" + RESET + WHITE + "\n8. White" + "\n9. Exit[x]" + RESET + "\n" + LayoutSettings.border + " \nYour choice is: ");
     }
 
     // 2. Method for changing color of border or text
     static void changeColor() {
-        System.out.println("Pick the color of \nwhat you want to change.\n" + border);
-        System.out.println("1. Text[_]\n2. Border[-]\n3. Exit[x]\n" + border + " \nYour choice is: ");
+        System.out.println("Pick the color of \nwhat you want to change.\n" + LayoutSettings.border);
+        System.out.println("1. Text[_]\n2. Border[-]\n3. Exit[x]\n" + LayoutSettings.border + " \nYour choice is: ");
 
         String partColorChoice = scanner.nextLine().toLowerCase();
-        System.out.println(border);
+        System.out.println(LayoutSettings.border);
         String choiceColor;
 
         switch (partColorChoice) {
@@ -130,7 +131,7 @@ public class AppearanceSettings {
             case "text":
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
-            System.out.println(border);
+                System.out.println(LayoutSettings.border);
             changeTextColor(choiceColor);
                 break;
 
@@ -139,7 +140,7 @@ public class AppearanceSettings {
             case "border":
             listOfColors();
             choiceColor = scanner.nextLine().toLowerCase();
-            System.out.println(border);
+                System.out.println(LayoutSettings.border);
             changeBorderColor(choiceColor);
                 break;
 
@@ -153,10 +154,10 @@ public class AppearanceSettings {
 
     // 1. Method for choosing basic changes of color or border
     public static void basicChanges() {
-        System.out.println("Choose what you\nwant to change.\n" + border);
-        System.out.println("1. Color[~]\n2. Border[-]\n3. Exit[x]\n" + border + " \nYour choice is: ");
+        System.out.println("Choose what you\nwant to change.\n" + LayoutSettings.fullBorder);
+        System.out.println("1. Color[~]\n2. Border[-]\n3. Exit[x]\n" + LayoutSettings.fullBorder + " \nYour choice is: ");
         String basicChangesChoice = scanner.nextLine().toLowerCase();
-        System.out.println(border);
+        System.out.println(LayoutSettings.fullBorder);
         if (basicChangesChoice.equals("1") || basicChangesChoice.equals("~") ||
                 basicChangesChoice.equalsIgnoreCase("color")) {
             changeColor();

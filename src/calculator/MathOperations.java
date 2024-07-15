@@ -1,6 +1,6 @@
 package calculator;
 
-import settings.AppearanceSettings;
+import layout.LayoutSettings;
 
 public class MathOperations {
     static double result;
@@ -17,7 +17,7 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n" + LayoutSettings.fullBorder + "\n");
     }
 
     // Subtraction
@@ -42,7 +42,7 @@ public class MathOperations {
                 System.out.println(nums[i] + " is not a number");
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n" + LayoutSettings.fullBorder + "\n");
     }
 
     // Multiplication
@@ -62,7 +62,7 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n" + LayoutSettings.fullBorder + "\n");
     }
 
     // Division
@@ -93,7 +93,7 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n" + LayoutSettings.fullBorder + "\n");
     }
 
     // Power
@@ -119,6 +119,6 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n" + LayoutSettings.fullBorder + "\n");
     }
 }
