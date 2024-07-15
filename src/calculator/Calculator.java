@@ -1,7 +1,7 @@
 package calculator;
 
 import additional.AdditionalOperations;
-import layout.layoutSettings;
+import layout.LayoutSettings;
 import settings.AppearanceSettings;
 import settings.BasicSettings;
 
@@ -21,7 +21,7 @@ public class Calculator {
         System.out.println();
 
         System.out.println("\n" + AppearanceSettings.border);
-        layoutSettings.showLogo();
+        LayoutSettings.showLogo();
 
         while (true) {
             try {
