@@ -1,45 +1,28 @@
 package calculator;
 
-import additional.AdditionalOperations;
-import layout.LayoutSettings;
+import layout.UserInterface;
 import settings.AppearanceSettings;
-import settings.BasicSettings;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static settings.AppearanceSettings.RESET;
-import static settings.AppearanceSettings.border;
 
 public class Calculator {
-    public static void calculator() {
+    public static Runnable calculator() {
         Scanner scanner = new Scanner(System.in);
-        LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("\ndd-MM-yyyy \nHH:mm");
-        String formattedTime = localTime.format(myFormatter);
-        System.out.println();
-
-        System.out.println("\n" + AppearanceSettings.border);
-        LayoutSettings.showLogo();
-
         while (true) {
             try {
                 System.out.println();
-                System.out.println(border + "\nTime is: " + formattedTime);
-                System.out.println(border + "\nEnter your numbers.");
-                System.out.println(border + "\nUse a 'SPACE'\nTo split numbers.\n" + border);
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    System.out.print(border + "\n" + "No numbers entered." + RESET);
+                    System.out.print(UserInterface.centeringFunction(18) + AppearanceSettings.RED + "\nNo numbers entered." + RESET);
                     continue;
                 }
 
-                AdditionalOperations.showCommandList();
+                UserInterface.displayCalculatorOperationsList();
                 System.out.print("Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
-                System.out.println(border);
 
                 switch (operation) {
                     case "sum":
@@ -67,17 +50,13 @@ public class Calculator {
                     case "^":
                         MathOperations.pow(mathStatementString);
                         break;
-                    case "6":
-                    case "settings":
-                        BasicSettings.versionInfo();
-                        break;
                     case "exit":
-                    case "7":
+                    case "6":
                     case "x":
                         System.out.println("Exiting the program...");
-                        return;
+                        return null;
                     default:
-                        System.out.println("Invalid operation.\n" + border + "\n");
+                        System.out.println("Invalid operation.\n");
 
                 }
             } catch (Exception ex) {

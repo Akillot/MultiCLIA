@@ -1,7 +1,5 @@
 package calculator;
 
-import settings.AppearanceSettings;
-
 public class MathOperations {
     static double result;
     // Summation
@@ -17,7 +15,7 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n");
     }
 
     // Subtraction
@@ -42,7 +40,7 @@ public class MathOperations {
                 System.out.println(nums[i] + " is not a number");
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n");
     }
 
     // Multiplication
@@ -62,7 +60,7 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n");
     }
 
     // Division
@@ -79,7 +77,7 @@ public class MathOperations {
             System.out.println(nums[0] + " is not a number");
             return;
         }
-        //hello
+
         for (int i = 1; i < nums.length; i++) {
             try {
                 double numDouble = Double.parseDouble(nums[i]);
@@ -93,7 +91,7 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n");
     }
 
     // Power
@@ -119,6 +117,6 @@ public class MathOperations {
                 return;
             }
         }
-        System.out.println("Answer: " + result + "\n" + AppearanceSettings.border + "\n");
+        System.out.println("Answer: " + result + "\n");
     }
 }

@@ -1,11 +1,8 @@
-import calculator.Calculator;
-import layout.LayoutSettings;
+import layout.UserInterface;
 
 public class Main {
     public static void main(String[] args) {
 
-        LayoutSettings.borderSetup();
-        Calculator.calculator();
-
+        UserInterface.displayMenu();
     }
 }
