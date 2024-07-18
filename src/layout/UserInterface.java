@@ -10,11 +10,13 @@ import java.util.Scanner;
 
 public class UserInterface {
     public static int borderWidth = 21;
+    public static int numberOfSymbols = 1;
     public static int delay;
     public static String nameOfFunction = "";
-    public static String[] symbolsOfBorder = new String[]{"+", "-", "|"};
+    public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
     static Scanner scanner = new Scanner(System.in);
+
 
     //Show a logo
     public static void displayLogo() {
@@ -25,6 +27,8 @@ public class UserInterface {
                 AppearanceSettings.PURPLE + "i" + AppearanceSettings.RESET + "CLIA|\n" + centeringFunction(11) + "+---------+\n");
     }
 
+
+    //Center the text
     public static String centeringFunction(int widthOfElement) {
         int fullWidth = borderWidth + 2; //Where 2 is "+"
         int oneSide = (fullWidth - widthOfElement) / 2;
@@ -32,27 +36,32 @@ public class UserInterface {
         return " ".repeat(Math.max(0, oneSide));
     }
 
+
     //Show version
     public static void displayVersionInfo() {
-        System.out.println("Current version:\n" + AppearanceSettings.YELLOW + "0.3.6");
+        System.out.println("Current version:\n" + AppearanceSettings.YELLOW + "0.3.8");
     }
+
 
     //Show current time
     public static void displayCurrentTime() {
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("\ndd-MM-yyyy \nHH:mm");
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(UserInterface.centeringFunction(10) + "\ndd-MM-yyyy"
+                + UserInterface.centeringFunction(5) + "\nHH:mm");
         String formattedTime = localTime.format(myFormatter);
         System.out.println("\nTime is: " + formattedTime);
     }
 
+
     //Show horizontal border
-    public static void drawHorizontalBorder() {
+    public static void drawHorizontalBorder(int numberOfSymbol) {
         System.out.print(symbolsOfBorder[0]);
         for (int i = 0; i < borderWidth; i++) {
-            System.out.print(symbolsOfBorder[1]);
+            System.out.print(symbolsOfBorder[numberOfSymbol]);
         }
         System.out.println(symbolsOfBorder[0]);
     }
+
 
     //Show main menu of the app
     public static void displayMenu() {
@@ -64,9 +73,9 @@ public class UserInterface {
         listOfNoParamFunctions.put("version", UserInterface::displayVersionInfo);
         listOfNoParamFunctions.put("exit", UserInterface::exitProgram);
 
-        drawHorizontalBorder();
+        drawHorizontalBorder(1);
         displayLogo();
-        drawHorizontalBorder();
+        drawHorizontalBorder(1);
         delay = 250;
         String searchText = centeringFunction(18) + "Search: ";
         for (char ch : searchText.toCharArray()) {
@@ -79,8 +88,16 @@ public class UserInterface {
         }
 
         nameOfFunction = scanner.nextLine().toLowerCase();
-        drawHorizontalBorder();
+        wrapText(nameOfFunction, borderWidth - 2);
+        drawHorizontalBorder(1);
 
+        if (listOfNoParamFunctions.containsKey(nameOfFunction)) {
+            listOfNoParamFunctions.get(nameOfFunction).run();
+        } else {
+            System.out.println("Command not found. Try again.");
+            drawHorizontalBorder(numberOfSymbols);
+            System.out.print("\n");
+        }
     }
 
 
@@ -89,11 +106,14 @@ public class UserInterface {
 
     }
 
+
+    //Show list of commands in menu
     public static void displayListOfMenuCommands() {
-        System.out.println(centeringFunction(12) + "All commands:\n" + centeringFunction(12) + "· calculator\n"
+        System.out.println(centeringFunction(12) + "All commands\n" + centeringFunction(12) + "· calculator\n"
                 + centeringFunction(12) + "· settings\n"
                 + centeringFunction(12) + "· show list\n" + centeringFunction(12) + "· exit");
     }
+
 
     //Exit program
     public static void exitProgram() {
@@ -107,7 +127,7 @@ public class UserInterface {
                 System.out.println(AppearanceSettings.RED + "Error, try again" + AppearanceSettings.RESET);
             }
         }
-        delay = 400;
+        delay = 100;
         String exitTextAdditional = AppearanceSettings.RED + "..." + AppearanceSettings.RESET;
         for (char ch : exitTextAdditional.toCharArray()) {
             System.out.print(ch);
@@ -120,21 +140,32 @@ public class UserInterface {
         System.exit(0);
     }
 
+
     //Show list of operations in calculator
     public static void displayCalculatorOperationsList() {
         System.out.println(centeringFunction(10) + "\nOperations:\n1. sum[+]" + centeringFunction(10) + "2. sub[-]" +
                 "\n3. multi[*]" + centeringFunction(10) + " 4. div[/]\n5. pow[^]" + centeringFunction(10) + "6. exit[x]\n");
     }
 
-    //IN PROCESS
+
     //Method to wrap the text
     public static void wrapText(String text, int width) {
+        System.out.print(centeringFunction(18)); // Align the first line
         for (int i = 0; i < text.length(); i += width) {
-            if (i + width > text.length()) {
-                System.out.println(text.substring(i));
+            if (i == 0) {
+                int end = Math.min(i + width, text.length());
+                System.out.print(text.substring(i, end));
+                if (end < text.length()) {
+                    System.out.println(); // Add newline after first segment
+                }
             } else {
-                System.out.println(text.substring(i, i + width));
+                int end = Math.min(i + width, text.length());
+                System.out.print(centeringFunction(18) + text.substring(i, end));
+                if (end < text.length()) {
+                    System.out.println(); // Add newline after each wrapped line
+                }
             }
         }
+        System.out.println();
     }
 }

@@ -5,21 +5,37 @@ import settings.AppearanceSettings;
 
 import java.util.Scanner;
 
-import static settings.AppearanceSettings.RESET;
+import static settings.AppearanceSettings.*;
 
 public class Calculator {
     public static Runnable calculator() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.println();
+                System.out.println("|" + UserInterface.centeringFunction(-19) + "|");
+                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+
+                UserInterface.delay = 200;
+                String searchText = UserInterface.centeringFunction(10) + "Calculator\n";
+                for (char ch : searchText.toCharArray()) {
+                    System.out.print(ch);
+                    try {
+                        Thread.sleep(UserInterface.delay);
+                    } catch (InterruptedException ex) {
+                        System.out.println(RED + "Error, try again" + RESET);
+                    }
+                }
+                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+                System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "]" + "Enter numbers\n" + UserInterface.centeringFunction(18) + "to calculate");
+                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
                     System.out.print(UserInterface.centeringFunction(18) + AppearanceSettings.RED + "\nNo numbers entered." + RESET);
                     continue;
                 }
-
+                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
                 UserInterface.displayCalculatorOperationsList();
                 System.out.print("Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
