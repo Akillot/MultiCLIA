@@ -1,35 +1,28 @@
 package calculator;
 
-import additional.AdditionalOperations;
-import layout.LayoutSettings;
-import settings.BasicSettings;
+import layout.UserInterface;
+import settings.AppearanceSettings;
 
 import java.util.Scanner;
 
 import static settings.AppearanceSettings.RESET;
 
 public class Calculator {
-    public static void calculator() {
+    public static Runnable calculator() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println();
-
-        System.out.println("\n" + LayoutSettings.fullBorder);
-        LayoutSettings.showLogo();
-
         while (true) {
             try {
                 System.out.println();
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    System.out.print(LayoutSettings.fullBorder + "\n" + "No numbers entered." + RESET);
+                    System.out.print(UserInterface.centeringFunction(18) + AppearanceSettings.RED + "\nNo numbers entered." + RESET);
                     continue;
                 }
 
-                AdditionalOperations.showCommandList();
+                UserInterface.displayCalculatorOperationsList();
                 System.out.print("Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
-                System.out.println(LayoutSettings.fullBorder);
 
                 switch (operation) {
                     case "sum":
@@ -57,17 +50,13 @@ public class Calculator {
                     case "^":
                         MathOperations.pow(mathStatementString);
                         break;
-                    case "6":
-                    case "settings":
-                        BasicSettings.showVersionInfo();
-                        break;
                     case "exit":
-                    case "7":
+                    case "6":
                     case "x":
                         System.out.println("Exiting the program...");
-                        return;
+                        return null;
                     default:
-                        System.out.println("Invalid operation.\n" + LayoutSettings.fullBorder + "\n");
+                        System.out.println("Invalid operation.\n");
 
                 }
             } catch (Exception ex) {
