@@ -1,6 +1,6 @@
 # MultiCLIA(formerly MathCLIA)
 
-MathCLIA (Multi Command Line Interface Application) is a simple command-line tool for performing basic arithmetic operations. 
+MultiCLIA (Multi Command Line Interface Application) is a simple command-line tool for performing basic arithmetic operations. 
 It allows users to input a list of numbers separated by spaces and choose an operation to perform on them: addition, subtraction, multiplication, or division and also power.
 
 ## Usage
