@@ -1,18 +1,18 @@
 package calculator;
 
 import layout.UserInterface;
-import settings.AppearanceSettings;
 
 import java.util.Scanner;
 
-import static settings.AppearanceSettings.*;
+import static settings.AppearanceSettings.RESET;
+import static settings.AppearanceSettings.YELLOW;
 
 public class Calculator {
     public static Runnable calculator() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.println("|" + UserInterface.centeringFunction(-19) + "|");
+                UserInterface.transitionBorder();
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
 
                 UserInterface.delay = 200;
@@ -22,23 +22,26 @@ public class Calculator {
                     try {
                         Thread.sleep(UserInterface.delay);
                     } catch (InterruptedException ex) {
-                        System.out.println(RED + "Error, try again" + RESET);
+                        UserInterface.displayError("Error, try again");
                     }
                 }
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
                 System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "]" + "Enter numbers\n" + UserInterface.centeringFunction(18) + "to calculate");
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+                System.out.print(UserInterface.centeringFunction(18) + "Input: ");
 
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    System.out.print(UserInterface.centeringFunction(18) + AppearanceSettings.RED + "\nNo numbers entered." + RESET);
+                    UserInterface.displayError("\nNo numbers entered");
                     continue;
                 }
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
                 UserInterface.displayCalculatorOperationsList();
                 System.out.print("Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
+                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+                UserInterface.transitionBorder();
 
                 switch (operation) {
                     case "sum":
@@ -69,14 +72,14 @@ public class Calculator {
                     case "exit":
                     case "6":
                     case "x":
-                        System.out.println("Exiting the program...");
+                        System.out.println("Exiting the program..."); //IN PROCESS
                         return null;
                     default:
-                        System.out.println("Invalid operation.\n");
+                        UserInterface.displayError("Invalid operation");
 
                 }
             } catch (Exception ex) {
-                System.out.println("Error: " + ex.getMessage());
+                UserInterface.displayError("Error: " + ex.getMessage());
             }
         }
     }
