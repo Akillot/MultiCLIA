@@ -18,6 +18,7 @@ public class UserInterface {
     static Scanner scanner = new Scanner(System.in);
 
 
+    //GRAPHIC
     //Show a logo
     public static void displayLogo() {
         System.out.print(centeringFunction(11) + "+---------+\n" + centeringFunction(11) + "|" + AppearanceSettings.RED + "M" + AppearanceSettings.RESET +
@@ -28,7 +29,8 @@ public class UserInterface {
     }
 
 
-    //Center the text
+    //GRAPHIC
+    //Centering the content
     public static String centeringFunction(int widthOfElement) {
         int fullWidth = borderWidth + 2; //Where 2 is "+"
         int oneSide = (fullWidth - widthOfElement) / 2;
@@ -37,22 +39,29 @@ public class UserInterface {
     }
 
 
+    //GRAPHIC
     //Show version
     public static void displayVersionInfo() {
-        System.out.println("Current version:\n" + AppearanceSettings.YELLOW + "0.3.8");
+        System.out.println("Current version:\n" + AppearanceSettings.YELLOW + "0.3.9");
     }
 
 
+    //GRAPHIC
     //Show current time
     public static void displayCurrentTime() {
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(UserInterface.centeringFunction(10) + "\ndd-MM-yyyy"
-                + UserInterface.centeringFunction(5) + "\nHH:mm");
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(centeringFunction(10) + "\ndd-MM-yyyy"
+                + centeringFunction(5) + "\nHH:mm");
         String formattedTime = localTime.format(myFormatter);
         System.out.println("\nTime is: " + formattedTime);
+        drawHorizontalBorder(numberOfSymbols);
+        transitionBorder();
     }
 
 
+    //GRAPHIC
     //Show horizontal border
     public static void drawHorizontalBorder(int numberOfSymbol) {
         System.out.print(symbolsOfBorder[0]);
@@ -63,6 +72,7 @@ public class UserInterface {
     }
 
 
+    //GRAPHIC
     //Show main menu of the app
     public static void displayMenu() {
         HashMap<String, Runnable> listOfNoParamFunctions = new HashMap<>();
@@ -83,42 +93,61 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                System.out.println(AppearanceSettings.RED + "Error, try again" + AppearanceSettings.RESET);
+                displayError("Error, try again");
             }
         }
 
         nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2);
-        drawHorizontalBorder(1);
+        drawHorizontalBorder(numberOfSymbols);
 
         if (listOfNoParamFunctions.containsKey(nameOfFunction)) {
             listOfNoParamFunctions.get(nameOfFunction).run();
         } else {
-            System.out.println("Command not found. Try again.");
+            transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            System.out.print("\n");
+            displayError("Command not found");
+            drawHorizontalBorder(numberOfSymbols);
+            transitionBorder();
         }
     }
 
 
+    //GRAPHIC
     //Show settings
     public static void displaySettings() {
 
     }
 
 
+    //GRAPHIC
     //Show list of commands in menu
     public static void displayListOfMenuCommands() {
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
         System.out.println(centeringFunction(12) + "All commands\n" + centeringFunction(12) + "· calculator\n"
                 + centeringFunction(12) + "· settings\n"
                 + centeringFunction(12) + "· show list\n" + centeringFunction(12) + "· exit");
+        drawHorizontalBorder(1);
+        System.out.println("|" + centeringFunction(-19) + "|");
     }
 
 
+    //GRAPHIC
+    //Show errors
+    public static void displayError(String text) {
+        drawHorizontalBorder(numberOfSymbols);
+        System.out.println(centeringFunction(text.length()) + AppearanceSettings.RED + text + AppearanceSettings.RESET);
+    }
+
+
+    //GRAPHIC
     //Exit program
     public static void exitProgram() {
-        delay = 250;
-        String exitText = AppearanceSettings.RED + "Exiting program" + AppearanceSettings.RESET;
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+        delay = 150;
+        String exitText = centeringFunction(18) + AppearanceSettings.RED + "Exiting program" + AppearanceSettings.RESET;
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
@@ -127,7 +156,7 @@ public class UserInterface {
                 System.out.println(AppearanceSettings.RED + "Error, try again" + AppearanceSettings.RESET);
             }
         }
-        delay = 100;
+        delay = 250;
         String exitTextAdditional = AppearanceSettings.RED + "..." + AppearanceSettings.RESET;
         for (char ch : exitTextAdditional.toCharArray()) {
             System.out.print(ch);
@@ -141,13 +170,27 @@ public class UserInterface {
     }
 
 
-    //Show list of operations in calculator
-    public static void displayCalculatorOperationsList() {
-        System.out.println(centeringFunction(10) + "\nOperations:\n1. sum[+]" + centeringFunction(10) + "2. sub[-]" +
-                "\n3. multi[*]" + centeringFunction(10) + " 4. div[/]\n5. pow[^]" + centeringFunction(10) + "6. exit[x]\n");
+    //GRAPHIC
+    //Show transition border
+    public static void transitionBorder() {
+        System.out.println("|" + centeringFunction(-19) + "|");
     }
 
 
+    //GRAPHIC
+    //Show list of operations in calculator
+    public static void displayCalculatorOperationsList() {
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+        System.out.println(centeringFunction(10) + "Operations:");
+        drawHorizontalBorder(numberOfSymbols);
+        System.out.println("1. sum[+]" + centeringFunction(10) + "2. sub[-]" +
+                "\n3. multi[*]" + centeringFunction(14) + "4. div[/]\n5. pow[^]" + centeringFunction(10) + "6. exit[x]");
+        drawHorizontalBorder(numberOfSymbols);
+    }
+
+
+    //LOGIC
     //Method to wrap the text
     public static void wrapText(String text, int width) {
         System.out.print(centeringFunction(18)); // Align the first line
