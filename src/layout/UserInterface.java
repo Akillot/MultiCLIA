@@ -13,12 +13,13 @@ public class UserInterface {
     public static int numberOfSymbols = 1;
     public static int delay;
 
+    public static String searchText;
     public static String nameOfFunction = "";
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
     static Scanner scanner = new Scanner(System.in);
 
-    //LOGO
+    //LOGO//
     //Show a logo
     public static void displayDefaultLogo() {
         System.out.print(centeringFunction(11) + "+---------+\n" +
@@ -48,6 +49,7 @@ public class UserInterface {
     public static void logoSwitcher() {
         String nameOfLogo = scanner.nextLine().toLowerCase();
 
+        //IN PROCESS
         if (nameOfLogo.equalsIgnoreCase("default")) {
             displayDefaultLogo();
         } else if (nameOfLogo.equalsIgnoreCase("google")) {
@@ -65,20 +67,20 @@ public class UserInterface {
         listOfMenuFunctions.put("settings", UserInterface::displaySettings);
         listOfMenuFunctions.put("all commands", UserInterface::displayListOfMenuCommands);
         listOfMenuFunctions.put("time", UserInterface::displayCurrentTime);
-        listOfMenuFunctions.put("version", UserInterface::displayVersionInfo);
+        listOfMenuFunctions.put("info", UserInterface::displayInfo);
         listOfMenuFunctions.put("exit", UserInterface::exitProgram);
 
         drawHorizontalBorder(numberOfSymbols);
         displayDefaultLogo();
         drawHorizontalBorder(numberOfSymbols);
         delay = 250;
-        String searchText = centeringFunction(18) + "Search: ";
+        searchText = centeringFunction(18) + "Search: ";
         for (char ch : searchText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayError("Error, try again");
+                displayRedCommands("Error, try again");
             }
         }
 
@@ -91,7 +93,7 @@ public class UserInterface {
         } else {
             transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            displayError("Command not found");
+            displayRedCommands("Command not found");
             drawHorizontalBorder(numberOfSymbols);
             transitionBorder();
         }
@@ -105,23 +107,39 @@ public class UserInterface {
         listOfSettings.put("settings value", UserInterface::displayListOfMenuCommands);
         listOfSettings.put("logo", UserInterface::logoSwitcher);
         listOfSettings.put("border", UserInterface::logoSwitcher); //In progress
-        listOfSettings.put("delay", UserInterface::displayVersionInfo); //In progress
-        listOfSettings.put("exit", UserInterface::exitProgram); //In progress
+        listOfSettings.put("delay", UserInterface::displayVersion); //In progress
+        listOfSettings.put("exit", UserInterface::exitBlock);
 
+        UserInterface.transitionBorder();
+        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+
+        UserInterface.delay = 200;
+        String searchText = UserInterface.centeringFunction(10) + "Settings\n";
+
+        for (char ch : searchText.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(UserInterface.delay);
+            } catch (InterruptedException ex) {
+                UserInterface.displayRedCommands("Error, try again");
+            }
+        }
+
+        transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         delay = 250;
-        String searchText = centeringFunction(18) + "Search: ";
+        searchText = centeringFunction(18) + "Search: ";
         for (char ch : searchText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayError("Error, try again");
+                displayRedCommands("Error, try again");
             }
         }
 
         nameOfFunction = scanner.nextLine().toLowerCase();
-        wrapText(nameOfFunction, borderWidth - 2);
+        wrapText(nameOfFunction, borderWidth - 2); //Wrapping the command from user
         drawHorizontalBorder(numberOfSymbols);
 
         if (listOfSettings.containsKey(nameOfFunction)) {
@@ -129,9 +147,8 @@ public class UserInterface {
         } else {
             transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            displayError("Command not found");
+            displayRedCommands("Command not found");
             drawHorizontalBorder(numberOfSymbols);
-            transitionBorder();
         }
     }
 
@@ -157,6 +174,7 @@ public class UserInterface {
         }
         System.out.println();
     }
+
     //Centering the content
     public static String centeringFunction(int widthOfElement) {
         int fullWidth = borderWidth + 2; //Where 2 is "+"
@@ -181,7 +199,7 @@ public class UserInterface {
     }
 
 
-    //TIME//VERSION//
+    //TIME//VERSION//INFO//
     //Show current time
     public static void displayCurrentTime() {
         transitionBorder();
@@ -192,12 +210,21 @@ public class UserInterface {
         String formattedTime = localTime.format(myFormatter);
         System.out.println("\nTime is: " + formattedTime);
         drawHorizontalBorder(numberOfSymbols);
-        transitionBorder();
+    }
+
+    //Show info about MultiCLIA
+    public static void displayInfo() {
+        displayVersion();
     }
 
     //Show version
-    public static void displayVersionInfo() {
-        System.out.println("Current version:\n" + AppearanceSettings.YELLOW + "0.4.0");
+    public static void displayVersion() {
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+        System.out.println(centeringFunction(18) + "Current version:\n"
+                + centeringFunction(18) + AppearanceSettings.YELLOW + "0.4.0" + AppearanceSettings.RESET);
+        drawHorizontalBorder(numberOfSymbols);
+        transitionBorder();
     }
 
 
@@ -206,11 +233,14 @@ public class UserInterface {
     public static void displayListOfMenuCommands() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        System.out.println(centeringFunction(12) + "All commands\n" + centeringFunction(12) + "· calculator\n"
+        System.out.println(centeringFunction(8) + "Commands\n"
+                + centeringFunction(12) + "· calculator\n"
                 + centeringFunction(12) + "· settings\n"
-                + centeringFunction(12) + "· show list\n" + centeringFunction(12) + "· exit");
+                + centeringFunction(12) + "· all commands\n"
+                + centeringFunction(12) + "· info\n"
+                + centeringFunction(12) + "· exit");
         drawHorizontalBorder(1);
-        System.out.println("|" + centeringFunction(-19) + "|");
+        transitionBorder();
     }
 
     //Show list of commands in settings
@@ -223,28 +253,28 @@ public class UserInterface {
                 + centeringFunction(12) + "· delay\n"
                 + centeringFunction(12) + "· exit");
         drawHorizontalBorder(1);
-        System.out.println("|" + centeringFunction(-19) + "|");
+        transitionBorder();
     }
 
 
-    //EXIT//ERRORS//
+    //EXIT//RED-COMMANDS//
     //Show errors
-    public static void displayError(String text) {
-        drawHorizontalBorder(numberOfSymbols);
+    public static void displayRedCommands(String text) {
         System.out.println(centeringFunction(text.length()) + AppearanceSettings.RED + text + AppearanceSettings.RESET);
     }
-    //Exit program
-    public static void exitProgram() {
+
+    //Exit block(apps)
+    public static void exitBlock() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         delay = 150;
-        String exitText = centeringFunction(18) + AppearanceSettings.RED + "Exiting program" + AppearanceSettings.RESET;
+        String exitText = centeringFunction(18) + AppearanceSettings.RED + "Application exit" + AppearanceSettings.RESET;
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                System.out.println(AppearanceSettings.RED + "Error, try again" + AppearanceSettings.RESET);
+                displayRedCommands("Error, try again");
             }
         }
         delay = 250;
@@ -254,7 +284,35 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                System.out.println(AppearanceSettings.RED + "Error, try again" + AppearanceSettings.RESET);
+                displayRedCommands("Error, try again");
+            }
+        }
+        drawHorizontalBorder(1);
+        transitionBorder();
+    }
+
+    //Exit program
+    public static void exitProgram() {
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+        delay = 150;
+        String exitText = centeringFunction(18) + AppearanceSettings.RED + "Program exit" + AppearanceSettings.RESET;
+        for (char ch : exitText.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                displayRedCommands("Error, try again");
+            }
+        }
+        delay = 250;
+        String exitTextAdditional = AppearanceSettings.RED + "..." + AppearanceSettings.RESET;
+        for (char ch : exitTextAdditional.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                displayRedCommands("Error, try again");
             }
         }
         System.exit(0);
