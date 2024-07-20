@@ -10,7 +10,10 @@ public class AppearanceSettings {
     public static final String BLUE = "\033[0;34m";
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
-    public static final String GRAY = "\033[0;37m";
+
+    public static final String BOLD = "\033[1m";
+    public static final String UNDERLINE = "\033[4m";
+    //public static final String GRAY = "\033[0;37m";
 }
    /* static Scanner scanner = new Scanner(System.in);
 

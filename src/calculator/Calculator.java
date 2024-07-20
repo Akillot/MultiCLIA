@@ -1,9 +1,9 @@
 package calculator;
 
-import layout.UserInterface;
-
 import java.util.Scanner;
 
+import static calculator.CalculatorFunctions.*;
+import static layout.UserInterface.*;
 import static settings.AppearanceSettings.RESET;
 import static settings.AppearanceSettings.YELLOW;
 
@@ -12,78 +12,78 @@ public class Calculator {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                UserInterface.transitionBorder();
-                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+                transitionBorder();
+                drawHorizontalBorder(numberOfSymbols);
 
-                UserInterface.delay = 200;
-                String searchText = UserInterface.centeringFunction(10) + "Calculator\n";
+                delay = 200;
+                String searchText = centeringFunction(10) + "Calculator\n";
                 for (char ch : searchText.toCharArray()) {
                     System.out.print(ch);
                     try {
-                        Thread.sleep(UserInterface.delay);
+                        Thread.sleep(delay);
                     } catch (InterruptedException ex) {
-                        UserInterface.displayRedCommands("Error, try again");
+                        displayRedCommands("Error, try again");
                     }
                 }
-                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "] " +
-                        "Enter numbers\n" + UserInterface.centeringFunction(18) + "to calculate");
-                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                System.out.print(UserInterface.centeringFunction(18) + "Input: ");
+                drawHorizontalBorder(numberOfSymbols);
+                System.out.println(centeringFunction(18) + "[" + YELLOW + "i" + RESET + "] " +
+                        "Enter numbers\n" + centeringFunction(18) + "to calculate");
+                drawHorizontalBorder(numberOfSymbols);
+                System.out.print(centeringFunction(18) + "Input: ");
 
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    UserInterface.displayRedCommands("\nNo numbers entered");
+                    displayRedCommands("\nNo numbers entered");
                     continue;
                 }
 
-                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                CalculatorFunctions.displayCalculatorOperationsList();
-                System.out.print("Your choice is: ");
+                drawHorizontalBorder(numberOfSymbols);
+                displayCalculatorOperationsList();
+                System.out.print(centeringFunction(18) + "Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
-                UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                UserInterface.transitionBorder();
+                drawHorizontalBorder(numberOfSymbols);
+                transitionBorder();
 
                 switch (operation) {
                     case "sum":
                     case "1":
                     case "+":
-                        CalculatorFunctions.sum(mathStatementString);
+                        sum(mathStatementString);
                         break;
                     case "sub":
                     case "2":
                     case "-":
-                        CalculatorFunctions.sub(mathStatementString);
+                        sub(mathStatementString);
                         break;
                     case "multi":
                     case "3":
                     case "*":
-                        CalculatorFunctions.multi(mathStatementString);
+                        multi(mathStatementString);
                         break;
                     case "div":
                     case "4":
                     case "/":
-                        CalculatorFunctions.divide(mathStatementString);
+                        divide(mathStatementString);
                         break;
                     case "pow":
                     case "5":
                     case "^":
-                        CalculatorFunctions.pow(mathStatementString);
+                        pow(mathStatementString);
                         break;
                     case "exit":
                     case "6":
                     case "x":
-                        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                        UserInterface.displayRedCommands("Exiting the program...");
-                        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                        UserInterface.transitionBorder();
+                        drawHorizontalBorder(numberOfSymbols);
+                        displayRedCommands("Exiting the program...");
+                        drawHorizontalBorder(numberOfSymbols);
+                        transitionBorder();
                         return null;
                     default:
-                        UserInterface.displayRedCommands("Invalid operation");
+                        displayRedCommands("Invalid operation");
                 }
             } catch (Exception ex) {
-                UserInterface.displayRedCommands("Error: " + ex.getMessage());
+                displayRedCommands("Error: " + ex.getMessage());
             }
         }
     }
