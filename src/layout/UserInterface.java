@@ -126,7 +126,6 @@ public class UserInterface {
             }
         }
 
-        transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         delay = 250;
         searchText = centeringFunction(18) + UNDERLINE + BOLD + "Search" + RESET + ": ";
@@ -275,7 +274,7 @@ public class UserInterface {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         delay = 150;
-        String exitText = centeringFunction(18) + RED + BOLD + "Application exit" + RESET;
+        String exitText = centeringFunction(18) + RED + BOLD + "Application exit\n" + RESET;
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
@@ -294,7 +293,7 @@ public class UserInterface {
                 displayRedCommands("Error, try again");
             }
         }
-        drawHorizontalBorder(1);
+        drawHorizontalBorder(numberOfSymbols);
         transitionBorder();
     }
 
