@@ -26,7 +26,8 @@ public class Calculator {
                     }
                 }
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "]" + "Enter numbers\n" + UserInterface.centeringFunction(18) + "to calculate");
+                System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "]" +
+                        "Enter numbers\n" + UserInterface.centeringFunction(18) + "to calculate");
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
                 System.out.print(UserInterface.centeringFunction(18) + "Input: ");
 
@@ -36,8 +37,9 @@ public class Calculator {
                     UserInterface.displayError("\nNo numbers entered");
                     continue;
                 }
+
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                UserInterface.displayCalculatorOperationsList();
+                CalculatorFunctions.displayCalculatorOperationsList();
                 System.out.print("Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
@@ -47,27 +49,27 @@ public class Calculator {
                     case "sum":
                     case "1":
                     case "+":
-                        MathOperations.sum(mathStatementString);
+                        CalculatorFunctions.sum(mathStatementString);
                         break;
                     case "sub":
                     case "2":
                     case "-":
-                        MathOperations.sub(mathStatementString);
+                        CalculatorFunctions.sub(mathStatementString);
                         break;
                     case "multi":
                     case "3":
                     case "*":
-                        MathOperations.multi(mathStatementString);
+                        CalculatorFunctions.multi(mathStatementString);
                         break;
                     case "div":
                     case "4":
                     case "/":
-                        MathOperations.divide(mathStatementString);
+                        CalculatorFunctions.divide(mathStatementString);
                         break;
                     case "pow":
                     case "5":
                     case "^":
-                        MathOperations.pow(mathStatementString);
+                        CalculatorFunctions.pow(mathStatementString);
                         break;
                     case "exit":
                     case "6":
@@ -76,7 +78,6 @@ public class Calculator {
                         return null;
                     default:
                         UserInterface.displayError("Invalid operation");
-
                 }
             } catch (Exception ex) {
                 UserInterface.displayError("Error: " + ex.getMessage());

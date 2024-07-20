@@ -2,7 +2,7 @@ package calculator;
 
 import layout.UserInterface;
 
-public class MathOperations {
+public class CalculatorFunctions {
     static double result;
     // Summation
     public static void sum(String mathStatement) {
@@ -127,6 +127,18 @@ public class MathOperations {
     public static void showAnswer(double answer) {
         UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
         System.out.println(UserInterface.centeringFunction(18) + "Answer: " + answer);
+        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+    }
+
+    //GRAPHIC
+    //Show list of operations in calculator
+    public static void displayCalculatorOperationsList() {
+        UserInterface.transitionBorder();
+        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+        System.out.println(UserInterface.centeringFunction(10) + "Operations:");
+        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+        System.out.println("1. sum[+]" + UserInterface.centeringFunction(10) + "2. sub[-]" +
+                "\n3. multi[*]" + UserInterface.centeringFunction(14) + "4. div[/]\n5. pow[^]" + UserInterface.centeringFunction(10) + "6. exit[x]");
         UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
     }
 }
