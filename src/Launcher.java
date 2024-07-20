@@ -1,10 +1,14 @@
-import layout.UserInterface;
+import static layout.UserInterface.*;
 
-public class Main {
+public class Launcher {
     public static void main(String[] args) {
+        drawFullTripleBorder();
+        displayDefaultLogo();
+        drawFullTripleBorder();
+
         while (true) {
             try {
-                UserInterface.displayMenu();
+                displayMenu();
             } catch (Exception ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
