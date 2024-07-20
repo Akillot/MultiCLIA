@@ -22,11 +22,11 @@ public class Calculator {
                     try {
                         Thread.sleep(UserInterface.delay);
                     } catch (InterruptedException ex) {
-                        UserInterface.displayError("Error, try again");
+                        UserInterface.displayRedCommands("Error, try again");
                     }
                 }
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
-                System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "]" +
+                System.out.println(UserInterface.centeringFunction(18) + "[" + YELLOW + "i" + RESET + "] " +
                         "Enter numbers\n" + UserInterface.centeringFunction(18) + "to calculate");
                 UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
                 System.out.print(UserInterface.centeringFunction(18) + "Input: ");
@@ -34,7 +34,7 @@ public class Calculator {
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    UserInterface.displayError("\nNo numbers entered");
+                    UserInterface.displayRedCommands("\nNo numbers entered");
                     continue;
                 }
 
@@ -74,13 +74,16 @@ public class Calculator {
                     case "exit":
                     case "6":
                     case "x":
-                        System.out.println("Exiting the program..."); //IN PROCESS
+                        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+                        UserInterface.displayRedCommands("Exiting the program...");
+                        UserInterface.drawHorizontalBorder(UserInterface.numberOfSymbols);
+                        UserInterface.transitionBorder();
                         return null;
                     default:
-                        UserInterface.displayError("Invalid operation");
+                        UserInterface.displayRedCommands("Invalid operation");
                 }
             } catch (Exception ex) {
-                UserInterface.displayError("Error: " + ex.getMessage());
+                UserInterface.displayRedCommands("Error: " + ex.getMessage());
             }
         }
     }
