@@ -5,6 +5,7 @@ import calculator.Calculator;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 
 import static settings.AppearanceSettings.*;
@@ -24,22 +25,22 @@ public class UserInterface {
     //LOGO//
     //Show a logo
     public static void displayDefaultLogo() {
-        System.out.print(centeringFunction(11) +
+        System.out.print(contentAlignment(11) +
                 BOLD + "+---------+\n" +
-                centeringFunction(11) + "|" +
+                contentAlignment(11) + "|" +
                 RED + BOLD + "M" + RESET + GREEN + BOLD + "u" + RESET +
                 YELLOW + BOLD + "l" + RESET + BLUE + BOLD + "t" + RESET +
                 PURPLE + BOLD + "i" + RESET + BOLD + "CLIA|\n" +
-                centeringFunction(11) + "+---------+\n" + RESET);
+                contentAlignment(11) + "+---------+\n" + RESET);
     }
 
     //Show a Google reference logo
     public static void displayGoogleReferenseLogo() {
-        System.out.print(centeringFunction(11) + "+---------+\n" +
-                centeringFunction(11) + "|" +
+        System.out.print(contentAlignment(11) + "+---------+\n" +
+                contentAlignment(11) + "|" +
                 BLUE + "M" + RESET + RED + "u" + RESET + YELLOW + "l" + RESET +
                 BLUE + "ti" + RESET + GREEN + "CL" + RESET + RED + "IA" + RESET + "|\n" +
-                centeringFunction(11) + "+---------+\n");
+                contentAlignment(11) + "+---------+\n");
     }
 
     //Switching the logo
@@ -67,21 +68,21 @@ public class UserInterface {
         listOfMenuFunctions.put("info", UserInterface::displayInfo);
         listOfMenuFunctions.put("exit", UserInterface::exitProgram);
 
-        System.out.println(centeringFunction(18) + BOLD
+        System.out.println(contentAlignment(18) + BOLD
                 + "[" + YELLOW + BOLD + "i" + RESET
                 + BOLD + "] " + "Enter 'commands'\n"
-                + centeringFunction(18) + "to show list of\n"
-                + centeringFunction(18) + "commands" + RESET);
+                + contentAlignment(18) + "to show list of\n"
+                + contentAlignment(18) + "commands" + RESET);
         drawFullTripleBorder();
 
         delay = 250;
-        searchText = centeringFunction(18) + UNDERLINE + BOLD + "Search" + RESET + ": ";
+        searchText = contentAlignment(18) + UNDERLINE + BOLD + "Search" + RESET + ": ";
         for (char ch : searchText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
 
@@ -94,7 +95,7 @@ public class UserInterface {
         } else {
             transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            displayRedCommands("Command not found");
+            displayColorfulCommands("Command not found", "red");
 
             drawFullTripleBorder();
         }
@@ -104,7 +105,7 @@ public class UserInterface {
     public static void displaySettings() {
         HashMap<String, Runnable> listOfSettings = new HashMap<>();
 
-        listOfSettings.put("all commands", UserInterface::displayListOfSettings);
+        listOfSettings.put("commands", UserInterface::displayListOfSettings);
         listOfSettings.put("settings value", UserInterface::displayListOfMenuCommands);
         listOfSettings.put("logo", UserInterface::logoSwitcher);
         listOfSettings.put("border", UserInterface::logoSwitcher); //In progress
@@ -115,26 +116,26 @@ public class UserInterface {
         drawHorizontalBorder(numberOfSymbols);
 
         delay = 200;
-        String searchText = centeringFunction(10) + "Settings\n";
+        String searchText = contentAlignment(10) + "Settings\n";
 
         for (char ch : searchText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
 
         drawHorizontalBorder(numberOfSymbols);
         delay = 250;
-        searchText = centeringFunction(18) + UNDERLINE + BOLD + "Search" + RESET + ": ";
+        searchText = contentAlignment(18) + UNDERLINE + BOLD + "Search" + RESET + ": ";
         for (char ch : searchText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
 
@@ -147,26 +148,27 @@ public class UserInterface {
         } else {
             transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            displayRedCommands("Command not found");
+            displayColorfulCommands("Command not found", "red");
             drawHorizontalBorder(numberOfSymbols);
         }
     }
 
 
-    //WRAPPING//CENTERING//
+    //WRAPPING//ALIGNMENT//
     //Method to wrap the content
     public static void wrapText(String text, int width) {
-        System.out.print(centeringFunction(18)); // Align the first line
+        //System.out.print(centeringFunction(18)); // Align the first line
         for (int i = 0; i < text.length(); i += width) {
             if (i == 0) {
                 int end = Math.min(i + width, text.length());
-                System.out.print(text.substring(i, end));
+                drawFullTripleBorder();
+                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println(); // Add newline after first segment
                 }
             } else {
                 int end = Math.min(i + width, text.length());
-                System.out.print(centeringFunction(18) + text.substring(i, end));
+                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println(); // Add newline after each wrapped line
                 }
@@ -175,8 +177,8 @@ public class UserInterface {
         System.out.println();
     }
 
-    //Centering the content
-    public static String centeringFunction(int widthOfElement) {
+    //Aligns the content
+    public static String contentAlignment(int widthOfElement) {
         int fullWidth = borderWidth + 2; //Where 2 is "+"
         int oneSide = (fullWidth - widthOfElement) / 2;
         return " ".repeat(Math.max(0, oneSide));
@@ -195,7 +197,7 @@ public class UserInterface {
 
     //Show transition border
     public static void transitionBorder() {
-        System.out.println("|" + centeringFunction(-19) + "|");
+        System.out.println("|" + contentAlignment(-19) + "|");
     }
 
     //Show triple border
@@ -212,10 +214,10 @@ public class UserInterface {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(centeringFunction(10) + "\ndd-MM-yyyy"
-                + centeringFunction(5) + "\nHH:mm");
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(contentAlignment(10) + "\ndd-MM-yyyy"
+                + contentAlignment(5) + "\nHH:mm");
         String formattedTime = localTime.format(myFormatter);
-        System.out.println(centeringFunction(9) + "Time is: " + formattedTime);
+        System.out.println(contentAlignment(9) + "Time is: " + formattedTime);
         drawHorizontalBorder(numberOfSymbols);
     }
 
@@ -229,8 +231,8 @@ public class UserInterface {
     public static void displayVersion() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        System.out.println(centeringFunction(18) + "Current version:\n"
-                + centeringFunction(18) + BLUE + BOLD + UNDERLINE + "0.4.2" + RESET);
+        System.out.println(contentAlignment(18) + "Current version:");
+        displayColorfulCommands("0.4.2", "randomly");
         drawFullTripleBorder();
     }
 
@@ -240,12 +242,12 @@ public class UserInterface {
     public static void displayListOfMenuCommands() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        System.out.println(centeringFunction(8) + "Commands\n"
-                + centeringFunction(12) + "· calculator\n"
-                + centeringFunction(12) + "· settings\n"
-                + centeringFunction(12) + "· all commands\n"
-                + centeringFunction(12) + "· info\n"
-                + centeringFunction(12) + "· exit");
+        System.out.println(contentAlignment(8) + "Commands\n"
+                + contentAlignment(12) + "· calculator\n"
+                + contentAlignment(12) + "· settings\n"
+                + contentAlignment(12) + "· commands\n"
+                + contentAlignment(12) + "· info\n"
+                + contentAlignment(12) + "· exit");
         drawFullTripleBorder();
     }
 
@@ -253,20 +255,63 @@ public class UserInterface {
     public static void displayListOfSettings() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        System.out.println(centeringFunction(12) + "All commands\n" + centeringFunction(12) + "· settings value\n"
-                + centeringFunction(12) + "· logo\n"
-                + centeringFunction(12) + "· border\n"
-                + centeringFunction(12) + "· delay\n"
-                + centeringFunction(12) + "· exit");
+        System.out.println(contentAlignment(12) + "Commands\n" + contentAlignment(12) + "· settings value\n"
+                + contentAlignment(12) + "· logo\n"
+                + contentAlignment(12) + "· border\n"
+                + contentAlignment(12) + "· delay\n"
+                + contentAlignment(12) + "· exit");
         drawHorizontalBorder(1);
         transitionBorder();
     }
 
 
-    //EXIT//RED-COMMANDS//
-    //Show errors//exit and other red text
-    public static void displayRedCommands(String text) {
-        System.out.println(centeringFunction(text.length()) + RED + BOLD + text + RESET);
+    //EXIT//COLORFUL-COMMANDS//
+    //Show colorful content//exit and other red text
+    public static void displayColorfulCommands(String text, String color) {
+        switch (color) {
+            case "red":
+                System.out.println(contentAlignment(text.length()) + RED + BOLD + text + RESET);
+                break;
+            case "yellow":
+                System.out.println(contentAlignment(text.length()) + YELLOW + BOLD + text + RESET);
+                break;
+            case "green":
+                System.out.println(contentAlignment(text.length()) + GREEN + BOLD + text + RESET);
+                break;
+            case "blue":
+                System.out.println(contentAlignment(text.length()) + BLUE + BOLD + text + RESET);
+                break;
+            case "purple":
+                System.out.println(contentAlignment(text.length()) + PURPLE + BOLD + text + RESET);
+                break;
+            case "cyan":
+                System.out.println(contentAlignment(text.length()) + CYAN + BOLD + text + RESET);
+                break;
+            case "randomly":
+                Random rand = new Random();
+                int randomColor = rand.nextInt(1, 7);
+
+                switch (randomColor) {
+                    case 1:
+                        System.out.println(contentAlignment(text.length()) + RED + BOLD + text + RESET);
+                        break;
+                    case 2:
+                        System.out.println(contentAlignment(text.length()) + YELLOW + BOLD + text + RESET);
+                        break;
+                    case 3:
+                        System.out.println(contentAlignment(text.length()) + GREEN + BOLD + text + RESET);
+                        break;
+                    case 4:
+                        System.out.println(contentAlignment(text.length()) + BLUE + BOLD + text + RESET);
+                        break;
+                    case 5:
+                        System.out.println(contentAlignment(text.length()) + PURPLE + BOLD + text + RESET);
+                        break;
+                    case 6:
+                        System.out.println(contentAlignment(text.length()) + CYAN + BOLD + text + RESET);
+                        break;
+                }
+        }
     }
 
     //Exit block(apps)
@@ -274,13 +319,13 @@ public class UserInterface {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         delay = 150;
-        String exitText = centeringFunction(18) + RED + BOLD + "Application exit" + RESET;
+        String exitText = contentAlignment(18) + RED + BOLD + "Application exit" + RESET;
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
         delay = 250;
@@ -290,7 +335,7 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
         drawFullTripleBorder();
@@ -301,13 +346,13 @@ public class UserInterface {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
         delay = 150;
-        String exitText = centeringFunction(18) + RED + "Program exit" + RESET;
+        String exitText = contentAlignment(18) + RED + "Program exit" + RESET;
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
         delay = 250;
@@ -317,7 +362,7 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayRedCommands("Error, try again");
+                displayColorfulCommands("Error, try again", "red");
             }
         }
         System.exit(0);
