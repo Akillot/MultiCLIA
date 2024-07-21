@@ -22,7 +22,7 @@ public class Calculator {
                     try {
                         Thread.sleep(delay);
                     } catch (InterruptedException ex) {
-                        displayColorfulCommands("Error, try again", "red");
+                        displayColorCommand("Error, try again", "red", (byte) 0);
                     }
                 }
                 drawHorizontalBorder(numberOfSymbols);
@@ -34,7 +34,7 @@ public class Calculator {
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    displayColorfulCommands("\nNo numbers entered", "red");
+                    displayColorCommand("\nNo numbers entered", "red", (byte) 0);
                     continue;
                 }
 
@@ -75,15 +75,15 @@ public class Calculator {
                     case "6":
                     case "x":
                         drawHorizontalBorder(numberOfSymbols);
-                        displayColorfulCommands("Exiting the program...", "red");
+                        displayColorCommand("Exiting the program...", "red", (byte) 18);
                         drawHorizontalBorder(numberOfSymbols);
                         transitionBorder();
                         return null;
                     default:
-                        displayColorfulCommands("Invalid operation", "red");
+                        displayColorCommand("Invalid operation", "red", (byte) 0);
                 }
             } catch (Exception ex) {
-                displayColorfulCommands("Error: " + ex.getMessage(), "red");
+                displayColorCommand("Error: " + ex.getMessage(), "red", (byte) 0);
             }
         }
     }

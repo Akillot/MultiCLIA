@@ -8,9 +8,94 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
-import static settings.AppearanceSettings.*;
-
 public class UserInterface {
+
+    //STYLE
+    //Colors
+    public static final String WHITE = "\033[0;38m";
+    public static final String RESET = "\033[0m";
+    public static final String RED = "\033[0;31m";
+    public static final String GREEN = "\033[0;32m";
+    public static final String YELLOW = "\033[0;33m";
+    public static final String BLUE = "\033[0;34m";
+    public static final String PURPLE = "\033[0;35m";
+    public static final String CYAN = "\033[0;36m";
+
+    //Text styles
+    public static final String BOLD = "\033[1m";
+    public static final String UNDERLINE = "\033[4m";
+
+    //Show colorful content with alignment
+    public static void displayColorCommand(String text, String colorName, byte alignment) {
+        Color color;
+        try {
+            color = Color.valueOf(colorName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            if (colorName.equalsIgnoreCase("randomly")) {
+                color = getRandomColor();
+            } else {
+                displayColorCommand("Invalid input", "red", (byte) 0);
+                return;
+            }
+        }
+
+        String coloredText = getColoredText(text, color);
+        int alignLength = alignment == 0 ? text.length() : alignment;
+
+        if (alignment < 0) {
+            displayColorCommand("Invalid input", "red", (byte) 0);
+        } else {
+            System.out.println(contentAlignment(alignLength) + coloredText);
+        }
+    }
+
+    static String getColoredText(String text, Color color) {
+        String colorCode;
+        switch (color) {
+            case RED:
+                colorCode = RED;
+                break;
+            case YELLOW:
+                colorCode = YELLOW;
+                break;
+            case GREEN:
+                colorCode = GREEN;
+                break;
+            case BLUE:
+                colorCode = BLUE;
+                break;
+            case PURPLE:
+                colorCode = PURPLE;
+                break;
+            case CYAN:
+                colorCode = CYAN;
+                break;
+            default:
+                colorCode = RESET;
+                break;
+        }
+        return colorCode + BOLD + text + RESET;
+    }
+
+    static Color getRandomColor() {
+        Random rand = new Random();
+        int randomColorIndex = rand.nextInt(Color.values().length);
+        return Color.values()[randomColorIndex];
+    }
+
+    //Switching the logo
+    public static void logoSwitcher() {
+
+        String nameOfLogo = scanner.nextLine().toLowerCase();
+
+        //IN PROCESS
+        if (nameOfLogo.equalsIgnoreCase("default")) {
+            displayDefaultLogo();
+        } else if (nameOfLogo.equalsIgnoreCase("google")) {
+            displayGoogleReferenseLogo();
+        }
+    }
+
     public static int borderWidth = 21;
     public static int numberOfSymbols = 1;
     public static int delay;
@@ -43,19 +128,6 @@ public class UserInterface {
                 contentAlignment(11) + "+---------+\n");
     }
 
-    //Switching the logo
-    public static void logoSwitcher() {
-        String nameOfLogo = scanner.nextLine().toLowerCase();
-
-        //IN PROCESS
-        if (nameOfLogo.equalsIgnoreCase("default")) {
-            displayDefaultLogo();
-        } else if (nameOfLogo.equalsIgnoreCase("google")) {
-            displayGoogleReferenseLogo();
-        }
-    }
-
-
     //MENU//SETTINGS//
     //Show main menu of the app
     public static void displayMenu() {
@@ -82,7 +154,7 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
+                displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
 
@@ -95,7 +167,7 @@ public class UserInterface {
         } else {
             transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            displayColorfulCommands("Command not found", "red");
+            displayColorCommand("Command not found", "red", (byte) 0);
 
             drawFullTripleBorder();
         }
@@ -123,7 +195,7 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
+                displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
 
@@ -135,7 +207,7 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
+                displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
 
@@ -148,9 +220,18 @@ public class UserInterface {
         } else {
             transitionBorder();
             drawHorizontalBorder(numberOfSymbols);
-            displayColorfulCommands("Command not found", "red");
+            displayColorCommand("Command not found", "red", (byte) 0);
             drawHorizontalBorder(numberOfSymbols);
         }
+    }
+
+    //Show version
+    public static void displayVersion() {
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+        System.out.println(contentAlignment(18) + "Current version:");
+        displayColorCommand("0.4.5", "randomly", (byte) 0);
+        drawFullTripleBorder();
     }
 
 
@@ -227,12 +308,31 @@ public class UserInterface {
         displayVersion();
     }
 
-    //Show version
-    public static void displayVersion() {
+    //EXIT//COLORFUL-COMMANDS//
+    //Exit block(apps)
+    public static void exitBlock() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        System.out.println(contentAlignment(18) + "Current version:");
-        displayColorfulCommands("0.4.2", "randomly");
+        delay = 150;
+        String exitText = contentAlignment(18) + RED + BOLD + "Application exit" + RESET;
+        for (char ch : exitText.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                displayColorCommand("Error, try again", "red", (byte) 0);
+            }
+        }
+        delay = 250;
+        String exitTextAdditional = RED + "...\n" + RESET;
+        for (char ch : exitTextAdditional.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                displayColorCommand("Error, try again", "red", (byte) 0);
+            }
+        }
         drawFullTripleBorder();
     }
 
@@ -264,83 +364,6 @@ public class UserInterface {
         transitionBorder();
     }
 
-
-    //EXIT//COLORFUL-COMMANDS//
-    //Show colorful content//exit and other red text
-    public static void displayColorfulCommands(String text, String color) {
-        switch (color) {
-            case "red":
-                System.out.println(contentAlignment(text.length()) + RED + BOLD + text + RESET);
-                break;
-            case "yellow":
-                System.out.println(contentAlignment(text.length()) + YELLOW + BOLD + text + RESET);
-                break;
-            case "green":
-                System.out.println(contentAlignment(text.length()) + GREEN + BOLD + text + RESET);
-                break;
-            case "blue":
-                System.out.println(contentAlignment(text.length()) + BLUE + BOLD + text + RESET);
-                break;
-            case "purple":
-                System.out.println(contentAlignment(text.length()) + PURPLE + BOLD + text + RESET);
-                break;
-            case "cyan":
-                System.out.println(contentAlignment(text.length()) + CYAN + BOLD + text + RESET);
-                break;
-            case "randomly":
-                Random rand = new Random();
-                int randomColor = rand.nextInt(1, 7);
-
-                switch (randomColor) {
-                    case 1:
-                        System.out.println(contentAlignment(text.length()) + RED + BOLD + text + RESET);
-                        break;
-                    case 2:
-                        System.out.println(contentAlignment(text.length()) + YELLOW + BOLD + text + RESET);
-                        break;
-                    case 3:
-                        System.out.println(contentAlignment(text.length()) + GREEN + BOLD + text + RESET);
-                        break;
-                    case 4:
-                        System.out.println(contentAlignment(text.length()) + BLUE + BOLD + text + RESET);
-                        break;
-                    case 5:
-                        System.out.println(contentAlignment(text.length()) + PURPLE + BOLD + text + RESET);
-                        break;
-                    case 6:
-                        System.out.println(contentAlignment(text.length()) + CYAN + BOLD + text + RESET);
-                        break;
-                }
-        }
-    }
-
-    //Exit block(apps)
-    public static void exitBlock() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
-        delay = 150;
-        String exitText = contentAlignment(18) + RED + BOLD + "Application exit" + RESET;
-        for (char ch : exitText.toCharArray()) {
-            System.out.print(ch);
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
-            }
-        }
-        delay = 250;
-        String exitTextAdditional = RED + "...\n" + RESET;
-        for (char ch : exitTextAdditional.toCharArray()) {
-            System.out.print(ch);
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
-            }
-        }
-        drawFullTripleBorder();
-    }
-
     //Exit program
     public static void exitProgram() {
         transitionBorder();
@@ -352,7 +375,7 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
+                displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
         delay = 250;
@@ -362,9 +385,13 @@ public class UserInterface {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorfulCommands("Error, try again", "red");
+                displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
         System.exit(0);
+    }
+
+    enum Color {
+        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN
     }
 }
