@@ -16,31 +16,31 @@ public class Calculator {
                 drawHorizontalBorder(numberOfSymbols);
 
                 delay = 200;
-                String searchText = centeringFunction(10) + "Calculator\n";
+                String searchText = contentAlignment(10) + "Calculator\n";
                 for (char ch : searchText.toCharArray()) {
                     System.out.print(ch);
                     try {
                         Thread.sleep(delay);
                     } catch (InterruptedException ex) {
-                        displayRedCommands("Error, try again");
+                        displayColorfulCommands("Error, try again", "red");
                     }
                 }
                 drawHorizontalBorder(numberOfSymbols);
-                System.out.println(centeringFunction(18) + "[" + YELLOW + "i" + RESET + "] " +
-                        "Enter numbers\n" + centeringFunction(18) + "to calculate");
+                System.out.println(contentAlignment(18) + "[" + YELLOW + "i" + RESET + "] " +
+                        "Enter numbers\n" + contentAlignment(18) + "to calculate");
                 drawHorizontalBorder(numberOfSymbols);
-                System.out.print(centeringFunction(18) + "Input: ");
+                System.out.print(contentAlignment(18) + "Input: ");
 
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    displayRedCommands("\nNo numbers entered");
+                    displayColorfulCommands("\nNo numbers entered", "red");
                     continue;
                 }
 
                 drawHorizontalBorder(numberOfSymbols);
                 displayCalculatorOperationsList();
-                System.out.print(centeringFunction(18) + "Your choice is: ");
+                System.out.print(contentAlignment(18) + "Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
                 drawHorizontalBorder(numberOfSymbols);
                 transitionBorder();
@@ -75,15 +75,15 @@ public class Calculator {
                     case "6":
                     case "x":
                         drawHorizontalBorder(numberOfSymbols);
-                        displayRedCommands("Exiting the program...");
+                        displayColorfulCommands("Exiting the program...", "red");
                         drawHorizontalBorder(numberOfSymbols);
                         transitionBorder();
                         return null;
                     default:
-                        displayRedCommands("Invalid operation");
+                        displayColorfulCommands("Invalid operation", "red");
                 }
             } catch (Exception ex) {
-                displayRedCommands("Error: " + ex.getMessage());
+                displayColorfulCommands("Error: " + ex.getMessage(), "red");
             }
         }
     }
