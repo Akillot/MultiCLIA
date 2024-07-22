@@ -1,6 +1,6 @@
 package calculator;
 
-import static layout.UserInterface.*;
+import static layout.Stylization.*;
 
 public class CalculatorFunctions {
     static double result;
@@ -134,13 +134,10 @@ public class CalculatorFunctions {
     //GRAPHIC
     //Show list of operations in calculator
     public static void displayCalculatorOperationsList() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
         System.out.println(contentAlignment(10) + "Operations:");
-        drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
         System.out.println("1. sum[+]" + contentAlignment(10) + "2. sub[-]" +
                 "\n3. multi[*]" + contentAlignment(14) + "4. div[/]" +
                 "\n5. pow[^]" + contentAlignment(10) + "6. exit[x]");
-        drawHorizontalBorder(numberOfSymbols);
     }
 }
