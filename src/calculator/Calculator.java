@@ -3,32 +3,18 @@ package calculator;
 import java.util.Scanner;
 
 import static calculator.CalculatorFunctions.*;
-import static layout.UserInterface.*;
-import static settings.AppearanceSettings.RESET;
-import static settings.AppearanceSettings.YELLOW;
+import static layout.Stylization.*;
 
 public class Calculator {
     public static Runnable calculator() {
         Scanner scanner = new Scanner(System.in);
+        displaySlowMotionText(250, 10, false, "Calculator", "\n");
         while (true) {
             try {
-                transitionBorder();
-                drawHorizontalBorder(numberOfSymbols);
-
-                delay = 200;
-                String searchText = contentAlignment(10) + "Calculator\n";
-                for (char ch : searchText.toCharArray()) {
-                    System.out.print(ch);
-                    try {
-                        Thread.sleep(delay);
-                    } catch (InterruptedException ex) {
-                        displayColorCommand("Error, try again", "red", (byte) 0);
-                    }
-                }
-                drawHorizontalBorder(numberOfSymbols);
+                drawFullTripleBorder();
                 System.out.println(contentAlignment(18) + "[" + YELLOW + "i" + RESET + "] " +
                         "Enter numbers\n" + contentAlignment(18) + "to calculate");
-                drawHorizontalBorder(numberOfSymbols);
+                drawFullTripleBorder();
                 System.out.print(contentAlignment(18) + "Input: ");
 
                 String mathStatementString = scanner.nextLine().trim();
@@ -40,10 +26,10 @@ public class Calculator {
 
                 drawHorizontalBorder(numberOfSymbols);
                 displayCalculatorOperationsList();
+                drawHorizontalBorder(numberOfSymbols);
                 System.out.print(contentAlignment(18) + "Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
                 drawHorizontalBorder(numberOfSymbols);
-                transitionBorder();
 
                 switch (operation) {
                     case "sum":
@@ -74,12 +60,12 @@ public class Calculator {
                     case "exit":
                     case "6":
                     case "x":
-                        drawHorizontalBorder(numberOfSymbols);
+                        drawFullTripleBorder();
                         displayColorCommand("Exiting the program...", "red", (byte) 18);
-                        drawHorizontalBorder(numberOfSymbols);
-                        transitionBorder();
+                        drawFullTripleBorder();
                         return null;
                     default:
+                        drawFullTripleBorder();
                         displayColorCommand("Invalid operation", "red", (byte) 0);
                 }
             } catch (Exception ex) {

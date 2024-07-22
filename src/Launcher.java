@@ -1,4 +1,6 @@
-import static layout.UserInterface.*;
+import static layout.Stylization.displayDefaultLogo;
+import static layout.Stylization.drawFullTripleBorder;
+import static layout.UserInterface.displayMenu;
 
 public class Launcher {
     public static void main(String[] args) {
