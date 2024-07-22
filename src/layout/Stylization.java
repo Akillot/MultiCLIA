@@ -7,7 +7,7 @@ import static layout.UserInterface.scanner;
 public class Stylization {
 
     //COLORS//LOGO
-    //Colors
+    //ANSI colors
     //public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
     public static final String RED = "\033[0;31m";
@@ -16,9 +16,34 @@ public class Stylization {
     public static final String BLUE = "\033[0;34m";
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
+
+    //WRAPPING//ALIGNMENT//SLOW-MOTION//
+    //Method to wrap the content
+    public static void wrapText(String text, int width) {
+        for (int i = 0; i < text.length(); i += width) {
+            if (i == 0) {
+                int end = Math.min(i + width, text.length());
+                drawFullTripleBorder();
+                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                if (end < text.length()) {
+                    System.out.println(); //Add newline after first segment
+                }
+            } else {
+                int end = Math.min(i + width, text.length());
+                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                if (end < text.length()) {
+                    System.out.println(); //Add newline after each wrapped line
+                }
+            }
+        }
+        System.out.println();
+    }
+
     //Text styles
     public static final String BOLD = "\033[1m";
     public static final String UNDERLINE = "\033[4m";
+
+
     //BORDERS//
     //Show horizontal border
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
@@ -122,26 +147,23 @@ public class Stylization {
                 contentAlignment(11) + "+---------+\n");
     }
 
-    //WRAPPING//ALIGNMENT//SLOW-MOTION//
-    //Method to wrap the content
-    public static void wrapText(String text, int width) {
-        for (int i = 0; i < text.length(); i += width) {
-            if (i == 0) {
-                int end = Math.min(i + width, text.length());
-                drawFullTripleBorder();
-                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
-                if (end < text.length()) {
-                    System.out.println(); // Add newline after first segment
-                }
-            } else {
-                int end = Math.min(i + width, text.length());
-                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
-                if (end < text.length()) {
-                    System.out.println(); // Add newline after each wrapped line
-                }
+    //Show slow motion text
+    public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive, String mainText, String additionalText) {
+        //Construct the text with or without underline based on the isUnderlineActive parameter
+        String formattedText = contentAlignment(alignment) +
+                (isUnderlineActive ? UNDERLINE : "") +
+                BOLD + mainText + RESET + additionalText;
+
+        //Gradually display the text with a delay
+        for (char ch : formattedText.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(delay);
+            } catch (InterruptedException ex) {
+                displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
-        System.out.println();
+        System.out.print("");
     }
 
     //Aligns the content
@@ -151,27 +173,7 @@ public class Stylization {
         return " ".repeat(Math.max(0, oneSide));
     }
 
-    //Show slow motion text
-    public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive, String mainText, String additionalText) {
-        // Construct the text with or without underline based on the isUnderlineActive parameter
-        String formattedText = contentAlignment(alignment) +
-                (isUnderlineActive ? UNDERLINE : "") +
-                BOLD + mainText + RESET + additionalText;
-
-        // Gradually display the text with a delay
-        for (char ch : formattedText.toCharArray()) {
-            System.out.print(ch);
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException ex) {
-                displayColorCommand("Error, try again", "red", (byte) 0);
-            }
-        }
-        System.out.print(""); // Перевод строки после завершения вывода текста
-    }
-
     enum Color {
         RED, YELLOW, GREEN, BLUE, PURPLE, CYAN
     }
-
 }
