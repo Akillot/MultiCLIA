@@ -1,6 +1,6 @@
 package layout;
 
-import calculator.Calculator;
+import Commands_LanguagePackages.PackageUniter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,37 +12,29 @@ import static layout.Stylization.*;
 public class UserInterface {
 
     public static Scanner scanner = new Scanner(System.in);
+
     //MENU//SETTINGS//
     //Show main menu of the app
-    public static String text;
     public static String nameOfFunction = "";
     private static int delay;
 
     public static void displayMenu() {
-        HashMap<String, Runnable> listOfMenuFunctions = new HashMap<>();
+        PackageUniter registry = new PackageUniter();
 
-        listOfMenuFunctions.put("calculator", Calculator::calculator);
-        listOfMenuFunctions.put("settings", UserInterface::displaySettings);
-        listOfMenuFunctions.put("commands", UserInterface::displayListOfMenuCommands);
-        listOfMenuFunctions.put("time", UserInterface::displayCurrentTime);
-        listOfMenuFunctions.put("info", UserInterface::displayInfo);
-        listOfMenuFunctions.put("exit", UserInterface::exitProgram);
-
+        //Display tip for the user
         displayTip("Enter 'commands'\n"
                 + contentAlignment(18) + "to show list of\n"
                 + contentAlignment(18) + "commands");
 
-        displaySlowMotionText(250, 18, true, "Search", ": ");
+        displaySlowMotionText(200, 18, true, "Search", ": ");
 
-        nameOfFunction = scanner.nextLine().toLowerCase();
+        String nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2);
-        drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
 
-        if (listOfMenuFunctions.containsKey(nameOfFunction)) {
-            listOfMenuFunctions.get(nameOfFunction).run();
+        if (registry.executeCommand(nameOfFunction)) {
+            // Command executed successfully
         } else {
-            transitionBorder();
-            drawHorizontalBorder(numberOfSymbols);
             displayColorCommand("Command not found", "red", (byte) 0);
             drawFullTripleBorder();
         }
@@ -61,14 +53,18 @@ public class UserInterface {
 
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        displaySlowMotionText(200, 10, false, "Settings\n", "");
+        displaySlowMotionText(200, 8, false, "Settings\n", "");
 
         drawHorizontalBorder(numberOfSymbols);
-        displaySlowMotionText(250, 18, true, "Search", ": ");
+        //Display tip for the user
+        displayTip("Enter 'commands'\n"
+                + contentAlignment(18) + "to show list of\n"
+                + contentAlignment(18) + "commands");
+
+        displaySlowMotionText(200, 18, true, "Search", ": ");
 
         nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2); //Wrapping the command from user
-        drawHorizontalBorder(numberOfSymbols);
 
         if (listOfSettings.containsKey(nameOfFunction)) {
             listOfSettings.get(nameOfFunction).run();
@@ -78,7 +74,6 @@ public class UserInterface {
             displayColorCommand("Command not found", "red", (byte) 0);
         }
     }
-
 
     //TIME//VERSION//INFO//TIP//
     //Show current time
@@ -108,14 +103,13 @@ public class UserInterface {
         drawFullTripleBorder();
     }
 
-    //Show tip
+    //Show tip for the user
     public static void displayTip(String text) {
         System.out.println(contentAlignment(18) + BOLD
                 + "[" + YELLOW + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
         drawFullTripleBorder();
     }
-
 
     //EXIT//
     //Exit block(apps)
@@ -172,19 +166,15 @@ public class UserInterface {
         System.exit(0);
     }
 
-
-
     //LISTS OF COMMANDS//
     //Show list of commands in menu
     public static void displayListOfMenuCommands() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
         System.out.println(contentAlignment(8) + "Commands\n"
-                + contentAlignment(12) + "· calculator\n"
-                + contentAlignment(12) + "· settings\n"
-                + contentAlignment(12) + "· commands\n"
-                + contentAlignment(12) + "· info\n"
-                + contentAlignment(12) + "· exit");
+                + contentAlignment(18) + "· calculator\n"
+                + contentAlignment(18) + "· settings\n"
+                + contentAlignment(18) + "· commands\n"
+                + contentAlignment(18) + "· info\n"
+                + contentAlignment(18) + "· exit");
         drawFullTripleBorder();
     }
 
@@ -192,12 +182,11 @@ public class UserInterface {
     public static void displayListOfSettings() {
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
-        System.out.println(contentAlignment(12) + "Commands\n" + contentAlignment(12) + "· settings value\n"
-                + contentAlignment(12) + "· logo\n"
-                + contentAlignment(12) + "· border\n"
-                + contentAlignment(12) + "· delay\n"
-                + contentAlignment(12) + "· exit");
-        drawHorizontalBorder(1);
-        transitionBorder();
+        System.out.println(contentAlignment(8) + "Commands\n" + contentAlignment(18) + "· settings value\n"
+                + contentAlignment(18) + "· logo\n"
+                + contentAlignment(18) + "· border\n"
+                + contentAlignment(18) + "· delay\n"
+                + contentAlignment(18) + "· exit");
+        drawFullTripleBorder();
     }
 }

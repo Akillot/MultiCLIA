@@ -26,7 +26,6 @@ public class CalculatorFunctions {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
 
-            drawHorizontalBorder(numberOfSymbols);
             displayColorCommand("No numbers to subtract", "red", (byte) 0);
             return;
         }
@@ -135,7 +134,7 @@ public class CalculatorFunctions {
     //Show list of operations in calculator
     public static void displayCalculatorOperationsList() {
         System.out.println(contentAlignment(10) + "Operations:");
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
         System.out.println("1. sum[+]" + contentAlignment(10) + "2. sub[-]" +
                 "\n3. multi[*]" + contentAlignment(14) + "4. div[/]" +
                 "\n5. pow[^]" + contentAlignment(10) + "6. exit[x]");

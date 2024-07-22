@@ -11,10 +11,10 @@ public class Calculator {
         displaySlowMotionText(250, 10, false, "Calculator", "\n");
         while (true) {
             try {
-                drawFullTripleBorder();
+                drawHorizontalBorder(numberOfSymbols);
                 System.out.println(contentAlignment(18) + "[" + YELLOW + "i" + RESET + "] " +
                         "Enter numbers\n" + contentAlignment(18) + "to calculate");
-                drawFullTripleBorder();
+                drawHorizontalBorder(numberOfSymbols);
                 System.out.print(contentAlignment(18) + "Input: ");
 
                 String mathStatementString = scanner.nextLine().trim();
@@ -27,6 +27,7 @@ public class Calculator {
                 drawHorizontalBorder(numberOfSymbols);
                 displayCalculatorOperationsList();
                 drawHorizontalBorder(numberOfSymbols);
+
                 System.out.print(contentAlignment(18) + "Your choice is: ");
                 String operation = scanner.nextLine().trim().toLowerCase();
                 drawHorizontalBorder(numberOfSymbols);
