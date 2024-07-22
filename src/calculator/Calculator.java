@@ -20,7 +20,8 @@ public class Calculator {
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    displayColorCommand("\nNo numbers entered", "red", (byte) 0);
+                    drawHorizontalBorder(numberOfSymbols);
+                    displayColorCommand("No numbers entered", "red", (byte) 18);
                     continue;
                 }
 
@@ -66,7 +67,6 @@ public class Calculator {
                         drawFullTripleBorder();
                         return null;
                     default:
-                        drawFullTripleBorder();
                         displayColorCommand("Invalid operation", "red", (byte) 0);
                 }
             } catch (Exception ex) {

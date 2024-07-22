@@ -125,9 +125,7 @@ public class CalculatorFunctions {
     }
 
     public static void showAnswer(double answer) {
-        drawHorizontalBorder(numberOfSymbols);
         System.out.println(contentAlignment(18) + "Answer: " + answer);
-        drawHorizontalBorder(numberOfSymbols);
     }
 
     //GRAPHIC

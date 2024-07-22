@@ -141,8 +141,6 @@ public class UserInterface {
 
     //Exit program
     public static void exitProgram() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
         delay = 150;
         String exitText = contentAlignment(18) + RED + "Program exit" + RESET;
         for (char ch : exitText.toCharArray()) {
