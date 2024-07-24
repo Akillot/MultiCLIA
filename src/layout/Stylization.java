@@ -14,12 +14,81 @@ public class Stylization {
     public static final String BLUE = "\033[0;34m";
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
+
+    //BORDERS//
+    //Show horizontal border
+    public static int borderWidth = 21;
+
     //ANSI text styles
     public static final String BOLD = "\033[1m";
     public static final String UNDERLINE = "\033[4m";
-    //BORDERS//
-    //Show horizontal border
+
+    //Randomly picks a color
+    static Color getRandomColor() {
+        Random rand = new Random();
+        int randomColorIndex = rand.nextInt(Color.values().length);
+        return Color.values()[randomColorIndex];
+    }
+
+    //Get a user choice color
+    static String getColoredText(String text, Color color) {
+        String colorCode = switch (color) {
+            case RED -> RED;
+            case YELLOW -> YELLOW;
+            case GREEN -> GREEN;
+            case BLUE -> BLUE;
+            case PURPLE -> PURPLE;
+            case CYAN -> CYAN;
+            case WHITE -> WHITE;
+        };
+        return colorCode + BOLD + text + RESET;
+    }
+
+    public static void drawHorizontalBorder(int numberOfSymbol) {
+        System.out.print(symbolsOfBorder[0]);
+        for (int i = 0; i < borderWidth; i++) {
+            System.out.print(symbolsOfBorder[numberOfSymbol]);
+        }
+        System.out.println(symbolsOfBorder[0]);
+    }
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
+
+    //Show transition border
+    public static void transitionBorder() {
+        System.out.println("|" + contentAlignment(-19) + "|");
+    }
+
+    //Show triple border
+    public static void drawFullTripleBorder() {
+        drawHorizontalBorder(numberOfSymbols);
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+    }
+
+    //SLOW-MOTION//ALIGNMENT//COLORFUL-COMMANDS//
+    //Show colorful content with alignment
+    public static void displayColorCommand(String text, String colorName, byte alignment) {
+        Color color;
+        try {
+            color = Color.valueOf(colorName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            if (colorName.equalsIgnoreCase("randomly")) {
+                color = getRandomColor();
+            } else {
+                displayColorCommand("Invalid input", "red", (byte) 0);
+                return;
+            }
+        }
+
+        String coloredText = getColoredText(text, color);
+        int alignLength = alignment == 0 ? text.length() : alignment;
+
+        if (alignment < 0) {
+            displayColorCommand("Invalid input", "red", (byte) 0);
+        } else {
+            System.out.println(contentAlignment(alignLength) + coloredText);
+        }
+    }
 
 
 
@@ -45,38 +114,12 @@ public class Stylization {
         System.out.println();
     }
 
-    //Show colorful content with alignment
-    public static void displayColorCommand(String text, String colorName, byte alignment) {
-        Color color;
-        try {
-            color = Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                displayColorCommand("Invalid input", "red", (byte) 0);
-                return;
-            }
-        }
 
-        String coloredText = getColoredText(text, color);
-        int alignLength = alignment == 0 ? text.length() : alignment;
-
-        if (alignment < 0) {
-            displayColorCommand("Invalid input", "red", (byte) 0);
-        } else {
-            System.out.println(contentAlignment(alignLength) + coloredText);
-        }
+    enum Color {
+        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE
     }
 
-    public static int borderWidth = 21;
 
-    //Randomly picks a color
-    static Color getRandomColor() {
-        Random rand = new Random();
-        int randomColorIndex = rand.nextInt(Color.values().length);
-        return Color.values()[randomColorIndex];
-    }
 
     //Show slow motion text
     public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive, String mainText, String additionalText) {
@@ -106,41 +149,4 @@ public class Stylization {
 
     public static int numberOfSymbols = 1;
 
-    //Get a user choice color
-    static String getColoredText(String text, Color color) {
-        String colorCode = switch (color) {
-            case RED -> RED;
-            case YELLOW -> YELLOW;
-            case GREEN -> GREEN;
-            case BLUE -> BLUE;
-            case PURPLE -> PURPLE;
-            case CYAN -> CYAN;
-            case WHITE -> WHITE;
-        };
-        return colorCode + BOLD + text + RESET;
-    }
-
-    public static void drawHorizontalBorder(int numberOfSymbol) {
-        System.out.print(symbolsOfBorder[0]);
-        for (int i = 0; i < borderWidth; i++) {
-            System.out.print(symbolsOfBorder[numberOfSymbol]);
-        }
-        System.out.println(symbolsOfBorder[0]);
-    }
-
-    //Show transition border
-    public static void transitionBorder() {
-        System.out.println("|" + contentAlignment(-19) + "|");
-    }
-
-    //Show triple border
-    public static void drawFullTripleBorder() {
-        drawHorizontalBorder(numberOfSymbols);
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
-    }
-
-    enum Color {
-        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE
-    }
 }
