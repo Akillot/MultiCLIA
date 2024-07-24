@@ -1,12 +1,13 @@
 package layout;
 
-import Commands_LanguagePackages.PackageUniter;
+import commands_language_packages.PackageUniter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import static layout.Logos.logoInitializer;
 import static layout.Stylization.*;
 
 public class UserInterface {
@@ -14,66 +15,79 @@ public class UserInterface {
     public static Scanner scanner = new Scanner(System.in);
 
     //MENU//SETTINGS//
-    //Show main menu of the app
     public static String nameOfFunction = "";
     private static int delay;
 
-    public static void displayMenu() {
+    //Show main menu of the app (menu ui)
+    public static void displayMainMenuUi() {
         PackageUniter registry = new PackageUniter();
 
-        //Display tip for the user
         displayTip("Enter 'commands'\n"
                 + contentAlignment(18) + "to show list of\n"
                 + contentAlignment(18) + "commands");
 
-        displaySlowMotionText(200, 18, true, "Search", ": ");
+        displaySlowMotionText(100, 18, true, "Search", ": ");
 
         String nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2);
         drawFullTripleBorder();
 
-        if (registry.executeCommand(nameOfFunction)) {
-            // Command executed successfully
-        } else {
+        if (!registry.executeCommand(nameOfFunction)) {
             displayColorCommand("Command not found", "red", (byte) 0);
             drawFullTripleBorder();
         }
     }
 
-    //Show settings
-    public static void displaySettings() {
+    //Show settings ui
+    public static void displaySettingsUi() {
         HashMap<String, Runnable> listOfSettings = new HashMap<>();
 
         listOfSettings.put("commands", UserInterface::displayListOfSettings);
         listOfSettings.put("settings value", UserInterface::displayListOfMenuCommands);
-        listOfSettings.put("logo", Stylization::logoSwitcher);
-        listOfSettings.put("border", Stylization::logoSwitcher); //In progress
-        listOfSettings.put("delay", Stylization::logoSwitcher); //In progress
+        listOfSettings.put("logo", UserInterface::logoSwitcherUi);
+        listOfSettings.put("border", UserInterface::logoSwitcherUi); //In progress
+        listOfSettings.put("delay", UserInterface::logoSwitcherUi); //In progress
         listOfSettings.put("exit", UserInterface::exitBlock);
 
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
-        displaySlowMotionText(200, 8, false, "Settings\n", "");
+        displaySlowMotionText(100, 8, false, "Settings\n", "");
 
-        drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
         //Display tip for the user
         displayTip("Enter 'commands'\n"
                 + contentAlignment(18) + "to show list of\n"
                 + contentAlignment(18) + "commands");
 
-        displaySlowMotionText(200, 18, true, "Search", ": ");
+        displaySlowMotionText(100, 18, true, "Search", ": ");
 
         nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2); //Wrapping the command from user
+        drawFullTripleBorder();
 
         if (listOfSettings.containsKey(nameOfFunction)) {
             listOfSettings.get(nameOfFunction).run();
         } else {
-            transitionBorder();
-            drawHorizontalBorder(numberOfSymbols);
+            drawFullTripleBorder();
             displayColorCommand("Command not found", "red", (byte) 0);
+            drawFullTripleBorder();
         }
     }
+
+    //Show a logo switcher user interface
+    public static void logoSwitcherUi() {
+        displayTip("Enter 'logos'\n"
+                + contentAlignment(18) + "to show list of\n"
+                + contentAlignment(18) + "all logos");
+
+        displaySlowMotionText(200, 18, true, "Search", ": ");
+
+        String nameOfFunction = scanner.nextLine().toLowerCase();
+        wrapText(nameOfFunction, borderWidth - 2);
+
+        logoInitializer(nameOfFunction);
+        drawFullTripleBorder();
+    }
+
+
 
     //TIME//VERSION//INFO//TIP//
     //Show current time
@@ -96,11 +110,8 @@ public class UserInterface {
 
     //Show version
     public static void displayVersion() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
         System.out.println(contentAlignment(18) + "Current version:");
-        displayColorCommand("0.4.7", "randomly", (byte) 0);
-        drawFullTripleBorder();
+        displayColorCommand("0.4.8", "randomly", (byte) 0);
     }
 
     //Show tip for the user
@@ -111,11 +122,11 @@ public class UserInterface {
         drawFullTripleBorder();
     }
 
+
     //EXIT//
     //Exit block(apps)
     public static void exitBlock() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
         delay = 150;
         String exitText = contentAlignment(18) + RED + BOLD + "Application exit" + RESET;
         for (char ch : exitText.toCharArray()) {
@@ -164,6 +175,7 @@ public class UserInterface {
         System.exit(0);
     }
 
+
     //LISTS OF COMMANDS//
     //Show list of commands in menu
     public static void displayListOfMenuCommands() {
@@ -178,8 +190,6 @@ public class UserInterface {
 
     //Show list of commands in settings
     public static void displayListOfSettings() {
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
         System.out.println(contentAlignment(8) + "Commands\n" + contentAlignment(18) + "· settings value\n"
                 + contentAlignment(18) + "· logo\n"
                 + contentAlignment(18) + "· border\n"

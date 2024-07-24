@@ -5,7 +5,8 @@ import static layout.Stylization.*;
 public class CalculatorFunctions {
     static double result;
 
-    // Summation
+    //MATH-OPERATIONS//
+    //Summation
     public static void sum(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         result = 0;
@@ -21,7 +22,7 @@ public class CalculatorFunctions {
         showAnswer(result);
     }
 
-    // Subtraction
+    //Subtraction
     public static void sub(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
@@ -47,7 +48,7 @@ public class CalculatorFunctions {
         showAnswer(result);
     }
 
-    // Multiplication
+    //Multiplication
     public static void multi(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
@@ -67,7 +68,7 @@ public class CalculatorFunctions {
         showAnswer(result);
     }
 
-    // Division
+    //Division
     public static void divide(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
@@ -98,7 +99,7 @@ public class CalculatorFunctions {
         showAnswer(result);
     }
 
-    // Power
+    //Power
     public static void pow(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
@@ -128,7 +129,8 @@ public class CalculatorFunctions {
         System.out.println(contentAlignment(18) + "Answer: " + answer);
     }
 
-    //GRAPHIC
+
+    //LIST-OF-OPERATIONS//
     //Show list of operations in calculator
     public static void displayCalculatorOperationsList() {
         System.out.println(contentAlignment(10) + "Operations:");

@@ -1,4 +1,4 @@
-package Commands_LanguagePackages;
+package commands_language_packages;
 
 import calculator.Calculator;
 import layout.UserInterface;
@@ -10,8 +10,8 @@ public class EnglishCommands {
         commandMap.put("calculator", Calculator::calculator);
         commandMap.put("cal", Calculator::calculator);
 
-        commandMap.put("settings", UserInterface::displaySettings);
-        commandMap.put("set", UserInterface::displaySettings);
+        commandMap.put("settings", UserInterface::displaySettingsUi);
+        commandMap.put("set", UserInterface::displaySettingsUi);
 
         commandMap.put("commands", UserInterface::displayListOfMenuCommands);
         commandMap.put("com", UserInterface::displayListOfMenuCommands);

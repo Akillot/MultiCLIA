@@ -1,4 +1,4 @@
-package Commands_LanguagePackages;
+package commands_language_packages;
 
 import calculator.Calculator;
 import layout.UserInterface;
@@ -12,11 +12,11 @@ public class CzechCommands {
         commandMap.put("rfdlhesho'v", Calculator::calculator); // 'kalkulačka' typed in English layout
         commandMap.put("rfd", Calculator::calculator); // 'kal' typed in English layout
 
-        commandMap.put("nastavení", UserInterface::displaySettings);
-        commandMap.put("nastaveni", UserInterface::displaySettings);
-        commandMap.put("nas", UserInterface::displaySettings);
-        commandMap.put("nfcgtdbp", UserInterface::displaySettings); // 'nastavení' typed in English layout
-        commandMap.put("nfc", UserInterface::displaySettings); // 'nas' typed in English layout
+        commandMap.put("nastavení", UserInterface::displaySettingsUi);
+        commandMap.put("nastaveni", UserInterface::displaySettingsUi);
+        commandMap.put("nas", UserInterface::displaySettingsUi);
+        commandMap.put("nfcgtdbp", UserInterface::displaySettingsUi); // 'nastavení' typed in English layout
+        commandMap.put("nfc", UserInterface::displaySettingsUi); // 'nas' typed in English layout
 
         commandMap.put("příkazy", UserInterface::displayListOfMenuCommands);
         commandMap.put("prikazy", UserInterface::displayListOfMenuCommands);
