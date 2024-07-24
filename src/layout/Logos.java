@@ -49,9 +49,9 @@ public class Logos {
         System.out.print(contentAlignment(11) +
                 BOLD + "+---------+\n" +
                 contentAlignment(11) + "|" +
-                PURPLE + BOLD + "M" + RESET + BLUE + BOLD + "u" + RESET +
-                RED + BOLD + "l" + RESET + BLUE + BOLD + "t" + RESET +
-                PURPLE + BOLD + "i" + RESET + BOLD + "CLIA|\n" +
+                RED + BOLD + "M" + RESET + PURPLE + BOLD + "u" + RESET +
+                RED + BOLD + "l" + RESET + PURPLE + BOLD + "t" + RESET +
+                RED + BOLD + "i" + RESET + BOLD + "CLIA|\n" +
                 contentAlignment(11) + "+---------+\n" + RESET);
     }
 }
