@@ -2,13 +2,11 @@ package layout;
 
 import java.util.Random;
 
-import static layout.UserInterface.scanner;
-
 public class Stylization {
 
-    //COLORS//LOGO
+    //COLORS//
     //ANSI colors
-    //public static final String WHITE = "\033[0;38m";
+    public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
     public static final String RED = "\033[0;31m";
     public static final String GREEN = "\033[0;32m";
@@ -16,6 +14,14 @@ public class Stylization {
     public static final String BLUE = "\033[0;34m";
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
+    //ANSI text styles
+    public static final String BOLD = "\033[1m";
+    public static final String UNDERLINE = "\033[4m";
+    //BORDERS//
+    //Show horizontal border
+    public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
+
+
 
     //WRAPPING//ALIGNMENT//SLOW-MOTION//
     //Method to wrap the content
@@ -37,37 +43,6 @@ public class Stylization {
             }
         }
         System.out.println();
-    }
-
-    //Text styles
-    public static final String BOLD = "\033[1m";
-    public static final String UNDERLINE = "\033[4m";
-
-
-    //BORDERS//
-    //Show horizontal border
-    public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
-    public static int borderWidth = 21;
-    public static int numberOfSymbols = 1;
-
-    public static void drawHorizontalBorder(int numberOfSymbol) {
-        System.out.print(symbolsOfBorder[0]);
-        for (int i = 0; i < borderWidth; i++) {
-            System.out.print(symbolsOfBorder[numberOfSymbol]);
-        }
-        System.out.println(symbolsOfBorder[0]);
-    }
-
-    //Show transition border
-    public static void transitionBorder() {
-        System.out.println("|" + contentAlignment(-19) + "|");
-    }
-
-    //Show triple border
-    public static void drawFullTripleBorder() {
-        drawHorizontalBorder(numberOfSymbols);
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
     }
 
     //Show colorful content with alignment
@@ -94,57 +69,13 @@ public class Stylization {
         }
     }
 
-    //Get a user choice color
-    static String getColoredText(String text, Color color) {
-        String colorCode = switch (color) {
-            case RED -> RED;
-            case YELLOW -> YELLOW;
-            case GREEN -> GREEN;
-            case BLUE -> BLUE;
-            case PURPLE -> PURPLE;
-            case CYAN -> CYAN;
-        };
-        return colorCode + BOLD + text + RESET;
-    }
+    public static int borderWidth = 21;
 
     //Randomly picks a color
     static Color getRandomColor() {
         Random rand = new Random();
         int randomColorIndex = rand.nextInt(Color.values().length);
         return Color.values()[randomColorIndex];
-    }
-
-    //Switching the logo
-    public static void logoSwitcher() {
-
-        String nameOfLogo = scanner.nextLine().toLowerCase();
-
-        //IN PROCESS
-        if (nameOfLogo.equalsIgnoreCase("default")) {
-            displayDefaultLogo();
-        } else if (nameOfLogo.equalsIgnoreCase("google")) {
-            displayGoogleReferenceLogo();
-        }
-    }
-
-    //Show a logo
-    public static void displayDefaultLogo() {
-        System.out.print(contentAlignment(11) +
-                BOLD + "+---------+\n" +
-                contentAlignment(11) + "|" +
-                RED + BOLD + "M" + RESET + GREEN + BOLD + "u" + RESET +
-                YELLOW + BOLD + "l" + RESET + BLUE + BOLD + "t" + RESET +
-                PURPLE + BOLD + "i" + RESET + BOLD + "CLIA|\n" +
-                contentAlignment(11) + "+---------+\n" + RESET);
-    }
-
-    //Show a Google reference logo
-    public static void displayGoogleReferenceLogo() {
-        System.out.print(contentAlignment(11) + "+---------+\n" +
-                contentAlignment(11) + "|" +
-                BLUE + "M" + RESET + RED + "u" + RESET + YELLOW + "l" + RESET +
-                BLUE + "ti" + RESET + GREEN + "CL" + RESET + RED + "IA" + RESET + "|\n" +
-                contentAlignment(11) + "+---------+\n");
     }
 
     //Show slow motion text
@@ -173,7 +104,43 @@ public class Stylization {
         return " ".repeat(Math.max(0, oneSide));
     }
 
+    public static int numberOfSymbols = 1;
+
+    //Get a user choice color
+    static String getColoredText(String text, Color color) {
+        String colorCode = switch (color) {
+            case RED -> RED;
+            case YELLOW -> YELLOW;
+            case GREEN -> GREEN;
+            case BLUE -> BLUE;
+            case PURPLE -> PURPLE;
+            case CYAN -> CYAN;
+            case WHITE -> WHITE;
+        };
+        return colorCode + BOLD + text + RESET;
+    }
+
+    public static void drawHorizontalBorder(int numberOfSymbol) {
+        System.out.print(symbolsOfBorder[0]);
+        for (int i = 0; i < borderWidth; i++) {
+            System.out.print(symbolsOfBorder[numberOfSymbol]);
+        }
+        System.out.println(symbolsOfBorder[0]);
+    }
+
+    //Show transition border
+    public static void transitionBorder() {
+        System.out.println("|" + contentAlignment(-19) + "|");
+    }
+
+    //Show triple border
+    public static void drawFullTripleBorder() {
+        drawHorizontalBorder(numberOfSymbols);
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
+    }
+
     enum Color {
-        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN
+        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE
     }
 }

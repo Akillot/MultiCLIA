@@ -1,4 +1,4 @@
-package Commands_LanguagePackages;
+package commands_language_packages;
 
 import java.util.HashMap;
 import java.util.Map;

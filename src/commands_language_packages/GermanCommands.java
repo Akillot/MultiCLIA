@@ -1,4 +1,4 @@
-package Commands_LanguagePackages;
+package commands_language_packages;
 
 import calculator.Calculator;
 import layout.UserInterface;
@@ -12,9 +12,9 @@ public class GermanCommands {
         commandMap.put("rfxnher", Calculator::calculator); // 'rechner' typed in English layout
         commandMap.put("rfxh", Calculator::calculator); // 'rech' typed in English layout
 
-        commandMap.put("einstellungen", UserInterface::displaySettings);
-        commandMap.put("ein", UserInterface::displaySettings);
-        commandMap.put("dpfmdmbhfyftufohfo", UserInterface::displaySettings); // 'einstellungen' typed in English layout
+        commandMap.put("einstellungen", UserInterface::displaySettingsUi);
+        commandMap.put("ein", UserInterface::displaySettingsUi);
+        commandMap.put("dpfmdmbhfyftufohfo", UserInterface::displaySettingsUi); // 'einstellungen' typed in English layout
 
         commandMap.put("befehle", UserInterface::displayListOfMenuCommands);
         commandMap.put("bef", UserInterface::displayListOfMenuCommands);

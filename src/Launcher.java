@@ -1,16 +1,17 @@
-import static layout.Stylization.displayDefaultLogo;
+import layout.Logos;
+
 import static layout.Stylization.drawFullTripleBorder;
-import static layout.UserInterface.displayMenu;
+import static layout.UserInterface.displayMainMenuUi;
 
 public class Launcher {
     public static void main(String[] args) {
         drawFullTripleBorder();
-        displayDefaultLogo();
+        Logos.logoInitializer("default");
         drawFullTripleBorder();
 
         while (true) {
             try {
-                displayMenu();
+                displayMainMenuUi();
             } catch (Exception ex) {
                 System.out.println("Error: " + ex.getMessage());
             }

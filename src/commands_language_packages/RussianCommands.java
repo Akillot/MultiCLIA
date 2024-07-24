@@ -1,4 +1,4 @@
-package Commands_LanguagePackages;
+package commands_language_packages;
 
 import calculator.Calculator;
 import layout.UserInterface;
@@ -12,16 +12,16 @@ public class RussianCommands {
         commandMap.put("сфдсгдфещк", Calculator::calculator); // 'calculator' typed in Russian layout
         commandMap.put("сфд", Calculator::calculator); // 'cal' typed in Russian layout
 
-        commandMap.put("настройки", UserInterface::displaySettings);
-        commandMap.put("нас", UserInterface::displaySettings);
-        commandMap.put("yfcnjhqr", UserInterface::displaySettings); // 'settings' typed in Russian layout
-        commandMap.put("ctn", UserInterface::displaySettings); // 'set' typed in Russian layout
+        commandMap.put("настройки", UserInterface::displaySettingsUi);
+        commandMap.put("нас", UserInterface::displaySettingsUi);
+        commandMap.put("yfcnjhqr", UserInterface::displaySettingsUi); // 'settings' typed in Russian layout
+        commandMap.put("ctn", UserInterface::displaySettingsUi); // 'set' typed in Russian layout
 
         commandMap.put("команды", UserInterface::displayListOfMenuCommands);
         commandMap.put("ком", UserInterface::displayListOfMenuCommands);
-        commandMap.put("сщььфтвы", UserInterface::displayListOfMenuCommands); // 'commands' typed in Russian layout
+        commandMap.put("сщььфтвы", UserInterface::displayListOfMenuCommands);// 'commands' typed in Russian layout
+        commandMap.put("сщь", UserInterface::displayListOfMenuCommands);
         commandMap.put("rjvfyls", UserInterface::displayListOfMenuCommands); // 'commands' typed in Russian layout
-
 
         commandMap.put("время", UserInterface::displayCurrentTime);
         commandMap.put("дрфнз", UserInterface::displayCurrentTime); // 'time' typed in Russian layout
