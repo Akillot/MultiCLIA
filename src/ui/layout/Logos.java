@@ -1,8 +1,8 @@
-package layout;
+package ui.layout;
 
 import java.util.HashMap;
 
-import static layout.Stylization.*;
+import static ui.layout.Stylization.*;
 
 public class Logos {
 
@@ -13,7 +13,7 @@ public class Logos {
         listOfCommands.put("google", Logos::displayGoogleReferenceLogo);
         listOfCommands.put("neon", Logos::displayNeonDefaultLogo);
 
-        listOfCommands.put("exit", UserInterface::exitBlock);
+        listOfCommands.put("exit", UiLayout::exitBlock);
 
         Runnable command = listOfCommands.get(requiredCommand.toLowerCase());
         if (command != null) {
