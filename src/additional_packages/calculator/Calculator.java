@@ -1,9 +1,8 @@
-package calculator;
+package additional_packages.calculator;
 
 import java.util.Scanner;
 
-import static calculator.CalculatorFunctions.*;
-import static layout.Stylization.*;
+import static ui.layout.Stylization.*;
 
 public class Calculator {
     public static Runnable calculator() {
@@ -26,7 +25,7 @@ public class Calculator {
                 }
 
                 drawHorizontalBorder(numberOfSymbols);
-                displayCalculatorOperationsList();
+                CalculatorFunctions.displayCalculatorOperationsList();
                 drawHorizontalBorder(numberOfSymbols);
 
                 System.out.print(contentAlignment(18) + "Your choice is: ");
@@ -37,27 +36,27 @@ public class Calculator {
                     case "sum":
                     case "1":
                     case "+":
-                        sum(mathStatementString);
+                        CalculatorFunctions.sum(mathStatementString);
                         break;
                     case "sub":
                     case "2":
                     case "-":
-                        sub(mathStatementString);
+                        CalculatorFunctions.sub(mathStatementString);
                         break;
                     case "multi":
                     case "3":
                     case "*":
-                        multi(mathStatementString);
+                        CalculatorFunctions.multi(mathStatementString);
                         break;
                     case "div":
                     case "4":
                     case "/":
-                        divide(mathStatementString);
+                        CalculatorFunctions.divide(mathStatementString);
                         break;
                     case "pow":
                     case "5":
                     case "^":
-                        pow(mathStatementString);
+                        CalculatorFunctions.pow(mathStatementString);
                         break;
                     case "exit":
                     case "6":

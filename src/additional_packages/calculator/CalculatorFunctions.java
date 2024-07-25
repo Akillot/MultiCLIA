@@ -1,6 +1,6 @@
-package calculator;
+package additional_packages.calculator;
 
-import static layout.Stylization.*;
+import static ui.layout.Stylization.*;
 
 public class CalculatorFunctions {
     static double result;

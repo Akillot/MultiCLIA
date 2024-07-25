@@ -1,7 +1,10 @@
 package commands_language_packages;
 
-import calculator.Calculator;
-import layout.UserInterface;
+import additional_packages.calculator.Calculator;
+import ui.layout.UiLayout;
+import ui.pages.GeneralSettingsPage;
+import ui.pages.InfoPage;
+import ui.pages.TimePage;
 
 import java.util.Map;
 
@@ -12,25 +15,25 @@ public class CzechCommands {
         commandMap.put("rfdlhesho'v", Calculator::calculator); // 'kalkulačka' typed in English layout
         commandMap.put("rfd", Calculator::calculator); // 'kal' typed in English layout
 
-        commandMap.put("nastavení", UserInterface::displaySettingsUi);
-        commandMap.put("nastaveni", UserInterface::displaySettingsUi);
-        commandMap.put("nas", UserInterface::displaySettingsUi);
-        commandMap.put("nfcgtdbp", UserInterface::displaySettingsUi); // 'nastavení' typed in English layout
-        commandMap.put("nfc", UserInterface::displaySettingsUi); // 'nas' typed in English layout
+        commandMap.put("nastavení", GeneralSettingsPage::displayGeneralSettings);
+        commandMap.put("nastaveni", GeneralSettingsPage::displayGeneralSettings);
+        commandMap.put("nas", GeneralSettingsPage::displayGeneralSettings);
+        commandMap.put("nfcgtdbp", GeneralSettingsPage::displayGeneralSettings); // 'nastavení' typed in English layout
+        commandMap.put("nfc", GeneralSettingsPage::displayGeneralSettings); // 'nas' typed in English layout
 
-        commandMap.put("příkazy", UserInterface::displayListOfMenuCommands);
-        commandMap.put("prikazy", UserInterface::displayListOfMenuCommands);
-        commandMap.put("prik", UserInterface::displayListOfMenuCommands);
-        commandMap.put("ohrfkbd", UserInterface::displayListOfMenuCommands); // 'příkazy' typed in English layout
+        commandMap.put("příkazy", UiLayout::displayListOfMenuCommands);
+        commandMap.put("prikazy", UiLayout::displayListOfMenuCommands);
+        commandMap.put("prik", UiLayout::displayListOfMenuCommands);
+        commandMap.put("ohrfkbd", UiLayout::displayListOfMenuCommands); // 'příkazy' typed in English layout
 
-        commandMap.put("čas", UserInterface::displayCurrentTime);
-        commandMap.put("cas", UserInterface::displayCurrentTime);
-        commandMap.put("chf", UserInterface::displayCurrentTime); // 'cas' typed in English layout
+        commandMap.put("čas", TimePage::displayCurrentTime);
+        commandMap.put("cas", TimePage::displayCurrentTime);
+        commandMap.put("chf", TimePage::displayCurrentTime); // 'cas' typed in English layout
 
-        commandMap.put("informace", UserInterface::displayInfo);
+        commandMap.put("informace", InfoPage::displayInfo);
 
-        commandMap.put("konec", UserInterface::exitProgram);
-        commandMap.put("kon", UserInterface::exitProgram);
-        commandMap.put("lphfd", UserInterface::exitProgram); // 'konec' typed in English layout
+        commandMap.put("konec", UiLayout::exitProgram);
+        commandMap.put("kon", UiLayout::exitProgram);
+        commandMap.put("lphfd", UiLayout::exitProgram); // 'konec' typed in English layout
     }
 }

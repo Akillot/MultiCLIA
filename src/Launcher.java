@@ -1,11 +1,10 @@
-import static layout.Logos.logoInitializer;
-import static layout.Stylization.drawFullTripleBorder;
-import static layout.UserInterface.displayMainMenuUi;
-import static layout.UserInterface.nameOfLogo;
+import static ui.layout.Logos.logoInitializer;
+import static ui.layout.Stylization.drawFullTripleBorder;
+import static ui.layout.UiLayout.nameOfLogo;
+import static ui.pages.MenuPage.displayMainMenuUi;
 
 public class Launcher {
     public static void main(String[] args) {
-        //Eula.displayEula();
         drawFullTripleBorder();
         logoInitializer(nameOfLogo);
         drawFullTripleBorder();
