@@ -6,6 +6,7 @@ import static layout.UserInterface.nameOfLogo;
 public class Launcher {
     public static void main(String[] args) {
         //Eula.displayEula();
+        drawFullTripleBorder();
         logoInitializer(nameOfLogo);
         drawFullTripleBorder();
 
