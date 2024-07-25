@@ -16,6 +16,7 @@ public class UserInterface {
 
     //MENU//SETTINGS//
     public static String nameOfFunction = "";
+    public static String nameOfLogo = "";
     private static int delay;
 
     //Show main menu of the app (menu ui)
@@ -52,7 +53,6 @@ public class UserInterface {
         displaySlowMotionText(100, 8, false, "Settings\n", "");
 
         drawFullTripleBorder();
-        //Display tip for the user
         displayTip("Enter 'commands'\n"
                 + contentAlignment(18) + "to show list of\n"
                 + contentAlignment(18) + "commands");
@@ -86,7 +86,6 @@ public class UserInterface {
         logoInitializer(nameOfFunction);
         drawFullTripleBorder();
     }
-
 
 
     //TIME//VERSION//INFO//TIP//
@@ -183,17 +182,32 @@ public class UserInterface {
                 + contentAlignment(18) + "· calculator\n"
                 + contentAlignment(18) + "· settings\n"
                 + contentAlignment(18) + "· commands\n"
-                + contentAlignment(18) + "· info\n"
+                + contentAlignment(18) + "· info\n\n"
                 + contentAlignment(18) + "· exit");
         drawFullTripleBorder();
     }
 
     //Show list of commands in settings
     public static void displayListOfSettings() {
-        System.out.println(contentAlignment(8) + "Commands\n" + contentAlignment(18) + "· settings value\n"
+        System.out.println(contentAlignment(8) + "Commands\n"
+                + contentAlignment(18) + "· settings value\n"
                 + contentAlignment(18) + "· logo\n"
                 + contentAlignment(18) + "· border\n"
                 + contentAlignment(18) + "· delay\n"
+                + contentAlignment(18) + "· color-mode\n\n"
+                + contentAlignment(18) + "· info\n" //IN PROGRESS
+                + contentAlignment(18) + "· exit");
+        drawFullTripleBorder();
+    }
+
+    //IN PROGRESS
+    //Show list of color modes
+    public static void displayListOfColorModes() {
+        System.out.println(contentAlignment(5) + "Modes\n"
+                + contentAlignment(18) + "· high contrast\n"
+                + contentAlignment(18) + "· mono color\n"
+                + contentAlignment(18) + "· no color\n\n"
+                + contentAlignment(18) + "· info\n"
                 + contentAlignment(18) + "· exit");
         drawFullTripleBorder();
     }

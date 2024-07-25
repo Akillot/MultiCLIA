@@ -15,6 +15,7 @@ public class Stylization {
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
 
+
     //BORDERS//
     //Show horizontal border
     public static int borderWidth = 21;
@@ -53,18 +54,6 @@ public class Stylization {
     }
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
-    //Show transition border
-    public static void transitionBorder() {
-        System.out.println("|" + contentAlignment(-19) + "|");
-    }
-
-    //Show triple border
-    public static void drawFullTripleBorder() {
-        drawHorizontalBorder(numberOfSymbols);
-        transitionBorder();
-        drawHorizontalBorder(numberOfSymbols);
-    }
-
     //SLOW-MOTION//ALIGNMENT//COLORFUL-COMMANDS//
     //Show colorful content with alignment
     public static void displayColorCommand(String text, String colorName, byte alignment) {
@@ -88,6 +77,18 @@ public class Stylization {
         } else {
             System.out.println(contentAlignment(alignLength) + coloredText);
         }
+    }
+
+    //Show transition border
+    public static void transitionBorder() {
+        System.out.println("|" + contentAlignment(-19) + "|");
+    }
+
+    //Show triple border
+    public static void drawFullTripleBorder() {
+        drawHorizontalBorder(numberOfSymbols);
+        transitionBorder();
+        drawHorizontalBorder(numberOfSymbols);
     }
 
 
@@ -148,5 +149,4 @@ public class Stylization {
     }
 
     public static int numberOfSymbols = 1;
-
 }
