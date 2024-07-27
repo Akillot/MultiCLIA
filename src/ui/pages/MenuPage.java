@@ -4,7 +4,8 @@ import commands_language_packages.PackageUniter;
 
 import static ui.layout.AdditionalFunctions.displayTip;
 import static ui.layout.AdditionalFunctions.scanner;
-import static ui.layout.BorderWork.*;
+import static ui.layout.BorderWork.borderWidth;
+import static ui.layout.BorderWork.drawFullTripleBorder;
 import static ui.layout.ColorWork.displayColorCommand;
 import static ui.layout.TextWork.*;
 
@@ -22,11 +23,13 @@ public class MenuPage {
 
         String nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2);
-        drawHorizontalBorder(numberOfSymbols);
+        //drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
 
         if (!registry.executeCommand(nameOfFunction)) {
             displayColorCommand("Command not found", "red", (byte) 0);
-            drawHorizontalBorder(numberOfSymbols);
+            drawFullTripleBorder();
+            //drawHorizontalBorder(numberOfSymbols);
         }
     }
 }

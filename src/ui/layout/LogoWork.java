@@ -7,7 +7,7 @@ import static ui.layout.TextWork.contentAlignment;
 
 public class LogoWork {
 
-    public static String nameOfLogo = "";
+    public static String nameOfLogo = "neon";
 
     public static void logoInitializer(String requiredCommand) {
         HashMap<String, Runnable> listOfCommands = new HashMap<>();

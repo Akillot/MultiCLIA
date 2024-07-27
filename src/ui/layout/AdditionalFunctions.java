@@ -2,8 +2,7 @@ package ui.layout;
 
 import java.util.Scanner;
 
-import static ui.layout.BorderWork.drawHorizontalBorder;
-import static ui.layout.BorderWork.numberOfSymbols;
+import static ui.layout.BorderWork.*;
 import static ui.layout.ColorWork.*;
 import static ui.layout.TextWork.contentAlignment;
 
@@ -18,7 +17,8 @@ public class AdditionalFunctions {
         System.out.println(contentAlignment(18) + BOLD
                 + "[" + YELLOW + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
-        drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
+        //drawHorizontalBorder(numberOfSymbols);
     }
 
     //Exit block(apps)
@@ -74,7 +74,7 @@ public class AdditionalFunctions {
 
     //Show list of commands in menu
     public static void displayListOfMenuCommands() {
-        System.out.println(contentAlignment(8) + "Commands\n"
+        System.out.println(contentAlignment(18) + "Commands"
                 + contentAlignment(18) + "· calculator\n"
                 + contentAlignment(18) + "· settings\n"
                 + contentAlignment(18) + "· commands\n"
@@ -84,16 +84,14 @@ public class AdditionalFunctions {
     }
 
     //Show list of commands in settings
-    public static void displayListOfSettings() {
-        System.out.println(contentAlignment(8) + "Commands\n"
-                + contentAlignment(18) + "· settings value\n"
-                + contentAlignment(18) + "· logo\n"
-                + contentAlignment(18) + "· border\n"
-                + contentAlignment(18) + "· delay\n"
-                + contentAlignment(18) + "· color-mode\n\n"
-                + contentAlignment(18) + "· info\n" //IN PROGRESS
-                + contentAlignment(18) + "· exit");
-        drawHorizontalBorder(numberOfSymbols);
+    public static void displayListOfSetup() {
+        System.out.println("\n" + contentAlignment(58) + "· settings value\n"
+                + contentAlignment(58) + "· logo\n"
+                + contentAlignment(58) + "· border\n"
+                + contentAlignment(58) + "· delay\n"
+                // + contentAlignment(18) + "· color-mode\n\n"
+                + contentAlignment(58) + "· info\n" //IN PROGRESS
+                + contentAlignment(58) + "· exit");
     }
 
     //IN PROGRESS

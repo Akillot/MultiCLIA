@@ -5,6 +5,7 @@ import static ui.pages.MenuPage.displayMainMenuUi;
 
 public class Launcher {
     public static void main(String[] args) {
+        //drawFullTripleBorder();
         //displaySetUpPage();
         drawFullTripleBorder();
         logoInitializer(nameOfLogo);
