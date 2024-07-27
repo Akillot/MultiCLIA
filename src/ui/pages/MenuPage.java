@@ -2,9 +2,11 @@ package ui.pages;
 
 import commands_language_packages.PackageUniter;
 
-import static ui.layout.Stylization.*;
-import static ui.layout.UiLayout.displayTip;
-import static ui.layout.UiLayout.scanner;
+import static ui.layout.AdditionalFunctions.displayTip;
+import static ui.layout.AdditionalFunctions.scanner;
+import static ui.layout.BorderWork.*;
+import static ui.layout.ColorWork.displayColorCommand;
+import static ui.layout.TextWork.*;
 
 public class MenuPage {
     public static String nameOfFunction = "";
@@ -20,11 +22,11 @@ public class MenuPage {
 
         String nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2);
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
 
         if (!registry.executeCommand(nameOfFunction)) {
             displayColorCommand("Command not found", "red", (byte) 0);
-            drawFullTripleBorder();
+            drawHorizontalBorder(numberOfSymbols);
         }
     }
 }

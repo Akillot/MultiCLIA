@@ -1,12 +1,13 @@
 package ui.pages;
 
-import ui.layout.Logos;
+import ui.layout.LogoWork;
 
-import static ui.layout.Stylization.*;
-import static ui.layout.UiLayout.displayTip;
-import static ui.layout.UiLayout.scanner;
+import static ui.layout.AdditionalFunctions.displayTip;
+import static ui.layout.AdditionalFunctions.scanner;
+import static ui.layout.BorderWork.borderWidth;
+import static ui.layout.TextWork.*;
 
-public class LogoSwitcher {
+public class LogoSwitcherPage {
     public static void logoSwitcherUi() {
         displayTip("Enter 'logos'\n"
                 + contentAlignment(18) + "to show list of\n"
@@ -16,8 +17,6 @@ public class LogoSwitcher {
 
         String nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2);
-
-        Logos.logoInitializer(nameOfFunction);
-        drawFullTripleBorder();
+        LogoWork.logoInitializer(nameOfFunction);
     }
 }

@@ -2,18 +2,21 @@ package ui.layout;
 
 import java.util.HashMap;
 
-import static ui.layout.Stylization.*;
+import static ui.layout.ColorWork.*;
+import static ui.layout.TextWork.contentAlignment;
 
-public class Logos {
+public class LogoWork {
+
+    public static String nameOfLogo = "";
 
     public static void logoInitializer(String requiredCommand) {
         HashMap<String, Runnable> listOfCommands = new HashMap<>();
 
-        listOfCommands.put("default", Logos::displayDefaultLogo);
-        listOfCommands.put("google", Logos::displayGoogleReferenceLogo);
-        listOfCommands.put("neon", Logos::displayNeonDefaultLogo);
+        listOfCommands.put("default", LogoWork::displayDefaultLogo);
+        listOfCommands.put("google", LogoWork::displayGoogleReferenceLogo);
+        listOfCommands.put("neon", LogoWork::displayNeonDefaultLogo);
 
-        listOfCommands.put("exit", UiLayout::exitBlock);
+        listOfCommands.put("exit", AdditionalFunctions::exitBlock);
 
         Runnable command = listOfCommands.get(requiredCommand.toLowerCase());
         if (command != null) {

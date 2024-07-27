@@ -2,32 +2,28 @@ package ui.layout;
 
 import java.util.Scanner;
 
-import static ui.layout.Stylization.*;
+import static ui.layout.BorderWork.drawHorizontalBorder;
+import static ui.layout.BorderWork.numberOfSymbols;
+import static ui.layout.ColorWork.*;
+import static ui.layout.TextWork.contentAlignment;
 
-public class UiLayout {
+public class AdditionalFunctions {
 
     public static Scanner scanner = new Scanner(System.in);
 
-    public static String nameOfLogo = "";
     private static int delay;
-
-
-    //VERSION//INFO//TIP//
-    //Show info about MultiCLIA
 
     //Show tip for the user
     public static void displayTip(String text) {
         System.out.println(contentAlignment(18) + BOLD
                 + "[" + YELLOW + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
     }
 
-
-    //EXIT//
     //Exit block(apps)
     public static void exitBlock() {
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
         delay = 150;
         String exitText = contentAlignment(18) + RED + BOLD + "Application exit" + RESET;
         for (char ch : exitText.toCharArray()) {
@@ -48,7 +44,7 @@ public class UiLayout {
                 displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
     }
 
     //Exit program
@@ -76,8 +72,6 @@ public class UiLayout {
         System.exit(0);
     }
 
-
-    //LISTS OF COMMANDS//
     //Show list of commands in menu
     public static void displayListOfMenuCommands() {
         System.out.println(contentAlignment(8) + "Commands\n"
@@ -86,7 +80,7 @@ public class UiLayout {
                 + contentAlignment(18) + "· commands\n"
                 + contentAlignment(18) + "· info\n\n"
                 + contentAlignment(18) + "· exit");
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
     }
 
     //Show list of commands in settings
@@ -99,7 +93,7 @@ public class UiLayout {
                 + contentAlignment(18) + "· color-mode\n\n"
                 + contentAlignment(18) + "· info\n" //IN PROGRESS
                 + contentAlignment(18) + "· exit");
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
     }
 
     //IN PROGRESS
@@ -111,6 +105,6 @@ public class UiLayout {
                 + contentAlignment(18) + "· no color\n\n"
                 + contentAlignment(18) + "· info\n"
                 + contentAlignment(18) + "· exit");
-        drawFullTripleBorder();
+        drawHorizontalBorder(numberOfSymbols);
     }
 }

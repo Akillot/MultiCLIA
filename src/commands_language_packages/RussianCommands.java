@@ -1,7 +1,7 @@
 package commands_language_packages;
 
 import additional_packages.calculator.Calculator;
-import ui.layout.UiLayout;
+import ui.layout.AdditionalFunctions;
 import ui.pages.GeneralSettingsPage;
 import ui.pages.InfoPage;
 import ui.pages.TimePage;
@@ -20,11 +20,11 @@ public class RussianCommands {
         commandMap.put("yfcnjhqr", GeneralSettingsPage::displayGeneralSettings); // 'settings' typed in Russian layout
         commandMap.put("ctn", GeneralSettingsPage::displayGeneralSettings); // 'set' typed in Russian layout
 
-        commandMap.put("команды", UiLayout::displayListOfMenuCommands);
-        commandMap.put("ком", UiLayout::displayListOfMenuCommands);
-        commandMap.put("сщььфтвы", UiLayout::displayListOfMenuCommands);// 'commands' typed in Russian layout
-        commandMap.put("сщь", UiLayout::displayListOfMenuCommands);
-        commandMap.put("rjvfyls", UiLayout::displayListOfMenuCommands); // 'commands' typed in Russian layout
+        commandMap.put("команды", AdditionalFunctions::displayListOfMenuCommands);
+        commandMap.put("ком", AdditionalFunctions::displayListOfMenuCommands);
+        commandMap.put("сщььфтвы", AdditionalFunctions::displayListOfMenuCommands);// 'commands' typed in Russian layout
+        commandMap.put("сщь", AdditionalFunctions::displayListOfMenuCommands);
+        commandMap.put("rjvfyls", AdditionalFunctions::displayListOfMenuCommands); // 'commands' typed in Russian layout
 
         commandMap.put("время", TimePage::displayCurrentTime);
         commandMap.put("дрфнз", TimePage::displayCurrentTime); // 'time' typed in Russian layout
@@ -33,8 +33,8 @@ public class RussianCommands {
         commandMap.put("инф", InfoPage::displayInfo);
         commandMap.put("byajhfrwbz", InfoPage::displayInfo); // 'info' typed in Russian layout
 
-        commandMap.put("выход", UiLayout::exitProgram);
-        commandMap.put("вых", UiLayout::exitProgram);
-        commandMap.put("dscjr", UiLayout::exitProgram); // 'exit' typed in Russian layout
+        commandMap.put("выход", AdditionalFunctions::exitProgram);
+        commandMap.put("вых", AdditionalFunctions::exitProgram);
+        commandMap.put("dscjr", AdditionalFunctions::exitProgram); // 'exit' typed in Russian layout
     }
 }
