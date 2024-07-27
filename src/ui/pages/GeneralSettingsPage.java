@@ -16,7 +16,7 @@ public class GeneralSettingsPage {
     public static void displayGeneralSettings() {
         HashMap<String, Runnable> listOfSettings = new HashMap<>();
 
-        listOfSettings.put("commands", AdditionalFunctions::displayListOfSettings);
+        listOfSettings.put("commands", AdditionalFunctions::displayListOfSetup);
         listOfSettings.put("settings value", AdditionalFunctions::displayListOfMenuCommands);
         listOfSettings.put("logo", LogoSwitcherPage::logoSwitcherUi);
         listOfSettings.put("border", LogoSwitcherPage::logoSwitcherUi); //In progress

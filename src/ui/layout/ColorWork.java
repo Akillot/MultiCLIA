@@ -37,6 +37,7 @@ public class ColorWork {
             case PURPLE -> PURPLE;
             case CYAN -> CYAN;
             case WHITE -> WHITE;
+            case RESET -> RESET;
         };
         return colorCode + BOLD + text + RESET;
     }
@@ -66,6 +67,6 @@ public class ColorWork {
     }
 
     public enum Color {
-        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE
+        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, RESET
     }
 }
