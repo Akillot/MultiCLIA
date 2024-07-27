@@ -1,6 +1,9 @@
 package additional_packages.calculator;
 
-import static ui.layout.Stylization.*;
+import static ui.layout.BorderWork.drawHorizontalBorder;
+import static ui.layout.BorderWork.numberOfSymbols;
+import static ui.layout.ColorWork.displayColorCommand;
+import static ui.layout.TextWork.contentAlignment;
 
 public class CalculatorFunctions {
     static double result;

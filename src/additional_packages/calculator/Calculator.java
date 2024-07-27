@@ -2,7 +2,10 @@ package additional_packages.calculator;
 
 import java.util.Scanner;
 
-import static ui.layout.Stylization.*;
+import static ui.layout.BorderWork.*;
+import static ui.layout.ColorWork.*;
+import static ui.layout.TextWork.contentAlignment;
+import static ui.layout.TextWork.displaySlowMotionText;
 
 public class Calculator {
     public static Runnable calculator() {
