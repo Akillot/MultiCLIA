@@ -2,8 +2,7 @@ package ui.layout;
 
 import java.util.Scanner;
 
-import static ui.layout.BorderWork.drawHorizontalBorder;
-import static ui.layout.BorderWork.numberOfSymbols;
+import static ui.layout.BorderWork.*;
 import static ui.layout.ColorWork.*;
 import static ui.layout.TextWork.contentAlignment;
 
@@ -18,7 +17,8 @@ public class AdditionalFunctions {
         System.out.println(contentAlignment(18) + BOLD
                 + "[" + YELLOW + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
-        drawHorizontalBorder(numberOfSymbols);
+        drawFullTripleBorder();
+        //drawHorizontalBorder(numberOfSymbols);
     }
 
     //Exit block(apps)

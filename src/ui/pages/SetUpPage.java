@@ -12,6 +12,8 @@ public class SetUpPage {
                 "white", (byte) 20);
         displayColorCommand("First of all let`s do first setup.", "white", (byte) 58);
         displayListOfSetup();
+        System.out.print("\n");
+        displayColorCommand("Enter: ", "white", (byte) 58);
         String command = scanner.nextLine().toLowerCase();
     }
 }
