@@ -1,11 +1,11 @@
 package ui.pages;
 
-import ui.layout.AdditionalFunctions;
+import ui.layout.BasicFunctions;
 
 import java.util.HashMap;
 
-import static ui.layout.AdditionalFunctions.displayTip;
-import static ui.layout.AdditionalFunctions.scanner;
+import static ui.layout.BasicFunctions.displayTip;
+import static ui.layout.BasicFunctions.scanner;
 import static ui.layout.BorderWork.*;
 import static ui.layout.ColorWork.displayColorCommand;
 import static ui.layout.TextWork.*;
@@ -16,12 +16,12 @@ public class GeneralSettingsPage {
     public static void displayGeneralSettings() {
         HashMap<String, Runnable> listOfSettings = new HashMap<>();
 
-        listOfSettings.put("commands", AdditionalFunctions::displayListOfSetup);
-        listOfSettings.put("settings value", AdditionalFunctions::displayListOfMenuCommands);
+        listOfSettings.put("commands", BasicFunctions::displayListOfSetup);
+        listOfSettings.put("settings value", BasicFunctions::displayListOfMenuCommands);
         listOfSettings.put("logo", LogoSwitcherPage::logoSwitcherUi);
         listOfSettings.put("border", LogoSwitcherPage::logoSwitcherUi); //In progress
         listOfSettings.put("delay", LogoSwitcherPage::logoSwitcherUi); //In progress
-        listOfSettings.put("exit", AdditionalFunctions::exitBlock);
+        listOfSettings.put("exit", BasicFunctions::exitBlock);
 
         displaySlowMotionText(100, 8, false, "Settings\n", "");
 

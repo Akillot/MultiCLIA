@@ -1,7 +1,7 @@
 package commands_language_packages;
 
 import additional_packages.calculator.Calculator;
-import ui.layout.AdditionalFunctions;
+import ui.layout.BasicFunctions;
 import ui.pages.GeneralSettingsPage;
 import ui.pages.InfoPage;
 import ui.pages.TimePage;
@@ -19,9 +19,9 @@ public class GermanCommands {
         commandMap.put("ein", GeneralSettingsPage::displayGeneralSettings);
         commandMap.put("dpfmdmbhfyftufohfo", GeneralSettingsPage::displayGeneralSettings); // 'einstellungen' typed in English layout
 
-        commandMap.put("befehle", AdditionalFunctions::displayListOfMenuCommands);
-        commandMap.put("bef", AdditionalFunctions::displayListOfMenuCommands);
-        commandMap.put("whfidh", AdditionalFunctions::displayListOfMenuCommands); // 'befehle' typed in English layout
+        commandMap.put("befehle", BasicFunctions::displayListOfMenuCommands);
+        commandMap.put("bef", BasicFunctions::displayListOfMenuCommands);
+        commandMap.put("whfidh", BasicFunctions::displayListOfMenuCommands); // 'befehle' typed in English layout
 
         commandMap.put("zeit", TimePage::displayCurrentTime);
         commandMap.put("ze", TimePage::displayCurrentTime);
@@ -31,8 +31,8 @@ public class GermanCommands {
         commandMap.put("info", InfoPage::displayInfo);
         commandMap.put("hofpsnbujpofo", InfoPage::displayInfo); // 'info' typed in English layout
 
-        commandMap.put("ausgang", AdditionalFunctions::exitProgram);
-        commandMap.put("aus", AdditionalFunctions::exitProgram);
-        commandMap.put("tbgboh", AdditionalFunctions::exitProgram); // 'ausgang' typed in English layout
+        commandMap.put("ausgang", BasicFunctions::exitProgram);
+        commandMap.put("aus", BasicFunctions::exitProgram);
+        commandMap.put("tbgboh", BasicFunctions::exitProgram); // 'ausgang' typed in English layout
     }
 }

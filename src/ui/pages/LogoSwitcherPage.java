@@ -2,8 +2,8 @@ package ui.pages;
 
 import ui.layout.LogoWork;
 
-import static ui.layout.AdditionalFunctions.displayTip;
-import static ui.layout.AdditionalFunctions.scanner;
+import static ui.layout.BasicFunctions.displayTip;
+import static ui.layout.BasicFunctions.scanner;
 import static ui.layout.BorderWork.borderWidth;
 import static ui.layout.TextWork.*;
 
