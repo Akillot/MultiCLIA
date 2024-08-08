@@ -1,21 +1,21 @@
 package ui.layout;
 
-import static ui.layout.BorderWork.*;
+import static ui.layout.BorderWork.borderWidth;
+import static ui.layout.BorderWork.drawFullTripleBorder;
 import static ui.layout.ColorWork.*;
 
 public class TextWork {
 
     public static void wrapText(String text, int width) {
         for (int i = 0; i < text.length(); i += width) {
+            int end = Math.min(i + width, text.length());
             if (i == 0) {
-                int end = Math.min(i + width, text.length());
-                drawHorizontalBorder(numberOfSymbols);
+                drawFullTripleBorder();
                 System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();
                 }
             } else {
-                int end = Math.min(i + width, text.length());
                 System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();

@@ -8,7 +8,7 @@ import static ui.layout.TextWork.contentAlignment;
 public class InfoPage {
     public static void displayInfo() {
         displayColorCommand(contentAlignment(58) + "Current version:", "white", (byte) 58);
-        displayColorCommand("0.4.9", "randomly", (byte) 58);
+        displayColorCommand("0.4.9.4", "randomly", (byte) 58);
         displayColorCommand("Author: Nick Zozulia", "white", (byte) 58);
         drawHorizontalBorder(numberOfSymbols);
     }

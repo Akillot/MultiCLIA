@@ -1,7 +1,7 @@
 package commands_language_packages;
 
 import additional_packages.calculator.Calculator;
-import ui.layout.AdditionalFunctions;
+import ui.layout.BasicFunctions;
 import ui.pages.GeneralSettingsPage;
 import ui.pages.InfoPage;
 import ui.pages.TimePage;
@@ -21,10 +21,10 @@ public class CzechCommands {
         commandMap.put("nfcgtdbp", GeneralSettingsPage::displayGeneralSettings); // 'nastavení' typed in English layout
         commandMap.put("nfc", GeneralSettingsPage::displayGeneralSettings); // 'nas' typed in English layout
 
-        commandMap.put("příkazy", AdditionalFunctions::displayListOfMenuCommands);
-        commandMap.put("prikazy", AdditionalFunctions::displayListOfMenuCommands);
-        commandMap.put("prik", AdditionalFunctions::displayListOfMenuCommands);
-        commandMap.put("ohrfkbd", AdditionalFunctions::displayListOfMenuCommands); // 'příkazy' typed in English layout
+        commandMap.put("příkazy", BasicFunctions::displayListOfMenuCommands);
+        commandMap.put("prikazy", BasicFunctions::displayListOfMenuCommands);
+        commandMap.put("prik", BasicFunctions::displayListOfMenuCommands);
+        commandMap.put("ohrfkbd", BasicFunctions::displayListOfMenuCommands); // 'příkazy' typed in English layout
 
         commandMap.put("čas", TimePage::displayCurrentTime);
         commandMap.put("cas", TimePage::displayCurrentTime);
@@ -32,8 +32,8 @@ public class CzechCommands {
 
         commandMap.put("informace", InfoPage::displayInfo);
 
-        commandMap.put("konec", AdditionalFunctions::exitProgram);
-        commandMap.put("kon", AdditionalFunctions::exitProgram);
-        commandMap.put("lphfd", AdditionalFunctions::exitProgram); // 'konec' typed in English layout
+        commandMap.put("konec", BasicFunctions::exitProgram);
+        commandMap.put("kon", BasicFunctions::exitProgram);
+        commandMap.put("lphfd", BasicFunctions::exitProgram); // 'konec' typed in English layout
     }
 }
