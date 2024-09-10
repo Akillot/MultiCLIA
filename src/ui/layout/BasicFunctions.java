@@ -2,8 +2,8 @@ package ui.layout;
 
 import java.util.Scanner;
 
-import static ui.layout.BorderWork.drawHorizontalBorder;
-import static ui.layout.BorderWork.numberOfSymbols;
+import static ui.layout.BorderWork.*;
+import static ui.layout.BorderWork.drawTripleBorder;
 import static ui.layout.ColorWork.*;
 import static ui.layout.TextWork.contentAlignment;
 
@@ -13,17 +13,15 @@ public class BasicFunctions {
 
     private static int delay;
 
-    //Show tip for the user
     public static void displayTip(String text) {
         System.out.println(contentAlignment(18) + BOLD
-                + "[" + YELLOW + BOLD + "i" + RESET
+                + "[" + WHITE + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
-        //drawHorizontalBorder(numberOfSymbols);
     }
 
     //Exit block(apps)
     public static void exitBlock() {
-        drawHorizontalBorder(numberOfSymbols);
+        //drawHorizontalBorder(numberOfSymbols);
         delay = 150;
         String exitText = contentAlignment(18) + RED + BOLD + "Application exit" + RESET;
         for (char ch : exitText.toCharArray()) {
@@ -44,13 +42,14 @@ public class BasicFunctions {
                 displayColorCommand("Error, try again", "red", (byte) 0);
             }
         }
-        drawHorizontalBorder(numberOfSymbols);
+        //drawHorizontalBorder(numberOfSymbols);
     }
 
     //Exit program
     public static void exitProgram() {
         delay = 150;
-        String exitText = contentAlignment(18) + RED + "Program exit" + RESET;
+        System.out.print("\n");
+        String exitText = contentAlignment(12) + RED + "Program exit" + RESET;
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
@@ -74,30 +73,29 @@ public class BasicFunctions {
 
     //Show list of commands in menu
     public static void displayListOfMenuCommands() {
-        System.out.println(contentAlignment(18) + "Commands"
-                + contentAlignment(18) + "· calculator\n"
+        System.out.println("\n" + contentAlignment(18) + "· calculator\n"
                 + contentAlignment(18) + "· settings\n"
                 + contentAlignment(18) + "· commands\n"
-                + contentAlignment(18) + "· info\n\n"
-                + contentAlignment(18) + "· exit");
-        drawHorizontalBorder(numberOfSymbols);
+                + contentAlignment(18) + "· info\n"
+                + contentAlignment(18) + "· " + RED + "exit\n" + RESET);
+        drawTripleBorder();
     }
 
     //Show list of commands in settings
     public static void displayListOfSetup() {
-        System.out.println("\n" + contentAlignment(58) + "· settings value\n"
-                + contentAlignment(58) + "· logo\n"
-                + contentAlignment(58) + "· border\n"
-                + contentAlignment(58) + "· delay\n"
+        System.out.println("\n" + contentAlignment(58)
+                + contentAlignment(18) + "· logo\n"
+                + contentAlignment(18) + "· border\n"
+                + contentAlignment(18) + "· delay\n"
                 // + contentAlignment(18) + "· color-mode\n\n"
-                + contentAlignment(58) + "· info\n" //IN PROGRESS
-                + contentAlignment(58) + "· exit");
+                + contentAlignment(18) + "· info\n" //IN PROGRESS
+                + contentAlignment(18) + "· exit\n");
     }
 
     //IN PROGRESS
     //Show list of color modes
     public static void displayListOfColorModes() {
-        System.out.println(contentAlignment(5) + "Modes\n"
+        System.out.println(contentAlignment(5)
                 + contentAlignment(18) + "· high contrast\n"
                 + contentAlignment(18) + "· mono color\n"
                 + contentAlignment(18) + "· no color\n\n"

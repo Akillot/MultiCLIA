@@ -1,15 +1,24 @@
 package ui.pages;
 
-import static ui.layout.BorderWork.drawHorizontalBorder;
-import static ui.layout.BorderWork.numberOfSymbols;
-import static ui.layout.ColorWork.displayColorCommand;
-import static ui.layout.TextWork.contentAlignment;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class InfoPage {
+import static ui.layout.BorderWork.drawTripleBorder;
+import static ui.layout.ColorWork.displayColorCommand;
+
+public  class InfoPage {
+    public static String version = "0.5.0.0";
     public static void displayInfo() {
-        displayColorCommand(contentAlignment(58) + "Current version:", "white", (byte) 58);
-        displayColorCommand("0.4.9.4", "randomly", (byte) 58);
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(" dd-MM-yyyy"
+                + " HH:mm");
+        String formattedTime = localTime.format(myFormatter);
+
+        displayColorCommand("Current version:", "white", (byte) 58);
+        displayColorCommand(version, "purple", (byte) 58);
         displayColorCommand("Author: Nick Zozulia", "white", (byte) 58);
-        drawHorizontalBorder(numberOfSymbols);
+
+        displayColorCommand("Time is: " + formattedTime, "white", (byte) 58);
+        drawTripleBorder();
     }
 }

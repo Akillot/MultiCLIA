@@ -16,16 +16,15 @@ public class GeneralSettingsPage {
     public static void displayGeneralSettings() {
         HashMap<String, Runnable> listOfSettings = new HashMap<>();
 
-        listOfSettings.put("commands", BasicFunctions::displayListOfSetup);
+        listOfSettings.put("", BasicFunctions::displayListOfSetup);
         listOfSettings.put("settings value", BasicFunctions::displayListOfMenuCommands);
-        listOfSettings.put("logo", LogoSwitcherPage::logoSwitcherUi);
-        listOfSettings.put("border", LogoSwitcherPage::logoSwitcherUi); //In progress
-        listOfSettings.put("delay", LogoSwitcherPage::logoSwitcherUi); //In progress
-        listOfSettings.put("exit", BasicFunctions::exitBlock);
+        //listOfSettings.put("logo-color", GeneralSettingsPage::
+        //listOfSettings.put("border", GeneralSettingsPage::); //In progress
+        //listOfSettings.put("delay", GeneralSettingsPage::); //In progress
+        //listOfSettings.put("exit", BasicFunctions::exitBlock);
 
         displaySlowMotionText(100, 8, false, "Settings\n", "");
 
-        drawHorizontalBorder(numberOfSymbols);
         displayTip("Enter 'commands'\n"
                 + contentAlignment(18) + "to show list of\n"
                 + contentAlignment(18) + "commands");
@@ -34,7 +33,7 @@ public class GeneralSettingsPage {
 
         nameOfFunction = scanner.nextLine().toLowerCase();
         wrapText(nameOfFunction, borderWidth - 2); //Wrapping the command from user
-        drawHorizontalBorder(numberOfSymbols);
+        //drawHorizontalBorder(numberOfSymbols);
 
         if (listOfSettings.containsKey(nameOfFunction)) {
             listOfSettings.get(nameOfFunction).run();
@@ -43,5 +42,8 @@ public class GeneralSettingsPage {
             displayColorCommand("Command not found", "red", (byte) 0);
             drawHorizontalBorder(numberOfSymbols);
         }
+    }
+    public static void changeBorder(){
+
     }
 }

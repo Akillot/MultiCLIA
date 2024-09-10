@@ -6,7 +6,6 @@ import static ui.layout.TextWork.contentAlignment;
 
 public class ColorWork {
 
-    //ANSI colors
     public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
     public static final String RED = "\033[0;31m";
@@ -15,20 +14,28 @@ public class ColorWork {
     public static final String BLUE = "\033[0;34m";
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
+    public static final String MAGENTA = "\u001B[35m";
 
-    //ANSI text styles
     public static final String BOLD = "\033[1m";
     public static final String UNDERLINE = "\033[4m";
 
-    //Randomly picks a color
+    private String color;
+
+    public String getColor(){
+        return color;
+    }
+
+    public void setColor(String color){
+        this.color = color;
+    }
+
     static ColorWork.Color getRandomColor() {
         Random rand = new Random();
         int randomColorIndex = rand.nextInt(ColorWork.Color.values().length);
         return ColorWork.Color.values()[randomColorIndex];
     }
 
-    //Get a user choice color
-    static String getColoredText(String text, ColorWork.Color color) {
+    static String getColoredText(String text, Color color) {
         String colorCode = switch (color) {
             case RED -> RED;
             case YELLOW -> YELLOW;
@@ -37,6 +44,7 @@ public class ColorWork {
             case PURPLE -> PURPLE;
             case CYAN -> CYAN;
             case WHITE -> WHITE;
+            case MAGENTA -> MAGENTA;
             case RESET -> RESET;
         };
         return colorCode + BOLD + text + RESET;
@@ -67,6 +75,12 @@ public class ColorWork {
     }
 
     public enum Color {
-        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, RESET
+        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, MAGENTA, RESET
+    }
+
+    public enum Color_Background {
+        Red_Background, Yellow_Background, Green_Background,
+        Blue_Background, Purple_Background, Cyan_Background,
+        Magenta_Background, Black_Background
     }
 }

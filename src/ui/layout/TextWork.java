@@ -1,7 +1,7 @@
 package ui.layout;
 
 import static ui.layout.BorderWork.borderWidth;
-import static ui.layout.BorderWork.drawFullTripleBorder;
+import static ui.layout.BorderWork.drawTripleBorder;
 import static ui.layout.ColorWork.*;
 
 public class TextWork {
@@ -10,7 +10,7 @@ public class TextWork {
         for (int i = 0; i < text.length(); i += width) {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
-                drawFullTripleBorder();
+                drawTripleBorder();
                 System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();

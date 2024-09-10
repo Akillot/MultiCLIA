@@ -5,12 +5,10 @@ import java.util.Scanner;
 import static ui.layout.BorderWork.*;
 import static ui.layout.ColorWork.*;
 import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.TextWork.displaySlowMotionText;
 
 public class Calculator {
     public static Runnable calculator() {
         Scanner scanner = new Scanner(System.in);
-        displaySlowMotionText(250, 10, false, "Calculator", "\n");
         while (true) {
             try {
                 drawHorizontalBorder(numberOfSymbols);
@@ -64,9 +62,9 @@ public class Calculator {
                     case "exit":
                     case "6":
                     case "x":
-                        drawFullTripleBorder();
+                        drawTripleBorder();
                         displayColorCommand("Exiting the program...", "red", (byte) 18);
-                        drawFullTripleBorder();
+                        drawTripleBorder();
                         return null;
                     default:
                         displayColorCommand("Invalid operation", "red", (byte) 0);

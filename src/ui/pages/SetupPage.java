@@ -6,17 +6,8 @@ import static ui.layout.BorderWork.drawHorizontalBorder;
 import static ui.layout.ColorWork.displayColorCommand;
 import static ui.layout.TextWork.contentAlignment;
 
-public class SetUpPage {
+public class SetupPage {
     public static void displaySetUpPage() {
-      /*
-        displayColorCommand("  __  __           _   _     _    _____   _        _____            ", "randomly", (byte)0);
-        displayColorCommand(" |  \\/  |         | | | |   (_)  / ____| | |      |_   _|     /\\    ", "randomly", (byte)0);
-        displayColorCommand(" | \\  / |  _   _  | | | |_   _  | |      | |        | |      /  \\  ", "randomly", (byte)0);
-        displayColorCommand(" | |\\/| | | | | | | | | __| | | | |      | |        | |     / /\\ \\  ", "randomly", (byte)0);
-        displayColorCommand(" | |  | | | |_| | | | | |_  | | | |____  | |____   _| |_   / ____ \\ ", "randomly", (byte)0);
-        displayColorCommand(" |_|  |_|  \\__,_| |_|  \\__| |_|  \\_____| |______| |_____| /_/    \\_\\", "randomly", (byte)0);
-       */
-
 
         drawHorizontalBorder(6);
         System.out.print("\n");

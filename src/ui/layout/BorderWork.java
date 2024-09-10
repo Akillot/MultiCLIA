@@ -1,11 +1,11 @@
 package ui.layout;
 
 import static ui.layout.TextWork.contentAlignment;
+import static ui.layout.ColorWork.displayColorCommand;
 
 public class BorderWork {
-
     public static int numberOfSymbols = 1;
-    public static int borderWidth = 62;
+    public static final int borderWidth = 62;
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
     public static void drawHorizontalBorder(int numberOfSymbol) {
@@ -16,13 +16,11 @@ public class BorderWork {
         System.out.println(symbolsOfBorder[0]);
     }
 
-    //Show transition border
     public static void transitionBorder() {
-        System.out.println("|" + contentAlignment(-61) + "|");
+        System.out.println(symbolsOfBorder[2] + contentAlignment(-61) + symbolsOfBorder[2]);
     }
 
-    //Show triple border
-    public static void drawFullTripleBorder() {
+    public static void drawTripleBorder() {
         drawHorizontalBorder(numberOfSymbols);
         transitionBorder();
         drawHorizontalBorder(numberOfSymbols);
