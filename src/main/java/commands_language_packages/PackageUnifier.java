@@ -3,18 +3,15 @@ package commands_language_packages;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PackageUniter {
+public class PackageUnifier {
     private final Map<String, Runnable> listOfMenuCommands = new HashMap<>();
 
-    public PackageUniter() {
+    public PackageUnifier() {
         initializeCommands();
     }
 
     private void initializeCommands() {
-        EnglishCommands.registerCommands(listOfMenuCommands);
-        CzechCommands.registerCommands(listOfMenuCommands);
-        RussianCommands.registerCommands(listOfMenuCommands);
-        GermanCommands.registerCommands(listOfMenuCommands);
+        CommandHandler.registerCommands(listOfMenuCommands);
     }
 
     public boolean executeCommand(String command) {

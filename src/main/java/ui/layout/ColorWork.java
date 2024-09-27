@@ -3,6 +3,7 @@ package ui.layout;
 import java.util.Random;
 
 import static ui.layout.TextWork.contentAlignment;
+import static ui.layout.ThemesWork.displayErrorAscii;
 
 public class ColorWork {
 
@@ -50,8 +51,7 @@ public class ColorWork {
         return colorCode + BOLD + text + RESET;
     }
 
-    //Show colorful content with alignment
-    public static void displayColorCommand(String text, String colorName, byte alignment) {
+    public static void displayColorMessage(String text, String colorName, int alignment) {
         ColorWork.Color color;
         try {
             color = ColorWork.Color.valueOf(colorName.toUpperCase());
@@ -59,7 +59,8 @@ public class ColorWork {
             if (colorName.equalsIgnoreCase("randomly")) {
                 color = getRandomColor();
             } else {
-                displayColorCommand("Invalid input", "red", (byte) 0);
+                displayErrorAscii();
+                displayColorMessage("Invalid input", "red", 0);
                 return;
             }
         }
@@ -68,7 +69,8 @@ public class ColorWork {
         int alignLength = alignment == 0 ? text.length() : alignment;
 
         if (alignment < 0) {
-            displayColorCommand("Invalid input", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage("Invalid input", "red", 0);
         } else {
             System.out.println(contentAlignment(alignLength) + coloredText);
         }

@@ -1,7 +1,6 @@
 package ui.layout;
 
 import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ColorWork.displayColorCommand;
 
 public class BorderWork {
     public static int numberOfSymbols = 1;
@@ -16,13 +15,9 @@ public class BorderWork {
         System.out.println(symbolsOfBorder[0]);
     }
 
-    public static void transitionBorder() {
-        System.out.println(symbolsOfBorder[2] + contentAlignment(-61) + symbolsOfBorder[2]);
-    }
-
     public static void drawTripleBorder() {
         drawHorizontalBorder(numberOfSymbols);
-        transitionBorder();
+        System.out.println(symbolsOfBorder[2] + contentAlignment(-61) + symbolsOfBorder[2]);
         drawHorizontalBorder(numberOfSymbols);
     }
 }

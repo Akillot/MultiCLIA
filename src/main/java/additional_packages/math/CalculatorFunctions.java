@@ -1,16 +1,15 @@
-package additional_packages.calculator;
+package additional_packages.math;
 
 import static ui.layout.BorderWork.drawHorizontalBorder;
 import static ui.layout.BorderWork.numberOfSymbols;
-import static ui.layout.ColorWork.displayColorCommand;
+import static ui.layout.ColorWork.displayColorMessage;
 import static ui.layout.TextWork.contentAlignment;
+import static ui.layout.ThemesWork.displayErrorAscii;
 
 public class CalculatorFunctions {
     static double result;
 
-    //MATH-OPERATIONS//
-    //Summation
-    public static void sum(String mathStatement) {
+    public static void summationOperation(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         result = 0;
         for (String num : nums) {
@@ -18,26 +17,27 @@ public class CalculatorFunctions {
                 double numDouble = Double.parseDouble(num);
                 result += numDouble;
             } catch (NumberFormatException e) {
-                displayColorCommand(num + " is not a number", "red", (byte) 0);
+                displayErrorAscii();
+                displayColorMessage(num + " is not a number", "red", 0);
                 return;
             }
         }
-        showAnswer(result);
+        displayAnswer(result);
     }
 
-    //Subtraction
-    public static void sub(String mathStatement) {
+    public static void subtractionOperation(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-
-            displayColorCommand("No numbers to subtract", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage("No numbers to subtract", "red", 0);
             return;
         }
         result = 0;
         try {
             result = Double.parseDouble(nums[0]);
         } catch (NumberFormatException e) {
-            displayColorCommand(nums[0] + " is not a number", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage(nums[0] + " is not a number", "red", 0);
             return;
         }
         for (int i = 1; i < nums.length; i++) {
@@ -45,17 +45,18 @@ public class CalculatorFunctions {
                 double numDouble = Double.parseDouble(nums[i]);
                 result -= numDouble;
             } catch (NumberFormatException e) {
-                displayColorCommand(nums[i] + " is not a number", "red", (byte) 0);
+                displayErrorAscii();
+                displayColorMessage(nums[i] + " is not a number", "red", 0);
             }
         }
-        showAnswer(result);
+        displayAnswer(result);
     }
 
-    //Multiplication
-    public static void multi(String mathStatement) {
+    public static void multiplyingOperation(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            displayColorCommand("No numbers to multiply", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage("No numbers to multiply", "red", 0);
             return;
         }
         result = 1;
@@ -64,25 +65,27 @@ public class CalculatorFunctions {
                 double numDouble = Double.parseDouble(num);
                 result *= numDouble;
             } catch (NumberFormatException e) {
-                displayColorCommand(num + " is not a number", "red", (byte) 0);
+                displayErrorAscii();
+                displayColorMessage(num + " is not a number", "red", 0);
                 return;
             }
         }
-        showAnswer(result);
+        displayAnswer(result);
     }
 
-    //Division
-    public static void divide(String mathStatement) {
+    public static void dividingOperation(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            displayColorCommand("No numbers to divide", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage("No numbers to divide", "red", 0);
             return;
         }
         result = 1;
         try {
             result = Double.parseDouble(nums[0]);
         } catch (NumberFormatException e) {
-            displayColorCommand(nums[0] + " is not a number", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage(nums[0] + " is not a number", "red", 0);
             return;
         }
 
@@ -90,30 +93,33 @@ public class CalculatorFunctions {
             try {
                 double numDouble = Double.parseDouble(nums[i]);
                 if (numDouble == 0) {
-                    displayColorCommand("Division by zero detected.\nAborting operation", "red", (byte) 0);
+                    displayErrorAscii();
+                    displayColorMessage("Division by zero detected.\nAborting operation", "red", 0);
                     return;
                 }
                 result /= numDouble;
             } catch (NumberFormatException e) {
-                displayColorCommand(nums[i] + " is not a number", "red", (byte) 0);
+                displayErrorAscii();
+                displayColorMessage(nums[i] + " is not a number", "red", 0);
                 return;
             }
         }
-        showAnswer(result);
+        displayAnswer(result);
     }
 
-    //Power
-    public static void pow(String mathStatement) {
+    public static void powerOperation(String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            displayColorCommand("No numbers to process", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage("No numbers to process", "red", 0);
             return;
         }
         result = 1;
         try {
             result = Double.parseDouble(nums[0]);
         } catch (NumberFormatException e) {
-            displayColorCommand(nums[0] + " is not a number", "red", (byte) 0);
+            displayErrorAscii();
+            displayColorMessage(nums[0] + " is not a number", "red", 0);
             return;
         }
         for (int i = 1; i < nums.length; i++) {
@@ -121,20 +127,18 @@ public class CalculatorFunctions {
                 double numDouble = Double.parseDouble(nums[i]);
                 result = Math.pow(result, numDouble);
             } catch (NumberFormatException e) {
-                displayColorCommand(nums[i] + " is not a number", "red", (byte) 0);
+                displayErrorAscii();
+                displayColorMessage(nums[i] + " is not a number", "red", 0);
                 return;
             }
         }
-        showAnswer(result);
+        displayAnswer(result);
     }
 
-    public static void showAnswer(double answer) {
+    public static void displayAnswer(double answer) {
         System.out.println(contentAlignment(18) + "Answer: " + answer);
     }
 
-
-    //LIST-OF-OPERATIONS//
-    //Show list of operations in calculator
     public static void displayCalculatorOperationsList() {
         System.out.println(contentAlignment(10) + "Operations:");
         drawHorizontalBorder(numberOfSymbols);

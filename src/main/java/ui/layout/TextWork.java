@@ -25,7 +25,6 @@ public class TextWork {
         System.out.println();
     }
 
-    //Show slow motion text
     public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive, String mainText, String additionalText) {
         String formattedText = contentAlignment(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
@@ -36,15 +35,14 @@ public class TextWork {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorCommand("Error, try again", "red", (byte) 0);
+                displayColorMessage("Error, try again", "red", (byte) 0);
             }
         }
         System.out.print("");
     }
 
-    //Aligns the content
     public static String contentAlignment(int widthOfElement) {
-        int fullWidth = borderWidth + 2; //Where 2 is "+"
+        int fullWidth = borderWidth + 2;
         int oneSide = (fullWidth - widthOfElement) / 2;
         return " ".repeat(Math.max(0, oneSide));
     }
