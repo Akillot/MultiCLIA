@@ -21,7 +21,7 @@ public class ThemesWork {
             case 6 -> logo(COLORS[7], COLORS[4], COLORS[0], COLORS[4], COLORS[7], COLORS[7]);
             case 7 -> logo(COLORS[5], COLORS[7], COLORS[5], COLORS[5], COLORS[7], COLORS[5]);
             case 8 -> logo(COLORS[1], COLORS[3], COLORS[7], COLORS[1], COLORS[1], COLORS[3]);
-            case 9 -> logo(COLORS[1], COLORS[1], COLORS[2], COLORS[1], COLORS[7], COLORS[2]);
+            case 9 -> logo(COLORS[1], COLORS[1], COLORS[0], COLORS[1], COLORS[7], COLORS[0]);
             case 10 -> logo(COLORS[5], COLORS[7], COLORS[5], COLORS[6], COLORS[5], COLORS[6]);
             default -> logo(COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2]);
         }

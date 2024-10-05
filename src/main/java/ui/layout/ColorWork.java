@@ -20,16 +20,6 @@ public class ColorWork {
     public static final String BOLD = "\033[1m";
     public static final String UNDERLINE = "\033[4m";
 
-    private String color;
-
-    public String getColor(){
-        return color;
-    }
-
-    public void setColor(String color){
-        this.color = color;
-    }
-
     static ColorWork.Color getRandomColor() {
         Random rand = new Random();
         int randomColorIndex = rand.nextInt(ColorWork.Color.values().length);

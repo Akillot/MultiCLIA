@@ -1,8 +1,6 @@
 package additional_packages.math;
 
-import static ui.layout.BorderWork.drawHorizontalBorder;
-import static ui.layout.BorderWork.numberOfSymbols;
-import static ui.layout.ColorWork.displayColorMessage;
+import static ui.layout.ColorWork.*;
 import static ui.layout.TextWork.contentAlignment;
 import static ui.layout.ThemesWork.displayErrorAscii;
 
@@ -140,10 +138,12 @@ public class CalculatorFunctions {
     }
 
     public static void displayCalculatorOperationsList() {
-        System.out.println(contentAlignment(10) + "Operations:");
-        drawHorizontalBorder(numberOfSymbols);
-        System.out.println("1. sum[+]" + contentAlignment(10) + "2. sub[-]" +
-                "\n3. multi[*]" + contentAlignment(14) + "4. div[/]" +
-                "\n5. pow[^]" + contentAlignment(10) + "6. exit[x]");
+        displayColorMessage("Operations:", "white", 0);
+        displayColorMessage("· sum[+]", "white", 58);
+        displayColorMessage("· sub[-]", "white", 58);
+        displayColorMessage("· multi[*]", "white", 58);
+        displayColorMessage("· div[/]", "white", 58);
+        displayColorMessage("· pow[^]", "white", 58);
+        System.out.println(contentAlignment(58) + "· " + BOLD + RED + "exit" + RESET + BOLD + WHITE + "[x]" + RESET);
     }
 }
