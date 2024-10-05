@@ -12,7 +12,7 @@ import static ui.layout.TextWork.contentAlignment;
 import static ui.layout.ThemesWork.displayErrorAscii;
 
 public  class InfoPage {
-    public static String version = "A-0.6.0";
+    public static String version = "A-0.6.1";
 
     public static void displayInfo() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);

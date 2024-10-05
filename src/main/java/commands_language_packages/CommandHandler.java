@@ -12,16 +12,18 @@ import static ui.layout.ThemesWork.displayErrorAscii;
 
 public class CommandHandler {
     public static void registerCommands(Map<String, Runnable> commandMap) {
+        //En-Cz-De-Ru-Fr-Es-tok
         String[] calculatorCommands = {"calculator", "kalkulačka",
-                "rechner", "калькулятор", "calculatrice"};
+                "rechner", "калькулятор", "calculatrice", "calculadora", "kule laso"};
         String[] basicFunctionsCommands = {"commands", "příkazy", "prikazy",
-                "befehle", "commandes", "команды", "commandes"};
-        String[] timeCommands = {"time", "čas", "cas", "zeit", "время", "temps"};
+                "befehle", "commandes", "команды", "commandes", "comandos", "pali lawa"};
+        String[] timeCommands = {"time", "čas", "cas", "zeit", "время", "temps", "tiempo", "tenpo"};
         String[] browserCommands = {"browser", "browse", "prohlížeč", "prohlizec",
-                "браузер", "поисковик", "поиск", "navigateur"};
+                "браузер", "поисковик", "поиск", "navigateur", "navegador", "ilo lukin"};
         String[] infoCommands = {"info", "informace", "informationen",
-                "инфо", "информация", "les informations", "l'information", "informations"};
-        String[] exitCommands = {"exit", "konec", "ausgang", "выход", "sortie", "sortir"};
+                "инфо", "информация", "les informations", "l'information", "informations",
+                "información", "informacion", "sona"};
+        String[] exitCommands = {"exit", "konec", "ausgang", "выход", "sortie", "sortir", "salida", "poka"};
 
         registerMultipleCommands(commandMap, calculatorCommands, CalculatorLayout::calculator);
         registerMultipleCommands(commandMap, basicFunctionsCommands, BasicFunctions::displayListOfMenuCommands);
