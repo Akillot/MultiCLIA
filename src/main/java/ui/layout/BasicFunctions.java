@@ -4,7 +4,6 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 
 import static ui.layout.BorderWork.drawTripleBorder;
@@ -15,12 +14,21 @@ import static ui.layout.ThemesWork.displayErrorAscii;
 public class BasicFunctions {
 
     public static Scanner scanner = new Scanner(System.in);
-    private static int delay;
 
     public static void displayTip(String text, int alignment) {
         System.out.println(contentAlignment(alignment) + BOLD
                 + "[" + WHITE + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
+    }
+
+    public static void displaySupportedLanguages(){
+        String[] langs = new String[]{"· En", "· Cz", "· De", "· Ru", "· Fr", "· Es", "· tok"};
+        for(String lang : langs){
+            displayContent(lang,"white", 58);
+        }
+        System.out.print("\n");
+        drawTripleBorder();
+        System.out.print("\n");
     }
 
     private static void displayExitText(String exitText, int delay) {
@@ -30,7 +38,7 @@ public class BasicFunctions {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
                 displayErrorAscii();
-                displayColorMessage("Error, try again", "red", 0);
+                displayContent("Error, try again", "red", 0);
             }
         }
     }
@@ -54,7 +62,7 @@ public class BasicFunctions {
     }
 
     public static void displayListOfMenuCommands() {
-        String[] commands = {"calculator", "browser", "settings", "commands", "info", RED + "exit" + RESET};
+        String[] commands = {"calculator", "browser", "settings", "commands", "info", "languages" , RED + "exit" + RESET};
         for (String command : commands) {
             System.out.println(contentAlignment(58) + "· " + command);
         }
@@ -77,10 +85,10 @@ public class BasicFunctions {
             drawTripleBorder();
             System.out.print("\n");
             displayErrorAscii();
-            displayColorMessage("Failed to open link: " + e.getMessage(), "red", 0);
+            displayContent("Failed to open link: " + e.getMessage(), "red", 0);
         } catch (Exception e) {
             displayErrorAscii();
-            displayColorMessage("Unexpected error: " + e.getMessage(), "red", 0);
+            displayContent("Unexpected error: " + e.getMessage(), "red", 0);
         }
     }
 }

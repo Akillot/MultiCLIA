@@ -48,7 +48,7 @@ public class ThemesWork {
 
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logoLines.length; i++) {
-            displayColorMessage(logoLines[i], colors[i % colors.length], 0);
+            displayContent(logoLines[i], colors[i % colors.length], 0);
         }
     }
 
@@ -66,7 +66,7 @@ public class ThemesWork {
                 "                       o888o               \n"
         };
         for (String line : errorAscii) {
-            displayColorMessage(line, "red", 0);
+            displayContent(line, "red", 0);
         }
     }
 }

@@ -23,7 +23,7 @@ public class MenuPage {
             drawTripleBorder();
             System.out.print("\n");
             displayErrorAscii();
-            displayColorMessage("Command not found\n", "red", 0);
+            displayContent("Command not found\n", "red", 0);
             drawTripleBorder();
             System.out.print("\n");
         }

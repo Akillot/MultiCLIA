@@ -17,7 +17,7 @@ public class BrowserPage {
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {
-                displayColorMessage("Exiting browser...", "red", 58);
+                displayContent("Exiting browser...", "red", 58);
                 System.out.print("\n");
                 drawTripleBorder();
                 System.out.print("\n");
@@ -39,12 +39,12 @@ public class BrowserPage {
                         drawTripleBorder();
                         System.out.print("\n");
                         displayErrorAscii();
-                        displayColorMessage("Failed to open link: " + e.getMessage(), "red", 0);
+                        displayContent("Failed to open link: " + e.getMessage(), "red", 0);
                     }
                     break;
 
                 case "-":
-                    displayColorMessage("Searching canceled\n", "white", 58);
+                    displayContent("Searching canceled\n", "white", 58);
                     break;
 
                 default:
@@ -52,7 +52,7 @@ public class BrowserPage {
                     drawTripleBorder();
                     System.out.print("\n");
                     displayErrorAscii();
-                    displayColorMessage("Invalid input\n", "red", 0);
+                    displayContent("Invalid input\n", "red", 0);
                     break;
             }
         }
