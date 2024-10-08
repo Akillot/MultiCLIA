@@ -23,13 +23,15 @@ public class CommandHandler {
         String[] infoCommands = {"info", "informace", "informationen",
                 "инфо", "информация", "les informations", "l'information", "informations",
                 "información", "informacion", "sona"};
+
+        String[] langsCommands = {"languages", "jazyky", "Sprachen", "sprachen", "языки", "langues",
+                "les langues", "idiomas", "lenguas", "toki"};
         String[] exitCommands = {"exit", "konec", "ausgang", "выход", "sortie", "sortir", "salida", "poka"};
 
         registerMultipleCommands(commandMap, calculatorCommands, CalculatorLayout::calculator);
         registerMultipleCommands(commandMap, basicFunctionsCommands, BasicFunctions::displayListOfMenuCommands);
         registerMultipleCommands(commandMap, timeCommands, TimePage::displayCurrentTime);
         registerMultipleCommands(commandMap, browserCommands, BrowserPage::browser);
-
         registerMultipleCommands(commandMap, infoCommands, () -> {
             try {
                 InfoPage.displayInfo();
@@ -38,6 +40,7 @@ public class CommandHandler {
                 System.err.println("Error displaying info: " + e.getMessage());
             }
         });
+        registerMultipleCommands(commandMap,langsCommands,BasicFunctions::displaySupportedLanguages);
         registerMultipleCommands(commandMap, exitCommands, BasicFunctions::exitMultiClia);
     }
 

@@ -35,7 +35,7 @@ public class TextWork {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayColorMessage("Error, try again", "red", (byte) 0);
+                displayContent("Error, try again", "red", (byte) 0);
             }
         }
         System.out.print("");

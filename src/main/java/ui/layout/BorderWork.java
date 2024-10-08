@@ -7,7 +7,7 @@ public class BorderWork {
     public static final int borderWidth = 62;
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
-    public static void drawHorizontalBorder(int numberOfSymbol) {
+    public static void drawSingleBorder(int numberOfSymbol) {
         System.out.print(symbolsOfBorder[0]);
         for (int i = 0; i < borderWidth; i++) {
             System.out.print(symbolsOfBorder[numberOfSymbol]);
@@ -16,8 +16,8 @@ public class BorderWork {
     }
 
     public static void drawTripleBorder() {
-        drawHorizontalBorder(numberOfSymbols);
+        drawSingleBorder(numberOfSymbols);
         System.out.println(symbolsOfBorder[2] + contentAlignment(-61) + symbolsOfBorder[2]);
-        drawHorizontalBorder(numberOfSymbols);
+        drawSingleBorder(numberOfSymbols);
     }
 }

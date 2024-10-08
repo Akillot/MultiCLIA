@@ -12,7 +12,7 @@ import static ui.layout.TextWork.contentAlignment;
 import static ui.layout.ThemesWork.displayErrorAscii;
 
 public  class InfoPage {
-    public static String version = "A-0.6.1";
+    public static String version = "A-0.6.2";
 
     public static void displayInfo() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
@@ -20,11 +20,11 @@ public  class InfoPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(" dd-MM-yyyy" + " HH:mm");
         String formattedTime = localTime.format(myFormatter);
 
-        displayColorMessage("Current version:", "white", 58);
-        displayColorMessage(version, "purple", 58);
-        displayColorMessage("Author: Nick Zozulia", "white", 58);
-        displayColorMessage("Current time: " + formattedTime, "white", 58);
-        displayColorMessage("Memory used: " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1000 * 1000) + "M"), "white", 58);
+        displayContent("Current version:", "white", 58);
+        displayContent(version, "purple", 58);
+        displayContent("Author: Nick Zozulia", "white", 58);
+        displayContent("Current time: " + formattedTime, "white", 58);
+        displayContent("Memory used: " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1000 * 1000) + "M"), "white", 58);
 
         System.out.print("\n");
         displayTip("Enter '+' to open and '-' to skip", 58);
@@ -40,12 +40,12 @@ public  class InfoPage {
                     drawTripleBorder();
                     System.out.print("\n");
                     displayErrorAscii();
-                    displayColorMessage("Failed to open link: " + e.getMessage(), "red", 0);
+                    displayContent("Failed to open link: " + e.getMessage(), "red", 0);
                 }
                 break;
 
             case "-":
-                displayColorMessage("Alright, next time", "white", 58);
+                displayContent("Alright, next time", "white", 58);
                 break;
 
             default:
@@ -53,7 +53,7 @@ public  class InfoPage {
                 drawTripleBorder();
                 System.out.print("\n");
                 displayErrorAscii();
-                displayColorMessage("Invalid input", "red", 0);
+                displayContent("Invalid input", "red", 0);
                 break;
         }
 

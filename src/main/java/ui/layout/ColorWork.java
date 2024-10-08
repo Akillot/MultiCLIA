@@ -41,7 +41,7 @@ public class ColorWork {
         return colorCode + BOLD + text + RESET;
     }
 
-    public static void displayColorMessage(String text, String colorName, int alignment) {
+    public static void displayContent(String text, String colorName, int alignment) {
         ColorWork.Color color;
         try {
             color = ColorWork.Color.valueOf(colorName.toUpperCase());
@@ -50,7 +50,7 @@ public class ColorWork {
                 color = getRandomColor();
             } else {
                 displayErrorAscii();
-                displayColorMessage("Invalid input", "red", 0);
+                displayContent("Invalid input", "red", 0);
                 return;
             }
         }
@@ -60,7 +60,7 @@ public class ColorWork {
 
         if (alignment < 0) {
             displayErrorAscii();
-            displayColorMessage("Invalid input", "red", 0);
+            displayContent("Invalid input", "red", 0);
         } else {
             System.out.println(contentAlignment(alignLength) + coloredText);
         }
