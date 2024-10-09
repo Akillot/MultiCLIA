@@ -2,9 +2,9 @@ package ui.layout;
 
 import java.util.Random;
 
-import static ui.layout.ColorWork.*;
+import static ui.layout.ColorFunc.*;
 
-public class ThemesWork {
+public class ThemesFunc {
     private static final String[] COLORS = {"red", "blue", "green", "yellow", "purple", "cyan", "magenta", "white"};
 
     public static void displayLogo() {
@@ -27,8 +27,8 @@ public class ThemesWork {
         }
     }
 
-    // Метод для отображения логотипа с переданными цветами
-    public static void logo(String color1, String color2, String color3, String color4, String color5, String color6) {
+    public static void logo(String color1, String color2, String color3,
+                            String color4, String color5, String color6) {
         String[] logoLines = {
                 "ooo        ooooo             oooo      .    o8o  ",
                 "`88.       .888'             `888    .o8    `\"'  ",

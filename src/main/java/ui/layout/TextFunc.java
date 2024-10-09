@@ -1,10 +1,10 @@
 package ui.layout;
 
-import static ui.layout.BorderWork.borderWidth;
-import static ui.layout.BorderWork.drawTripleBorder;
-import static ui.layout.ColorWork.*;
+import static ui.layout.BorderFunc.borderWidth;
+import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.ColorFunc.*;
 
-public class TextWork {
+public class TextFunc {
 
     public static void wrapText(String text, int width) {
         for (int i = 0; i < text.length(); i += width) {

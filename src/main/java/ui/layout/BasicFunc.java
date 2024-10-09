@@ -6,12 +6,12 @@ import java.net.URISyntaxException;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static ui.layout.BorderWork.drawTripleBorder;
-import static ui.layout.ColorWork.*;
-import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.ColorFunc.*;
+import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
-public class BasicFunctions {
+public class BasicFunc {
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -22,7 +22,7 @@ public class BasicFunctions {
     }
 
     public static void displaySupportedLanguages(){
-        String[] langs = new String[]{"· En", "· Cz", "· De", "· Ru", "· Fr", "· Es", "· tok"};
+        String[] langs = new String[]{"· English", "· Čeština", "· Deutsch", "· Русский", "· Français", "· Español", "· Toki Pona"};
         for(String lang : langs){
             displayContent(lang,"white", 58);
         }
@@ -44,7 +44,7 @@ public class BasicFunctions {
     }
 
     public static void exitApp() {
-        displayExitMessage(contentAlignment(18) + RED + BOLD + "Application exit" + RESET, 150);
+        displayExitMessage(contentAlignment(18) + RED + BOLD + "Application exit" + RESET, 100);
         System.out.println(RED + "...\n" + RESET);
         drawTripleBorder();
         System.out.print("\n");
@@ -52,7 +52,7 @@ public class BasicFunctions {
 
     public static void exitMultiClia() {
         System.out.print("\n");
-        displayExitMessage(contentAlignment(58) + RED + "Program exit" + RESET, 150);
+        displayExitMessage(contentAlignment(58) + RED + "Program exit" + RESET, 100);
         System.out.println(RED + "..." + RESET);
         System.exit(0);
     }
@@ -62,9 +62,10 @@ public class BasicFunctions {
     }
 
     public static void displayListOfMenuCommands() {
-        String[] commands = {"calculator", "browser", "settings", "commands", "info", "languages" , RED + "exit" + RESET};
+        String[] commands = {"calculator", "browser", "notepad", "languages", "commands", "info", "languages" ,BOLD + RED + "exit" + RESET};
         for (String command : commands) {
-            System.out.println(contentAlignment(58) + "· " + command);
+            displayContent("· " + command, "white", 58);
+            //System.out.println(contentAlignment(58) + "· " + command);
         }
         drawTripleBorder();
         System.out.print("\n");

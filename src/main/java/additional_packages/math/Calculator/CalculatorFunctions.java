@@ -1,12 +1,12 @@
-package additional_packages.math;
+package additional_packages.math.Calculator;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import static ui.layout.BasicFunctions.exitApp;
-import static ui.layout.ColorWork.*;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static ui.layout.BasicFunc.exitApp;
+import static ui.layout.ColorFunc.*;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class CalculatorFunctions {
     public static void calculateOperation(String mathStatement) {

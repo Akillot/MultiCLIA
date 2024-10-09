@@ -1,10 +1,10 @@
 
-import static ui.layout.BasicFunctions.displayTip;
-import static ui.layout.BorderWork.drawTripleBorder;
-import static ui.layout.ColorWork.displayContent;
-import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ThemesWork.displayErrorAscii;
-import static ui.layout.ThemesWork.displayLogo;
+import static ui.layout.BasicFunc.displayTip;
+import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.ColorFunc.displayContent;
+import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.ThemesFunc.displayErrorAscii;
+import static ui.layout.ThemesFunc.displayLogo;
 import static ui.pages.InfoPage.version;
 import static ui.pages.MenuPage.displayMainMenuUi;
 
@@ -28,7 +28,7 @@ public class Launcher {
                     displayMainMenuUi();
                 } catch (Exception ex) {
                     displayErrorAscii();
-                    System.out.println("Error: " + ex.getMessage());
+                    displayContent("Error: " + ex.getMessage(), "red", 0);
                 }
             }
         }

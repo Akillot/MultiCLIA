@@ -4,22 +4,22 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static ui.layout.BasicFunctions.displayTip;
-import static ui.layout.BasicFunctions.openSite;
-import static ui.layout.BorderWork.drawTripleBorder;
-import static ui.layout.ColorWork.*;
-import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static ui.layout.BasicFunc.displayTip;
+import static ui.layout.BasicFunc.openSite;
+import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.ColorFunc.*;
+import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public  class InfoPage {
-    public static String version = "A-0.6.2";
+    public static String version = "A-0.6.3";
 
     public static void displayInfo() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(" dd-MM-yyyy" + " HH:mm");
         String formattedTime = localTime.format(myFormatter);
-
+        System.out.println("\n");
         displayContent("Current version:", "white", 58);
         displayContent(version, "purple", 58);
         displayContent("Author: Nick Zozulia", "white", 58);

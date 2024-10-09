@@ -1,8 +1,8 @@
 package ui.layout;
 
-import static ui.layout.TextWork.contentAlignment;
+import static ui.layout.TextFunc.contentAlignment;
 
-public class BorderWork {
+public class BorderFunc {
     public static int numberOfSymbols = 1;
     public static final int borderWidth = 62;
     public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
