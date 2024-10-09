@@ -62,7 +62,7 @@ public class BasicFunc {
     }
 
     public static void displayListOfMenuCommands() {
-        String[] commands = {"calculator", "browser", "notepad", "languages", "commands", "info", "languages" ,BOLD + RED + "exit" + RESET};
+        String[] commands = {"calculator", "browser", "notepad", "commands", "info", "languages" ,BOLD + RED + "exit" + RESET};
         for (String command : commands) {
             displayContent("· " + command, "white", 58);
             //System.out.println(contentAlignment(58) + "· " + command);
