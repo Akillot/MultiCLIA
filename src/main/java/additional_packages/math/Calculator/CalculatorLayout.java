@@ -1,13 +1,13 @@
-package additional_packages.math;
+package additional_packages.math.Calculator;
 
 import java.util.Scanner;
 
-import static additional_packages.math.CalculatorFunctions.*;
-import static ui.layout.BasicFunctions.displayTip;
-import static ui.layout.BorderWork.*;
-import static ui.layout.ColorWork.*;
-import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static additional_packages.math.Calculator.CalculatorFunctions.*;
+import static ui.layout.BasicFunc.displayTip;
+import static ui.layout.BorderFunc.*;
+import static ui.layout.ColorFunc.*;
+import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class CalculatorLayout {
     public static void calculator() {

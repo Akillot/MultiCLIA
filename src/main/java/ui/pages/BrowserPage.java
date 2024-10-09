@@ -1,11 +1,11 @@
 package ui.pages;
 
-import static ui.layout.BasicFunctions.*;
-import static ui.layout.BorderWork.drawTripleBorder;
-import static ui.layout.ColorWork.*;
-import static ui.layout.ColorWork.RESET;
-import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static ui.layout.BasicFunc.*;
+import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.ColorFunc.*;
+import static ui.layout.ColorFunc.RESET;
+import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class BrowserPage {
     public static void browser() {

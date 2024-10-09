@@ -3,8 +3,8 @@ package ui.pages;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static ui.layout.ColorWork.displayContent;
-import static ui.layout.BorderWork.drawTripleBorder;
+import static ui.layout.ColorFunc.displayContent;
+import static ui.layout.BorderFunc.drawTripleBorder;
 
 public class TimePage {
     public static void displayCurrentTime() {

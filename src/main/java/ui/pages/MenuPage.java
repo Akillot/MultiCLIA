@@ -2,11 +2,11 @@ package ui.pages;
 
 import commands_language_packages.PackageUnifier;
 
-import static ui.layout.BasicFunctions.*;
-import static ui.layout.BorderWork.*;
-import static ui.layout.ColorWork.*;
-import static ui.layout.TextWork.*;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static ui.layout.BasicFunc.*;
+import static ui.layout.BorderFunc.*;
+import static ui.layout.ColorFunc.*;
+import static ui.layout.TextFunc.*;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class MenuPage {
     public static String nameOfFunction = "";

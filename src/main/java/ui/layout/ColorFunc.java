@@ -2,10 +2,10 @@ package ui.layout;
 
 import java.util.Random;
 
-import static ui.layout.TextWork.contentAlignment;
-import static ui.layout.ThemesWork.displayErrorAscii;
+import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.ThemesFunc.displayErrorAscii;
 
-public class ColorWork {
+public class ColorFunc {
 
     public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
@@ -20,10 +20,10 @@ public class ColorWork {
     public static final String BOLD = "\033[1m";
     public static final String UNDERLINE = "\033[4m";
 
-    static ColorWork.Color getRandomColor() {
+    static ColorFunc.Color getRandomColor() {
         Random rand = new Random();
-        int randomColorIndex = rand.nextInt(ColorWork.Color.values().length);
-        return ColorWork.Color.values()[randomColorIndex];
+        int randomColorIndex = rand.nextInt(ColorFunc.Color.values().length);
+        return ColorFunc.Color.values()[randomColorIndex];
     }
 
     static String getColoredText(String text, Color color) {
@@ -42,9 +42,9 @@ public class ColorWork {
     }
 
     public static void displayContent(String text, String colorName, int alignment) {
-        ColorWork.Color color;
+        ColorFunc.Color color;
         try {
-            color = ColorWork.Color.valueOf(colorName.toUpperCase());
+            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
         } catch (IllegalArgumentException e) {
             if (colorName.equalsIgnoreCase("randomly")) {
                 color = getRandomColor();
