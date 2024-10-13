@@ -1,7 +1,7 @@
 
 import static ui.layout.BasicFunc.displayTip;
 import static ui.layout.BorderFunc.drawTripleBorder;
-import static ui.layout.ColorFunc.displayContent;
+import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.contentAlignment;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 import static ui.layout.ThemesFunc.displayLogo;
@@ -18,7 +18,7 @@ public class Launcher {
         displayContent("--------------------", "white", 58);
         displayContent("Version: " + version, "white", 58);
         displayContent("--------------------", "white", 58);
-        displayTip("Enter 'commands'\n"
+        displayTip("Enter " + "'" + BOLD + PURPLE + "commands" + RESET + "'\n"
                 + contentAlignment(58) + "to show list of\n"
                 + contentAlignment(58) + "commands", 58);
         displayContent("--------------------", "white", 58);

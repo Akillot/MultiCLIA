@@ -1,4 +1,4 @@
-package additional_packages.math.Calculator;
+package additional_packages.math;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

@@ -1,4 +1,4 @@
-package additional_packages.Notepad;
+package additional_packages.notepad;
 
 import java.util.Scanner;
 
@@ -44,12 +44,6 @@ public class NotepadLayout {
                     exitApp();
                     running = false;
                     break;
-                default:
-                    System.out.println("\n");
-                    drawTripleBorder();
-                    System.out.println("\n");
-                    displayErrorAscii();
-                    displayContent("Error, try again", "red", 0);
             }
         }
     }
@@ -92,6 +86,9 @@ public class NotepadLayout {
                 String newContent = scanner.nextLine();
                 note.setContent(newContent);
                 note.saveToFile();
+
+                System.out.print("\n");
+                drawTripleBorder();
                 displayContent("Note updated", "purple", 58);
                 System.out.print("\n");
                 drawTripleBorder();

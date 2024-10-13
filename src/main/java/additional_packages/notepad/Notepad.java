@@ -1,4 +1,4 @@
-package additional_packages.Notepad;
+package additional_packages.notepad;
 
 import java.io.*;
 

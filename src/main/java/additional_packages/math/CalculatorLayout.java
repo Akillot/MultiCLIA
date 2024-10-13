@@ -1,8 +1,8 @@
-package additional_packages.math.Calculator;
+package additional_packages.math;
 
 import java.util.Scanner;
 
-import static additional_packages.math.Calculator.CalculatorFunctions.*;
+import static additional_packages.math.CalculatorFunctions.*;
 import static ui.layout.BasicFunc.displayTip;
 import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;

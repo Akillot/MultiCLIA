@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static commands_language_packages.CommandHandler.*;
 import static ui.layout.BorderFunc.drawTripleBorder;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.contentAlignment;
@@ -21,8 +22,11 @@ public class BasicFunc {
                 + BOLD + "] " + text + RESET);
     }
 
-    public static void displaySupportedLanguages(){
-        String[] langs = new String[]{"· English", "· Čeština", "· Deutsch", "· Русский", "· Français", "· Español", "· Toki Pona"};
+    public static void displayLangs(){
+        String[] langs = new String[]{
+                "· English", "· Čeština", "· Deutsch",
+                "· Русский", "· Français", "· Español",
+                "· Toki Pona"};
         for(String lang : langs){
             displayContent(lang,"white", 58);
         }
@@ -30,6 +34,32 @@ public class BasicFunc {
         drawTripleBorder();
         System.out.print("\n");
     }
+
+    public static void displayAllLangCommands() {
+        String[][] commandPacks = {
+                calculatorCommands, basicFunctionsCommands, timeCommands,
+                browserCommands, infoCommands, notepadCommands, langsCommands,
+                exitCommands, allLangCommands
+        };
+
+        for (String[] commandPack : commandPacks) {
+            for (int i = 0; i < commandPack.length; i++) {
+                if (i == 0) {
+                    displayContent(commandPack[i], "purple", 58);
+                } else {
+                    displayContent(commandPack[i], "white", 58);
+                }
+            }
+            System.out.print("\n");
+            displayContent("--------------------", "white", 58);
+            System.out.print("\n");
+        }
+
+        System.out.print("\n");
+        drawTripleBorder();
+        System.out.print("\n");
+    }
+
 
     private static void displayExitText(String exitText, int delay) {
         for (char ch : exitText.toCharArray()) {
@@ -44,7 +74,7 @@ public class BasicFunc {
     }
 
     public static void exitApp() {
-        displayExitMessage(contentAlignment(18) + RED + BOLD + "Application exit" + RESET, 100);
+        displayExitMessage(contentAlignment(58) + RED + BOLD + "Application exit" + RESET);
         System.out.println(RED + "...\n" + RESET);
         drawTripleBorder();
         System.out.print("\n");
@@ -52,20 +82,19 @@ public class BasicFunc {
 
     public static void exitMultiClia() {
         System.out.print("\n");
-        displayExitMessage(contentAlignment(58) + RED + "Program exit" + RESET, 100);
+        displayExitMessage(contentAlignment(58) + RED + "Program exit" + RESET);
         System.out.println(RED + "..." + RESET);
         System.exit(0);
     }
 
-    private static void displayExitMessage(String message, int delay) {
-        displayExitText(message, delay);
+    private static void displayExitMessage(String message) {
+        displayExitText(message, 100);
     }
 
     public static void displayListOfMenuCommands() {
         String[] commands = {"calculator", "browser", "notepad", "commands", "info", "languages" ,BOLD + RED + "exit" + RESET};
         for (String command : commands) {
             displayContent("· " + command, "white", 58);
-            //System.out.println(contentAlignment(58) + "· " + command);
         }
         drawTripleBorder();
         System.out.print("\n");
