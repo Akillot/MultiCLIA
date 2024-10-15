@@ -1,7 +1,7 @@
 package ui.pages;
 
 import static ui.layout.BasicFunc.*;
-import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.ColorFunc.RESET;
 import static ui.layout.TextFunc.contentAlignment;
@@ -18,9 +18,7 @@ public class BrowserPage {
 
             if (domainInput.equals("exit")) {
                 displayContent("Exiting browser...", "red", 58);
-                System.out.print("\n");
-                drawTripleBorder();
-                System.out.print("\n");
+                displayMarginBigBorder();
                 break;
             }
 
@@ -35,9 +33,7 @@ public class BrowserPage {
                     try {
                         openSite(domain);
                     } catch (Exception e) {
-                        System.out.print("\n");
-                        drawTripleBorder();
-                        System.out.print("\n");
+                        displayMarginBigBorder();
                         displayErrorAscii();
                         displayContent("Failed to open link: " + e.getMessage(), "red", 0);
                     }
@@ -48,9 +44,7 @@ public class BrowserPage {
                     break;
 
                 default:
-                    System.out.print("\n");
-                    drawTripleBorder();
-                    System.out.print("\n");
+                    displayMarginBigBorder();
                     displayErrorAscii();
                     displayContent("Invalid input\n", "red", 0);
                     break;

@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 import static ui.layout.BasicFunc.displayTip;
 import static ui.layout.BasicFunc.openSite;
-import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.contentAlignment;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public  class InfoPage {
-    public static String version = "A-0.6.3";
+    public static String version = "A-0.6.4";
 
     public static void displayInfo() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
@@ -36,9 +36,7 @@ public  class InfoPage {
                 try {
                     openSite("https://github.com/Akillot/MultiCLIA");
                 } catch (Exception e) {
-                    System.out.print("\n");
-                    drawTripleBorder();
-                    System.out.print("\n");
+                    displayMarginBigBorder();
                     displayErrorAscii();
                     displayContent("Failed to open link: " + e.getMessage(), "red", 0);
                 }
@@ -49,16 +47,11 @@ public  class InfoPage {
                 break;
 
             default:
-                System.out.print("\n");
-                drawTripleBorder();
-                System.out.print("\n");
+                displayMarginBigBorder();
                 displayErrorAscii();
                 displayContent("Invalid input", "red", 0);
                 break;
         }
-
-        System.out.print("\n");
-        drawTripleBorder();
-        System.out.print("\n");
+        displayMarginBigBorder();
     }
 }

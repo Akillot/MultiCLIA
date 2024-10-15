@@ -5,7 +5,10 @@ import java.util.Random;
 import static ui.layout.ColorFunc.*;
 
 public class ThemesFunc {
-    private static final String[] COLORS = {"red", "blue", "green", "yellow", "purple", "cyan", "magenta", "white"};
+    private static final String[] COLORS = {
+            "red", "blue", "green",
+            "yellow", "purple", "cyan",
+            "magenta", "white"};
 
     public static void displayLogo() {
         Random rand = new Random();
@@ -20,7 +23,7 @@ public class ThemesFunc {
             case 5 -> logo(COLORS[1], COLORS[5], COLORS[5], COLORS[1], COLORS[1], COLORS[5]);
             case 6 -> logo(COLORS[7], COLORS[4], COLORS[0], COLORS[4], COLORS[7], COLORS[7]);
             case 7 -> logo(COLORS[5], COLORS[7], COLORS[5], COLORS[5], COLORS[7], COLORS[5]);
-            case 8 -> logo(COLORS[1], COLORS[3], COLORS[7], COLORS[1], COLORS[1], COLORS[3]);
+            case 8 -> logo(COLORS[1], COLORS[4], COLORS[7], COLORS[1], COLORS[1], COLORS[4]);
             case 9 -> logo(COLORS[1], COLORS[1], COLORS[0], COLORS[1], COLORS[7], COLORS[0]);
             case 10 -> logo(COLORS[5], COLORS[7], COLORS[5], COLORS[6], COLORS[5], COLORS[6]);
             default -> logo(COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2]);

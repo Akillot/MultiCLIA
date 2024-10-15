@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import static ui.layout.BasicFunc.displayTip;
 import static ui.layout.BasicFunc.exitApp;
-import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.BorderFunc.displayBigBorder;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.contentAlignment;
 import static ui.layout.TextFunc.displaySlowMotionText;
@@ -58,11 +58,11 @@ public class NotepadLayout {
         Notepad note = new Notepad(title, content);
         note.saveToFile();
         System.out.print("\n");
-        drawTripleBorder();
+        displayBigBorder();
         System.out.print("\n");
         displayContent("Note saved", "purple", 58);
         System.out.print("\n");
-        drawTripleBorder();
+        displayBigBorder();
     }
 
     // Opening and editing a note
@@ -74,7 +74,7 @@ public class NotepadLayout {
         if (note != null) {
             displayContent("Content: ", "white", 58);
             System.out.println(note.getContent());
-            drawTripleBorder();
+            displayBigBorder();
             System.out.print("\n");
 
             displayTip("Do you want to update this note? [+/-]", 58);
@@ -88,20 +88,20 @@ public class NotepadLayout {
                 note.saveToFile();
 
                 System.out.print("\n");
-                drawTripleBorder();
+                displayBigBorder();
                 displayContent("Note updated", "purple", 58);
                 System.out.print("\n");
-                drawTripleBorder();
+                displayBigBorder();
             }
             else if(answer.equals("-")) {
                 System.out.print("\n");
                 displayContent("Opening canceled", "purple", 58);
                 System.out.print("\n");
-                drawTripleBorder();
+                displayBigBorder();
             }
         } else {
             System.out.println("\n");
-            drawTripleBorder();
+            displayBigBorder();
             System.out.println("\n");
             displayErrorAscii();
             displayContent("Note not found", "red", 0);
@@ -116,10 +116,10 @@ public class NotepadLayout {
         if (success) {
             displayContent("Note deleted", "purple", 58);
             System.out.print("\n");
-            drawTripleBorder();
+            displayBigBorder();
         } else {
             System.out.println("\n");
-            drawTripleBorder();
+            displayBigBorder();
             System.out.println("\n");
             displayErrorAscii();
             displayContent("Note not found", "red", 0);

@@ -2,7 +2,7 @@ package additional_packages.notepad;
 
 import java.io.*;
 
-import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.BorderFunc.displayBigBorder;
 import static ui.layout.ColorFunc.displayContent;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
@@ -37,7 +37,7 @@ public class Notepad {
         }
         catch(Exception e){
             System.out.println("\n");
-            drawTripleBorder();
+            displayBigBorder();
             System.out.println("\n");
             displayErrorAscii();
             displayContent("Error, try again", "red", 0);

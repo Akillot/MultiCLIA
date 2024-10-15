@@ -4,10 +4,13 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static commands_language_packages.CommandHandler.*;
-import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.contentAlignment;
 import static ui.layout.ThemesFunc.displayErrorAscii;
@@ -30,9 +33,7 @@ public class BasicFunc {
         for(String lang : langs){
             displayContent(lang,"white", 58);
         }
-        System.out.print("\n");
-        drawTripleBorder();
-        System.out.print("\n");
+        displayMarginBigBorder();
     }
 
     public static void displayAllLangCommands() {
@@ -42,23 +43,28 @@ public class BasicFunc {
                 exitCommands, allLangCommands
         };
 
-        for (String[] commandPack : commandPacks) {
+        for (int packIndex = 0; packIndex < commandPacks.length; packIndex++) {
+            String[] commandPack = commandPacks[packIndex];
+
+            // Выводим все команды в текущем пакете
             for (int i = 0; i < commandPack.length; i++) {
                 if (i == 0) {
-                    displayContent(commandPack[i], "purple", 58);
+                    displayContent(commandPack[i], "purple", 58); // Первая команда выделена цветом
                 } else {
-                    displayContent(commandPack[i], "white", 58);
+                    displayContent(commandPack[i], "white", 58);  // Остальные команды
                 }
             }
-            System.out.print("\n");
-            displayContent("--------------------", "white", 58);
-            System.out.print("\n");
+
+            if (packIndex < commandPacks.length - 1) {
+                System.out.print("\n");
+                displayContent("--------------------", "white", 58); // Разделяющая строка
+                System.out.print("\n");
+            }
         }
 
-        System.out.print("\n");
-        drawTripleBorder();
-        System.out.print("\n");
+        displayMarginBigBorder(); // Вывод нижней границы или отступа
     }
+
 
 
     private static void displayExitText(String exitText, int delay) {
@@ -76,7 +82,7 @@ public class BasicFunc {
     public static void exitApp() {
         displayExitMessage(contentAlignment(58) + RED + BOLD + "Application exit" + RESET);
         System.out.println(RED + "...\n" + RESET);
-        drawTripleBorder();
+        displayBigBorder();
         System.out.print("\n");
     }
 
@@ -96,7 +102,7 @@ public class BasicFunc {
         for (String command : commands) {
             displayContent("· " + command, "white", 58);
         }
-        drawTripleBorder();
+        displayBigBorder();
         System.out.print("\n");
     }
 
@@ -108,17 +114,33 @@ public class BasicFunc {
                 System.out.println("\r   Opened in browser\n");
             } else {
                 displayErrorAscii();
-                System.out.println("Browsing action not supported. Please manually open the link: " + userSite);
+                displayContent("Browsing action not supported. " +
+                        "Please manually open the link: " + userSite, "red", 0);
             }
         } catch (URISyntaxException | IOException e) {
-            System.out.print("\n");
-            drawTripleBorder();
-            System.out.print("\n");
+            displayMarginBigBorder();
             displayErrorAscii();
             displayContent("Failed to open link: " + e.getMessage(), "red", 0);
         } catch (Exception e) {
             displayErrorAscii();
             displayContent("Unexpected error: " + e.getMessage(), "red", 0);
         }
+    }
+
+    //In progress
+    public static void activityDetection(){
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                displayMarginBigBorder();
+                displayTip("Press any key to unfreeze the app", 58);
+                System.out.print(BOLD + WHITE + "Your choice: " + RESET);
+                String choice = scanner.nextLine();
+                if(choice.equalsIgnoreCase(" ")){}
+                displayMarginBigBorder();
+            }
+        };
+        timer.schedule(timerTask, 30000);
     }
 }

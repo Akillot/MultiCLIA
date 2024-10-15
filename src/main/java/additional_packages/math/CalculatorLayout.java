@@ -22,18 +22,18 @@ public class CalculatorLayout {
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    drawTripleBorder();
+                    displayBigBorder();
                     displayContent("No numbers entered", "red", 18);
                     continue;
                 }
                 System.out.println("\n");
-                drawTripleBorder();
+                displayBigBorder();
                 calculateOperation(mathStatementString);
-                drawTripleBorder();
+                displayBigBorder();
 
                 System.out.print(contentAlignment(58) + BOLD + WHITE + "Your choice is: " + RESET);
 
-                drawTripleBorder();
+                displayBigBorder();
             }
             catch (Exception ex) {
                 displayErrorAscii();

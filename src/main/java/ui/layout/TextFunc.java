@@ -1,7 +1,7 @@
 package ui.layout;
 
 import static ui.layout.BorderFunc.borderWidth;
-import static ui.layout.BorderFunc.drawTripleBorder;
+import static ui.layout.BorderFunc.displayBigBorder;
 import static ui.layout.ColorFunc.*;
 
 public class TextFunc {
@@ -10,7 +10,7 @@ public class TextFunc {
         for (int i = 0; i < text.length(); i += width) {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
-                drawTripleBorder();
+                displayBigBorder();
                 System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();
