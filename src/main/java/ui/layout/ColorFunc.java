@@ -42,9 +42,9 @@ public class ColorFunc {
         RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, MAGENTA, RESET
     }
 
-    public enum Color_Background {
+   /* public enum Color_Background {
         Red_Background, Yellow_Background, Green_Background,
         Blue_Background, Purple_Background, Cyan_Background,
         Magenta_Background, Black_Background
-    }
+    }*/
 }

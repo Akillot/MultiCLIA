@@ -3,7 +3,6 @@ package ui.layout;
 import java.util.Random;
 
 import static ui.layout.BasicFunc.displayContent;
-import static ui.layout.ColorFunc.*;
 
 public class ThemesFunc {
     private static final String[] COLORS = {

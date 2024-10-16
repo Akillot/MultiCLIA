@@ -8,8 +8,6 @@ import static ui.layout.TextFunc.*;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class MenuPage {
-    public static String nameOfFunction = "";
-
     public static void displayMainMenuUi() {
         PackageUnifier registry = new PackageUnifier();
         displaySlowMotionText(100, 58, true, "Search", ": ");

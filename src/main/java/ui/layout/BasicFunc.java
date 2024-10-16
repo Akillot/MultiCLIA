@@ -5,8 +5,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+//import java.util.Timer;
+//import java.util.TimerTask;
 
 import static commands_language_packages.CommandHandler.*;
 import static ui.layout.BorderFunc.*;
@@ -155,7 +155,7 @@ public class BasicFunc {
     }
 
     //In progress
-    public static void activityDetection(){
+    /*public static void activityDetection(){
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -170,4 +170,5 @@ public class BasicFunc {
         };
         timer.schedule(timerTask, 30000);
     }
+     */
 }
