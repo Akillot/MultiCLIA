@@ -4,7 +4,7 @@ import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.alignmentLogic;
 import static ui.layout.ThemesFunc.*;
-        import static ui.pages.InfoPage.version;
+import static ui.pages.InfoPage.version;
 import static ui.pages.MenuPage.displayMainMenuUi;
 
 public class Launcher {
