@@ -4,8 +4,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.BasicFunc.exitApp;
-import static ui.layout.ColorFunc.*;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class CalculatorFunctions {

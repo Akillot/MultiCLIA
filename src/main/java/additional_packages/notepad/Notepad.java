@@ -2,8 +2,8 @@ package additional_packages.notepad;
 
 import java.io.*;
 
+import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.BorderFunc.displayBigBorder;
-import static ui.layout.ColorFunc.displayContent;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class Notepad {

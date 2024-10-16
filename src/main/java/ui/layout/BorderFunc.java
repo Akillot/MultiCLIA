@@ -1,6 +1,6 @@
 package ui.layout;
 
-import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.TextFunc.alignmentLogic;
 
 public class BorderFunc {
     public static int numberOfSymbols = 1;
@@ -17,7 +17,7 @@ public class BorderFunc {
 
     public static void displayBigBorder() {
         displaySmallBorder(numberOfSymbols);
-        System.out.println(symbolsOfBorder[2] + contentAlignment(-61) + symbolsOfBorder[2]);
+        System.out.println(symbolsOfBorder[2] + alignmentLogic(-61) + symbolsOfBorder[2]);
         displaySmallBorder(numberOfSymbols);
     }
 

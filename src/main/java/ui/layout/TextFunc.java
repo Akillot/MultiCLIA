@@ -1,22 +1,24 @@
 package ui.layout;
 
-import static ui.layout.BorderFunc.borderWidth;
-import static ui.layout.BorderFunc.displayBigBorder;
+import static ui.layout.BasicFunc.displayContent;
+import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
 
 public class TextFunc {
+
+    public static int alignment;
 
     public static void wrapText(String text, int width) {
         for (int i = 0; i < text.length(); i += width) {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
                 displayBigBorder();
-                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                System.out.print(BOLD + alignmentLogic(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();
                 }
             } else {
-                System.out.print(BOLD + contentAlignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                System.out.print(BOLD + alignmentLogic(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();
                 }
@@ -26,7 +28,8 @@ public class TextFunc {
     }
 
     public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive, String mainText, String additionalText) {
-        String formattedText = contentAlignment(alignment) +
+        TextFunc.alignment = alignment;
+        String formattedText = alignmentLogic(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
                 BOLD + mainText + RESET + additionalText;
 
@@ -41,7 +44,7 @@ public class TextFunc {
         System.out.print("");
     }
 
-    public static String contentAlignment(int widthOfElement) {
+    public static String alignmentLogic(int widthOfElement) {
         int fullWidth = borderWidth + 2;
         int oneSide = (fullWidth - widthOfElement) / 2;
         return " ".repeat(Math.max(0, oneSide));

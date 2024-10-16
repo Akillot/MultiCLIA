@@ -4,11 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static ui.layout.BasicFunc.displayTip;
-import static ui.layout.BasicFunc.openSite;
+import static ui.layout.BasicFunc.*;
 import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
-import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.TextFunc.alignmentLogic;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public  class InfoPage {
@@ -28,7 +27,7 @@ public  class InfoPage {
 
         System.out.print("\n");
         displayTip("Enter '+' to open and '-' to skip", 58);
-        System.out.print(contentAlignment(58) + WHITE + BOLD + "Github: " + RESET);
+        System.out.print(alignmentLogic(58) + WHITE + BOLD + "Github: " + RESET);
         String choice = scanner.nextLine().toLowerCase();
 
         switch (choice) {

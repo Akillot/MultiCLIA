@@ -1,8 +1,9 @@
 
+import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.BasicFunc.displayTip;
 import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
-import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.TextFunc.alignmentLogic;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 import static ui.layout.ThemesFunc.displayLogo;
 import static ui.pages.InfoPage.version;
@@ -18,8 +19,8 @@ public class Launcher {
         displayContent("Version: " + version, "white", 58);
         displayContent("--------------------", "white", 58);
         displayTip("Enter " + "'" + BOLD + PURPLE + "commands" + RESET + "'\n"
-                + contentAlignment(58) + "to show list of\n"
-                + contentAlignment(58) + "commands", 58);
+                + alignmentLogic(58) + "to show list of\n"
+                + alignmentLogic(58) + "commands", 58);
         displayContent("--------------------", "white", 58);
         System.out.println();
             while(true) {

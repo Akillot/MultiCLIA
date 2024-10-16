@@ -3,10 +3,11 @@ package additional_packages.math;
 import java.util.Scanner;
 
 import static additional_packages.math.CalculatorFunctions.*;
+import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.BasicFunc.displayTip;
 import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
-import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.TextFunc.alignmentLogic;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class CalculatorLayout {
@@ -16,9 +17,9 @@ public class CalculatorLayout {
             try {
                 System.out.println("\n");
                 displayContent("--------------------", "white", 58);
-                displayTip( "Enter numbers\n" + contentAlignment(58) + "to calculate", 58);
+                displayTip( "Enter numbers\n" + alignmentLogic(58) + "to calculate", 58);
                 displayContent("--------------------", "white", 58);
-                System.out.print(contentAlignment(58) + BOLD + WHITE + "Input: " + RESET);
+                System.out.print(alignmentLogic(58) + BOLD + WHITE + "Input: " + RESET);
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
@@ -31,13 +32,13 @@ public class CalculatorLayout {
                 calculateOperation(mathStatementString);
                 displayBigBorder();
 
-                System.out.print(contentAlignment(58) + BOLD + WHITE + "Your choice is: " + RESET);
+                System.out.print(alignmentLogic(58) + BOLD + WHITE + "Your choice is: " + RESET);
 
                 displayBigBorder();
             }
             catch (Exception ex) {
                 displayErrorAscii();
-                displayContent("Error: " + ex.getMessage(), "red", (byte) 0);
+                displayContent("Error: " + ex.getMessage(), "red", 0);
             }
         }
     }

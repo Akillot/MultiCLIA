@@ -2,9 +2,6 @@ package ui.layout;
 
 import java.util.Random;
 
-import static ui.layout.TextFunc.contentAlignment;
-import static ui.layout.ThemesFunc.displayErrorAscii;
-
 public class ColorFunc {
 
     public static final String WHITE = "\033[0;38m";
@@ -39,31 +36,6 @@ public class ColorFunc {
             case RESET -> RESET;
         };
         return colorCode + BOLD + text + RESET;
-    }
-
-    public static void displayContent(String text, String colorName, int alignment) {
-        ColorFunc.Color color;
-        try {
-            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                displayErrorAscii();
-                displayContent("Invalid input", "red", 0);
-                return;
-            }
-        }
-
-        String coloredText = getColoredText(text, color);
-        int alignLength = alignment == 0 ? text.length() : alignment;
-
-        if (alignment < 0) {
-            displayErrorAscii();
-            displayContent("Invalid input", "red", 0);
-        } else {
-            System.out.println(contentAlignment(alignLength) + coloredText);
-        }
     }
 
     public enum Color {

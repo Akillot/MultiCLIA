@@ -4,7 +4,6 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,7 +11,7 @@ import java.util.TimerTask;
 import static commands_language_packages.CommandHandler.*;
 import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
-import static ui.layout.TextFunc.contentAlignment;
+import static ui.layout.TextFunc.alignmentLogic;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class BasicFunc {
@@ -20,12 +19,14 @@ public class BasicFunc {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void displayTip(String text, int alignment) {
-        System.out.println(contentAlignment(alignment) + BOLD
+        System.out.println(alignmentLogic(alignment) + BOLD
                 + "[" + WHITE + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
     }
 
     public static void displayLangs(){
+        System.out.print("\n");
+        System.out.print("\n");
         String[] langs = new String[]{
                 "· English", "· Čeština", "· Deutsch",
                 "· Русский", "· Français", "· Español",
@@ -42,36 +43,32 @@ public class BasicFunc {
                 browserCommands, infoCommands, notepadCommands, langsCommands,
                 exitCommands, allLangCommands
         };
-
+        System.out.print("\n");
+        System.out.print("\n");
         for (int packIndex = 0; packIndex < commandPacks.length; packIndex++) {
             String[] commandPack = commandPacks[packIndex];
-
-            // Выводим все команды в текущем пакете
             for (int i = 0; i < commandPack.length; i++) {
                 if (i == 0) {
-                    displayContent(commandPack[i], "purple", 58); // Первая команда выделена цветом
+                    displayContent(commandPack[i], "purple", 58);
                 } else {
-                    displayContent(commandPack[i], "white", 58);  // Остальные команды
+                    displayContent(commandPack[i], "white", 58);
                 }
             }
 
             if (packIndex < commandPacks.length - 1) {
                 System.out.print("\n");
-                displayContent("--------------------", "white", 58); // Разделяющая строка
+                displayContent("--------------------", "white", 58);
                 System.out.print("\n");
             }
         }
-
-        displayMarginBigBorder(); // Вывод нижней границы или отступа
+        displayMarginBigBorder();
     }
 
-
-
-    private static void displayExitText(String exitText, int delay) {
+    private static void displayExitText(String exitText) {
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
-                Thread.sleep(delay);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 displayErrorAscii();
                 displayContent("Error, try again", "red", 0);
@@ -80,30 +77,34 @@ public class BasicFunc {
     }
 
     public static void exitApp() {
-        displayExitMessage(contentAlignment(58) + RED + BOLD + "Application exit" + RESET);
+        displayExitMessage(alignmentLogic(58) + RED + BOLD + "Application exit" + RESET);
         System.out.println(RED + "...\n" + RESET);
-        displayBigBorder();
+        displayMarginBigBorder();
         System.out.print("\n");
     }
 
     public static void exitMultiClia() {
         System.out.print("\n");
-        displayExitMessage(contentAlignment(58) + RED + "Program exit" + RESET);
+        displayExitMessage(alignmentLogic(58) + RED + "Program exit" + RESET);
         System.out.println(RED + "..." + RESET);
+        System.out.print("\n");
         System.exit(0);
     }
 
     private static void displayExitMessage(String message) {
-        displayExitText(message, 100);
+        displayExitText(message);
     }
 
     public static void displayListOfMenuCommands() {
-        String[] commands = {"calculator", "browser", "notepad", "commands", "info", "languages" ,BOLD + RED + "exit" + RESET};
+        System.out.print("\n");
+        System.out.print("\n");
+        String[] commands = {
+                "calculator", "browser", "notepad",
+                "commands", "info", "languages" ,BOLD + RED + "exit" + RESET};
         for (String command : commands) {
             displayContent("· " + command, "white", 58);
         }
-        displayBigBorder();
-        System.out.print("\n");
+        displayMarginBigBorder();
     }
 
     public static void openSite(String userSite) {
@@ -124,6 +125,32 @@ public class BasicFunc {
         } catch (Exception e) {
             displayErrorAscii();
             displayContent("Unexpected error: " + e.getMessage(), "red", 0);
+        }
+    }
+
+    public static void displayContent(String text, String colorName, int alignment) {
+        ColorFunc.Color color;
+        try {
+            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            if (colorName.equalsIgnoreCase("randomly")) {
+                color = getRandomColor();
+            } else {
+                displayErrorAscii();
+                displayContent("Invalid input", "red", 0);
+                return;
+            }
+        }
+
+        String coloredText = getColoredText(text, color);
+        alignmentLogic(alignment);
+        int alignLength = alignment == 0 ? text.length() : alignment;
+
+        if (alignment < 0) {
+            displayErrorAscii();
+            displayContent("Invalid input", "red", 0);
+        } else {
+            System.out.println(alignmentLogic(alignLength) + coloredText);
         }
     }
 

@@ -9,7 +9,7 @@ import ui.pages.TimePage;
 
 import java.util.Map;
 
-import static ui.layout.ColorFunc.displayContent;
+import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.ThemesFunc.displayErrorAscii;
 
 public class CommandHandler {
