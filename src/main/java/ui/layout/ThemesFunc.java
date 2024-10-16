@@ -10,23 +10,47 @@ public class ThemesFunc {
             "yellow", "purple", "cyan",
             "magenta", "white"};
 
-    public static void displayLogo() {
+    public static void displayTheme() {
         Random rand = new Random();
         int indexOfLogo = rand.nextInt(11);
 
         switch (indexOfLogo) {
-            case 0 -> logo(COLORS[1], COLORS[3], COLORS[0], COLORS[4], COLORS[1], COLORS[1]);
-            case 1 -> logo(COLORS[7], COLORS[4], COLORS[7], COLORS[7], COLORS[4], COLORS[4]);
-            case 2 -> logo(COLORS[1], COLORS[7], COLORS[1], COLORS[1], COLORS[7], COLORS[7]);
-            case 3 -> logo(COLORS[1], COLORS[7], COLORS[7], COLORS[1], COLORS[1], COLORS[5]);
-            case 4 -> logo(COLORS[7], COLORS[0], COLORS[3], COLORS[1], COLORS[7], COLORS[0]);
-            case 5 -> logo(COLORS[1], COLORS[5], COLORS[5], COLORS[1], COLORS[1], COLORS[5]);
-            case 6 -> logo(COLORS[7], COLORS[4], COLORS[0], COLORS[4], COLORS[7], COLORS[7]);
-            case 7 -> logo(COLORS[5], COLORS[7], COLORS[5], COLORS[5], COLORS[7], COLORS[5]);
-            case 8 -> logo(COLORS[1], COLORS[4], COLORS[7], COLORS[1], COLORS[1], COLORS[4]);
-            case 9 -> logo(COLORS[1], COLORS[1], COLORS[0], COLORS[1], COLORS[7], COLORS[0]);
-            case 10 -> logo(COLORS[5], COLORS[7], COLORS[5], COLORS[6], COLORS[5], COLORS[6]);
-            default -> logo(COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2]);
+            case 0:
+                logo(COLORS[1], COLORS[3], COLORS[0], COLORS[4], COLORS[1], COLORS[1]);
+                break;
+            case 1:
+                logo(COLORS[7], COLORS[4], COLORS[7], COLORS[7], COLORS[4], COLORS[4]);
+                break;
+            case 2:
+                logo(COLORS[1], COLORS[7], COLORS[1], COLORS[1], COLORS[7], COLORS[7]);
+                break;
+            case 3:
+                logo(COLORS[1], COLORS[7], COLORS[7], COLORS[1], COLORS[1], COLORS[5]);
+                break;
+            case 4:
+                logo(COLORS[7], COLORS[0], COLORS[3], COLORS[1], COLORS[7], COLORS[0]);
+                break;
+            case 5:
+                logo(COLORS[1], COLORS[5], COLORS[5], COLORS[1], COLORS[1], COLORS[5]);
+                break;
+            case 6:
+                logo(COLORS[7], COLORS[4], COLORS[0], COLORS[4], COLORS[7], COLORS[7]);
+                break;
+            case 7:
+                logo(COLORS[5], COLORS[7], COLORS[5], COLORS[5], COLORS[7], COLORS[5]);
+                break;
+            case 8:
+                logo(COLORS[1], COLORS[4], COLORS[7], COLORS[1], COLORS[1], COLORS[4]);
+                break;
+            case 9:
+                logo(COLORS[1], COLORS[1], COLORS[0], COLORS[1], COLORS[7], COLORS[0]);
+                break;
+            case 10:
+                logo(COLORS[5], COLORS[7], COLORS[5], COLORS[6], COLORS[5], COLORS[6]);
+                break;
+            default:
+                logo(COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2], COLORS[2]);
+                break;
         }
     }
 

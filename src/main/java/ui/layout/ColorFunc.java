@@ -46,5 +46,6 @@ public class ColorFunc {
         Red_Background, Yellow_Background, Green_Background,
         Blue_Background, Purple_Background, Cyan_Background,
         Magenta_Background, Black_Background
-    }*/
+    }
+    */
 }
