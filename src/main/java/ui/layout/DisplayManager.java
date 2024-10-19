@@ -51,7 +51,7 @@ public class DisplayManager {
     private static String[][] commandPacks = {
             calculatorCommands, basicFunctionsCommands, timeCommands,
             browserCommands, infoCommands, notepadCommands, langsCommands,
-            exitCommands, allLangCommands};
+            exitCommands};
 
     private static String[] commands = {
             "calculator", "browser", "notepad",

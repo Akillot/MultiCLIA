@@ -53,11 +53,18 @@ public class CommandHandler {
             "sortie", "sortir", "salida", "poka", "wyjście",
             "wyjscie"};
 
-    public static String[] allLangCommands = {
-            "commands.languages", "commands.langs", "commands.lang"};
+    public static String[] combinedCommands(String[] prefixCommands, String[] suffixCommands) {
+        String[] result = new String[prefixCommands.length * suffixCommands.length];
+        int index = 0;
+        for (String prefix : prefixCommands) {
+            for (String suffix : suffixCommands) {
+                result[index++] = prefix + "." + suffix;
+            }
+        }
+        return result;
+    }
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        registerMultipleCommands(commandMap, allLangCommands, DisplayManager::langCommands);
         registerMultipleCommands(commandMap, calculatorCommands, CalculatorLayout::calculator);
         registerMultipleCommands(commandMap, basicFunctionsCommands, DisplayManager::menuCommands);
         registerMultipleCommands(commandMap, timeCommands, TimePage::displayCurrentTime);
@@ -71,8 +78,11 @@ public class CommandHandler {
             }
         });
         registerMultipleCommands(commandMap, notepadCommands, NotepadLayout::displayNotepad);
-        registerMultipleCommands(commandMap,langsCommands, DisplayManager::langs);
+        registerMultipleCommands(commandMap, langsCommands, DisplayManager::langs);
         registerMultipleCommands(commandMap, exitCommands, CommandManager::exitProgram);
+
+        String[] combinedLangCommands = combinedCommands(basicFunctionsCommands, langsCommands);
+        registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::langCommands);
     }
 
     private static void registerMultipleCommands(Map<String, Runnable> commandMap, String[] commands, Runnable action) {
