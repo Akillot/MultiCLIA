@@ -10,8 +10,7 @@ import ui.pages.TimePage;
 
 import java.util.Map;
 
-import static ui.layout.DisplayManager.errorAscii;
-import static ui.layout.DisplayManager.message;
+import static ui.layout.DisplayManager.*;
 
 public class CommandHandler {
     //En-Cz-De-Ru-Uk-Fr-Es-tok-Pl
@@ -53,6 +52,11 @@ public class CommandHandler {
             "sortie", "sortir", "salida", "poka", "wyjście",
             "wyjscie"};
 
+    public static String[] colorCommands = {
+            "color", "barva", "farbe", "цвет", "барва",
+            "couleur", "kule", "kolor",
+            "barva"};
+
     public static String[] combinedCommands(String[] prefixCommands, String[] suffixCommands) {
         String[] result = new String[prefixCommands.length * suffixCommands.length];
         int index = 0;
@@ -83,6 +87,10 @@ public class CommandHandler {
 
         String[] combinedLangCommands = combinedCommands(basicFunctionsCommands, langsCommands);
         registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::langCommands);
+
+        combinedLangCommands = combinedCommands(infoCommands, colorCommands);
+        registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::colors);
+
     }
 
     private static void registerMultipleCommands(Map<String, Runnable> commandMap, String[] commands, Runnable action) {
