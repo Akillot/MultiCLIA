@@ -2,28 +2,24 @@ package ui.layout;
 
 import java.util.Random;
 
-import static ui.layout.TextFunc.contentAlignment;
-import static ui.layout.ThemesFunc.displayErrorAscii;
-
 public class ColorFunc {
 
-    public static final String WHITE = "\033[0;38m";
     public static final String RESET = "\033[0m";
+    public static final String WHITE = "\033[0;38m";
     public static final String RED = "\033[0;31m";
     public static final String GREEN = "\033[0;32m";
     public static final String YELLOW = "\033[0;33m";
     public static final String BLUE = "\033[0;34m";
     public static final String PURPLE = "\033[0;35m";
     public static final String CYAN = "\033[0;36m";
-    public static final String MAGENTA = "\u001B[35m";
 
     public static final String BOLD = "\033[1m";
     public static final String UNDERLINE = "\033[4m";
 
-    static ColorFunc.Color getRandomColor() {
+    public static Color getRandomColor() {
         Random rand = new Random();
-        int randomColorIndex = rand.nextInt(ColorFunc.Color.values().length);
-        return ColorFunc.Color.values()[randomColorIndex];
+        int randomColorIndex = rand.nextInt(Color.values().length);
+        return Color.values()[randomColorIndex];
     }
 
     static String getColoredText(String text, Color color) {
@@ -35,44 +31,12 @@ public class ColorFunc {
             case PURPLE -> PURPLE;
             case CYAN -> CYAN;
             case WHITE -> WHITE;
-            case MAGENTA -> MAGENTA;
             case RESET -> RESET;
         };
         return colorCode + BOLD + text + RESET;
     }
 
-    public static void displayContent(String text, String colorName, int alignment) {
-        ColorFunc.Color color;
-        try {
-            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                displayErrorAscii();
-                displayContent("Invalid input", "red", 0);
-                return;
-            }
-        }
-
-        String coloredText = getColoredText(text, color);
-        int alignLength = alignment == 0 ? text.length() : alignment;
-
-        if (alignment < 0) {
-            displayErrorAscii();
-            displayContent("Invalid input", "red", 0);
-        } else {
-            System.out.println(contentAlignment(alignLength) + coloredText);
-        }
-    }
-
     public enum Color {
-        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, MAGENTA, RESET
-    }
-
-    public enum Color_Background {
-        Red_Background, Yellow_Background, Green_Background,
-        Blue_Background, Purple_Background, Cyan_Background,
-        Magenta_Background, Black_Background
+        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, RESET
     }
 }
