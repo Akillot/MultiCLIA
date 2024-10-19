@@ -133,7 +133,7 @@ public class DisplayManager {
     }
 
     public static void logoAscii() {
-        int indexOfLogo = rand.nextInt(7);
+        int indexOfLogo = rand.nextInt(8);
 
         switch (indexOfLogo) {
             case 0:
