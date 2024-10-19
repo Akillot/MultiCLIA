@@ -99,9 +99,6 @@ public class DisplayManager {
 
     public static void menuCommands() {
         System.out.print("\n\n");
-        String[] commands = {
-                "calculator", "browser", "notepad",
-                "commands", "info", "langs", BOLD + RED + "exit" + RESET};
         for (String command : commands) {
             message("· " + command, "white", 58);
         }
