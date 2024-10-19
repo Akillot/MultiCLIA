@@ -5,10 +5,10 @@
 
     <groupId>groupId</groupId>
     <artifactId>MultiCLIA</artifactId>
-    <version>A-0.6.0</version>
+    <version>A-0.6.3.5</version>
 
     <properties>
-        <java.version>22</java.version>
+        <java.version>17</java.version> <!-- Убедитесь, что это правильная версия Java -->
         <spring.boot.version>3.1.0</spring.boot.version>
     </properties>
 
@@ -31,15 +31,12 @@
             <version>8.0.33</version>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
+            <version>1.18.28</version> <!-- Добавлена версия для Lombok -->
+            <scope>provided</scope> <!-- Используем provided для Lombok -->
         </dependency>
     </dependencies>
 
@@ -50,7 +47,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
             </plugin>
-
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
