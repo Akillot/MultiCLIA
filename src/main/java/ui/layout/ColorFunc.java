@@ -23,6 +23,11 @@ public class ColorFunc {
         return ColorFunc.Color.values()[randomColorIndex];
     }
 
+    private static final String[] COLORS = {
+            "red", "blue", "green",
+            "yellow", "purple", "cyan",
+            "magenta", "white"};
+
     static String getColoredText(String text, Color color) {
         String colorCode = switch (color) {
             case RED -> RED;
@@ -42,10 +47,9 @@ public class ColorFunc {
         RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, MAGENTA, RESET
     }
 
-   /* public enum Color_Background {
+    public enum Color_Background {
         Red_Background, Yellow_Background, Green_Background,
         Blue_Background, Purple_Background, Cyan_Background,
         Magenta_Background, Black_Background
     }
-    */
 }

@@ -1,8 +1,8 @@
 package ui.layout;
 
-import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
+import static ui.layout.DisplayManager.message;
 
 public class TextFunc {
 
@@ -13,12 +13,12 @@ public class TextFunc {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
                 displayBigBorder();
-                System.out.print(BOLD + alignmentLogic(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                System.out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();
                 }
             } else {
-                System.out.print(BOLD + alignmentLogic(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                System.out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     System.out.println();
                 }
@@ -29,7 +29,7 @@ public class TextFunc {
 
     public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive, String mainText, String additionalText) {
         TextFunc.alignment = alignment;
-        String formattedText = alignmentLogic(alignment) +
+        String formattedText = alignment(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
                 BOLD + mainText + RESET + additionalText;
 
@@ -38,13 +38,13 @@ public class TextFunc {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                displayContent("Error, try again", "red", 0);
+                message("Error, try again", "red", 58);
             }
         }
         System.out.print("");
     }
 
-    public static String alignmentLogic(int widthOfElement) {
+    public static String alignment(int widthOfElement) {
         int fullWidth = borderWidth + 2;
         int oneSide = (fullWidth - widthOfElement) / 2;
         return " ".repeat(Math.max(0, oneSide));

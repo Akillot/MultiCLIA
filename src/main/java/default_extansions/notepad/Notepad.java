@@ -1,10 +1,11 @@
-package additional_packages.notepad;
+package default_extansions.notepad;
 
 import java.io.*;
 
-import static ui.layout.BasicFunc.displayContent;
 import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.ThemesFunc.displayErrorAscii;
+import static ui.layout.DisplayManager.errorAscii;
+import static ui.layout.DisplayManager.message;
+
 
 public class Notepad {
     private String title;
@@ -25,17 +26,17 @@ public class Notepad {
 
     public void saveToFile() {
         if (title == null || title.isEmpty()) {
-            displayContent("Title cannot be empty!", "red", 0);
+            message("Title cannot be empty!", "red", 58);
             return;
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(title + ".txt"))) {
             writer.write(content);
-            displayContent("Note saved successfully!", "green", 0);
+            message("Note saved successfully!", "purple", 58);
         } catch (IOException e) {
             displayMarginBigBorder();
-            displayErrorAscii();
-            displayContent("Error saving the note: " + e.getMessage(), "red", 0);
+            errorAscii();
+            message("Error saving the note: " + e.getMessage(), "red", 58);
         }
     }
 
@@ -43,7 +44,7 @@ public class Notepad {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            displayContent("File not found!", "red", 0);
+            message("File not found!", "red", 58);
             return null;
         }
 
@@ -54,12 +55,12 @@ public class Notepad {
                 content.append(line).append("\n");
             }
         } catch (IOException e) {
-            displayErrorAscii();
-            displayContent("Error reading the note: " + e.getMessage(), "red", 0);
+            errorAscii();
+            message("Error reading the note: " + e.getMessage(), "red", 58);
             return null;
         }
 
-        displayContent("Note read successfully!", "green", 0);
+        message("Note read successfully!", "purple", 58);
         return new Notepad(title, content.toString());
     }
 
@@ -67,16 +68,16 @@ public class Notepad {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            displayContent("File not found!", "red", 0);
+            message("File not found!", "red", 58);
             return false;
         }
 
         if (file.delete()) {
-            displayContent("Note deleted successfully!", "green", 0);
+            message("Note deleted successfully!", "purple", 58);
             return true;
         } else {
-            displayErrorAscii();
-            displayContent("Error deleting the note!", "red", 0);
+            errorAscii();
+            message("Error deleting the note!", "red", 58);
             return false;
         }
     }

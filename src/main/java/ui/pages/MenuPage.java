@@ -2,10 +2,10 @@ package ui.pages;
 
 import commands_language_packages.PackageUnifier;
 
-import static ui.layout.BasicFunc.*;
 import static ui.layout.BorderFunc.*;
+import static ui.layout.DisplayManager.*;
 import static ui.layout.TextFunc.*;
-import static ui.layout.ThemesFunc.displayErrorAscii;
+
 
 public class MenuPage {
     public static void displayMainMenuUi() {
@@ -17,10 +17,9 @@ public class MenuPage {
 
         if (!registry.executeCommand(nameOfFunction)) {
             displayMarginBigBorder();
-            displayErrorAscii();
-            displayContent("Command not found\n", "red", 0);
+            errorAscii();
             displayBigBorder();
-            System.out.print("\n");
+            System.out.print("\n\n");
         }
     }
 }

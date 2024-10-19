@@ -1,12 +1,13 @@
-package additional_packages.math;
+package default_extansions.math;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import static ui.layout.BasicFunc.displayContent;
-import static ui.layout.BasicFunc.exitApp;
-import static ui.layout.ThemesFunc.displayErrorAscii;
+import static ui.layout.CommandManager.exitExtension;
+import static ui.layout.DisplayManager.errorAscii;
+import static ui.layout.DisplayManager.message;
+
 
 public class CalculatorFunctions {
     public static void calculateOperation(String mathStatement) {
@@ -19,11 +20,10 @@ public class CalculatorFunctions {
             System.out.println("\n");
 
             if(result != null && result.toString().equalsIgnoreCase("exit")) {
-                exitApp();
+                exitExtension();
             }
         } catch (ScriptException e) {
-            displayErrorAscii();
-            displayContent("Invalid input", "red", 0);
+            errorAscii();
         }
     }
 }
