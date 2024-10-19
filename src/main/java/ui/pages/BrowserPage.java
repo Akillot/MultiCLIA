@@ -2,11 +2,9 @@ package ui.pages;
 
 import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
-import static ui.layout.ColorFunc.RESET;
 import static ui.layout.CommandManager.openUri;
 import static ui.layout.DisplayManager.*;
 import static ui.layout.TextFunc.alignment;
-
 
 public class BrowserPage {
     public static void browser() {

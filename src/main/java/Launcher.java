@@ -8,7 +8,7 @@ import static ui.pages.MenuPage.displayMainMenuUi;
 public class Launcher {
     public static void main(String[] args) {
         System.out.println("\n");
-        logo();
+        logoAscii();
         displayMarginBigBorder();
 
         message("--------------------", "white", 58);
@@ -18,7 +18,7 @@ public class Launcher {
                 + alignment(58) + "to show list of\n"
                 + alignment(58) + "commands", 58);
         message("--------------------", "white", 58);
-        System.out.println();
+        System.out.print("\n");
         while(true) {
             try {
                 displayMainMenuUi();

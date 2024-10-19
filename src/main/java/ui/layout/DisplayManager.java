@@ -70,7 +70,7 @@ public class DisplayManager {
 
     public static void langs() {
         System.out.print("\n\n");
-        for(String lang : langs){
+        for (String lang : langs) {
             message(lang, "white", 58);
         }
         displayMarginBigBorder();
@@ -133,51 +133,42 @@ public class DisplayManager {
         }
     }
 
-    public static void logo() {
-        int indexOfLogo = rand.nextInt(11);
+    public static void logoAscii() {
+        int indexOfLogo = rand.nextInt(8);
 
         switch (indexOfLogo) {
             case 0:
-                logo(COLORS[1], COLORS[4], COLORS[7], COLORS[4], COLORS[4], COLORS[7]);
+                logoAscii(COLORS[5], COLORS[4], COLORS[7], COLORS[0], COLORS[1], COLORS[2]);
                 break;
             case 1:
-                logo(COLORS[7], COLORS[4], COLORS[7], COLORS[7], COLORS[4], COLORS[4]);
+                logoAscii(COLORS[7], COLORS[4], COLORS[7], COLORS[7], COLORS[4], COLORS[4]);
                 break;
             case 2:
-                logo(COLORS[4], COLORS[7], COLORS[4], COLORS[1], COLORS[7], COLORS[7]);
+                logoAscii(COLORS[1], COLORS[7], COLORS[7], COLORS[1], COLORS[1], COLORS[7]);
                 break;
             case 3:
-                logo(COLORS[1], COLORS[7], COLORS[7], COLORS[1], COLORS[1], COLORS[5]);
+                logoAscii(COLORS[7], COLORS[0], COLORS[3], COLORS[1], COLORS[7], COLORS[0]);
                 break;
             case 4:
-                logo(COLORS[7], COLORS[0], COLORS[3], COLORS[1], COLORS[7], COLORS[0]);
+                logoAscii(COLORS[1], COLORS[5], COLORS[4], COLORS[0], COLORS[7], COLORS[7]);
                 break;
             case 5:
-                logo(COLORS[1], COLORS[5], COLORS[5], COLORS[1], COLORS[1], COLORS[5]);
+                logoAscii(COLORS[7], COLORS[4], COLORS[0], COLORS[4], COLORS[7], COLORS[7]);
                 break;
             case 6:
-                logo(COLORS[7], COLORS[4], COLORS[0], COLORS[4], COLORS[7], COLORS[7]);
+                logoAscii(COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[7], COLORS[0]);
                 break;
             case 7:
-                logo(COLORS[5], COLORS[4], COLORS[7], COLORS[4], COLORS[4], COLORS[5]);
-                break;
-            case 8:
-                logo(COLORS[1], COLORS[4], COLORS[7], COLORS[1], COLORS[1], COLORS[4]);
-                break;
-            case 9:
-                logo(COLORS[4], COLORS[1], COLORS[4], COLORS[1], COLORS[7], COLORS[4]);
-                break;
-            case 10:
-                logo(COLORS[4], COLORS[7], COLORS[7], COLORS[4], COLORS[7], COLORS[4]);
+                logoAscii(COLORS[4], COLORS[7], COLORS[0], COLORS[5], COLORS[2], COLORS[3]);
                 break;
             default:
-                logo(COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
+                logoAscii(COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
                 break;
         }
     }
 
-    public static void logo(String color1, String color2, String color3,
-                            String color4, String color5, String color6) {
+    public static void logoAscii(String color1, String color2, String color3,
+                                 String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logoLines.length; i++) {
             message(logoLines[i], colors[i % colors.length], 48);
@@ -187,6 +178,15 @@ public class DisplayManager {
     public static void errorAscii() {
         for (String line : errorAscii) {
             message(line, "red", 40);
+        }
+    }
+
+    public static void colors() {
+        System.out.print("\n\n");
+        message("All colors", "white", 58);
+        System.out.print("\n");
+        for (String color : COLORS) {
+            message(color, color, 58);
         }
     }
 }
