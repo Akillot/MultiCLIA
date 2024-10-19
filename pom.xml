@@ -8,7 +8,7 @@
     <version>A-0.6.3.5</version>
 
     <properties>
-        <java.version>17</java.version> <!-- Убедитесь, что это правильная версия Java -->
+        <java.version>17</java.version>
         <spring.boot.version>3.1.0</spring.boot.version>
     </properties>
 
@@ -35,8 +35,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version> <!-- Добавлена версия для Lombok -->
-            <scope>provided</scope> <!-- Используем provided для Lombok -->
+            <version>1.18.28</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
