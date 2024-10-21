@@ -62,7 +62,7 @@ public class DisplayManager {
 
     public static void tip(String text, int alignment) {
         System.out.println(alignment(alignment) + BOLD
-                + "[" + WHITE + BOLD + "i" + RESET
+                + "[" + PURPLE + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
     }
 

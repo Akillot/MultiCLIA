@@ -59,7 +59,7 @@ public class CommandHandler {
             "barva"};
 
     public static String[] systemCommands = {
-            "system", "systém", "система", "système", "systeme",
+            "system", "sys", "systém", "система", "système", "systeme",
             "sistema", "lipu suli", "układ", "uklad"};
 
     public static String[] reloadCommands = {

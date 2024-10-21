@@ -12,10 +12,11 @@ public class BrowserFunc {
         while (true) {
             displayBigBorder();
             System.out.print("\n\n");
-            tip("Enter domain or 'exit' to quit", 58);
+            tip("Enter domain or '" + RED + BOLD + "exit" + RESET + "' to quit", 58);
             System.out.print(alignment(58)
-                    + BOLD + WHITE + UNDERLINE + "Search" + RESET + BOLD + WHITE + ": " + RESET);
+                    + WHITE + BOLD  + UNDERLINE + "Search" + RESET + BOLD + WHITE + ": " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
+            System.out.print("\n");
 
             if (domainInput.equals("exit")) {
                 message("Exiting browser...", "red", 58, false);
