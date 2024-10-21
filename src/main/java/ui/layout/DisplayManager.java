@@ -12,7 +12,7 @@ public class DisplayManager {
     public static Scanner scanner = new Scanner(System.in);
     private static Random rand = new Random();
 
-    private static String[] logoLines = {
+    private static String[] logoAscii = {
             "ooo        ooooo             oooo      .    o8o  ",
             "`88.       .888'             `888    .o8    `\"'  ",
             " 888b     d'888  oooo  oooo   888  .o888oo oooo  ",
@@ -29,6 +29,10 @@ public class DisplayManager {
             "   `Y8bood8P'  o888ooooood8 o888o o88o     o8888o "
     };
 
+    /*private static String[] browserAscii = {
+            "oooooooooo.                                                                  "
+    };
+     */
 
     private static String[] errorAscii = {
             "  .oooooo.                                 ",
@@ -51,7 +55,7 @@ public class DisplayManager {
     private static String[][] commandPacks = {
             calculatorCommands, basicFunctionsCommands, timeCommands,
             browserCommands, infoCommands, notepadCommands, langsCommands,
-            colorCommands, exitCommands};
+            colorCommands, systemCommands, reloadCommands , exitCommands};
 
     private static String[] commands = {
             "calculator", "browser", "notepad",
@@ -169,8 +173,8 @@ public class DisplayManager {
     public static void logoAscii(String color1, String color2, String color3,
                                  String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
-        for (int i = 0; i < logoLines.length; i++) {
-            message(logoLines[i], colors[i % colors.length], 48);
+        for (int i = 0; i < logoAscii.length; i++) {
+            message(logoAscii[i], colors[i % colors.length], 48);
         }
     }
 

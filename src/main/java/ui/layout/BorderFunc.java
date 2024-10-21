@@ -22,8 +22,8 @@ public class BorderFunc {
     }
 
     public static void displayMarginBigBorder() {
-        System.out.println("\n");
+        System.out.print("\n");
         displayBigBorder();
-        System.out.println("\n");
+        System.out.print("\n");
     }
 }

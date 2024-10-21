@@ -6,6 +6,7 @@ import ui.layout.CommandManager;
 import ui.layout.DisplayManager;
 import ui.pages.BrowserPage;
 import ui.pages.InfoPage;
+import ui.pages.StartPage;
 import ui.pages.TimePage;
 
 import java.util.Map;
@@ -57,6 +58,15 @@ public class CommandHandler {
             "couleur", "kule", "kolor",
             "barva"};
 
+    public static String[] systemCommands = {
+            "system", "systém", "система", "système", "systeme",
+            "sistema", "lipu suli", "układ", "uklad"};
+
+    public static String[] reloadCommands = {
+            "reload", "načítání", "nacitani", "nachladen", "перезагрузка",
+            "перезавантаження", "recharger", "recargar", "kama sin", "pana sin",
+            "przeładowanie", "przeladowanie"};
+
     public static String[] combinedCommands(String[] prefixCommands, String[] suffixCommands) {
         String[] result = new String[prefixCommands.length * suffixCommands.length];
         int index = 0;
@@ -85,12 +95,15 @@ public class CommandHandler {
         registerMultipleCommands(commandMap, langsCommands, DisplayManager::langs);
         registerMultipleCommands(commandMap, exitCommands, CommandManager::exitProgram);
 
-        String[] combinedLangCommands = combinedCommands(basicFunctionsCommands, langsCommands);
+        String[] combinedLangCommands;
+        combinedLangCommands= combinedCommands(basicFunctionsCommands, langsCommands);
         registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::langCommands);
 
         combinedLangCommands = combinedCommands(infoCommands, colorCommands);
         registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::colors);
 
+        combinedLangCommands = combinedCommands(systemCommands, reloadCommands);
+        registerMultipleCommands(commandMap, systemCommands, StartPage::start);
     }
 
     private static void registerMultipleCommands(Map<String, Runnable> commandMap, String[] commands, Runnable action) {
