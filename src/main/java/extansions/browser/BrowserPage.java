@@ -1,4 +1,4 @@
-package ui.pages;
+package extansions.browser;
 
 import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;

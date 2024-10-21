@@ -2,13 +2,13 @@ package extansions.math;
 
 import java.util.Scanner;
 
-import static extansions.math.CalculatorFunctions.*;
+import static extansions.math.CalculatorFunc.*;
 import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.DisplayManager.*;
 import static ui.layout.TextFunc.alignment;
 
-public class CalculatorLayout {
+public class CalculatorPage {
     public static void calculator() {
         Scanner scanner = new Scanner(System.in);
         while (true) {

@@ -7,11 +7,11 @@ import static ui.layout.DisplayManager.errorAscii;
 import static ui.layout.DisplayManager.message;
 
 
-public class Notepad {
+public class NotepadFunc {
     private String title;
     private String content;
 
-    public Notepad(String title, String content) {
+    public NotepadFunc(String title, String content) {
         this.title = title;
         this.content = content;
     }
@@ -40,7 +40,7 @@ public class Notepad {
         }
     }
 
-    public static Notepad readFromFile(String title) {
+    public static NotepadFunc readFromFile(String title) {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
@@ -61,7 +61,7 @@ public class Notepad {
         }
 
         message("Note read successfully!", "purple", 58);
-        return new Notepad(title, content.toString());
+        return new NotepadFunc(title, content.toString());
     }
 
     public static boolean deleteNoteFile(String title) {

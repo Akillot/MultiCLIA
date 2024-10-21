@@ -10,7 +10,7 @@ import static ui.layout.DisplayManager.*;
 import static ui.layout.TextFunc.alignment;
 import static ui.layout.TextFunc.displaySlowMotionText;
 
-public class NotepadLayout {
+public class NotepadPage {
     private static  Scanner scanner = new Scanner(System.in);
 
     public static void displayNotepad() {
@@ -55,7 +55,7 @@ public class NotepadLayout {
         System.out.print(alignment(58) + BOLD + WHITE + "Enter content: " + RESET);
         String content = scanner.nextLine();
 
-        Notepad note = new Notepad(title, content);
+        NotepadFunc note = new NotepadFunc(title, content);
         note.saveToFile();
         displayMarginBigBorder();
         message("Note saved", "purple", 58);
@@ -67,7 +67,7 @@ public class NotepadLayout {
         System.out.print(alignment(58) + BOLD + WHITE + "Enter title to open: " + RESET);
         String title = scanner.nextLine();
 
-        Notepad note = Notepad.readFromFile(title);
+        NotepadFunc note = NotepadFunc.readFromFile(title);
         if (note != null) {
             message("Content: ", "white", 58);
             System.out.println(note.getContent());
@@ -106,7 +106,7 @@ public class NotepadLayout {
     private static void deleteNote() {
         System.out.print(alignment(58) + BOLD + WHITE + "Enter title to delete note: " + RESET);
         String title = scanner.nextLine();
-        boolean success = Notepad.deleteNoteFile(title);
+        boolean success = NotepadFunc.deleteNoteFile(title);
         if (success) {
             message("Note deleted", "purple", 58);
             System.out.print("\n");

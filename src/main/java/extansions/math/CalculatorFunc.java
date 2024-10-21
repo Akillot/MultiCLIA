@@ -8,7 +8,7 @@ import static ui.layout.CommandManager.exitExtension;
 import static ui.layout.DisplayManager.errorAscii;
 
 
-public class CalculatorFunctions {
+public class CalculatorFunc {
     public static void calculateOperation(String mathStatement) {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("JavaScript");

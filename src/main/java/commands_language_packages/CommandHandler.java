@@ -1,10 +1,10 @@
 package commands_language_packages;
 
-import extansions.notepad.NotepadLayout;
-import extansions.math.CalculatorLayout;
+import extansions.notepad.NotepadPage;
+import extansions.math.CalculatorPage;
 import ui.layout.CommandManager;
 import ui.layout.DisplayManager;
-import ui.pages.BrowserPage;
+import extansions.browser.BrowserPage;
 import ui.pages.InfoPage;
 import ui.pages.StartPage;
 import ui.pages.TimePage;
@@ -79,7 +79,7 @@ public class CommandHandler {
     }
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        registerMultipleCommands(commandMap, calculatorCommands, CalculatorLayout::calculator);
+        registerMultipleCommands(commandMap, calculatorCommands, CalculatorPage::calculator);
         registerMultipleCommands(commandMap, basicFunctionsCommands, DisplayManager::menuCommands);
         registerMultipleCommands(commandMap, timeCommands, TimePage::displayCurrentTime);
         registerMultipleCommands(commandMap, browserCommands, BrowserPage::browser);
@@ -91,7 +91,7 @@ public class CommandHandler {
                 message("Error displaying info: " + e.getMessage(), "red", 58);
             }
         });
-        registerMultipleCommands(commandMap, notepadCommands, NotepadLayout::displayNotepad);
+        registerMultipleCommands(commandMap, notepadCommands, NotepadPage::displayNotepad);
         registerMultipleCommands(commandMap, langsCommands, DisplayManager::langs);
         registerMultipleCommands(commandMap, exitCommands, CommandManager::exitProgram);
 
