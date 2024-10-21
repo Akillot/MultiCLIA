@@ -29,11 +29,6 @@ public class DisplayManager {
             "   `Y8bood8P'  o888ooooood8 o888o o88o     o8888o "
     };
 
-    /*private static String[] browserAscii = {
-            "oooooooooo.                                                                  "
-    };
-     */
-
     private static String[] errorAscii = {
             "  .oooooo.                                 ",
             " d8P'  `Y8b                                ",
@@ -105,6 +100,7 @@ public class DisplayManager {
         for (String command : commands) {
             message("· " + command, "white", 58);
         }
+        System.out.print("\n");
         displayMarginBigBorder();
     }
 
@@ -147,7 +143,7 @@ public class DisplayManager {
                 logoAscii(COLORS[6], COLORS[4], COLORS[6], COLORS[6], COLORS[4], COLORS[4]);
                 break;
             case 2:
-                logoAscii(COLORS[1], COLORS[6], COLORS[6], COLORS[1], COLORS[1], COLORS[6]);
+                logoAscii(COLORS[6], COLORS[5], COLORS[4], COLORS[3], COLORS[1], COLORS[6]);
                 break;
             case 3:
                 logoAscii(COLORS[6], COLORS[0], COLORS[3], COLORS[1], COLORS[6], COLORS[0]);

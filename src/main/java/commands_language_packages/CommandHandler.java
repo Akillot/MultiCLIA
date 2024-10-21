@@ -1,7 +1,7 @@
 package commands_language_packages;
 
-import default_extansions.notepad.NotepadLayout;
-import default_extansions.math.CalculatorLayout;
+import extansions.notepad.NotepadLayout;
+import extansions.math.CalculatorLayout;
 import ui.layout.CommandManager;
 import ui.layout.DisplayManager;
 import ui.pages.BrowserPage;
@@ -96,14 +96,14 @@ public class CommandHandler {
         registerMultipleCommands(commandMap, exitCommands, CommandManager::exitProgram);
 
         String[] combinedLangCommands;
-        combinedLangCommands= combinedCommands(basicFunctionsCommands, langsCommands);
+        combinedLangCommands = combinedCommands(basicFunctionsCommands, langsCommands);
         registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::langCommands);
 
         combinedLangCommands = combinedCommands(infoCommands, colorCommands);
         registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::colors);
 
         combinedLangCommands = combinedCommands(systemCommands, reloadCommands);
-        registerMultipleCommands(commandMap, systemCommands, StartPage::start);
+        registerMultipleCommands(commandMap, combinedLangCommands, StartPage::start);
     }
 
     private static void registerMultipleCommands(Map<String, Runnable> commandMap, String[] commands, Runnable action) {

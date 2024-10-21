@@ -1,8 +1,8 @@
-package default_extansions.math;
+package extansions.math;
 
 import java.util.Scanner;
 
-import static default_extansions.math.CalculatorFunctions.*;
+import static extansions.math.CalculatorFunctions.*;
 import static ui.layout.BorderFunc.*;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.DisplayManager.*;

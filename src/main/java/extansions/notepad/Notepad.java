@@ -1,4 +1,4 @@
-package default_extansions.notepad;
+package extansions.notepad;
 
 import java.io.*;
 
