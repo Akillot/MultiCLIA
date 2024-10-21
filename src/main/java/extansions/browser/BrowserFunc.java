@@ -12,7 +12,7 @@ public class BrowserFunc {
         while (true) {
             displayBigBorder();
             System.out.print("\n\n");
-            tip("Enter domain or '" + RED + BOLD + "exit" + RESET + "' to quit", 58);
+            tip("Enter domain or '" + PURPLE + BOLD + "exit" + RESET + "' to quit", 58);
             System.out.print(alignment(58)
                     + WHITE + BOLD  + UNDERLINE + "Search" + RESET + BOLD + WHITE + ": " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
@@ -27,7 +27,8 @@ public class BrowserFunc {
 
             String domain = "https://www." + domainInput;
 
-            tip("Enter '+' to open, '-' to cancel", 58);
+            tip("Enter '" + PURPLE + BOLD + "+" + RESET + "' to open, '"
+                    + PURPLE + BOLD +  "-" + RESET + "' to cancel", 58);
             System.out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
             String choice = scanner.nextLine().toLowerCase();
 
