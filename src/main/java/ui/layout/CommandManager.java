@@ -2,6 +2,7 @@ package ui.layout;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -14,12 +15,29 @@ public class CommandManager {
     public static void openUri(String userSite) {
         try {
             URI uri = new URI(userSite);
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                Desktop.getDesktop().browse(uri);
-                System.out.print("\r   Opened in browser\n");
-                System.out.print("\n");
+            String host = uri.getHost();
+
+            if (host != null && host.matches("\\d+\\.\\d+\\.\\d+\\.\\d+")) {
+                InetAddress inetAddress = InetAddress.getByName(host);
+
+                if (inetAddress.isReachable(3000)) {
+                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                        Desktop.getDesktop().browse(uri);
+                        System.out.print(WHITE + BOLD + "\r   Opened in browser\n" + RESET);
+                        System.out.print("\n");
+                    } else {
+                        errorAscii();
+                        displayMarginBigBorder();
+                    }
+                } else {
+                    System.out.print("\n");
+                    displayMarginBigBorder();
+                    errorAscii();
+                    message("IP address is unreachable", "red", 58, false);
+                    System.out.print("\n");
+                }
             } else {
-                errorAscii();
+                errorAscii();;
             }
         } catch (URISyntaxException | IOException e) {
             displayMarginBigBorder();
