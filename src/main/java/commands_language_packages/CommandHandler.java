@@ -82,7 +82,7 @@ public class CommandHandler {
         registerMultipleCommands(commandMap, calculatorCommands, CalculatorPage::calculator);
         registerMultipleCommands(commandMap, basicFunctionsCommands, DisplayManager::menuCommands);
         registerMultipleCommands(commandMap, timeCommands, TimePage::displayCurrentTime);
-        registerMultipleCommands(commandMap, browserCommands, BrowserPage::browser);
+        registerMultipleCommands(commandMap, browserCommands, BrowserPage::browserStarter);
         registerMultipleCommands(commandMap, infoCommands, () -> {
             try {
                 InfoPage.displayInfo();

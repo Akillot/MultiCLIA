@@ -6,7 +6,6 @@ import static ui.layout.BorderFunc.*;
 import static ui.layout.DisplayManager.*;
 import static ui.layout.TextFunc.*;
 
-
 public class MenuPage {
     public static void displayMainMenuUi() {
         PackageUnifier registry = new PackageUnifier();

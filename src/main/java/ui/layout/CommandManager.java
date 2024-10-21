@@ -17,6 +17,7 @@ public class CommandManager {
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(uri);
                 System.out.print("\r   Opened in browser\n");
+                System.out.print("\n");
             } else {
                 errorAscii();
             }
