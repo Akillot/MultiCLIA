@@ -19,13 +19,13 @@ public  class InfoPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(" dd-MM-yyyy" + " HH:mm");
         String formattedTime = localTime.format(myFormatter);
         System.out.println("\n");
-        message("Current version:", "white", 58);
-        message(version, "purple", 58);
-        message("Author: Nick Zozulia", "white", 58);
-        message("Current time: " + formattedTime, "white", 58);
+        message("Current version:", "white", 58, false);
+        message(version, "purple", 58, false);
+        message("Author: Nick Zozulia", "white", 58, false);
+        message("Current time: " + formattedTime, "white", 58, false);
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                / (1000 * 1000) + "M"), "white", 58);
+                / (1000 * 1000) + "M"), "white", 58, false);
 
         System.out.print("\n");
         tip("Enter '+' to open and '-' to skip", 58);
@@ -43,7 +43,7 @@ public  class InfoPage {
                 break;
 
             case "-":
-                message("Alright, next time", "white", 58);
+                message("Alright, next time", "white", 58, false);
                 System.out.print("\n");
                 break;
 

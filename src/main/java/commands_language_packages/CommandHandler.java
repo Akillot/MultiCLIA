@@ -88,7 +88,7 @@ public class CommandHandler {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
                 errorAscii();
-                message("Error displaying info: " + e.getMessage(), "red", 58);
+                message("Error displaying info: " + e.getMessage(), "red", 58, false);
             }
         });
         registerMultipleCommands(commandMap, notepadCommands, NotepadPage::displayNotepad);

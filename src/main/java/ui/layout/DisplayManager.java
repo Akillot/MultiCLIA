@@ -12,7 +12,7 @@ public class DisplayManager {
     public static Scanner scanner = new Scanner(System.in);
     private static Random rand = new Random();
 
-    private static String[] logoAscii = {
+    public static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o  ",
             "`88.       .888'             `888    .o8    `\"'  ",
             " 888b     d'888  oooo  oooo   888  .o888oo oooo  ",
@@ -69,7 +69,7 @@ public class DisplayManager {
     public static void langs() {
         System.out.print("\n\n");
         for (String lang : langs) {
-            message(lang, "white", 58);
+            message(lang, "white", 58, false);
         }
         displayMarginBigBorder();
     }
@@ -80,15 +80,15 @@ public class DisplayManager {
             String[] commandPack = commandPacks[packIndex];
             for (int i = 0; i < commandPack.length; i++) {
                 if (i == 0) {
-                    message(commandPack[i], "purple", 58);
+                    message(commandPack[i], "purple", 58, false);
                 } else {
-                    message(commandPack[i], "white", 58);
+                    message(commandPack[i], "white", 58, false);
                 }
             }
 
             if (packIndex < commandPacks.length - 1) {
                 System.out.print("\n");
-                message("--------------------", "white", 58);
+                message("--------------------", "white", 58, false);
                 System.out.print("\n");
             }
         }
@@ -98,15 +98,18 @@ public class DisplayManager {
     public static void menuCommands() {
         System.out.print("\n\n");
         for (String command : commands) {
-            message("· " + command, "white", 58);
+            message("· " + command, "white", 58, false);
         }
         System.out.print("\n");
         displayMarginBigBorder();
     }
 
-    public static void message(String text, String colorName, int alignment) {
+    public static void message(String text, String colorName, int alignment, boolean isUnderlineActive) {
         ColorFunc.Color color;
         try {
+            String formattedText = alignment(alignment) +
+                    (isUnderlineActive ? UNDERLINE : "") +
+                    BOLD + text + RESET;
             color = ColorFunc.Color.valueOf(colorName.toUpperCase());
         } catch (IllegalArgumentException e) {
             if (colorName.equalsIgnoreCase("randomly")) {
@@ -132,60 +135,60 @@ public class DisplayManager {
         }
     }
 
-    public static void logoAscii() {
+    public static void logoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(8);
 
         switch (indexOfLogo) {
             case 0:
-                logoAscii(COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
+                logoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
                 break;
             case 1:
-                logoAscii(COLORS[6], COLORS[4], COLORS[6], COLORS[6], COLORS[4], COLORS[4]);
+                logoAscii(logo, alignment, COLORS[6], COLORS[4], COLORS[6], COLORS[6], COLORS[4], COLORS[4]);
                 break;
             case 2:
-                logoAscii(COLORS[6], COLORS[5], COLORS[4], COLORS[3], COLORS[1], COLORS[6]);
+                logoAscii(logo, alignment, COLORS[6], COLORS[5], COLORS[4], COLORS[3], COLORS[1], COLORS[6]);
                 break;
             case 3:
-                logoAscii(COLORS[6], COLORS[0], COLORS[3], COLORS[1], COLORS[6], COLORS[0]);
+                logoAscii(logo, alignment, COLORS[6], COLORS[0], COLORS[3], COLORS[1], COLORS[6], COLORS[0]);
                 break;
             case 4:
-                logoAscii(COLORS[1], COLORS[5], COLORS[4], COLORS[0], COLORS[6], COLORS[6]);
+                logoAscii(logo, alignment, COLORS[1], COLORS[5], COLORS[4], COLORS[0], COLORS[6], COLORS[6]);
                 break;
             case 5:
-                logoAscii(COLORS[6], COLORS[4], COLORS[0], COLORS[4], COLORS[6], COLORS[6]);
+                logoAscii(logo, alignment, COLORS[6], COLORS[4], COLORS[0], COLORS[4], COLORS[6], COLORS[6]);
                 break;
             case 6:
-                logoAscii(COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
+                logoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
                 break;
             case 7:
-                logoAscii(COLORS[4], COLORS[6], COLORS[0], COLORS[5], COLORS[2], COLORS[3]);
+                logoAscii(logo, alignment, COLORS[4], COLORS[6], COLORS[0], COLORS[5], COLORS[2], COLORS[3]);
                 break;
             default:
-                logoAscii(COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
+                logoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
                 break;
         }
     }
 
-    public static void logoAscii(String color1, String color2, String color3,
+    public static void logoAscii(String[] logo, int alignment ,String color1, String color2, String color3,
                                  String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
-        for (int i = 0; i < logoAscii.length; i++) {
-            message(logoAscii[i], colors[i % colors.length], 48);
+        for (int i = 0; i < logo.length; i++) {
+            message(logo[i], colors[i % colors.length], alignment, false);
         }
     }
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, "red", 40);
+            message(line, "red", 40, false);
         }
     }
 
     public static void colors() {
         System.out.print("\n\n");
-        message("All colors", "white", 58);
+        message("All colors", "white", 58, false);
         System.out.print("\n");
         for (String color : COLORS) {
-            message(color, color, 58);
+            message(color, color, 58, false);
         }
         System.out.print("\n");
         displayMarginBigBorder();
