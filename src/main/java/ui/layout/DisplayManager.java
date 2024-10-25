@@ -42,16 +42,6 @@ public class DisplayManager {
             "                       o888o               \n"
     };
 
-    private static String[] langs = new String[]{
-            "· English", "· Čeština", "· Deutsch",
-            "· Русский", "· Українська", "· Polski",
-            "· Français", "· Español", "· Toki Pona"};
-
-    private static String[][] commandPacks = {
-            calculatorCommands, basicFunctionsCommands, timeCommands,
-            browserCommands, infoCommands, notepadCommands, langsCommands,
-            colorCommands, systemCommands, reloadCommands , exitCommands};
-
     private static String[] commands = {
             "calculator", "browser", "notepad",
             "commands", "info", "langs", BOLD + RED + "exit" + RESET};
@@ -64,35 +54,6 @@ public class DisplayManager {
         System.out.println(alignment(alignment) + BOLD
                 + "[" + WHITE + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
-    }
-
-    public static void langs() {
-        System.out.print("\n\n");
-        for (String lang : langs) {
-            message(lang, "white", 58, false);
-        }
-        displayMarginBigBorder();
-    }
-
-    public static void langCommands() {
-        System.out.print("\n\n");
-        for (int packIndex = 0; packIndex < commandPacks.length; packIndex++) {
-            String[] commandPack = commandPacks[packIndex];
-            for (int i = 0; i < commandPack.length; i++) {
-                if (i == 0) {
-                    message(commandPack[i], "purple", 58, false);
-                } else {
-                    message(commandPack[i], "white", 58, false);
-                }
-            }
-
-            if (packIndex < commandPacks.length - 1) {
-                System.out.print("\n");
-                message("--------------------", "white", 58, false);
-                System.out.print("\n");
-            }
-        }
-        displayMarginBigBorder();
     }
 
     public static void menuCommands() {

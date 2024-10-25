@@ -14,76 +14,17 @@ import java.util.Map;
 import static ui.layout.DisplayManager.*;
 
 public class CommandHandler {
-    //En-Cz-De-Ru-Uk-Fr-Es-tok-Pl
-    public static String[] calculatorCommands = {
-            "calculator", "kalkulačka", "rechner", "калькулятор",
-            "calculatrice", "calculadora", "kule laso", "kalkulator"};
-
-    public static String[] basicFunctionsCommands = {
-            "commands", "příkazy", "prikazy", "befehle", "commandes",
-            "команды", "команди", "commandes", "comandos", "pali lawa",
-            "komendy"};
-
-    public static String[] timeCommands = {
-            "time", "čas", "cas", "zeit", "время",
-            "час", "temps", "tiempo", "tenpo", "czas"};
-
-    public static String[] browserCommands = {
-            "browser", "browse", "prohlížeč", "prohlizec", "браузер",
-            "поисковик", "поиск","пошуковик", "пошук", "navigateur",
-            "navegador", "ilo lukin", "przeglądarka", "przegladarka"};
-
-    public static String[] infoCommands = {
-            "info", "informace", "informationen", "инфо", "информация",
-            "інфо", "інформація", "les informations", "l'information", "informations",
-            "información", "informacion", "sona", "informacja", "informacje"};
-
-    public static String[] notepadCommands = {
-            "notepad", "zápisník", "zapisnik", "notizblock", "notizbuch",
-            "merkzettel", "блокнот", "bloc-notes", "calepin", "bloc note",
-            "cuaderno", "bloc de notas", "cuaderno de notas", "lipu toki"};
-
-    public static String[] langsCommands = {
-            "langs", "languages", "jazyky", "sprachen", "языки",
-            "мови", "langues", "les langues", "idiomas", "lenguas",
-            "toki", "języki", "jezyki"};
-
-    public static String[] exitCommands = {
-            "exit", "konec", "ausgang", "выход", "вихід",
-            "sortie", "sortir", "salida", "poka", "wyjście",
-            "wyjscie"};
-
-    public static String[] colorCommands = {
-            "color", "barva", "farbe", "цвет", "барва",
-            "couleur", "kule", "kolor",
-            "barva"};
 
     public static String[] systemCommands = {
-            "system", "sys", "systém", "система", "système", "systeme",
-            "sistema", "lipu suli", "układ", "uklad"};
-
-    public static String[] reloadCommands = {
-            "reload", "načítání", "nacitani", "nachladen", "перезагрузка",
-            "перезавантаження", "recharger", "recargar", "kama sin", "pana sin",
-            "przeładowanie", "przeladowanie"};
-
-    public static String[] combinedCommands(String[] prefixCommands, String[] suffixCommands) {
-        String[] result = new String[prefixCommands.length * suffixCommands.length];
-        int index = 0;
-        for (String prefix : prefixCommands) {
-            for (String suffix : suffixCommands) {
-                result[index++] = prefix + "." + suffix;
-            }
-        }
-        return result;
-    }
+            "sys.reload", "sys.commands", "sys.time", "sys.info", "sys.color", "sys.exit"};
+    public static String[] extensionCommands = {
+            "calculator", "notepad", "browser"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        registerMultipleCommands(commandMap, calculatorCommands, CalculatorPage::calculator);
-        registerMultipleCommands(commandMap, basicFunctionsCommands, DisplayManager::menuCommands);
-        registerMultipleCommands(commandMap, timeCommands, TimePage::displayCurrentTime);
-        registerMultipleCommands(commandMap, browserCommands, BrowserPage::browserStarter);
-        registerMultipleCommands(commandMap, infoCommands, () -> {
+        commandMap.put("sys.reload", StartPage::start);
+        commandMap.put("sys.commands", DisplayManager::menuCommands);
+        commandMap.put("sys.time", TimePage::displayCurrentTime);
+        commandMap.put("sys.info", () -> {
             try {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
@@ -91,24 +32,11 @@ public class CommandHandler {
                 message("Error displaying info: " + e.getMessage(), "red", 58, false);
             }
         });
-        registerMultipleCommands(commandMap, notepadCommands, NotepadPage::displayNotepad);
-        registerMultipleCommands(commandMap, langsCommands, DisplayManager::langs);
-        registerMultipleCommands(commandMap, exitCommands, CommandManager::exitProgram);
+        commandMap.put("sys.color", DisplayManager::colors);
+        commandMap.put("sys.exit", CommandManager::exitProgram);
 
-        String[] combinedLangCommands;
-        combinedLangCommands = combinedCommands(basicFunctionsCommands, langsCommands);
-        registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::langCommands);
-
-        combinedLangCommands = combinedCommands(infoCommands, colorCommands);
-        registerMultipleCommands(commandMap, combinedLangCommands, DisplayManager::colors);
-
-        combinedLangCommands = combinedCommands(systemCommands, reloadCommands);
-        registerMultipleCommands(commandMap, combinedLangCommands, StartPage::start);
-    }
-
-    private static void registerMultipleCommands(Map<String, Runnable> commandMap, String[] commands, Runnable action) {
-        for (String command : commands) {
-            commandMap.put(command, action);
-        }
+        commandMap.put("calculator", CalculatorPage::calculator);
+        commandMap.put("notepad", NotepadPage::displayNotepad);
+        commandMap.put("browser", BrowserPage::browserStarter);
     }
 }
