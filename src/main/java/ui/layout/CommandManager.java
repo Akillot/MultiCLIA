@@ -49,17 +49,27 @@ public class CommandManager {
 
     public static void exitExtension() {
         System.out.print("\n");
-        exitMessage(alignment(58) + RED + BOLD + "Application exit" + RESET);
+        exitMessage(alignment(58) + RED + BOLD + "Application exit" + RESET, 100);
         System.out.println(RED + "...\n" + RESET);
         displayMarginBigBorder();
         System.out.print("\n");
     }
 
-    public static void exitProgram() {
+    public static Runnable exitProgramDefault() {
         System.out.print("\n");
-        exitMessage(alignment(58) + RED + "Program exit" + RESET);
+        exitMessage(alignment(58) + RED + "Program exit" + RESET, 100);
         System.out.println(RED + "..." + RESET);
         System.out.print("\n");
         System.exit(0);
+        return null;
+    }
+
+    public static Runnable exitProgramQuick() {
+        System.out.print("\n");
+        exitMessage(alignment(58) + RED + "Program exit" + RESET, 0);
+        System.out.println(RED + "..." + RESET);
+        System.out.print("\n");
+        System.exit(0);
+        return null;
     }
 }

@@ -86,11 +86,11 @@ public class DisplayManager {
         System.out.println(alignment(alignment) + coloredText);
     }
 
-    public static void exitMessage(String exitText) {
+    public static void exitMessage(String exitText, int sleep) {
         for (char ch : exitText.toCharArray()) {
             System.out.print(ch);
             try {
-                Thread.sleep(100);
+                Thread.sleep(sleep);
             } catch (InterruptedException ex) {
                 errorAscii();
             }

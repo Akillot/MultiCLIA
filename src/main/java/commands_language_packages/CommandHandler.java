@@ -16,7 +16,7 @@ import static ui.layout.DisplayManager.*;
 public class CommandHandler {
 
     public static String[] systemCmds = {
-            "sys.reload", "sys.cmds", "sys.time", "sys.info", "sys.color", "sys.exit"};
+            "sys.reload", "sys.cmds", "sys.time", "sys.info", "sys.color", "sys.exit", "sys.exitq"};
     public static String[] extensionCmds = {
             "calculator", "notepad", "browser"};
 
@@ -33,7 +33,8 @@ public class CommandHandler {
             }
         });
         commandMap.put(systemCmds[4], DisplayManager::colors);
-        commandMap.put(systemCmds[5], CommandManager::exitProgram);
+        commandMap.put(systemCmds[5], CommandManager::exitProgramDefault);
+        commandMap.put(systemCmds[6], CommandManager::exitProgramQuick);
 
         commandMap.put(extensionCmds[0], CalculatorPage::calculator);
         commandMap.put(extensionCmds[1], NotepadPage::displayNotepad);
