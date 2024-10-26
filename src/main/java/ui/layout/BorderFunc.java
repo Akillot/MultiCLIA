@@ -5,7 +5,7 @@ import static ui.layout.TextFunc.alignment;
 public class BorderFunc {
     public static int numberOfSymbols = 1;
     public static final int borderWidth = 62;
-    public static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
+    private static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
     public static void displaySmallBorder(int numberOfSymbol) {
         System.out.print(symbolsOfBorder[0]);

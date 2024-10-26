@@ -3,7 +3,8 @@ package ui.layout;
 import java.util.Random;
 import java.util.Scanner;
 
-import static commands_language_packages.CommandHandler.*;
+import static commands_language_packages.CommandHandler.extensionCmds;
+import static commands_language_packages.CommandHandler.systemCmds;
 import static ui.layout.BorderFunc.displayMarginBigBorder;
 import static ui.layout.ColorFunc.*;
 import static ui.layout.TextFunc.alignment;
@@ -42,10 +43,6 @@ public class DisplayManager {
             "                       o888o               \n"
     };
 
-    private static String[] commands = {
-            "calculator", "browser", "notepad",
-            "commands", "info", "langs", BOLD + RED + "exit" + RESET};
-
     private static final String[] COLORS = {
             "red", "blue", "green",
             "yellow", "purple", "cyan", "white"};
@@ -56,21 +53,25 @@ public class DisplayManager {
                 + BOLD + "] " + text + RESET);
     }
 
-    public static void menuCommands() {
+    public static void displayCommandsSideBySide() {
         System.out.print("\n\n");
-        for (String command : commands) {
-            message("· " + command, "white", 58, false);
+        message("System Commands                         Extension Commands", "purple", 58);
+
+        int maxRows = Math.max(systemCmds.length, extensionCmds.length);
+
+        for (int i = 0; i < maxRows; i++) {
+            String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
+            String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
+
+            System.out.printf(alignment(58) + "%-30s          %-30s%n", systemCmd, extensionCmd);
         }
         System.out.print("\n");
         displayMarginBigBorder();
     }
 
-    public static void message(String text, String colorName, int alignment, boolean isUnderlineActive) {
+    public static void message(String text, String colorName, int alignment) {
         ColorFunc.Color color;
         try {
-            String formattedText = alignment(alignment) +
-                    (isUnderlineActive ? UNDERLINE : "") +
-                    BOLD + text + RESET;
             color = ColorFunc.Color.valueOf(colorName.toUpperCase());
         } catch (IllegalArgumentException e) {
             if (colorName.equalsIgnoreCase("randomly")) {
@@ -130,26 +131,26 @@ public class DisplayManager {
         }
     }
 
-    public static void logoAscii(String[] logo, int alignment ,String color1, String color2, String color3,
-                                 String color4, String color5, String color6) {
+    public static void logoAscii(String[] logo, int alignment ,String color1, String color2,
+                                 String color3, String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
-            message(logo[i], colors[i % colors.length], alignment, false);
+            message(logo[i], colors[i % colors.length], alignment);
         }
     }
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, "red", 40, false);
+            message(line, "red", 40);
         }
     }
 
     public static void colors() {
         System.out.print("\n\n");
-        message("All colors", "white", 58, false);
+        message("All colors", "white", 58);
         System.out.print("\n");
         for (String color : COLORS) {
-            message(color, color, 58, false);
+            message(color, color, 58);
         }
         System.out.print("\n");
         displayMarginBigBorder();

@@ -33,7 +33,7 @@ public class CommandManager {
                     System.out.print("\n");
                     displayMarginBigBorder();
                     errorAscii();
-                    message("IP address is unreachable", "red", 58, false);
+                    message("IP address is unreachable", "red", 58);
                     System.out.print("\n");
                 }
             } else {

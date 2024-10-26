@@ -12,7 +12,7 @@ public class TimePage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
         System.out.print("\n\n");
-        message("Time is: " + formattedTime, "white", 58, false);
+        message("Time is: " + formattedTime, "white", 58);
         displayMarginBigBorder();
     }
 }

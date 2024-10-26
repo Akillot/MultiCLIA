@@ -9,12 +9,13 @@ import static ui.layout.TextFunc.alignment;
 public class BrowserFunc {
     public static void browser() {
         while (true) {
+            System.out.print("\n");
             System.out.print(alignment(58) + PURPLE + BOLD + "Enter domain" + RESET
                     + WHITE + BOLD + " (or type 'exit' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {
-                message("Exiting browser...", "red", 58, false);
+                message("Exiting browser...", "red", 58);
                 displayMarginBigBorder();
                 break;
             }
@@ -32,12 +33,12 @@ public class BrowserFunc {
                     } catch (Exception e) {
                         displayMarginBigBorder();
                         errorAscii();
-                        message("Failed to open link", "red", 58, false);
+                        message("Failed to open link", "red", 58);
                     }
                     break;
 
                 case "-":
-                    message("Searching canceled\n", "white", 58, false);
+                    message("Searching canceled\n", "white", 58);
                     break;
 
                 default:

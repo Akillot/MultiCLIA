@@ -15,28 +15,28 @@ import static ui.layout.DisplayManager.*;
 
 public class CommandHandler {
 
-    public static String[] systemCommands = {
-            "sys.reload", "sys.commands", "sys.time", "sys.info", "sys.color", "sys.exit"};
-    public static String[] extensionCommands = {
+    public static String[] systemCmds = {
+            "sys.reload", "sys.cmds", "sys.time", "sys.info", "sys.color", "sys.exit"};
+    public static String[] extensionCmds = {
             "calculator", "notepad", "browser"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        commandMap.put("sys.reload", StartPage::start);
-        commandMap.put("sys.commands", DisplayManager::menuCommands);
-        commandMap.put("sys.time", TimePage::displayCurrentTime);
-        commandMap.put("sys.info", () -> {
+        commandMap.put(systemCmds[0], StartPage::start);
+        commandMap.put(systemCmds[1], DisplayManager::displayCommandsSideBySide);
+        commandMap.put(systemCmds[2], TimePage::displayCurrentTime);
+        commandMap.put(systemCmds[3], () -> {
             try {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
                 errorAscii();
-                message("Error displaying info: " + e.getMessage(), "red", 58, false);
+                message("Error displaying info: " + e.getMessage(), "red", 58);
             }
         });
-        commandMap.put("sys.color", DisplayManager::colors);
-        commandMap.put("sys.exit", CommandManager::exitProgram);
+        commandMap.put(systemCmds[4], DisplayManager::colors);
+        commandMap.put(systemCmds[5], CommandManager::exitProgram);
 
-        commandMap.put("calculator", CalculatorPage::calculator);
-        commandMap.put("notepad", NotepadPage::displayNotepad);
-        commandMap.put("browser", BrowserPage::browserStarter);
+        commandMap.put(extensionCmds[0], CalculatorPage::calculator);
+        commandMap.put(extensionCmds[1], NotepadPage::displayNotepad);
+        commandMap.put(extensionCmds[2], BrowserPage::browserStarter);
     }
 }

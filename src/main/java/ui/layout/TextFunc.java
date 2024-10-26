@@ -38,7 +38,7 @@ public class TextFunc {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", "red", 58, false);
+                message("Error, try again", "red", 58);
             }
         }
         System.out.print("");
