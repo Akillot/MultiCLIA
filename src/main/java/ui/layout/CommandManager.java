@@ -37,7 +37,7 @@ public class CommandManager {
                     System.out.print("\n");
                 }
             } else {
-                errorAscii();;
+                errorAscii();
             }
         } catch (URISyntaxException | IOException e) {
             displayMarginBigBorder();
@@ -55,21 +55,19 @@ public class CommandManager {
         System.out.print("\n");
     }
 
-    public static Runnable exitProgramDefault() {
+    public static void exitProgramDefault() {
         System.out.print("\n");
-        exitMessage(alignment(58) + RED + "Program exit" + RESET, 100);
-        System.out.println(RED + "..." + RESET);
+        loadingAnimation(300, 10);
+        exitMessage(alignment(62) + RED + "Program termination" + RESET, 50);
         System.out.print("\n");
         System.exit(0);
-        return null;
     }
 
-    public static Runnable exitProgramQuick() {
+    public static void exitProgramQuick() {
         System.out.print("\n");
-        exitMessage(alignment(58) + RED + "Program exit" + RESET, 0);
-        System.out.println(RED + "..." + RESET);
+        System.out.print(WHITE + BOLD + "\r    ✓" + RESET);
+        exitMessage(alignment(62) + RED + "Quick program termination" + RESET, 0);
         System.out.print("\n");
         System.exit(0);
-        return null;
     }
 }

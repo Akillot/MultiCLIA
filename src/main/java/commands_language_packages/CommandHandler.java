@@ -22,7 +22,7 @@ public class CommandHandler {
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
         commandMap.put(systemCmds[0], StartPage::start);
-        commandMap.put(systemCmds[1], DisplayManager::displayCommandsSideBySide);
+        commandMap.put(systemCmds[1], DisplayManager::commandsSideBySide);
         commandMap.put(systemCmds[2], TimePage::displayCurrentTime);
         commandMap.put(systemCmds[3], () -> {
             try {

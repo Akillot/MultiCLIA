@@ -44,8 +44,8 @@ public class DisplayManager {
     };
 
     private static final String[] COLORS = {
-            "red", "blue", "green",
-            "yellow", "purple", "cyan", "white", "gray", "black"};
+            "red", "blue", "green", "yellow", "purple",
+            "cyan", "white", "gray", "black"};
 
     public static void tip(String text, int alignment) {
         System.out.println(alignment(alignment) + BOLD
@@ -53,7 +53,7 @@ public class DisplayManager {
                 + BOLD + "] " + text + RESET);
     }
 
-    public static void displayCommandsSideBySide() {
+    public static void commandsSideBySide() {
         System.out.print("\n\n");
         message("System Commands                         Extension Commands", "purple", 58);
 
@@ -143,6 +143,19 @@ public class DisplayManager {
         for (String line : errorAscii) {
             message(line, "red", 40);
         }
+    }
+
+    public static void loadingAnimation(int frames, int duration) {
+        String[] spinner = {"    |", "    /", "    —", "    \\"};
+        for (int i = 0; i < duration; i++) {
+            System.out.print(WHITE + BOLD + "\r" + spinner[i % spinner.length] + RESET);
+            try {
+                Thread.sleep(frames);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.print(WHITE + BOLD + "\r    ✓" + RESET);
     }
 
     public static void colors() {

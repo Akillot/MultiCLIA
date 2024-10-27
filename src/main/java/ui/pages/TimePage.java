@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.DisplayManager.message;
+import static ui.layout.DisplayManager.*;
 
 public class TimePage {
     public static void displayCurrentTime() {
