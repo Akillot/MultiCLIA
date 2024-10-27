@@ -13,15 +13,15 @@ public class StartPage {
         logoAscii(mainLogoAscii, 48);
         displayMarginBigBorder();
 
-        message("--------------------", "white", 58);
-        message("Version: " + version, "white", 58);
-        message("--------------------", "white", 58);
+        message("+--------------------+", "white", 58);
+        message("Version: " + version, "white", 56);
+        message("+--------------------+", "white", 58);
 
         tip("Enter " + "'" + PURPLE + BOLD + "sys.cmds" + RESET + "'\n"
-                + alignment(58) + "to show list of\n"
-                + alignment(58) + "commands", 58);
+                + alignment(56) + "to show list of\n"
+                + alignment(56) + "commands", 56);
 
-        message("--------------------", "white", 58);
+        message("+--------------------+", "white", 58);
         System.out.print("\n");
         while(true) {
             try {
