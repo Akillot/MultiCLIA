@@ -45,7 +45,7 @@ public class DisplayManager {
 
     private static final String[] COLORS = {
             "red", "blue", "green",
-            "yellow", "purple", "cyan", "white"};
+            "yellow", "purple", "cyan", "white", "gray", "black"};
 
     public static void tip(String text, int alignment) {
         System.out.println(alignment(alignment) + BOLD

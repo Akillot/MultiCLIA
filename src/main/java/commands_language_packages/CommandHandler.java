@@ -16,7 +16,7 @@ import static ui.layout.DisplayManager.*;
 public class CommandHandler {
 
     public static String[] systemCmds = {
-            "sys.reload", "sys.cmds", "sys.time", "sys.info", "sys.color", "sys.exit", "sys.exitq"};
+            "sys.rerun", "sys.cmds", "sys.time", "sys.info", "sys.color", "sys.exit", "sys.exitq"};
     public static String[] extensionCmds = {
             "calculator", "notepad", "browser"};
 
