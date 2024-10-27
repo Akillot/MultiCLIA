@@ -9,7 +9,7 @@ import static ui.layout.TextFunc.*;
 public class MenuPage {
     public static void displayMainMenuUi() {
         PackageUnifier registry = new PackageUnifier();
-        displaySlowMotionText(100, 58, true, "Search", ": ");
+        displaySlowMotionText(100, 56, false, true, "Search", ": ");
         String nameOfFunction = scanner.nextLine().toLowerCase();
         System.out.print("\n");
         wrapText(nameOfFunction, borderWidth - 2);

@@ -23,7 +23,7 @@ public class NotepadPage {
             }
             System.out.println(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET);
             System.out.print("\n");
-            displaySlowMotionText(50, 58, true, "Your choice", ": ");
+            displaySlowMotionText(50, 58, true, false, "Your choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
