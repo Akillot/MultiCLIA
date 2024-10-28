@@ -1,4 +1,4 @@
-package ui.layout;
+package core.layout;
 
 import java.awt.*;
 import java.io.IOException;
@@ -6,10 +6,10 @@ import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.DisplayManager.*;
-import static ui.layout.TextFunc.alignment;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.ColorFunc.*;
+import static core.layout.DisplayManager.*;
+import static core.layout.TextFunc.alignment;
 
 public class CommandManager {
     public static void openUri(String userSite) {

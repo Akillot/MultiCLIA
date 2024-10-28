@@ -2,9 +2,9 @@ package extansions.notepad;
 
 import java.io.*;
 
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.DisplayManager.errorAscii;
-import static ui.layout.DisplayManager.message;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.DisplayManager.errorAscii;
+import static core.layout.DisplayManager.message;
 
 
 public class NotepadFunc {

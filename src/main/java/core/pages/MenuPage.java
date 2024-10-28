@@ -1,10 +1,10 @@
-package ui.pages;
+package core.pages;
 
-import commands_language_packages.PackageUnifier;
+import core.command_handling_system.PackageUnifier;
 
-import static ui.layout.BorderFunc.*;
-import static ui.layout.DisplayManager.*;
-import static ui.layout.TextFunc.*;
+import static core.layout.BorderFunc.*;
+import static core.layout.DisplayManager.*;
+import static core.layout.TextFunc.*;
 
 public class MenuPage {
     public static void displayMainMenuUi() {

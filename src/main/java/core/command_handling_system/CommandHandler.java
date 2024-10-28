@@ -1,17 +1,17 @@
-package commands_language_packages;
+package core.command_handling_system;
 
 import extansions.notepad.NotepadPage;
 import extansions.math.CalculatorPage;
-import ui.layout.CommandManager;
-import ui.layout.DisplayManager;
+import core.layout.CommandManager;
+import core.layout.DisplayManager;
 import extansions.browser.BrowserPage;
-import ui.pages.InfoPage;
-import ui.pages.StartPage;
-import ui.pages.TimePage;
+import core.pages.InfoPage;
+import core.pages.StartPage;
+import core.pages.TimePage;
 
 import java.util.Map;
 
-import static ui.layout.DisplayManager.*;
+import static core.layout.DisplayManager.*;
 
 public class CommandHandler {
 

@@ -1,11 +1,11 @@
-package ui.pages;
+package core.pages;
 
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.DisplayManager.*;
-import static ui.layout.TextFunc.alignment;
-import static ui.pages.InfoPage.version;
-import static ui.pages.MenuPage.displayMainMenuUi;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.ColorFunc.*;
+import static core.layout.DisplayManager.*;
+import static core.layout.TextFunc.alignment;
+import static core.pages.InfoPage.version;
+import static core.pages.MenuPage.displayMainMenuUi;
 
 public class StartPage {
     public static void start() {

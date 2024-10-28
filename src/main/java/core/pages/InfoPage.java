@@ -1,14 +1,14 @@
-package ui.pages;
+package core.pages;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.CommandManager.openUri;
-import static ui.layout.DisplayManager.*;
-import static ui.layout.TextFunc.alignment;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.ColorFunc.*;
+import static core.layout.CommandManager.openUri;
+import static core.layout.DisplayManager.*;
+import static core.layout.TextFunc.alignment;
 
 public  class InfoPage {
     public static String version = "A-0.6.5";

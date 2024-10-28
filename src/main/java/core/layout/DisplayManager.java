@@ -1,13 +1,13 @@
-package ui.layout;
+package core.layout;
 
 import java.util.Random;
 import java.util.Scanner;
 
-import static commands_language_packages.CommandHandler.extensionCmds;
-import static commands_language_packages.CommandHandler.systemCmds;
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.TextFunc.alignment;
+import static core.command_handling_system.CommandHandler.extensionCmds;
+import static core.command_handling_system.CommandHandler.systemCmds;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.ColorFunc.*;
+import static core.layout.TextFunc.alignment;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(System.in);

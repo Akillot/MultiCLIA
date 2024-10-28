@@ -1,6 +1,6 @@
-package ui.layout;
+package core.layout;
 
-import static ui.layout.TextFunc.alignment;
+import static core.layout.TextFunc.alignment;
 
 public class BorderFunc {
     public static int numberOfSymbols = 1;

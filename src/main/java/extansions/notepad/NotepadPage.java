@@ -2,13 +2,13 @@ package extansions.notepad;
 
 import java.util.Scanner;
 
-import static ui.layout.BorderFunc.displayBigBorder;
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.CommandManager.exitExtension;
-import static ui.layout.DisplayManager.*;
-import static ui.layout.TextFunc.alignment;
-import static ui.layout.TextFunc.displaySlowMotionText;
+import static core.layout.BorderFunc.displayBigBorder;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.ColorFunc.*;
+import static core.layout.CommandManager.exitExtension;
+import static core.layout.DisplayManager.*;
+import static core.layout.TextFunc.alignment;
+import static core.layout.TextFunc.displaySlowMotionText;
 
 public class NotepadPage {
     private static  Scanner scanner = new Scanner(System.in);

@@ -1,10 +1,10 @@
-package ui.pages;
+package core.pages;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static ui.layout.BorderFunc.displayMarginBigBorder;
-import static ui.layout.DisplayManager.*;
+import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.DisplayManager.*;
 
 public class TimePage {
     public static void displayCurrentTime() {

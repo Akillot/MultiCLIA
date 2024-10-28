@@ -1,4 +1,4 @@
-package commands_language_packages;
+package core.command_handling_system;
 
 import java.util.HashMap;
 import java.util.Map;

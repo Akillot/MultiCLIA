@@ -1,8 +1,8 @@
-package ui.layout;
+package core.layout;
 
-import static ui.layout.BorderFunc.*;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.DisplayManager.message;
+import static core.layout.BorderFunc.*;
+import static core.layout.ColorFunc.*;
+import static core.layout.DisplayManager.message;
 
 public class TextFunc {
 

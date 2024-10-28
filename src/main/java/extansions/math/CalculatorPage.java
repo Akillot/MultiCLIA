@@ -3,10 +3,10 @@ package extansions.math;
 import java.util.Scanner;
 
 import static extansions.math.CalculatorFunc.*;
-import static ui.layout.BorderFunc.*;
-import static ui.layout.ColorFunc.*;
-import static ui.layout.DisplayManager.*;
-import static ui.layout.TextFunc.alignment;
+import static core.layout.BorderFunc.*;
+import static core.layout.ColorFunc.*;
+import static core.layout.DisplayManager.*;
+import static core.layout.TextFunc.alignment;
 
 public class CalculatorPage {
     public static void calculator() {
