@@ -6,10 +6,11 @@ import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
 import static core.pages.InfoPage.version;
 import static core.pages.MenuPage.displayMainMenuUi;
+import static java.lang.System.out;
 
 public class StartPage {
     public static void start() {
-        System.out.print("\n\n");
+        out.print("\n\n");
         logoAscii(mainLogoAscii, 48);
         displayMarginBigBorder();
 
@@ -22,7 +23,7 @@ public class StartPage {
                 + alignment(56) + "commands", 56);
 
         message("+--------------------+", "white", 58);
-        System.out.print("\n");
+        out.print("\n");
         while(true) {
             try {
                 displayMainMenuUi();

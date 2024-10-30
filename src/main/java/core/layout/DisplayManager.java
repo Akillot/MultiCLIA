@@ -158,14 +158,18 @@ public class DisplayManager {
         System.out.print(WHITE + BOLD + "\r    ✓" + RESET);
     }
 
-    public static void colors() {
+    public static void textModification() {
         System.out.print("\n\n");
-        message("All colors", "white", 58);
+        message("All colors and text modifiers", "white", 58);
         System.out.print("\n");
         for (String color : COLORS) {
             message(color, color, 58);
         }
+
         System.out.print("\n");
+        System.out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
+        System.out.println(WHITE + ITALICS + alignment(58) + "Italics" + RESET);
+        System.out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
         displayMarginBigBorder();
     }
 }

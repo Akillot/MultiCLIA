@@ -16,15 +16,17 @@ import static core.layout.DisplayManager.*;
 public class CommandHandler {
 
     public static String[] systemCmds = {
-            "sys.rerun", "sys.cmds", "sys.time", "sys.info", "sys.color", "sys.exit", "sys.exitq"};
+            "sys.cmds", "sys.rerun", "sys.time", "sys.ip",
+            "sys.info", "sys.text", "sys.exit", "sys.exitq"};
     public static String[] extensionCmds = {
             "calculator", "notepad", "browser"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        commandMap.put(systemCmds[0], StartPage::start);
-        commandMap.put(systemCmds[1], DisplayManager::commandsSideBySide);
+        commandMap.put(systemCmds[0], DisplayManager::commandsSideBySide);
+        commandMap.put(systemCmds[1], StartPage::start);
         commandMap.put(systemCmds[2], TimePage::displayCurrentTime);
-        commandMap.put(systemCmds[3], () -> {
+        commandMap.put(systemCmds[3], CommandManager::getUserIp);
+        commandMap.put(systemCmds[4], () -> {
             try {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
@@ -32,9 +34,9 @@ public class CommandHandler {
                 message("Error displaying info: " + e.getMessage(), "red", 58);
             }
         });
-        commandMap.put(systemCmds[4], DisplayManager::colors);
-        commandMap.put(systemCmds[5], CommandManager::exitProgramDefault);
-        commandMap.put(systemCmds[6], CommandManager::exitProgramQuick);
+        commandMap.put(systemCmds[5], DisplayManager::textModification);
+        commandMap.put(systemCmds[6], CommandManager::exitProgramDefault);
+        commandMap.put(systemCmds[7], CommandManager::exitProgramQuick);
 
         commandMap.put(extensionCmds[0], CalculatorPage::calculator);
         commandMap.put(extensionCmds[1], NotepadPage::displayNotepad);
