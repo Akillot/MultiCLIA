@@ -1,6 +1,7 @@
 package core.layout;
 
 import static core.layout.TextFunc.alignment;
+import static java.lang.System.out;
 
 public class BorderFunc {
     public static int numberOfSymbols = 1;
@@ -8,22 +9,22 @@ public class BorderFunc {
     private static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
     public static void displaySmallBorder(int numberOfSymbol) {
-        System.out.print(symbolsOfBorder[0]);
+        out.print(symbolsOfBorder[0]);
         for (int i = 0; i < borderWidth; i++) {
-            System.out.print(symbolsOfBorder[numberOfSymbol]);
+            out.print(symbolsOfBorder[numberOfSymbol]);
         }
-        System.out.println(symbolsOfBorder[0]);
+        out.println(symbolsOfBorder[0]);
     }
 
     public static void displayBigBorder() {
         displaySmallBorder(numberOfSymbols);
-        System.out.println(symbolsOfBorder[2] + alignment(-61) + symbolsOfBorder[2]);
+        out.println(symbolsOfBorder[2] + alignment(-61) + symbolsOfBorder[2]);
         displaySmallBorder(numberOfSymbols);
     }
 
     public static void displayMarginBigBorder() {
-        System.out.print("\n");
+        out.print("\n");
         displayBigBorder();
-        System.out.print("\n");
+        out.print("\n");
     }
 }

@@ -8,6 +8,7 @@ import static core.command_handling_system.CommandHandler.systemCmds;
 import static core.layout.BorderFunc.displayMarginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.TextFunc.alignment;
+import static java.lang.System.out;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(System.in);
@@ -48,13 +49,13 @@ public class DisplayManager {
             "cyan", "white", "gray", "black"};
 
     public static void tip(String text, int alignment) {
-        System.out.println(alignment(alignment) + BOLD
+        out.println(alignment(alignment) + BOLD
                 + "[" + WHITE + BOLD + "i" + RESET
                 + BOLD + "] " + text + RESET);
     }
 
     public static void commandsSideBySide() {
-        System.out.print("\n\n");
+        out.print("\n\n");
         message("System Commands                         Extension Commands", "purple", 58);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
@@ -63,9 +64,9 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            System.out.printf(alignment(58) + "%-30s          %-30s%n", systemCmd, extensionCmd);
+            out.printf(alignment(58) + "%-30s          %-30s%n", systemCmd, extensionCmd);
         }
-        System.out.print("\n");
+        out.print("\n");
         displayMarginBigBorder();
     }
 
@@ -83,12 +84,12 @@ public class DisplayManager {
         }
 
         String coloredText = getColoredText(text, color);
-        System.out.println(alignment(alignment) + coloredText);
+        out.println(alignment(alignment) + coloredText);
     }
 
     public static void exitMessage(String exitText, int sleep) {
         for (char ch : exitText.toCharArray()) {
-            System.out.print(ch);
+            out.print(ch);
             try {
                 Thread.sleep(sleep);
             } catch (InterruptedException ex) {
@@ -148,28 +149,28 @@ public class DisplayManager {
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
-            System.out.print(WHITE + BOLD + "\r" + spinner[i % spinner.length] + RESET);
+            out.print(WHITE + BOLD + "\r" + spinner[i % spinner.length] + RESET);
             try {
                 Thread.sleep(frames);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
-        System.out.print(WHITE + BOLD + "\r    ✓" + RESET);
+        out.print(WHITE + BOLD + "\r    ✓" + RESET);
     }
 
     public static void textModification() {
-        System.out.print("\n\n");
+        out.print("\n\n");
         message("All colors and text modifiers", "white", 58);
-        System.out.print("\n");
+        out.print("\n");
         for (String color : COLORS) {
             message(color, color, 58);
         }
 
-        System.out.print("\n");
-        System.out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
-        System.out.println(WHITE + ITALICS + alignment(58) + "Italics" + RESET);
-        System.out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
+        out.print("\n");
+        out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
+        out.println(WHITE + ITALICS + alignment(58) + "Italics" + RESET);
+        out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
         displayMarginBigBorder();
     }
 }

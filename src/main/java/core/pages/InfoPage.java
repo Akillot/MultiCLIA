@@ -9,6 +9,7 @@ import static core.layout.ColorFunc.*;
 import static core.layout.CommandManager.openUri;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
+import static java.lang.System.out;
 
 public  class InfoPage {
     public static String version = "A-0.6.5";
@@ -18,7 +19,7 @@ public  class InfoPage {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(" dd-MM-yyyy" + " HH:mm");
         String formattedTime = localTime.format(myFormatter);
-        System.out.println("\n");
+        out.println("\n");
         message("Current version:", "white", 58);
         message(version, "purple", 58);
         message("Author: Nick Zozulia", "white", 58);
@@ -27,9 +28,9 @@ public  class InfoPage {
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
                 / (1000 * 1000) + "M"), "white", 58);
 
-        System.out.print("\n");
+        out.print("\n");
         tip("Enter '+' to open and '-' to skip", 58);
-        System.out.print(alignment(58) + WHITE + BOLD + "Github: " + RESET);
+        out.print(alignment(58) + WHITE + BOLD + "Github: " + RESET);
         String choice = scanner.nextLine().toLowerCase();
 
         switch (choice) {
@@ -44,7 +45,7 @@ public  class InfoPage {
 
             case "-":
                 message("Alright, next time", "white", 58);
-                System.out.print("\n");
+                out.print("\n");
                 break;
 
             default:

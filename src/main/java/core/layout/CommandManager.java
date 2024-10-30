@@ -10,6 +10,7 @@ import static core.layout.BorderFunc.displayMarginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
+import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class CommandManager {
@@ -76,7 +77,7 @@ public class CommandManager {
         loadingAnimation(300, 10);
         exitMessage(alignment(62) + RED + "Program termination" + RESET, 50);
         out.print("\n");
-        System.exit(0);
+        exit(0);
     }
 
     public static void exitProgramQuick() {
@@ -84,6 +85,6 @@ public class CommandManager {
         out.print(WHITE + BOLD + "\r    ✓" + RESET);
         exitMessage(alignment(62) + RED + "Quick program termination" + RESET, 0);
         out.print("\n");
-        System.exit(0);
+        exit(0);
     }
 }

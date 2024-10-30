@@ -3,6 +3,7 @@ package core.layout;
 import static core.layout.BorderFunc.*;
 import static core.layout.ColorFunc.*;
 import static core.layout.DisplayManager.message;
+import static java.lang.System.out;
 
 public class TextFunc {
 
@@ -13,18 +14,18 @@ public class TextFunc {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
                 displayBigBorder();
-                System.out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    System.out.println();
+                    out.println();
                 }
             } else {
-                System.out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+                out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    System.out.println();
+                    out.println();
                 }
             }
         }
-        System.out.println();
+        out.println();
     }
 
     public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive,
@@ -36,14 +37,14 @@ public class TextFunc {
                 BOLD + mainText + RESET + additionalText;
 
         for (char ch : formattedText.toCharArray()) {
-            System.out.print(ch);
+            out.print(ch);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
                 message("Error, try again", "red", 58);
             }
         }
-        System.out.print("");
+        out.print("");
     }
 
     public static String alignment(int widthOfElement) {
