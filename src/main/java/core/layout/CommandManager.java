@@ -5,6 +5,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 
 import static core.layout.BorderFunc.displayMarginBigBorder;
 import static core.layout.ColorFunc.*;
@@ -50,7 +53,9 @@ public class CommandManager {
 
     public static void getUserExternalIp() {
         try {
-            URL url = new URL("https://api.ipify.org");
+            URI uri = new URI("https://api.ipify.org");
+            URL url = uri.toURL();
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
@@ -63,6 +68,7 @@ public class CommandManager {
             message("Error: " + e.getMessage(), "red", 58);
         }
     }
+
 
     public static void exitExtension() {
         out.print("\n");
