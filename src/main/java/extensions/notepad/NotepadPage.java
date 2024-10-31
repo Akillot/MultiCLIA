@@ -1,4 +1,4 @@
-package extansions.notepad;
+package extensions.notepad;
 
 import java.util.Scanner;
 
@@ -8,7 +8,8 @@ import static core.layout.ColorFunc.*;
 import static core.layout.CommandManager.exitExtension;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
-import static core.layout.TextFunc.displaySlowMotionText;
+import static core.layout.TextFunc.slowMotionText;
+import static java.lang.System.out;
 
 public class NotepadPage {
     private static  Scanner scanner = new Scanner(System.in);
@@ -16,14 +17,14 @@ public class NotepadPage {
     public static void displayNotepad() {
         boolean running = true;
         while (running) {
-            System.out.print("\n\n");
+            out.print("\n\n");
             String[] operations = new String[]{"1 create note", "2 open note", "3 delete note"};
             for (String operation : operations) {
                 message(operation, "white", 58);
             }
-            System.out.println(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET);
-            System.out.print("\n");
-            displaySlowMotionText(50, 58, true, false, "Your choice", ": ");
+            out.println(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET);
+            out.print("\n");
+            slowMotionText(50, 58, true, false, "Your choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
@@ -50,32 +51,32 @@ public class NotepadPage {
 
     // Creating a new note
     private static void createNote() {
-        System.out.print(alignment(58) + BOLD + WHITE + "Enter title: " + RESET);
+        out.print(alignment(58) + BOLD + WHITE + "Enter title: " + RESET);
         String title = scanner.nextLine();
-        System.out.print(alignment(58) + BOLD + WHITE + "Enter content: " + RESET);
+        out.print(alignment(58) + BOLD + WHITE + "Enter content: " + RESET);
         String content = scanner.nextLine();
 
         NotepadFunc note = new NotepadFunc(title, content);
         note.saveToFile();
         marginBigBorder();
         message("Note saved", "purple", 58);
-        System.out.print("\n");
+        out.print("\n");
         bigBorder();
     }
 
     private static void openNote() {
-        System.out.print(alignment(58) + BOLD + WHITE + "Enter title to open: " + RESET);
+        out.print(alignment(58) + BOLD + WHITE + "Enter title to open: " + RESET);
         String title = scanner.nextLine();
 
         NotepadFunc note = NotepadFunc.readFromFile(title);
         if (note != null) {
             message("Content: ", "white", 58);
-            System.out.println(note.getContent());
+            out.println(note.getContent());
             bigBorder();
-            System.out.print("\n");
+            out.print("\n");
 
             tip("Do you want to update this note? [+/-]", 58);
-            System.out.print(alignment(58) + BOLD + WHITE + "Your choice: " + RESET);
+            out.print(alignment(58) + BOLD + WHITE + "Your choice: " + RESET);
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
@@ -84,16 +85,16 @@ public class NotepadPage {
                 note.setContent(newContent);
                 note.saveToFile();
 
-                System.out.print("\n");
+                out.print("\n");
                 bigBorder();
                 message("Note updated", "purple", 58);
-                System.out.print("\n");
+                out.print("\n");
                 bigBorder();
             }
             else if(answer.equals("-")) {
-                System.out.print("\n");
+                out.print("\n");
                 message("Opening canceled", "purple", 58);
-                System.out.print("\n");
+                out.print("\n");
                 bigBorder();
             }
         } else {
@@ -104,12 +105,12 @@ public class NotepadPage {
     }
 
     private static void deleteNote() {
-        System.out.print(alignment(58) + BOLD + WHITE + "Enter title to delete note: " + RESET);
+        out.print(alignment(58) + BOLD + WHITE + "Enter title to delete note: " + RESET);
         String title = scanner.nextLine();
         boolean success = NotepadFunc.deleteNoteFile(title);
         if (success) {
             message("Note deleted", "purple", 58);
-            System.out.print("\n");
+            out.print("\n");
             bigBorder();
         } else {
             marginBigBorder();

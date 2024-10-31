@@ -1,4 +1,4 @@
-package extansions.math;
+package extensions.math;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -6,6 +6,7 @@ import javax.script.ScriptException;
 
 import static core.layout.CommandManager.exitExtension;
 import static core.layout.DisplayManager.errorAscii;
+import static java.lang.System.out;
 
 
 public class CalculatorFunc {
@@ -15,8 +16,8 @@ public class CalculatorFunc {
 
         try {
             Object result = engine.eval(mathStatement);
-            System.out.print("= " + result);
-            System.out.println("\n");
+            out.print("= " + result);
+            out.println("\n");
 
             if(result != null && result.toString().equalsIgnoreCase("exit")) {
                 exitExtension();

@@ -1,5 +1,7 @@
 package core.layout;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -166,17 +168,31 @@ public class DisplayManager {
         for (String color : COLORS) {
             message(color, color, 58);
         }
-
         out.print("\n");
         out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
-        out.println(WHITE + ITALICS + alignment(58) + "Italics" + RESET);
+        out.println(WHITE + ITALIC + alignment(58) + "Italics" + RESET);
         out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
         marginBigBorder();
     }
 
-    public static void appDescription(){
-        message("Description", "white", 14);
-        out.print("\n");
+    public static void time(){
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
+        String formattedTime = localTime.format(myFormatter);
+        message("Current time: " + formattedTime, "white", 58);
+    }
 
+    public static void usingMemory(){
+        message("Memory used: " +
+                ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
+                        / (1000 * 1000) + "M"), "white", 58);
+    }
+
+    public static Runnable appDescription() {
+        return () -> {
+            message("Description", "white", 14);
+            out.print("\n");
+
+        };
     }
 }

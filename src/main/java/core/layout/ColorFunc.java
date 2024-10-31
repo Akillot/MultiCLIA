@@ -16,7 +16,7 @@ public class ColorFunc {
     public static final String WHITE = "\033[0;38m";
 
     public static final String BOLD = "\033[1m";
-    public static final String ITALICS = "\u001b[3m";
+    public static final String ITALIC = "\u001b[3m";
     public static final String UNDERLINE = "\033[4m";
 
     public static Color getRandomColor() {

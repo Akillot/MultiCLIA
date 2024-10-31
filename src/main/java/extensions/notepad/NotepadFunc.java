@@ -1,4 +1,4 @@
-package extansions.notepad;
+package extensions.notepad;
 
 import lombok.Getter;
 import lombok.Setter;

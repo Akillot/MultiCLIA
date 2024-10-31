@@ -1,16 +1,17 @@
-package extansions.browser;
+package extensions.browser;
 
 import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.CommandManager.openUri;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
+import static java.lang.System.out;
 
 public class BrowserFunc {
     public static void browser() {
         while (true) {
-            System.out.print("\n");
-            System.out.print(alignment(58) + PURPLE + BOLD + "Enter domain" + RESET
+            out.print("\n");
+            out.print(alignment(58) + PURPLE + BOLD + "Enter domain" + RESET
                     + WHITE + BOLD + " (or type 'exit' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
 
@@ -23,7 +24,7 @@ public class BrowserFunc {
             String domain = "https://www." + domainInput;
             //FIX
             tip("Enter '+' to open, '-' to cancel", 58);
-            System.out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
+            out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {

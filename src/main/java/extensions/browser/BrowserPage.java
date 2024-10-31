@@ -1,12 +1,13 @@
-package extansions.browser;
+package extensions.browser;
 import static core.layout.BorderFunc.bigBorder;
-import static extansions.browser.BrowserFunc.browser;
-import static extansions.browser.BrowserFunc.browserLogo;
+import static extensions.browser.BrowserFunc.browser;
+import static extensions.browser.BrowserFunc.browserLogo;
 import static core.layout.DisplayManager.logoAscii;
+import static java.lang.System.out;
 
 public class BrowserPage {
     public static void browserStarter() {
-        System.out.println("\n");
+        out.println("\n");
         logoAscii(browserLogo, 58);
         bigBorder();
         browser();

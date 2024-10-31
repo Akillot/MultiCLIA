@@ -28,12 +28,12 @@ public class TextFunc {
         out.println();
     }
 
-    public static void displaySlowMotionText(int delay, int alignment, boolean isUnderlineActive,
-                                             boolean isItalicActive, String mainText, String additionalText) {
+    public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
+                                      boolean isItalicActive, String mainText, String additionalText) {
         TextFunc.alignment = alignment;
         String formattedText = alignment(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
-                (isItalicActive ? ITALICS : "") +
+                (isItalicActive ? ITALIC : "") +
                 BOLD + mainText + RESET + additionalText;
 
         for (char ch : formattedText.toCharArray()) {

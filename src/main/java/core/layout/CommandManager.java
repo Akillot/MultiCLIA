@@ -23,12 +23,12 @@ public class CommandManager {
             URI uri = new URI(userSite);
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(uri);
-                System.out.print("\r   Opened in browser\n");
+                out.print("\r   Opened in browser\n\n");
             } else {
-                System.out.println("Error: Desktop or browse action not supported.");
+                out.println("Error: Desktop or browse action not supported");
             }
         } catch (URISyntaxException | IOException e) {
-            System.out.println("Error opening URL.");
+            out.println("Error opening URL");
         }
     }
 
@@ -65,7 +65,7 @@ public class CommandManager {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String ip = reader.readLine();
             reader.close();
-            message("Your external IP: " + ip, "white", 58);
+            message("Your external IP: " + PURPLE + ip + RESET, "white", 58);
 
         } catch (Exception e) {
             message("Error: " + e.getMessage(), "red", 58);
@@ -73,8 +73,9 @@ public class CommandManager {
     }
 
     public static void choice(String title, Runnable action) {
-        System.out.println("Enter '+' to open and '-' to skip");
-        System.out.print(title);
+        message("Enter '+' to open and '-' to skip", "white", 58);
+        out.print(alignment(58) + PURPLE + BOLD + title + RESET
+                + BOLD + ": " + RESET);
         String choice = scanner.nextLine().toLowerCase();
 
         switch (choice) {
@@ -82,25 +83,25 @@ public class CommandManager {
                 try {
                     action.run();
                 } catch (Exception e) {
-                    System.out.println("Error executing action.");
+                    out.println("Error executing action");
                 }
                 break;
 
             case "-":
-                System.out.println("Alright, next time");
+                message("Alright, next time", "white", 58);
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                message("Invalid choice", "red", 58);
                 break;
         }
-        marginBigBorder();
+        out.print("\n");
     }
 
     public static void exitExtension() {
         out.print("\n");
+        loadingAnimation(300, 10);
         exitMessage(alignment(58) + RED + BOLD + "Application exit" + RESET, 100);
-        out.println(RED + "...\n" + RESET);
         marginBigBorder();
         out.print("\n");
     }
