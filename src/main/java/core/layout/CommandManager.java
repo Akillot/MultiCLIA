@@ -82,6 +82,7 @@ public class CommandManager {
             case "+":
                 try {
                     action.run();
+                    out.print("\n");
                 } catch (Exception e) {
                     out.println("Error executing action");
                 }
@@ -89,13 +90,13 @@ public class CommandManager {
 
             case "-":
                 message("Alright, next time", "white", 58);
+                out.print("\n\n");
                 break;
 
             default:
                 message("Invalid choice", "red", 58);
                 break;
         }
-        out.print("\n");
     }
 
     public static void exitExtension() {

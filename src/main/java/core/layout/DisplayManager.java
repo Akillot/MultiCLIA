@@ -190,9 +190,20 @@ public class DisplayManager {
 
     public static Runnable appDescription() {
         return () -> {
-            message("Description", "white", 14);
             out.print("\n");
-
+            marginBigBorder();
+            out.print("\n");
+            message("MultiCLIA [" + ITALIC + "Multi Command Line Interface App" + RESET + "]\n\n" +
+                            alignment(58) + "is an open-source application designed for \n" +
+                            alignment(58) + "streamlined command-line interaction.\n\n" +
+                            alignment(58) + "It provides a flexible, modular interface where\n" +
+                            alignment(58) + "functionality is built on extensible components.\n\n" +
+                            alignment(58) + "Users will soon be able to add new extensions\n" +
+                            alignment(58) + "with any functionality, allowing limitless customization\n" +
+                            alignment(58) + "and adaptation to specific workflows.",
+                    "white", 58);
+            out.print("\n");
+            marginBigBorder();
         };
     }
 }
