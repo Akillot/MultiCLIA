@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
-import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.TextFunc.alignment;
 import static java.lang.System.out;
@@ -68,7 +68,7 @@ public class DisplayManager {
             out.printf(alignment(58) + "%-30s          %-30s%n", systemCmd, extensionCmd);
         }
         out.print("\n");
-        displayMarginBigBorder();
+       marginBigBorder();
     }
 
     public static void message(String text, String colorName, int alignment) {
@@ -101,7 +101,6 @@ public class DisplayManager {
 
     public static void logoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(8);
-
         switch (indexOfLogo) {
             case 0:
                 logoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
@@ -172,6 +171,12 @@ public class DisplayManager {
         out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
         out.println(WHITE + ITALICS + alignment(58) + "Italics" + RESET);
         out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
-        displayMarginBigBorder();
+        marginBigBorder();
+    }
+
+    public static void appDescription(){
+        message("Description", "white", 14);
+        out.print("\n");
+
     }
 }

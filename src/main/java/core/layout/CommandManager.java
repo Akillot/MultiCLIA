@@ -9,10 +9,11 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
-import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
+
 import static java.lang.System.exit;
 import static java.lang.System.out;
 
@@ -22,23 +23,25 @@ public class CommandManager {
             URI uri = new URI(userSite);
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(uri);
-                out.print("\r   Opened in browser\n");
+                System.out.print("\r   Opened in browser\n");
             } else {
-                errorAscii();
+                System.out.println("Error: Desktop or browse action not supported.");
             }
         } catch (URISyntaxException | IOException e) {
-            displayMarginBigBorder();
-            errorAscii();
-        } catch (Exception e) {
-            errorAscii();
+            System.out.println("Error opening URL.");
         }
     }
+
+    public static Runnable getOpenUriAction(String userSite) {
+        return () -> openUri(userSite);
+    }
+
     public static void getUserIp(){
         out.print("\n\n");
         getUserLocalIp();
         getUserExternalIp();
         out.print("\n");
-        displayMarginBigBorder();
+        marginBigBorder();
     }
 
     public static void getUserLocalIp(){
@@ -69,12 +72,36 @@ public class CommandManager {
         }
     }
 
+    public static void choice(String title, Runnable action) {
+        System.out.println("Enter '+' to open and '-' to skip");
+        System.out.print(title);
+        String choice = scanner.nextLine().toLowerCase();
+
+        switch (choice) {
+            case "+":
+                try {
+                    action.run();
+                } catch (Exception e) {
+                    System.out.println("Error executing action.");
+                }
+                break;
+
+            case "-":
+                System.out.println("Alright, next time");
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+        marginBigBorder();
+    }
 
     public static void exitExtension() {
         out.print("\n");
         exitMessage(alignment(58) + RED + BOLD + "Application exit" + RESET, 100);
         out.println(RED + "...\n" + RESET);
-        displayMarginBigBorder();
+        marginBigBorder();
         out.print("\n");
     }
 

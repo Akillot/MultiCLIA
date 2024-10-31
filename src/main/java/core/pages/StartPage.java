@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
@@ -12,7 +12,7 @@ public class StartPage {
     public static void start() {
         out.print("\n\n");
         logoAscii(mainLogoAscii, 48);
-        displayMarginBigBorder();
+        marginBigBorder();
 
         message("+--------------------+", "white", 58);
         message("Version: " + version, "white", 56);
@@ -28,7 +28,7 @@ public class StartPage {
             try {
                 displayMainMenuUi();
             } catch (Exception ex) {
-                displayMarginBigBorder();
+                marginBigBorder();
                 errorAscii();
             }
         }

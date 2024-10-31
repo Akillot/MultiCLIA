@@ -13,7 +13,7 @@ public class TextFunc {
         for (int i = 0; i < text.length(); i += width) {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
-                displayBigBorder();
+                bigBorder();
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
                     out.println();

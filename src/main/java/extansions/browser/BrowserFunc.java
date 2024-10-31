@@ -1,6 +1,6 @@
 package extansions.browser;
 
-import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.CommandManager.openUri;
 import static core.layout.DisplayManager.*;
@@ -16,12 +16,12 @@ public class BrowserFunc {
 
             if (domainInput.equals("exit")) {
                 message("Exiting browser...", "red", 58);
-                displayMarginBigBorder();
+                marginBigBorder();
                 break;
             }
 
             String domain = "https://www." + domainInput;
-
+            //FIX
             tip("Enter '+' to open, '-' to cancel", 58);
             System.out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
             String choice = scanner.nextLine().toLowerCase();
@@ -31,7 +31,7 @@ public class BrowserFunc {
                     try {
                         openUri(domain);
                     } catch (Exception e) {
-                        displayMarginBigBorder();
+                        marginBigBorder();
                         errorAscii();
                         message("Failed to open link", "red", 58);
                     }
@@ -42,7 +42,7 @@ public class BrowserFunc {
                     break;
 
                 default:
-                    displayMarginBigBorder();
+                    marginBigBorder();
                     errorAscii();
                     break;
             }

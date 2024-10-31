@@ -18,7 +18,7 @@ public class MenuPage {
         if (!registry.executeCommand(nameOfFunction)) {
             out.print("\n\n");
             errorAscii();
-            displayMarginBigBorder();
+            marginBigBorder();
         }
     }
 }

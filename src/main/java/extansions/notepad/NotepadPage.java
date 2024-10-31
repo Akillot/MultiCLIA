@@ -2,8 +2,8 @@ package extansions.notepad;
 
 import java.util.Scanner;
 
-import static core.layout.BorderFunc.displayBigBorder;
-import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.BorderFunc.bigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.CommandManager.exitExtension;
 import static core.layout.DisplayManager.*;
@@ -57,10 +57,10 @@ public class NotepadPage {
 
         NotepadFunc note = new NotepadFunc(title, content);
         note.saveToFile();
-        displayMarginBigBorder();
+        marginBigBorder();
         message("Note saved", "purple", 58);
         System.out.print("\n");
-        displayBigBorder();
+        bigBorder();
     }
 
     private static void openNote() {
@@ -71,7 +71,7 @@ public class NotepadPage {
         if (note != null) {
             message("Content: ", "white", 58);
             System.out.println(note.getContent());
-            displayBigBorder();
+            bigBorder();
             System.out.print("\n");
 
             tip("Do you want to update this note? [+/-]", 58);
@@ -85,19 +85,19 @@ public class NotepadPage {
                 note.saveToFile();
 
                 System.out.print("\n");
-                displayBigBorder();
+                bigBorder();
                 message("Note updated", "purple", 58);
                 System.out.print("\n");
-                displayBigBorder();
+                bigBorder();
             }
             else if(answer.equals("-")) {
                 System.out.print("\n");
                 message("Opening canceled", "purple", 58);
                 System.out.print("\n");
-                displayBigBorder();
+                bigBorder();
             }
         } else {
-            displayMarginBigBorder();
+            marginBigBorder();
             errorAscii();
             message("Note not found", "red", 58);
         }
@@ -110,9 +110,9 @@ public class NotepadPage {
         if (success) {
             message("Note deleted", "purple", 58);
             System.out.print("\n");
-            displayBigBorder();
+            bigBorder();
         } else {
-            displayMarginBigBorder();
+            marginBigBorder();
             errorAscii();
             message("Note not found", "red", 58);
         }

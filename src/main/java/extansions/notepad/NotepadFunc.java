@@ -1,26 +1,23 @@
 package extansions.notepad;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.*;
 
-import static core.layout.BorderFunc.displayMarginBigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.DisplayManager.errorAscii;
 import static core.layout.DisplayManager.message;
 
 
 public class NotepadFunc {
     private String title;
+    @Setter
+    @Getter
     private String content;
 
     public NotepadFunc(String title, String content) {
         this.title = title;
-        this.content = content;
-    }
-
-    public String getContent(){
-        return content;
-    }
-
-    public void setContent(String content){
         this.content = content;
     }
 
@@ -34,7 +31,7 @@ public class NotepadFunc {
             writer.write(content);
             message("Note saved successfully!", "purple", 58);
         } catch (IOException e) {
-            displayMarginBigBorder();
+            marginBigBorder();
             errorAscii();
             message("Error saving the note: " + e.getMessage(), "red", 58);
         }

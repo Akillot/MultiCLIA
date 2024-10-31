@@ -21,18 +21,16 @@ public class CalculatorPage {
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
-                    displayBigBorder();
+                    bigBorder();
                     message("No numbers entered", "red", 18);
                     continue;
                 }
                 System.out.println("\n");
-                displayBigBorder();
+                bigBorder();
                 calculateOperation(mathStatementString);
-                displayBigBorder();
-
+                bigBorder();
                 System.out.print(alignment(58) + BOLD + WHITE + "Your choice is: " + RESET);
-
-                displayBigBorder();
+                bigBorder();
             }
             catch (Exception ex) {
                 errorAscii();

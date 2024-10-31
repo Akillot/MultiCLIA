@@ -8,7 +8,7 @@ public class BorderFunc {
     public static final int borderWidth = 62;
     private static String[] symbolsOfBorder = new String[]{"+", "-", "|", "*", "_", "~", "·"};
 
-    public static void displaySmallBorder(int numberOfSymbol) {
+    public static void smallBorder(int numberOfSymbol) {
         out.print(symbolsOfBorder[0]);
         for (int i = 0; i < borderWidth; i++) {
             out.print(symbolsOfBorder[numberOfSymbol]);
@@ -16,15 +16,15 @@ public class BorderFunc {
         out.println(symbolsOfBorder[0]);
     }
 
-    public static void displayBigBorder() {
-        displaySmallBorder(numberOfSymbols);
+    public static void bigBorder() {
+        smallBorder(numberOfSymbols);
         out.println(symbolsOfBorder[2] + alignment(-61) + symbolsOfBorder[2]);
-        displaySmallBorder(numberOfSymbols);
+        smallBorder(numberOfSymbols);
     }
 
-    public static void displayMarginBigBorder() {
+    public static void marginBigBorder() {
         out.print("\n");
-        displayBigBorder();
+        bigBorder();
         out.print("\n");
     }
 }
