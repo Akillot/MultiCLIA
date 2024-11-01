@@ -59,7 +59,7 @@ public class DisplayManager {
 
     public static void commandsSideBySide() {
         out.print("\n\n");
-        message("System Commands                         Extension Commands", "purple", 58);
+        message("System Commands                 Extension Commands", "purple", 50);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -67,7 +67,7 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(58) + "%-30s          %-30s%n", systemCmd, extensionCmd);
+            out.printf(alignment(50) + "%-22s          %-10s%n", systemCmd, extensionCmd);
         }
         out.print("\n");
        marginBigBorder();
