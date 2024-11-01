@@ -47,7 +47,7 @@ public class CommandManager {
     public static void getUserLocalIp(){
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            message("Your local IP: " + localHost.getHostAddress(), "white", 58);
+            out.println(alignment(58) + WHITE + BOLD + "Your local IP: " + RESET + PURPLE + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
             message("IP is undefined", "red", 58);
@@ -65,7 +65,7 @@ public class CommandManager {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String ip = reader.readLine();
             reader.close();
-            message("Your external IP: " + PURPLE + ip + RESET, "white", 58);
+            out.println(alignment(58) + WHITE + BOLD + "Your external IP: " + RESET + PURPLE + ip + RESET);
 
         } catch (Exception e) {
             message("Error: " + e.getMessage(), "red", 58);

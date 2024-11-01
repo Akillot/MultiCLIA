@@ -1,3 +1,5 @@
+package core;
+
 import core.pages.StartPage;
 
 public class Launcher {
