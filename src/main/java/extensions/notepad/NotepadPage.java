@@ -49,7 +49,6 @@ public class NotepadPage {
         }
     }
 
-    // Creating a new note
     private static void createNote() {
         out.print(alignment(58) + BOLD + WHITE + "Enter title: " + RESET);
         String title = scanner.nextLine();
@@ -71,7 +70,7 @@ public class NotepadPage {
         NotepadFunc note = NotepadFunc.readFromFile(title);
         if (note != null) {
             message("Content: ", "white", 58);
-            out.println(note.getContent());
+            message(note.getContent(), "white", 58);
             bigBorder();
             out.print("\n");
 

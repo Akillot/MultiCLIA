@@ -18,7 +18,8 @@ public class CommandHandler {
 
     public static String[] systemCmds = {
             "sys.cmds" ,"sys.setts", "sys.rerun", "sys.time",
-            "sys.ip", "sys.info", "sys.text", "sys.exit", "sys.exitq"};
+            "sys.ip", "sys.info", "sys.text", "sys.exit", "sys.exitq",
+            "sys.help"};
     public static String[] extensionCmds = {
             "calculator", "notepad", "browser"};
 
@@ -39,6 +40,7 @@ public class CommandHandler {
         commandMap.put(systemCmds[6], DisplayManager::textModification);
         commandMap.put(systemCmds[7], CommandManager::exitProgramDefault);
         commandMap.put(systemCmds[8], CommandManager::exitProgramQuick);
+        commandMap.put(systemCmds[9], DisplayManager::commandsDescription);
 
         commandMap.put(extensionCmds[0], CalculatorPage::calculator);
         commandMap.put(extensionCmds[1], NotepadPage::displayNotepad);

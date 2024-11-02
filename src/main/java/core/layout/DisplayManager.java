@@ -206,4 +206,10 @@ public class DisplayManager {
             marginBigBorder();
         };
     }
+
+    public static void commandsDescription(){
+        message("sys.cmds: show all commands","white", 58);
+        message("sys.rerun: restart an app\n" +
+                alignment(58) + "without cleaning previous context","white", 58);
+    }
 }

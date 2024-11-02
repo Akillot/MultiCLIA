@@ -78,4 +78,5 @@ public class NotepadFunc {
             return false;
         }
     }
+
 }
