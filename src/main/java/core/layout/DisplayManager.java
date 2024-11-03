@@ -7,8 +7,10 @@ import java.util.Scanner;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
+import static core.layout.BorderFunc.bigBorder;
 import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
+import static core.layout.CommandManager.choice;
 import static core.layout.TextFunc.alignment;
 import static java.lang.System.out;
 
@@ -55,9 +57,34 @@ public class DisplayManager {
         out.println(alignment(alignment) + WHITE + BOLD + "["  + modificator + "] " + RESET + text);
     }
 
-    public static void commandsSideBySide() {
+    public static void commandList(){
         messageModifier('n', 2);
-        message("System Commands                 Extension Commands", "purple", 50);
+        alert("i", "select a command type", 58);
+        messageModifier('n', 1);
+
+        choice("System", commandList(systemCmds, "white", 58));
+        marginBigBorder();
+        messageModifier('n', 1);
+
+        choice("Extensions",commandList(extensionCmds, "white", 58));
+        marginBigBorder();
+        messageModifier('n', 1);
+
+        choice("All", DisplayManager::allCommandList);
+        marginBigBorder();
+    }
+
+    private static Runnable commandList(String[] commands, String textColor, int alignment) {
+        return () -> {
+            for (String command : commands) {
+                message("· " + command, textColor, alignment);
+            }
+        };
+    }
+
+    private static void allCommandList() {
+        messageModifier('n', 1);
+        message("System Commands               Extensions", "purple", 58);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -65,10 +92,8 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(50) + "%-22s          %-10s%n", systemCmd, extensionCmd);
+            out.printf(alignment(58) + "%-20s          %-20s%n", systemCmd, extensionCmd);
         }
-        messageModifier('n', 1);
-       marginBigBorder();
     }
 
     public static void message(String text, String colorName, int alignment) {
@@ -220,8 +245,8 @@ public class DisplayManager {
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
                     "white", 58);
-            messageModifier('n', 1);
-            marginBigBorder();
+            messageModifier('n', 2);
+            bigBorder();
         };
     }
 

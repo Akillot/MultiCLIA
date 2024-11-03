@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.layout.BorderFunc.bigBorder;
+import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.CommandManager.*;
 import static core.layout.DisplayManager.*;
 
@@ -15,8 +15,9 @@ public  class InfoPage {
 
         messageModifier('n', 2);
         choice("Description", appDescription());
-        choice("Github", getOpenUriAction("https://github.com/Akillot/MultiCLIA"));
-        bigBorder();
         messageModifier('n', 1);
+
+        choice("Github", getOpenUriAction("https://github.com/Akillot/MultiCLIA"));
+        marginBigBorder();
     }
 }

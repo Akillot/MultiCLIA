@@ -24,7 +24,7 @@ public class CommandHandler {
             "calculator", "notepad", "browser"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        commandMap.put(systemCmds[0], DisplayManager::commandsSideBySide);
+        commandMap.put(systemCmds[0], DisplayManager::commandList);
         commandMap.put(systemCmds[1], SettingsPage::displaySettings);
         commandMap.put(systemCmds[2], StartPage::start);
         commandMap.put(systemCmds[3], TimePage::displayCurrentTime);

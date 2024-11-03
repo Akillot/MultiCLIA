@@ -23,12 +23,13 @@ public class CommandManager {
             URI uri = new URI(userSite);
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(uri);
-                out.print("\r   Opened in browser\n\n");
+                out.print("\r   Opened in browser");
+                messageModifier('n', 1);
             } else {
-                out.println("Error: Desktop or browse action not supported");
+                message("Error: Desktop or browse action not supported", "red", 58);
             }
         } catch (URISyntaxException | IOException e) {
-            out.println("Error opening URL");
+            message("Error opening URL", "red", 58);
         }
     }
 
@@ -90,7 +91,7 @@ public class CommandManager {
 
             case "-":
                 message("Alright, next time", "white", 58);
-                messageModifier('n', 2);
+                messageModifier('n', 1);
                 break;
 
             default:
