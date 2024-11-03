@@ -1,6 +1,5 @@
 package core.pages;
 
-import static com.ibm.icu.text.PluralRules.Operand.n;
 import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.DisplayManager.*;
