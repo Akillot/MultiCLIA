@@ -37,7 +37,7 @@ public class CommandManager {
     }
 
     public static void getUserIp(){
-        out.print("\n\n");
+        messageModifier('n', 2);
         getUserLocalIp();
         getUserExternalIp();
         messageModifier('n', 1);
@@ -90,7 +90,7 @@ public class CommandManager {
 
             case "-":
                 message("Alright, next time", "white", 58);
-                out.print("\n\n");
+                messageModifier('n', 2);
                 break;
 
             default:

@@ -9,7 +9,7 @@ import static java.lang.System.out;
 
 public class SettingsPage {
     public static void displaySettings() {
-        out.print("\n\n");
+        messageModifier('n', 2);
         out.print(alignment(60) + BOLD + "-" + PURPLE + ITALIC + "Memory\n" + RESET);
         usingMemory();
         choice("Text", textModification());

@@ -6,11 +6,10 @@ import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
 import static core.pages.InfoPage.version;
 import static core.pages.MenuPage.displayMainMenuUi;
-import static java.lang.System.out;
 
 public class StartPage {
     public static void start() {
-        out.print("\n\n");
+        messageModifier('n', 2);
         logoAscii(mainLogoAscii, 48);
         marginBigBorder();
 

@@ -6,7 +6,7 @@ import static java.lang.System.out;
 
 public class TimePage {
     public static void displayCurrentTime() {
-        out.print("\n\n");
+        messageModifier('n', 2);
         time();
         messageModifier('n', 1);
         out.println("First Line\fSecond Line");

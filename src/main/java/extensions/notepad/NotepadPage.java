@@ -17,7 +17,7 @@ public class NotepadPage {
     public static void displayNotepad() {
         boolean running = true;
         while (running) {
-            out.print("\n\n");
+            messageModifier('n', 2);
             String[] operations = new String[]{"1 create note", "2 open note", "3 delete note"};
             for (String operation : operations) {
                 message(operation, "white", 58);

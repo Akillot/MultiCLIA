@@ -58,7 +58,7 @@ public class DisplayManager {
     }
 
     public static void commandsSideBySide() {
-        out.print("\n\n");
+        messageModifier('n', 2);
         message("System Commands                 Extension Commands", "purple", 50);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
