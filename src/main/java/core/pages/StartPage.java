@@ -23,7 +23,7 @@ public class StartPage {
                 + alignment(56) + "commands", 56);
 
         message("+--------------------+", "white", 58);
-        out.print("\n");
+        messageModifier('n', 1);
         while(true) {
             try {
                 displayMainMenuUi();

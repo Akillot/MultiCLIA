@@ -19,6 +19,6 @@ public  class InfoPage {
         choice("Description", appDescription());
         choice("Github", getOpenUriAction("https://github.com/Akillot/MultiCLIA"));
         bigBorder();
-        out.print("\n");
+        messageModifier('n', 1);
     }
 }

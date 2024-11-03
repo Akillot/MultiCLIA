@@ -23,7 +23,7 @@ public class NotepadPage {
                 message(operation, "white", 58);
             }
             out.println(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET);
-            out.print("\n");
+            messageModifier('n', 1);
             slowMotionText(50, 58, true, false, "Your choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
 
@@ -59,7 +59,7 @@ public class NotepadPage {
         note.saveToFile();
         marginBigBorder();
         message("Note saved", "purple", 58);
-        out.print("\n");
+        messageModifier('n', 1);
         bigBorder();
     }
 
@@ -72,7 +72,7 @@ public class NotepadPage {
             message("Content: ", "white", 58);
             message(note.getContent(), "white", 58);
             bigBorder();
-            out.print("\n");
+            messageModifier('n', 1);
 
             tip("Do you want to update this note? [+/-]", 58);
             out.print(alignment(58) + BOLD + WHITE + "Your choice: " + RESET);
@@ -84,16 +84,16 @@ public class NotepadPage {
                 note.setContent(newContent);
                 note.saveToFile();
 
-                out.print("\n");
+                messageModifier('n', 1);
                 bigBorder();
                 message("Note updated", "purple", 58);
-                out.print("\n");
+                messageModifier('n', 1);
                 bigBorder();
             }
             else if(answer.equals("-")) {
-                out.print("\n");
+                messageModifier('n', 1);
                 message("Opening canceled", "purple", 58);
-                out.print("\n");
+                messageModifier('n', 1);
                 bigBorder();
             }
         } else {
@@ -109,7 +109,7 @@ public class NotepadPage {
         boolean success = NotepadFunc.deleteNoteFile(title);
         if (success) {
             message("Note deleted", "purple", 58);
-            out.print("\n");
+            messageModifier('n', 1);
             bigBorder();
         } else {
             marginBigBorder();

@@ -69,7 +69,7 @@ public class DisplayManager {
 
             out.printf(alignment(50) + "%-22s          %-10s%n", systemCmd, extensionCmd);
         }
-        out.print("\n");
+        messageModifier('n', 1);
        marginBigBorder();
     }
 
@@ -88,6 +88,24 @@ public class DisplayManager {
 
         String coloredText = getColoredText(text, color);
         out.println(alignment(alignment) + coloredText);
+    }
+
+    public static void messageModifier(char modifier, int amount) {
+        if(amount <= 0){
+            errorAscii();
+        }
+        String output = switch(modifier){
+          case 'n' -> "\n";
+          case 't' -> "\t";
+          case 'b' -> "\b";
+          case 'r' -> "\r";
+          case '\\' -> "\\";
+          default -> "\\" + modifier;
+        };
+
+        for (int i = 0; i < amount; i++) {
+            out.print(output);
+        }
     }
 
     public static void exitMessage(String exitText, int sleep) {
@@ -161,19 +179,21 @@ public class DisplayManager {
         out.print(WHITE + BOLD + "\r    ✓" + RESET);
     }
 
-    public static void textModification() {
-        out.print("\n\n");
+    public static Runnable textModification() {
+        return () -> {
+        messageModifier('n', 1);
         message("All colors and text modifiers", "white", 58);
-        out.print("\n");
+        messageModifier('n', 1);
         for (String color : COLORS) {
             message(color, color, 58);
         }
-        out.print("\n");
+        messageModifier('n', 1);
         out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
         out.println(WHITE + ITALIC + alignment(58) + "Italics" + RESET);
         out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
         marginBigBorder();
-    }
+    };
+        }
 
     public static void time(){
         LocalDateTime localTime = LocalDateTime.now();
@@ -190,9 +210,9 @@ public class DisplayManager {
 
     public static Runnable appDescription() {
         return () -> {
-            out.print("\n");
+            messageModifier('n', 1);
             marginBigBorder();
-            out.print("\n");
+            messageModifier('n', 1);
             message("MultiCLIA [" + ITALIC + "Multi Command Line Interface App" + RESET + "]\n\n" +
                             alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
@@ -202,14 +222,19 @@ public class DisplayManager {
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
                     "white", 58);
-            out.print("\n");
+            messageModifier('n', 1);
             marginBigBorder();
         };
     }
 
     public static void commandsDescription(){
         message("sys.cmds: show all commands","white", 58);
+        message("sys.setts: show a settings of the app","white", 58);
         message("sys.rerun: restart an app\n" +
                 alignment(58) + "without cleaning previous context","white", 58);
+        message("sys.time: show current time","white", 58);
+        message("sys.ip: show local and external IP addresses","white", 58);
+        message("sys.info: show info about the app","white", 58);
+        message("sys.setts: show a settings of the app","white", 58);
     }
 }

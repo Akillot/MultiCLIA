@@ -2,6 +2,7 @@ package core.pages;
 
 import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
+import static core.layout.CommandManager.choice;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.alignment;
 import static java.lang.System.out;
@@ -11,7 +12,8 @@ public class SettingsPage {
         out.print("\n\n");
         out.print(alignment(60) + BOLD + "-" + PURPLE + ITALIC + "Memory\n" + RESET);
         usingMemory();
-        out.print("\n");
+        choice("Text", textModification());
+        messageModifier('n', 1);
         marginBigBorder();
     }
 }

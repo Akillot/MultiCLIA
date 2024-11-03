@@ -40,7 +40,7 @@ public class CommandManager {
         out.print("\n\n");
         getUserLocalIp();
         getUserExternalIp();
-        out.print("\n");
+        messageModifier('n', 1);
         marginBigBorder();
     }
 
@@ -82,7 +82,7 @@ public class CommandManager {
             case "+":
                 try {
                     action.run();
-                    out.print("\n");
+                    messageModifier('n', 1);
                 } catch (Exception e) {
                     out.println("Error executing action");
                 }
@@ -100,26 +100,26 @@ public class CommandManager {
     }
 
     public static void exitExtension() {
-        out.print("\n");
+        messageModifier('n', 1);
         loadingAnimation(300, 10);
         exitMessage(alignment(58) + RED + BOLD + "Application exit" + RESET, 100);
         marginBigBorder();
-        out.print("\n");
+        messageModifier('n', 1);
     }
 
     public static void exitProgramDefault() {
-        out.print("\n");
+        messageModifier('n', 1);
         loadingAnimation(300, 10);
         exitMessage(alignment(62) + RED + "Program termination" + RESET, 50);
-        out.print("\n");
+        messageModifier('n', 1);
         exit(0);
     }
 
     public static void exitProgramQuick() {
-        out.print("\n");
+        messageModifier('n', 1);
         out.print(WHITE + BOLD + "\r    ✓" + RESET);
         exitMessage(alignment(62) + RED + "Quick program termination" + RESET, 0);
-        out.print("\n");
+        messageModifier('n', 1);
         exit(0);
     }
 }

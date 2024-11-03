@@ -13,7 +13,7 @@ public class MenuPage {
         PackageUnifier registry = new PackageUnifier();
         slowMotionText(100, 56, false, true, "Search", ": ");
         String nameOfFunction = scanner.nextLine().toLowerCase();
-        out.print("\n");
+        messageModifier('n', 1);
         wrapText(nameOfFunction, borderWidth - 2);
 
         if (!registry.executeCommand(nameOfFunction)) {

@@ -8,7 +8,8 @@ public class TimePage {
     public static void displayCurrentTime() {
         out.print("\n\n");
         time();
-        out.print("\n");
+        messageModifier('n', 1);
+        out.println("First Line\fSecond Line");
         marginBigBorder();
     }
 }

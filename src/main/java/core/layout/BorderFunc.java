@@ -1,5 +1,6 @@
 package core.layout;
 
+import static core.layout.DisplayManager.messageModifier;
 import static core.layout.TextFunc.alignment;
 import static java.lang.System.out;
 
@@ -23,8 +24,8 @@ public class BorderFunc {
     }
 
     public static void marginBigBorder() {
-        out.print("\n");
+        messageModifier('n', 1);
         bigBorder();
-        out.print("\n");
+        messageModifier('n', 1);
     }
 }

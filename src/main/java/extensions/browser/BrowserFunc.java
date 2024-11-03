@@ -10,7 +10,7 @@ import static java.lang.System.out;
 public class BrowserFunc {
     public static void browser() {
         while (true) {
-            out.print("\n");
+            messageModifier('n', 1);
             out.print(alignment(58) + PURPLE + BOLD + "Enter domain" + RESET
                     + WHITE + BOLD + " (or type 'exit' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
