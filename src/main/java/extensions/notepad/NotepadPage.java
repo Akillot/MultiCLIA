@@ -74,7 +74,7 @@ public class NotepadPage {
             bigBorder();
             messageModifier('n', 1);
 
-            tip("Do you want to update this note? [+/-]", 58);
+            alert("i", "Do you want to update this note? [+/-]", 58);
             out.print(alignment(58) + BOLD + WHITE + "Your choice: " + RESET);
             String answer = scanner.nextLine();
 

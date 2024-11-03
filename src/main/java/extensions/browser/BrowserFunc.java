@@ -23,7 +23,7 @@ public class BrowserFunc {
 
             String domain = "https://www." + domainInput;
             //FIX
-            tip("Enter '+' to open, '-' to cancel", 58);
+            alert("i","Enter '+' to open, '-' to cancel", 58);
             out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
             String choice = scanner.nextLine().toLowerCase();
 

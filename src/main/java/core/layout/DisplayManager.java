@@ -51,10 +51,8 @@ public class DisplayManager {
             "red", "blue", "green", "yellow", "purple",
             "cyan", "white", "gray", "black"};
 
-    public static void tip(String text, int alignment) {
-        out.println(alignment(alignment) + BOLD
-                + "[" + WHITE + BOLD + "i" + RESET
-                + BOLD + "] " + text + RESET);
+    public static void alert(String modificator ,String text, int alignment) {
+        out.println(alignment(alignment) + WHITE + BOLD + "["  + modificator + "] " + RESET + text);
     }
 
     public static void commandsSideBySide() {
@@ -181,19 +179,19 @@ public class DisplayManager {
 
     public static Runnable textModification() {
         return () -> {
-        messageModifier('n', 1);
-        message("All colors and text modifiers", "white", 58);
-        messageModifier('n', 1);
-        for (String color : COLORS) {
-            message(color, color, 58);
-        }
-        messageModifier('n', 1);
-        out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
-        out.println(WHITE + ITALIC + alignment(58) + "Italics" + RESET);
-        out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
-        marginBigBorder();
-    };
-        }
+            messageModifier('n', 1);
+            message("All colors and text modifiers", "white", 58);
+            messageModifier('n', 1);
+            for (String color : COLORS) {
+                message(color, color, 58);
+            }
+            messageModifier('n', 1);
+            out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
+            out.println(WHITE + ITALIC + alignment(58) + "Italics" + RESET);
+            out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
+            marginBigBorder();
+        };
+    }
 
     public static void time(){
         LocalDateTime localTime = LocalDateTime.now();

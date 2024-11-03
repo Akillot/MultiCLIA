@@ -1,5 +1,6 @@
 package core.pages;
 
+import static com.ibm.icu.text.PluralRules.Operand.n;
 import static core.layout.BorderFunc.marginBigBorder;
 import static core.layout.ColorFunc.*;
 import static core.layout.DisplayManager.*;
@@ -17,7 +18,7 @@ public class StartPage {
         message("Version: " + version, "white", 56);
         message("+--------------------+", "white", 58);
 
-        tip("Enter " + "'" + PURPLE + BOLD + "sys.cmds" + RESET + "'\n"
+        alert("i", "Enter " + "'" + PURPLE + BOLD + "sys.cmds" + RESET + "'\n"
                 + alignment(56) + "to show list of\n"
                 + alignment(56) + "commands", 56);
 

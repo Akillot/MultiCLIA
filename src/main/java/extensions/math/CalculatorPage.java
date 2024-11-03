@@ -16,7 +16,7 @@ public class CalculatorPage {
             try {
                 out.println("\n");
                 message("--------------------", "white", 58);
-                tip( "Enter numbers\n" + alignment(58) + "to calculate", 58);
+                alert( "i","Enter numbers\n" + alignment(58) + "to calculate", 58);
                 message("--------------------", "white", 58);
                 out.print(alignment(58) + BOLD + WHITE + "Input: " + RESET);
                 String mathStatementString = scanner.nextLine().trim();
