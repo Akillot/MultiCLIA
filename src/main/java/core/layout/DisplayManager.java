@@ -60,7 +60,6 @@ public class DisplayManager {
     public static void commandList(){
         messageModifier('n', 2);
         alert("i", "select a command type", 58);
-        messageModifier('n', 1);
 
         choice("System", commandList(systemCmds, "white", 58));
         marginBigBorder();
