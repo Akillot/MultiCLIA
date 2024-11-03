@@ -6,8 +6,6 @@ import static core.layout.BorderFunc.*;
 import static core.layout.DisplayManager.*;
 import static core.layout.TextFunc.*;
 
-import static java.lang.System.out;
-
 public class MenuPage {
     public static void displayMainMenuUi() {
         PackageUnifier registry = new PackageUnifier();

@@ -9,7 +9,6 @@ public class TimePage {
         messageModifier('n', 2);
         time();
         messageModifier('n', 1);
-        out.println("First Line\fSecond Line");
         marginBigBorder();
     }
 }

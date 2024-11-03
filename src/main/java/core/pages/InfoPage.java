@@ -4,8 +4,6 @@ import static core.layout.BorderFunc.bigBorder;
 import static core.layout.CommandManager.*;
 import static core.layout.DisplayManager.*;
 
-import static java.lang.System.out;
-
 public  class InfoPage {
     public static String version = "A-0.7.0";
 
