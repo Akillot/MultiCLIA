@@ -250,13 +250,23 @@ public class DisplayManager {
     }
 
     public static void commandsDescription(){
+        messageModifier('n', 2);
         message("sys.cmds: show all commands","white", 58);
+        messageModifier('n', 1);
         message("sys.setts: show a settings of the app","white", 58);
+        messageModifier('n', 1);
         message("sys.rerun: restart an app\n" +
                 alignment(58) + "without cleaning previous context","white", 58);
+        messageModifier('n', 1);
         message("sys.time: show current time","white", 58);
+        messageModifier('n', 1);
         message("sys.ip: show local and external IP addresses","white", 58);
+        messageModifier('n', 1);
         message("sys.info: show info about the app","white", 58);
+        messageModifier('n', 1);
         message("sys.setts: show a settings of the app","white", 58);
+        message("", "white", 58);
+        messageModifier('n', 1);
+        marginBigBorder();
     }
 }
