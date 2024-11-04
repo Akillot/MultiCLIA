@@ -62,11 +62,9 @@ public class DisplayManager {
         alert("i", "select a command type", 58);
 
         choice("System", commandList(systemCmds, "white", 58));
-        marginBigBorder();
         messageModifier('n', 1);
 
         choice("Extensions",commandList(extensionCmds, "white", 58));
-        marginBigBorder();
         messageModifier('n', 1);
 
         choice("All", DisplayManager::allCommandList);
@@ -82,7 +80,7 @@ public class DisplayManager {
     }
 
     private static void allCommandList() {
-        messageModifier('n', 1);
+        messageModifier('n', 2);
         message("System Commands               Extensions", "purple", 58);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
@@ -107,7 +105,6 @@ public class DisplayManager {
                 return;
             }
         }
-
         String coloredText = getColoredText(text, color);
         out.println(alignment(alignment) + coloredText);
     }

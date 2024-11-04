@@ -75,7 +75,6 @@ public class CommandManager {
 
     public static void choice(String title, Runnable action) {
         message("Enter '+' to open and '-' to skip", "white", 58);
-        messageModifier('n', 1);
         out.print(alignment(58) + PURPLE + BOLD + title + RESET + BOLD + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
@@ -90,7 +89,7 @@ public class CommandManager {
                 break;
 
             case "-":
-                message("Alright, next time", "white", 58);
+                message("Skipped", "white", 58);
                 messageModifier('n', 1);
                 break;
 
