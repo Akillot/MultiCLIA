@@ -2,6 +2,9 @@ package core.layout;
 
 import java.util.Random;
 
+import static core.layout.TextFunc.alignment;
+import static java.lang.System.out;
+
 public class ColorFunc {
 
     public static final String RESET = "\033[0m";
@@ -43,5 +46,12 @@ public class ColorFunc {
 
     public enum Color {
         RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, GRAY, BLACK, RESET
+    }
+
+    public static void getRgbText(String text, String textColorCode, String backColorCode) {
+        String rgbCodeText = "\033[38;2;"+ textColorCode +"m";
+        String rgbCodeBack = "\033[48;2;" + backColorCode + "m";
+        String resetColor = "\033[0m";
+        out.print(alignment(58) + (rgbCodeBack + rgbCodeText + text + resetColor));
     }
 }
