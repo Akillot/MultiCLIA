@@ -12,8 +12,9 @@ public class SettingsPage {
         messageModifier('n', 2);
         out.print(alignment(60) + BOLD + "-" + PURPLE + ITALIC + "Memory\n" + RESET);
         usingMemory();
+        messageModifier('n', 2);
+        out.print(alignment(60) + BOLD + "-" + PURPLE + ITALIC + "Text\n" + RESET);
         choice("Text", textModification());
-        messageModifier('n', 1);
         marginBigBorder();
     }
 }

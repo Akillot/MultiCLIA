@@ -209,10 +209,9 @@ public class DisplayManager {
                 message(color, color, 58,0);
             }
             messageModifier('n', 1);
-            out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
-            out.println(WHITE + ITALIC + alignment(58) + "Italics" + RESET);
-            out.println(WHITE + alignment(58) + UNDERLINE + "Underline" + RESET);
-            marginBigBorder();
+            message("Bold", "white", 58,0);
+            message(ITALIC + "Italic", "white", 58,0);
+            message(UNDERLINE + "Underline", "white", 58,0);
         };
     }
 
