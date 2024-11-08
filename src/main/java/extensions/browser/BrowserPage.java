@@ -1,14 +1,14 @@
 package extensions.browser;
 import static core.layout.BorderFunc.bigBorder;
+import static core.layout.DisplayManager.logoAscii;
+import static core.layout.DisplayManager.messageModifier;
 import static extensions.browser.BrowserFunc.browser;
 import static extensions.browser.BrowserFunc.browserLogo;
-import static core.layout.DisplayManager.logoAscii;
-import static java.lang.System.out;
 
 public class BrowserPage {
     public static void browserStarter() {
-        out.println("\n");
-        logoAscii(browserLogo, 58);
+        messageModifier('n', 2);
+        logoAscii(browserLogo,48);
         bigBorder();
         browser();
     }

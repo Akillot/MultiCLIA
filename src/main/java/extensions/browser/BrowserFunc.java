@@ -16,7 +16,7 @@ public class BrowserFunc {
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {
-                message("Exiting browser...", "red", 58);
+                message("Exiting browser...", "red", 58,0);
                 marginBigBorder();
                 break;
             }
@@ -34,12 +34,12 @@ public class BrowserFunc {
                     } catch (Exception e) {
                         marginBigBorder();
                         errorAscii();
-                        message("Failed to open link", "red", 58);
+                        message("Failed to open link", "red", 58,0);
                     }
                     break;
 
                 case "-":
-                    message("Searching canceled\n", "white", 58);
+                    message("Searching canceled\n", "white", 58,0);
                     break;
 
                 default:

@@ -20,7 +20,7 @@ public class NotepadPage {
             messageModifier('n', 2);
             String[] operations = new String[]{"1 create note", "2 open note", "3 delete note"};
             for (String operation : operations) {
-                message(operation, "white", 58);
+                message(operation, "white", 58,0);
             }
             out.println(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET);
             messageModifier('n', 1);
@@ -58,7 +58,7 @@ public class NotepadPage {
         NotepadFunc note = new NotepadFunc(title, content);
         note.saveToFile();
         marginBigBorder();
-        message("Note saved", "purple", 58);
+        message("Note saved", "purple", 58,0);
         messageModifier('n', 1);
         bigBorder();
     }
@@ -69,8 +69,8 @@ public class NotepadPage {
 
         NotepadFunc note = NotepadFunc.readFromFile(title);
         if (note != null) {
-            message("Content: ", "white", 58);
-            message(note.getContent(), "white", 58);
+            message("Content: ", "white", 58,0);
+            message(note.getContent(), "white", 58,0);
             bigBorder();
             messageModifier('n', 1);
 
@@ -79,27 +79,27 @@ public class NotepadPage {
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
-                message("Enter new text to this note: ", "white", 58);
+                message("Enter new text to this note: ", "white", 58,0);
                 String newContent = scanner.nextLine();
                 note.setContent(newContent);
                 note.saveToFile();
 
                 messageModifier('n', 1);
                 bigBorder();
-                message("Note updated", "purple", 58);
+                message("Note updated", "purple", 58,0);
                 messageModifier('n', 1);
                 bigBorder();
             }
             else if(answer.equals("-")) {
                 messageModifier('n', 1);
-                message("Opening canceled", "purple", 58);
+                message("Opening canceled", "purple", 58,0);
                 messageModifier('n', 1);
                 bigBorder();
             }
         } else {
             marginBigBorder();
             errorAscii();
-            message("Note not found", "red", 58);
+            message("Note not found", "red", 58,0);
         }
     }
 
@@ -108,13 +108,13 @@ public class NotepadPage {
         String title = scanner.nextLine();
         boolean success = NotepadFunc.deleteNoteFile(title);
         if (success) {
-            message("Note deleted", "purple", 58);
+            message("Note deleted", "purple", 58,0);
             messageModifier('n', 1);
             bigBorder();
         } else {
             marginBigBorder();
             errorAscii();
-            message("Note not found", "red", 58);
+            message("Note not found", "red", 58,0);
         }
     }
 }

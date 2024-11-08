@@ -53,91 +53,6 @@ public class DisplayManager {
             "red", "blue", "green", "yellow", "purple",
             "cyan", "white", "gray", "black"};
 
-    public static void alert(String modificator ,String text, int alignment) {
-        out.println(alignment(alignment) + WHITE + BOLD + "["  + modificator + "] " + RESET + text);
-    }
-
-    public static void commandList(){
-        messageModifier('n', 2);
-        alert("i", "select a command type", 58);
-
-        choice("System", commandList(systemCmds, "white", 58));
-        messageModifier('n', 1);
-
-        choice("Extensions",commandList(extensionCmds, "white", 58));
-        messageModifier('n', 1);
-
-        choice("All", DisplayManager::allCommandList);
-        marginBigBorder();
-    }
-
-    private static Runnable commandList(String[] commands, String textColor, int alignment) {
-        return () -> {
-            for (String command : commands) {
-                message("· " + command, textColor, alignment);
-            }
-        };
-    }
-
-    private static void allCommandList() {
-        messageModifier('n', 2);
-        message("System Commands               Extensions", "purple", 58);
-
-        int maxRows = Math.max(systemCmds.length, extensionCmds.length);
-
-        for (int i = 0; i < maxRows; i++) {
-            String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
-            String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
-
-            out.printf(alignment(58) + "%-20s          %-20s%n", systemCmd, extensionCmd);
-        }
-    }
-
-    public static void message(String text, String colorName, int alignment) {
-        ColorFunc.Color color;
-        try {
-            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                errorAscii();
-                return;
-            }
-        }
-        String coloredText = getColoredText(text, color);
-        out.println(alignment(alignment) + coloredText);
-    }
-
-    public static void messageModifier(char modifier, int amount) {
-        if(amount <= 0){
-            errorAscii();
-        }
-        String output = switch(modifier){
-          case 'n' -> "\n";
-          case 't' -> "\t";
-          case 'b' -> "\b";
-          case 'r' -> "\r";
-          case '\\' -> "\\";
-          default -> "\\" + modifier;
-        };
-
-        for (int i = 0; i < amount; i++) {
-            out.print(output);
-        }
-    }
-
-    public static void exitMessage(String exitText, int sleep) {
-        for (char ch : exitText.toCharArray()) {
-            out.print(ch);
-            try {
-                Thread.sleep(sleep);
-            } catch (InterruptedException ex) {
-                errorAscii();
-            }
-        }
-    }
-
     public static void logoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(8);
         switch (indexOfLogo) {
@@ -175,13 +90,100 @@ public class DisplayManager {
                                  String color3, String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
-            message(logo[i], colors[i % colors.length], alignment);
+            message(logo[i], colors[i % colors.length], alignment,0);
         }
     }
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, "red", 40);
+            message(line, "red", 40, 0);
+        }
+    }
+
+    public static void alert(String modificator ,String text, int alignment) {
+        out.println(alignment(alignment) + WHITE + BOLD + "["  + modificator + "] " + RESET + text);
+    }
+
+    public static void commandList(){
+        messageModifier('n', 2);
+        alert("i", "select a command type", 58);
+
+        choice("System", commandList(systemCmds, "white", 58));
+        messageModifier('n', 1);
+
+        choice("Extensions",commandList(extensionCmds, "white", 58));
+        messageModifier('n', 1);
+
+        choice("All", DisplayManager::allCommandList);
+        marginBigBorder();
+    }
+
+    private static Runnable commandList(String[] commands, String textColor, int alignment) {
+        return () -> {
+            for (String command : commands) {
+                message("· " + command, textColor, alignment,0);
+            }
+        };
+    }
+
+    private static void allCommandList() {
+        messageModifier('n', 2);
+        message("System Commands               Extensions", "purple", 58,0);
+
+        int maxRows = Math.max(systemCmds.length, extensionCmds.length);
+
+        for (int i = 0; i < maxRows; i++) {
+            String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
+            String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
+
+            out.printf(alignment(58) + "%-20s          %-20s%n", systemCmd, extensionCmd);
+        }
+    }
+
+    public static void message(String text, String colorName, int alignment, int delay) {
+        ColorFunc.Color color;
+
+        try {
+            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            if (colorName.equalsIgnoreCase("randomly")) {
+                color = getRandomColor();
+            } else {
+                errorAscii();
+                return;
+            }
+        }
+        String coloredText = getColoredText(text, color);
+        String alignedText = alignment(alignment) + coloredText;
+        for (char ch : alignedText.toCharArray()) {
+            out.print(ch);
+            if (delay > 0) {
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException ex) {
+                    errorAscii();
+                    return;
+                }
+            }
+        }
+        messageModifier('n', 1);
+    }
+
+    public static void messageModifier(char modifier, int amount) {
+        if(amount <= 0){
+            errorAscii();
+        }
+        String output = switch(modifier){
+            case 'n' -> "\n";
+            case 't' -> "\t";
+            case 'b' -> "\b";
+            case 'r' -> "\r";
+            case '\\' -> "\\";
+            default -> "\\" + modifier;
+        };
+
+        for (int i = 0; i < amount; i++) {
+            out.print(output);
         }
     }
 
@@ -201,10 +203,10 @@ public class DisplayManager {
     public static Runnable textModification() {
         return () -> {
             messageModifier('n', 1);
-            message("All colors and text modifiers", "white", 58);
+            message("All colors and text modifiers", "white", 58,0);
             messageModifier('n', 1);
             for (String color : COLORS) {
-                message(color, color, 58);
+                message(color, color, 58,0);
             }
             messageModifier('n', 1);
             out.println(WHITE + BOLD + alignment(58) + "Bold" + RESET);
@@ -218,13 +220,13 @@ public class DisplayManager {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
-        message("Current time: " + formattedTime, "white", 58);
+        message("Current time: " + formattedTime, "white", 58,0);
     }
 
     public static void usingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"), "white", 58);
+                        / (1000 * 1000) + "M"), "white", 58,0);
     }
 
     public static Runnable appDescription() {
@@ -240,7 +242,7 @@ public class DisplayManager {
                             alignment(58) + "Users will soon be able to add new extensions\n" +
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
-                    "white", 58);
+                    "white", 58, 0);
             messageModifier('n', 2);
             bigBorder();
         };
@@ -248,21 +250,21 @@ public class DisplayManager {
 
     public static void commandsDescription(){
         messageModifier('n', 2);
-        message("sys.cmds: show all commands","white", 58);
+        message("sys.cmds: show all commands","white", 58,0);
         messageModifier('n', 1);
-        message("sys.setts: show a settings of the app","white", 58);
+        message("sys.setts: show a settings of the app","white", 58,0);
         messageModifier('n', 1);
         message("sys.rerun: restart an app\n" +
-                alignment(58) + "without cleaning previous context","white", 58);
+                alignment(58) + "without cleaning previous context","white", 58,0);
         messageModifier('n', 1);
-        message("sys.time: show current time","white", 58);
+        message("sys.time: show current time","white", 58,0);
         messageModifier('n', 1);
-        message("sys.ip: show local and external IP addresses","white", 58);
+        message("sys.ip: show local and external IP addresses","white", 58,0);
         messageModifier('n', 1);
-        message("sys.info: show info about the app","white", 58);
+        message("sys.info: show info about the app","white", 58,0);
         messageModifier('n', 1);
-        message("sys.setts: show a settings of the app","white", 58);
-        message("", "white", 58);
+        message("sys.setts: show a settings of the app","white", 58,0);
+        message("", "white", 58,0);
         messageModifier('n', 1);
         marginBigBorder();
     }

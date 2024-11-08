@@ -9,9 +9,9 @@ public  class InfoPage {
 
     public static void displayInfo() throws InterruptedException {
         messageModifier('n', 2);
-        message("Current version:", "white", 58);
-        message(version, "purple", 58);
-        message("Author: Nick Zozulia", "white", 58);
+        message("Current version:", "white", 58,0);
+        message(version, "purple", 58,0);
+        message("Author: Nick Zozulia", "white", 58,0);
 
         messageModifier('n', 2);
         choice("Description", appDescription());

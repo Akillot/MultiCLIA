@@ -23,13 +23,13 @@ public class CommandManager {
             URI uri = new URI(userSite);
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 Desktop.getDesktop().browse(uri);
-                out.print("\r   Opened in browser");
+                out.print("\r   ✓");
                 messageModifier('n', 1);
             } else {
-                message("Error: Desktop or browse action not supported", "red", 58);
+                message("Error: Desktop or browse action not supported", "red", 58,0);
             }
         } catch (URISyntaxException | IOException e) {
-            message("Error opening URL", "red", 58);
+            message("Error opening URL", "red", 58,0);
         }
     }
 
@@ -51,7 +51,7 @@ public class CommandManager {
             out.println(alignment(58) + WHITE + BOLD + "Your local IP: " + RESET + PURPLE + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined", "red", 58);
+            message("IP is undefined", "red", 58,0);
         }
     }
 
@@ -69,12 +69,12 @@ public class CommandManager {
             out.println(alignment(58) + WHITE + BOLD + "Your external IP: " + RESET + PURPLE + ip + RESET);
 
         } catch (Exception e) {
-            message("Error: " + e.getMessage(), "red", 58);
+            message("Error: " + e.getMessage(), "red", 58,0);
         }
     }
 
     public static void choice(String title, Runnable action) {
-        message("Enter '+' to open and '-' to skip", "white", 58);
+        message("Enter '+' to open and '-' to skip", "white", 58,0);
         out.print(alignment(58) + PURPLE + BOLD + title + RESET + BOLD + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
@@ -89,12 +89,12 @@ public class CommandManager {
                 break;
 
             case "-":
-                message("Skipped", "white", 58);
+                message("Skipped", "white", 58,0);
                 messageModifier('n', 1);
                 break;
 
             default:
-                message("Invalid choice", "red", 58);
+                message("Invalid choice", "red", 58,0);
                 messageModifier('n', 1);
                 break;
         }
@@ -103,7 +103,7 @@ public class CommandManager {
     public static void exitExtension() {
         messageModifier('n', 1);
         loadingAnimation(300, 10);
-        exitMessage(alignment(58) + RED + BOLD + "Application exit" + RESET, 100);
+        message(alignment(58) + RED + BOLD + "Application exit" + RESET,"red", 100,0);
         marginBigBorder();
         messageModifier('n', 1);
     }
@@ -111,7 +111,7 @@ public class CommandManager {
     public static void exitProgramDefault() {
         messageModifier('n', 1);
         loadingAnimation(300, 10);
-        exitMessage(alignment(62) + RED + "Program termination" + RESET, 50);
+        message(alignment(62) + "Program termination","red", 50,100);
         messageModifier('n', 1);
         exit(0);
     }
@@ -119,7 +119,7 @@ public class CommandManager {
     public static void exitProgramQuick() {
         messageModifier('n', 1);
         out.print(WHITE + BOLD + "\r    ✓" + RESET);
-        exitMessage(alignment(62) + RED + "Quick program termination" + RESET, 0);
+        message(alignment(62) + RED + "Quick program termination" + RESET,"red", 0,0);
         messageModifier('n', 1);
         exit(0);
     }

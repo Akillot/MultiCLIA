@@ -23,17 +23,17 @@ public class NotepadFunc {
 
     public void saveToFile() {
         if (title == null || title.isEmpty()) {
-            message("Title cannot be empty!", "red", 58);
+            message("Title cannot be empty!", "red", 58,0);
             return;
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(title + ".txt"))) {
             writer.write(content);
-            message("Note saved successfully!", "purple", 58);
+            message("Note saved successfully!", "purple", 58,0);
         } catch (IOException e) {
             marginBigBorder();
             errorAscii();
-            message("Error saving the note: " + e.getMessage(), "red", 58);
+            message("Error saving the note: " + e.getMessage(), "red", 58,0);
         }
     }
 
@@ -41,7 +41,7 @@ public class NotepadFunc {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            message("File not found!", "red", 58);
+            message("File not found!", "red", 58,0);
             return null;
         }
 
@@ -53,11 +53,11 @@ public class NotepadFunc {
             }
         } catch (IOException e) {
             errorAscii();
-            message("Error reading the note: " + e.getMessage(), "red", 58);
+            message("Error reading the note: " + e.getMessage(), "red", 58,0);
             return null;
         }
 
-        message("Note read successfully!", "purple", 58);
+        message("Note read successfully!", "purple", 58,0);
         return new NotepadFunc(title, content.toString());
     }
 
@@ -65,16 +65,16 @@ public class NotepadFunc {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            message("File not found!", "red", 58);
+            message("File not found!", "red", 58,0);
             return false;
         }
 
         if (file.delete()) {
-            message("Note deleted successfully!", "purple", 58);
+            message("Note deleted successfully!", "purple", 58,0);
             return true;
         } else {
             errorAscii();
-            message("Error deleting the note!", "red", 58);
+            message("Error deleting the note!", "red", 58,0);
             return false;
         }
     }

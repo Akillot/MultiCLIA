@@ -34,7 +34,7 @@ public class CommandHandler {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
                 errorAscii();
-                message("Error displaying info: " + e.getMessage(), "red", 58);
+                message("Error displaying info: " + e.getMessage(), "red", 58,0);
             }
         });
         commandMap.put(systemCmds[6], CommandManager::exitProgramDefault);

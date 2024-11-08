@@ -15,15 +15,15 @@ public class CalculatorPage {
         while (true) {
             try {
                 out.println("\n");
-                message("--------------------", "white", 58);
+                message("--------------------", "white", 58,0);
                 alert( "i","Enter numbers\n" + alignment(58) + "to calculate", 58);
-                message("--------------------", "white", 58);
+                message("--------------------", "white", 58,0);
                 out.print(alignment(58) + BOLD + WHITE + "Input: " + RESET);
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
                     bigBorder();
-                    message("No numbers entered", "red", 18);
+                    message("No numbers entered", "red", 18,0);
                     continue;
                 }
                 out.println("\n");
