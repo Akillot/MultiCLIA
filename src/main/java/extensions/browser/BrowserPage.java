@@ -1,7 +1,7 @@
 package extensions.browser;
-import static core.layout.BorderFunc.bigBorder;
-import static core.layout.DisplayManager.logoAscii;
-import static core.layout.DisplayManager.messageModifier;
+import static core.logic.BorderFunc.bigBorder;
+import static core.logic.DisplayManager.logoAscii;
+import static core.logic.DisplayManager.messageModifier;
 import static extensions.browser.BrowserFunc.browser;
 import static extensions.browser.BrowserFunc.browserLogo;
 

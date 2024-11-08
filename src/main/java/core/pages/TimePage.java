@@ -1,6 +1,6 @@
 package core.pages;
-import static core.layout.BorderFunc.marginBigBorder;
-import static core.layout.DisplayManager.*;
+import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.DisplayManager.*;
 
 public class TimePage {
     public static void displayCurrentTime() {

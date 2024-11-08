@@ -1,8 +1,8 @@
-package core.layout;
+package core.logic;
 
-import static core.layout.BorderFunc.*;
-import static core.layout.ColorFunc.*;
-import static core.layout.DisplayManager.message;
+import static core.logic.BorderFunc.*;
+import static core.logic.ColorFunc.*;
+import static core.logic.DisplayManager.message;
 import static java.lang.System.out;
 
 public class TextFunc {

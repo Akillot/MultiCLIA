@@ -4,8 +4,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
-import static core.layout.CommandManager.exitExtension;
-import static core.layout.DisplayManager.errorAscii;
+import static core.logic.CommandManager.exitExtension;
+import static core.logic.DisplayManager.errorAscii;
 import static java.lang.System.out;
 
 

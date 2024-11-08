@@ -1,4 +1,4 @@
-package core.layout;
+package core.logic;
 
 import java.util.Random;
 

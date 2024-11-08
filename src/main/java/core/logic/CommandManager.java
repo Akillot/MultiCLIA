@@ -1,4 +1,4 @@
-package core.layout;
+package core.logic;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -9,10 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
-import static core.layout.BorderFunc.marginBigBorder;
-import static core.layout.ColorFunc.*;
-import static core.layout.DisplayManager.*;
-import static core.layout.TextFunc.alignment;
+import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.ColorFunc.*;
+import static core.logic.DisplayManager.*;
+import static core.logic.TextFunc.alignment;
 
 import static java.lang.System.exit;
 import static java.lang.System.out;
@@ -35,14 +35,6 @@ public class CommandManager {
 
     public static Runnable getOpenUriAction(String userSite) {
         return () -> openUri(userSite);
-    }
-
-    public static void getUserIp(){
-        messageModifier('n', 2);
-        getUserLocalIp();
-        getUserExternalIp();
-        messageModifier('n', 1);
-        marginBigBorder();
     }
 
     public static void getUserLocalIp(){

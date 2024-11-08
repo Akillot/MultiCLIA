@@ -3,10 +3,10 @@ package extensions.math;
 import java.util.Scanner;
 
 import static extensions.math.CalculatorFunc.*;
-import static core.layout.BorderFunc.*;
-import static core.layout.ColorFunc.*;
-import static core.layout.DisplayManager.*;
-import static core.layout.TextFunc.alignment;
+import static core.logic.BorderFunc.*;
+import static core.logic.ColorFunc.*;
+import static core.logic.DisplayManager.*;
+import static core.logic.TextFunc.alignment;
 import static java.lang.System.out;
 
 public class CalculatorPage {

@@ -5,9 +5,9 @@ import lombok.Setter;
 
 import java.io.*;
 
-import static core.layout.BorderFunc.marginBigBorder;
-import static core.layout.DisplayManager.errorAscii;
-import static core.layout.DisplayManager.message;
+import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.DisplayManager.errorAscii;
+import static core.logic.DisplayManager.message;
 
 
 public class NotepadFunc {

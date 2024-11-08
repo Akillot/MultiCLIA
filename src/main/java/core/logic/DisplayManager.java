@@ -1,4 +1,4 @@
-package core.layout;
+package core.logic;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
-import static core.layout.BorderFunc.bigBorder;
-import static core.layout.BorderFunc.marginBigBorder;
-import static core.layout.ColorFunc.*;
-import static core.layout.CommandManager.choice;
-import static core.layout.TextFunc.alignment;
+import static core.logic.BorderFunc.bigBorder;
+import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.ColorFunc.*;
+import static core.logic.CommandManager.*;
+import static core.logic.TextFunc.alignment;
 import static java.lang.System.out;
 
 public class DisplayManager {
@@ -220,6 +220,14 @@ public class DisplayManager {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
         message("Current time: " + formattedTime, "white", 58,0);
+    }
+
+    public static void userIp(){
+        messageModifier('n', 2);
+        getUserLocalIp();
+        getUserExternalIp();
+        messageModifier('n', 1);
+        marginBigBorder();
     }
 
     public static void usingMemory(){

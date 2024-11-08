@@ -2,9 +2,9 @@ package core.pages;
 
 import core.command_handling_system.PackageUnifier;
 
-import static core.layout.BorderFunc.*;
-import static core.layout.DisplayManager.*;
-import static core.layout.TextFunc.*;
+import static core.logic.BorderFunc.*;
+import static core.logic.DisplayManager.*;
+import static core.logic.TextFunc.*;
 
 public class MenuPage {
     public static void displayMainMenuUi() {

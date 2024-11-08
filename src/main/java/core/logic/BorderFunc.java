@@ -1,7 +1,7 @@
-package core.layout;
+package core.logic;
 
-import static core.layout.DisplayManager.messageModifier;
-import static core.layout.TextFunc.alignment;
+import static core.logic.DisplayManager.messageModifier;
+import static core.logic.TextFunc.alignment;
 import static java.lang.System.out;
 
 public class BorderFunc {

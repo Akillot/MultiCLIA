@@ -1,8 +1,8 @@
 package core.pages;
 
-import static core.layout.BorderFunc.marginBigBorder;
-import static core.layout.CommandManager.*;
-import static core.layout.DisplayManager.*;
+import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.CommandManager.*;
+import static core.logic.DisplayManager.*;
 
 public  class InfoPage {
     public static String version = "A-0.7.0";
