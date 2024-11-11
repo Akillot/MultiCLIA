@@ -3,21 +3,24 @@ package core.pages;
 import static core.logic.BorderFunc.marginBigBorder;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
+import static java.lang.System.out;
 
 public  class InfoPage {
     public static String version = "A-0.7.0";
 
     public static void displayInfo() throws InterruptedException {
         messageModifier('n', 2);
-        message("Current version:", "white", 58,0);
-        message(version, "purple", 58,0);
-        message("Author: Nick Zozulia", "white", 58,0);
+        message("Current version:", "white", 58,0, out::print);
+        message(version, "blue", 58,0, out::print);
+        message("Author: Nick Zozulia", "white", 58,0, out::print);
+        messageModifier('n', 1);
 
-        messageModifier('n', 2);
+        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
         choice("Description", appDescription());
         messageModifier('n', 1);
 
-        choice("Github", getOpenUriAction("https://github.com/Akillot/MultiCLIA"));
+        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
+        choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBigBorder();
     }
 }

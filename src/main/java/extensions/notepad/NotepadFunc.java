@@ -8,6 +8,7 @@ import java.io.*;
 import static core.logic.BorderFunc.marginBigBorder;
 import static core.logic.DisplayManager.errorAscii;
 import static core.logic.DisplayManager.message;
+import static java.lang.System.out;
 
 
 public class NotepadFunc {
@@ -23,17 +24,17 @@ public class NotepadFunc {
 
     public void saveToFile() {
         if (title == null || title.isEmpty()) {
-            message("Title cannot be empty!", "red", 58,0);
+            message("Title cannot be empty!", "red", 58,0, out::println);
             return;
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(title + ".txt"))) {
             writer.write(content);
-            message("Note saved successfully!", "purple", 58,0);
+            message("Note saved successfully!", "blue", 58,0, out::println);
         } catch (IOException e) {
             marginBigBorder();
             errorAscii();
-            message("Error saving the note: " + e.getMessage(), "red", 58,0);
+            message("Error saving the note: " + e.getMessage(), "red", 58,0, out::println);
         }
     }
 
@@ -41,7 +42,7 @@ public class NotepadFunc {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            message("File not found!", "red", 58,0);
+            message("File not found!", "red", 58,0, out::println);
             return null;
         }
 
@@ -53,11 +54,11 @@ public class NotepadFunc {
             }
         } catch (IOException e) {
             errorAscii();
-            message("Error reading the note: " + e.getMessage(), "red", 58,0);
+            message("Error reading the note: " + e.getMessage(), "red", 58,0, out::println);
             return null;
         }
 
-        message("Note read successfully!", "purple", 58,0);
+        message("Note read successfully!", "blue", 58,0, out::println);
         return new NotepadFunc(title, content.toString());
     }
 
@@ -65,16 +66,16 @@ public class NotepadFunc {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            message("File not found!", "red", 58,0);
+            message("File not found!", "red", 58,0, out::println);
             return false;
         }
 
         if (file.delete()) {
-            message("Note deleted successfully!", "purple", 58,0);
+            message("Note deleted successfully!", "blue", 58,0, out::println);
             return true;
         } else {
             errorAscii();
-            message("Error deleting the note!", "red", 58,0);
+            message("Error deleting the note!", "red", 58,0, out::println);
             return false;
         }
     }

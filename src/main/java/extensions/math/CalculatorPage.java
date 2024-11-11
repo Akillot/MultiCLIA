@@ -15,22 +15,22 @@ public class CalculatorPage {
         while (true) {
             try {
                 out.println("\n");
-                message("--------------------", "white", 58,0);
+                message("--------------------", "white", 58,0, out::print);
                 alert( "i","Enter numbers\n" + alignment(58) + "to calculate", 58);
-                message("--------------------", "white", 58,0);
+                message("--------------------", "white", 58,0, out::print);
                 out.print(alignment(58) + BOLD + WHITE + "Input: " + RESET);
                 String mathStatementString = scanner.nextLine().trim();
 
                 if (mathStatementString.isEmpty()) {
                     bigBorder();
-                    message("No numbers entered", "red", 18,0);
+                    message("No numbers entered", "red", 18,0, out::print);
                     continue;
                 }
-                out.println("\n");
+                messageModifier('n', 2);
                 bigBorder();
                 calculateOperation(mathStatementString);
                 bigBorder();
-                out.print(alignment(58) + BOLD + WHITE + "Your choice is: " + RESET);
+                message("Your choice is: ","white", 58,0, out::print);
                 bigBorder();
             }
             catch (Exception ex) {

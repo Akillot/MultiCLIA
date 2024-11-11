@@ -10,11 +10,11 @@ import static java.lang.System.out;
 public class SettingsPage {
     public static void displaySettings() {
         messageModifier('n', 2);
-        out.print(alignment(60) + BOLD + "-" + PURPLE + ITALIC + "Memory\n" + RESET);
+        out.print(alignment(60) + BOLD + "-" + BLUE + ITALIC + "Memory\n" + RESET);
         usingMemory();
 
         messageModifier('n', 2);
-        out.print(alignment(60) + BOLD + "-" + PURPLE + ITALIC + "Text\n" + RESET);
+        out.print(alignment(60) + BOLD + "-" + BLUE + ITALIC + "Text\n" + RESET);
         choice("Text", textModification());
         marginBigBorder();
     }

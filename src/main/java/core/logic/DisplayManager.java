@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
@@ -12,10 +13,11 @@ import static core.logic.BorderFunc.marginBigBorder;
 import static core.logic.ColorFunc.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextFunc.alignment;
+import static java.lang.System.*;
 import static java.lang.System.out;
 
 public class DisplayManager {
-    public static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(in);
     private static Random rand = new Random();
 
     public static String[] mainLogoAscii = {
@@ -90,45 +92,47 @@ public class DisplayManager {
                                  String color3, String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
-            message(logo[i], colors[i % colors.length], alignment,0);
+            message(logo[i], colors[i % colors.length], alignment,0, out::print);
         }
     }
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, "red", 40, 0);
+            message(line, "red", 40, 0, out::print);
         }
     }
 
-    public static void alert(String modificator ,String text, int alignment) {
-        out.println(alignment(alignment) + WHITE + BOLD + "["  + modificator + "] " + RESET + text);
+    public static void alert(String modification ,String text, int alignment) {
+        out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + text);
     }
 
     public static void commandList(){
         messageModifier('n', 2);
         alert("i", "select a command type", 58);
+        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
+        messageModifier('n',2);
 
-        choice("System", commandList(systemCmds, "white", 58));
+        choice("System", commandList(systemCmds));
         messageModifier('n', 1);
 
-        choice("Extensions",commandList(extensionCmds, "white", 58));
+        choice("Extensions",commandList(extensionCmds));
         messageModifier('n', 1);
 
         choice("All", DisplayManager::allCommandList);
         marginBigBorder();
     }
 
-    private static Runnable commandList(String[] commands, String textColor, int alignment) {
+    private static Runnable commandList(String[] commands) {
         return () -> {
             for (String command : commands) {
-                message("· " + command, textColor, alignment,0);
+                message("· " + command, "white", 58,0, out::print);
             }
         };
     }
 
     private static void allCommandList() {
         messageModifier('n', 2);
-        message("System Commands               Extensions", "purple", 58,0);
+        message("System Commands               Extensions", "blue", 58,0, System.out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -140,7 +144,7 @@ public class DisplayManager {
         }
     }
 
-    public static void message(String text, String colorName, int alignment, int delay) {
+    public static void message(String text, String colorName, int alignment, int delay, Consumer<String> printMethod) {
         ColorFunc.Color color;
 
         try {
@@ -153,10 +157,13 @@ public class DisplayManager {
                 return;
             }
         }
+
         String coloredText = getColoredText(text, color);
         String alignedText = alignment(alignment) + coloredText;
+
+        StringBuilder output = new StringBuilder();
         for (char ch : alignedText.toCharArray()) {
-            out.print(ch);
+            output.append(ch);
             if (delay > 0) {
                 try {
                     Thread.sleep(delay);
@@ -166,8 +173,10 @@ public class DisplayManager {
                 }
             }
         }
+        printMethod.accept(output.toString());
         messageModifier('n', 1);
     }
+
 
     public static void messageModifier(char modifier, int amount) {
         if(amount <= 0){
@@ -203,15 +212,15 @@ public class DisplayManager {
     public static Runnable textModification() {
         return () -> {
             messageModifier('n', 1);
-            message("All colors and text modifiers", "white", 58,0);
+            message("All colors and text modifiers", "white", 58,0, out::print);
             messageModifier('n', 1);
             for (String color : COLORS) {
-                message(color, color, 58,0);
+                message(color, color, 58,0, out::print);
             }
             messageModifier('n', 1);
-            message("Bold", "white", 58,0);
-            message(ITALIC + "Italic", "white", 58,0);
-            message(UNDERLINE + "Underline", "white", 58,0);
+            message("Bold", "white", 58,0, out::print);
+            message(ITALIC + "Italic", "white", 58,0, out::print);
+            message(UNDERLINE + "Underline", "white", 58,0, out::print);
         };
     }
 
@@ -219,7 +228,7 @@ public class DisplayManager {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
-        message("Current time: " + formattedTime, "white", 58,0);
+        message("Current time: " + formattedTime, "white", 58,0, out::print);
     }
 
     public static void userIp(){
@@ -233,7 +242,7 @@ public class DisplayManager {
     public static void usingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"), "white", 58,0);
+                        / (1000 * 1000) + "M"), "white", 58,0, out::print);
     }
 
     public static Runnable appDescription() {
@@ -249,7 +258,7 @@ public class DisplayManager {
                             alignment(58) + "Users will soon be able to add new extensions\n" +
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
-                    "white", 58, 0);
+                    "white", 58, 0, out::print);
             messageModifier('n', 2);
             bigBorder();
         };
@@ -257,21 +266,21 @@ public class DisplayManager {
 
     public static void commandsDescription(){
         messageModifier('n', 2);
-        message("sys.cmds: show all commands","white", 58,0);
+        message("sys.cmds: show all commands","white", 58,0, out::print);
         messageModifier('n', 1);
-        message("sys.setts: show a settings of the app","white", 58,0);
+        message("sys.setts: show a settings of the app","white", 58,0, out::print);
         messageModifier('n', 1);
         message("sys.rerun: restart an app\n" +
-                alignment(58) + "without cleaning previous context","white", 58,0);
+                alignment(58) + "without cleaning previous context","white", 58,0, out::print);
         messageModifier('n', 1);
-        message("sys.time: show current time","white", 58,0);
+        message("sys.time: show current time","white", 58,0, out::print);
         messageModifier('n', 1);
-        message("sys.ip: show local and external IP addresses","white", 58,0);
+        message("sys.ip: show local and external IP addresses","white", 58,0, out::print);
         messageModifier('n', 1);
-        message("sys.info: show info about the app","white", 58,0);
+        message("sys.info: show info about the app","white", 58,0, out::print);
         messageModifier('n', 1);
-        message("sys.setts: show a settings of the app","white", 58,0);
-        message("", "white", 58,0);
+        message("sys.setts: show a settings of the app","white", 58,0, out::print);
+        message("", "white", 58,0, out::print);
         messageModifier('n', 1);
         marginBigBorder();
     }

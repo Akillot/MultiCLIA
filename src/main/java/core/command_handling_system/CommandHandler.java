@@ -14,6 +14,7 @@ import extensions.time.Reminder;
 import java.util.Map;
 
 import static core.logic.DisplayManager.*;
+import static java.lang.System.out;
 
 public class CommandHandler {
 
@@ -35,7 +36,7 @@ public class CommandHandler {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
                 errorAscii();
-                message("Error displaying info: " + e.getMessage(), "red", 58,0);
+                message("Error displaying info: " + e.getMessage(), "red", 58,0, out::println);
             }
         });
         commandMap.put(systemCmds[6], CommandManager::exitProgramDefault);

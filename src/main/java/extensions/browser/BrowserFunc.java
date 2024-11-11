@@ -2,6 +2,7 @@ package extensions.browser;
 
 import static core.logic.BorderFunc.marginBigBorder;
 import static core.logic.ColorFunc.*;
+import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.openUri;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextFunc.alignment;
@@ -11,42 +12,18 @@ public class BrowserFunc {
     public static void browser() {
         while (true) {
             messageModifier('n', 1);
-            out.print(alignment(58) + PURPLE + BOLD + "Enter domain" + RESET
-                    + WHITE + BOLD + " (or type 'exit' to quit): " + RESET);
+            out.print(alignment(58) + BLUE + BOLD + "Enter domain" + RESET
+                    + WHITE + BOLD + " (or type 'exit' to quit): ");
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {
-                message("Exiting browser...", "red", 58,0);
+                message("Exiting browser...", "red", 58,0, out::print);
                 marginBigBorder();
                 break;
             }
 
             String domain = "https://www." + domainInput;
-            //FIX
-            alert("i","Enter '+' to open, '-' to cancel", 58);
-            out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
-            String choice = scanner.nextLine().toLowerCase();
-
-            switch (choice) {
-                case "+":
-                    try {
-                        openUri(domain);
-                    } catch (Exception e) {
-                        marginBigBorder();
-                        errorAscii();
-                        message("Failed to open link", "red", 58,0);
-                    }
-                    break;
-
-                case "-":
-                    message("Searching canceled\n", "white", 58,0);
-                    break;
-
-                default:
-                    marginBigBorder();
-                    errorAscii();
-                    break;
-            }
+            choice(domainInput, openUri(domain));
         }
     }
     public static String[] browserLogo = {
