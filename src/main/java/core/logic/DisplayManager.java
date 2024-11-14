@@ -55,6 +55,13 @@ public class DisplayManager {
             "red", "blue", "green", "yellow", "purple",
             "cyan", "white", "gray", "black"};
 
+    private static final String[] RULES = {
+            "sys.cmds: show all commands", "sys.setts: show a settings of the application",
+            "sys.rerun: restart an app\n" + alignment(58) + "without cleaning previous context",
+            "sys.time: show current time", "sys.ip: show local and external IP addresses",
+            "sys.info: show info about the app", "sys.help: show description to all commands",
+            "sys.exit: terminate the application", "sys.exitq: terminate the application quietly"};
+
     public static void logoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(8);
         switch (indexOfLogo) {
@@ -266,22 +273,10 @@ public class DisplayManager {
 
     public static void commandsDescription(){
         messageModifier('n', 2);
-        message("sys.cmds: show all commands","white", 58,0, out::print);
-        messageModifier('n', 1);
-        message("sys.setts: show a settings of the app","white", 58,0, out::print);
-        messageModifier('n', 1);
-        message("sys.rerun: restart an app\n" +
-                alignment(58) + "without cleaning previous context","white", 58,0, out::print);
-        messageModifier('n', 1);
-        message("sys.time: show current time","white", 58,0, out::print);
-        messageModifier('n', 1);
-        message("sys.ip: show local and external IP addresses","white", 58,0, out::print);
-        messageModifier('n', 1);
-        message("sys.info: show info about the app","white", 58,0, out::print);
-        messageModifier('n', 1);
-        message("sys.setts: show a settings of the app","white", 58,0, out::print);
-        message("", "white", 58,0, out::print);
-        messageModifier('n', 1);
+        for(String rule : RULES){
+            message(rule,"white",58,0,out::print);
+            messageModifier('n', 1);
+        }
         marginBigBorder();
     }
 }
