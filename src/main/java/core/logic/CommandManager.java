@@ -25,7 +25,6 @@ public class CommandManager {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
                     message("Status: ✓","white", 58,0, System.out::print);
-                    messageModifier('n', 1);
                 } else {
                     message("Error: Desktop or browse action not supported", "red",
                             58, 0, System.out::print);

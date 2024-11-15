@@ -117,14 +117,9 @@ public class DisplayManager {
         messageModifier('n', 2);
         alert("i", "select a command type", 58);
         message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
-        messageModifier('n',2);
-
+        messageModifier('n',1);
         choice("System", commandList(systemCmds));
-        messageModifier('n', 1);
-
         choice("Extensions",commandList(extensionCmds));
-        messageModifier('n', 1);
-
         choice("All", DisplayManager::allCommandList);
         marginBigBorder();
     }
@@ -138,7 +133,7 @@ public class DisplayManager {
     }
 
     private static void allCommandList() {
-        messageModifier('n', 2);
+        messageModifier('n', 1);
         message("System Commands               Extensions", "blue", 58,0, System.out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
