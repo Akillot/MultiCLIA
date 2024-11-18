@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.DisplayManager.*;
 
 public class TimePage {
@@ -8,6 +8,6 @@ public class TimePage {
         messageModifier('n', 2);
         time();
         messageModifier('n', 1);
-        marginBigBorder();
+        marginBorder();
     }
 }

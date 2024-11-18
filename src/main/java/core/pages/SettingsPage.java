@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.ColorFunc.*;
 import static core.logic.CommandManager.choice;
 import static core.logic.DisplayManager.*;
@@ -16,6 +16,6 @@ public class SettingsPage {
         messageModifier('n', 2);
         out.print(alignment(60) + BOLD + "-" + BLUE + ITALIC + "Text\n" + RESET);
         choice("Text", textModification());
-        marginBigBorder();
+        marginBorder();
     }
 }

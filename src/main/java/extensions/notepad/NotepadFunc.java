@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.io.*;
 
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.DisplayManager.errorAscii;
 import static core.logic.DisplayManager.message;
 import static java.lang.System.out;
@@ -32,7 +32,7 @@ public class NotepadFunc {
             writer.write(content);
             message("Note saved successfully!", "blue", 58,0, out::println);
         } catch (IOException e) {
-            marginBigBorder();
+            marginBorder();
             errorAscii();
             message("Error saving the note: " + e.getMessage(), "red", 58,0, out::println);
         }

@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.ColorFunc.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextFunc.alignment;
@@ -28,6 +28,7 @@ public class CommandManager {
                 } else {
                     message("Error: Desktop or browse action not supported", "red",
                             58, 0, System.out::print);
+                    message("Status: x","white", 58,0, System.out::print);
                 }
             } catch (URISyntaxException | IOException e) {
                 message("Error opening URL", "red", 58, 0, System.out::print);
@@ -94,7 +95,7 @@ public class CommandManager {
         loadingAnimation(300, 10);
         message(alignment(58) + RED + BOLD + "Application exit" + RESET,"red",
                 100,0,out::print);
-        marginBigBorder();
+        marginBorder();
         messageModifier('n', 1);
     }
 

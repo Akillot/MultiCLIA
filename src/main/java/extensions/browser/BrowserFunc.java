@@ -1,6 +1,6 @@
 package extensions.browser;
 
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.ColorFunc.*;
 import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.openUri;
@@ -18,7 +18,7 @@ public class BrowserFunc {
 
             if (domainInput.equals("exit")) {
                 message("Exiting browser...", "red", 58,0, out::print);
-                marginBigBorder();
+                marginBorder();
                 break;
             }
 

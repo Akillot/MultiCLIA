@@ -3,6 +3,7 @@ package core.logic;
 import static core.logic.BorderFunc.*;
 import static core.logic.ColorFunc.*;
 import static core.logic.DisplayManager.message;
+import static core.logic.DisplayManager.messageModifier;
 import static java.lang.System.out;
 
 public class TextFunc {
@@ -13,19 +14,19 @@ public class TextFunc {
         for (int i = 0; i < text.length(); i += width) {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
-                bigBorder();
+                border();
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    out.println();
+                    messageModifier('n',1);
                 }
             } else {
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    out.println();
+                    messageModifier('n',1);
                 }
             }
         }
-        out.println();
+        messageModifier('n',1);
     }
 
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,

@@ -8,8 +8,7 @@ import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
-import static core.logic.BorderFunc.bigBorder;
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.*;
 import static core.logic.ColorFunc.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextFunc.alignment;
@@ -121,7 +120,7 @@ public class DisplayManager {
         choice("System", commandList(systemCmds));
         choice("Extensions",commandList(extensionCmds));
         choice("All", DisplayManager::allCommandList);
-        marginBigBorder();
+        marginBorder();
     }
 
     private static Runnable commandList(String[] commands) {
@@ -238,7 +237,7 @@ public class DisplayManager {
         getUserLocalIp();
         getUserExternalIp();
         messageModifier('n', 1);
-        marginBigBorder();
+        marginBorder();
     }
 
     public static void usingMemory(){
@@ -250,7 +249,7 @@ public class DisplayManager {
     public static Runnable appDescription() {
         return () -> {
             messageModifier('n', 1);
-            marginBigBorder();
+            marginBorder();
             messageModifier('n', 1);
             message("MultiCLIA [" + ITALIC + "Multi Command Line Interface App" + RESET + "]\n\n" +
                             alignment(58) + "is an open-source application designed for \n" +
@@ -262,7 +261,7 @@ public class DisplayManager {
                             alignment(58) + "and adaptation to specific workflows.",
                     "white", 58, 0, out::print);
             messageModifier('n', 2);
-            bigBorder();
+            border();
         };
     }
 
@@ -272,6 +271,6 @@ public class DisplayManager {
             message(rule,"white",58,0,out::print);
             messageModifier('n', 1);
         }
-        marginBigBorder();
+        marginBorder();
     }
 }

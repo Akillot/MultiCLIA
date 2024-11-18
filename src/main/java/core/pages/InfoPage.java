@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static java.lang.System.out;
@@ -21,6 +21,6 @@ public  class InfoPage {
 
         message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
-        marginBigBorder();
+        marginBorder();
     }
 }

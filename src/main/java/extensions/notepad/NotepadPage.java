@@ -2,8 +2,8 @@ package extensions.notepad;
 
 import java.util.Scanner;
 
-import static core.logic.BorderFunc.bigBorder;
-import static core.logic.BorderFunc.marginBigBorder;
+import static core.logic.BorderFunc.border;
+import static core.logic.BorderFunc.marginBorder;
 import static core.logic.ColorFunc.*;
 import static core.logic.CommandManager.exitExtension;
 import static core.logic.DisplayManager.*;
@@ -20,10 +20,10 @@ public class NotepadPage {
             messageModifier('n', 2);
             String[] operations = new String[]{"1 create note", "2 open note", "3 delete note"};
             for (String operation : operations) {
-                message(operation, "white", 58,0, out::println);
+                message(operation, "white", 58,0, out::print);
             }
             message(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET,
-                    "white", 58, 0, out::println);
+                    "white", 58, 0, out::print);
             messageModifier('n', 1);
             slowMotionText(50, 58, true, false, "Your choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
@@ -58,10 +58,10 @@ public class NotepadPage {
 
         NotepadFunc note = new NotepadFunc(title, content);
         note.saveToFile();
-        marginBigBorder();
+        marginBorder();
         message("Note saved", "blue", 58,0, out::println);
         messageModifier('n', 1);
-        bigBorder();
+        border();
     }
 
     private static void openNote() {
@@ -72,7 +72,7 @@ public class NotepadPage {
         if (note != null) {
             message("Content: ", "white", 58,0, out::println);
             message(note.getContent(), "white", 58,0, out::println);
-            bigBorder();
+            border();
             messageModifier('n', 1);
 
             alert("i", "Do you want to update this note? [+/-]", 58);
@@ -86,19 +86,19 @@ public class NotepadPage {
                 note.saveToFile();
 
                 messageModifier('n', 1);
-                bigBorder();
+                border();
                 message("Note updated", "blue", 58,0, out::println);
                 messageModifier('n', 1);
-                bigBorder();
+                border();
             }
             else if(answer.equals("-")) {
                 messageModifier('n', 1);
                 message("Opening canceled", "blue", 58,0, out::println);
                 messageModifier('n', 1);
-                bigBorder();
+                border();
             }
         } else {
-            marginBigBorder();
+            marginBorder();
             errorAscii();
             message("Note not found", "red", 58,0, out::println);
         }
@@ -111,9 +111,9 @@ public class NotepadPage {
         if (success) {
             message("Note deleted", "blue", 58,0, out::println);
             messageModifier('n', 1);
-            bigBorder();
+            border();
         } else {
-            marginBigBorder();
+            marginBorder();
             errorAscii();
             message("Note not found", "red", 58,0, out::println);
         }
