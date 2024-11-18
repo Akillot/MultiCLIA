@@ -1,4 +1,5 @@
 package core.pages;
+
 import static core.logic.BorderFunc.marginBigBorder;
 import static core.logic.DisplayManager.*;
 

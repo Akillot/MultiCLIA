@@ -78,7 +78,7 @@ public class CommandManager {
                 break;
 
             case "-":
-                message("Skipped", "white", 58,0,out::print);
+                message("Status: x", "white", 58,0,out::print);
                 messageModifier('n', 1);
                 break;
 

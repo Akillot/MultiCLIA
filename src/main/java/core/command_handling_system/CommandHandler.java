@@ -2,7 +2,6 @@ package core.command_handling_system;
 
 import core.pages.SettingsPage;
 import extensions.notepad.NotepadPage;
-import extensions.math.CalculatorPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
 import extensions.browser.BrowserPage;
@@ -23,7 +22,7 @@ public class CommandHandler {
             "sys.ip", "sys.info", "sys.exit", "sys.exitq",
             "sys.help"};
     public static String[] extensionCmds = {
-            "calculator", "notepad", "browser", "reminder"};
+            "notepad", "browser", "reminder"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
         commandMap.put(systemCmds[0], DisplayManager::commandList);
@@ -43,9 +42,8 @@ public class CommandHandler {
         commandMap.put(systemCmds[7], CommandManager::exitProgramQuick);
         commandMap.put(systemCmds[8], DisplayManager::commandsDescription);
 
-        commandMap.put(extensionCmds[0], CalculatorPage::calculator);
-        commandMap.put(extensionCmds[1], NotepadPage::displayNotepad);
-        commandMap.put(extensionCmds[2], BrowserPage::browserStarter);
-        commandMap.put(extensionCmds[3], Reminder::reminderStarted);
+        commandMap.put(extensionCmds[0], NotepadPage::displayNotepad);
+        commandMap.put(extensionCmds[1], BrowserPage::browserStarter);
+        commandMap.put(extensionCmds[2], Reminder::reminderStarted);
     }
 }
