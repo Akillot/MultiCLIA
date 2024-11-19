@@ -262,7 +262,7 @@ public class DisplayManager {
     public static void userIp(){
         messageModifier('n', 2);
         getUserLocalIp();
-        getUserExternalIp();
+        getHttpRequest("https://api.ipify.org","Your external IP:");
         messageModifier('n', 1);
         marginBorder();
     }

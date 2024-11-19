@@ -1,6 +1,5 @@
 package core.pages;
 
-import static core.logic.BorderFunc.border;
 import static core.logic.BorderFunc.marginBorder;
 import static core.logic.ColorFunc.*;
 import static core.logic.DisplayManager.*;
@@ -11,7 +10,8 @@ import static java.lang.System.out;
 
 public class StartPage {
     public static void start() {
-        messageModifier('n', 2);
+
+        messageModifier('n', 1);
         logoAscii(mainLogoAscii, 48);
         marginBorder();
 

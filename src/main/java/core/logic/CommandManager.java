@@ -48,22 +48,35 @@ public class CommandManager {
         }
     }
 
-    public static void getUserExternalIp() {
+    public static void getHttpRequest(String userUri, String text) {
+        StringBuilder response = new StringBuilder();
         try {
-            URI uri = new URI("https://api.ipify.org");
+            URI uri = new URI(userUri);
             URL url = uri.toURL();
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String ip = reader.readLine();
-            reader.close();
-            out.println(alignment(58) + WHITE + BOLD + "Your external IP: " + RESET + BLUE + ip + RESET);
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+
+            int statusCode = connection.getResponseCode();
+            if (statusCode != 200) {
+                message("Error: HTTP " + statusCode, "red", 58, 0, out::print);
+                return;
+            }
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + response + RESET);
 
         } catch (Exception e) {
-            message("Error: " + e.getMessage(), "red", 58,0,out::print);
-            message("Status: x", "white", 58,0,out::print);
+            message("Error: " + e.getMessage(), "red", 58, 0, out::print);
         }
     }
 
