@@ -108,19 +108,41 @@ public class DisplayManager {
         }
     }
 
+    /*Show a message with [x], where x is a special character.
+    Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
         out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + text);
     }
 
-    public static void commandList(){
-        messageModifier('n', 2);
-        alert("i", "select a command type", 58);
-        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
-        messageModifier('n',1);
-        choice("System", commandList(systemCmds));
-        choice("Extensions",commandList(extensionCmds));
-        choice("All", DisplayManager::allCommandList);
-        marginBorder();
+    public static void commandList() {
+        try {
+            messageModifier('n', 2);
+            alert("i", "show all lists together", 58);
+            message("Enter '+' to open and '-' to skip", "white", 58, 0, out::print);
+            messageModifier('n', 1);
+
+            out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
+            String choice = scanner.nextLine();
+            messageModifier('n', 1);
+
+            if (choice.equals("+")) {
+                DisplayManager.allCommandList();
+                messageModifier('n', 1);
+            }
+            else if (choice.equals("-")) {
+                choice("System", commandList(systemCmds));
+                choice("Extensions", commandList(extensionCmds));
+                marginBorder();
+            }
+            if (choice.equalsIgnoreCase("exit")){
+                marginBorder();
+            }
+        }
+        catch (Exception e) {
+            marginBorder();
+            errorAscii();
+            message("Unknown error occurred","red", 58, 0, out::print);
+        }
     }
 
     private static Runnable commandList(String[] commands) {
@@ -132,8 +154,9 @@ public class DisplayManager {
     }
 
     private static void allCommandList() {
+
         messageModifier('n', 1);
-        message("System Commands               Extensions", "blue", 58,0, System.out::print);
+        message("System Commands               Extensions", "blue", 58,0, out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -143,8 +166,12 @@ public class DisplayManager {
 
             out.printf(alignment(58) + "%-20s          %-20s%n", systemCmd, extensionCmd);
         }
+        messageModifier('n', 2);
+        border();
     }
 
+    /*Modified method System.out.println(). Added text color,
+    alignment, delay and opportunity to move to the next line*/
     public static void message(String text, String colorName, int alignment, int delay, Consumer<String> printMethod) {
         ColorFunc.Color color;
 

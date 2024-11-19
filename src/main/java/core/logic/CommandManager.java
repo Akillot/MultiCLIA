@@ -32,6 +32,7 @@ public class CommandManager {
                 }
             } catch (URISyntaxException | IOException e) {
                 message("Error opening URL", "red", 58, 0, System.out::print);
+                message("Status: x","white", 58,0, System.out::print);
             }
         };
     }
@@ -42,7 +43,8 @@ public class CommandManager {
             out.println(alignment(58) + WHITE + BOLD + "Your local IP: " + RESET + BLUE + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined", "red", 58,0,out::println);
+            message("IP is undefined", "red", 58,0,out::print);
+            message("Status: x", "white", 58,0,out::print);
         }
     }
 
@@ -60,7 +62,8 @@ public class CommandManager {
             out.println(alignment(58) + WHITE + BOLD + "Your external IP: " + RESET + BLUE + ip + RESET);
 
         } catch (Exception e) {
-            message("Error: " + e.getMessage(), "red", 58,0,out::println);
+            message("Error: " + e.getMessage(), "red", 58,0,out::print);
+            message("Status: x", "white", 58,0,out::print);
         }
     }
 
@@ -74,7 +77,8 @@ public class CommandManager {
                     action.run();
                     messageModifier('n', 1);
                 } catch (Exception e) {
-                    out.println("Error executing action");
+                    message("Error executing action", "red", 58,0,out::print);
+                    message("Status: x", "white", 58,0,out::print);
                 }
                 break;
 
@@ -85,6 +89,7 @@ public class CommandManager {
 
             default:
                 message("Invalid choice", "red", 58,0,out::print);
+                message("Status: x", "white", 58,0,out::print);
                 messageModifier('n', 1);
                 break;
         }
