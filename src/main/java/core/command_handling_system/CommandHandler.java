@@ -20,7 +20,7 @@ public class CommandHandler {
     public static String[] systemCmds = {
             "sys.cmds" ,"sys.setts", "sys.rerun", "sys.time",
             "sys.ip", "sys.info", "sys.exit", "sys.exitq",
-            "sys.help"};
+            "sys.help", "sys.weather"};//Add command for sys.weather
     public static String[] extensionCmds = {
             "notepad", "browser", "reminder"};
 

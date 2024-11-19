@@ -123,7 +123,6 @@ public class DisplayManager {
 
             out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
             String choice = scanner.nextLine();
-            messageModifier('n', 1);
 
             if (choice.equals("+")) {
                 DisplayManager.allCommandList();
