@@ -121,7 +121,7 @@ public class CommandManager {
         messageModifier('n', 1);
         loadingAnimation(300, 10);
         message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Program termination","red",
+        message("Program terminated","red",
                 56,20,out::print);
         messageModifier('n', 1);
         exit(0);
@@ -130,7 +130,7 @@ public class CommandManager {
     public static void exitProgramQuick() {
         messageModifier('n', 1);
         message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Quick program termination" + RESET,"red",
+        message("Program terminated quickly" + RESET,"red",
                 56,0,out::print);
         messageModifier('n', 1);
         exit(0);
