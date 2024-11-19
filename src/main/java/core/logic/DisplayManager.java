@@ -59,7 +59,7 @@ public class DisplayManager {
             "sys.rerun: restart an app\n" + alignment(58) + "without cleaning previous context",
             "sys.time: show current time", "sys.ip: show local and external IP addresses",
             "sys.info: show info about the app", "sys.help: show description to all commands",
-            "sys.exit: terminate the application", "sys.exitq: terminate the application quietly"};
+            "sys.exit: terminate the application", "sys.exitq: terminate the application quickly"};
 
     public static void logoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(8);
