@@ -62,31 +62,13 @@ public class DisplayManager {
             "sys.exit: terminate the application", "sys.exitq: terminate the application quickly"};
 
     public static void logoAscii(String[] logo, int alignment) {
-        int indexOfLogo = rand.nextInt(8);
+        int indexOfLogo = rand.nextInt(2);
         switch (indexOfLogo) {
             case 0:
                 logoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
                 break;
             case 1:
-                logoAscii(logo, alignment, COLORS[6], COLORS[4], COLORS[6], COLORS[6], COLORS[4], COLORS[4]);
-                break;
-            case 2:
-                logoAscii(logo, alignment, COLORS[6], COLORS[5], COLORS[4], COLORS[3], COLORS[1], COLORS[6]);
-                break;
-            case 3:
-                logoAscii(logo, alignment, COLORS[6], COLORS[0], COLORS[3], COLORS[1], COLORS[6], COLORS[0]);
-                break;
-            case 4:
-                logoAscii(logo, alignment, COLORS[1], COLORS[5], COLORS[4], COLORS[0], COLORS[6], COLORS[6]);
-                break;
-            case 5:
-                logoAscii(logo, alignment, COLORS[6], COLORS[4], COLORS[0], COLORS[4], COLORS[6], COLORS[6]);
-                break;
-            case 6:
                 logoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
-                break;
-            case 7:
-                logoAscii(logo, alignment, COLORS[4], COLORS[6], COLORS[0], COLORS[5], COLORS[2], COLORS[3]);
                 break;
             default:
                 logoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);

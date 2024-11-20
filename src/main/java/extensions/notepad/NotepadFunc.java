@@ -80,4 +80,25 @@ public class NotepadFunc {
         }
     }
 
+    public static String[] notepadLogo = {
+            "ooooo      ooo               .             ",
+            "`888b.     `8'             .o8             ",
+            " 8 `88b.    8   .ooooo.  .o888oo  .ooooo.  ",
+            " 8   `88b.  8  d88' `88b   888   d88' `88b ",
+            " 8     `88b.8  888   888   888   888ooo888 ",
+            " 8       `888  888   888   888 . 888    .o ",
+            "o8o        `8  `Y8bod8P'   \"888\" `Y8bod8P' ",
+            "                                                 ",
+            "                           .o8             ",
+            "                          \"888             ",
+            "oo.ooooo.   .oooo.    .oooo888             ",
+            " 888' `88b `P  )88b  d88' `888             ",
+            " 888   888  .oP\"888  888   888             ",
+            " 888   888 d8(  888  888   888             ",
+            " 888bod8P' `Y888\"\"8o `Y8bod88P\"            ",
+            " 888                                       ",
+            "o888o                                      ",
+            "                                           "
+    };
+
 }

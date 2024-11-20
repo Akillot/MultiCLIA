@@ -9,6 +9,7 @@ import static core.logic.CommandManager.exitExtension;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextFunc.alignment;
 import static core.logic.TextFunc.slowMotionText;
+import static extensions.notepad.NotepadFunc.notepadLogo;
 import static java.lang.System.out;
 
 public class NotepadPage {
@@ -18,14 +19,18 @@ public class NotepadPage {
         boolean running = true;
         while (running) {
             messageModifier('n', 2);
+            logoAscii(notepadLogo,48);
+            border();
+            messageModifier('n',1);
+
             String[] operations = new String[]{"1 create note", "2 open note", "3 delete note"};
             for (String operation : operations) {
-                message(operation, "white", 58,0, out::print);
+                message(operation,"white",58,0, out::print);
             }
             message(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET,
                     "white", 58, 0, out::print);
             messageModifier('n', 1);
-            slowMotionText(50, 58, true, false, "Your choice", ": ");
+            slowMotionText(50,58,false,true,"Choice",": ");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {

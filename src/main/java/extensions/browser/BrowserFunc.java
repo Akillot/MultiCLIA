@@ -26,6 +26,7 @@ public class BrowserFunc {
             choice(domainInput, openUri(domain));
         }
     }
+
     public static String[] browserLogo = {
             "oooooooooo.                                      ",
             "`888'   `Y8b                                     ",
