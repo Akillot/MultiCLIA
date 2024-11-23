@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.logic.BorderFunc.marginBorder;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.DisplayManager.*;
 
 public class TimePage {

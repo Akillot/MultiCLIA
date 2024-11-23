@@ -25,11 +25,11 @@ public class CommandHandler {
             "notepad", "browser", "reminder"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
-        commandMap.put(systemCmds[0], DisplayManager::commandList);
+        commandMap.put(systemCmds[0], DisplayManager::displayCommandList);
         commandMap.put(systemCmds[1], SettingsPage::displaySettings);
         commandMap.put(systemCmds[2], StartPage::start);
         commandMap.put(systemCmds[3], TimePage::displayCurrentTime);
-        commandMap.put(systemCmds[4], DisplayManager::userIp);
+        commandMap.put(systemCmds[4], DisplayManager::displayUserIp);
         commandMap.put(systemCmds[5], () -> {
             try {
                 InfoPage.displayInfo();
@@ -39,9 +39,9 @@ public class CommandHandler {
                         58,0, out::println);
             }
         });
-        commandMap.put(systemCmds[6], CommandManager::exitProgramDefault);
-        commandMap.put(systemCmds[7], CommandManager::exitProgramQuick);
-        commandMap.put(systemCmds[8], DisplayManager::commandsDescription);
+        commandMap.put(systemCmds[6], CommandManager::terminateProgramDefault);
+        commandMap.put(systemCmds[7], CommandManager::terminateProgramQuick);
+        commandMap.put(systemCmds[8], DisplayManager::displayCommandsDescription);
 
         commandMap.put(extensionCmds[0], NotepadPage::displayNotepad);
         commandMap.put(extensionCmds[1], BrowserPage::browserStarter);

@@ -2,7 +2,7 @@ package core.logic;
 
 import java.util.Random;
 
-public class ColorFunc {
+public class ColorConfigs {
 
     public static final String RESET = "\033[0m";
     public static final String BLACK = "\033[0;30m";

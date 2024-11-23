@@ -1,18 +1,17 @@
 package core.pages;
 
-import static core.logic.BorderFunc.marginBorder;
-import static core.logic.ColorFunc.*;
+import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextFunc.alignment;
+import static core.logic.TextConfigs.alignment;
 import static core.pages.InfoPage.version;
 import static core.pages.MenuPage.displayMainMenuUi;
 import static java.lang.System.out;
 
 public class StartPage {
     public static void start() {
-
-        messageModifier('n', 1);
-        logoAscii(mainLogoAscii, 48);
+        messageModifier('n',1);
+        switchlogoAscii(mainLogoAscii, 48);
         marginBorder();
 
         String displayVersion = (version != null) ? version : "Unknown Version";

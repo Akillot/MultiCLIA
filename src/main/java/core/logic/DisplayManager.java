@@ -8,10 +8,10 @@ import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
-import static core.logic.BorderFunc.*;
-import static core.logic.ColorFunc.*;
+import static core.logic.BorderConfigs.*;
+import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.TextFunc.alignment;
+import static core.logic.TextConfigs.alignment;
 import static java.lang.System.*;
 import static java.lang.System.out;
 
@@ -35,6 +35,16 @@ public class DisplayManager {
             "  888           888          888    .88ooo8888.   ",
             "  `88b    ooo   888       o  888   .8'     `888.  ",
             "   `Y8bood8P'  o888ooooood8 o888o o88o     o8888o "
+    };
+
+    public static String[] mainLogoAsciiShort = {
+            "ooo        ooooo             oooo      .    o8o  ",
+            "`88.       .888'             `888    .o8    `\"'  ",
+            " 888b     d'888  oooo  oooo   888  .o888oo oooo  ",
+            " 8 Y88. .P  888  `888  `888   888    888   `888  ",
+            " 8  `888'   888   888   888   888    888    888  ",
+            " 8    Y     888   888   888   888    888 .  888  ",
+            "o8o        o888o  `V88V\"V8P' o888o   \"888\" o888o "
     };
 
     private static String[] errorAscii = {
@@ -61,23 +71,23 @@ public class DisplayManager {
             "sys.info: show info about the app", "sys.help: show description to all commands",
             "sys.exit: terminate the application", "sys.exitq: terminate the application quickly"};
 
-    public static void logoAscii(String[] logo, int alignment) {
+    public static void switchlogoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(2);
         switch (indexOfLogo) {
             case 0:
-                logoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
+                switchlogoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
                 break;
             case 1:
-                logoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
+                switchlogoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
                 break;
             default:
-                logoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
+                switchlogoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
                 break;
         }
     }
 
-    public static void logoAscii(String[] logo, int alignment ,String color1, String color2,
-                                 String color3, String color4, String color5, String color6) {
+    public static void switchlogoAscii(String[] logo, int alignment , String color1, String color2,
+                                       String color3, String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
             message(logo[i], colors[i % colors.length], alignment,0, out::print);
@@ -96,7 +106,7 @@ public class DisplayManager {
         out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + text);
     }
 
-    public static void commandList() {
+    public static void displayCommandList() {
         try {
             messageModifier('n', 2);
             alert("i", "show all lists together", 58);
@@ -107,12 +117,17 @@ public class DisplayManager {
             String choice = scanner.nextLine();
 
             if (choice.equals("+")) {
-                DisplayManager.allCommandList();
-                messageModifier('n', 1);
+                try {
+                    DisplayManager.displayAllCommandList();
+                    messageModifier('n', 1);
+                }
+                catch (Exception e) {
+                    message("Invalid input","red", 58, 0, out::print);
+                }
             }
             else if (choice.equals("-")) {
-                choice("System", commandList(systemCmds));
-                choice("Extensions", commandList(extensionCmds));
+                choice("System", displayCommandList(systemCmds));
+                choice("Extensions", displayCommandList(extensionCmds));
                 marginBorder();
             }
             if (choice.equalsIgnoreCase("exit")){
@@ -126,7 +141,7 @@ public class DisplayManager {
         }
     }
 
-    private static Runnable commandList(String[] commands) {
+    private static Runnable displayCommandList(String[] commands) {
         return () -> {
             for (String command : commands) {
                 message("· " + command, "white", 58,0, out::print);
@@ -134,7 +149,7 @@ public class DisplayManager {
         };
     }
 
-    private static void allCommandList() {
+    private static void displayAllCommandList() {
 
         messageModifier('n', 1);
         message("System Commands               Extensions", "blue", 58,0, out::print);
@@ -154,10 +169,10 @@ public class DisplayManager {
     /*Modified method System.out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
     public static void message(String text, String colorName, int alignment, int delay, Consumer<String> printMethod) {
-        ColorFunc.Color color;
+        ColorConfigs.Color color;
 
         try {
-            color = ColorFunc.Color.valueOf(colorName.toUpperCase());
+            color = ColorConfigs.Color.valueOf(colorName.toUpperCase());
         } catch (IllegalArgumentException e) {
             if (colorName.equalsIgnoreCase("randomly")) {
                 color = getRandomColor();
@@ -240,21 +255,21 @@ public class DisplayManager {
         message("Current time: " + formattedTime, "white", 58,0, out::print);
     }
 
-    public static void userIp(){
+    public static void displayUserIp(){
         messageModifier('n', 2);
         getUserLocalIp();
-        getHttpRequest("https://api.ipify.org","Your external IP:");
+        getHttpRequest("https://api.ipify.org","GET","Your external IP:");
         messageModifier('n', 1);
         marginBorder();
     }
 
-    public static void usingMemory(){
+    public static void displayUsingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
                         / (1000 * 1000) + "M"), "white", 58,0, out::print);
     }
 
-    public static Runnable appDescription() {
+    public static Runnable displayAppDescription() {
         return () -> {
             messageModifier('n', 1);
             marginBorder();
@@ -273,7 +288,7 @@ public class DisplayManager {
         };
     }
 
-    public static void commandsDescription(){
+    public static void displayCommandsDescription(){
         messageModifier('n', 2);
         for(String rule : RULES){
             message(rule,"white",58,0,out::print);

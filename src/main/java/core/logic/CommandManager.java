@@ -9,10 +9,10 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
-import static core.logic.BorderFunc.marginBorder;
-import static core.logic.ColorFunc.*;
+import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextFunc.alignment;
+import static core.logic.TextConfigs.alignment;
 
 import static java.lang.System.exit;
 import static java.lang.System.out;
@@ -48,14 +48,14 @@ public class CommandManager {
         }
     }
 
-    public static void getHttpRequest(String userUri, String text) {
+    public static void getHttpRequest(String userUri, String requestType, String text) {
         StringBuilder response = new StringBuilder();
         try {
             URI uri = new URI(userUri);
             URL url = uri.toURL();
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod(requestType);
 
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
@@ -108,7 +108,7 @@ public class CommandManager {
         }
     }
 
-    public static void exitExtension() {
+    public static void terminateExtension() {
         messageModifier('n', 1);
         loadingAnimation(300, 10);
         message(alignment(58) + RED + BOLD + "Application exit" + RESET,"red",
@@ -117,7 +117,7 @@ public class CommandManager {
         messageModifier('n', 1);
     }
 
-    public static void exitProgramDefault() {
+    public static void terminateProgramDefault() {
         messageModifier('n', 1);
         loadingAnimation(300, 10);
         message("\r    Status: ✓", "white", 58,0,out::print);
@@ -127,7 +127,7 @@ public class CommandManager {
         exit(0);
     }
 
-    public static void exitProgramQuick() {
+    public static void terminateProgramQuick() {
         messageModifier('n', 1);
         message("\r    Status: ✓", "white", 58,0,out::print);
         message("Program terminated quickly" + RESET,"red",

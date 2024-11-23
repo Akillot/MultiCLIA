@@ -3,7 +3,7 @@ package core.logic;
 import static core.logic.DisplayManager.messageModifier;
 import static java.lang.System.out;
 
-public class BorderFunc {
+public class BorderConfigs {
     public static final int borderWidth = 62;
     private static String[] symbolsOfBorder = new String[]{"━"};
 

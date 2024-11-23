@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.io.*;
 
-import static core.logic.BorderFunc.marginBorder;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.DisplayManager.errorAscii;
 import static core.logic.DisplayManager.message;
 import static java.lang.System.out;

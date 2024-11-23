@@ -1,6 +1,6 @@
 package core.pages;
 
-import static core.logic.BorderFunc.marginBorder;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static java.lang.System.out;
@@ -16,7 +16,7 @@ public  class InfoPage {
         messageModifier('n', 1);
 
         message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
-        choice("Description", appDescription());
+        choice("Description", displayAppDescription());
         messageModifier('n', 1);
 
         message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);

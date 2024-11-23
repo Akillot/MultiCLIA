@@ -2,13 +2,13 @@ package extensions.notepad;
 
 import java.util.Scanner;
 
-import static core.logic.BorderFunc.border;
-import static core.logic.BorderFunc.marginBorder;
-import static core.logic.ColorFunc.*;
-import static core.logic.CommandManager.exitExtension;
+import static core.logic.BorderConfigs.border;
+import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.ColorConfigs.*;
+import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextFunc.alignment;
-import static core.logic.TextFunc.slowMotionText;
+import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.slowMotionText;
 import static extensions.notepad.NotepadFunc.notepadLogo;
 import static java.lang.System.out;
 
@@ -19,16 +19,14 @@ public class NotepadPage {
         boolean running = true;
         while (running) {
             messageModifier('n', 2);
-            logoAscii(notepadLogo,48);
+            switchlogoAscii(notepadLogo,48);
             border();
             messageModifier('n',1);
 
-            String[] operations = new String[]{"1 create note", "2 open note", "3 delete note"};
+            String[] operations = new String[]{"1 create note", "2 open note", "3 delete note", "4 exit"};
             for (String operation : operations) {
                 message(operation,"white",58,0, out::print);
             }
-            message(alignment(58) + BOLD + WHITE + "4 " + RESET + BOLD + RED + "exit" + RESET,
-                    "white", 58, 0, out::print);
             messageModifier('n', 1);
             slowMotionText(50,58,false,true,"Choice",": ");
             String choice = scanner.nextLine().toLowerCase();
@@ -48,7 +46,7 @@ public class NotepadPage {
                     break;
                 case "4":
                 case "exit":
-                    exitExtension();
+                    terminateExtension();
                     running = false;
                     break;
             }

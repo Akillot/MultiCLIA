@@ -1,12 +1,12 @@
 package core.logic;
 
-import static core.logic.BorderFunc.*;
-import static core.logic.ColorFunc.*;
+import static core.logic.BorderConfigs.*;
+import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.message;
 import static core.logic.DisplayManager.messageModifier;
 import static java.lang.System.out;
 
-public class TextFunc {
+public class TextConfigs {
 
     public static int alignment;
 
@@ -31,7 +31,7 @@ public class TextFunc {
 
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
                                       boolean isItalicActive, String mainText, String additionalText) {
-        TextFunc.alignment = alignment;
+        TextConfigs.alignment = alignment;
         String formattedText = alignment(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
                 (isItalicActive ? ITALIC : "") +
