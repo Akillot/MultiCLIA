@@ -1,4 +1,4 @@
-package extensions.notepad;
+package extensions.notes;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +11,13 @@ import static core.logic.DisplayManager.message;
 import static java.lang.System.out;
 
 
-public class NotepadFunc {
+public class NotesConfigs {
     private String title;
     @Setter
     @Getter
     private String content;
 
-    public NotepadFunc(String title, String content) {
+    public NotesConfigs(String title, String content) {
         this.title = title;
         this.content = content;
     }
@@ -38,7 +38,7 @@ public class NotepadFunc {
         }
     }
 
-    public static NotepadFunc readFromFile(String title) {
+    public static NotesConfigs readFromFile(String title) {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
@@ -59,7 +59,7 @@ public class NotepadFunc {
         }
 
         message("Note read successfully!", "blue", 58,0, out::println);
-        return new NotepadFunc(title, content.toString());
+        return new NotesConfigs(title, content.toString());
     }
 
     public static boolean deleteNoteFile(String title) {

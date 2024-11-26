@@ -10,12 +10,11 @@ import static java.lang.System.out;
 
 public class StartPage {
     public static void start() {
-        messageModifier('n',1);
-        switchlogoAscii(mainLogoAscii, 48);
+        messageModifier('n',2);
+        switchLogoAscii(mainLogoAscii, 48);
         marginBorder();
 
         String displayVersion = (version != null) ? version : "Unknown Version";
-
         message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
         message("Version: " + displayVersion, "white", 56, 0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);

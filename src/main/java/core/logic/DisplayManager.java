@@ -1,5 +1,8 @@
 package core.logic;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -37,16 +40,6 @@ public class DisplayManager {
             "   `Y8bood8P'  o888ooooood8 o888o o88o     o8888o "
     };
 
-    public static String[] mainLogoAsciiShort = {
-            "ooo        ooooo             oooo      .    o8o  ",
-            "`88.       .888'             `888    .o8    `\"'  ",
-            " 888b     d'888  oooo  oooo   888  .o888oo oooo  ",
-            " 8 Y88. .P  888  `888  `888   888    888   `888  ",
-            " 8  `888'   888   888   888   888    888    888  ",
-            " 8    Y     888   888   888   888    888 .  888  ",
-            "o8o        o888o  `V88V\"V8P' o888o   \"888\" o888o "
-    };
-
     private static String[] errorAscii = {
             "  .oooooo.                                 ",
             " d8P'  `Y8b                                ",
@@ -71,22 +64,22 @@ public class DisplayManager {
             "sys.info: show info about the app", "sys.help: show description to all commands",
             "sys.exit: terminate the application", "sys.exitq: terminate the application quickly"};
 
-    public static void switchlogoAscii(String[] logo, int alignment) {
+    public static void switchLogoAscii(String[] logo, int alignment) {
         int indexOfLogo = rand.nextInt(2);
         switch (indexOfLogo) {
             case 0:
-                switchlogoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
+                switchLogoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
                 break;
             case 1:
-                switchlogoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
+                switchLogoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
                 break;
             default:
-                switchlogoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
+                switchLogoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
                 break;
         }
     }
 
-    public static void switchlogoAscii(String[] logo, int alignment , String color1, String color2,
+    public static void switchLogoAscii(String @NotNull [] logo, int alignment , String color1, String color2,
                                        String color3, String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
@@ -114,34 +107,38 @@ public class DisplayManager {
             messageModifier('n', 1);
 
             out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
-            String choice = scanner.nextLine();
+            String choice = scanner.nextLine().trim();
 
-            if (choice.equals("+")) {
-                try {
-                    DisplayManager.displayAllCommandList();
+            switch (choice) {
+                case "+":
+                    displayAllCommandList();
                     messageModifier('n', 1);
-                }
-                catch (Exception e) {
-                    message("Invalid input","red", 58, 0, out::print);
-                }
+                    break;
+                case "-":
+                    messageModifier('n', 1);
+                    choice("System", displayCommandList(systemCmds));
+                    choice("Extensions", displayCommandList(extensionCmds));
+                    marginBorder();
+                    break;
+                case "exit":
+                    marginBorder();
+                    return;
+                default:
+                    message("Invalid input", "red", 58, 0, out::print);
+                    messageModifier('n', 1);
+                    marginBorder();
+                    break;
             }
-            else if (choice.equals("-")) {
-                choice("System", displayCommandList(systemCmds));
-                choice("Extensions", displayCommandList(extensionCmds));
-                marginBorder();
-            }
-            if (choice.equalsIgnoreCase("exit")){
-                marginBorder();
-            }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             marginBorder();
             errorAscii();
-            message("Unknown error occurred","red", 58, 0, out::print);
+            message("Unknown error occurred", "red", 58, 0, out::print);
         }
     }
 
-    private static Runnable displayCommandList(String[] commands) {
+
+    @Contract(pure = true)
+    private static @NotNull Runnable displayCommandList(String[] commands) {
         return () -> {
             for (String command : commands) {
                 message("· " + command, "white", 58,0, out::print);
@@ -150,9 +147,8 @@ public class DisplayManager {
     }
 
     private static void displayAllCommandList() {
-
         messageModifier('n', 1);
-        message("System Commands               Extensions", "blue", 58,0, out::print);
+        message("System Commands" + alignment(0) + "Extensions", "blue", 58,0, out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -160,7 +156,7 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(58) + "%-20s          %-20s%n", systemCmd, extensionCmd);
+            out.printf(alignment(58) + "%-20s" + alignment(10) + "%-20s%n", systemCmd, extensionCmd);
         }
         messageModifier('n', 2);
         border();
@@ -168,7 +164,7 @@ public class DisplayManager {
 
     /*Modified method System.out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, String colorName, int alignment, int delay, Consumer<String> printMethod) {
+    public static void message(String text, @NotNull String colorName, int alignment, int delay, Consumer<String> printMethod) {
         ColorConfigs.Color color;
 
         try {
@@ -233,7 +229,8 @@ public class DisplayManager {
         out.print(WHITE + BOLD + "\r    ✓" + RESET);
     }
 
-    public static Runnable textModification() {
+    @Contract(pure = true)
+    public static @NotNull Runnable textModification() {
         return () -> {
             messageModifier('n', 1);
             message("All colors and text modifiers", "white", 58,0, out::print);

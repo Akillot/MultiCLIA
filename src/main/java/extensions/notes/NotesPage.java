@@ -1,4 +1,4 @@
-package extensions.notepad;
+package extensions.notes;
 
 import java.util.Scanner;
 
@@ -9,17 +9,17 @@ import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.alignment;
 import static core.logic.TextConfigs.slowMotionText;
-import static extensions.notepad.NotepadFunc.notepadLogo;
+import static extensions.notes.NotesConfigs.notepadLogo;
 import static java.lang.System.out;
 
-public class NotepadPage {
+public class NotesPage {
     private static  Scanner scanner = new Scanner(System.in);
 
     public static void displayNotepad() {
         boolean running = true;
         while (running) {
             messageModifier('n', 2);
-            switchlogoAscii(notepadLogo,48);
+            switchLogoAscii(notepadLogo,48);
             border();
             messageModifier('n',1);
 
@@ -59,7 +59,7 @@ public class NotepadPage {
         out.print(alignment(58) + BOLD + WHITE + "Enter content: " + RESET);
         String content = scanner.nextLine();
 
-        NotepadFunc note = new NotepadFunc(title, content);
+        NotesConfigs note = new NotesConfigs(title, content);
         note.saveToFile();
         marginBorder();
         message("Note saved", "blue", 58,0, out::println);
@@ -71,7 +71,7 @@ public class NotepadPage {
         out.print(alignment(58) + BOLD + WHITE + "Enter title to open: " + RESET);
         String title = scanner.nextLine();
 
-        NotepadFunc note = NotepadFunc.readFromFile(title);
+        NotesConfigs note = NotesConfigs.readFromFile(title);
         if (note != null) {
             message("Content: ", "white", 58,0, out::println);
             message(note.getContent(), "white", 58,0, out::println);
@@ -110,7 +110,7 @@ public class NotepadPage {
     private static void deleteNote() {
         out.print(alignment(58) + BOLD + WHITE + "Enter title to delete note: " + RESET);
         String title = scanner.nextLine();
-        boolean success = NotepadFunc.deleteNoteFile(title);
+        boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
             message("Note deleted", "blue", 58,0, out::println);
             messageModifier('n', 1);

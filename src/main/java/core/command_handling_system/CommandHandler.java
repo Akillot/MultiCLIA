@@ -1,10 +1,10 @@
 package core.command_handling_system;
 
 import core.pages.SettingsPage;
-import extensions.notepad.NotepadPage;
+import extensions.notes.NotesPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
-import extensions.browser.BrowserPage;
+import extensions.internet.browser.BrowserPage;
 import core.pages.InfoPage;
 import core.pages.StartPage;
 import core.pages.TimePage;
@@ -43,7 +43,7 @@ public class CommandHandler {
         commandMap.put(systemCmds[7], CommandManager::terminateProgramQuick);
         commandMap.put(systemCmds[8], DisplayManager::displayCommandsDescription);
 
-        commandMap.put(extensionCmds[0], NotepadPage::displayNotepad);
+        commandMap.put(extensionCmds[0], NotesPage::displayNotepad);
         commandMap.put(extensionCmds[1], BrowserPage::browserStarter);
         commandMap.put(extensionCmds[2], Reminder::reminderStarted);
     }

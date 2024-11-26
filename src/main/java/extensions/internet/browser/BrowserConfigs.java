@@ -1,4 +1,4 @@
-package extensions.browser;
+package extensions.internet.browser;
 
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
@@ -8,7 +8,7 @@ import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
-public class BrowserFunc {
+public class BrowserConfigs {
     public static void browser() {
         while (true) {
             messageModifier('n', 1);
