@@ -2,8 +2,7 @@ package extensions.internet.browser;
 
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
-import static core.logic.CommandManager.choice;
-import static core.logic.CommandManager.openUri;
+import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
@@ -17,8 +16,7 @@ public class BrowserConfigs {
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {
-                message("Exiting browser...", "red", 58,0, out::print);
-                marginBorder();
+                terminateExtension();
                 break;
             }
 

@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
+import static core.logic.ApiConfigs.getHttpRequest;
 import static core.logic.BorderConfigs.*;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
@@ -156,7 +157,7 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(58) + "%-20s" + alignment(10) + "%-20s%n", systemCmd, extensionCmd);
+            out.printf(alignment(58) + BOLD + "%-20s" + alignment(10) + BOLD + "%-20s%n", systemCmd, extensionCmd);
         }
         messageModifier('n', 2);
         border();
@@ -166,7 +167,6 @@ public class DisplayManager {
     alignment, delay and opportunity to move to the next line*/
     public static void message(String text, @NotNull String colorName, int alignment, int delay, Consumer<String> printMethod) {
         ColorConfigs.Color color;
-
         try {
             color = ColorConfigs.Color.valueOf(colorName.toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -245,7 +245,7 @@ public class DisplayManager {
         };
     }
 
-    public static void time(){
+    public static void displayTime(){
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
@@ -266,7 +266,8 @@ public class DisplayManager {
                         / (1000 * 1000) + "M"), "white", 58,0, out::print);
     }
 
-    public static Runnable displayAppDescription() {
+    @Contract(pure = true)
+    public static @NotNull Runnable displayAppDescription() {
         return () -> {
             messageModifier('n', 1);
             marginBorder();

@@ -6,7 +6,7 @@ import static core.logic.DisplayManager.*;
 public class TimePage {
     public static void displayCurrentTime() {
         messageModifier('n', 2);
-        time();
+        displayTime();
         messageModifier('n', 1);
         marginBorder();
     }

@@ -1,13 +1,9 @@
 package core.logic;
 
 import java.awt.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.*;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
@@ -48,38 +44,6 @@ public class CommandManager {
         }
     }
 
-    public static void getHttpRequest(String userUri, String requestType, String text) {
-        StringBuilder response = new StringBuilder();
-        try {
-            URI uri = new URI(userUri);
-            URL url = uri.toURL();
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(requestType);
-
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-
-            int statusCode = connection.getResponseCode();
-            if (statusCode != 200) {
-                message("Error: HTTP " + statusCode, "red", 58, 0, out::print);
-                return;
-            }
-
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-            }
-
-            out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + response + RESET);
-
-        } catch (Exception e) {
-            message("Error: " + e.getMessage(), "red", 58, 0, out::print);
-        }
-    }
-
     public static void choice(String title, Runnable action) {
         out.print(alignment(58) + BLUE + BOLD + title + RESET + BOLD + ": " + RESET);
 
@@ -110,8 +74,8 @@ public class CommandManager {
 
     public static void terminateExtension() {
         messageModifier('n', 1);
-        loadingAnimation(300, 10);
-        message(alignment(58) + RED + BOLD + "Application exit" + RESET,"red",
+        message("\r   Status: ✓", "white", 58,0,out::print);
+        message(alignment(58) + RED + BOLD + "Extension terminated correctly" + RESET,"blue",
                 100,0,out::print);
         marginBorder();
         messageModifier('n', 1);
@@ -121,7 +85,7 @@ public class CommandManager {
         messageModifier('n', 1);
         loadingAnimation(300, 10);
         message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Program terminated","red",
+        message("Program terminated correctly","blue",
                 56,20,out::print);
         messageModifier('n', 1);
         exit(0);
@@ -130,7 +94,7 @@ public class CommandManager {
     public static void terminateProgramQuick() {
         messageModifier('n', 1);
         message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Program terminated quickly" + RESET,"red",
+        message("Program terminated quickly correctly" + RESET,"blue",
                 56,0,out::print);
         messageModifier('n', 1);
         exit(0);
