@@ -57,7 +57,7 @@ public class ApiConfigs {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
                 double price = jsonResponse.getJSONObject(cryptoCurrencyName).getDouble(fiatCurrencyCode);
-                out.println(alignment(58) + WHITE + BOLD + capitalize(cryptoCurrencyName) + " price in [" + fiatCurrencyCode + "]: "
+                out.println(alignment(58) + WHITE + BOLD + capitalize(cryptoCurrencyName) + " price in " + fiatCurrencyCode.toUpperCase() + ": "
                         + RESET + BLUE + price + RESET);
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);
