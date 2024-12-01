@@ -1,5 +1,8 @@
 package core.logic;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.*;
@@ -14,7 +17,8 @@ import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class CommandManager {
-    public static Runnable openUri(String userSite) {
+    @Contract(pure = true)
+    public static @NotNull Runnable openUri(String userSite) {
         return () -> {
             try {
                 URI uri = new URI(userSite);
@@ -73,10 +77,9 @@ public class CommandManager {
     }
 
     public static void terminateExtension() {
-        messageModifier('n', 1);
         message("\r   Status: ✓", "white", 58,0,out::print);
-        message(alignment(58) + RED + BOLD + "Extension terminated correctly" + RESET,"blue",
-                100,0,out::print);
+        message("Extension terminated correctly","blue",
+                58,0,out::print);
         marginBorder();
         messageModifier('n', 1);
     }
@@ -94,7 +97,7 @@ public class CommandManager {
     public static void terminateProgramQuick() {
         messageModifier('n', 1);
         message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Program terminated quickly correctly" + RESET,"blue",
+        message("Program terminated quickly correctly","blue",
                 56,0,out::print);
         messageModifier('n', 1);
         exit(0);

@@ -6,13 +6,17 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
+import org.json.JSONObject;
+
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.message;
 import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.capitalize;
 import static java.lang.System.out;
 
 public class ApiConfigs {
-    public static void getHttpRequest(String userUri, String requestType, String text) {
+
+    public static String httpRequest(String userUri, String requestType, String text) {
         StringBuilder response = new StringBuilder();
         try {
             URI uri = new URI(userUri);
@@ -27,7 +31,7 @@ public class ApiConfigs {
             int statusCode = connection.getResponseCode();
             if (statusCode != 200) {
                 message("Error: HTTP " + statusCode, "red", 58, 0, out::print);
-                return;
+                return null;
             }
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -37,10 +41,43 @@ public class ApiConfigs {
                 }
             }
 
-            out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + response + RESET);
+            return response.toString();
 
         } catch (Exception e) {
             message("Error: " + e.getMessage(), "red", 58, 0, out::print);
+            return null;
+        }
+    }
+
+    public static void getCryptoCurrencyPrice(String cryptoCurrencyName, String fiatCurrencyCode) {
+        String apiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptoCurrencyName + "&vs_currencies=" + fiatCurrencyCode;
+        String response = httpRequest(apiUrl, "GET", "Bitcoin price in USD: ");
+
+        if (response != null) {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                double price = jsonResponse.getJSONObject(cryptoCurrencyName).getDouble(fiatCurrencyCode);
+                out.println(alignment(58) + WHITE + BOLD + capitalize(cryptoCurrencyName) + " price in [" + fiatCurrencyCode + "]: "
+                        + RESET + BLUE + price + RESET);
+            } catch (Exception e) {
+                message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);
+            }
+        }
+    }
+
+    public static void getWeather(String city) {
+        String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&current_weather=true";
+        String response = httpRequest(apiUrl, "GET", "Current Weather in: " + city);
+
+        if (response != null) {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                JSONObject currentWeather = jsonResponse.getJSONObject("current_weather");
+                double temperature = currentWeather.getDouble("temperature");
+                out.println(alignment(58) + WHITE + BOLD + "Weather in " + city + " now: " + RESET + BLUE + temperature + "°C" + RESET);
+            } catch (Exception e) {
+                message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);
+            }
         }
     }
 }

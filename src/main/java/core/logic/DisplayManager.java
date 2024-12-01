@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
-import static core.logic.ApiConfigs.getHttpRequest;
+import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.*;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
@@ -54,11 +54,11 @@ public class DisplayManager {
             "                       o888o               \n"
     };
 
-    private static final String[] COLORS = {
+    private static final String[] colors = {
             "red", "blue", "green", "yellow", "purple",
             "cyan", "white", "gray", "black"};
 
-    private static final String[] RULES = {
+    private static final String[] rules = {
             "sys.cmds: show all commands", "sys.setts: show a settings of the application",
             "sys.rerun: restart an app\n" + alignment(58) + "without cleaning previous context",
             "sys.time: show current time", "sys.ip: show local and external IP addresses",
@@ -69,13 +69,13 @@ public class DisplayManager {
         int indexOfLogo = rand.nextInt(2);
         switch (indexOfLogo) {
             case 0:
-                switchLogoAscii(logo, alignment, COLORS[5], COLORS[4], COLORS[6], COLORS[0], COLORS[1], COLORS[2]);
+                switchLogoAscii(logo, alignment, colors[5], colors[4], colors[6], colors[0], colors[1], colors[2]);
                 break;
             case 1:
-                switchLogoAscii(logo, alignment, COLORS[3], COLORS[4], COLORS[5], COLORS[4], COLORS[6], COLORS[0]);
+                switchLogoAscii(logo, alignment, colors[3], colors[4], colors[5], colors[4], colors[6], colors[0]);
                 break;
             default:
-                switchLogoAscii(logo, alignment, COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4], COLORS[4]);
+                switchLogoAscii(logo, alignment, colors[4], colors[4], colors[4], colors[4], colors[4], colors[4]);
                 break;
         }
     }
@@ -235,7 +235,7 @@ public class DisplayManager {
             messageModifier('n', 1);
             message("All colors and text modifiers", "white", 58,0, out::print);
             messageModifier('n', 1);
-            for (String color : COLORS) {
+            for (String color : colors) {
                 message(color, color, 58,0, out::print);
             }
             messageModifier('n', 1);
@@ -255,7 +255,7 @@ public class DisplayManager {
     public static void displayUserIp(){
         messageModifier('n', 2);
         getUserLocalIp();
-        getHttpRequest("https://api.ipify.org","GET","Your external IP:");
+        httpRequest("https://api.ipify.org","GET","Your external IP:");
         messageModifier('n', 1);
         marginBorder();
     }
@@ -272,8 +272,8 @@ public class DisplayManager {
             messageModifier('n', 1);
             marginBorder();
             messageModifier('n', 1);
-            message("MultiCLIA [" + ITALIC + "Multi Command Line Interface App" + RESET + "]\n\n" +
-                            alignment(58) + "is an open-source application designed for \n" +
+            message( BLUE + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
+                            BOLD + alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
                             alignment(58) + "functionality is built on extensible components.\n\n" +
@@ -288,7 +288,7 @@ public class DisplayManager {
 
     public static void displayCommandsDescription(){
         messageModifier('n', 2);
-        for(String rule : RULES){
+        for(String rule : rules){
             message(rule,"white",58,0,out::print);
             messageModifier('n', 1);
         }

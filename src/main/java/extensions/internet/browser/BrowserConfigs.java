@@ -1,6 +1,5 @@
 package extensions.internet.browser;
 
-import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
