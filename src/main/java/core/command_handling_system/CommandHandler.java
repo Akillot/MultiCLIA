@@ -1,6 +1,7 @@
 package core.command_handling_system;
 
 import core.pages.SettingsPage;
+import extensions.finance.CurrencyExchangerPage;
 import extensions.notes.NotesPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
@@ -22,7 +23,7 @@ public class CommandHandler {
             "sys.ip", "sys.info", "sys.exit", "sys.exitq",
             "sys.help", "sys.weather"};//Add command for sys.weather
     public static String[] extensionCmds = {
-            "notepad", "browser", "reminder"};
+            "notepad", "browser", "reminder", "crypto"};
 
     public static void registerCommands(Map<String, Runnable> commandMap) {
         commandMap.put(systemCmds[0], DisplayManager::displayCommandList);
@@ -44,7 +45,8 @@ public class CommandHandler {
         commandMap.put(systemCmds[8], DisplayManager::displayCommandsDescription);
 
         commandMap.put(extensionCmds[0], NotesPage::displayNotepad);
-        commandMap.put(extensionCmds[1], BrowserPage::browserStarter);
+        commandMap.put(extensionCmds[1], BrowserPage::browserPage);
         commandMap.put(extensionCmds[2], Reminder::reminderStarted);
+        commandMap.put(extensionCmds[3], CurrencyExchangerPage::exchangerPage);
     }
 }

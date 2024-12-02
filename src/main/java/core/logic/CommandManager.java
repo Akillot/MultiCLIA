@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.*;
 import java.net.URI;
 
+import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
@@ -80,8 +81,8 @@ public class CommandManager {
         message("\r   Status: ✓", "white", 58,0,out::print);
         message("Extension terminated correctly","blue",
                 58,0,out::print);
-        marginBorder();
         messageModifier('n', 1);
+        marginBorder();
     }
 
     public static void terminateProgramDefault() {

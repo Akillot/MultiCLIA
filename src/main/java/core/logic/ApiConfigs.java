@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.message;
 import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.capitalize;
 import static java.lang.System.out;
 
 public class ApiConfigs {
@@ -46,22 +45,6 @@ public class ApiConfigs {
         } catch (Exception e) {
             message("Error: " + e.getMessage(), "red", 58, 0, out::print);
             return null;
-        }
-    }
-
-    public static void getCryptoCurrencyPrice(String cryptoCurrencyName, String fiatCurrencyCode) {
-        String apiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptoCurrencyName + "&vs_currencies=" + fiatCurrencyCode;
-        String response = httpRequest(apiUrl, "GET", "Bitcoin price in USD: ");
-
-        if (response != null) {
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-                double price = jsonResponse.getJSONObject(cryptoCurrencyName).getDouble(fiatCurrencyCode);
-                out.println(alignment(58) + WHITE + BOLD + capitalize(cryptoCurrencyName) + " price in " + fiatCurrencyCode.toUpperCase() + ": "
-                        + RESET + BLUE + price + RESET);
-            } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);
-            }
         }
     }
 

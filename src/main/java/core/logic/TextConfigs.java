@@ -54,7 +54,7 @@ public class TextConfigs {
         return " ".repeat(Math.max(0, oneSide));
     }
 
-    static String capitalize(String input) {
+    public static String capitalize(String input) {
         if (input == null || input.isEmpty()) {
             return input;
         }

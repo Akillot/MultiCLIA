@@ -20,8 +20,8 @@ public class StartPage {
         message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
 
         alert("i", "Enter " + "'" + BLUE + BOLD + "sys.cmds" + RESET + "'\n"
-                + alignment(56) + "to show list of\n"
-                + alignment(56) + "commands", 56);
+                + alignment(56) + BOLD + "to show list of\n"
+                + alignment(56) +"commands" + RESET, 56);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
         messageModifier('n', 1);
