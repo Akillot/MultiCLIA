@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.*;
 import java.net.URI;
 
-import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
