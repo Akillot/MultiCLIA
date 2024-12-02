@@ -10,6 +10,7 @@ import core.pages.InfoPage;
 import core.pages.StartPage;
 import core.pages.TimePage;
 import extensions.time.Reminder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -21,11 +22,13 @@ public class CommandHandler {
     public static String[] systemCmds = {
             "sys.cmds" ,"sys.setts", "sys.rerun", "sys.time",
             "sys.ip", "sys.info", "sys.exit", "sys.exitq",
-            "sys.help", "sys.weather"};//Add command for sys.weather
+            "sys.help"};
     public static String[] extensionCmds = {
-            "notepad", "browser", "reminder", "crypto"};
+            "notes", "browser", "reminder", "crypto", "calendar", "weather",
+            "mini-postman", "cipher", "chatgpt", "discord", "telegram", "reddit",
+            "translate", "calculator", "clock"};
 
-    public static void registerCommands(Map<String, Runnable> commandMap) {
+    public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         commandMap.put(systemCmds[0], DisplayManager::displayCommandList);
         commandMap.put(systemCmds[1], SettingsPage::displaySettings);
         commandMap.put(systemCmds[2], StartPage::start);

@@ -13,22 +13,32 @@ import static extensions.notes.NotesConfigs.notepadLogo;
 import static java.lang.System.out;
 
 public class NotesPage {
-    private static  Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void displayNotepad() {
         boolean running = true;
-        while (running) {
-            messageModifier('n', 2);
-            switchLogoAscii(notepadLogo,48);
-            border();
-            messageModifier('n',1);
+        messageModifier('n', 2);
+        switchLogoAscii(notepadLogo, 52);
+        messageModifier('n', 1);
+        border();
 
-            String[] operations = new String[]{"1 create note", "2 open note", "3 delete note", "4 exit"};
+        while (running) {
+            messageModifier('n', 1);
+
+            String[] operations = new String[]{
+                    "1 create note",
+                    "2 open note",
+                    "3 delete note",
+                    "4 sort notes by title",
+                    "5 sort notes by content",
+                    "6 exit"
+            };
+
             for (String operation : operations) {
-                message(operation,"white",58,0, out::print);
+                message(operation, "white", 58, 0, out::print);
             }
             messageModifier('n', 1);
-            slowMotionText(50,58,false,true,"Choice",": ");
+            slowMotionText(50, 58, false, true, "Choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
@@ -45,6 +55,12 @@ public class NotesPage {
                     deleteNote();
                     break;
                 case "4":
+                    sortNotesByTitle();
+                    break;
+                case "5":
+                    sortNotesByContent();
+                    break;
+                case "6":
                 case "exit":
                     terminateExtension();
                     running = false;
@@ -62,8 +78,7 @@ public class NotesPage {
         NotesConfigs note = new NotesConfigs(title, content);
         note.saveToFile();
         marginBorder();
-        message("Note saved", "blue", 58,0, out::println);
-        messageModifier('n', 1);
+        message("Note saved", "blue", 58, 0, out::println);
         border();
     }
 
@@ -73,8 +88,8 @@ public class NotesPage {
 
         NotesConfigs note = NotesConfigs.readFromFile(title);
         if (note != null) {
-            message("Content: ", "white", 58,0, out::println);
-            message(note.getContent(), "white", 58,0, out::println);
+            message("Content: ", "white", 58, 0, out::println);
+            message(note.getContent(), "white", 58, 0, out::println);
             border();
             messageModifier('n', 1);
 
@@ -83,27 +98,26 @@ public class NotesPage {
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
-                message("Enter new text to this note: ", "white", 58,0, out::println);
+                message("Enter new text to this note: ", "white", 58, 0, out::println);
                 String newContent = scanner.nextLine();
                 note.setContent(newContent);
                 note.saveToFile();
 
                 messageModifier('n', 1);
                 border();
-                message("Note updated", "blue", 58,0, out::println);
+                message("Note updated", "blue", 58, 0, out::println);
                 messageModifier('n', 1);
                 border();
-            }
-            else if(answer.equals("-")) {
+            } else if (answer.equals("-")) {
                 messageModifier('n', 1);
-                message("Opening canceled", "blue", 58,0, out::println);
+                message("Opening canceled", "blue", 58, 0, out::println);
                 messageModifier('n', 1);
                 border();
             }
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", "red", 58,0, out::println);
+            message("Note not found", "red", 58, 0, out::println);
         }
     }
 
@@ -112,13 +126,27 @@ public class NotesPage {
         String title = scanner.nextLine();
         boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
-            message("Note deleted", "blue", 58,0, out::println);
+            message("Note deleted", "blue", 58, 0, out::println);
             messageModifier('n', 1);
             border();
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", "red", 58,0, out::println);
+            message("Note not found", "red", 58, 0, out::println);
         }
+    }
+
+    private static void sortNotesByTitle() {
+        NotesConfigs.sortNotesByTitle();
+        marginBorder();
+        message("Notes sorted by title", "blue", 58, 0, out::println);
+        border();
+    }
+
+    private static void sortNotesByContent() {
+        NotesConfigs.sortNotesByContent();
+        marginBorder();
+        message("Notes sorted by content", "blue", 58, 0, out::println);
+        border();
     }
 }
