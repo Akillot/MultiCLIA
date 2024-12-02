@@ -137,7 +137,6 @@ public class DisplayManager {
         }
     }
 
-
     @Contract(pure = true)
     private static @NotNull Runnable displayCommandList(String[] commands) {
         return () -> {
