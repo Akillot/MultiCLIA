@@ -26,7 +26,7 @@ public class CurrencyExchanger {
 
         while (true) {
             messageModifier('n', 1);
-            out.print(alignment(58) + BLUE + BOLD + "Cryptocurrency" + RESET + WHITE + BOLD + ": ");
+            out.print(alignment(58) + WHITE + BOLD + "Cryptocurrency: " + RESET);
             String userCryptocurrency = scanner.nextLine().trim();
 
             if (userCryptocurrency.equalsIgnoreCase("exit")) {
@@ -36,11 +36,11 @@ public class CurrencyExchanger {
             }
 
             if (userCryptocurrency.isEmpty()) {
-                message("Cryptocurrency name cannot be empty.", "red", 58, 0, out::print);
+                message("Cryptocurrency name cannot be empty", "red", 58, 0, out::print);
                 continue;
             }
 
-            out.print(alignment(58) + BLUE + BOLD + "Fiat code" + RESET + WHITE + BOLD + ": ");
+            out.print(alignment(58) + WHITE + BOLD + "Fiat code: " + RESET);
             String userFiatCurrencyCode = scanner.nextLine().trim();
 
             if (userFiatCurrencyCode.equalsIgnoreCase("exit")) {
