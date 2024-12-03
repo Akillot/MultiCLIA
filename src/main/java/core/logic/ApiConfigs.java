@@ -6,16 +6,17 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
+import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import static core.logic.ColorConfigs.*;
-import static core.logic.DisplayManager.message;
 import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
 
 public class ApiConfigs {
 
-    public static String httpRequest(String userUri, String requestType, String text) {
+    public static @Nullable String httpRequest(String userUri, String requestType, String text) {
         StringBuilder response = new StringBuilder();
         try {
             URI uri = new URI(userUri);

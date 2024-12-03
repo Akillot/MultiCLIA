@@ -3,7 +3,7 @@ package core.pages;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.*;
 import static core.pages.InfoPage.version;
 import static core.pages.MenuPage.displayMainMenuUi;
 import static java.lang.System.out;

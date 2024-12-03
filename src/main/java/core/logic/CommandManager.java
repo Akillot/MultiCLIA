@@ -11,8 +11,8 @@ import java.net.URI;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.alignment;
 
+import static core.logic.TextConfigs.*;
 import static java.lang.System.exit;
 import static java.lang.System.out;
 

@@ -11,6 +11,7 @@ import java.util.List;
 
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.DisplayManager.*;
+import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
 
 public class NotesConfigs {

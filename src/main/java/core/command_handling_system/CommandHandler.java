@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 import static core.logic.DisplayManager.*;
+import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {

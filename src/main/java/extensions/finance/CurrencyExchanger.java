@@ -6,8 +6,7 @@ import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.capitalize;
+import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
 public class CurrencyExchanger {

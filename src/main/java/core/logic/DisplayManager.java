@@ -2,12 +2,12 @@ package core.logic;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
@@ -15,7 +15,7 @@ import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.*;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.*;
 import static java.lang.System.*;
 import static java.lang.System.out;
 
@@ -104,6 +104,7 @@ public class DisplayManager {
         try {
             messageModifier('n', 2);
             alert("i", "show all lists together", 58);
+            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + BLUE + BOLD + "+" + RESET +  WHITE + BOLD);
             message("Enter '+' to open and '-' to skip", "white", 58, 0, out::print);
             messageModifier('n', 1);
 
@@ -162,59 +163,6 @@ public class DisplayManager {
         border();
     }
 
-    /*Modified method System.out.println(). Added text color,
-    alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, @NotNull String colorName, int alignment, int delay, Consumer<String> printMethod) {
-        ColorConfigs.Color color;
-        try {
-            color = ColorConfigs.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                errorAscii();
-                return;
-            }
-        }
-
-        String coloredText = getColoredText(text, color);
-        String alignedText = alignment(alignment) + coloredText;
-
-        StringBuilder output = new StringBuilder();
-        for (char ch : alignedText.toCharArray()) {
-            output.append(ch);
-            if (delay > 0) {
-                try {
-                    Thread.sleep(delay);
-                } catch (InterruptedException ex) {
-                    errorAscii();
-                    return;
-                }
-            }
-        }
-        printMethod.accept(output.toString());
-        messageModifier('n', 1);
-    }
-
-
-    public static void messageModifier(char modifier, int amount) {
-        if(amount <= 0){
-            errorAscii();
-        }
-        String output = switch(modifier){
-            case 'n' -> "\n";
-            case 't' -> "\t";
-            case 'b' -> "\b";
-            case 'r' -> "\r";
-            case '\\' -> "\\";
-            default -> "\\" + modifier;
-        };
-
-        for (int i = 0; i < amount; i++) {
-            out.print(output);
-        }
-    }
-
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
@@ -251,10 +199,22 @@ public class DisplayManager {
         message("Current time: " + formattedTime, "white", 58,0, out::print);
     }
 
-    public static void displayUserIp(){
+    public static void displayUserIp() {
         messageModifier('n', 2);
         getUserLocalIp();
-        httpRequest("https://api.ipify.org","GET","Your external IP:");
+
+        String externalIp = httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:");
+        if (externalIp != null) {
+            try {
+                JSONObject jsonResponse = new JSONObject(externalIp);
+                String ip = jsonResponse.getString("ip");
+
+                out.println(alignment(58) + WHITE + BOLD + "Your external IP: " + RESET + BLUE + ip + RESET);
+            } catch (Exception e) {
+                message("Error parsing external IP: " + e.getMessage(), "red", 58, 0, out::print);
+            }
+        }
+
         messageModifier('n', 1);
         marginBorder();
     }

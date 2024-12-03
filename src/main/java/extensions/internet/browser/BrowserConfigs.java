@@ -4,6 +4,7 @@ import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.messageModifier;
 import static java.lang.System.out;
 
 public class BrowserConfigs {
