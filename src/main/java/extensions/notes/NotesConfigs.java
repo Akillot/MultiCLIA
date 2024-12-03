@@ -6,11 +6,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.DisplayManager.*;
 import static java.lang.System.out;
@@ -18,6 +16,7 @@ import static java.lang.System.out;
 public class NotesConfigs {
     @Getter
     private String title;
+
     @Setter
     @Getter
     private String content;
