@@ -12,22 +12,17 @@ import static java.lang.System.out;
 
 public class CurrencyExchanger {
     public static void exchanger() {
-        alert("i", "Enter the name of\n"
-                + alignment(58) + "a cryptocurrency, then\n"
-                + alignment(58) + "the fiat currency code\n",58);
-
-        message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
-        messageModifier('n',1);
-
-        out.print(alignment(58) + BOLD + "[" + BLUE + BOLD + "Example"
-                + BOLD + ": '" + BLUE + BOLD + "Bitcoin" + RESET + BOLD + "']" + RESET);
-
-        messageModifier('n', 2);
-        message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
-        messageModifier('n', 1);
 
         alert("i", "Type '" + BLUE + BOLD + "exit" + RESET + BOLD + "' to\n" +
                 alignment(58) + "quit the extension.", 58);
+
+        messageModifier('n',1);
+
+        out.print(alignment(58) + BOLD + "[" + BLUE + BOLD + "Example"
+                + RESET + BOLD + ": '" + BLUE + BOLD + "bitcoin" + RESET + WHITE
+                + BOLD + " → " + RESET + BLUE + BOLD + "usd" + RESET + BOLD + "']" + RESET);
+
+        messageModifier('n', 1);
 
         while (true) {
             messageModifier('n', 1);
