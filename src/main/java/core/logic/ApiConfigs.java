@@ -41,6 +41,15 @@ public class ApiConfigs {
                 }
             }
 
+            try {
+                JSONObject jsonResponse = new JSONObject(response.toString());
+                String ip = jsonResponse.getString("ip");
+
+                out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + ip + RESET);
+            } catch (Exception e) {
+                message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);
+            }
+
             return response.toString();
 
         } catch (Exception e) {
@@ -48,6 +57,7 @@ public class ApiConfigs {
             return null;
         }
     }
+
 
     public static void getWeather(String city) {
         String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&current_weather=true";

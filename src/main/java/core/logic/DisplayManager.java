@@ -94,12 +94,6 @@ public class DisplayManager {
         }
     }
 
-    /*Show a message with [x], where x is a special character.
-    Can be used as tip([i]) or a clarification([?]) or another alert message*/
-    public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + BOLD + text);
-    }
-
     public static void displayCommandList() {
         try {
             messageModifier('n', 2);
@@ -202,19 +196,7 @@ public class DisplayManager {
     public static void displayUserIp() {
         messageModifier('n', 2);
         getUserLocalIp();
-
-        String externalIp = httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:");
-        if (externalIp != null) {
-            try {
-                JSONObject jsonResponse = new JSONObject(externalIp);
-                String ip = jsonResponse.getString("ip");
-
-                out.println(alignment(58) + WHITE + BOLD + "Your external IP: " + RESET + BLUE + ip + RESET);
-            } catch (Exception e) {
-                message("Error parsing external IP: " + e.getMessage(), "red", 58, 0, out::print);
-            }
-        }
-
+        httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:");
         messageModifier('n', 1);
         marginBorder();
     }

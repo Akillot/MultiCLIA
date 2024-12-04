@@ -115,4 +115,10 @@ public class TextConfigs {
             out.print(output);
         }
     }
+
+    /*Show a message with [x], where x is a special character.
+    Can be used as tip([i]) or a clarification([?]) or another alert message*/
+    public static void alert(String modification ,String text, int alignment) {
+        out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + BOLD + text);
+    }
 }
