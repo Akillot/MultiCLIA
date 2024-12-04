@@ -1,8 +1,8 @@
 package extensions.internet.browser;
 
 import static core.logic.BorderConfigs.border;
-import static core.logic.DisplayManager.messageModifier;
 import static core.logic.DisplayManager.switchLogoAscii;
+import static core.logic.TextConfigs.messageModifier;
 import static extensions.internet.browser.BrowserConfigs.browser;
 import static extensions.internet.browser.BrowserConfigs.browserLogo;
 

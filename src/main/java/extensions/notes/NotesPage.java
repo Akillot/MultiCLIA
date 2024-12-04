@@ -7,8 +7,7 @@ import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.slowMotionText;
+import static core.logic.TextConfigs.*;
 import static extensions.notes.NotesConfigs.notepadLogo;
 import static java.lang.System.out;
 

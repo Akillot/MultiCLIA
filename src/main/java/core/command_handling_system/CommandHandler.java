@@ -9,12 +9,12 @@ import extensions.internet.browser.BrowserPage;
 import core.pages.InfoPage;
 import core.pages.StartPage;
 import core.pages.TimePage;
-import extensions.time.Reminder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 import static core.logic.DisplayManager.*;
+import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
@@ -24,9 +24,7 @@ public class CommandHandler {
             "sys.ip", "sys.info", "sys.exit", "sys.exitq",
             "sys.help"};
     public static String[] extensionCmds = {
-            "notes", "browser", "reminder", "crypto", "calendar", "weather",
-            "mini-postman", "cipher", "chatgpt", "discord", "telegram", "reddit",
-            "translate", "calculator", "clock"};
+            "notes", "browser", "crypto"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         commandMap.put(systemCmds[0], DisplayManager::displayCommandList);
@@ -49,7 +47,6 @@ public class CommandHandler {
 
         commandMap.put(extensionCmds[0], NotesPage::displayNotepad);
         commandMap.put(extensionCmds[1], BrowserPage::browserPage);
-        commandMap.put(extensionCmds[2], Reminder::reminderStarted);
-        commandMap.put(extensionCmds[3], CurrencyExchangerPage::exchangerPage);
+        commandMap.put(extensionCmds[2], CurrencyExchangerPage::exchangerPage);
     }
 }

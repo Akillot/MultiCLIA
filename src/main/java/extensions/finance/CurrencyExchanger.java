@@ -6,28 +6,26 @@ import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.capitalize;
+import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
 public class CurrencyExchanger {
     public static void exchanger() {
-        alert("i", "Enter the name of\n"
-                + alignment(58) + "a cryptocurrency, then\n"
-                + alignment(58) + "the fiat currency code\n"
-                + alignment(58) + "[" + BLUE + BOLD + "Example" + RESET + ": '"
-                + BLUE + BOLD + "usd" + RESET + WHITE + BOLD + "']" + RESET, 58);
-
-        messageModifier('n', 1);
-        message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
-        messageModifier('n', 1);
 
         alert("i", "Type '" + BLUE + BOLD + "exit" + RESET + BOLD + "' to\n" +
                 alignment(58) + "quit the extension.", 58);
 
+        messageModifier('n',1);
+
+        out.print(alignment(58) + BOLD + "[" + BLUE + BOLD + "Example"
+                + RESET + BOLD + ": '" + BLUE + BOLD + "bitcoin" + RESET + WHITE
+                + BOLD + " → " + RESET + BLUE + BOLD + "usd" + RESET + BOLD + "']" + RESET);
+
+        messageModifier('n', 1);
+
         while (true) {
             messageModifier('n', 1);
-            out.print(alignment(58) + BLUE + BOLD + "Cryptocurrency" + RESET + WHITE + BOLD + ": ");
+            out.print(alignment(58) + WHITE + BOLD + "Cryptocurrency: " + RESET);
             String userCryptocurrency = scanner.nextLine().trim();
 
             if (userCryptocurrency.equalsIgnoreCase("exit")) {
@@ -37,11 +35,11 @@ public class CurrencyExchanger {
             }
 
             if (userCryptocurrency.isEmpty()) {
-                message("Cryptocurrency name cannot be empty.", "red", 58, 0, out::print);
+                message("Cryptocurrency name cannot be empty", "red", 58, 0, out::print);
                 continue;
             }
 
-            out.print(alignment(58) + BLUE + BOLD + "Fiat code" + RESET + WHITE + BOLD + ": ");
+            out.print(alignment(58) + WHITE + BOLD + "Fiat code: " + RESET);
             String userFiatCurrencyCode = scanner.nextLine().trim();
 
             if (userFiatCurrencyCode.equalsIgnoreCase("exit")) {
@@ -55,7 +53,6 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            messageModifier('n', 1);
             getCryptocurrencyPrice(userCryptocurrency, userFiatCurrencyCode);
         }
     }
@@ -64,9 +61,8 @@ public class CurrencyExchanger {
         cryptocurrencyName = cryptocurrencyName.toLowerCase();
         fiatCurrencyCode = fiatCurrencyCode.toLowerCase();
 
-        String apiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptocurrencyName +
-                "&vs_currencies=" + fiatCurrencyCode;
-        String response = httpRequest(apiUrl, "GET", "");
+        String response = httpRequest("https://api.coingecko.com/api/v3/simple/price?ids="
+                + cryptocurrencyName + "&vs_currencies=" + fiatCurrencyCode, "GET", "","response");
 
         if (response != null) {
             try {

@@ -1,6 +1,6 @@
 package extensions.finance;
 
-import static core.logic.DisplayManager.messageModifier;
+import static core.logic.TextConfigs.messageModifier;
 import static extensions.finance.CurrencyExchanger.exchanger;
 
 public class CurrencyExchangerPage {

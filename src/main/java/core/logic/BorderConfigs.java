@@ -1,6 +1,6 @@
 package core.logic;
 
-import static core.logic.DisplayManager.messageModifier;
+import static core.logic.TextConfigs.messageModifier;
 import static java.lang.System.out;
 
 public class BorderConfigs {

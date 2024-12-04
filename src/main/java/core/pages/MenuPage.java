@@ -9,7 +9,8 @@ import static core.logic.TextConfigs.*;
 public class MenuPage {
     public static void displayMainMenuUi() {
         PackageUnifier registry = new PackageUnifier();
-        slowMotionText(100, 56, false, true, "Search", ": ");
+        slowMotionText(100, 56,false,true,
+                "Search", ": ");
         String nameOfFunction = scanner.nextLine().toLowerCase();
         messageModifier('n', 1);
         wrapText(nameOfFunction, borderWidth - 2);

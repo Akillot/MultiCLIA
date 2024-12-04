@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 import static core.command_handling_system.CommandHandler.extensionCmds;
 import static core.command_handling_system.CommandHandler.systemCmds;
@@ -15,7 +14,7 @@ import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.*;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.*;
 import static java.lang.System.*;
 import static java.lang.System.out;
 
@@ -94,17 +93,12 @@ public class DisplayManager {
         }
     }
 
-    /*Show a message with [x], where x is a special character.
-    Can be used as tip([i]) or a clarification([?]) or another alert message*/
-    public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + BOLD + text);
-    }
-
     public static void displayCommandList() {
         try {
             messageModifier('n', 2);
             alert("i", "show all lists together", 58);
-            message("Enter '+' to open and '-' to skip", "white", 58, 0, out::print);
+            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + BLUE + BOLD + "+" + RESET
+                    + WHITE + BOLD + "' to open and '" + RESET + BLUE + BOLD + "-" + RESET + WHITE + BOLD + "' to skip" + RESET);
             messageModifier('n', 1);
 
             out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
@@ -137,7 +131,6 @@ public class DisplayManager {
         }
     }
 
-
     @Contract(pure = true)
     private static @NotNull Runnable displayCommandList(String[] commands) {
         return () -> {
@@ -149,7 +142,7 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         messageModifier('n', 1);
-        message("System Commands" + alignment(0) + "Extensions", "blue", 58,0, out::print);
+        message("System Commands" + alignment(0) + "Extensions","blue",58,0, out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -161,59 +154,6 @@ public class DisplayManager {
         }
         messageModifier('n', 2);
         border();
-    }
-
-    /*Modified method System.out.println(). Added text color,
-    alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, @NotNull String colorName, int alignment, int delay, Consumer<String> printMethod) {
-        ColorConfigs.Color color;
-        try {
-            color = ColorConfigs.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                errorAscii();
-                return;
-            }
-        }
-
-        String coloredText = getColoredText(text, color);
-        String alignedText = alignment(alignment) + coloredText;
-
-        StringBuilder output = new StringBuilder();
-        for (char ch : alignedText.toCharArray()) {
-            output.append(ch);
-            if (delay > 0) {
-                try {
-                    Thread.sleep(delay);
-                } catch (InterruptedException ex) {
-                    errorAscii();
-                    return;
-                }
-            }
-        }
-        printMethod.accept(output.toString());
-        messageModifier('n', 1);
-    }
-
-
-    public static void messageModifier(char modifier, int amount) {
-        if(amount <= 0){
-            errorAscii();
-        }
-        String output = switch(modifier){
-            case 'n' -> "\n";
-            case 't' -> "\t";
-            case 'b' -> "\b";
-            case 'r' -> "\r";
-            case '\\' -> "\\";
-            default -> "\\" + modifier;
-        };
-
-        for (int i = 0; i < amount; i++) {
-            out.print(output);
-        }
     }
 
     public static void loadingAnimation(int frames, int duration) {
@@ -252,10 +192,10 @@ public class DisplayManager {
         message("Current time: " + formattedTime, "white", 58,0, out::print);
     }
 
-    public static void displayUserIp(){
+    public static void displayUserIp() {
         messageModifier('n', 2);
         getUserLocalIp();
-        httpRequest("https://api.ipify.org","GET","Your external IP:");
+        httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
         messageModifier('n', 1);
         marginBorder();
     }
@@ -272,6 +212,7 @@ public class DisplayManager {
             messageModifier('n', 1);
             marginBorder();
             messageModifier('n', 1);
+
             message( BLUE + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
                             BOLD + alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +

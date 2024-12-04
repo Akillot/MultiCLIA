@@ -6,18 +6,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.DisplayManager.*;
+import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
 
 public class NotesConfigs {
     @Getter
     private String title;
+
     @Setter
     @Getter
     private String content;
@@ -91,13 +91,13 @@ public class NotesConfigs {
     }
 
     public static void sortNotesByTitle() {
-        Collections.sort(notesList, Comparator.comparing(NotesConfigs::getTitle));
+        notesList.sort(Comparator.comparing(NotesConfigs::getTitle));
         message("Notes sorted by title.", "blue", 58, 0, out::print);
         displayNotesList();
     }
 
     public static void sortNotesByContent() {
-        Collections.sort(notesList, Comparator.comparing(NotesConfigs::getContent));
+        notesList.sort(Comparator.comparing(NotesConfigs::getContent));
         message("Notes sorted by content.", "blue", 58, 0, out::print);
         displayNotesList();
     }
