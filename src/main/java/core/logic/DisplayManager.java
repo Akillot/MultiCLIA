@@ -2,7 +2,6 @@ package core.logic;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -98,8 +97,8 @@ public class DisplayManager {
         try {
             messageModifier('n', 2);
             alert("i", "show all lists together", 58);
-            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + BLUE + BOLD + "+" + RESET +  WHITE + BOLD);
-            message("Enter '+' to open and '-' to skip", "white", 58, 0, out::print);
+            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + BLUE + BOLD + "+" + RESET
+                    + WHITE + BOLD + "' to open and '" + RESET + BLUE + BOLD + "-" + RESET + WHITE + BOLD + "' to skip" + RESET);
             messageModifier('n', 1);
 
             out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
@@ -143,7 +142,7 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         messageModifier('n', 1);
-        message("System Commands" + alignment(0) + "Extensions", "blue", 58,0, out::print);
+        message("System Commands" + alignment(0) + "Extensions","blue",58,0, out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -196,7 +195,7 @@ public class DisplayManager {
     public static void displayUserIp() {
         messageModifier('n', 2);
         getUserLocalIp();
-        httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:");
+        httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
         messageModifier('n', 1);
         marginBorder();
     }
@@ -213,6 +212,7 @@ public class DisplayManager {
             messageModifier('n', 1);
             marginBorder();
             messageModifier('n', 1);
+
             message( BLUE + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
                             BOLD + alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +

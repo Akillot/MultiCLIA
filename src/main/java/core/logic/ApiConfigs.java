@@ -16,7 +16,7 @@ import static java.lang.System.out;
 
 public class ApiConfigs {
 
-    public static @Nullable String httpRequest(String userUri, String requestType, String text) {
+    public static @Nullable String httpRequest(String userUri, String requestType, String text, String key) {
         StringBuilder response = new StringBuilder();
         try {
             URI uri = new URI(userUri);
@@ -43,9 +43,9 @@ public class ApiConfigs {
 
             try {
                 JSONObject jsonResponse = new JSONObject(response.toString());
-                String ip = jsonResponse.getString("ip");
+                String value = jsonResponse.optString(key);
 
-                out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + ip + RESET);
+                out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + value + RESET);
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);
             }
@@ -58,16 +58,16 @@ public class ApiConfigs {
         }
     }
 
-
-    public static void getWeather(String city) {
-        String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&current_weather=true";
-        String response = httpRequest(apiUrl, "GET", "Current Weather in: " + city);
+    public static void getWeather(double latitude, double longitude, String city) {
+        String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&current_weather=true";
+        String response = httpRequest(apiUrl, "GET", "Current Weather in " + city + ":", "current_weather");
 
         if (response != null) {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
                 JSONObject currentWeather = jsonResponse.getJSONObject("current_weather");
                 double temperature = currentWeather.getDouble("temperature");
+
                 out.println(alignment(58) + WHITE + BOLD + "Weather in " + city + " now: " + RESET + BLUE + temperature + "°C" + RESET);
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(), "red", 58, 0, out::print);

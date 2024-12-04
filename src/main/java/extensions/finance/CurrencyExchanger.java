@@ -53,7 +53,6 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            messageModifier('n', 1);
             getCryptocurrencyPrice(userCryptocurrency, userFiatCurrencyCode);
         }
     }
@@ -62,9 +61,8 @@ public class CurrencyExchanger {
         cryptocurrencyName = cryptocurrencyName.toLowerCase();
         fiatCurrencyCode = fiatCurrencyCode.toLowerCase();
 
-        String apiUrl = "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptocurrencyName +
-                "&vs_currencies=" + fiatCurrencyCode;
-        String response = httpRequest(apiUrl, "GET", "");
+        String response = httpRequest("https://api.coingecko.com/api/v3/simple/price?ids="
+                + cryptocurrencyName + "&vs_currencies=" + fiatCurrencyCode, "GET", "","response");
 
         if (response != null) {
             try {
