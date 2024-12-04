@@ -8,7 +8,7 @@ import static core.logic.TextConfigs.messageModifier;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.0";
+    public static String version = "A-0.7.1";
 
     public static void displayInfo() throws InterruptedException {
         messageModifier('n', 2);
