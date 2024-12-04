@@ -7,11 +7,11 @@ import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
+
 import static java.lang.System.out;
 
 public class CurrencyExchanger {
     public static void exchanger() {
-
         alert("i", "Type '" + BLUE + BOLD + "exit" + RESET + BOLD + "' to\n" +
                 alignment(58) + "quit the extension.", 58);
 
@@ -39,7 +39,7 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            out.print(alignment(58) + WHITE + BOLD + "Fiat code: " + RESET);
+            out.print(alignment(58) +  WHITE + BOLD + "Fiat code: " + RESET);
             String userFiatCurrencyCode = scanner.nextLine().trim();
 
             if (userFiatCurrencyCode.equalsIgnoreCase("exit")) {
