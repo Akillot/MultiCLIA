@@ -185,13 +185,6 @@ public class DisplayManager {
         };
     }
 
-    public static void displayTime(){
-        LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
-        String formattedTime = localTime.format(myFormatter);
-        message("Current time: " + formattedTime, "white", 58,0, out::print);
-    }
-
     public static void displayUserIp() {
         messageModifier('n', 2);
         getUserLocalIp();
