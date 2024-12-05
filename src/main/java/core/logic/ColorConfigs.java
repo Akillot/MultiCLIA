@@ -1,5 +1,8 @@
 package core.logic;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 public class ColorConfigs {
@@ -26,7 +29,8 @@ public class ColorConfigs {
         return Color.values()[randomColorIndex];
     }
 
-    static String getColoredText(String text, Color color) {
+    @Contract(pure = true)
+    static @NotNull String getColoredText(String text, @NotNull Color color) {
         String colorCode = switch (color) {
             case RED -> RED;
             case YELLOW -> YELLOW;
