@@ -18,6 +18,7 @@ public class ColorConfigs {
     public static final String BOLD = "\033[1m";
     public static final String ITALIC = "\u001b[3m";
     public static final String UNDERLINE = "\033[4m";
+    public static final String REVERSE = "\u001B[7m";
 
     public static Color getRandomColor() {
         Random rand = new Random();
