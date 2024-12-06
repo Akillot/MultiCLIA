@@ -1,14 +1,18 @@
 package core.pages;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.message;
-import static core.logic.TextConfigs.modifyMessage;
+import static core.logic.TextConfigs.*;
+import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.1";
+    public static String version = "A-0.7.2";
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
@@ -24,5 +28,26 @@ public  class InfoPage {
         message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBorder();
+    }
+
+    @Contract(pure = true)
+    public static @NotNull Runnable displayAppDescription() {
+        return () -> {
+            modifyMessage('n', 1);
+            marginBorder();
+            modifyMessage('n', 1);
+
+            message( BLUE + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
+                            BOLD + alignment(58) + "is an open-source application designed for \n" +
+                            alignment(58) + "streamlined command-line interaction.\n\n" +
+                            alignment(58) + "It provides a flexible, modular interface where\n" +
+                            alignment(58) + "functionality is built on extensible components.\n\n" +
+                            alignment(58) + "Users will soon be able to add new extensions\n" +
+                            alignment(58) + "with any functionality, allowing limitless customization\n" +
+                            alignment(58) + "and adaptation to specific workflows.",
+                    "white", 58, 0, out::print);
+            modifyMessage('n', 2);
+            border();
+        };
     }
 }

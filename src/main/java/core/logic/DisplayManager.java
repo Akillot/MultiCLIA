@@ -123,55 +123,12 @@ public class DisplayManager {
         out.print(WHITE + BOLD + "\r    ✓" + RESET);
     }
 
-    @Contract(pure = true)
-    public static @NotNull Runnable textModification() {
-        return () -> {
-            modifyMessage('n', 1);
-            message("All colors and text modifiers", "white", 58,0, out::print);
-            modifyMessage('n', 1);
-            for (String color : colors) {
-                message(color, color, 58,0, out::print);
-            }
-            modifyMessage('n', 1);
-            message("Bold", "white", 58,0, out::print);
-            message(ITALIC + "Italic", "white", 58,0, out::print);
-            message(UNDERLINE + "Underline", "white", 58,0, out::print);
-        };
-    }
-
     public static void displayUserIp() {
         modifyMessage('n', 2);
         getUserLocalIp();
         httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
         modifyMessage('n', 1);
         marginBorder();
-    }
-
-    public static void displayUsingMemory(){
-        message("Memory used: " +
-                ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"), "white", 58,0, out::print);
-    }
-
-    @Contract(pure = true)
-    public static @NotNull Runnable displayAppDescription() {
-        return () -> {
-            modifyMessage('n', 1);
-            marginBorder();
-            modifyMessage('n', 1);
-
-            message( BLUE + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
-                            BOLD + alignment(58) + "is an open-source application designed for \n" +
-                            alignment(58) + "streamlined command-line interaction.\n\n" +
-                            alignment(58) + "It provides a flexible, modular interface where\n" +
-                            alignment(58) + "functionality is built on extensible components.\n\n" +
-                            alignment(58) + "Users will soon be able to add new extensions\n" +
-                            alignment(58) + "with any functionality, allowing limitless customization\n" +
-                            alignment(58) + "and adaptation to specific workflows.",
-                    "white", 58, 0, out::print);
-            modifyMessage('n', 2);
-            border();
-        };
     }
 
     public static void displayCommandsDescription(){
