@@ -1,5 +1,6 @@
 package core.logic;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -51,6 +52,7 @@ public class TextConfigs {
         out.print("");
     }
 
+    @Contract(pure = true)
     public static @NotNull String alignment(int widthOfElement) {
         int fullWidth = borderWidth + 2;
         int oneSide = (fullWidth - widthOfElement) / 2;
