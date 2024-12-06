@@ -1,5 +1,6 @@
 package core.logic;
 
+import core.command_handling_system.PackageUnifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.net.*;
 import java.net.URI;
 
+import static core.logic.BorderConfigs.borderWidth;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
@@ -17,6 +19,22 @@ import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class CommandManager {
+
+    public static void searchCommands() {
+        PackageUnifier registry = new PackageUnifier();
+        slowMotionText(100, 56,false,true,
+                "Search", ": ");
+        String nameOfFunction = scanner.nextLine().toLowerCase();
+        modifyMessage('n', 1);
+        wrapText(nameOfFunction, borderWidth - 2);
+
+        if (!registry.executeCommand(nameOfFunction)) {
+            modifyMessage('n', 2);
+            errorAscii();
+            marginBorder();
+        }
+    }
+
     @Contract(pure = true)
     public static @NotNull Runnable openUri(String userSite) {
         return () -> {
@@ -56,7 +74,7 @@ public class CommandManager {
             case "+":
                 try {
                     action.run();
-                    messageModifier('n', 1);
+                    modifyMessage('n', 1);
                 } catch (Exception e) {
                     message("Error executing action", "red", 58,0,out::print);
                     message("Status: x", "white", 58,0,out::print);
@@ -65,13 +83,13 @@ public class CommandManager {
 
             case "-":
                 message("Status: x", "white", 58,0,out::print);
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 break;
 
             default:
                 message("Invalid choice", "red", 58,0,out::print);
                 message("Status: x", "white", 58,0,out::print);
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 break;
         }
     }
@@ -80,26 +98,26 @@ public class CommandManager {
         message("\r   Status: ✓", "white", 58,0,out::print);
         message("Extension terminated correctly","blue",
                 58,0,out::print);
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
         marginBorder();
     }
 
     public static void terminateProgramDefault() {
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
         loadingAnimation(300, 10);
         message("\r    Status: ✓", "white", 58,0,out::print);
         message("Program terminated correctly","blue",
                 56,20,out::print);
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
         exit(0);
     }
 
     public static void terminateProgramQuick() {
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
         message("\r    Status: ✓", "white", 58,0,out::print);
         message("Program terminated quickly correctly","blue",
                 56,0,out::print);
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
         exit(0);
     }
 }

@@ -29,7 +29,7 @@ public class CommandHandler {
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         commandMap.put(systemCmds[0], DisplayManager::displayCommandList);
         commandMap.put(systemCmds[1], SettingsPage::displaySettings);
-        commandMap.put(systemCmds[2], StartPage::start);
+        commandMap.put(systemCmds[2], StartPage::displayStart);
         commandMap.put(systemCmds[3], DisplayManager::displayUserIp);
         commandMap.put(systemCmds[4], () -> {
             try {

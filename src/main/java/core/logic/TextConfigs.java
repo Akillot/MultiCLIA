@@ -20,16 +20,16 @@ public class TextConfigs {
                 border();
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    messageModifier('n',1);
+                    modifyMessage('n',1);
                 }
             } else {
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    messageModifier('n',1);
+                    modifyMessage('n',1);
                 }
             }
         }
-        messageModifier('n',1);
+        modifyMessage('n',1);
     }
 
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
@@ -57,7 +57,7 @@ public class TextConfigs {
         return " ".repeat(Math.max(0, oneSide));
     }
 
-    public static String capitalize(String input) {
+    public static String capitalizeMessage(String input) {
         if (input == null || input.isEmpty()) {
             return input;
         }
@@ -95,10 +95,11 @@ public class TextConfigs {
             }
         }
         printMethod.accept(output.toString());
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
     }
 
-    public static void messageModifier(char modifier, int amount) {
+    //unclear name
+    public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
             errorAscii();
         }

@@ -1,4 +1,4 @@
-core/pages/TimePage.class
+extensions/time/clock/Clock.class
 core/pages/SettingsPage.class
 extensions/internet/browser/BrowserPage.class
 core/logic/ColorConfigs.class
@@ -18,6 +18,7 @@ extensions/time/Reminder.class
 core/pages/MenuPage.class
 extensions/notes/NotesPage.class
 core/pages/StartPage.class
+extensions/time/clock/ClockPage.class
 core/command_handling_system/PackageUnifier.class
 core/logic/DisplayManager.class
 core/logic/ColorConfigs$1.class

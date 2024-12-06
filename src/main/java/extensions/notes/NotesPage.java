@@ -8,7 +8,6 @@ import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
-import static extensions.notes.NotesConfigs.notepadLogo;
 import static java.lang.System.out;
 
 public class NotesPage {
@@ -16,13 +15,9 @@ public class NotesPage {
 
     public static void displayNotepad() {
         boolean running = true;
-        messageModifier('n', 2);
-        switchLogoAscii(notepadLogo, 52);
-        messageModifier('n', 1);
-        border();
-
+        modifyMessage('n', 2);
         while (running) {
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
 
             String[] operations = new String[]{
                     "1 create note",
@@ -36,7 +31,7 @@ public class NotesPage {
             for (String operation : operations) {
                 message(operation, "white", 58, 0, out::print);
             }
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
             slowMotionText(50, 58, false, true, "Choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
 
@@ -90,7 +85,7 @@ public class NotesPage {
             message("Content: ", "white", 58, 0, out::println);
             message(note.getContent(), "white", 58, 0, out::println);
             border();
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
 
             alert("i", "Do you want to update this note? [+/-]", 58);
             out.print(alignment(58) + BOLD + WHITE + "Your choice: " + RESET);
@@ -102,15 +97,15 @@ public class NotesPage {
                 note.setContent(newContent);
                 note.saveToFile();
 
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 border();
                 message("Note updated", "blue", 58, 0, out::println);
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 border();
             } else if (answer.equals("-")) {
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 message("Opening canceled", "blue", 58, 0, out::println);
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 border();
             }
         } else {
@@ -126,7 +121,7 @@ public class NotesPage {
         boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
             message("Note deleted", "blue", 58, 0, out::println);
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
             border();
         } else {
             marginBorder();

@@ -1,6 +1,6 @@
 package core.logic;
 
-import static core.logic.TextConfigs.messageModifier;
+import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
 public class BorderConfigs {
@@ -16,8 +16,8 @@ public class BorderConfigs {
     }
 
     public static void marginBorder() {
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
         border();
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
     }
 }
