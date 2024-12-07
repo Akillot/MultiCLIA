@@ -4,15 +4,15 @@ import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.messageModifier;
+import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
 public class BrowserConfigs {
     public static void browser() {
         while (true) {
-            messageModifier('n', 1);
-            out.print(alignment(58) + BLUE + BOLD + "Enter domain" + RESET
-                    + WHITE + BOLD + " (or type 'exit' to quit): ");
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + BOLD + "Enter domain" + RESET
+                    + getAnsi256Color(systemDefaultWhite) + BOLD + " (or type 'exit' to quit): ");
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {

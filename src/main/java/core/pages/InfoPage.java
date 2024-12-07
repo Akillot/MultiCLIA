@@ -1,28 +1,59 @@
 package core.pages;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
+import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.DisplayManager.*;
-import static core.logic.TextConfigs.message;
-import static core.logic.TextConfigs.messageModifier;
+import static core.logic.TextConfigs.*;
+import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.1";
+    public static String version = "A-0.7.4";
 
     public static void displayInfo() throws InterruptedException {
-        messageModifier('n', 2);
-        message("Current version:", "white", 58,0, out::print);
-        message(version, "blue", 58,0, out::print);
-        message("Author: Nick Zozulia", "white", 58,0, out::print);
-        messageModifier('n', 1);
+        modifyMessage('n', 2);
+        message("Current version:",systemDefaultWhite,58,0,out::print);
+        message(version,systemDefaultColor,58,0,out::print);
+        message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
+        modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
+        message("Enter '+' to open and '-' to skip",systemDefaultWhite,58,0,out::print);
         choice("Description", displayAppDescription());
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
+        message("Enter '" + getAnsi256Color(systemDefaultColor) + BOLD + "+" + RESET +
+                getAnsi256Color(systemDefaultWhite) + BOLD + "' to open and '" +
+                getAnsi256Color(systemDefaultColor) + BOLD + "-" + RESET +
+                getAnsi256Color(systemDefaultWhite) + BOLD + "' to skip",systemDefaultWhite,58,0,out::print);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBorder();
+    }
+
+    @Contract(pure = true)
+    public static @NotNull Runnable displayAppDescription() {
+        return () -> {
+            modifyMessage('n', 1);
+            marginBorder();
+            modifyMessage('n', 1);
+
+            message(getAnsi256Color(systemDefaultColor) + BOLD + "MultiCLIA " + RESET
+                            + getAnsi256Color(systemDefaultWhite) + "[" + getAnsi256Color(systemDefaultWhite)
+                            + ITALIC + BOLD + "Multi Command Line Interface App" + RESET
+                            + getAnsi256Color(systemDefaultWhite) + "]\n\n" +
+                            BOLD + alignment(58) + "is an open-source application designed for \n" +
+                            alignment(58) + "streamlined command-line interaction.\n\n" +
+                            alignment(58) + "It provides a flexible, modular interface where\n" +
+                            alignment(58) + "functionality is built on extensible components.\n\n" +
+                            alignment(58) + "Users will soon be able to add new extensions\n" +
+                            alignment(58) + "with any functionality, allowing limitless customization\n" +
+                            alignment(58) + "and adaptation to specific workflows.",
+                    systemDefaultWhite,58,0,out::print);
+            modifyMessage('n', 2);
+            border();
+        };
     }
 }

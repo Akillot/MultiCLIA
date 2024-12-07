@@ -53,7 +53,7 @@ Enter your numbers.
 Use a 'SPACE' 
 To split numbers.
 -------------------
-9974 33 1 1 1 1 2 4 55
+systemDefaultColor74 33 1 1 1 1 2 4 55
 -------------------
 Operations:
 1. sum

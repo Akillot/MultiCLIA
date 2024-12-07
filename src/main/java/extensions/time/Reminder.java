@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 import static core.logic.ColorConfigs.*;
 import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.messageModifier;
+import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
 public class Reminder {
@@ -13,7 +13,7 @@ public class Reminder {
 
     public static void reminderStarted(){
 
-        messageModifier('n',2);
-        out.print(alignment(58) + WHITE + BOLD + "Set date and time to remind: " + RESET);
+        modifyMessage('n',2);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Set date and time to remind: " + RESET);
     }
 }

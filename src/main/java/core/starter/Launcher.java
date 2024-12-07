@@ -2,8 +2,11 @@ package core.starter;
 
 import core.pages.StartPage;
 
+import static core.logic.TextConfigs.modifyMessage;
+
 public class Launcher {
     public static void main(String[] args) {
-        StartPage.start();
+        modifyMessage('n',3);
+        StartPage.displayStart();
     }
 }

@@ -8,7 +8,6 @@ import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
-import static extensions.notes.NotesConfigs.notepadLogo;
 import static java.lang.System.out;
 
 public class NotesPage {
@@ -16,13 +15,9 @@ public class NotesPage {
 
     public static void displayNotepad() {
         boolean running = true;
-        messageModifier('n', 2);
-        switchLogoAscii(notepadLogo, 52);
-        messageModifier('n', 1);
-        border();
-
+        modifyMessage('n', 2);
         while (running) {
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
 
             String[] operations = new String[]{
                     "1 create note",
@@ -34,9 +29,9 @@ public class NotesPage {
             };
 
             for (String operation : operations) {
-                message(operation, "white", 58, 0, out::print);
+                message(operation,systemDefaultWhite,58,0,out::print);
             }
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
             slowMotionText(50, 58, false, true, "Choice", ": ");
             String choice = scanner.nextLine().toLowerCase();
 
@@ -69,83 +64,83 @@ public class NotesPage {
     }
 
     private static void createNote() {
-        out.print(alignment(58) + BOLD + WHITE + "Enter title: " + RESET);
+        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter title: " + RESET);
         String title = scanner.nextLine();
-        out.print(alignment(58) + BOLD + WHITE + "Enter content: " + RESET);
+        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter content: " + RESET);
         String content = scanner.nextLine();
 
         NotesConfigs note = new NotesConfigs(title, content);
         note.saveToFile();
         marginBorder();
-        message("Note saved", "blue", 58, 0, out::println);
+        message("Note saved",systemDefaultColor,58,0,out::println);
         border();
     }
 
     private static void openNote() {
-        out.print(alignment(58) + BOLD + WHITE + "Enter title to open: " + RESET);
+        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter title to open: " + RESET);
         String title = scanner.nextLine();
 
         NotesConfigs note = NotesConfigs.readFromFile(title);
         if (note != null) {
-            message("Content: ", "white", 58, 0, out::println);
-            message(note.getContent(), "white", 58, 0, out::println);
+            message("Content: ",systemDefaultWhite,58,0,out::println);
+            message(note.getContent(),systemDefaultWhite,58,0,out::println);
             border();
-            messageModifier('n', 1);
+            modifyMessage('n', 1);
 
             alert("i", "Do you want to update this note? [+/-]", 58);
-            out.print(alignment(58) + BOLD + WHITE + "Your choice: " + RESET);
+            out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Your choice: " + RESET);
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
-                message("Enter new text to this note: ", "white", 58, 0, out::println);
+                message("Enter new text to this note: ",systemDefaultWhite,58,0,out::println);
                 String newContent = scanner.nextLine();
                 note.setContent(newContent);
                 note.saveToFile();
 
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
                 border();
-                message("Note updated", "blue", 58, 0, out::println);
-                messageModifier('n', 1);
+                message("Note updated",systemDefaultColor,58,0,out::println);
+                modifyMessage('n', 1);
                 border();
             } else if (answer.equals("-")) {
-                messageModifier('n', 1);
-                message("Opening canceled", "blue", 58, 0, out::println);
-                messageModifier('n', 1);
+                modifyMessage('n', 1);
+                message("Opening canceled",systemDefaultColor,58,0,out::println);
+                modifyMessage('n', 1);
                 border();
             }
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", "red", 58, 0, out::println);
+            message("Note not found",systemDefaultRed,58,0,out::println);
         }
     }
 
     private static void deleteNote() {
-        out.print(alignment(58) + BOLD + WHITE + "Enter title to delete note: " + RESET);
+        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter title to delete note: " + RESET);
         String title = scanner.nextLine();
         boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
-            message("Note deleted", "blue", 58, 0, out::println);
-            messageModifier('n', 1);
+            message("Note deleted",systemDefaultColor,58,0,out::println);
+            modifyMessage('n', 1);
             border();
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", "red", 58, 0, out::println);
+            message("Note not found",systemDefaultRed,58,0,out::println);
         }
     }
 
     private static void sortNotesByTitle() {
         NotesConfigs.sortNotesByTitle();
         marginBorder();
-        message("Notes sorted by title", "blue", 58, 0, out::println);
+        message("Notes sorted by title",systemDefaultColor,58,0,out::println);
         border();
     }
 
     private static void sortNotesByContent() {
         NotesConfigs.sortNotesByContent();
         marginBorder();
-        message("Notes sorted by content", "blue", 58, 0, out::println);
+        message("Notes sorted by content",systemDefaultColor,58,0,out::println);
         border();
     }
 }

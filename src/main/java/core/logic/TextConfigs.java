@@ -1,5 +1,6 @@
 package core.logic;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
@@ -20,16 +21,16 @@ public class TextConfigs {
                 border();
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    messageModifier('n',1);
+                    modifyMessage('n',1);
                 }
             } else {
                 out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
                 if (end < text.length()) {
-                    messageModifier('n',1);
+                    modifyMessage('n',1);
                 }
             }
         }
-        messageModifier('n',1);
+        modifyMessage('n',1);
     }
 
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
@@ -45,19 +46,20 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", "red", 58,0, out::println);
+                message("Error, try again",systemDefaultRed,58,0, out::println);
             }
         }
         out.print("");
     }
 
+    @Contract(pure = true)
     public static @NotNull String alignment(int widthOfElement) {
         int fullWidth = borderWidth + 2;
         int oneSide = (fullWidth - widthOfElement) / 2;
         return " ".repeat(Math.max(0, oneSide));
     }
 
-    public static String capitalize(String input) {
+    public static String capitalizeMessage(String input) {
         if (input == null || input.isEmpty()) {
             return input;
         }
@@ -66,18 +68,7 @@ public class TextConfigs {
 
     /*Modified method System.out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, @NotNull String colorName, int alignment, int delay, Consumer<String> printMethod) {
-        ColorConfigs.Color color;
-        try {
-            color = ColorConfigs.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                errorAscii();
-                return;
-            }
-        }
+    public static void message(String text, @NotNull int color, int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColoredText(text, color);
         String alignedText = alignment(alignment) + coloredText;
@@ -95,10 +86,11 @@ public class TextConfigs {
             }
         }
         printMethod.accept(output.toString());
-        messageModifier('n', 1);
+        modifyMessage('n', 1);
     }
 
-    public static void messageModifier(char modifier, int amount) {
+    //unclear name
+    public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
             errorAscii();
         }
@@ -119,6 +111,9 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + BOLD + text);
+        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + BOLD + "["  + modification + "] " + RESET
+                + getAnsi256Color(systemDefaultWhite) + BOLD + text + RESET);
     }
+
+
 }
