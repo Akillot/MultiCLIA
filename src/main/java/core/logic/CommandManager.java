@@ -23,8 +23,7 @@ public class CommandManager {
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         slowMotionText(50, 56,false,true,
-                getAnsi256Color(systemDefaultWhite) + "Search",
-                getAnsi256Color(systemDefaultWhite) + ": " + RESET);
+                getAnsi256Color(systemDefaultWhite) + "Search:","");
         String nameOfFunction = scanner.nextLine().toLowerCase();
         modifyMessage('n', 1);
         wrapText(nameOfFunction, borderWidth - 2);
