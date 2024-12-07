@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class ColorConfigs {
 
+    public static int systemDefaultColor = 99;
+
     public static final String RESET = "\033[0m";
     public static final String BLACK = "\033[0;30m";
     public static final String RED = "\033[0;31m";
@@ -50,41 +52,12 @@ public class ColorConfigs {
     public static final String BRIGHT_BACKGROUND_CYAN = "\u001B[46;1m";
     public static final String BRIGHT_BACKGROUND_WHITE = "\u001B[47;1m";
 
-    public static Color getRandomColor() {
-        Random rand = new Random();
-        int randomColorIndex = rand.nextInt(Color.values().length);
-        return Color.values()[randomColorIndex];
-    }
-
     @Contract(pure = true)
-    static @NotNull String getColoredText(String text, @NotNull Color color) {
-        String colorCode = switch (color) {
-            case RED -> RED;
-            case YELLOW -> YELLOW;
-            case GREEN -> GREEN;
-            case BLUE -> BLUE;
-            case PURPLE -> PURPLE;
-            case CYAN -> CYAN;
-            case WHITE -> WHITE;
-            case GRAY -> GRAY;
-            case BLACK -> BLACK;
-            case BRIGHT_RED -> BRIGHT_RED;
-            case BRIGHT_YELLOW -> BRIGHT_YELLOW;
-            case BRIGHT_GREEN -> BRIGHT_GREEN;
-            case BRIGHT_BLUE -> BRIGHT_BLUE;
-            case BRIGHT_PURPLE -> BRIGHT_PURPLE;
-            case BRIGHT_CYAN -> BRIGHT_CYAN;
-            case BRIGHT_WHITE -> BRIGHT_WHITE;
-            case BRIGHT_BLACK -> BRIGHT_BLACK;
-            case RESET -> RESET;
-        };
-        return colorCode + BOLD + text + RESET;
-    }
-
-    public enum Color {
-        RED, YELLOW, GREEN, BLUE, PURPLE, CYAN, WHITE, GRAY, BLACK, RESET,
-        BRIGHT_RED, BRIGHT_YELLOW, BRIGHT_GREEN, BRIGHT_BLUE, BRIGHT_PURPLE,
-        BRIGHT_CYAN, BRIGHT_WHITE, BRIGHT_BLACK
+    static @NotNull String getColoredText(String text, int color) {
+        if (color < 0 || color > 255) {
+            throw new IllegalArgumentException("Color code must be between 0 and 255");
+        }
+        return getAnsi256Color(color) + BOLD + text + RESET;
     }
 
     @Contract(pure = true)
@@ -108,10 +81,4 @@ public class ColorConfigs {
         int colorCode = rand.nextInt(256);
         return getAnsi256BackgroundColor(colorCode);
     }
-
-public static final String[] colors = {
-            "red", "blue", "green", "yellow", "purple",
-            "cyan", "white", "gray", "black", "bright_black",
-            "bright_red", "bright_green", "bright_yellow", "bright_blue",
-            "bright_purple", "bright_cyan", "bright_white"};
 }

@@ -13,19 +13,19 @@ import static java.lang.System.out;
 public class StartPage {
     public static void displayStart() {
         modifyMessage('n',2);
-        switchLogoAscii(mainLogoAscii, 48);
+        switcherLogoAscii(mainLogoAscii, 48);
         marginBorder();
 
         String displayVersion = (version != null) ? version : "Unknown Version";
-        message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
-        message("Version: " + displayVersion, "white", 56, 0, out::print);
-        message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━",15,58,0, out::print);
+        message("Version: " + displayVersion,15,56,0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━",15,58,0, out::print);
 
-        alert("i", "Enter " + "'" + BLUE + BOLD + "sys.cmds" + RESET + "'\n"
+        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + BOLD + "sys.cmds" + RESET + "'\n"
                 + alignment(56) + BOLD + "to show list of\n"
                 + alignment(56) + "commands", 56);
 
-        message("━━━━━━━━━━━━━━━━━━━━━━", "white", 58, 0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━",15,58,0,out::print);
         modifyMessage('n', 1);
 
         while (true) {
@@ -35,7 +35,7 @@ public class StartPage {
                 marginBorder();
                 errorAscii();
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, "red", 58, 0, out::print);
+                message(errorMessage, 196, 58, 0, out::print);
             }
         }
     }
@@ -60,26 +60,33 @@ public class StartPage {
             "   `Y8bood8P'  o888ooooood8 o888o o88o     o8888o "
     };
 
-    public static void switchLogoAscii(String[] logo, int alignment) {
-        int indexOfLogo = rand.nextInt(2);
+    public static void switcherLogoAscii(String[] logo, int alignment) {
+        int indexOfLogo = rand.nextInt(3);
         switch (indexOfLogo) {
-            case 0:
-                switchLogoAscii(logo, alignment, colors[5], colors[4], colors[6], colors[0], colors[1], colors[2]);
-                break;
-            case 1:
-                switchLogoAscii(logo, alignment, colors[3], colors[4], colors[5], colors[4], colors[6], colors[0]);
-                break;
-            default:
-                switchLogoAscii(logo, alignment, colors[4], colors[4], colors[4], colors[4], colors[4], colors[4]);
-                break;
+            case 0 -> switcherLogoAscii(logo, alignment,
+                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
+                    getAnsi256Color(165), getAnsi256Color(systemDefaultColor),
+                    getAnsi256Color(63), getAnsi256Color(systemDefaultColor));
+            case 1 -> switcherLogoAscii(logo, alignment,
+                    getAnsi256Color(250), getAnsi256Color(251),
+                    getAnsi256Color(252), getAnsi256Color(253),
+                    getAnsi256Color(254), getAnsi256Color(255));
+            case 2 -> switcherLogoAscii(logo, alignment,
+                    getAnsi256Color(52), getAnsi256Color(53),
+                    getAnsi256Color(54), getAnsi256Color(55),
+                    getAnsi256Color(56), getAnsi256Color(57));
+            default -> switcherLogoAscii(logo, alignment,
+                    getAnsi256Color(15), getAnsi256Color(15),
+                    getAnsi256Color(15), getAnsi256Color(15),
+                    getAnsi256Color(15), getAnsi256Color(15));
         }
     }
 
-    public static void switchLogoAscii(String @NotNull [] logo, int alignment , String color1, String color2,
-                                       String color3, String color4, String color5, String color6) {
+    public static void switcherLogoAscii(String @NotNull [] logo, int alignment, String color1, String color2,
+                                         String color3, String color4, String color5, String color6) {
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
-            message(logo[i], colors[i % colors.length], alignment,0, out::print);
+            message(logo[i],i % colors.length,alignment,0,out::print);
         }
     }
 }

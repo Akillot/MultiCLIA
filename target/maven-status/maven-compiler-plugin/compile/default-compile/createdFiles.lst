@@ -15,7 +15,6 @@ core/logic/TextConfigs.class
 core/logic/CommandManager.class
 core/command_handling_system/CommandHandler.class
 extensions/time/Reminder.class
-core/pages/MenuPage.class
 extensions/notes/NotesPage.class
 core/pages/StartPage.class
 extensions/time/clock/ClockPage.class

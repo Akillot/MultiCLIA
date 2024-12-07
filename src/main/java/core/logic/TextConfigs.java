@@ -46,7 +46,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", "red", 58,0, out::println);
+                message("Error, try again",196, 58,0, out::println);
             }
         }
         out.print("");
@@ -68,18 +68,7 @@ public class TextConfigs {
 
     /*Modified method System.out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, @NotNull String colorName, int alignment, int delay, Consumer<String> printMethod) {
-        ColorConfigs.Color color;
-        try {
-            color = ColorConfigs.Color.valueOf(colorName.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (colorName.equalsIgnoreCase("randomly")) {
-                color = getRandomColor();
-            } else {
-                errorAscii();
-                return;
-            }
-        }
+    public static void message(String text, @NotNull int color, int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColoredText(text, color);
         String alignedText = alignment(alignment) + coloredText;

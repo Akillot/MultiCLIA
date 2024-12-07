@@ -29,7 +29,7 @@ public class NotesPage {
             };
 
             for (String operation : operations) {
-                message(operation, "white", 58, 0, out::print);
+                message(operation,15,58,0,out::print);
             }
             modifyMessage('n', 1);
             slowMotionText(50, 58, false, true, "Choice", ": ");
@@ -72,7 +72,7 @@ public class NotesPage {
         NotesConfigs note = new NotesConfigs(title, content);
         note.saveToFile();
         marginBorder();
-        message("Note saved", "blue", 58, 0, out::println);
+        message("Note saved",systemDefaultColor,58,0,out::println);
         border();
     }
 
@@ -82,8 +82,8 @@ public class NotesPage {
 
         NotesConfigs note = NotesConfigs.readFromFile(title);
         if (note != null) {
-            message("Content: ", "white", 58, 0, out::println);
-            message(note.getContent(), "white", 58, 0, out::println);
+            message("Content: ",15,58,0,out::println);
+            message(note.getContent(),15,58,0,out::println);
             border();
             modifyMessage('n', 1);
 
@@ -92,26 +92,26 @@ public class NotesPage {
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
-                message("Enter new text to this note: ", "white", 58, 0, out::println);
+                message("Enter new text to this note: ",15,58,0,out::println);
                 String newContent = scanner.nextLine();
                 note.setContent(newContent);
                 note.saveToFile();
 
                 modifyMessage('n', 1);
                 border();
-                message("Note updated", "blue", 58, 0, out::println);
+                message("Note updated",systemDefaultColor,58,0,out::println);
                 modifyMessage('n', 1);
                 border();
             } else if (answer.equals("-")) {
                 modifyMessage('n', 1);
-                message("Opening canceled", "blue", 58, 0, out::println);
+                message("Opening canceled",systemDefaultColor,58,0,out::println);
                 modifyMessage('n', 1);
                 border();
             }
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", "red", 58, 0, out::println);
+            message("Note not found",196,58,0,out::println);
         }
     }
 
@@ -120,27 +120,27 @@ public class NotesPage {
         String title = scanner.nextLine();
         boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
-            message("Note deleted", "blue", 58, 0, out::println);
+            message("Note deleted",systemDefaultColor,58,0,out::println);
             modifyMessage('n', 1);
             border();
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", "red", 58, 0, out::println);
+            message("Note not found",196,58,0,out::println);
         }
     }
 
     private static void sortNotesByTitle() {
         NotesConfigs.sortNotesByTitle();
         marginBorder();
-        message("Notes sorted by title", "blue", 58, 0, out::println);
+        message("Notes sorted by title",systemDefaultColor,58,0,out::println);
         border();
     }
 
     private static void sortNotesByContent() {
         NotesConfigs.sortNotesByContent();
         marginBorder();
-        message("Notes sorted by content", "blue", 58, 0, out::println);
+        message("Notes sorted by content",systemDefaultColor,58,0,out::println);
         border();
     }
 }

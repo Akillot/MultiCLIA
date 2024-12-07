@@ -42,7 +42,7 @@ public class DisplayManager {
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, "red", 40, 0, out::print);
+            message(line,196,40,0,out::print);
         }
     }
 
@@ -51,8 +51,8 @@ public class DisplayManager {
             modifyMessage('n', 2);
             alert("i", "show all lists together", 58);
 
-            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + BLUE + BOLD + "+" + RESET
-                    + WHITE + BOLD + "' to open and '" + RESET + BLUE + BOLD + "-" + RESET + WHITE + BOLD + "' to skip" + RESET);
+            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + systemDefaultColor + BOLD + "+" + RESET
+                    + WHITE + BOLD + "' to open and '" + RESET + systemDefaultColor + BOLD + "-" + RESET + WHITE + BOLD + "' to skip" + RESET);
             modifyMessage('n', 1);
 
             out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
@@ -73,15 +73,15 @@ public class DisplayManager {
                     marginBorder();
                     return;
                 default:
-                    message("Invalid input", "red", 58, 0, out::print);
-                    modifyMessage('n', 1);
+                    message("Invalid input",196,58,0,out::print);
+                    modifyMessage('n',1);
                     marginBorder();
                     break;
             }
         } catch (Exception e) {
             marginBorder();
             errorAscii();
-            message("Unknown error occurred", "red", 58, 0, out::print);
+            message("Unknown error occurred",196,58,0,out::print);
         }
     }
 
@@ -89,14 +89,14 @@ public class DisplayManager {
     private static @NotNull Runnable displayCommandList(String[] commands) {
         return () -> {
             for (String command : commands) {
-                message("· " + command, "white", 58,0, out::print);
+                message("· " + command,15,58,0,out::print);
             }
         };
     }
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        message("System Commands" + alignment(0) + "Extensions","blue",58,0, out::print);
+        message("System Commands" + alignment(0) + "Extensions",systemDefaultColor,58,0,out::print);
 
         int maxRows = Math.max(systemCmds.length, extensionCmds.length);
 
@@ -134,7 +134,7 @@ public class DisplayManager {
     public static void displayCommandsDescription(){
         modifyMessage('n', 2);
         for(String rule : rules){
-            message(rule,"white",58,0,out::print);
+            message(rule,15,58,0,out::print);
             modifyMessage('n', 1);
         }
         marginBorder();

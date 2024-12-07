@@ -42,15 +42,15 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("Status: ✓","white", 58,0, System.out::print);
+                    message("Status: ✓",15, 58,0,out::print);
                 } else {
-                    message("Error: Desktop or browse action not supported", "red",
-                            58, 0, System.out::print);
-                    message("Status: x","white", 58,0, System.out::print);
+                    message("Error: Desktop or browse action not supported",196,
+                            58, 0,out::print);
+                    message("Status: x",15,58,0,out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL", "red", 58, 0, System.out::print);
-                message("Status: x","white", 58,0, System.out::print);
+                message("Error opening URL",196,58,0,out::print);
+                message("Status: x",15,58,0,out::print);
             }
         };
     }
@@ -61,13 +61,13 @@ public class CommandManager {
             out.println(alignment(58) + WHITE + BOLD + "Your local IP: " + RESET + BLUE + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined", "red", 58,0,out::print);
-            message("Status: x", "white", 58,0,out::print);
+            message("IP is undefined",196, 58,0,out::print);
+            message("Status: x",15, 58,0,out::print);
         }
     }
 
     public static void choice(String title, Runnable action) {
-        out.print(alignment(58) + BLUE + BOLD + title + RESET + BOLD + ": " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + title + RESET +  BOLD + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
@@ -76,27 +76,27 @@ public class CommandManager {
                     action.run();
                     modifyMessage('n', 1);
                 } catch (Exception e) {
-                    message("Error executing action", "red", 58,0,out::print);
-                    message("Status: x", "white", 58,0,out::print);
+                    message("Error executing action",196, 58,0,out::print);
+                    message("Status: x",15, 58,0,out::print);
                 }
                 break;
 
             case "-":
-                message("Status: x", "white", 58,0,out::print);
+                message("Status: x",15, 58,0,out::print);
                 modifyMessage('n', 1);
                 break;
 
             default:
-                message("Invalid choice", "red", 58,0,out::print);
-                message("Status: x", "white", 58,0,out::print);
+                message("Invalid choice",196, 58,0,out::print);
+                message("Status: x",15, 58,0,out::print);
                 modifyMessage('n', 1);
                 break;
         }
     }
 
     public static void terminateExtension() {
-        message("\r   Status: ✓", "white", 58,0,out::print);
-        message("Extension terminated correctly","blue",
+        message("\r   Status: ✓",15, 58,0,out::print);
+        message("Extension terminated correctly",systemDefaultColor,
                 58,0,out::print);
         modifyMessage('n', 1);
         marginBorder();
@@ -105,8 +105,8 @@ public class CommandManager {
     public static void terminateProgramDefault() {
         modifyMessage('n', 1);
         loadingAnimation(300, 10);
-        message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Program terminated correctly","blue",
+        message("\r    Status: ✓",15, 58,0,out::print);
+        message("Program terminated correctly",systemDefaultColor,
                 56,20,out::print);
         modifyMessage('n', 1);
         exit(0);
@@ -114,8 +114,8 @@ public class CommandManager {
 
     public static void terminateProgramQuick() {
         modifyMessage('n', 1);
-        message("\r    Status: ✓", "white", 58,0,out::print);
-        message("Program terminated quickly correctly","blue",
+        message("\r    Status: ✓", 15, 58,0,out::print);
+        message("Program terminated quickly correctly",systemDefaultColor,
                 56,0,out::print);
         modifyMessage('n', 1);
         exit(0);

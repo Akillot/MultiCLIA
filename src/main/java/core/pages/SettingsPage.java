@@ -13,11 +13,11 @@ import static java.lang.System.out;
 public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
-        message("Memory", "white", 58,0, out::print);
+        message("Memory",15,58,0,out::print);
         displayUsingMemory();
 
         modifyMessage('n', 2);
-        out.print(getAnsi256Color(105) + BOLD + alignment(58) + "ANSI Colors" + RESET);
+        out.print(getAnsi256Color(systemDefaultColor) + BOLD + alignment(58) + "ANSI Colors\n" + RESET);
         choice("Text", textModification());
         marginBorder();
     }
@@ -25,7 +25,7 @@ public class SettingsPage {
     public static void displayUsingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"), "white", 58,0, out::print);
+                        / (1000 * 1000) + "M"),15,58,0, out::print);
     }
 
     @Contract(pure = true)
@@ -66,11 +66,6 @@ public class SettingsPage {
             }
             modifyMessage('n', 1);
         }
-    }
-
-    @Contract(pure = true)
-    public static @NotNull String getAnsi256BackgroundColor(int colorCode) {
-        return "\033[48;5;" + colorCode + "m";
     }
 
     @Contract(pure = true)

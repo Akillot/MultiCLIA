@@ -12,20 +12,20 @@ import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.2";
+    public static String version = "A-0.7.3";
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
-        message("Current version:", "white", 58,0, out::print);
-        message(version, "blue", 58,0, out::print);
-        message("Author: Nick Zozulia", "white", 58,0, out::print);
+        message("Current version:",15,58,0,out::print);
+        message(version,systemDefaultColor,58,0,out::print);
+        message("Author: Nick Zozulia",15,58,0,out::print);
         modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
+        message("Enter '+' to open and '-' to skip",15,58,0,out::print);
         choice("Description", displayAppDescription());
         modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip", "white", 58,0, System.out::print);
+        message("Enter '+' to open and '-' to skip",15,58,0,out::print);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBorder();
     }
@@ -37,7 +37,7 @@ public  class InfoPage {
             marginBorder();
             modifyMessage('n', 1);
 
-            message( BLUE + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
+            message( systemDefaultColor + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
                             BOLD + alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
@@ -45,7 +45,7 @@ public  class InfoPage {
                             alignment(58) + "Users will soon be able to add new extensions\n" +
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
-                    "white", 58, 0, out::print);
+                    15,58,0,out::print);
             modifyMessage('n', 2);
             border();
         };
