@@ -12,7 +12,7 @@ import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.3";
+    public static String version = "A-0.7.4";
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
