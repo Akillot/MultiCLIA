@@ -13,7 +13,7 @@ import static java.lang.System.out;
 public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
-        message("Memory",15,58,0,out::print);
+        message("Memory",systemDefaultWhite,58,0,out::print);
         displayUsingMemory();
 
         modifyMessage('n', 2);
@@ -25,14 +25,14 @@ public class SettingsPage {
     public static void displayUsingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"),15,58,0, out::print);
+                        / (1000 * 1000) + "M"),systemDefaultWhite,58,0, out::print);
     }
 
     @Contract(pure = true)
     public static @NotNull Runnable textModification() {
         return () -> {
             modifyMessage('n', 2);
-            printColorRange(0, 15, " ");
+            printColorRange(0, systemDefaultWhite, " ");
 
             modifyMessage('n', 1);
             printColorBlock(16, 231);

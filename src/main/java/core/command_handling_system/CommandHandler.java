@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+import static core.logic.ColorConfigs.systemDefaultRed;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
@@ -36,7 +37,7 @@ public class CommandHandler {
                 InfoPage.displayInfo();
             } catch (InterruptedException e) {
                 errorAscii();
-                message("Error displaying info: " + e.getMessage(),196,58,0,out::println);
+                message("Error displaying info: " + e.getMessage(),systemDefaultRed,58,0,out::println);
             }
         });
         commandMap.put(systemCmds[5], CommandManager::terminateProgramDefault);

@@ -30,7 +30,7 @@ public class ApiConfigs {
 
             int statusCode = connection.getResponseCode();
             if (statusCode != 200) {
-                message("Error: HTTP " + statusCode, 196, 58, 0, out::print);
+                message("Error: HTTP " + statusCode, systemDefaultRed, 58, 0, out::print);
                 return null;
             }
 
@@ -45,15 +45,16 @@ public class ApiConfigs {
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 String value = jsonResponse.optString(key);
 
-                out.println(alignment(58) + WHITE + BOLD + text + " " + RESET + BLUE + value + RESET);
+                out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + text + " " + RESET +
+                        getAnsi256Color(systemDefaultColor) + value + RESET);
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(),196,58,0,out::print);
+                message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
             }
 
             return response.toString();
 
         } catch (Exception e) {
-            message("Error: " + e.getMessage(),196,58,0,out::print);
+            message("Error: " + e.getMessage(),systemDefaultRed,58,0,out::print);
             return null;
         }
     }
@@ -68,9 +69,10 @@ public class ApiConfigs {
                 JSONObject currentWeather = jsonResponse.getJSONObject("current_weather");
                 double temperature = currentWeather.getDouble("temperature");
 
-                out.println(alignment(58) + WHITE + BOLD + "Weather in " + city + " now: " + RESET + BLUE + temperature + "°C" + RESET);
+                out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Weather in " + city + " now: " + RESET
+                        + getAnsi256Color(systemDefaultColor) + temperature + "°C" + RESET);
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(),196,58,0,out::print);
+                message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
             }
         }
     }

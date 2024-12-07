@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.systemDefaultColor;
+import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
@@ -33,7 +33,7 @@ public class NotesConfigs {
 
     public void saveToFile() {
         if (title == null || title.isEmpty()) {
-            message("Title cannot be empty!",196,58,0,out::print);
+            message("Title cannot be empty!",systemDefaultRed,58,0,out::print);
             return;
         }
 
@@ -44,7 +44,7 @@ public class NotesConfigs {
         } catch (IOException e) {
             marginBorder();
             errorAscii();
-            message("Error saving the note: " + e.getMessage(),196,58,0,out::print);
+            message("Error saving the note: " + e.getMessage(),systemDefaultRed,58,0,out::print);
         }
     }
 
@@ -52,7 +52,7 @@ public class NotesConfigs {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            message("File not found!",196,58,0,out::print);
+            message("File not found!",systemDefaultRed,58,0,out::print);
             return null;
         }
 
@@ -64,7 +64,7 @@ public class NotesConfigs {
             }
         } catch (IOException e) {
             errorAscii();
-            message("Error reading the note: " + e.getMessage(),196,58,0,out::print);
+            message("Error reading the note: " + e.getMessage(),systemDefaultRed,58,0,out::print);
             return null;
         }
 
@@ -76,7 +76,7 @@ public class NotesConfigs {
         File file = new File(title + ".txt");
 
         if (!file.exists()) {
-            message("File not found!",196,58,0,out::print);
+            message("File not found!",systemDefaultRed,58,0,out::print);
             return false;
         }
 
@@ -86,7 +86,7 @@ public class NotesConfigs {
             return true;
         } else {
             errorAscii();
-            message("Error deleting the note!",196,58,0,out::print);
+            message("Error deleting the note!",systemDefaultRed,58,0,out::print);
             return false;
         }
     }
@@ -105,13 +105,13 @@ public class NotesConfigs {
 
     public static void displayNotesList() {
         if (notesList.isEmpty()) {
-            message("No notes available.",196,58,0,out::print);
+            message("No notes available.",systemDefaultRed,58,0,out::print);
             return;
         }
-        message("List of Notes:",46,58,0,out::print);
+        message("List of Notes:",systemDefaultGreen,58,0,out::print);
         for (NotesConfigs note : notesList) {
-            message("Title: " + note.getTitle(), 15, 58, 0,out::print);
-            message("Content: " + note.getContent(),15,58,0,out::print);
+            message("Title: " + note.getTitle(), systemDefaultWhite, 58, 0,out::print);
+            message("Content: " + note.getContent(),systemDefaultWhite,58,0,out::print);
         }
     }
 /*

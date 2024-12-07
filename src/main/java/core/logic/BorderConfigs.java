@@ -1,5 +1,7 @@
 package core.logic;
 
+import static core.logic.ColorConfigs.getAnsi256Color;
+import static core.logic.ColorConfigs.systemDefaultWhite;
 import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
@@ -8,7 +10,7 @@ public class BorderConfigs {
     private static String[] symbolsOfBorder = new String[]{"━"};
 
     public static void border() {
-        out.print(symbolsOfBorder[0]);
+        out.print(getAnsi256Color(systemDefaultWhite) + symbolsOfBorder[0]);
         for (int i = 0; i < borderWidth; i++) {
             out.print(symbolsOfBorder[0]);
         }

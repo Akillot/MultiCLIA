@@ -22,8 +22,9 @@ public class CommandManager {
 
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
-        slowMotionText(100, 56,false,true,
-                "Search", ": ");
+        slowMotionText(50, 56,false,true,
+                getAnsi256Color(systemDefaultWhite) + "Search",
+                getAnsi256Color(systemDefaultWhite) + ": " + RESET);
         String nameOfFunction = scanner.nextLine().toLowerCase();
         modifyMessage('n', 1);
         wrapText(nameOfFunction, borderWidth - 2);
@@ -42,15 +43,15 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("Status: ✓",15, 58,0,out::print);
+                    message("Status: ✓",systemDefaultWhite,58,0,out::print);
                 } else {
-                    message("Error: Desktop or browse action not supported",196,
+                    message("Error: Desktop or browse action not supported",systemDefaultRed,
                             58, 0,out::print);
-                    message("Status: x",15,58,0,out::print);
+                    message("Status: x",systemDefaultWhite,58,0,out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL",196,58,0,out::print);
-                message("Status: x",15,58,0,out::print);
+                message("Error opening URL",systemDefaultRed,58,0,out::print);
+                message("Status: x",systemDefaultWhite,58,0,out::print);
             }
         };
     }
@@ -58,16 +59,18 @@ public class CommandManager {
     public static void getUserLocalIp(){
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            out.println(alignment(58) + WHITE + BOLD + "Your local IP: " + RESET + BLUE + localHost + RESET);
+            out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Your local IP: " + RESET
+                    + getAnsi256Color(systemDefaultColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined",196, 58,0,out::print);
-            message("Status: x",15, 58,0,out::print);
+            message("IP is undefined",systemDefaultRed,58,0,out::print);
+            message("Status: x",systemDefaultWhite,58,0,out::print);
         }
     }
 
     public static void choice(String title, Runnable action) {
-        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + title + RESET +  BOLD + ": " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) +
+                BOLD + title + RESET +  BOLD + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
@@ -76,36 +79,36 @@ public class CommandManager {
                     action.run();
                     modifyMessage('n', 1);
                 } catch (Exception e) {
-                    message("Error executing action",196, 58,0,out::print);
-                    message("Status: x",15, 58,0,out::print);
+                    message("Error executing action",systemDefaultRed,58,0,out::print);
+                    message("Status: x",systemDefaultWhite,58,0,out::print);
                 }
                 break;
 
             case "-":
-                message("Status: x",15, 58,0,out::print);
-                modifyMessage('n', 1);
+                message("Status: x",systemDefaultWhite,58,0,out::print);
+                modifyMessage('n',1);
                 break;
 
             default:
-                message("Invalid choice",196, 58,0,out::print);
-                message("Status: x",15, 58,0,out::print);
-                modifyMessage('n', 1);
+                message("Invalid choice",systemDefaultRed,58,0,out::print);
+                message("Status: x",systemDefaultWhite,58,0,out::print);
+                modifyMessage('n',1);
                 break;
         }
     }
 
     public static void terminateExtension() {
-        message("\r   Status: ✓",15, 58,0,out::print);
+        message("\r   Status: ✓",systemDefaultWhite,58,0,out::print);
         message("Extension terminated correctly",systemDefaultColor,
                 58,0,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n',1);
         marginBorder();
     }
 
     public static void terminateProgramDefault() {
-        modifyMessage('n', 1);
-        loadingAnimation(300, 10);
-        message("\r    Status: ✓",15, 58,0,out::print);
+        modifyMessage('n',1);
+        loadingAnimation(300,10);
+        message("\r    Status: ✓",systemDefaultWhite,58,0,out::print);
         message("Program terminated correctly",systemDefaultColor,
                 56,20,out::print);
         modifyMessage('n', 1);
@@ -113,8 +116,8 @@ public class CommandManager {
     }
 
     public static void terminateProgramQuick() {
-        modifyMessage('n', 1);
-        message("\r    Status: ✓", 15, 58,0,out::print);
+        modifyMessage('n',1);
+        message("\r    Status: ✓", systemDefaultWhite,58,0,out::print);
         message("Program terminated quickly correctly",systemDefaultColor,
                 56,0,out::print);
         modifyMessage('n', 1);

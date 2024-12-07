@@ -46,7 +46,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again",196, 58,0, out::println);
+                message("Error, try again",systemDefaultRed,58,0, out::println);
             }
         }
         out.print("");
@@ -111,6 +111,9 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + WHITE + BOLD + "["  + modification + "] " + RESET + BOLD + text);
+        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + BOLD + "["  + modification + "] " + RESET
+                + getAnsi256Color(systemDefaultWhite) + BOLD + text + RESET);
     }
+
+
 }

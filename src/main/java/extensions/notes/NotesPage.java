@@ -29,7 +29,7 @@ public class NotesPage {
             };
 
             for (String operation : operations) {
-                message(operation,15,58,0,out::print);
+                message(operation,systemDefaultWhite,58,0,out::print);
             }
             modifyMessage('n', 1);
             slowMotionText(50, 58, false, true, "Choice", ": ");
@@ -82,8 +82,8 @@ public class NotesPage {
 
         NotesConfigs note = NotesConfigs.readFromFile(title);
         if (note != null) {
-            message("Content: ",15,58,0,out::println);
-            message(note.getContent(),15,58,0,out::println);
+            message("Content: ",systemDefaultWhite,58,0,out::println);
+            message(note.getContent(),systemDefaultWhite,58,0,out::println);
             border();
             modifyMessage('n', 1);
 
@@ -92,7 +92,7 @@ public class NotesPage {
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
-                message("Enter new text to this note: ",15,58,0,out::println);
+                message("Enter new text to this note: ",systemDefaultWhite,58,0,out::println);
                 String newContent = scanner.nextLine();
                 note.setContent(newContent);
                 note.saveToFile();
@@ -111,7 +111,7 @@ public class NotesPage {
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found",196,58,0,out::println);
+            message("Note not found",systemDefaultRed,58,0,out::println);
         }
     }
 
@@ -126,7 +126,7 @@ public class NotesPage {
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found",196,58,0,out::println);
+            message("Note not found",systemDefaultRed,58,0,out::println);
         }
     }
 

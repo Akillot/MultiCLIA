@@ -17,15 +17,15 @@ public class StartPage {
         marginBorder();
 
         String displayVersion = (version != null) ? version : "Unknown Version";
-        message("━━━━━━━━━━━━━━━━━━━━━━",15,58,0, out::print);
-        message("Version: " + displayVersion,15,56,0, out::print);
-        message("━━━━━━━━━━━━━━━━━━━━━━",15,58,0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
+        message("Version: " + displayVersion,systemDefaultWhite,56,0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
 
         alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + BOLD + "sys.cmds" + RESET + "'\n"
-                + alignment(56) + BOLD + "to show list of\n"
-                + alignment(56) + "commands", 56);
+                + alignment(56) + getAnsi256Color(systemDefaultWhite) + BOLD + "to show list of\n"
+                + alignment(56) + "commands" + RESET, 56);
 
-        message("━━━━━━━━━━━━━━━━━━━━━━",15,58,0,out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0,out::print);
         modifyMessage('n', 1);
 
         while (true) {
@@ -35,7 +35,7 @@ public class StartPage {
                 marginBorder();
                 errorAscii();
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, 196, 58, 0, out::print);
+                message(errorMessage, systemDefaultRed, 58, 0, out::print);
             }
         }
     }
@@ -67,18 +67,21 @@ public class StartPage {
                     getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
                     getAnsi256Color(165), getAnsi256Color(systemDefaultColor),
                     getAnsi256Color(63), getAnsi256Color(systemDefaultColor));
+
             case 1 -> switcherLogoAscii(logo, alignment,
                     getAnsi256Color(250), getAnsi256Color(251),
                     getAnsi256Color(252), getAnsi256Color(253),
                     getAnsi256Color(254), getAnsi256Color(255));
+
             case 2 -> switcherLogoAscii(logo, alignment,
                     getAnsi256Color(52), getAnsi256Color(53),
                     getAnsi256Color(54), getAnsi256Color(55),
                     getAnsi256Color(56), getAnsi256Color(57));
+
             default -> switcherLogoAscii(logo, alignment,
-                    getAnsi256Color(15), getAnsi256Color(15),
-                    getAnsi256Color(15), getAnsi256Color(15),
-                    getAnsi256Color(15), getAnsi256Color(15));
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite));
         }
     }
 

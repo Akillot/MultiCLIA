@@ -16,16 +16,19 @@ public  class InfoPage {
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
-        message("Current version:",15,58,0,out::print);
+        message("Current version:",systemDefaultWhite,58,0,out::print);
         message(version,systemDefaultColor,58,0,out::print);
-        message("Author: Nick Zozulia",15,58,0,out::print);
+        message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
         modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip",15,58,0,out::print);
+        message("Enter '+' to open and '-' to skip",systemDefaultWhite,58,0,out::print);
         choice("Description", displayAppDescription());
         modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip",15,58,0,out::print);
+        message("Enter '" + getAnsi256Color(systemDefaultColor) + BOLD + "+" + RESET +
+                getAnsi256Color(systemDefaultWhite) + BOLD + "' to open and '" +
+                getAnsi256Color(systemDefaultColor) + BOLD + "-" + RESET +
+                getAnsi256Color(systemDefaultWhite) + BOLD + "' to skip",systemDefaultWhite,58,0,out::print);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBorder();
     }
@@ -37,7 +40,10 @@ public  class InfoPage {
             marginBorder();
             modifyMessage('n', 1);
 
-            message( systemDefaultColor + BOLD + "MultiCLIA " + RESET + "[" + ITALIC + BOLD + "Multi Command Line Interface App" + RESET + "]\n\n" +
+            message(getAnsi256Color(systemDefaultColor) + BOLD + "MultiCLIA " + RESET
+                            + getAnsi256Color(systemDefaultWhite) + "[" + getAnsi256Color(systemDefaultWhite)
+                            + ITALIC + BOLD + "Multi Command Line Interface App" + RESET
+                            + getAnsi256Color(systemDefaultWhite) + "]\n\n" +
                             BOLD + alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
@@ -45,7 +51,7 @@ public  class InfoPage {
                             alignment(58) + "Users will soon be able to add new extensions\n" +
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
-                    15,58,0,out::print);
+                    systemDefaultWhite,58,0,out::print);
             modifyMessage('n', 2);
             border();
         };

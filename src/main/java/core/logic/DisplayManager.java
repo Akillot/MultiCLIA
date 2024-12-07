@@ -42,7 +42,7 @@ public class DisplayManager {
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line,196,40,0,out::print);
+            message(line,systemDefaultRed,40,0,out::print);
         }
     }
 
@@ -51,11 +51,14 @@ public class DisplayManager {
             modifyMessage('n', 2);
             alert("i", "show all lists together", 58);
 
-            out.print(alignment(58) + WHITE + BOLD + "Enter '" + RESET + systemDefaultColor + BOLD + "+" + RESET
-                    + WHITE + BOLD + "' to open and '" + RESET + systemDefaultColor + BOLD + "-" + RESET + WHITE + BOLD + "' to skip" + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Enter '" + RESET
+                    + getAnsi256Color(systemDefaultColor)+ BOLD + "+" + RESET
+                    + getAnsi256Color(systemDefaultWhite) + BOLD + "' to open and '"
+                    + RESET + getAnsi256Color(systemDefaultColor) + BOLD + "-" + RESET + getAnsi256Color(systemDefaultWhite)
+                    + BOLD + "' to skip" + RESET);
             modifyMessage('n', 1);
 
-            out.print(alignment(58) + WHITE + BOLD + "Choice: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Choice: " + RESET);
             String choice = scanner.nextLine().trim();
 
             switch (choice) {
@@ -73,7 +76,7 @@ public class DisplayManager {
                     marginBorder();
                     return;
                 default:
-                    message("Invalid input",196,58,0,out::print);
+                    message("Invalid input",systemDefaultRed,58,0,out::print);
                     modifyMessage('n',1);
                     marginBorder();
                     break;
@@ -81,7 +84,7 @@ public class DisplayManager {
         } catch (Exception e) {
             marginBorder();
             errorAscii();
-            message("Unknown error occurred",196,58,0,out::print);
+            message("Unknown error occurred",systemDefaultRed,58,0,out::print);
         }
     }
 
@@ -89,7 +92,7 @@ public class DisplayManager {
     private static @NotNull Runnable displayCommandList(String[] commands) {
         return () -> {
             for (String command : commands) {
-                message("· " + command,15,58,0,out::print);
+                message("· " + command,systemDefaultWhite,58,0,out::print);
             }
         };
     }
@@ -104,7 +107,8 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(58) + BOLD + "%-20s" + alignment(10) + BOLD + "%-20s%n", systemCmd, extensionCmd);
+            out.printf(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "%-20s"
+                    + alignment(10) + getAnsi256Color(systemDefaultWhite) + BOLD + "%-20s%n", systemCmd, extensionCmd);
         }
         modifyMessage('n', 2);
         border();
@@ -113,14 +117,14 @@ public class DisplayManager {
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
-            out.print(WHITE + BOLD + "\r" + spinner[i % spinner.length] + RESET);
+            out.print(getAnsi256Color(systemDefaultWhite) + BOLD + "\r" + spinner[i % spinner.length] + RESET);
             try {
                 Thread.sleep(frames);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(WHITE + BOLD + "\r    ✓" + RESET);
+        out.print(getAnsi256Color(systemDefaultWhite) + BOLD + "\r    ✓" + RESET);
     }
 
     public static void displayUserIp() {
@@ -134,7 +138,7 @@ public class DisplayManager {
     public static void displayCommandsDescription(){
         modifyMessage('n', 2);
         for(String rule : rules){
-            message(rule,15,58,0,out::print);
+            message(rule,systemDefaultWhite,58,0,out::print);
             modifyMessage('n', 1);
         }
         marginBorder();

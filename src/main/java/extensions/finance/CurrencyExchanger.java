@@ -35,7 +35,7 @@ public class CurrencyExchanger {
             }
 
             if (userCryptocurrency.isEmpty()) {
-                message("Cryptocurrency name cannot be empty",196,58,0,out::print);
+                message("Cryptocurrency name cannot be empty",systemDefaultRed,58,0,out::print);
                 continue;
             }
 
@@ -49,7 +49,7 @@ public class CurrencyExchanger {
             }
 
             if (userFiatCurrencyCode.isEmpty()) {
-                message("Fiat currency code cannot be empty.",196,58,0,out::print);
+                message("Fiat currency code cannot be empty.",systemDefaultRed,58,0,out::print);
                 continue;
             }
 
@@ -68,11 +68,11 @@ public class CurrencyExchanger {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
                 if (!jsonResponse.has(cryptocurrencyName)) {
-                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyName),196,58,0,out::print);
+                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyName),systemDefaultRed,58,0,out::print);
                     return;
                 }
                 if (!jsonResponse.getJSONObject(cryptocurrencyName).has(fiatCurrencyCode)) {
-                    message("Invalid fiat currency: " + fiatCurrencyCode.toUpperCase(),196,58,0,out::print);
+                    message("Invalid fiat currency: " + fiatCurrencyCode.toUpperCase(),systemDefaultRed,58,0,out::print);
                     return;
                 }
 
@@ -81,7 +81,7 @@ public class CurrencyExchanger {
                 out.println(WHITE + BOLD + " costs in " + fiatCurrencyCode.toUpperCase() + ": " + RESET + BLUE + price + RESET);
 
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(),196,58,0,out::print);
+                message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
             }
         }
     }
