@@ -61,35 +61,41 @@ public class StartPage {
     };
 
     public static void switcherLogoAscii(String[] logo, int alignment) {
+        String[] colors;
         int indexOfLogo = rand.nextInt(3);
-        switch (indexOfLogo) {
-            case 0 -> switcherLogoAscii(logo, alignment,
-                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
-                    getAnsi256Color(165), getAnsi256Color(systemDefaultColor),
-                    getAnsi256Color(63), getAnsi256Color(systemDefaultColor));
 
-            case 1 -> switcherLogoAscii(logo, alignment,
+        switch (indexOfLogo) {
+            case 0 -> colors = new String[]{
+                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
+                    getAnsi256Color(165), getAnsi256Color(99),
+                    getAnsi256Color(63), getAnsi256Color(99)};
+            case 1 -> colors = new String[]{
                     getAnsi256Color(250), getAnsi256Color(251),
                     getAnsi256Color(252), getAnsi256Color(253),
-                    getAnsi256Color(254), getAnsi256Color(255));
-
-            case 2 -> switcherLogoAscii(logo, alignment,
+                    getAnsi256Color(254), getAnsi256Color(255)};
+            case 2 -> colors = new String[]{
                     getAnsi256Color(52), getAnsi256Color(53),
                     getAnsi256Color(54), getAnsi256Color(55),
-                    getAnsi256Color(56), getAnsi256Color(57));
+                    getAnsi256Color(56), getAnsi256Color(57)};
+            default -> colors = new String[]{
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
+        }
 
-            default -> switcherLogoAscii(logo, alignment,
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite));
+        for (int i = 0; i < logo.length; i++) {
+            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+            message(coloredText, i % colors.length, alignment, 0, System.out::print);
         }
     }
-
     public static void switcherLogoAscii(String @NotNull [] logo, int alignment, String color1, String color2,
                                          String color3, String color4, String color5, String color6) {
+
         String[] colors = {color1, color2, color3, color4, color5, color6};
         for (int i = 0; i < logo.length; i++) {
-            message(logo[i],i % colors.length,alignment,0,out::print);
+            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+            message(coloredText, i % colors.length, alignment, 0, out::print);
         }
     }
+
 }
