@@ -12,20 +12,20 @@ import static java.lang.System.out;
 
 public class CurrencyExchanger {
     public static void exchanger() {
-        alert("i", "Type '" + BLUE + BOLD + "exit" + RESET + BOLD + "' to\n" +
+        alert("i", "Type '" + getAnsi256Color(systemDefaultColor) + BOLD + "exit" + RESET + BOLD + "' to\n" +
                 alignment(58) + "quit the extension.", 58);
 
         modifyMessage('n',1);
 
-        out.print(alignment(58) + BOLD + "[" + BLUE + BOLD + "Example"
-                + RESET + BOLD + ": '" + BLUE + BOLD + "bitcoin" + RESET + WHITE
-                + BOLD + " → " + RESET + BLUE + BOLD + "usd" + RESET + BOLD + "']" + RESET);
+        out.print(alignment(58) + BOLD + "[" + getAnsi256Color(systemDefaultColor) + BOLD + "Example"
+                + RESET + BOLD + ": '" + getAnsi256Color(systemDefaultColor) + BOLD + "bitcoin" + RESET + getAnsi256Color(systemDefaultWhite)
+                + BOLD + " → " + RESET + getAnsi256Color(systemDefaultColor) + BOLD + "usd" + RESET + BOLD + "']" + RESET);
 
         modifyMessage('n', 1);
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + WHITE + BOLD + "Cryptocurrency: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Cryptocurrency: " + RESET);
             String userCryptocurrency = scanner.nextLine().trim();
 
             if (userCryptocurrency.equalsIgnoreCase("exit")) {
@@ -39,7 +39,7 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            out.print(alignment(58) +  WHITE + BOLD + "Fiat code: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Fiat code: " + RESET);
             String userFiatCurrencyCode = scanner.nextLine().trim();
 
             if (userFiatCurrencyCode.equalsIgnoreCase("exit")) {
@@ -77,8 +77,8 @@ public class CurrencyExchanger {
                 }
 
                 double price = jsonResponse.getJSONObject(cryptocurrencyName).getDouble(fiatCurrencyCode);
-                out.print(alignment(58) + BLUE + BOLD + capitalizeMessage(cryptocurrencyName) + RESET);
-                out.println(WHITE + BOLD + " costs in " + fiatCurrencyCode.toUpperCase() + ": " + RESET + BLUE + price + RESET);
+                out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + BOLD + capitalizeMessage(cryptocurrencyName) + RESET);
+                out.println(getAnsi256Color(systemDefaultWhite) + BOLD + " costs in " + fiatCurrencyCode.toUpperCase() + ": " + RESET + getAnsi256Color(systemDefaultColor) + price + RESET);
 
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
