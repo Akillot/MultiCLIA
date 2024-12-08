@@ -45,7 +45,7 @@ public class ApiConfigs {
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 String value = jsonResponse.optString(key);
 
-                out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + text + " " + RESET +
+                out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + text + " " + RESET +
                         getAnsi256Color(systemDefaultColor) + value + RESET);
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
@@ -69,7 +69,7 @@ public class ApiConfigs {
                 JSONObject currentWeather = jsonResponse.getJSONObject("current_weather");
                 double temperature = currentWeather.getDouble("temperature");
 
-                out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Weather in " + city + " now: " + RESET
+                out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Weather in " + city + " now: " + RESET
                         + getAnsi256Color(systemDefaultColor) + temperature + "°C" + RESET);
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);

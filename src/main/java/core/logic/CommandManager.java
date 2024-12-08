@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.*;
 import java.net.URI;
+import java.util.Random;
 
 import static core.logic.BorderConfigs.borderWidth;
 import static core.logic.BorderConfigs.marginBorder;
@@ -20,15 +21,55 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
+    public static void switchLogo(String[] logo, int alignment) {
+        String[] colors;
+        Random rand = new Random();
+        int indexOfLogo = rand.nextInt(0,3);
+
+        switch (indexOfLogo) {
+            case 0 -> colors = new String[]{
+                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
+                    getAnsi256Color(165), getAnsi256Color(99),
+                    getAnsi256Color(63), getAnsi256Color(99)};
+
+            case 1 -> colors = new String[]{
+                    getAnsi256Color(140), getAnsi256Color(98),
+                    getAnsi256Color(134), getAnsi256Color(129),
+                    getAnsi256Color(93), getAnsi256Color(171)};
+
+            case 2 -> colors = new String[]{
+                    getAnsi256Color(132), getAnsi256Color(168),
+                    getAnsi256Color(204), getAnsi256Color(133),
+                    getAnsi256Color(169), getAnsi256Color(205)};
+
+            default -> colors = new String[]{
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
+        }
+
+        for (int i = 0; i < logo.length; i++) {
+            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+            message(coloredText, i % colors.length, alignment, 0, System.out::print);
+        }
+    }
+
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
-        slowMotionText(50, 56,false,true,
-                getAnsi256Color(systemDefaultWhite) + "Search: ","");
-        String nameOfFunction = scanner.nextLine().toLowerCase();
-        modifyMessage('n', 1);
-        wrapText(nameOfFunction, borderWidth - 2);
+        try {
+            slowMotionText(50, 56, false, true,
+                    getAnsi256Color(systemDefaultWhite) + "> ", "");
+            String nameOfFunction = scanner.nextLine().toLowerCase();
+            modifyMessage('n', 1);
+            wrapText(nameOfFunction, borderWidth - 2);
 
-        if (!registry.executeCommand(nameOfFunction)) {
+            if (!registry.executeCommand(nameOfFunction)) {
+                modifyMessage('n', 2);
+                errorAscii();
+                marginBorder();
+            }
+        }
+        catch (Exception e) {
             modifyMessage('n', 2);
             errorAscii();
             marginBorder();
@@ -58,7 +99,7 @@ public class CommandManager {
     public static void getUserLocalIp(){
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Your local IP: " + RESET
+            out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Your local IP: " + RESET
                     + getAnsi256Color(systemDefaultColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
@@ -68,8 +109,7 @@ public class CommandManager {
     }
 
     public static void choice(String title, Runnable action) {
-        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) +
-                BOLD + title + RESET +  BOLD + ": " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + title + RESET + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
@@ -105,21 +145,21 @@ public class CommandManager {
     }
 
     public static void terminateProgramDefault() {
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         loadingAnimation(300,10);
         message("\r    Status: ✓",systemDefaultWhite,58,0,out::print);
         message("Program terminated correctly",systemDefaultColor,
                 56,20,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         exit(0);
     }
 
     public static void terminateProgramQuick() {
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         message("\r    Status: ✓", systemDefaultWhite,58,0,out::print);
         message("Program terminated quickly correctly",systemDefaultColor,
                 56,0,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         exit(0);
     }
 }

@@ -1,8 +1,9 @@
+extensions/internet/BrowserPage.class
 extensions/time/clock/Clock.class
 core/logic/CommandManager.class
+extensions/internet/BrowserConfigs.class
 core/pages/SettingsPage.class
 core/command_handling_system/CommandHandler.class
-extensions/internet/browser/BrowserPage.class
 extensions/time/Reminder.class
 extensions/notes/NotesPage.class
 core/logic/ColorConfigs.class
@@ -13,7 +14,6 @@ core/command_handling_system/PackageUnifier.class
 extensions/math/CalculatorConfig.class
 core/logic/ApiConfigs.class
 extensions/finance/CurrencyExchangerPage.class
-extensions/internet/browser/BrowserConfigs.class
 core/logic/DisplayManager.class
 extensions/finance/CurrencyExchanger.class
 core/logic/BorderConfigs.class

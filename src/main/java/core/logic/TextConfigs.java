@@ -19,15 +19,10 @@ public class TextConfigs {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
                 border();
-                out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
-                if (end < text.length()) {
-                    modifyMessage('n',1);
-                }
-            } else {
-                out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
-                if (end < text.length()) {
-                    modifyMessage('n',1);
-                }
+            }
+            out.print(alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+            if (end < text.length()) {
+                modifyMessage('n',1);
             }
         }
         modifyMessage('n',1);
@@ -38,8 +33,7 @@ public class TextConfigs {
         TextConfigs.alignment = alignment;
         String formattedText = alignment(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
-                (isItalicActive ? ITALIC : "") +
-                BOLD + mainText + RESET + additionalText;
+                (isItalicActive ? ITALIC : "") + mainText + RESET + additionalText;
 
         for (char ch : formattedText.toCharArray()) {
             out.print(ch);
@@ -68,7 +62,7 @@ public class TextConfigs {
 
     /*Modified method System.out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, @NotNull int color, int alignment, int delay, Consumer<String> printMethod) {
+    public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColoredText(text, color);
         String alignedText = alignment(alignment) + coloredText;
@@ -87,6 +81,14 @@ public class TextConfigs {
         }
         printMethod.accept(output.toString());
         modifyMessage('n', 1);
+    }
+
+    public static void messageInstruction(String preText, String instructionOne, String midText,
+                                          String instructionTwo, String postText) {
+        message(preText + " '" + getAnsi256Color(systemDefaultColor) + instructionOne + RESET +
+                getAnsi256Color(systemDefaultWhite) + "' " + midText +" '" + RESET +
+                getAnsi256Color(systemDefaultColor) + instructionTwo + RESET +
+                getAnsi256Color(systemDefaultWhite) + "' " + postText,systemDefaultWhite,58,0,out::print);
     }
 
     //unclear name
@@ -111,9 +113,7 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + BOLD + "["  + modification + "] " + RESET
-                + getAnsi256Color(systemDefaultWhite) + BOLD + text + RESET);
+        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + "["  + modification + "] " + RESET
+                + getAnsi256Color(systemDefaultWhite) + text + RESET);
     }
-
-
 }

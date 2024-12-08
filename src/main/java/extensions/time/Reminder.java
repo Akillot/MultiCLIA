@@ -14,6 +14,6 @@ public class Reminder {
     public static void reminderStarted(){
 
         modifyMessage('n',2);
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Set date and time to remind: " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Set date and time to remind: " + RESET);
     }
 }

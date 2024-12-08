@@ -12,7 +12,7 @@ import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.4";
+    public static String version = "A-0.7.5";
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
@@ -21,14 +21,11 @@ public  class InfoPage {
         message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
         modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip",systemDefaultWhite,58,0,out::print);
+        messageInstruction("Enter","+","to open and","-","to skip");
         choice("Description", displayAppDescription());
         modifyMessage('n', 1);
 
-        message("Enter '" + getAnsi256Color(systemDefaultColor) + BOLD + "+" + RESET +
-                getAnsi256Color(systemDefaultWhite) + BOLD + "' to open and '" +
-                getAnsi256Color(systemDefaultColor) + BOLD + "-" + RESET +
-                getAnsi256Color(systemDefaultWhite) + BOLD + "' to skip",systemDefaultWhite,58,0,out::print);
+        messageInstruction("Enter","+","to open and","-","to skip");
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBorder();
     }
@@ -40,11 +37,11 @@ public  class InfoPage {
             marginBorder();
             modifyMessage('n', 1);
 
-            message(getAnsi256Color(systemDefaultColor) + BOLD + "MultiCLIA " + RESET
+            message(getAnsi256Color(systemDefaultColor) + "MultiCLIA " + RESET
                             + getAnsi256Color(systemDefaultWhite) + "[" + getAnsi256Color(systemDefaultWhite)
-                            + ITALIC + BOLD + "Multi Command Line Interface App" + RESET
+                            + ITALIC + "Multi Command Line Interface App" + RESET
                             + getAnsi256Color(systemDefaultWhite) + "]\n\n" +
-                            BOLD + alignment(58) + "is an open-source application designed for \n" +
+                            alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
                             alignment(58) + "functionality is built on extensible components.\n\n" +

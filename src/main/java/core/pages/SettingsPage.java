@@ -13,13 +13,15 @@ import static java.lang.System.out;
 public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
-        message("Memory",systemDefaultWhite,58,0,out::print);
-        displayUsingMemory();
+        displayMemorySection();
 
-        modifyMessage('n', 2);
-        out.print(getAnsi256Color(systemDefaultColor) + BOLD + alignment(58) + "ANSI Colors\n" + RESET);
-        choice("Text", textModification());
+        displayColorSection();
         marginBorder();
+    }
+
+    //Memory methods
+    public static void displayMemorySection(){
+        choice("Memory", SettingsPage::displayUsingMemory);
     }
 
     public static void displayUsingMemory(){
@@ -28,28 +30,28 @@ public class SettingsPage {
                         / (1000 * 1000) + "M"),systemDefaultWhite,58,0, out::print);
     }
 
+    //Color methods
+    public static void displayColorSection(){
+        choice("Colors", textModification());
+    }
+
     @Contract(pure = true)
     public static @NotNull Runnable textModification() {
         return () -> {
-            modifyMessage('n', 2);
-            printColorRange(0, systemDefaultWhite, " ");
-
+            printColorRange(0, systemDefaultWhite, "");
             modifyMessage('n', 1);
             printColorBlock(16, 231);
-
-            modifyMessage('n', 1);
-            printColorRange(232, 255, " ");
+            printColorRange(232, 255, "");
         };
     }
 
     @Contract(pure = true)
     public static void printColorRange(int start, int end, String title) {
-        out.println(BOLD + title + RESET);
+        out.println(title + RESET);
         for (int i = start; i <= end; i++) {
             out.print(getAnsi256BackgroundColor(i) + tableAlignment(4) + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) modifyMessage('n',1);
         }
-        modifyMessage('n', 1);
     }
 
     @Contract(pure = true)
@@ -63,6 +65,9 @@ public class SettingsPage {
                 if (colorCode <= end) {
                     out.print(getAnsi256BackgroundColor(colorCode) + tableAlignment(4) + " " + colorCode + " " + RESET);
                 }
+            }
+            if(row == 11){
+                modifyMessage('n',1);
             }
             modifyMessage('n', 1);
         }
