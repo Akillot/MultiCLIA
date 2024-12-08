@@ -20,7 +20,7 @@ public class TextConfigs {
             if (i == 0) {
                 border();
             }
-            out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+            out.print(alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
             if (end < text.length()) {
                 modifyMessage('n',1);
             }
@@ -33,8 +33,7 @@ public class TextConfigs {
         TextConfigs.alignment = alignment;
         String formattedText = alignment(alignment) +
                 (isUnderlineActive ? UNDERLINE : "") +
-                (isItalicActive ? ITALIC : "") +
-                BOLD + mainText + RESET + additionalText;
+                (isItalicActive ? ITALIC : "") + mainText + RESET + additionalText;
 
         for (char ch : formattedText.toCharArray()) {
             out.print(ch);
@@ -86,10 +85,10 @@ public class TextConfigs {
 
     public static void messageInstruction(String preText, String instructionOne, String midText,
                                           String instructionTwo, String postText) {
-        message(preText + " '" + getAnsi256Color(systemDefaultColor) + BOLD + instructionOne + RESET +
-                getAnsi256Color(systemDefaultWhite) + BOLD + "' " + midText +" '" + RESET +
-                getAnsi256Color(systemDefaultColor) + BOLD + instructionTwo + RESET +
-                getAnsi256Color(systemDefaultWhite) + BOLD + "' " + postText,systemDefaultWhite,58,0,out::print);
+        message(preText + " '" + getAnsi256Color(systemDefaultColor) + instructionOne + RESET +
+                getAnsi256Color(systemDefaultWhite) + "' " + midText +" '" + RESET +
+                getAnsi256Color(systemDefaultColor) + instructionTwo + RESET +
+                getAnsi256Color(systemDefaultWhite) + "' " + postText,systemDefaultWhite,58,0,out::print);
     }
 
     //unclear name
@@ -114,7 +113,7 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + BOLD + "["  + modification + "] " + RESET
-                + getAnsi256Color(systemDefaultWhite) + BOLD + text + RESET);
+        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + "["  + modification + "] " + RESET
+                + getAnsi256Color(systemDefaultWhite) + text + RESET);
     }
 }

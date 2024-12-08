@@ -41,7 +41,7 @@ public class CommandManager {
                     getAnsi256Color(169), getAnsi256Color(205)};
 
             default -> colors = new String[]{
-                    getAnsi256Color(99), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
                     getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
                     getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
         }
@@ -56,7 +56,7 @@ public class CommandManager {
         PackageUnifier registry = new PackageUnifier();
         try {
             slowMotionText(50, 56, false, true,
-                    getAnsi256Color(systemDefaultWhite) + "Search: ", "");
+                    getAnsi256Color(systemDefaultWhite) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
             modifyMessage('n', 1);
             wrapText(nameOfFunction, borderWidth - 2);
@@ -97,7 +97,7 @@ public class CommandManager {
     public static void getUserLocalIp(){
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Your local IP: " + RESET
+            out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Your local IP: " + RESET
                     + getAnsi256Color(systemDefaultColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
@@ -107,8 +107,7 @@ public class CommandManager {
     }
 
     public static void choice(String title, Runnable action) {
-        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) +
-                BOLD + title + RESET +  BOLD + ": " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + title + RESET + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {

@@ -47,7 +47,7 @@ public class SettingsPage {
 
     @Contract(pure = true)
     public static void printColorRange(int start, int end, String title) {
-        out.println(BOLD + title + RESET);
+        out.println(title + RESET);
         for (int i = start; i <= end; i++) {
             out.print(getAnsi256BackgroundColor(i) + tableAlignment(4) + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) modifyMessage('n',1);

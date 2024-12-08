@@ -12,20 +12,20 @@ import static java.lang.System.out;
 
 public class CurrencyExchanger {
     public static void exchanger() {
-        alert("i", "Type '" + getAnsi256Color(systemDefaultColor) + BOLD + "exit" + RESET + BOLD + "' to\n" +
+        alert("i", "Type '" + getAnsi256Color(systemDefaultColor) + "exit" + RESET + "' to\n" +
                 alignment(58) + "quit the extension.", 58);
 
         modifyMessage('n',1);
 
-        out.print(alignment(58) + BOLD + "[" + getAnsi256Color(systemDefaultColor) + BOLD + "Example"
-                + RESET + BOLD + ": '" + getAnsi256Color(systemDefaultColor) + BOLD + "bitcoin" + RESET + getAnsi256Color(systemDefaultWhite)
-                + BOLD + " → " + RESET + getAnsi256Color(systemDefaultColor) + BOLD + "usd" + RESET + BOLD + "']" + RESET);
+        out.print(alignment(58) + "[" + getAnsi256Color(systemDefaultColor) + "Example"
+                + RESET + ": '" + getAnsi256Color(systemDefaultColor) + "bitcoin" + RESET + getAnsi256Color(systemDefaultWhite)
+                + " → " + RESET + getAnsi256Color(systemDefaultColor) + "usd" + RESET + "']" + RESET);
 
         modifyMessage('n', 1);
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Cryptocurrency: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency: " + RESET);
             String userCryptocurrency = scanner.nextLine().trim();
 
             if (userCryptocurrency.equalsIgnoreCase("exit")) {
@@ -39,7 +39,7 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Fiat code: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Fiat code: " + RESET);
             String userFiatCurrencyCode = scanner.nextLine().trim();
 
             if (userFiatCurrencyCode.equalsIgnoreCase("exit")) {
@@ -77,8 +77,8 @@ public class CurrencyExchanger {
                 }
 
                 double price = jsonResponse.getJSONObject(cryptocurrencyName).getDouble(fiatCurrencyCode);
-                out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + BOLD + capitalizeMessage(cryptocurrencyName) + RESET);
-                out.println(getAnsi256Color(systemDefaultWhite) + BOLD + " costs in " + fiatCurrencyCode.toUpperCase() + ": " + RESET + getAnsi256Color(systemDefaultColor) + price + RESET);
+                out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + capitalizeMessage(cryptocurrencyName) + RESET);
+                out.println(getAnsi256Color(systemDefaultWhite) + " costs in " + fiatCurrencyCode.toUpperCase() + ": " + RESET + getAnsi256Color(systemDefaultColor) + price + RESET);
 
             } catch (Exception e) {
                 message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);

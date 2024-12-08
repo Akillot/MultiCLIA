@@ -51,14 +51,14 @@ public class DisplayManager {
             modifyMessage('n', 2);
             alert("i", "show all lists together", 58);
 
-            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Enter '" + RESET
-                    + getAnsi256Color(systemDefaultColor)+ BOLD + "+" + RESET
-                    + getAnsi256Color(systemDefaultWhite) + BOLD + "' to open and '"
-                    + RESET + getAnsi256Color(systemDefaultColor) + BOLD + "-" + RESET + getAnsi256Color(systemDefaultWhite)
-                    + BOLD + "' to skip" + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Enter '" + RESET
+                    + getAnsi256Color(systemDefaultColor) + "+" + RESET
+                    + getAnsi256Color(systemDefaultWhite) + "' to open and '"
+                    + RESET + getAnsi256Color(systemDefaultColor) + "-" + RESET + getAnsi256Color(systemDefaultWhite)
+                    + "' to skip" + RESET);
             modifyMessage('n', 1);
 
-            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Choice: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Choice: " + RESET);
             String choice = scanner.nextLine().trim();
 
             switch (choice) {
@@ -107,8 +107,8 @@ public class DisplayManager {
             String systemCmd = i < systemCmds.length ? "· " + systemCmds[i] : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "%-20s"
-                    + alignment(10) + getAnsi256Color(systemDefaultWhite) + BOLD + "%-20s%n", systemCmd, extensionCmd);
+            out.printf(alignment(58) + getAnsi256Color(systemDefaultWhite) + "%-20s"
+                    + alignment(10) + getAnsi256Color(systemDefaultWhite) + "%-20s%n", systemCmd, extensionCmd);
         }
         modifyMessage('n', 2);
         border();
@@ -117,14 +117,14 @@ public class DisplayManager {
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
-            out.print(getAnsi256Color(systemDefaultWhite) + BOLD + "\r" + spinner[i % spinner.length] + RESET);
+            out.print(getAnsi256Color(systemDefaultWhite) + "\r" + spinner[i % spinner.length] + RESET);
             try {
                 Thread.sleep(frames);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getAnsi256Color(systemDefaultWhite) + BOLD + "\r    ✓" + RESET);
+        out.print(getAnsi256Color(systemDefaultWhite) + "\r    ✓" + RESET);
     }
 
     public static void displayUserIp() {

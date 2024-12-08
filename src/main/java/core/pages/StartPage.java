@@ -20,8 +20,8 @@ public class StartPage {
         message("Version: " + displayVersion,systemDefaultWhite,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + BOLD + "s.cmds" + RESET
-                + getAnsi256Color(systemDefaultWhite) +  BOLD + "'\n"
+        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "s.cmds" + RESET
+                + getAnsi256Color(systemDefaultWhite) + "'\n"
                 + alignment(56) + "to show list of\n"
                 + alignment(56) + "commands" + RESET, 56);
 

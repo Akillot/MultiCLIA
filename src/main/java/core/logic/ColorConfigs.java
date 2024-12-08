@@ -60,7 +60,7 @@ public class ColorConfigs {
         if (color < 0 || color > 255) {
             throw new IllegalArgumentException("Color code must be between 0 and 255");
         }
-        return getAnsi256Color(color) + BOLD + text + RESET;
+        return getAnsi256Color(color) + text + RESET;
     }
 
     @Contract(pure = true)

@@ -37,11 +37,11 @@ public  class InfoPage {
             marginBorder();
             modifyMessage('n', 1);
 
-            message(getAnsi256Color(systemDefaultColor) + BOLD + "MultiCLIA " + RESET
+            message(getAnsi256Color(systemDefaultColor) + "MultiCLIA " + RESET
                             + getAnsi256Color(systemDefaultWhite) + "[" + getAnsi256Color(systemDefaultWhite)
-                            + ITALIC + BOLD + "Multi Command Line Interface App" + RESET
+                            + ITALIC + "Multi Command Line Interface App" + RESET
                             + getAnsi256Color(systemDefaultWhite) + "]\n\n" +
-                            BOLD + alignment(58) + "is an open-source application designed for \n" +
+                            alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
                             alignment(58) + "functionality is built on extensible components.\n\n" +

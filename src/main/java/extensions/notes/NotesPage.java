@@ -64,9 +64,9 @@ public class NotesPage {
     }
 
     private static void createNote() {
-        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter title: " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Enter title: " + RESET);
         String title = scanner.nextLine();
-        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter content: " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Enter content: " + RESET);
         String content = scanner.nextLine();
 
         NotesConfigs note = new NotesConfigs(title, content);
@@ -77,7 +77,7 @@ public class NotesPage {
     }
 
     private static void openNote() {
-        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter title to open: " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Enter title to open: " + RESET);
         String title = scanner.nextLine();
 
         NotesConfigs note = NotesConfigs.readFromFile(title);
@@ -88,7 +88,7 @@ public class NotesPage {
             modifyMessage('n', 1);
 
             alert("i", "Do you want to update this note? [+/-]", 58);
-            out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Your choice: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Your choice: " + RESET);
             String answer = scanner.nextLine();
 
             if (answer.equalsIgnoreCase("+")) {
@@ -116,7 +116,7 @@ public class NotesPage {
     }
 
     private static void deleteNote() {
-        out.print(alignment(58) + BOLD + getAnsi256Color(systemDefaultWhite) + "Enter title to delete note: " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Enter title to delete note: " + RESET);
         String title = scanner.nextLine();
         boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
