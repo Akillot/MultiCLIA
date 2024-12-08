@@ -15,8 +15,6 @@ public class SettingsPage {
         modifyMessage('n', 2);
         displayMemorySection();
 
-        modifyMessage('n',1);
-
         displayColorSection();
         marginBorder();
     }

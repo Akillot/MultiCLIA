@@ -61,7 +61,7 @@ public class StartPage {
 
     public static void switcherLogoAscii(String[] logo, int alignment) {
         String[] colors;
-        int indexOfLogo = rand.nextInt(3);
+        int indexOfLogo = rand.nextInt(0,3);
 
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
@@ -75,9 +75,9 @@ public class StartPage {
                     getAnsi256Color(254), getAnsi256Color(255)};
 
             case 2 -> colors = new String[]{
-                    getAnsi256Color(52), getAnsi256Color(53),
-                    getAnsi256Color(54), getAnsi256Color(55),
-                    getAnsi256Color(56), getAnsi256Color(57)};
+                    getAnsi256Color(132), getAnsi256Color(168),
+                    getAnsi256Color(204), getAnsi256Color(133),
+                    getAnsi256Color(169), getAnsi256Color(205)};
 
             default -> colors = new String[]{
                     getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),

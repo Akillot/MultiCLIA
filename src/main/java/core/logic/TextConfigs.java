@@ -19,15 +19,10 @@ public class TextConfigs {
             int end = Math.min(i + width, text.length());
             if (i == 0) {
                 border();
-                out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
-                if (end < text.length()) {
-                    modifyMessage('n',1);
-                }
-            } else {
-                out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
-                if (end < text.length()) {
-                    modifyMessage('n',1);
-                }
+            }
+            out.print(BOLD + alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+            if (end < text.length()) {
+                modifyMessage('n',1);
             }
         }
         modifyMessage('n',1);
@@ -68,7 +63,7 @@ public class TextConfigs {
 
     /*Modified method System.out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
-    public static void message(String text, @NotNull int color, int alignment, int delay, Consumer<String> printMethod) {
+    public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColoredText(text, color);
         String alignedText = alignment(alignment) + coloredText;
