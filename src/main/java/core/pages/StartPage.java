@@ -3,6 +3,7 @@ package core.pages;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.searchCommands;
+import static core.logic.CommandManager.switchLogo;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
 import static core.pages.InfoPage.version;
@@ -11,7 +12,7 @@ import static java.lang.System.out;
 public class StartPage {
     public static void displayStart() {
         modifyMessage('n',2);
-        switcherLogoAscii(mainLogoAscii, 48);
+        switchLogo(mainLogoAscii, 48);
         marginBorder();
 
         String displayVersion = (version != null) ? version : "Unknown Version";
@@ -19,7 +20,7 @@ public class StartPage {
         message("Version: " + displayVersion,systemDefaultWhite,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + BOLD + "sys.cmds" + RESET
+        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + BOLD + "s.cmds" + RESET
                 + getAnsi256Color(systemDefaultWhite) +  BOLD + "'\n"
                 + alignment(56) + "to show list of\n"
                 + alignment(56) + "commands" + RESET, 56);
@@ -58,36 +59,4 @@ public class StartPage {
             "  `88b    ooo   888       o  888   .8'     `888.  ",
             "   `Y8bood8P'  o888ooooood8 o888o o88o     o8888o "
     };
-
-    public static void switcherLogoAscii(String[] logo, int alignment) {
-        String[] colors;
-        int indexOfLogo = rand.nextInt(0,3);
-
-        switch (indexOfLogo) {
-            case 0 -> colors = new String[]{
-                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
-                    getAnsi256Color(165), getAnsi256Color(99),
-                    getAnsi256Color(63), getAnsi256Color(99)};
-
-            case 1 -> colors = new String[]{
-                    getAnsi256Color(250), getAnsi256Color(251),
-                    getAnsi256Color(252), getAnsi256Color(253),
-                    getAnsi256Color(254), getAnsi256Color(255)};
-
-            case 2 -> colors = new String[]{
-                    getAnsi256Color(132), getAnsi256Color(168),
-                    getAnsi256Color(204), getAnsi256Color(133),
-                    getAnsi256Color(169), getAnsi256Color(205)};
-
-            default -> colors = new String[]{
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
-        }
-
-        for (int i = 0; i < logo.length; i++) {
-            String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, i % colors.length, alignment, 0, System.out::print);
-        }
-    }
 }

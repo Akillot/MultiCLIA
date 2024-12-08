@@ -11,8 +11,9 @@ public class BrowserConfigs {
     public static void browser() {
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + BOLD + "Enter domain" + RESET
-                    + getAnsi256Color(systemDefaultWhite) + BOLD + " (or type 'exit' to quit): ");
+            out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + BOLD + "Enter domain"
+                    + getAnsi256Color(systemDefaultWhite) + BOLD + " (or type '" + getAnsi256Color(systemDefaultRed) + "exit"
+                    + getAnsi256Color(systemDefaultWhite) + BOLD + "' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
 
             if (domainInput.equals("exit")) {

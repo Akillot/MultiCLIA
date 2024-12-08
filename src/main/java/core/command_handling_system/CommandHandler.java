@@ -21,9 +21,9 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] systemCmds = {
-            "sys.cmds" ,"sys.setts", "sys.rerun",
-            "sys.ip", "sys.info", "sys.exit", "sys.exitq",
-            "sys.help"};
+            "s.cmds" ,"s.setts", "s.rerun",
+            "s.ip", "s.info", "s.exit", "s.exitq",
+            "s.help"};
     public static String[] extensionCmds = {
             "notes", "browser", "crypto", "clock"};
 

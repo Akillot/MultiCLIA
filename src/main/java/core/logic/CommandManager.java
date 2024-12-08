@@ -20,15 +20,54 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
+    public static void switchLogo(String[] logo, int alignment) {
+        String[] colors;
+        int indexOfLogo = rand.nextInt(0,3);
+
+        switch (indexOfLogo) {
+            case 0 -> colors = new String[]{
+                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
+                    getAnsi256Color(165), getAnsi256Color(99),
+                    getAnsi256Color(63), getAnsi256Color(99)};
+
+            case 1 -> colors = new String[]{
+                    getAnsi256Color(250), getAnsi256Color(251),
+                    getAnsi256Color(252), getAnsi256Color(253),
+                    getAnsi256Color(254), getAnsi256Color(255)};
+
+            case 2 -> colors = new String[]{
+                    getAnsi256Color(132), getAnsi256Color(168),
+                    getAnsi256Color(204), getAnsi256Color(133),
+                    getAnsi256Color(169), getAnsi256Color(205)};
+
+            default -> colors = new String[]{
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
+        }
+
+        for (int i = 0; i < logo.length; i++) {
+            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+            message(coloredText, i % colors.length, alignment, 0, System.out::print);
+        }
+    }
+
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
-        slowMotionText(50, 56,false,true,
-                getAnsi256Color(systemDefaultWhite) + "Search: ","");
-        String nameOfFunction = scanner.nextLine().toLowerCase();
-        modifyMessage('n', 1);
-        wrapText(nameOfFunction, borderWidth - 2);
+        try {
+            slowMotionText(50, 56, false, true,
+                    getAnsi256Color(systemDefaultWhite) + "Search: ", "");
+            String nameOfFunction = scanner.nextLine().toLowerCase();
+            modifyMessage('n', 1);
+            wrapText(nameOfFunction, borderWidth - 2);
 
-        if (!registry.executeCommand(nameOfFunction)) {
+            if (!registry.executeCommand(nameOfFunction)) {
+                modifyMessage('n', 2);
+                errorAscii();
+                marginBorder();
+            }
+        }
+        catch (Exception e) {
             modifyMessage('n', 2);
             errorAscii();
             marginBorder();
