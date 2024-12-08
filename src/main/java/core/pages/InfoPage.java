@@ -12,7 +12,7 @@ import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.4";
+    public static String version = "A-0.7.5";
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
@@ -21,14 +21,11 @@ public  class InfoPage {
         message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
         modifyMessage('n', 1);
 
-        message("Enter '+' to open and '-' to skip",systemDefaultWhite,58,0,out::print);
+        messageInstruction("Enter","+","to open and","-","to skip");
         choice("Description", displayAppDescription());
         modifyMessage('n', 1);
 
-        message("Enter '" + getAnsi256Color(systemDefaultColor) + BOLD + "+" + RESET +
-                getAnsi256Color(systemDefaultWhite) + BOLD + "' to open and '" +
-                getAnsi256Color(systemDefaultColor) + BOLD + "-" + RESET +
-                getAnsi256Color(systemDefaultWhite) + BOLD + "' to skip",systemDefaultWhite,58,0,out::print);
+        messageInstruction("Enter","+","to open and","-","to skip");
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
         marginBorder();
     }

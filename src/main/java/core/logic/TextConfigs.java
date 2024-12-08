@@ -89,6 +89,14 @@ public class TextConfigs {
         modifyMessage('n', 1);
     }
 
+    public static void messageInstruction(String preText, String instructionOne, String midText,
+                                          String instructionTwo, String postText) {
+        message(preText + " '" + getAnsi256Color(systemDefaultColor) + BOLD + instructionOne + RESET +
+                getAnsi256Color(systemDefaultWhite) + BOLD + "' " + midText +" '" + RESET +
+                getAnsi256Color(systemDefaultColor) + BOLD + instructionTwo + RESET +
+                getAnsi256Color(systemDefaultWhite) + BOLD + "' " + postText,systemDefaultWhite,58,0,out::print);
+    }
+
     //unclear name
     public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
@@ -114,6 +122,4 @@ public class TextConfigs {
         out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + BOLD + "["  + modification + "] " + RESET
                 + getAnsi256Color(systemDefaultWhite) + BOLD + text + RESET);
     }
-
-
 }
