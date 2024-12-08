@@ -20,7 +20,7 @@ public class StartPage {
         message("Version: " + displayVersion,systemDefaultWhite,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "s.cmds" + RESET
+        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "--cmds" + RESET
                 + getAnsi256Color(systemDefaultWhite) + "'\n"
                 + alignment(56) + "to show list of\n"
                 + alignment(56) + "commands" + RESET, 56);
@@ -40,7 +40,7 @@ public class StartPage {
         }
     }
 
-    public static String[] mainLogoAscii = {
+    private static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o  ",
             "`88.       .888'             `888    .o8    `\"'  ",
             " 888b     d'888  oooo  oooo   888  .o888oo oooo  ",

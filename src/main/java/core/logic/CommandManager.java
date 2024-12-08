@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.*;
 import java.net.URI;
+import java.util.Random;
 
 import static core.logic.BorderConfigs.borderWidth;
 import static core.logic.BorderConfigs.marginBorder;
@@ -22,6 +23,7 @@ public class CommandManager {
 
     public static void switchLogo(String[] logo, int alignment) {
         String[] colors;
+        Random rand = new Random();
         int indexOfLogo = rand.nextInt(0,3);
 
         switch (indexOfLogo) {
@@ -143,21 +145,21 @@ public class CommandManager {
     }
 
     public static void terminateProgramDefault() {
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         loadingAnimation(300,10);
         message("\r    Status: ✓",systemDefaultWhite,58,0,out::print);
         message("Program terminated correctly",systemDefaultColor,
                 56,20,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         exit(0);
     }
 
     public static void terminateProgramQuick() {
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         message("\r    Status: ✓", systemDefaultWhite,58,0,out::print);
         message("Program terminated quickly correctly",systemDefaultColor,
                 56,0,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         exit(0);
     }
 }
