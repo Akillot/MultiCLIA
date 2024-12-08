@@ -1,4 +1,4 @@
-package extensions.internet.browser;
+package extensions.internet;
 
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;

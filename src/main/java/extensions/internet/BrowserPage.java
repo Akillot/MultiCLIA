@@ -1,10 +1,10 @@
-package extensions.internet.browser;
+package extensions.internet;
 
 import static core.logic.BorderConfigs.border;
 import static core.logic.CommandManager.switchLogo;
 import static core.logic.TextConfigs.modifyMessage;
-import static extensions.internet.browser.BrowserConfigs.browser;
-import static extensions.internet.browser.BrowserConfigs.browserLogo;
+import static extensions.internet.BrowserConfigs.browser;
+import static extensions.internet.BrowserConfigs.browserLogo;
 
 public class BrowserPage {
     public static void browserPage() {

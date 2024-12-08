@@ -31,9 +31,9 @@ public class CommandManager {
                     getAnsi256Color(63), getAnsi256Color(99)};
 
             case 1 -> colors = new String[]{
-                    getAnsi256Color(250), getAnsi256Color(251),
-                    getAnsi256Color(252), getAnsi256Color(253),
-                    getAnsi256Color(254), getAnsi256Color(255)};
+                    getAnsi256Color(140), getAnsi256Color(98),
+                    getAnsi256Color(134), getAnsi256Color(129),
+                    getAnsi256Color(93), getAnsi256Color(171)};
 
             case 2 -> colors = new String[]{
                     getAnsi256Color(132), getAnsi256Color(168),
@@ -41,7 +41,7 @@ public class CommandManager {
                     getAnsi256Color(169), getAnsi256Color(205)};
 
             default -> colors = new String[]{
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
+                    getAnsi256Color(99), getAnsi256Color(systemDefaultWhite),
                     getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
                     getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
         }

@@ -5,7 +5,7 @@ import extensions.finance.CurrencyExchangerPage;
 import extensions.notes.NotesPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
-import extensions.internet.browser.BrowserPage;
+import extensions.internet.BrowserPage;
 import core.pages.InfoPage;
 import core.pages.StartPage;
 import extensions.time.clock.ClockPage;
