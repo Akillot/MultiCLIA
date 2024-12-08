@@ -12,12 +12,17 @@ import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
-    public static String version = "A-0.7.5";
+
+    @Contract(pure = true)
+    public static @NotNull String getVersion() {
+        String appVersion = "A-0.7.6";
+        return getAnsi256Color(systemDefaultColor) + appVersion + RESET;
+    }
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
         message("Current version:",systemDefaultWhite,58,0,out::print);
-        message(version,systemDefaultColor,58,0,out::print);
+        message(getVersion(),systemDefaultColor,58,0,out::print);
         message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
         modifyMessage('n', 1);
 

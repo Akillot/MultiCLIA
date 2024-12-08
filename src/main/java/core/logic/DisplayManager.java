@@ -12,6 +12,7 @@ import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
+import static core.pages.InfoPage.getVersion;
 import static java.lang.System.*;
 
 public class DisplayManager {
@@ -166,6 +167,13 @@ public class DisplayManager {
             message(rule, systemDefaultWhite, 58, 0, out::print);
             modifyMessage('n', 1);
         }
+        marginBorder();
+    }
+
+    public static void displayCurrentVersion() {
+        modifyMessage('n', 2);
+        message("Version: " + getVersion(),systemDefaultWhite,58,0,out::print);
+        modifyMessage('n', 1);
         marginBorder();
     }
 }

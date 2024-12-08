@@ -6,7 +6,7 @@ import static core.logic.CommandManager.searchCommands;
 import static core.logic.CommandManager.switchLogo;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
-import static core.pages.InfoPage.version;
+import static core.pages.InfoPage.getVersion;
 import static java.lang.System.out;
 
 public class StartPage {
@@ -15,9 +15,8 @@ public class StartPage {
         switchLogo(mainLogoAscii, 48);
         marginBorder();
 
-        String displayVersion = (version != null) ? version : "Unknown Version";
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
-        message("Version: " + displayVersion,systemDefaultWhite,56,0, out::print);
+        message("Version: " + getVersion() ,systemDefaultWhite,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
 
         alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "--cmds" + RESET
