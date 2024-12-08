@@ -113,7 +113,8 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + "["  + modification + "] " + RESET
+        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + "["
+                + getAnsi256Color(systemDefaultColor) + modification + getAnsi256Color(systemDefaultWhite) + "] "
                 + getAnsi256Color(systemDefaultWhite) + text + RESET);
     }
 }

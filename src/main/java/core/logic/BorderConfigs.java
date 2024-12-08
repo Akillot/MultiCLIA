@@ -11,7 +11,7 @@ public class BorderConfigs {
 
     public static void border() {
         out.print(getAnsi256Color(systemDefaultWhite) + symbolsOfBorder[0]);
-        for (int i = 0; i < borderWidth; i++) {
+        for (int i = 0; i < 115; i++) {
             out.print(symbolsOfBorder[0]);
         }
         out.println(symbolsOfBorder[0]);
