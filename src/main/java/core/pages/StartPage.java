@@ -13,6 +13,7 @@ public class StartPage {
     public static void displayStart() {
         modifyMessage('n',2);
         switchLogo(mainLogoAscii, 48);
+        modifyMessage('n',1);
         marginBorder();
 
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
