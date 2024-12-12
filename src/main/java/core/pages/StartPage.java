@@ -14,6 +14,7 @@ public class StartPage {
         modifyMessage('n',2);
         switchLogo(mainLogoAscii, 48);
         modifyMessage('n',1);
+        message("Everything you need.",15,48,0,out::print);
         marginBorder();
 
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
