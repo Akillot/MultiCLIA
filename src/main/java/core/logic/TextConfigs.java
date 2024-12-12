@@ -20,7 +20,10 @@ public class TextConfigs {
             if (i == 0) {
                 border();
             }
-            out.print(alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+            modifyMessage('n',1);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "You entered: ["
+                    + getAnsi256Color(systemDefaultColor) + text.substring(i, end) + RESET
+                    + getAnsi256Color(systemDefaultWhite) + "]" + RESET);
             if (end < text.length()) {
                 modifyMessage('n',1);
             }
