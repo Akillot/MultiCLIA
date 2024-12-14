@@ -112,7 +112,6 @@ public class CurrencyExchanger {
         }
     }};
 
-
     public static void exchanger() {
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
                 + getAnsi256Color(systemDefaultWhite) + "' to\n" + alignment(58) + "quit the extension.", 58);
