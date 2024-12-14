@@ -3,6 +3,7 @@ package extensions.finance;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import static core.logic.ApiConfigs.httpRequest;
@@ -15,54 +16,105 @@ import static java.lang.System.out;
 
 public class CurrencyExchanger {
 
+    private static LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
+        add("btc");
+        add("eth");
+        add("xrp");
+        add("ltc");
+        add("doge");
+        add("ada");
+        add("bnb");
+        add("dot");
+        add("usdt");
+        add("sol");
+        add("shib");
+        add("avax");
+        add("trx");
+        add("sui");
+        add("matic");
+        add("uni");
+        add("link");
+        add("atom");
+        add("etc");
+        add("xlm");
+        add("fil");
+        add("icp");
+        add("algo");
+        add("qnt");
+        add("apt");
+        add("hbar");
+        add("eos");
+        add("neo");
+        add("ftm");
+        add("sand");
+        add("mana");
+        add("chz");
+        add("crv");
+        add("aave");
+        add("dydx");
+        add("lunc");
+        add("bch");
+        add("zec");
+        add("dash");
+        add("xmr");
+        add("gala");
+        add("ape");
+    }};
+
+    private static LinkedList<String> cryptocurrencyNames = new LinkedList<>() {{
+        add("bitcoin");
+        add("ethereum");
+        add("ripple");
+        add("litecoin");
+        add("dogecoin");
+        add("cardano");
+        add("binancecoin");
+        add("polkadot");
+        add("tether");
+        add("solana");
+        add("shiba-inu");
+        add("avalanche-2");
+        add("tron");
+        add("sui");
+        add("polygon");
+        add("uniswap");
+        add("chainlink");
+        add("cosmos");
+        add("ethereum-classic");
+        add("stellar");
+        add("filecoin");
+        add("internet-computer");
+        add("algorand");
+        add("quant");
+        add("aptos");
+        add("hedera");
+        add("eos");
+        add("neo");
+        add("fantom");
+        add("the-sandbox");
+        add("decentraland");
+        add("chiliz");
+        add("curve-dao-token");
+        add("aave");
+        add("dydx");
+        add("terra-luna");
+        add("bitcoin-cash");
+        add("zcash");
+        add("dash");
+        add("monero");
+        add("gala");
+        add("apecoin");
+    }};
+
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
-        put("btc", "bitcoin");
-        put("eth", "ethereum");
-        put("xrp", "ripple");
-        put("ltc", "litecoin");
-        put("doge", "dogecoin");
-        put("ada", "cardano");
-        put("bnb", "binancecoin");
-        put("dot", "polkadot");
-        put("usdt", "tether");
-        put("sol", "solana");
-        put("shib", "shiba-inu");
-        put("avax", "avalanche-2");
-        put("trx", "tron");
-        put("sui", "sui");
-        put("matic", "polygon");
-        put("uni", "uniswap");
-        put("link", "chainlink");
-        put("atom", "cosmos");
-        put("etc", "ethereum-classic");
-        put("xlm", "stellar");
-        put("fil", "filecoin");
-        put("icp", "internet-computer");
-        put("algo", "algorand");
-        put("qnt", "quant");
-        put("apt", "aptos");
-        put("hbar", "hedera");
-        put("eos", "eos");
-        put("neo", "neo");
-        put("ftm", "fantom");
-        put("sand", "the-sandbox");
-        put("mana", "decentraland");
-        put("chz", "chiliz");
-        put("crv", "curve-dao-token");
-        put("aave", "aave");
-        put("dydx", "dydx");
-        put("lunc", "terra-luna");
-        put("bch", "bitcoin-cash");
-        put("zec", "zcash");
-        put("dash", "dash");
-        put("xmr", "monero");
-        put("gala", "gala");
-        put("ape", "apecoin");
+        for(int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyNames.size(); i++) {
+            put(cryptocurrencyCodes.get(i), cryptocurrencyNames.get(i));
+        }
     }};
 
 
     public static void exchanger() {
-        alert("i", "Type '" + getAnsi256Color(systemDefaultColor) + "exit"
+        alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
                 + getAnsi256Color(systemDefaultWhite) + "' to\n" + alignment(58) + "quit the extension.", 58);
 
         modifyMessage('n', 1);
@@ -90,7 +142,7 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            String cryptocurrencyName = CRYPTO_MAP.getOrDefault(userCryptoCode, userCryptoCode);
+            String cryptocurrencyCode = CRYPTO_MAP.getOrDefault(userCryptoCode, userCryptoCode);
 
             out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Fiat currency code: " + RESET);
             String userFiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
@@ -106,31 +158,31 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            getCryptocurrencyPrice(cryptocurrencyName, userFiatCurrencyCode);
+            getCryptocurrencyPrice(cryptocurrencyCode, userFiatCurrencyCode);
         }
     }
 
-    private static void getCryptocurrencyPrice(String cryptocurrencyName, String fiatCurrencyCode) {
-        cryptocurrencyName = cryptocurrencyName.toLowerCase();
+    private static void getCryptocurrencyPrice(String cryptocurrencyCode, String fiatCurrencyCode) {
+        cryptocurrencyCode = cryptocurrencyCode.toLowerCase();
         fiatCurrencyCode = fiatCurrencyCode.toLowerCase();
 
         String response = httpRequest("https://api.coingecko.com/api/v3/simple/price?ids="
-                + cryptocurrencyName + "&vs_currencies=" + fiatCurrencyCode, "GET", "", "response");
+                + cryptocurrencyCode + "&vs_currencies=" + fiatCurrencyCode, "GET", "", "response");
 
         if (response != null) {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
-                if (!jsonResponse.has(cryptocurrencyName)) {
-                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyName), systemDefaultRed, 58, 0, out::print);
+                if (!jsonResponse.has(cryptocurrencyCode)) {
+                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyCode), systemDefaultRed, 58, 0, out::print);
                     return;
                 }
-                if (!jsonResponse.getJSONObject(cryptocurrencyName).has(fiatCurrencyCode)) {
+                if (!jsonResponse.getJSONObject(cryptocurrencyCode).has(fiatCurrencyCode)) {
                     message("Invalid fiat currency: " + fiatCurrencyCode.toUpperCase(), systemDefaultRed, 58, 0, out::print);
                     return;
                 }
 
-                double price = jsonResponse.getJSONObject(cryptocurrencyName).getDouble(fiatCurrencyCode);
-                out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + capitalizeMessage(cryptocurrencyName) + RESET);
+                double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
+                out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + capitalizeMessage(cryptocurrencyCode) + RESET);
                 out.println(getAnsi256Color(systemDefaultWhite) + " costs in " + fiatCurrencyCode.toUpperCase() + ": "
                         + RESET + getAnsi256Color(systemDefaultColor) + price + RESET);
 
