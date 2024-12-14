@@ -1,5 +1,7 @@
 package core.pages;
 
+import java.util.Random;
+
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.searchCommands;
@@ -14,7 +16,7 @@ public class StartPage {
         modifyMessage('n',2);
         switchLogo(mainLogoAscii, 48);
         modifyMessage('n',1);
-        message("Everything you need.",15,48,0,out::print);
+        getRandomMotto();
         marginBorder();
 
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
@@ -51,4 +53,16 @@ public class StartPage {
             " 8          888   888   888   888    888 .  888    `88b    ooo   888       o  888    .88'      `888.  ",
             "o8o        o888o  `V88V\"V8P' o888o   \"888\" o888o    `Y8bood8P'  o888ooooood8 o888o  o88o       o8888o "
     };
+
+    private static void getRandomMotto(){
+        String[] motto = {"Everything you need. Command-driven simplicity.",
+                "Everything you need. Version:" + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
+                "Everything you need. Built for you.",
+                "Everything you need. Just type ‘" + getAnsi256Color(systemDefaultColor) + "--cmds" + getAnsi256Color(systemDefaultWhite) + "’.",
+                "Everything you need. Command-driven simplicity.","Everything you need. Fast. Smooth. Ready.",
+                "Everything you need. Harmony in command.","Everything you need. It starts with a command."};
+        Random rand = new Random();
+        int index = rand.nextInt(0, motto.length - 1);
+        message(motto[index],15,48,0,out::print);
+    }
 }
