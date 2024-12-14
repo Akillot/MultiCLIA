@@ -14,29 +14,29 @@ public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
         displayMemorySection();
-
         displayColorSection();
+        displayTextStylesSection();
         marginBorder();
     }
 
     //Memory methods
-    public static void displayMemorySection(){
+    private static void displayMemorySection(){
         choice("Memory", SettingsPage::displayUsingMemory);
     }
 
-    public static void displayUsingMemory(){
+    private static void displayUsingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
                         / (1000 * 1000) + "M"),systemDefaultWhite,58,0, out::print);
     }
 
     //Color methods
-    public static void displayColorSection(){
+    private static void displayColorSection(){
         choice("Colors", textModification());
     }
 
     @Contract(pure = true)
-    public static @NotNull Runnable textModification() {
+    private static @NotNull Runnable textModification() {
         return () -> {
             printColorRange(0, systemDefaultWhite, "");
             modifyMessage('n', 1);
@@ -46,7 +46,7 @@ public class SettingsPage {
     }
 
     @Contract(pure = true)
-    public static void printColorRange(int start, int end, String title) {
+    private static void printColorRange(int start, int end, String title) {
         out.println(title + RESET);
         for (int i = start; i <= end; i++) {
             out.print(getAnsi256BackgroundColor(i) + tableAlignment(4) + " " + i + " " + RESET);
@@ -55,7 +55,7 @@ public class SettingsPage {
     }
 
     @Contract(pure = true)
-    public static void printColorBlock(int start, int end) {
+    private static void printColorBlock(int start, int end) {
         int columns = 6;
         int rows = (end - start + 1) / columns;
 
@@ -76,5 +76,18 @@ public class SettingsPage {
     @Contract(pure = true)
     public static @NotNull String tableAlignment(int width) {
         return " ".repeat(Math.max(0, width));
+    }
+
+    //Text styles
+    private static void displayTextStylesSection(){
+        choice("Text styles", SettingsPage::displayTextStyles);
+    }
+
+    private static void displayTextStyles(){
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Bold" + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + ITALIC + "Italic" + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + UNDERLINE + "Underline" + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + REVERSE + "Reverse" + RESET);
+        modifyMessage('n', 1);
     }
 }

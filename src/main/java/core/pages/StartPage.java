@@ -56,7 +56,7 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String[] motto = {"Everything you need. Command-driven simplicity.",
-                "Everything you need. Version:" + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
+                "Everything you need. Version: " + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
                 "Everything you need. Built for you.",
                 "Everything you need. Just type ‘" + getAnsi256Color(systemDefaultColor) + "--cmds" + getAnsi256Color(systemDefaultWhite) + "’.",
                 "Everything you need. Command-driven simplicity.","Everything you need. Fast. Smooth. Ready.",
