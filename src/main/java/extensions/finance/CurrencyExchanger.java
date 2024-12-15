@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.ColorConfigs.*;
+import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.terminateExtension;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
@@ -112,7 +113,15 @@ public class CurrencyExchanger {
         }
     }};
 
-    public static void exchanger() {
+    //Menu method
+    public static void cryptoMenu(){
+        choice("Exchanger",CurrencyExchanger::exchanger);
+        modifyMessage('n',2);
+        choice("Price tracker", CurrencyExchanger::currencyPriceTracker);
+    }
+
+    //Exchanger method
+    private static void exchanger() {
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
                 + getAnsi256Color(systemDefaultWhite) + "' to\n" + alignment(58) + "quit the extension.", 58);
 
@@ -161,22 +170,34 @@ public class CurrencyExchanger {
         }
     }
 
+    //Tracker method
+    private static void currencyPriceTracker(){
+        try {
+            String currency = scanner.nextLine().trim().toLowerCase();
+
+        }
+        catch (Exception ex){
+            message(ex.getMessage(), systemDefaultRed, 58, 0, out::print);
+        }
+    }
+
+    //Getting and confirming the price of cryptocurrency
     private static void getCryptocurrencyPrice(String cryptocurrencyCode, String fiatCurrencyCode) {
         cryptocurrencyCode = cryptocurrencyCode.toLowerCase();
         fiatCurrencyCode = fiatCurrencyCode.toLowerCase();
 
         String response = httpRequest("https://api.coingecko.com/api/v3/simple/price?ids="
-                + cryptocurrencyCode + "&vs_currencies=" + fiatCurrencyCode, "GET", "", "response");
+                + cryptocurrencyCode + "&vs_currencies=" + fiatCurrencyCode,"GET","","response");
 
         if (response != null) {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
                 if (!jsonResponse.has(cryptocurrencyCode)) {
-                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyCode), systemDefaultRed, 58, 0, out::print);
+                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyCode),systemDefaultRed,58,0,out::print);
                     return;
                 }
                 if (!jsonResponse.getJSONObject(cryptocurrencyCode).has(fiatCurrencyCode)) {
-                    message("Invalid fiat currency: " + fiatCurrencyCode.toUpperCase(), systemDefaultRed, 58, 0, out::print);
+                    message("Invalid fiat currency: " + fiatCurrencyCode.toUpperCase(),systemDefaultRed,58,0,out::print);
                     return;
                 }
 
@@ -186,7 +207,7 @@ public class CurrencyExchanger {
                         + RESET + getAnsi256Color(systemDefaultColor) + price + RESET);
 
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(), systemDefaultRed, 58, 0, out::print);
+                message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
             }
         }
     }
