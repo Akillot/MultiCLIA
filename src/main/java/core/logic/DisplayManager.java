@@ -45,14 +45,15 @@ public class DisplayManager {
     };
 
     private static final String[] rules = {
-            "--cmds: Show all commands",
-            "--setts: Show settings of the application",
-            "--rerun: Restart the app without clearing context",
-            "--ip: Show local and external IP addresses",
-            "--info: Show app information",
-            "--help: Show description of all commands",
-            "--exit: Terminate the application",
-            "--exitq: Terminate the application quickly"
+            "--cmds: Show all commands (-c)",
+            "--setts: Show settings of the application (-s)",
+            "--rerun: Restart the app without clearing context (-rr)",
+            "--ip: Show local and external IP addresses (-ip)",
+            "--info: Show app information (-i)",
+            "--help: Show description of all commands (-h)",
+            "--exit: Terminate the application (-e)",
+            "--exitq: Terminate the application quickly (-eq)",
+            "--version: Show version (-v)"
     };
 
     public static void errorAscii() {
