@@ -169,8 +169,8 @@ public class CurrencyExchanger {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
                 + getAnsi256Color(systemDefaultWhite) + "' to quit the extension at any time.", 58);
-        modifyMessage('n', 1);
         while (true) {
+            modifyMessage('n', 1);
             out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency code: " + RESET);
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
@@ -217,7 +217,7 @@ public class CurrencyExchanger {
             for (int i = 0; i < duration; i += 5000) {
                 getCryptocurrencyPrice(CRYPTO_MAP.get(cryptocurrencyCode), fiatCurrencyCode);
                 try {
-                    Thread.sleep(20000); //pause 10 sec
+                    Thread.sleep(50000); //pause 50 sec
                 } catch (InterruptedException e) {
                     modifyMessage('n',1);
                     message("Tracking interrupted.", systemDefaultRed, 58, 0, out::print);
