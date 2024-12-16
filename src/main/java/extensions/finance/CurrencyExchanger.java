@@ -67,7 +67,7 @@ public class CurrencyExchanger {
         add("ape");
     }};
 
-    private static final LinkedList<String> cryptocurrencyNames = new LinkedList<>() {{
+    private static final LinkedList<String> cryptocurrencyName = new LinkedList<>() {{
         add("bitcoin");
         add("ethereum");
         add("ripple");
@@ -113,8 +113,8 @@ public class CurrencyExchanger {
     }};
 
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
-        for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyNames.size(); i++) {
-            put(cryptocurrencyCodes.get(i), cryptocurrencyNames.get(i));
+        for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyName.size(); i++) {
+            put(cryptocurrencyCodes.get(i), cryptocurrencyName.get(i));
         }
     }};
 
@@ -126,6 +126,7 @@ public class CurrencyExchanger {
         marginBorder();
     }
 
+    //Exchanger method
     private static void exchanger() {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
@@ -168,7 +169,7 @@ public class CurrencyExchanger {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
                 + getAnsi256Color(systemDefaultWhite) + "' to quit the extension at any time.", 58);
-
+        modifyMessage('n', 1);
         while (true) {
             out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency code: " + RESET);
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
@@ -196,17 +197,19 @@ public class CurrencyExchanger {
                 continue;
             }
 
-            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Duration (minutes): " + RESET);
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Duration in minutes: " + RESET);
 
-            int duration;
+            double duration;
             try {
                 duration = Integer.parseInt(scanner.nextLine().trim()) * 60000;
             } catch (NumberFormatException e) {
+                modifyMessage('n',1);
                 message("Invalid duration. Please enter a valid number.", systemDefaultRed, 58, 0, out::print);
                 continue;
             }
 
             if (duration <= 0) {
+                modifyMessage('n',1);
                 message("Duration must be greater than zero.", systemDefaultRed, 58, 0, out::print);
                 continue;
             }
@@ -214,8 +217,9 @@ public class CurrencyExchanger {
             for (int i = 0; i < duration; i += 5000) {
                 getCryptocurrencyPrice(CRYPTO_MAP.get(cryptocurrencyCode), fiatCurrencyCode);
                 try {
-                    Thread.sleep(12000); //pause 12 sec
+                    Thread.sleep(20000); //pause 10 sec
                 } catch (InterruptedException e) {
+                    modifyMessage('n',1);
                     message("Tracking interrupted.", systemDefaultRed, 58, 0, out::print);
                     return;
                 }
@@ -235,17 +239,23 @@ public class CurrencyExchanger {
                 if (jsonResponse.has(cryptocurrencyCode)) {
                     double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
                     out.println(alignment(58) + getAnsi256Color(systemDefaultColor)
-                            + capitalizeMessage(cryptocurrencyCode) + RESET + " costs in "
+                            + capitalizeMessage(cryptocurrencyCode) + getAnsi256Color(systemDefaultWhite) + " costs in "
                             + fiatCurrencyCode.toUpperCase() + ": "
                             + getAnsi256Color(systemDefaultColor) + price + RESET);
                 } else {
+                    modifyMessage('n',1);
                     message("Invalid response from API.", systemDefaultRed, 58, 0, out::print);
+                    modifyMessage('n',1);
                 }
             } catch (Exception e) {
+                modifyMessage('n',1);
                 message("Error parsing response: " + e.getMessage(), systemDefaultRed, 58, 0, out::print);
+                modifyMessage('n',1);
             }
         } else {
+            modifyMessage('n',1);
             message("Failed to fetch price. Check your network connection.", systemDefaultRed, 58, 0, out::print);
+            modifyMessage('n',1);
         }
     }
 }
