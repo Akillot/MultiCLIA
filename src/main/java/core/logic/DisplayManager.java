@@ -18,19 +18,6 @@ import static java.lang.System.*;
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    public static void loadingAnimation(int frames, int duration) {
-        String[] spinner = {"    |", "    /", "    —", "    \\"};
-        for (int i = 0; i < duration; i++) {
-            out.print(getAnsi256Color(systemDefaultWhite) + "\r" + spinner[i % spinner.length] + RESET);
-            try {
-                Thread.sleep(frames);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        out.print(getAnsi256Color(systemDefaultWhite) + "\r    ✓" + RESET);
-    }
-
     private static final String[] errorAscii = {
             "  .oooooo.                                 ",
             " d8P'  `Y8b                                ",
@@ -55,6 +42,19 @@ public class DisplayManager {
             "--exitq: Terminate the application quickly (-eq)",
             "--version: Show version (-v)"
     };
+
+    public static void loadingAnimation(int frames, int duration) {
+        String[] spinner = {"    |", "    /", "    —", "    \\"};
+        for (int i = 0; i < duration; i++) {
+            out.print(getAnsi256Color(systemDefaultWhite) + "\r" + spinner[i % spinner.length] + RESET);
+            try {
+                Thread.sleep(frames);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        out.print(getAnsi256Color(systemDefaultWhite) + "\r    ✓" + RESET);
+    }
 
     public static void errorAscii() {
         for (String line : errorAscii) {

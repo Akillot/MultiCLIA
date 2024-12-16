@@ -16,18 +16,17 @@ public class NotesPage {
     public static void displayNotepad() {
         boolean running = true;
         modifyMessage('n', 2);
+
+        String[] operations = new String[]{
+                "1 create note",
+                "2 open note",
+                "3 delete note",
+                "4 sort notes by title",
+                "5 sort notes by content",
+                "6 exit"
+        };
+
         while (running) {
-            modifyMessage('n', 1);
-
-            String[] operations = new String[]{
-                    "1 create note",
-                    "2 open note",
-                    "3 delete note",
-                    "4 sort notes by title",
-                    "5 sort notes by content",
-                    "6 exit"
-            };
-
             for (String operation : operations) {
                 message(operation,systemDefaultWhite,58,0,out::print);
             }
@@ -57,6 +56,7 @@ public class NotesPage {
                 case "6":
                 case "exit":
                     terminateExtension();
+                    modifyMessage('n', 1);
                     running = false;
                     break;
             }

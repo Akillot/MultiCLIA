@@ -5,19 +5,24 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Scanner;
 
 import static core.logic.ApiConfigs.httpRequest;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.terminateExtension;
-import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
 
 import static java.lang.System.out;
 
 public class CurrencyExchanger {
 
-    private static LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
+    private static final Scanner scanner = new Scanner(System.in);
+    private static String cryptocurrencyCode;
+    private static String fiatCurrencyCode;
+
+    private static final LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
         add("btc");
         add("eth");
         add("xrp");
@@ -62,7 +67,7 @@ public class CurrencyExchanger {
         add("ape");
     }};
 
-    private static LinkedList<String> cryptocurrencyNames = new LinkedList<>() {{
+    private static final LinkedList<String> cryptocurrencyNames = new LinkedList<>() {{
         add("bitcoin");
         add("ethereum");
         add("ripple");
@@ -108,107 +113,139 @@ public class CurrencyExchanger {
     }};
 
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
-        for(int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyNames.size(); i++) {
+        for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyNames.size(); i++) {
             put(cryptocurrencyCodes.get(i), cryptocurrencyNames.get(i));
         }
     }};
 
-    //Menu method
-    public static void cryptoMenu(){
-        choice("Exchanger",CurrencyExchanger::exchanger);
-        modifyMessage('n',2);
+    public static void cryptoMenu() {
+        modifyMessage('n', 1);
+        choice("Exchanger", CurrencyExchanger::exchanger);
+        modifyMessage('n', 1);
         choice("Price tracker", CurrencyExchanger::currencyPriceTracker);
+        marginBorder();
     }
 
-    //Exchanger method
     private static void exchanger() {
+        modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
                 + getAnsi256Color(systemDefaultWhite) + "' to\n" + alignment(58) + "quit the extension.", 58);
-
-        modifyMessage('n', 1);
-
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "["
-                + getAnsi256Color(systemDefaultColor) + "Example" + getAnsi256Color(systemDefaultWhite) +
-                ": '" + getAnsi256Color(systemDefaultColor) + "btc" + getAnsi256Color(systemDefaultWhite) +
-                " → " + RESET + getAnsi256Color(systemDefaultColor) + "usd" + getAnsi256Color(systemDefaultWhite) + "']" + RESET);
-
-        modifyMessage('n', 1);
 
         while (true) {
             modifyMessage('n', 1);
             out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency code: " + RESET);
-            String userCryptoCode = scanner.nextLine().trim().toLowerCase();
+            cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
-            if (userCryptoCode.equalsIgnoreCase("exit")) {
+            if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
                 modifyMessage('n', 1);
                 terminateExtension();
-                break;
+                return;
             }
 
-            if (userCryptoCode.isEmpty()) {
-                message("Cryptocurrency code cannot be empty", systemDefaultRed, 58, 0, out::print);
+            if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
+                message("Invalid cryptocurrency code: " + cryptocurrencyCode, systemDefaultRed, 58, 0, out::print);
                 continue;
             }
 
-            String cryptocurrencyCode = CRYPTO_MAP.getOrDefault(userCryptoCode, userCryptoCode);
-
             out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Fiat currency code: " + RESET);
-            String userFiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
+            fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
-            if (userFiatCurrencyCode.equalsIgnoreCase("exit")) {
-                modifyMessage('n', 1);
+            if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
                 terminateExtension();
-                break;
+                return;
             }
 
-            if (userFiatCurrencyCode.isEmpty()) {
+            if (fiatCurrencyCode.isEmpty()) {
                 message("Fiat currency code cannot be empty.", systemDefaultRed, 58, 0, out::print);
                 continue;
             }
 
-            getCryptocurrencyPrice(cryptocurrencyCode, userFiatCurrencyCode);
+            getCryptocurrencyPrice(CRYPTO_MAP.get(cryptocurrencyCode), fiatCurrencyCode);
         }
     }
 
-    //Tracker method
-    private static void currencyPriceTracker(){
-        try {
-            String currency = scanner.nextLine().trim().toLowerCase();
+    private static void currencyPriceTracker() {
+        modifyMessage('n', 2);
+        alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
+                + getAnsi256Color(systemDefaultWhite) + "' to quit the extension at any time.", 58);
 
-        }
-        catch (Exception ex){
-            message(ex.getMessage(), systemDefaultRed, 58, 0, out::print);
+        while (true) {
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency code: " + RESET);
+            cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
+
+            if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
+                terminateExtension();
+                return;
+            }
+
+            if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
+                message("Invalid cryptocurrency code: " + cryptocurrencyCode, systemDefaultRed, 58, 0, out::print);
+                continue;
+            }
+
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Fiat currency code: " + RESET);
+            fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
+
+            if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
+                terminateExtension();
+                return;
+            }
+
+            if (fiatCurrencyCode.isEmpty()) {
+                message("Fiat currency code cannot be empty.", systemDefaultRed, 58, 0, out::print);
+                continue;
+            }
+
+            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Duration (minutes): " + RESET);
+
+            int duration;
+            try {
+                duration = Integer.parseInt(scanner.nextLine().trim()) * 60000;
+            } catch (NumberFormatException e) {
+                message("Invalid duration. Please enter a valid number.", systemDefaultRed, 58, 0, out::print);
+                continue;
+            }
+
+            if (duration <= 0) {
+                message("Duration must be greater than zero.", systemDefaultRed, 58, 0, out::print);
+                continue;
+            }
+
+            for (int i = 0; i < duration; i += 5000) {
+                getCryptocurrencyPrice(CRYPTO_MAP.get(cryptocurrencyCode), fiatCurrencyCode);
+                try {
+                    Thread.sleep(12000); //pause 12 sec
+                } catch (InterruptedException e) {
+                    message("Tracking interrupted.", systemDefaultRed, 58, 0, out::print);
+                    return;
+                }
+            }
         }
     }
 
-    //Getting and confirming the price of cryptocurrency
     private static void getCryptocurrencyPrice(String cryptocurrencyCode, String fiatCurrencyCode) {
-        cryptocurrencyCode = cryptocurrencyCode.toLowerCase();
-        fiatCurrencyCode = fiatCurrencyCode.toLowerCase();
-
-        String response = httpRequest("https://api.coingecko.com/api/v3/simple/price?ids="
-                + cryptocurrencyCode + "&vs_currencies=" + fiatCurrencyCode,"GET","","response");
+        String response = httpRequest(
+                "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptocurrencyCode +
+                        "&vs_currencies=" + fiatCurrencyCode,
+                "GET", "", "response");
 
         if (response != null) {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
-                if (!jsonResponse.has(cryptocurrencyCode)) {
-                    message("Invalid cryptocurrency: " + capitalizeMessage(cryptocurrencyCode),systemDefaultRed,58,0,out::print);
-                    return;
+                if (jsonResponse.has(cryptocurrencyCode)) {
+                    double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
+                    out.println(alignment(58) + getAnsi256Color(systemDefaultColor)
+                            + capitalizeMessage(cryptocurrencyCode) + RESET + " costs in "
+                            + fiatCurrencyCode.toUpperCase() + ": "
+                            + getAnsi256Color(systemDefaultColor) + price + RESET);
+                } else {
+                    message("Invalid response from API.", systemDefaultRed, 58, 0, out::print);
                 }
-                if (!jsonResponse.getJSONObject(cryptocurrencyCode).has(fiatCurrencyCode)) {
-                    message("Invalid fiat currency: " + fiatCurrencyCode.toUpperCase(),systemDefaultRed,58,0,out::print);
-                    return;
-                }
-
-                double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
-                out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + capitalizeMessage(cryptocurrencyCode) + RESET);
-                out.println(getAnsi256Color(systemDefaultWhite) + " costs in " + fiatCurrencyCode.toUpperCase() + ": "
-                        + RESET + getAnsi256Color(systemDefaultColor) + price + RESET);
-
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(),systemDefaultRed,58,0,out::print);
+                message("Error parsing response: " + e.getMessage(), systemDefaultRed, 58, 0, out::print);
             }
+        } else {
+            message("Failed to fetch price. Check your network connection.", systemDefaultRed, 58, 0, out::print);
         }
     }
 }

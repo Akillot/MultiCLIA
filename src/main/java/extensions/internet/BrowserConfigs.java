@@ -1,5 +1,6 @@
 package extensions.internet;
 
+import static core.logic.BorderConfigs.border;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
@@ -9,6 +10,9 @@ import static java.lang.System.out;
 
 public class BrowserConfigs {
     public static void browser() {
+        modifyMessage('n', 2);
+        switchLogo(browserLogo,48);
+        border();
         while (true) {
             modifyMessage('n', 1);
             out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + "Enter domain"
@@ -18,6 +22,7 @@ public class BrowserConfigs {
 
             if (domainInput.equals("exit")) {
                 terminateExtension();
+                modifyMessage('n', 1);
                 break;
             }
 

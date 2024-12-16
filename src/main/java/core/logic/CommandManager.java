@@ -10,8 +10,7 @@ import java.net.*;
 import java.net.URI;
 import java.util.Random;
 
-import static core.logic.BorderConfigs.borderWidth;
-import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.BorderConfigs.*;
 import static core.logic.ColorConfigs.*;
 import static core.logic.DisplayManager.*;
 
@@ -140,8 +139,8 @@ public class CommandManager {
         message("\r   Status: ✓",systemDefaultWhite,58,0,out::print);
         message("Extension terminated correctly",systemDefaultColor,
                 58,0,out::print);
-        modifyMessage('n',1);
-        marginBorder();
+        modifyMessage('n',2);
+        border();
     }
 
     public static void terminateProgramDefault() {
