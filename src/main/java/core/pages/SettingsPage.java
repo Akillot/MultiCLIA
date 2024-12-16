@@ -78,6 +78,11 @@ public class SettingsPage {
         return " ".repeat(Math.max(0, width));
     }
 
+    private static void changeColor(){
+        modifyMessage('n', 1);
+
+    }
+
     //Text styles
     private static void displayTextStylesSection(){
         choice("Text styles", SettingsPage::displayTextStyles);
