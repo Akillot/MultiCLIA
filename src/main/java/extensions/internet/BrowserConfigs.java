@@ -26,7 +26,7 @@ public class BrowserConfigs {
                 break;
             }
 
-            String domain = "https://www." + domainInput;
+            String domain = "https://" + domainInput;
             choice(domainInput, openUri(domain));
         }
     }
