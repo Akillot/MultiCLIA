@@ -23,7 +23,7 @@ public class StartPage {
         message("Version: " + getVersion() ,systemDefaultWhite,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "--cmds" + RESET
+        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "cmds" + RESET
                 + getAnsi256Color(systemDefaultWhite) + "'\n"
                 + alignment(56) + "to show list of\n"
                 + alignment(56) + "commands" + RESET, 56);
@@ -58,7 +58,7 @@ public class StartPage {
         String[] motto = {"Everything you need. Command-driven simplicity.",
                 "Everything you need. Version: " + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
                 "Everything you need. Built for you.",
-                "Everything you need. Just type ‘" + getAnsi256Color(systemDefaultColor) + "--cmds" + getAnsi256Color(systemDefaultWhite) + "’.",
+                "Everything you need. Just type ‘" + getAnsi256Color(systemDefaultColor) + "cmds" + getAnsi256Color(systemDefaultWhite) + "’.",
                 "Everything you need. Command-driven simplicity.","Everything you need. Fast. Smooth. Ready.",
                 "Everything you need. Harmony in command.","Everything you need. It starts with a command."};
         Random rand = new Random();

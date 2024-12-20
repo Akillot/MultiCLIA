@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static core.logic.ApiConfigs.httpRequest;
+import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.choice;
@@ -112,6 +113,10 @@ public class CurrencyExchanger {
         add("apecoin");
     }};
 
+    private static int cryptocurrencyNameColor = 85;
+    private static int defaultLayoutColor = 15;
+    private static int cryptocurrencyCodeColor = 46;
+
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
         for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyName.size(); i++) {
             put(cryptocurrencyCodes.get(i), cryptocurrencyName.get(i));
@@ -119,6 +124,8 @@ public class CurrencyExchanger {
     }};
 
     public static void cryptoMenu() {
+        modifyMessage('n', 1);
+        choice("List of cryptocurrencies", CurrencyExchanger::displayListOfCryptocurrencies);
         modifyMessage('n', 1);
         choice("Exchanger", CurrencyExchanger::exchanger);
         modifyMessage('n', 1);
@@ -165,6 +172,7 @@ public class CurrencyExchanger {
         }
     }
 
+    //Tracker
     private static void currencyPriceTracker() {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
@@ -203,13 +211,13 @@ public class CurrencyExchanger {
             try {
                 duration = Integer.parseInt(scanner.nextLine().trim()) * 60000;
             } catch (NumberFormatException e) {
-                modifyMessage('n',1);
+                modifyMessage('n', 1);
                 message("Invalid duration. Please enter a valid number.", systemDefaultRed, 58, 0, out::print);
                 continue;
             }
 
             if (duration <= 0) {
-                modifyMessage('n',1);
+                modifyMessage('n', 1);
                 message("Duration must be greater than zero.", systemDefaultRed, 58, 0, out::print);
                 continue;
             }
@@ -217,13 +225,36 @@ public class CurrencyExchanger {
             for (int i = 0; i < duration; i += 5000) {
                 getCryptocurrencyPrice(CRYPTO_MAP.get(cryptocurrencyCode), fiatCurrencyCode);
                 try {
-                    Thread.sleep(50000); //pause 50 sec
+                    Thread.sleep(40000); //pause 40 sec
                 } catch (InterruptedException e) {
-                    modifyMessage('n',1);
+                    modifyMessage('n', 1);
                     message("Tracking interrupted.", systemDefaultRed, 58, 0, out::print);
                     return;
                 }
             }
+        }
+    }
+
+    //Lists of cryptocurrencies
+    private static void displayListOfCryptocurrencies() {
+        modifyMessage('n', 2);
+        try {
+            if (cryptocurrencyName.size() != cryptocurrencyCodes.size()) {
+                throw new IllegalStateException("Cryptocurrency lists are not synchronized.");
+            }
+
+            for (int i = 0; i < cryptocurrencyName.size(); i++) {
+                out.println(alignment(42) + getAnsi256Color(defaultLayoutColor)
+                        + "· " + getAnsi256Color(cryptocurrencyNameColor)
+                        + capitalizeMessage(cryptocurrencyName.get(i))
+                        + getAnsi256Color(defaultLayoutColor) + " - [" + getAnsi256Color(cryptocurrencyCodeColor)
+                        + cryptocurrencyCodes.get(i).toUpperCase() + getAnsi256Color(defaultLayoutColor) + "]");
+            }
+            modifyMessage('n', 2);
+            border();
+        } catch (Exception e) {
+            modifyMessage('n', 1);
+            message("Error of showing list", systemDefaultRed, 58, 0, out::print);
         }
     }
 
@@ -243,19 +274,19 @@ public class CurrencyExchanger {
                             + fiatCurrencyCode.toUpperCase() + ": "
                             + getAnsi256Color(systemDefaultColor) + price + RESET);
                 } else {
-                    modifyMessage('n',1);
+                    modifyMessage('n', 1);
                     message("Invalid response from API.", systemDefaultRed, 58, 0, out::print);
-                    modifyMessage('n',1);
+                    modifyMessage('n', 1);
                 }
             } catch (Exception e) {
-                modifyMessage('n',1);
+                modifyMessage('n', 1);
                 message("Error parsing response: " + e.getMessage(), systemDefaultRed, 58, 0, out::print);
-                modifyMessage('n',1);
+                modifyMessage('n', 1);
             }
         } else {
-            modifyMessage('n',1);
+            modifyMessage('n', 1);
             message("Failed to fetch price. Check your network connection.", systemDefaultRed, 58, 0, out::print);
-            modifyMessage('n',1);
+            modifyMessage('n', 1);
         }
     }
 }

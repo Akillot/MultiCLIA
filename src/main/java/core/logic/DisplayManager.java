@@ -32,15 +32,15 @@ public class DisplayManager {
     };
 
     private static final String[] rules = {
-            "--cmds: Show all commands (-c)",
-            "--setts: Show settings of the application (-s)",
-            "--rerun: Restart the app without clearing context (-rr)",
-            "--ip: Show local and external IP addresses (-ip)",
-            "--info: Show app information (-i)",
-            "--help: Show description of all commands (-h)",
-            "--exit: Terminate the application (-e)",
-            "--exitq: Terminate the application quickly (-eq)",
-            "--version: Show version (-v)"
+            "cmds: Show all commands [c]",
+            "setts: Show settings of the application [s]",
+            "rerun: Restart the app without clearing context [rr]",
+            "ip: Show local and external IP addresses [ip]",
+            "info: Show app information [i]",
+            "help: Show description of all commands [h]",
+            "exit: Terminate the application [e]",
+            "exitq: Terminate the application quickly [eq]",
+            "version: Show version [v]"
     };
 
     public static void loadingAnimation(int frames, int duration) {
@@ -132,7 +132,7 @@ public class DisplayManager {
         return () -> {
             for (int i = 0; i < fullCommands.length; i++) {
                 String shortCmd = i < shortCommands.length ? shortCommands[i] : "";
-                message("· " + fullCommands[i] + " (" + shortCmd + ")", systemDefaultWhite, 58, 0, out::print);
+                message("· " + fullCommands[i] + " [" + shortCmd + "]", systemDefaultWhite, 58, 0, out::print);
             }
         };
     }
@@ -144,7 +144,7 @@ public class DisplayManager {
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
         for (int i = 0; i < maxRows; i++) {
-            String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " (" + shortSystemCmds[i] + ")" : "";
+            String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " [" + shortSystemCmds[i] + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
             out.printf(alignment(58) + getAnsi256Color(systemDefaultWhite) + "%-20s"

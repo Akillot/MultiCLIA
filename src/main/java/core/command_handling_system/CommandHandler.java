@@ -5,7 +5,7 @@ import extensions.finance.CurrencyExchangerPage;
 import extensions.notes.NotesPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
-import extensions.internet.BrowserPage;
+import extensions.internet.SearcherPage;
 import core.pages.InfoPage;
 import core.pages.StartPage;
 import extensions.time.clock.ClockPage;
@@ -22,17 +22,17 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "--cmds" ,"--setts", "--rerun",
-            "--ip", "--info", "--exit", "--exitq",
-            "--help", "--version"};
+            "cmds" ,"setts", "rerun",
+            "ip", "info", "exit", "exitq",
+            "help", "version"};
 
     public static String[] shortSystemCmds = {
-            "-c" ,"-s", "-rr",
-            "-ip", "-i", "-e", "-eq",
-            "-h", "-v"};
+            "c" ,"s", "rr",
+            "ip", "i", "e", "eq",
+            "h", "v"};
 
     public static String[] extensionCmds = {
-            "notes", "browser", "crypto", "clock"};
+            "notes", "searcher", "crypto", "clock"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
@@ -41,7 +41,7 @@ public class CommandHandler {
         }
 
         commandMap.put("notes", NotesPage::displayNotepad);
-        commandMap.put("browser", BrowserPage::browserPage);
+        commandMap.put("searcher", SearcherPage::browserPage);
         commandMap.put("crypto", CurrencyExchangerPage::exchangerPage);
         commandMap.put("clock", ClockPage::clockPage);
     }
