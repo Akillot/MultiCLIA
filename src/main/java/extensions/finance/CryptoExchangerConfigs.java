@@ -278,7 +278,7 @@ public class CryptoExchangerConfigs {
                         + rightColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
-                out.printf(alignment(58) + getAnsi256Color(defaultLayoutColor) + "%-40s"
+                out.printf(alignment(38) + getAnsi256Color(defaultLayoutColor) + "%-40s"
                         + alignment(10) + getAnsi256Color(defaultLayoutColor) + "%-40s%n", leftEntry, rightEntry);
             }
 
