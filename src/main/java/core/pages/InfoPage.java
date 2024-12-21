@@ -24,7 +24,7 @@ public  class InfoPage {
         message("Current version:",systemDefaultWhite,58,0,out::print);
         message(getVersion(),systemDefaultColor,58,0,out::print);
         message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
 
         messageInstruction("Enter","+","to open and","-","to skip");
         choice("Description", displayAppDescription());

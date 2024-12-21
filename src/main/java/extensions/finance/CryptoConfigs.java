@@ -8,13 +8,14 @@ import java.util.*;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.border;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
 import static java.lang.System.out;
 
-public class CryptoExchangerConfigs {
+public class CryptoConfigs {
 
     private static final LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
         add("btc");
@@ -123,8 +124,8 @@ public class CryptoExchangerConfigs {
     private static String cryptocurrencyCode;
     private static String fiatCurrencyCode;
 
-    private static int cryptocurrencyColor = 85;
-    private static int defaultLayoutColor = 15;
+    private static int mainThemeColor = 85;
+    private static int layoutColor = 15;
 
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
         for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyName.size(); i++) {
@@ -138,11 +139,11 @@ public class CryptoExchangerConfigs {
         switchLogo(cryptoLogo,8);
         border();
         modifyMessage('n', 2);
-        choice("List of cryptocurrencies", CryptoExchangerConfigs::displayListOfCryptocurrencies);
+        choice("List of cryptocurrencies", CryptoConfigs::displayListOfCryptocurrencies);
         modifyMessage('n', 1);
-        choice("Exchanger", CryptoExchangerConfigs::exchanger);
+        choice("Exchanger", CryptoConfigs::exchanger);
         modifyMessage('n', 1);
-        choice("Price tracker", CryptoExchangerConfigs::currencyPriceTracker);
+        choice("Price tracker", CryptoConfigs::currencyPriceTracker);
     }
 
     //Exchanger method
@@ -153,7 +154,7 @@ public class CryptoExchangerConfigs {
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency code: " + RESET);
+            out.print(alignment(58) + getAnsi256Color(layoutColor) + "Cryptocurrency code: " + RESET);
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
@@ -278,8 +279,8 @@ public class CryptoExchangerConfigs {
                         + rightColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
-                out.printf(alignment(38) + getAnsi256Color(defaultLayoutColor) + "%-40s"
-                        + alignment(10) + getAnsi256Color(defaultLayoutColor) + "%-40s%n", leftEntry, rightEntry);
+                out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
+                        + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n", leftEntry, rightEntry);
             }
 
             modifyMessage('n', 2);
@@ -297,8 +298,8 @@ public class CryptoExchangerConfigs {
         String formattedTime = localTime.format(myFormatter);
 
         String response = httpRequest(
-                "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptocurrencyCode +
-                        "&vs_currencies=" + fiatCurrencyCode,
+                "https://api.coingecko.com/api/v3/simple/price?ids="
+                        + cryptocurrencyCode + "&vs_currencies=" + fiatCurrencyCode,
                 "GET", "", "response");
 
         if (response != null) {
@@ -309,7 +310,7 @@ public class CryptoExchangerConfigs {
                     out.println(alignment(58) + getAnsi256Color(systemDefaultColor)
                             + capitalizeMessage(cryptocurrencyCode) + getAnsi256Color(systemDefaultWhite) + " costs in "
                             + fiatCurrencyCode.toUpperCase() + ": "
-                            + getAnsi256Color(systemDefaultColor) + price + getAnsi256Color(defaultLayoutColor)
+                            + getAnsi256Color(systemDefaultColor) + price + getAnsi256Color(layoutColor)
                             + " [" + formattedTime + "]");
                 } else {
                     modifyMessage('n', 1);
