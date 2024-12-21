@@ -1,5 +1,6 @@
 package extensions.internet;
 
+import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
@@ -9,10 +10,10 @@ import static java.lang.System.out;
 
 public class SearcherConfigs {
     public static void browser() {
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         switchLogo(browserLogo,32);
-        marginBorder();
-        modifyMessage('n', 1);
+        border();
+        modifyMessage('n', 2);
         alert("Example",getAnsi256Color(systemDefaultWhite) + ": '"
                 + getAnsi256Color(systemDefaultColor) + "github.com" + getAnsi256Color(systemDefaultWhite) + "'",58);
         while (true) {

@@ -9,17 +9,12 @@ import java.util.*;
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.border;
 import static core.logic.ColorConfigs.*;
-import static core.logic.CommandManager.choice;
-import static core.logic.CommandManager.terminateExtension;
+import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
 import static java.lang.System.out;
 
-public class CryptoExchanger {
-
-    private static final Scanner scanner = new Scanner(System.in);
-    private static String cryptocurrencyCode;
-    private static String fiatCurrencyCode;
+public class CryptoExchangerConfigs {
 
     private static final LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
         add("btc");
@@ -111,6 +106,23 @@ public class CryptoExchanger {
         add("apecoin");
     }};
 
+    public static String[] cryptoLogo = {
+            "  .oooooo.                                       .             ",
+            " d8P'  `Y8b                                    .o8             ",
+            "888          oooo d8b oooo    ooo oo.ooooo.  .o888oo  .ooooo.  ",
+            "888          `888\"\"8P  `88.  .8'   888' `88b   888   d88' `88b ",
+            "888           888       `88..8'    888   888   888   888   888 ",
+            "`88b    ooo   888        `888'     888   888   888 . 888   888 ",
+            " `Y8bood8P'  d888b        .8'      888bod8P'   \"888\" `Y8bod8P' ",
+            "                      .o..P'       888                         ",
+            "                      `Y8P'       o888o                        ",
+            " "
+    };
+
+    private static final Scanner scanner = new Scanner(System.in);
+    private static String cryptocurrencyCode;
+    private static String fiatCurrencyCode;
+
     private static int cryptocurrencyColor = 85;
     private static int defaultLayoutColor = 15;
 
@@ -123,11 +135,14 @@ public class CryptoExchanger {
     //Main menu of extension
     public static void cryptoMenu() {
         modifyMessage('n', 2);
-        choice("List of cryptocurrencies", CryptoExchanger::displayListOfCryptocurrencies);
+        switchLogo(cryptoLogo,8);
+        border();
+        modifyMessage('n', 2);
+        choice("List of cryptocurrencies", CryptoExchangerConfigs::displayListOfCryptocurrencies);
         modifyMessage('n', 1);
-        choice("Exchanger", CryptoExchanger::exchanger);
+        choice("Exchanger", CryptoExchangerConfigs::exchanger);
         modifyMessage('n', 1);
-        choice("Price tracker", CryptoExchanger::currencyPriceTracker);
+        choice("Price tracker", CryptoExchangerConfigs::currencyPriceTracker);
     }
 
     //Exchanger method
@@ -173,7 +188,8 @@ public class CryptoExchanger {
     private static void currencyPriceTracker() {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(systemDefaultRed) + "exit"
-                + getAnsi256Color(systemDefaultWhite) + "' to quit the extension at any time.", 58);
+                + getAnsi256Color(systemDefaultWhite) + "' to quit the extension at any time.\n"
+                + alignment(58) + "You cannot exit this mode while tracking is in progress.", 58);
         while (true) {
             modifyMessage('n', 1);
             out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Cryptocurrency code: " + RESET);
