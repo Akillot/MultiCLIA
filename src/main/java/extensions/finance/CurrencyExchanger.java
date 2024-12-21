@@ -2,10 +2,7 @@ package extensions.finance;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.border;
@@ -113,9 +110,8 @@ public class CurrencyExchanger {
         add("apecoin");
     }};
 
-    private static int cryptocurrencyNameColor = 85;
+    private static int cryptocurrencyColor = 85;
     private static int defaultLayoutColor = 15;
-    private static int cryptocurrencyCodeColor = 46;
 
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
         for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyName.size(); i++) {
@@ -124,7 +120,7 @@ public class CurrencyExchanger {
     }};
 
     public static void cryptoMenu() {
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         choice("List of cryptocurrencies", CurrencyExchanger::displayListOfCryptocurrencies);
         modifyMessage('n', 1);
         choice("Exchanger", CurrencyExchanger::exchanger);
@@ -243,13 +239,32 @@ public class CurrencyExchanger {
                 throw new IllegalStateException("Cryptocurrency lists are not synchronized.");
             }
 
-            for (int i = 0; i < cryptocurrencyName.size(); i++) {
-                out.println(alignment(42) + getAnsi256Color(defaultLayoutColor)
-                        + "· " + getAnsi256Color(cryptocurrencyNameColor)
-                        + capitalizeMessage(cryptocurrencyName.get(i))
-                        + getAnsi256Color(defaultLayoutColor) + " - [" + getAnsi256Color(cryptocurrencyCodeColor)
-                        + cryptocurrencyCodes.get(i).toUpperCase() + getAnsi256Color(defaultLayoutColor) + "]");
+            int totalItems = cryptocurrencyName.size();
+            int midPoint = (totalItems + 1) / 2;
+
+            List<String> leftColumnNames = cryptocurrencyName.subList(0, midPoint);
+            List<String> leftColumnCodes = cryptocurrencyCodes.subList(0, midPoint);
+
+            List<String> rightColumnNames = cryptocurrencyName.subList(midPoint, totalItems);
+            List<String> rightColumnCodes = cryptocurrencyCodes.subList(midPoint, totalItems);
+
+            int maxRows = Math.max(leftColumnNames.size(), rightColumnNames.size());
+
+            for (int i = 0; i < maxRows; i++) {
+                String leftEntry = i < leftColumnNames.size()
+                        ? "· " + capitalizeMessage(leftColumnNames.get(i))
+                        + " [" + leftColumnCodes.get(i).toUpperCase() + "]"
+                        : "";
+
+                String rightEntry = i < rightColumnNames.size()
+                        ? "· " + capitalizeMessage(rightColumnNames.get(i)) + " ["
+                        + rightColumnCodes.get(i).toUpperCase() + "]"
+                        : "";
+
+                out.printf(alignment(58) + getAnsi256Color(cryptocurrencyColor) + "%-40s"
+                        + alignment(10) + getAnsi256Color(cryptocurrencyColor) + "%-40s%n", leftEntry, rightEntry);
             }
+
             modifyMessage('n', 2);
             border();
         } catch (Exception e) {
@@ -258,6 +273,7 @@ public class CurrencyExchanger {
         }
     }
 
+    //Getting an actual cryptocurrency prices
     private static void getCryptocurrencyPrice(String cryptocurrencyCode, String fiatCurrencyCode) {
         String response = httpRequest(
                 "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptocurrencyCode +
