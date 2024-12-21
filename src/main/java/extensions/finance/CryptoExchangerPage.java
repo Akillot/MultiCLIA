@@ -1,9 +1,9 @@
 package extensions.finance;
 
 
-import static extensions.finance.CurrencyExchanger.cryptoMenu;
+import static extensions.finance.CryptoExchanger.cryptoMenu;
 
-public class CurrencyExchangerPage {
+public class CryptoExchangerPage {
     public static void exchangerPage() {
         cryptoMenu();
     }

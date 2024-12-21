@@ -2,11 +2,12 @@ package extensions.finance;
 
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.border;
-import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.terminateExtension;
@@ -14,7 +15,7 @@ import static core.logic.TextConfigs.*;
 
 import static java.lang.System.out;
 
-public class CurrencyExchanger {
+public class CryptoExchanger {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static String cryptocurrencyCode;
@@ -119,14 +120,14 @@ public class CurrencyExchanger {
         }
     }};
 
+    //Main menu of extension
     public static void cryptoMenu() {
         modifyMessage('n', 2);
-        choice("List of cryptocurrencies", CurrencyExchanger::displayListOfCryptocurrencies);
+        choice("List of cryptocurrencies", CryptoExchanger::displayListOfCryptocurrencies);
         modifyMessage('n', 1);
-        choice("Exchanger", CurrencyExchanger::exchanger);
+        choice("Exchanger", CryptoExchanger::exchanger);
         modifyMessage('n', 1);
-        choice("Price tracker", CurrencyExchanger::currencyPriceTracker);
-        marginBorder();
+        choice("Price tracker", CryptoExchanger::currencyPriceTracker);
     }
 
     //Exchanger method
@@ -275,6 +276,10 @@ public class CurrencyExchanger {
 
     //Getting an actual cryptocurrency prices
     private static void getCryptocurrencyPrice(String cryptocurrencyCode, String fiatCurrencyCode) {
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = localTime.format(myFormatter);
+
         String response = httpRequest(
                 "https://api.coingecko.com/api/v3/simple/price?ids=" + cryptocurrencyCode +
                         "&vs_currencies=" + fiatCurrencyCode,
@@ -288,7 +293,8 @@ public class CurrencyExchanger {
                     out.println(alignment(58) + getAnsi256Color(systemDefaultColor)
                             + capitalizeMessage(cryptocurrencyCode) + getAnsi256Color(systemDefaultWhite) + " costs in "
                             + fiatCurrencyCode.toUpperCase() + ": "
-                            + getAnsi256Color(systemDefaultColor) + price + RESET);
+                            + getAnsi256Color(systemDefaultColor) + price + getAnsi256Color(defaultLayoutColor)
+                            + " [" + formattedTime + "]");
                 } else {
                     modifyMessage('n', 1);
                     message("Invalid response from API.", systemDefaultRed, 58, 0, out::print);
