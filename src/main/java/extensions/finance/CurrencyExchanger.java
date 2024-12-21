@@ -261,8 +261,8 @@ public class CurrencyExchanger {
                         + rightColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
-                out.printf(alignment(58) + getAnsi256Color(cryptocurrencyColor) + "%-40s"
-                        + alignment(10) + getAnsi256Color(cryptocurrencyColor) + "%-40s%n", leftEntry, rightEntry);
+                out.printf(alignment(58) + getAnsi256Color(defaultLayoutColor) + "%-40s"
+                        + alignment(10) + getAnsi256Color(defaultLayoutColor) + "%-40s%n", leftEntry, rightEntry);
             }
 
             modifyMessage('n', 2);
