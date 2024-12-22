@@ -1,11 +1,8 @@
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CurrencyExchangerPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/notes/NotesConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/command_handling_system/CommandHandler.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/InfoPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/time/clock/Clock.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/starter/Launcher.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/math/CalculatorPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CurrencyExchanger.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/time/Reminder.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/DisplayManager.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/TextConfigs.java
@@ -13,10 +10,13 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/notes/NotesPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/BorderConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/time/clock/ClockPage.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CryptoConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/ApiConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/command_handling_system/PackageUnifier.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/SettingsPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/StartPage.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/time/clock/ClockConfigs.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CryptoPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/internet/SearcherPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/CommandManager.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/extensions/internet/SearcherConfigs.java

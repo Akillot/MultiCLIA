@@ -8,6 +8,7 @@ import java.util.*;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.BorderConfigs.border;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
@@ -136,8 +137,8 @@ public class CryptoConfigs {
     public static void cryptoMenu() {
         modifyMessage('n', 2);
         switchLogo(cryptoLogo,8);
-        border();
-        modifyMessage('n', 2);
+        marginBorder();
+        modifyMessage('n', 1);
         choice("List of cryptocurrencies", CryptoConfigs::displayListOfCryptocurrencies);
         modifyMessage('n', 1);
         choice("Exchanger", CryptoConfigs::exchanger);

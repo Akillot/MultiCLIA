@@ -3,7 +3,7 @@ package extensions.internet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import static core.logic.BorderConfigs.border;
+import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
@@ -20,8 +20,8 @@ public class SearcherConfigs {
 
         modifyMessage('n', 2);
         switchLogo(browserLogo,32);
-        border();
-        modifyMessage('n', 2);
+        marginBorder();
+        modifyMessage('n', 1);
         alert("Example",getAnsi256Color(defaultLocalLayoutColor)
                 + ": '" + getAnsi256Color(defaultLocalColor) + "github.com"
                 + getAnsi256Color(defaultLocalLayoutColor) + "'",58);

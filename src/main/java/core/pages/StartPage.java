@@ -13,7 +13,7 @@ import static java.lang.System.out;
 
 public class StartPage {
     public static void displayStart() {
-        modifyMessage('n',2);
+        modifyMessage('n',10);
         switchLogo(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
