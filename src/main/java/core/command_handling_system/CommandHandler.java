@@ -27,9 +27,9 @@ public class CommandHandler {
             "help", "version"};
 
     public static String[] shortSystemCmds = {
-            "c" ,"s", "rr",
-            "ip", "i", "e", "eq",
-            "h", "v"};
+            "/c" ,"/s", "/rr",
+            "/ip", "/i", "/e", "/eq",
+            "/h", "/v"};
 
     public static String[] extensionCmds = {
             "notes", "searcher", "crypto", "clock"};

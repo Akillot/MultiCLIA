@@ -19,28 +19,28 @@ public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
     private static final String[] errorAscii = {
-            "  .oooooo.                                 ",
-            " d8P'  `Y8b                                ",
-            "888      888  .ooooo.  oo.ooooo.   .oooo.o ",
-            "888      888 d88' `88b  888' `88b d88(  \"8 ",
-            "888      888 888   888  888   888 `\"Y88b.  ",
-            "888      888 888   888  888   888 o.  )88b ",
-            "`88b    d88' 888   888  888   888 8\"\"888P' ",
-            " `Y8bood8P'  `Y8bod8P'  888bod8P'          ",
-            "                        888                ",
-            "                       o888o               \n"
+            "  .oooooo.                                           ",
+            " d8P'  `Y8b                                          ",
+            "888      888   .ooooo.   .ooooo.  oo.ooooo.   .oooo.o ",
+            "888      888  d88' `88b d88' `88b  888' `88b d88(  \"8 ",
+            "888      888  888   888 888   888  888   888 `\"Y88b.  ",
+            "`88b    d88'  888   888 888   888  888   888 o.  )88b ",
+            " `Y8bood8P'   `Y8bod8P' `Y8bod8P'  888bod8P' 8\"\"888P' ",
+            "                                  888                ",
+            "                                 o888o               ",
+            " "
     };
 
     private static final String[] rules = {
-            "cmds: Show all commands [c]",
-            "setts: Show settings of the application [s]",
-            "rerun: Restart the app without clearing context [rr]",
-            "ip: Show local and external IP addresses [ip]",
-            "info: Show app information [i]",
-            "help: Show description of all commands [h]",
-            "exit: Terminate the application [e]",
-            "exitq: Terminate the application quickly [eq]",
-            "version: Show version [v]"
+            "cmds: Show all commands [/c]",
+            "setts: Show settings of the application [/s]",
+            "rerun: Restart the app without clearing context [/rr]",
+            "ip: Show local and external IP addresses [/ip]",
+            "info: Show app information [/i]",
+            "help: Show description of all commands [/h]",
+            "exit: Terminate the application [/e]",
+            "exitq: Terminate the application quickly [/eq]",
+            "version: Show version [/v]"
     };
 
     public static void loadingAnimation(int frames, int duration) {
@@ -58,7 +58,7 @@ public class DisplayManager {
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, systemDefaultRed, 40, 0, out::print);
+            message(line, systemDefaultRed, -1, 0, out::print);
         }
     }
 
@@ -139,7 +139,6 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        //message("System Commands" + alignment(10) + "Extensions", systemDefaultColor, 38, 0, out::print);
         out.println(alignment(38) + getAnsi256Color(systemDefaultColor) + "System Commands"
                 + alignment(-68) + getAnsi256Color(systemDefaultColor) + "Extensions");
 
