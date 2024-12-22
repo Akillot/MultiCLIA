@@ -32,6 +32,10 @@ public  class InfoPage {
 
         messageInstruction("Enter","+","to open and","-","to skip");
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
+        modifyMessage('n', 1);
+
+        messageInstruction("Enter","+","to open and","-","to skip");
+        choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"));
         marginBorder();
     }
 

@@ -56,15 +56,14 @@ public class StartPage {
     };
 
     private static void getRandomMotto(){
-        String[] motto = {"Everything you need. Command-driven simplicity.",
-                "Everything you need. Version: " + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
-                "Everything you need. Built for you.",
-                "Everything you need. Just type ‘" + getAnsi256Color(systemDefaultColor) + "cmds"
-                        + getAnsi256Color(systemDefaultWhite) + "’.",
-                "Everything you need. Command-driven simplicity.","Everything you need. Fast. Smooth. Ready.",
-                "Everything you need. Harmony in command.","Everything you need. It starts with a command."};
+        String[] motto = {"Command-driven simplicity.",
+                "Version: " + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
+                "Built for you.", "Just type ‘" + getAnsi256Color(systemDefaultColor) + "cmds" + getAnsi256Color(systemDefaultWhite) + "’.",
+                "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command."};
         Random rand = new Random();
+
         int index = rand.nextInt(0, motto.length - 1);
-        message(motto[index] + " Optimal width of the terminal window: 117 and wider",15,48,0,out::print);
+        message("Everything you need. " + motto[index] + "\n" + alignment(48)
+                + getAnsi256Color(systemDefaultWhite) + "Optimal width of the terminal window: 117 characters and wider.",15,48,0,out::print);
     }
 }
