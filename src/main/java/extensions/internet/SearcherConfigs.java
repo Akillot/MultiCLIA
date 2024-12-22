@@ -1,5 +1,8 @@
 package extensions.internet;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import static core.logic.BorderConfigs.border;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.*;
@@ -8,22 +11,29 @@ import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
 public class SearcherConfigs {
+
+    private static int defaultLocalColor = 99;
+    private static int defaultLocalLayoutColor = 15;
+    private static int defaultLocalErrorColor = 196;
+
     public static void browser() {
 
         modifyMessage('n', 2);
         switchLogo(browserLogo,32);
         border();
         modifyMessage('n', 2);
-        alert("Example",getAnsi256Color(systemDefaultWhite)
-                + ": '" + getAnsi256Color(systemDefaultColor) + "github.com"
-                + getAnsi256Color(systemDefaultWhite) + "'",58);
+        alert("Example",getAnsi256Color(defaultLocalLayoutColor)
+                + ": '" + getAnsi256Color(defaultLocalColor) + "github.com"
+                + getAnsi256Color(defaultLocalLayoutColor) + "'",58);
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + "Enter domain"
-                    + getAnsi256Color(systemDefaultWhite) + " (or type '" + getAnsi256Color(systemDefaultRed) + "exit"
-                    + getAnsi256Color(systemDefaultWhite) + "' to quit): " + RESET);
+            out.print(alignment(58) + getAnsi256Color(defaultLocalColor) + "Enter domain"
+                    + getAnsi256Color(defaultLocalLayoutColor) + " (or type '" + getAnsi256Color(defaultLocalErrorColor) + "exit"
+                    + getAnsi256Color(defaultLocalLayoutColor) + "' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
+
+            modifyMessage('n', 1);
 
             if (domainInput.equals("exit")) {
                 terminateExtension();
@@ -32,8 +42,16 @@ public class SearcherConfigs {
             }
 
             String domain = "https://" + domainInput;
+            choice("Show URL", SearcherConfigs.displayFullURl(domain));
             choice(domainInput, openUri(domain));
         }
+    }
+
+    @Contract(pure = true)
+    private static @NotNull Runnable displayFullURl(String domain) {
+        return () -> {
+            message("Full URL: " + domain, defaultLocalLayoutColor, 58, 0, out::print);
+        };
     }
 
     public static String[] browserLogo = {
