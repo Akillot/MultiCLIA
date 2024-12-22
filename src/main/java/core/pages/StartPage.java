@@ -15,8 +15,9 @@ public class StartPage {
     public static void displayStart() {
         modifyMessage('n',10);
         switchLogo(mainLogoAscii, 48);
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         getRandomMotto();
+        modifyMessage('n',1);
         marginBorder();
 
         message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);

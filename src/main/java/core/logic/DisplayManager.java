@@ -139,7 +139,9 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        message("System Commands" + alignment(0) + "Extensions", systemDefaultColor, 58, 0, out::print);
+        //message("System Commands" + alignment(10) + "Extensions", systemDefaultColor, 38, 0, out::print);
+        out.println(alignment(38) + getAnsi256Color(systemDefaultColor) + "System Commands"
+                + alignment(-68) + getAnsi256Color(systemDefaultColor) + "Extensions");
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
@@ -147,8 +149,8 @@ public class DisplayManager {
             String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " [" + shortSystemCmds[i] + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(58) + getAnsi256Color(systemDefaultWhite) + "%-20s"
-                    + alignment(10) + getAnsi256Color(systemDefaultWhite) + "%-20s%n", systemCmd, extensionCmd);
+            out.printf(alignment(38) + getAnsi256Color(systemDefaultWhite) + "%-40s"
+                    + alignment(-18) + getAnsi256Color(systemDefaultWhite) + "%-40s%n", systemCmd, extensionCmd);
         }
         modifyMessage('n', 1);
         marginBorder();
