@@ -27,7 +27,7 @@ public class CommandManager {
 
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
-                    getAnsi256Color(systemDefaultColor), getAnsi256Color(56),
+                    getAnsi256Color(systemMainColor), getAnsi256Color(56),
                     getAnsi256Color(165), getAnsi256Color(99),
                     getAnsi256Color(63), getAnsi256Color(99)};
 
@@ -47,9 +47,9 @@ public class CommandManager {
              */
 
             default -> colors = new String[]{
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite),
-                    getAnsi256Color(systemDefaultWhite), getAnsi256Color(systemDefaultWhite)};
+                    getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
+                    getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
+                    getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor)};
         }
 
         for (int i = 0; i < logo.length; i++) {
@@ -62,7 +62,7 @@ public class CommandManager {
         PackageUnifier registry = new PackageUnifier();
         try {
             slowMotionText(50, 56, false, true,
-                    getAnsi256Color(systemDefaultWhite) + "> ", "");
+                    getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
             modifyMessage('n', 1);
             wrapText(nameOfFunction, borderWidth - 2);
@@ -87,15 +87,15 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("Status: ✓",systemDefaultWhite,58,0,out::print);
+                    message("Status: ✓", systemLayoutColor,58,0,out::print);
                 } else {
-                    message("Error: Desktop or browse action not supported",systemDefaultRed,
+                    message("Error: Desktop or browse action not supported", systemErrorColor,
                             58, 0,out::print);
-                    message("Status: x",systemDefaultWhite,58,0,out::print);
+                    message("Status: x", systemLayoutColor,58,0,out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL",systemDefaultRed,58,0,out::print);
-                message("Status: x",systemDefaultWhite,58,0,out::print);
+                message("Error opening URL", systemErrorColor,58,0,out::print);
+                message("Status: x", systemLayoutColor,58,0,out::print);
             }
         };
     }
@@ -103,17 +103,17 @@ public class CommandManager {
     public static void getUserLocalIp(){
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            out.println(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Your local IP: " + RESET
-                    + getAnsi256Color(systemDefaultColor) + localHost + RESET);
+            out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
+                    + getAnsi256Color(systemMainColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined",systemDefaultRed,58,0,out::print);
-            message("Status: x",systemDefaultWhite,58,0,out::print);
+            message("IP is undefined", systemErrorColor,58,0,out::print);
+            message("Status: x", systemLayoutColor,58,0,out::print);
         }
     }
 
     public static void choice(String title, Runnable action) {
-        out.print(alignment(58) + getAnsi256Color(systemDefaultColor) + title + RESET + ": " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemMainColor) + title + RESET + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
@@ -122,27 +122,27 @@ public class CommandManager {
                     action.run();
                     modifyMessage('n', 1);
                 } catch (Exception e) {
-                    message("Error executing action",systemDefaultRed,58,0,out::print);
-                    message("Status: x",systemDefaultWhite,58,0,out::print);
+                    message("Error executing action", systemErrorColor,58,0,out::print);
+                    message("Status: x", systemLayoutColor,58,0,out::print);
                 }
                 break;
 
             case "-":
-                message("Status: x",systemDefaultWhite,58,0,out::print);
+                message("Status: x", systemLayoutColor,58,0,out::print);
                 modifyMessage('n',1);
                 break;
 
             default:
-                message("Invalid choice",systemDefaultRed,58,0,out::print);
-                message("Status: x",systemDefaultWhite,58,0,out::print);
+                message("Invalid choice", systemErrorColor,58,0,out::print);
+                message("Status: x", systemLayoutColor,58,0,out::print);
                 modifyMessage('n',1);
                 break;
         }
     }
 
     public static void terminateExtension() {
-        message("\r   Status: ✓",systemDefaultWhite,58,0,out::print);
-        message("Extension terminated correctly",systemDefaultColor,
+        message("\r   Status: ✓", systemLayoutColor,58,0,out::print);
+        message("Extension terminated correctly", systemMainColor,
                 58,0,out::print);
         modifyMessage('n',2);
         border();
@@ -151,8 +151,8 @@ public class CommandManager {
     public static void terminateProgramDefault() {
         modifyMessage('n',2);
         loadingAnimation(300,10);
-        message("\r    Status: ✓",systemDefaultWhite,58,0,out::print);
-        message("Program terminated correctly",systemDefaultColor,
+        message("\r    Status: ✓", systemLayoutColor,58,0,out::print);
+        message("Program terminated correctly", systemMainColor,
                 56,20,out::print);
         modifyMessage('n', 2);
         exit(0);
@@ -160,8 +160,8 @@ public class CommandManager {
 
     public static void terminateProgramQuick() {
         modifyMessage('n',2);
-        message("\r    Status: ✓", systemDefaultWhite,58,0,out::print);
-        message("Program terminated quickly correctly",systemDefaultColor,
+        message("\r    Status: ✓", systemLayoutColor,58,0,out::print);
+        message("Program terminated quickly correctly", systemMainColor,
                 56,0,out::print);
         modifyMessage('n', 2);
         exit(0);

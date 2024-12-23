@@ -20,16 +20,16 @@ public class StartPage {
         modifyMessage('n',1);
         marginBorder();
 
-        message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
-        message("Version: " + getVersion() ,systemDefaultWhite,56,0, out::print);
-        message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
+        message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemDefaultColor) + "cmds" + RESET
-                + getAnsi256Color(systemDefaultWhite) + "'\n"
+        alert("i", "Enter " + "'" + getAnsi256Color(systemMainColor) + "cmds" + RESET
+                + getAnsi256Color(systemLayoutColor) + "'\n"
                 + alignment(56) + "to show list of\n"
                 + alignment(56) + "commands" + RESET, 56);
 
-        message("━━━━━━━━━━━━━━━━━━━━━━",systemDefaultWhite,58,0,out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
 
         while (true) {
@@ -39,7 +39,7 @@ public class StartPage {
                 marginBorder();
                 errorAscii();
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, systemDefaultRed, 58, 0, out::print);
+                message(errorMessage, systemErrorColor, 58, 0, out::print);
             }
         }
     }
@@ -57,13 +57,13 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String[] motto = {"Command-driven simplicity.",
-                "Version: " + getVersion() + getAnsi256Color(systemDefaultWhite) + " — Stable.",
-                "Built for you.", "Just type ‘" + getAnsi256Color(systemDefaultColor) + "cmds" + getAnsi256Color(systemDefaultWhite) + "’.",
+                "Version: " + getVersion() + getAnsi256Color(systemLayoutColor) + " — Stable.",
+                "Built for you.", "Just type ‘" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command."};
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length - 1);
         message("Everything you need. " + motto[index] + "\n" + alignment(48)
-                + getAnsi256Color(systemDefaultWhite) + "Optimal width of the terminal window: 117 characters and wider.",15,48,0,out::print);
+                + getAnsi256Color(systemLayoutColor) + "Optimal width of the terminal window: 117 characters and wider.",15,48,0,out::print);
     }
 }

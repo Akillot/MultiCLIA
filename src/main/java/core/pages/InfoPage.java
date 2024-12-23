@@ -16,14 +16,14 @@ public  class InfoPage {
     @Contract(pure = true)
     public static @NotNull String getVersion() {
         String appVersion = "A-0.8.0";
-        return getAnsi256Color(systemDefaultColor) + appVersion + RESET;
+        return getAnsi256Color(systemMainColor) + appVersion + RESET;
     }
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
-        message("Current version:",systemDefaultWhite,58,0,out::print);
-        message(getVersion(),systemDefaultColor,58,0,out::print);
-        message("Author: Nick Zozulia",systemDefaultWhite,58,0,out::print);
+        message("Current version:", systemLayoutColor,58,0,out::print);
+        message(getVersion(), systemMainColor,58,0,out::print);
+        message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 2);
 
         messageInstruction("Enter","+","to open and","-","to skip");
@@ -46,10 +46,10 @@ public  class InfoPage {
             marginBorder();
             modifyMessage('n', 1);
 
-            message(getAnsi256Color(systemDefaultColor) + "MultiCLIA " + RESET
-                            + getAnsi256Color(systemDefaultWhite) + "[" + getAnsi256Color(systemDefaultWhite)
+            message(getAnsi256Color(systemMainColor) + "MultiCLIA " + RESET
+                            + getAnsi256Color(systemLayoutColor) + "[" + getAnsi256Color(systemLayoutColor)
                             + ITALIC + "Multi Command Line Interface App" + RESET
-                            + getAnsi256Color(systemDefaultWhite) + "]\n\n" +
+                            + getAnsi256Color(systemLayoutColor) + "]\n\n" +
                             alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
@@ -57,7 +57,7 @@ public  class InfoPage {
                             alignment(58) + "Users will soon be able to add new extensions\n" +
                             alignment(58) + "with any functionality, allowing limitless customization\n" +
                             alignment(58) + "and adaptation to specific workflows.",
-                    systemDefaultWhite,58,0,out::print);
+                    systemLayoutColor,58,0,out::print);
             modifyMessage('n', 2);
             border();
         };

@@ -7,10 +7,10 @@ import java.util.Random;
 
 public class ColorConfigs {
 
-    public static int systemDefaultColor = 99; //Purple
-    public static int systemDefaultRed = 196; //Red
-    public static int systemDefaultWhite = 15; //White
-    public static int systemDefaultGreen = 46; //Green
+    public static int systemMainColor = 99;
+    public static int systemErrorColor = 196;
+    public static int systemLayoutColor = 15;
+    public static int systemSecondColor = 46;
 
     public static final String RESET = "\033[0m";
     public static final String BOLD = "\033[1m";

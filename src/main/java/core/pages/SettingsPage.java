@@ -14,7 +14,9 @@ public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
         displayMemorySection();
+        modifyMessage('n', 1);
         displayColorSection();
+        modifyMessage('n', 1);
         displayTextStylesSection();
         marginBorder();
     }
@@ -27,7 +29,7 @@ public class SettingsPage {
     private static void displayUsingMemory(){
         message("Memory used: " +
                 ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"),systemDefaultWhite,58,0, out::print);
+                        / (1000 * 1000) + "M"), systemLayoutColor,58,0, out::print);
     }
 
     //Color methods
@@ -38,7 +40,7 @@ public class SettingsPage {
     @Contract(pure = true)
     private static @NotNull Runnable textModification() {
         return () -> {
-            printColorRange(0, systemDefaultWhite, "");
+            printColorRange(0, systemLayoutColor, "");
             modifyMessage('n', 1);
             printColorBlock(16, 231);
             printColorRange(232, 255, "");
@@ -80,7 +82,7 @@ public class SettingsPage {
 
     private static void changeColor(){
         modifyMessage('n', 1);
-
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter new color code: ");
     }
 
     //Text styles
@@ -89,10 +91,9 @@ public class SettingsPage {
     }
 
     private static void displayTextStyles(){
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + BOLD + "Bold" + RESET);
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + ITALIC + "Italic" + RESET);
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + UNDERLINE + "Underline" + RESET);
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + REVERSE + "Reverse" + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + BOLD + "Bold" + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + UNDERLINE + "Underline" + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + REVERSE + "Reverse" + RESET);
         modifyMessage('n', 1);
     }
 }

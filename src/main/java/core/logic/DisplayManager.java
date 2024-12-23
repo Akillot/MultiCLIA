@@ -46,19 +46,19 @@ public class DisplayManager {
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
-            out.print(getAnsi256Color(systemDefaultWhite) + "\r" + spinner[i % spinner.length] + RESET);
+            out.print(getAnsi256Color(systemLayoutColor) + "\r" + spinner[i % spinner.length] + RESET);
             try {
                 Thread.sleep(frames);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getAnsi256Color(systemDefaultWhite) + "\r    ✓" + RESET);
+        out.print(getAnsi256Color(systemLayoutColor) + "\r    ✓" + RESET);
     }
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, systemDefaultRed, -1, 0, out::print);
+            message(line, systemErrorColor, -1, 0, out::print);
         }
     }
 
@@ -75,18 +75,18 @@ public class DisplayManager {
         } catch (Exception e) {
             marginBorder();
             errorAscii();
-            message("Unknown error occurred", systemDefaultRed, 58, 0, out::print);
+            message("Unknown error occurred", systemErrorColor, 58, 0, out::print);
         }
     }
 
     private static void printOpenOrSkipPrompt() {
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Enter '" + RESET
-                + getAnsi256Color(systemDefaultColor) + "+" + RESET
-                + getAnsi256Color(systemDefaultWhite) + "' to open and '"
-                + RESET + getAnsi256Color(systemDefaultColor) + "-" + RESET + getAnsi256Color(systemDefaultWhite)
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter '" + RESET
+                + getAnsi256Color(systemMainColor) + "+" + RESET
+                + getAnsi256Color(systemLayoutColor) + "' to open and '"
+                + RESET + getAnsi256Color(systemMainColor) + "-" + RESET + getAnsi256Color(systemLayoutColor)
                 + "' to skip" + RESET);
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(systemDefaultWhite) + "Choice: " + RESET);
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Choice: " + RESET);
     }
 
     private static @NotNull String getUserChoice() {
@@ -105,7 +105,7 @@ public class DisplayManager {
                 marginBorder();
                 break;
             default:
-                message("Invalid input", systemDefaultRed, 58, 0, out::print);
+                message("Invalid input", systemErrorColor, 58, 0, out::print);
                 marginBorder();
                 break;
         }
@@ -122,7 +122,7 @@ public class DisplayManager {
     private static @NotNull Runnable displayCommandList(String[] commands) {
         return () -> {
             for (String command : commands) {
-                message("· " + command, systemDefaultWhite, 58, 0, out::print);
+                message("· " + command, systemLayoutColor, 58, 0, out::print);
             }
         };
     }
@@ -132,15 +132,15 @@ public class DisplayManager {
         return () -> {
             for (int i = 0; i < fullCommands.length; i++) {
                 String shortCmd = i < shortCommands.length ? shortCommands[i] : "";
-                message("· " + fullCommands[i] + " [" + shortCmd + "]", systemDefaultWhite, 58, 0, out::print);
+                message("· " + fullCommands[i] + " [" + shortCmd + "]", systemLayoutColor, 58, 0, out::print);
             }
         };
     }
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        out.println(alignment(38) + getAnsi256Color(systemDefaultColor) + "System Commands"
-                + alignment(-68) + getAnsi256Color(systemDefaultColor) + "Extensions");
+        out.println(alignment(38) + getAnsi256Color(systemMainColor) + "System Commands"
+                + alignment(-68) + getAnsi256Color(systemMainColor) + "Extensions");
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
@@ -148,8 +148,8 @@ public class DisplayManager {
             String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " [" + shortSystemCmds[i] + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(38) + getAnsi256Color(systemDefaultWhite) + "%-40s"
-                    + alignment(-18) + getAnsi256Color(systemDefaultWhite) + "%-40s%n", systemCmd, extensionCmd);
+            out.printf(alignment(38) + getAnsi256Color(systemLayoutColor) + "%-40s"
+                    + alignment(-18) + getAnsi256Color(systemLayoutColor) + "%-40s%n", systemCmd, extensionCmd);
         }
         modifyMessage('n', 1);
         marginBorder();
@@ -166,7 +166,7 @@ public class DisplayManager {
     public static void displayCommandsDescription() {
         modifyMessage('n', 2);
         for (String rule : rules) {
-            message(rule, systemDefaultWhite, 58, 0, out::print);
+            message(rule, systemLayoutColor, 58, 0, out::print);
             modifyMessage('n', 1);
         }
         marginBorder();
@@ -174,7 +174,7 @@ public class DisplayManager {
 
     public static void displayCurrentVersion() {
         modifyMessage('n', 2);
-        message("Version: " + getVersion(),systemDefaultWhite,58,0,out::print);
+        message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
         marginBorder();
     }
