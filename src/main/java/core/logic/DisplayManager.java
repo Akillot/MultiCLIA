@@ -113,8 +113,10 @@ public class DisplayManager {
 
     private static void displaySubCommandLists() {
         modifyMessage('n', 1);
-        choice("System", displayCommandList(fullSystemCmds, shortSystemCmds));
-        choice("Extensions", displayCommandList(extensionCmds));
+        choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
+                systemMainColor, systemLayoutColor, systemMainColor);
+        choice("Extensions", displayCommandList(extensionCmds),
+                systemMainColor, systemLayoutColor, systemMainColor);
         marginBorder();
     }
 

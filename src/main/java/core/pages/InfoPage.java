@@ -27,15 +27,18 @@ public  class InfoPage {
         modifyMessage('n', 2);
 
         messageInstruction("Enter","+","to open and","-","to skip");
-        choice("Description", displayAppDescription());
+        choice("Description", displayAppDescription(),
+                systemMainColor, systemLayoutColor, systemMainColor);
         modifyMessage('n', 1);
 
         messageInstruction("Enter","+","to open and","-","to skip");
-        choice("Github", openUri("https://github.com/Akillot/MultiCLIA"));
+        choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
+                systemMainColor, systemLayoutColor, systemMainColor);
         modifyMessage('n', 1);
 
         messageInstruction("Enter","+","to open and","-","to skip");
-        choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"));
+        choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
+                systemMainColor, systemLayoutColor, systemMainColor);
         marginBorder();
     }
 

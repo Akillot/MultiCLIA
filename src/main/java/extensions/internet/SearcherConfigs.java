@@ -42,8 +42,10 @@ public class SearcherConfigs {
             }
 
             String domain = "https://" + domainInput;
-            choice("Show URL", SearcherConfigs.displayFullURl(domain));
-            choice(domainInput, openUri(domain));
+            choice("Show URL", SearcherConfigs.displayFullURl(domain),
+                    systemMainColor, systemLayoutColor, systemMainColor);
+            choice(domainInput, openUri(domain),
+                    systemMainColor, systemLayoutColor, systemMainColor);
         }
     }
 
