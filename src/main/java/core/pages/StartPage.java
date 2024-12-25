@@ -12,12 +12,26 @@ import static core.pages.InfoPage.getVersion;
 import static java.lang.System.out;
 
 public class StartPage {
-    public static void displayStart() {
+
+    public static void displayStartPage() {
+        displayMenu();
+        while (true) {
+            try {
+                searchCommands();
+            } catch (Exception ex) {
+                marginBorder();
+                errorAscii();
+                String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
+                message(errorMessage, systemErrorColor, 58, 0, out::print);
+            }
+        }
+    }
+
+    private static void displayMenu() {
         modifyMessage('n',2);
         switchLogo(mainLogoAscii, 48);
-        modifyMessage('n',2);
-        getRandomMotto();
         modifyMessage('n',1);
+        getRandomMotto();
         marginBorder();
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
@@ -31,17 +45,6 @@ public class StartPage {
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
-
-        while (true) {
-            try {
-                searchCommands();
-            } catch (Exception ex) {
-                marginBorder();
-                errorAscii();
-                String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, systemErrorColor, 58, 0, out::print);
-            }
-        }
     }
 
     private static String[] mainLogoAscii = {
@@ -59,11 +62,11 @@ public class StartPage {
         String[] motto = {"Command-driven simplicity.",
                 "Version: " + getVersion() + getAnsi256Color(systemLayoutColor) + " — Stable.",
                 "Built for you.", "Just type ‘" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
-                "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command."};
+                "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
+                "Optimal width of the terminal window: 117 characters and wider."};
         Random rand = new Random();
 
-        int index = rand.nextInt(0, motto.length - 1);
-        message("Everything you need. " + motto[index] + "\n" + alignment(48)
-                + getAnsi256Color(systemLayoutColor) + "Optimal width of the terminal window: 117 characters and wider.",15,48,0,out::print);
+        int index = rand.nextInt(0, motto.length);
+        message("Everything you need. " + motto[index],15,48,0,out::print);
     }
 }

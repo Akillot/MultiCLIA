@@ -6,15 +6,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static core.logic.BorderConfigs.marginBorder;
+import static core.logic.ColorConfigs.getAnsi256Color;
 import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.switchLogo;
-import static core.logic.TextConfigs.message;
-import static core.logic.TextConfigs.modifyMessage;
+import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
 public class ClockConfigs {
 
     private static int mainThemeColor = 85;
+    private static int contentColor =  86;
     private static int layoutColor = 15;
     private static int errorColor = 196;
 
@@ -43,6 +44,6 @@ public class ClockConfigs {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
-        message("Current time: " + formattedTime, layoutColor, 58, 0, out::print);
+        out.println(alignment(58) + getAnsi256Color(contentColor) + "Current time: " + getAnsi256Color(layoutColor) + formattedTime);
     }
 }

@@ -7,6 +7,6 @@ import static core.logic.TextConfigs.modifyMessage;
 public class Launcher {
     public static void main(String[] args) {
         modifyMessage('n',8);
-        StartPage.displayStart();
+        StartPage.displayStartPage();
     }
 }
