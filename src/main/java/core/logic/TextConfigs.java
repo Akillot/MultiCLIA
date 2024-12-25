@@ -93,7 +93,7 @@ public class TextConfigs {
                 "/" + getAnsi256Color(systemFirstColor) + "-" + getAnsi256Color(systemLayoutColor) + "' " + postText, systemLayoutColor,58,0,out::print);
     }
 
-    //unclear name
+    //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
             errorAscii();
