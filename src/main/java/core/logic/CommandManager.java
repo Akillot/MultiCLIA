@@ -23,7 +23,7 @@ public class CommandManager {
     public static void switchLogo(String[] logo, int alignment) {
         String[] colors;
         Random rand = new Random();
-        int indexOfLogo = rand.nextInt(0,3);
+        int indexOfLogo = rand.nextInt(0, 3);
 
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
@@ -67,8 +67,7 @@ public class CommandManager {
                 errorAscii();
                 marginBorder();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             modifyMessage('n', 2);
             errorAscii();
             marginBorder();
@@ -82,28 +81,28 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("Status: ✓", systemLayoutColor,58,0,out::print);
+                    message("Status: ✓", systemLayoutColor, 58, 0, out::print);
                 } else {
                     message("Error: Desktop or browse action not supported", systemRejectionColor,
-                            58, 0,out::print);
-                    message("Status: x", systemLayoutColor,58,0,out::print);
+                            58, 0, out::print);
+                    message("Status: x", systemLayoutColor, 58, 0, out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL", systemRejectionColor,58,0,out::print);
-                message("Status: x", systemLayoutColor,58,0,out::print);
+                message("Error opening URL", systemRejectionColor, 58, 0, out::print);
+                message("Status: x", systemLayoutColor, 58, 0, out::print);
             }
         };
     }
 
-    public static void getUserLocalIp(){
+    public static void getUserLocalIp() {
         try {
             InetAddress localHost = InetAddress.getLocalHost();
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
                     + getAnsi256Color(systemFirstColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined", systemRejectionColor,58,0,out::print);
-            message("Status: x", systemLayoutColor,58,0,out::print);
+            message("IP is undefined", systemRejectionColor, 58, 0, out::print);
+            message("Status: x", systemLayoutColor, 58, 0, out::print);
         }
     }
 
@@ -118,24 +117,35 @@ public class CommandManager {
                     action.run();
                     modifyMessage('n', 1);
                 } catch (Exception e) {
-                    message("Error executing action", errorColor,58,0,out::print);
-                    message("Status: x", layoutColor,58,0,out::print);
+                    message("Error executing action", errorColor, 58, 0, out::print);
+                    message("Status: x", layoutColor, 58, 0, out::print);
                 }
                 break;
 
             case "-":
             case "n":
-                message("Status: x", layoutColor,58,0,out::print);
-                modifyMessage('n',1);
+                message("Status: x", layoutColor, 58, 0, out::print);
+                modifyMessage('n', 1);
                 break;
 
             default:
-                message("Invalid choice", errorColor,58,0,out::print);
-                message("Status: x", layoutColor,58,0,out::print);
-                modifyMessage('n',1);
+                message("Invalid choice", errorColor, 58, 0, out::print);
+                message("Status: x", layoutColor, 58, 0, out::print);
+                modifyMessage('n', 1);
                 break;
         }
     }
+
+    public static boolean executeWithProbability(double probabilityPercentage) throws IllegalArgumentException {
+        if (probabilityPercentage < 0 || probabilityPercentage > 100) {
+           message("Probability must be between 0 and 100.",
+                   systemRejectionColor,58,0,out::print);
+        }
+        Random rand = new Random();
+        double randomValue = rand.nextDouble() * 100;
+        return randomValue < probabilityPercentage;
+    }
+
 
     public static void terminateExtension() {
         message("\r   Status: ✓", systemLayoutColor,58,0,out::print);
