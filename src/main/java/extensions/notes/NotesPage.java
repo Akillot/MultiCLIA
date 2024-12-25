@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
-import static core.logic.CommandManager.terminateExtension;
+import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
@@ -13,25 +13,38 @@ import static java.lang.System.out;
 public class NotesPage {
     private static Scanner scanner = new Scanner(System.in);
 
+    public static void displayNotesMenu(){
+        modifyMessage('n',2);
+        switchLogo(notesLogo,-2);
+        marginBorder();
+        modifyMessage('n', 1);
+        choice("Operations",NotesPage::displayOperations,
+                systemFirstColor, systemLayoutColor, systemRejectionColor);
+        displayNotepad();
+    }
+
+    private static String[] operations = new String[]{
+            "1 create note",
+            "2 open note",
+            "3 delete note",
+            "4 sort notes by title",
+            "5 sort notes by content",
+            "6 exit"
+    };
+
+    private static void displayOperations(){
+        for (String operation : operations) {
+            message(operation, systemLayoutColor,58,0,out::print);
+        }
+    }
+
     public static void displayNotepad() {
+
         boolean running = true;
-        modifyMessage('n', 2);
-
-        String[] operations = new String[]{
-                "1 create note",
-                "2 open note",
-                "3 delete note",
-                "4 sort notes by title",
-                "5 sort notes by content",
-                "6 exit"
-        };
-
         while (running) {
-            for (String operation : operations) {
-                message(operation, systemLayoutColor,58,0,out::print);
-            }
             modifyMessage('n', 1);
-            slowMotionText(50, 58, false, true, "Choice", ": ");
+            slowMotionText(50, 58, false, true,
+                    getAnsi256Color(systemLayoutColor) + "> ", "");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
@@ -72,7 +85,7 @@ public class NotesPage {
         NotesConfigs note = new NotesConfigs(title, content);
         note.saveToFile();
         marginBorder();
-        message("Note saved", systemMainColor,58,0,out::println);
+        message("Note saved", systemFirstColor,58,0,out::println);
         border();
     }
 
@@ -87,7 +100,7 @@ public class NotesPage {
             border();
             modifyMessage('n', 1);
 
-            alert("i", "Do you want to update this note? [+/-]", 58);
+            displayConfirmation("Enter","to update this note or","to skip");
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your choice: " + RESET);
             String answer = scanner.nextLine();
 
@@ -99,19 +112,19 @@ public class NotesPage {
 
                 modifyMessage('n', 1);
                 border();
-                message("Note updated", systemMainColor,58,0,out::println);
+                message("Note updated", systemFirstColor,58,0,out::println);
                 modifyMessage('n', 1);
                 border();
             } else if (answer.equals("-")) {
                 modifyMessage('n', 1);
-                message("Opening canceled", systemMainColor,58,0,out::println);
+                message("Opening canceled", systemFirstColor,58,0,out::println);
                 modifyMessage('n', 1);
                 border();
             }
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", systemErrorColor,58,0,out::println);
+            message("Note not found", systemRejectionColor,58,0,out::println);
         }
     }
 
@@ -120,27 +133,38 @@ public class NotesPage {
         String title = scanner.nextLine();
         boolean success = NotesConfigs.deleteNoteFile(title);
         if (success) {
-            message("Note deleted", systemMainColor,58,0,out::println);
+            message("Note deleted", systemFirstColor,58,0,out::println);
             modifyMessage('n', 1);
             border();
         } else {
             marginBorder();
             errorAscii();
-            message("Note not found", systemErrorColor,58,0,out::println);
+            message("Note not found", systemRejectionColor,58,0,out::println);
         }
     }
 
     private static void sortNotesByTitle() {
         NotesConfigs.sortNotesByTitle();
         marginBorder();
-        message("Notes sorted by title", systemMainColor,58,0,out::println);
+        message("Notes sorted by title", systemFirstColor,58,0,out::println);
         border();
     }
 
     private static void sortNotesByContent() {
         NotesConfigs.sortNotesByContent();
         marginBorder();
-        message("Notes sorted by content", systemMainColor,58,0,out::println);
+        message("Notes sorted by content", systemFirstColor,58,0,out::println);
         border();
     }
+
+    public static String[] notesLogo = {
+            "ooooo      ooo               .                      ",
+            "`888b.     `8'             .o8                      ",
+            " 8 `88b.    8   .ooooo.  .o888oo  .ooooo.   .oooo.o ",
+            " 8   `88b.  8  d88' `88b   888   d88' `88b d88(  \"8 ",
+            " 8     `88b.8  888   888   888   888ooo888 `\"Y88b.  ",
+            " 8       `888  888   888   888 . 888    .o o.  )88b ",
+            "o8o        `8  `Y8bod8P'   \"888\" `Y8bod8P' 8\"\"888P' ",
+            " "
+    };
 }

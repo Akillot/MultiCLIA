@@ -124,9 +124,12 @@ public class CryptoConfigs {
     private static String cryptocurrencyCode;
     private static String fiatCurrencyCode;
 
-    private static int mainThemeColor = 85;
+    private static int firstThemeColor = 85;
+    private static int secondThemeColor = 121;
     private static int layoutColor = 15;
-    private static int errorColor = 196;
+
+    private static int acceptanceColor = 46;
+    private static int rejectionColor = 196;
 
     private static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
         for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyName.size(); i++) {
@@ -140,20 +143,26 @@ public class CryptoConfigs {
         switchLogo(cryptoLogo,8);
         marginBorder();
         modifyMessage('n', 1);
+
+        displayConfirmation("Enter","to open and","to skip");
         choice("List of cryptocurrencies", CryptoConfigs::displayListOfCryptocurrencies,
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
+
         modifyMessage('n', 1);
+        displayConfirmation("Enter","to open and","to skip");
         choice("Exchanger", CryptoConfigs::exchanger,
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
+
         modifyMessage('n', 1);
+        displayConfirmation("Enter","to open and","to skip");
         choice("Price tracker", CryptoConfigs::currencyPriceTracker,
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
     }
 
     //Exchanger method
     private static void exchanger() {
         modifyMessage('n', 2);
-        alert("i", "Type '" + getAnsi256Color(mainThemeColor) + "exit"
+        alert("i", "Type '" + getAnsi256Color(firstThemeColor) + "exit"
                 + getAnsi256Color(layoutColor) + "' to\n" + alignment(58) + "quit the extension.", 58);
 
         while (true) {
@@ -168,7 +177,7 @@ public class CryptoConfigs {
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
-                message("Invalid cryptocurrency code: " + cryptocurrencyCode, errorColor, 58, 0, out::print);
+                message("Invalid cryptocurrency code: " + cryptocurrencyCode, rejectionColor, 58, 0, out::print);
                 continue;
             }
 
@@ -181,7 +190,7 @@ public class CryptoConfigs {
             }
 
             if (fiatCurrencyCode.isEmpty()) {
-                message("Fiat currency code cannot be empty.", errorColor, 58, 0, out::print);
+                message("Fiat currency code cannot be empty.", rejectionColor, 58, 0, out::print);
                 continue;
             }
 
@@ -192,7 +201,7 @@ public class CryptoConfigs {
     //Tracker
     private static void currencyPriceTracker() {
         modifyMessage('n', 2);
-        alert("i", "Type '" + getAnsi256Color(errorColor) + "exit"
+        alert("i", "Type '" + getAnsi256Color(rejectionColor) + "exit"
                 + getAnsi256Color(layoutColor) + "' to quit the extension at any time.\n"
                 + alignment(58) + "You cannot exit this mode while tracking is in progress.", 58);
         while (true) {
@@ -206,7 +215,7 @@ public class CryptoConfigs {
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
-                message("Invalid cryptocurrency code: " + cryptocurrencyCode, errorColor, 58, 0, out::print);
+                message("Invalid cryptocurrency code: " + cryptocurrencyCode, rejectionColor, 58, 0, out::print);
                 continue;
             }
 
@@ -219,7 +228,7 @@ public class CryptoConfigs {
             }
 
             if (fiatCurrencyCode.isEmpty()) {
-                message("Fiat currency code cannot be empty.", errorColor, 58, 0, out::print);
+                message("Fiat currency code cannot be empty.", rejectionColor, 58, 0, out::print);
                 continue;
             }
 
@@ -230,13 +239,13 @@ public class CryptoConfigs {
                 duration = Integer.parseInt(scanner.nextLine().trim()) * 60000;
             } catch (NumberFormatException e) {
                 modifyMessage('n', 1);
-                message("Invalid duration. Please enter a valid number.", errorColor, 58, 0, out::print);
+                message("Invalid duration. Please enter a valid number.", rejectionColor, 58, 0, out::print);
                 continue;
             }
 
             if (duration <= 0) {
                 modifyMessage('n', 1);
-                message("Duration must be greater than zero.", errorColor, 58, 0, out::print);
+                message("Duration must be greater than zero.", rejectionColor, 58, 0, out::print);
                 continue;
             }
 
@@ -308,10 +317,10 @@ public class CryptoConfigs {
                 JSONObject jsonResponse = new JSONObject(response);
                 if (jsonResponse.has(cryptocurrencyCode)) {
                     double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
-                    out.println(alignment(58) + getAnsi256Color(mainThemeColor)
+                    out.println(alignment(58) + getAnsi256Color(firstThemeColor)
                             + capitalizeMessage(cryptocurrencyCode) + getAnsi256Color(layoutColor) + " costs in "
                             + fiatCurrencyCode.toUpperCase() + ": "
-                            + getAnsi256Color(mainThemeColor) + price + getAnsi256Color(layoutColor)
+                            + getAnsi256Color(firstThemeColor) + price + getAnsi256Color(layoutColor)
                             + " [" + formattedTime + "]");
                 } else {
                     errorFormatting("Invalid response from API.");
@@ -338,7 +347,7 @@ public class CryptoConfigs {
     //Formating the error outputs
     private static void errorFormatting(String text) {
         modifyMessage('n', 1);
-        message(text, errorColor, 58, 0, out::print);
+        message(text, rejectionColor, 58, 0, out::print);
         modifyMessage('n', 1);
     }
 }

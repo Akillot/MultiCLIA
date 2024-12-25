@@ -12,9 +12,13 @@ import static java.lang.System.out;
 
 public class SearcherConfigs {
 
-    private static int defaultLocalColor = 99;
-    private static int defaultLocalLayoutColor = 15;
-    private static int defaultLocalErrorColor = 196;
+    private static int firstThemeColor = 99;
+    private static int secondThemeColor = 121;
+    private static int layoutColo = 15;
+
+    private static int acceptanceColor = 46;
+    private static int rejectionColor = 196;
+
 
     public static void searcher() {
 
@@ -22,15 +26,18 @@ public class SearcherConfigs {
         switchLogo(searcherLogo,32);
         marginBorder();
         modifyMessage('n', 1);
-        alert("Example",getAnsi256Color(defaultLocalLayoutColor)
-                + ": '" + getAnsi256Color(defaultLocalColor) + "github.com"
-                + getAnsi256Color(defaultLocalLayoutColor) + "'",58);
+        alert("Example",getAnsi256Color(layoutColo)
+                + ": '" + getAnsi256Color(firstThemeColor) + "github.com"
+                + getAnsi256Color(layoutColo) + "'",58);
+
+        modifyMessage('n', 1);
+
+        out.print(alignment(58) + getAnsi256Color(firstThemeColor) + "Enter domain"
+                + getAnsi256Color(layoutColo) + " (or type '" + getAnsi256Color(rejectionColor) + "exit"
+                + getAnsi256Color(layoutColo) + "' to quit): " + RESET);
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(defaultLocalColor) + "Enter domain"
-                    + getAnsi256Color(defaultLocalLayoutColor) + " (or type '" + getAnsi256Color(defaultLocalErrorColor) + "exit"
-                    + getAnsi256Color(defaultLocalLayoutColor) + "' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
 
             modifyMessage('n', 1);
@@ -42,17 +49,20 @@ public class SearcherConfigs {
             }
 
             String domain = "https://" + domainInput;
+            displayConfirmation("Enter","to open and","to skip");
             choice("Show URL", SearcherConfigs.displayFullURl(domain),
-                    systemMainColor, systemLayoutColor, systemMainColor);
+                    systemFirstColor, systemLayoutColor, systemFirstColor);
+            modifyMessage('n', 1);
+            displayConfirmation("Enter","to open and","to skip");
             choice(domainInput, openUri(domain),
-                    systemMainColor, systemLayoutColor, systemMainColor);
+                    systemFirstColor, systemLayoutColor, systemFirstColor);
         }
     }
 
     @Contract(pure = true)
     private static @NotNull Runnable displayFullURl(String domain) {
         return () -> {
-            message("Full URL: " + domain, defaultLocalLayoutColor, 58, 0, out::print);
+            message("Full URL: " + domain, layoutColo, 58, 0, out::print);
         };
     }
 

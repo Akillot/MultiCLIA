@@ -23,7 +23,7 @@ public class SettingsPage {
 
     //Memory methods
     private static void displayMemorySection(){
-        choice("Memory", SettingsPage::displayUsingMemory, systemMainColor, systemLayoutColor, systemErrorColor);
+        choice("Memory", SettingsPage::displayUsingMemory, systemFirstColor, systemLayoutColor, systemRejectionColor);
     }
 
     private static void displayUsingMemory(){
@@ -34,7 +34,7 @@ public class SettingsPage {
 
     //Color methods
     private static void displayColorSection(){
-        choice("Colors", textModification(), systemMainColor, systemLayoutColor, systemErrorColor);
+        choice("Colors", textModification(), systemFirstColor, systemLayoutColor, systemRejectionColor);
     }
 
     @Contract(pure = true)
@@ -87,7 +87,7 @@ public class SettingsPage {
 
     //Text styles
     private static void displayTextStylesSection(){
-        choice("Text styles", SettingsPage::displayTextStyles, systemMainColor, systemLayoutColor, systemErrorColor);
+        choice("Text styles", SettingsPage::displayTextStyles, systemFirstColor, systemLayoutColor, systemRejectionColor);
     }
 
     private static void displayTextStyles(){

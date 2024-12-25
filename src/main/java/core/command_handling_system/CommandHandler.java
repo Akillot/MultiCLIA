@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.logic.ColorConfigs.systemErrorColor;
+import static core.logic.ColorConfigs.systemRejectionColor;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
@@ -40,7 +40,7 @@ public class CommandHandler {
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
 
-        commandMap.put("notes", NotesPage::displayNotepad);
+        commandMap.put("notes", NotesPage::displayNotesMenu);
         commandMap.put("searcher", SearcherPage::browserPage);
         commandMap.put("crypto", CryptoPage::exchangerPage);
         commandMap.put("clock", ClockPage::clockPage);
@@ -58,7 +58,7 @@ public class CommandHandler {
                     InfoPage.displayInfo();
                 } catch (InterruptedException e) {
                     errorAscii();
-                    message("Error displaying info: " + e.getMessage(), systemErrorColor, 58, 0, out::println);
+                    message("Error displaying info: " + e.getMessage(), systemRejectionColor, 58, 0, out::println);
                 }
             };
             case 5 -> CommandManager::terminateProgramDefault;

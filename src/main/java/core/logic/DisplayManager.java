@@ -58,7 +58,7 @@ public class DisplayManager {
 
     public static void errorAscii() {
         for (String line : errorAscii) {
-            message(line, systemErrorColor, -1, 0, out::print);
+            message(line, systemRejectionColor, -1, 0, out::print);
         }
     }
 
@@ -75,15 +75,15 @@ public class DisplayManager {
         } catch (Exception e) {
             marginBorder();
             errorAscii();
-            message("Unknown error occurred", systemErrorColor, 58, 0, out::print);
+            message("Unknown error occurred", systemRejectionColor, 58, 0, out::print);
         }
     }
 
     private static void printOpenOrSkipPrompt() {
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter '" + RESET
-                + getAnsi256Color(systemMainColor) + "+" + RESET
+                + getAnsi256Color(systemFirstColor) + "+" + RESET
                 + getAnsi256Color(systemLayoutColor) + "' to open and '"
-                + RESET + getAnsi256Color(systemMainColor) + "-" + RESET + getAnsi256Color(systemLayoutColor)
+                + RESET + getAnsi256Color(systemFirstColor) + "-" + RESET + getAnsi256Color(systemLayoutColor)
                 + "' to skip" + RESET);
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Choice: " + RESET);
@@ -105,7 +105,7 @@ public class DisplayManager {
                 marginBorder();
                 break;
             default:
-                message("Invalid input", systemErrorColor, 58, 0, out::print);
+                message("Invalid input", systemRejectionColor, 58, 0, out::print);
                 marginBorder();
                 break;
         }
@@ -114,9 +114,9 @@ public class DisplayManager {
     private static void displaySubCommandLists() {
         modifyMessage('n', 1);
         choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
         choice("Extensions", displayCommandList(extensionCmds),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
         marginBorder();
     }
 
@@ -141,8 +141,8 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        out.println(alignment(38) + getAnsi256Color(systemMainColor) + "System Commands"
-                + alignment(-68) + getAnsi256Color(systemMainColor) + "Extensions");
+        out.println(alignment(38) + getAnsi256Color(systemFirstColor) + "System Commands"
+                + alignment(-68) + getAnsi256Color(systemFirstColor) + "Extensions");
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 

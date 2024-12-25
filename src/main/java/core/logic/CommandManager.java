@@ -27,7 +27,7 @@ public class CommandManager {
 
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
-                    getAnsi256Color(systemMainColor), getAnsi256Color(56),
+                    getAnsi256Color(systemFirstColor), getAnsi256Color(56),
                     getAnsi256Color(165), getAnsi256Color(99),
                     getAnsi256Color(63), getAnsi256Color(99)};
 
@@ -84,12 +84,12 @@ public class CommandManager {
                     Desktop.getDesktop().browse(uri);
                     message("Status: ✓", systemLayoutColor,58,0,out::print);
                 } else {
-                    message("Error: Desktop or browse action not supported", systemErrorColor,
+                    message("Error: Desktop or browse action not supported", systemRejectionColor,
                             58, 0,out::print);
                     message("Status: x", systemLayoutColor,58,0,out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL", systemErrorColor,58,0,out::print);
+                message("Error opening URL", systemRejectionColor,58,0,out::print);
                 message("Status: x", systemLayoutColor,58,0,out::print);
             }
         };
@@ -99,10 +99,10 @@ public class CommandManager {
         try {
             InetAddress localHost = InetAddress.getLocalHost();
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
-                    + getAnsi256Color(systemMainColor) + localHost + RESET);
+                    + getAnsi256Color(systemFirstColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             errorAscii();
-            message("IP is undefined", systemErrorColor,58,0,out::print);
+            message("IP is undefined", systemRejectionColor,58,0,out::print);
             message("Status: x", systemLayoutColor,58,0,out::print);
         }
     }
@@ -113,6 +113,7 @@ public class CommandManager {
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
             case "+":
+            case "y":
                 try {
                     action.run();
                     modifyMessage('n', 1);
@@ -123,6 +124,7 @@ public class CommandManager {
                 break;
 
             case "-":
+            case "n":
                 message("Status: x", layoutColor,58,0,out::print);
                 modifyMessage('n',1);
                 break;
@@ -137,7 +139,7 @@ public class CommandManager {
 
     public static void terminateExtension() {
         message("\r   Status: ✓", systemLayoutColor,58,0,out::print);
-        message("Extension terminated correctly", systemMainColor,
+        message("Extension terminated correctly", systemFirstColor,
                 58,0,out::print);
         modifyMessage('n',2);
         border();
@@ -147,7 +149,7 @@ public class CommandManager {
         modifyMessage('n',2);
         loadingAnimation(300,10);
         message("\r    Status: ✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated correctly", systemMainColor,
+        message("Program terminated correctly", systemFirstColor,
                 56,20,out::print);
         modifyMessage('n', 2);
         exit(0);
@@ -156,7 +158,7 @@ public class CommandManager {
     public static void terminateProgramQuick() {
         modifyMessage('n',2);
         message("\r    Status: ✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated quickly correctly", systemMainColor,
+        message("Program terminated quickly correctly", systemFirstColor,
                 56,0,out::print);
         modifyMessage('n', 2);
         exit(0);

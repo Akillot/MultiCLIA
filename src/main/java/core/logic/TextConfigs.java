@@ -22,7 +22,7 @@ public class TextConfigs {
             }
             modifyMessage('n',1);
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "You entered: ["
-                    + getAnsi256Color(systemMainColor) + text.substring(i, end) + RESET
+                    + getAnsi256Color(systemFirstColor) + text.substring(i, end) + RESET
                     + getAnsi256Color(systemLayoutColor) + "]" + RESET);
             if (end < text.length()) {
                 modifyMessage('n',1);
@@ -43,7 +43,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", systemErrorColor,58,0, out::println);
+                message("Error, try again", systemRejectionColor,58,0, out::println);
             }
         }
         out.print("");
@@ -86,12 +86,11 @@ public class TextConfigs {
         modifyMessage('n', 1);
     }
 
-    public static void messageInstruction(String preText, String instructionOne, String midText,
-                                          String instructionTwo, String postText) {
-        message(preText + " '" + getAnsi256Color(systemMainColor) + instructionOne + RESET +
-                getAnsi256Color(systemLayoutColor) + "' " + midText +" '" + RESET +
-                getAnsi256Color(systemMainColor) + instructionTwo + RESET +
-                getAnsi256Color(systemLayoutColor) + "' " + postText, systemLayoutColor,58,0,out::print);
+    public static void displayConfirmation(String preText, String midText, String postText) {
+        message(preText + " '" + getAnsi256Color(systemFirstColor) + "y" + getAnsi256Color(systemLayoutColor) +
+                        "/" + getAnsi256Color(systemFirstColor) + "+" +
+                getAnsi256Color(systemLayoutColor) + "' " + midText +" '" + getAnsi256Color(systemFirstColor) + "n" + getAnsi256Color(systemLayoutColor) +
+                "/" + getAnsi256Color(systemFirstColor) + "-" + getAnsi256Color(systemLayoutColor) + "' " + postText, systemLayoutColor,58,0,out::print);
     }
 
     //unclear name
@@ -117,7 +116,7 @@ public class TextConfigs {
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
         out.println(alignment(alignment) + getAnsi256Color(systemLayoutColor) + "["
-                + getAnsi256Color(systemMainColor) + modification + getAnsi256Color(systemLayoutColor) + "] "
+                + getAnsi256Color(systemFirstColor) + modification + getAnsi256Color(systemLayoutColor) + "] "
                 + getAnsi256Color(systemLayoutColor) + text + RESET);
     }
 }

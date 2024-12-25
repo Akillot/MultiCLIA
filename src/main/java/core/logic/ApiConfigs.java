@@ -30,7 +30,7 @@ public class ApiConfigs {
 
             int statusCode = connection.getResponseCode();
             if (statusCode != 200) {
-                message("Error: HTTP " + statusCode, systemErrorColor, 58, 0, out::print);
+                message("Error: HTTP " + statusCode, systemRejectionColor, 58, 0, out::print);
                 return null;
             }
 
@@ -46,15 +46,15 @@ public class ApiConfigs {
                 String value = jsonResponse.optString(key);
 
                 out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + text + " " + RESET +
-                        getAnsi256Color(systemMainColor) + value + RESET);
+                        getAnsi256Color(systemFirstColor) + value + RESET);
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(), systemErrorColor,58,0,out::print);
+                message("Error parsing JSON response: " + e.getMessage(), systemRejectionColor,58,0,out::print);
             }
 
             return response.toString();
 
         } catch (Exception e) {
-            message("Error: " + e.getMessage(), systemErrorColor,58,0,out::print);
+            message("Error: " + e.getMessage(), systemRejectionColor,58,0,out::print);
             return null;
         }
     }
@@ -70,9 +70,9 @@ public class ApiConfigs {
                 double temperature = currentWeather.getDouble("temperature");
 
                 out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Weather in " + city + " now: " + RESET
-                        + getAnsi256Color(systemMainColor) + temperature + "°C" + RESET);
+                        + getAnsi256Color(systemFirstColor) + temperature + "°C" + RESET);
             } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(), systemErrorColor,58,0,out::print);
+                message("Error parsing JSON response: " + e.getMessage(), systemRejectionColor,58,0,out::print);
             }
         }
     }

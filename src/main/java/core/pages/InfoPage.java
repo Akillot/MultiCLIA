@@ -16,29 +16,29 @@ public  class InfoPage {
     @Contract(pure = true)
     public static @NotNull String getVersion() {
         String appVersion = "A-0.8.0";
-        return getAnsi256Color(systemMainColor) + appVersion + RESET;
+        return getAnsi256Color(systemFirstColor) + appVersion + RESET;
     }
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
         message("Current version:", systemLayoutColor,58,0,out::print);
-        message(getVersion(), systemMainColor,58,0,out::print);
+        message(getVersion(), systemFirstColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 2);
 
-        messageInstruction("Enter","+","to open and","-","to skip");
+        displayConfirmation("Enter","to open and","to skip");
         choice("Description", displayAppDescription(),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
         modifyMessage('n', 1);
 
-        messageInstruction("Enter","+","to open and","-","to skip");
+        displayConfirmation("Enter","to open and","to skip");
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
         modifyMessage('n', 1);
 
-        messageInstruction("Enter","+","to open and","-","to skip");
+        displayConfirmation("Enter","to open and","to skip");
         choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemFirstColor, systemLayoutColor, systemFirstColor);
         marginBorder();
     }
 
@@ -49,9 +49,9 @@ public  class InfoPage {
             marginBorder();
             modifyMessage('n', 1);
 
-            message(getAnsi256Color(systemMainColor) + "MultiCLIA " + RESET
+            message(getAnsi256Color(systemFirstColor) + "MultiCLIA " + RESET
                             + getAnsi256Color(systemLayoutColor) + "[" + getAnsi256Color(systemLayoutColor)
-                            + ITALIC + "Multi Command Line Interface App" + RESET
+                            + BOLD + "Multi Command Line Interface App" + RESET
                             + getAnsi256Color(systemLayoutColor) + "]\n\n" +
                             alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
