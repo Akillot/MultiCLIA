@@ -1,9 +1,9 @@
 package extensions.internet;
 
-import static extensions.internet.SearcherConfigs.browser;
+import static extensions.internet.SearcherConfigs.searcher;
 
 public class SearcherPage {
     public static void browserPage() {
-        browser();
+        searcher();
     }
 }

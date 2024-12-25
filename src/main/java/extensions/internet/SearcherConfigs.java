@@ -16,10 +16,10 @@ public class SearcherConfigs {
     private static int defaultLocalLayoutColor = 15;
     private static int defaultLocalErrorColor = 196;
 
-    public static void browser() {
+    public static void searcher() {
 
         modifyMessage('n', 2);
-        switchLogo(browserLogo,32);
+        switchLogo(searcherLogo,32);
         marginBorder();
         modifyMessage('n', 1);
         alert("Example",getAnsi256Color(defaultLocalLayoutColor)
@@ -56,7 +56,7 @@ public class SearcherConfigs {
         };
     }
 
-    public static String[] browserLogo = {
+    private static String[] searcherLogo = {
             " .oooooo..o                                        oooo                           ",
             "d8P'    `Y8                                        `888                           ",
             "Y88bo.       .ooooo.   .oooo.   oooo d8b  .ooooo.   888 .oo.    .ooooo.  oooo d8b ",

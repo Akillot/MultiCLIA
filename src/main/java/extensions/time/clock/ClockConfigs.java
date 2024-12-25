@@ -1,23 +1,48 @@
 package extensions.time.clock;
 
+import org.jetbrains.annotations.Contract;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.systemLayoutColor;
+import static core.logic.CommandManager.choice;
+import static core.logic.CommandManager.switchLogo;
 import static core.logic.TextConfigs.message;
 import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
 public class ClockConfigs {
-    public static void displayTime(){
+
+    private static int mainThemeColor = 85;
+    private static int layoutColor = 15;
+    private static int errorColor = 196;
+
+    private static String[] clockLogo = {
+            "  .oooooo.   oooo                       oooo        ",
+            " d8P'  `Y8b  `888                       `888        ",
+            "888           888   .ooooo.    .ooooo.   888  oooo  ",
+            "888           888  d88' `88b  d88' `\"Y8  888 .8P'   ",
+            "888           888  888   888  888        888888.    ",
+            "`88b    ooo   888  888   888  888   .o8  888 `88b.  ",
+            " `Y8bood8P'  o888o `Y8bod8P'  `Y8bod8P' o888o o888o ",
+            " "
+    };
+
+    public static void displayClockMenu() {
+        modifyMessage('n', 2);
+        switchLogo(clockLogo, -2);
+        marginBorder();
+        modifyMessage('n', 1);
+        choice("Clock", ClockConfigs::displayTime, mainThemeColor, layoutColor, errorColor);
+        marginBorder();
+    }
+
+    @Contract(pure = true)
+    private static void displayTime() {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
-
-        modifyMessage('n', 2);
-        message("Current time: " + formattedTime, systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
-        marginBorder();
+        message("Current time: " + formattedTime, layoutColor, 58, 0, out::print);
     }
 }

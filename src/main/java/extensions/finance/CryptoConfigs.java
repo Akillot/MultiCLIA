@@ -135,7 +135,7 @@ public class CryptoConfigs {
     }};
 
     //Main menu of extension
-    public static void cryptoMenu() {
+    public static void displayCryptoMenu() {
         modifyMessage('n', 2);
         switchLogo(cryptoLogo,8);
         marginBorder();
@@ -265,7 +265,6 @@ public class CryptoConfigs {
 
             List<String> leftColumnNames = cryptocurrencyName.subList(0, midPoint);
             List<String> leftColumnCodes = cryptocurrencyCodes.subList(0, midPoint);
-
             List<String> rightColumnNames = cryptocurrencyName.subList(midPoint, totalItems);
             List<String> rightColumnCodes = cryptocurrencyCodes.subList(midPoint, totalItems);
 
