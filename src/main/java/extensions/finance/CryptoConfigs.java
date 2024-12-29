@@ -125,7 +125,7 @@ public class CryptoConfigs {
     private static String fiatCurrencyCode;
 
     private static int themeColor_1 = 85;
-    private static int themeColor_2 = 121;
+    private static int themeColor_2 = 73;
     private static int layoutColor = 15;
 
     private static int acceptanceColor = 46;
@@ -281,7 +281,7 @@ public class CryptoConfigs {
 
             out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
                     + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n",
-                    getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_1) + "          Codes");
+                    getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_2) + "          Codes");
 
             for (int i = 0; i < maxRows; i++) {
                 String leftEntry = i < leftColumnNames.size()
