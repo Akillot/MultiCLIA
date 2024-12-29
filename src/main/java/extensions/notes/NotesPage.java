@@ -32,6 +32,13 @@ public class NotesPage {
             "6 exit"
     };
 
+    private static int themeColor_1 = 165;
+    private static int themeColor_2 = 207;
+    private static int layoutColor = 15;
+
+    private static int acceptanceColor = 46;
+    private static int rejectionColor = 196;
+
     private static void displayOperations(){
         for (String operation : operations) {
             message(operation, systemLayoutColor,58,0,out::print);
@@ -100,7 +107,8 @@ public class NotesPage {
             border();
             modifyMessage('n', 1);
 
-            displayConfirmation("Enter","to update this note or","to skip");
+            displayConfirmation("Enter","to open and","to skip",
+                    themeColor_1,layoutColor,rejectionColor);
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your choice: " + RESET);
             String answer = scanner.nextLine();
 

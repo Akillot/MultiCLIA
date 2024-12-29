@@ -125,7 +125,7 @@ public class CryptoConfigs {
     private static String fiatCurrencyCode;
 
     private static int themeColor_1 = 85;
-    private static int themeColor_2 = 73;
+    private static int themeColor_2 = 79;
     private static int layoutColor = 15;
 
     private static int acceptanceColor = 46;
@@ -144,19 +144,19 @@ public class CryptoConfigs {
         marginBorder();
         modifyMessage('n', 1);
 
-        displayConfirmation("Enter","to open and","to skip");
+        displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("List of cryptocurrencies", CryptoConfigs::displayListOfCryptocurrencies,
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                themeColor_1, layoutColor, rejectionColor);
 
         modifyMessage('n', 1);
-        displayConfirmation("Enter","to open and","to skip");
+        displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("Exchanger", CryptoConfigs::exchanger,
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                themeColor_1, layoutColor, rejectionColor);
 
         modifyMessage('n', 1);
-        displayConfirmation("Enter","to open and","to skip");
+        displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("Price tracker", CryptoConfigs::currencyPriceTracker,
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                themeColor_1, layoutColor, rejectionColor);
     }
 
     //Exchanger method
@@ -281,7 +281,7 @@ public class CryptoConfigs {
 
             out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
                     + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n",
-                    getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_2) + "          Codes");
+                    getAnsi256Color(themeColor_2) + "Names",getAnsi256Color(themeColor_2) + "          Codes");
 
             for (int i = 0; i < maxRows; i++) {
                 String leftEntry = i < leftColumnNames.size()

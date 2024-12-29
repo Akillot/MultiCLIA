@@ -26,17 +26,20 @@ public  class InfoPage {
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 2);
 
-        displayConfirmation("Enter","to open and","to skip");
+        displayConfirmation("Enter","to open and","to skip",
+                systemFirstColor,systemLayoutColor,systemRejectionColor);
         choice("Description", displayAppDescription(),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
         modifyMessage('n', 1);
 
-        displayConfirmation("Enter","to open and","to skip");
+        displayConfirmation("Enter","to open and","to skip",
+                systemFirstColor,systemLayoutColor,systemRejectionColor);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
         modifyMessage('n', 1);
 
-        displayConfirmation("Enter","to open and","to skip");
+        displayConfirmation("Enter","to open and","to skip",
+                systemFirstColor,systemLayoutColor,systemRejectionColor);
         choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
         marginBorder();

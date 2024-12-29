@@ -14,11 +14,12 @@ import static java.lang.System.out;
 
 public class ClockConfigs {
 
-    private static int firstThemeColor = 86;
-    private static int secondThemeColor = 121;
+    private static int themeColor_1 = 223;
+    private static int themeColor_2 = 187;
     private static int layoutColor = 15;
 
-    private static int errorColor = 196;
+    private static int acceptanceColor = 46;
+    private static int rejectionColor = 196;
 
     private static String[] clockLogo = {
             "  .oooooo.   oooo                       oooo        ",
@@ -36,8 +37,8 @@ public class ClockConfigs {
         switchLogo(clockLogo, -2);
         marginBorder();
         modifyMessage('n', 1);
-        displayConfirmation("Enter","to open and","to skip");
-        choice("Clock", ClockConfigs::displayTime, firstThemeColor, layoutColor, errorColor);
+        displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
+        choice("Clock", ClockConfigs::displayTime, themeColor_1, layoutColor, rejectionColor);
         marginBorder();
     }
 
@@ -46,6 +47,6 @@ public class ClockConfigs {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
-        out.println(alignment(58) + getAnsi256Color(secondThemeColor) + "Current time: " + getAnsi256Color(layoutColor) + formattedTime);
+        out.println(alignment(58) + getAnsi256Color(themeColor_2) + "Current time: " + getAnsi256Color(layoutColor) + formattedTime);
     }
 }

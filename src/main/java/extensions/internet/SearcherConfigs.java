@@ -52,13 +52,15 @@ public class SearcherConfigs {
 
             String domain = "https://" + domainInput;
 
-            displayConfirmation("Enter","to open and","to skip");
+            displayConfirmation("Enter","to open and","to skip",
+                    themeColor_1,layoutColor,rejectionColor);
             choice("Show URL", SearcherConfigs.displayFullURl(domain),
                     systemFirstColor, systemLayoutColor, systemFirstColor);
 
             modifyMessage('n', 1);
 
-            displayConfirmation("Enter","to open and","to skip");
+            displayConfirmation("Enter","to open and","to skip",
+                    themeColor_1,layoutColor,rejectionColor);
             choice(domainInput, openUri(domain),
                     systemFirstColor, systemLayoutColor, systemFirstColor);
         }
