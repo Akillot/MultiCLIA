@@ -12,9 +12,9 @@ import static java.lang.System.out;
 
 public class SearcherConfigs {
 
-    private static int firstThemeColor = 99;
-    private static int secondThemeColor = 121;
-    private static int layoutColo = 15;
+    private static int themeColor_1 = 99;
+    private static int themeColor_2 = 121;
+    private static int layoutColor = 15;
 
     private static int acceptanceColor = 46;
     private static int rejectionColor = 196;
@@ -26,18 +26,20 @@ public class SearcherConfigs {
         switchLogo(searcherLogo,32);
         marginBorder();
         modifyMessage('n', 1);
-        alert("Example",getAnsi256Color(layoutColo)
-                + ": '" + getAnsi256Color(firstThemeColor) + "github.com"
-                + getAnsi256Color(layoutColo) + "'",58);
+        alert("Example",getAnsi256Color(layoutColor)
+                + ": '" + getAnsi256Color(themeColor_1) + "github.com"
+                + getAnsi256Color(layoutColor) + "'",58);
 
         modifyMessage('n', 1);
 
-        out.print(alignment(58) + getAnsi256Color(firstThemeColor) + "Enter domain"
-                + getAnsi256Color(layoutColo) + " (or type '" + getAnsi256Color(rejectionColor) + "exit"
-                + getAnsi256Color(layoutColo) + "' to quit): " + RESET);
-
         while (true) {
             modifyMessage('n', 1);
+            message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",layoutColor, 58,0,out::print);
+            modifyMessage('n', 2);
+
+            out.print(alignment(58) + getAnsi256Color(themeColor_1) + "Enter domain"
+                    + getAnsi256Color(layoutColor) + " (or type '" + getAnsi256Color(rejectionColor) + "exit"
+                    + getAnsi256Color(layoutColor) + "' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
 
             modifyMessage('n', 1);
@@ -62,7 +64,7 @@ public class SearcherConfigs {
     @Contract(pure = true)
     private static @NotNull Runnable displayFullURl(String domain) {
         return () -> {
-            message("Full URL: " + domain, layoutColo, 58, 0, out::print);
+            message("Full URL: " + domain, layoutColor, 58, 0, out::print);
         };
     }
 
