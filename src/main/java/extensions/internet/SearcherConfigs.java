@@ -12,8 +12,8 @@ import static java.lang.System.out;
 
 public class SearcherConfigs {
 
-    private static int themeColor_1 = 99;
-    private static int themeColor_2 = 121;
+    private static int themeColor_1 = 165;
+    private static int themeColor_2 = 207;
     private static int layoutColor = 15;
 
     private static int acceptanceColor = 46;
@@ -51,10 +51,13 @@ public class SearcherConfigs {
             }
 
             String domain = "https://" + domainInput;
+
             displayConfirmation("Enter","to open and","to skip");
             choice("Show URL", SearcherConfigs.displayFullURl(domain),
                     systemFirstColor, systemLayoutColor, systemFirstColor);
+
             modifyMessage('n', 1);
+
             displayConfirmation("Enter","to open and","to skip");
             choice(domainInput, openUri(domain),
                     systemFirstColor, systemLayoutColor, systemFirstColor);
@@ -64,7 +67,7 @@ public class SearcherConfigs {
     @Contract(pure = true)
     private static @NotNull Runnable displayFullURl(String domain) {
         return () -> {
-            message("Full URL: " + domain, layoutColor, 58, 0, out::print);
+            message("Full URL: " + getAnsi256Color(152) + domain + RESET, layoutColor, 58, 0, out::print);
         };
     }
 

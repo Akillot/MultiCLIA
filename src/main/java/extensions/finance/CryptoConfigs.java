@@ -124,8 +124,8 @@ public class CryptoConfigs {
     private static String cryptocurrencyCode;
     private static String fiatCurrencyCode;
 
-    private static int firstThemeColor = 85;
-    private static int secondThemeColor = 121;
+    private static int themeColor_1 = 85;
+    private static int themeColor_2 = 121;
     private static int layoutColor = 15;
 
     private static int acceptanceColor = 46;
@@ -162,7 +162,7 @@ public class CryptoConfigs {
     //Exchanger method
     private static void exchanger() {
         modifyMessage('n', 2);
-        alert("i", "Type '" + getAnsi256Color(firstThemeColor) + "exit"
+        alert("i", "Type '" + getAnsi256Color(themeColor_1) + "exit"
                 + getAnsi256Color(layoutColor) + "' to\n" + alignment(58) + "quit the extension.", 58);
 
         while (true) {
@@ -279,6 +279,10 @@ public class CryptoConfigs {
 
             int maxRows = Math.max(leftColumnNames.size(), rightColumnNames.size());
 
+            out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
+                    + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n",
+                    getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_1) + "          Codes");
+
             for (int i = 0; i < maxRows; i++) {
                 String leftEntry = i < leftColumnNames.size()
                         ? "· " + capitalizeMessage(leftColumnNames.get(i))
@@ -317,10 +321,10 @@ public class CryptoConfigs {
                 JSONObject jsonResponse = new JSONObject(response);
                 if (jsonResponse.has(cryptocurrencyCode)) {
                     double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
-                    out.println(alignment(58) + getAnsi256Color(firstThemeColor)
+                    out.println(alignment(58) + getAnsi256Color(themeColor_1)
                             + capitalizeMessage(cryptocurrencyCode) + getAnsi256Color(layoutColor) + " costs in "
                             + fiatCurrencyCode.toUpperCase() + ": "
-                            + getAnsi256Color(firstThemeColor) + price + getAnsi256Color(layoutColor)
+                            + getAnsi256Color(themeColor_1) + price + getAnsi256Color(layoutColor)
                             + " [" + formattedTime + "]");
                 } else {
                     errorFormatting("Invalid response from API.");
