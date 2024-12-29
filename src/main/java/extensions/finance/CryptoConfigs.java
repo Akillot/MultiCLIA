@@ -281,21 +281,23 @@ public class CryptoConfigs {
 
             out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
                     + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n",
-                    getAnsi256Color(themeColor_2) + "Names",getAnsi256Color(themeColor_2) + "          Codes");
+                    getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_1) + "          Codes");
 
             for (int i = 0; i < maxRows; i++) {
                 String leftEntry = i < leftColumnNames.size()
                         ? "· " + capitalizeMessage(leftColumnNames.get(i))
+                        + getAnsi256Color(themeColor_2)
                         + " [" + leftColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
                 String rightEntry = i < rightColumnNames.size()
-                        ? "· " + capitalizeMessage(rightColumnNames.get(i)) + " ["
-                        + rightColumnCodes.get(i).toUpperCase() + "]"
+                        ? "· " + capitalizeMessage(rightColumnNames.get(i))
+                        + getAnsi256Color(themeColor_2)
+                        + " [" + rightColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
                 out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
-                        + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n", leftEntry, rightEntry);
+                        + alignment(10) + getAnsi256Color(layoutColor) + "          %-40s%n", leftEntry, rightEntry);
             }
 
             modifyMessage('n', 2);

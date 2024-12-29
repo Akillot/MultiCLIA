@@ -3,6 +3,7 @@ package core.pages;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import static core.logic.BorderConfigs.border;
 import static core.logic.BorderConfigs.marginBorder;
 import static core.logic.ColorConfigs.*;
 import static core.logic.CommandManager.choice;
@@ -14,11 +15,12 @@ public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
         displayMemorySection();
-        modifyMessage('n', 1);
-        displayColorSection();
-        modifyMessage('n', 1);
-        displayTextStylesSection();
         marginBorder();
+
+        modifyMessage('n',1);
+        displayColorSection();
+        border();
+        modifyMessage('n',1);
     }
 
     //Memory methods
@@ -27,10 +29,41 @@ public class SettingsPage {
     }
 
     private static void displayUsingMemory(){
-        message("Memory used: " +
-                ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
-                        / (1000 * 1000) + "M"), systemLayoutColor,58,0, out::print);
+        long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        double usagePercentage = (double) usedMemory / maxMemory * 100;
+
+        message("Memory used: " + (usedMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
+        message("Free memory: " + (freeMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
+        message("Total memory: " + (totalMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
+        message("Max memory: " + (maxMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
+        message("Memory usage: " + String.format("%.2f", usagePercentage) + "%", systemLayoutColor, 58, 0, out::print);
+
+        if (usagePercentage > 80) {
+            modifyMessage('n',1);
+            message("Warning: Memory usage exceeds 80%!", systemRejectionColor, 58, 0, out::print);
+            modifyMessage('n',1);
+        }
+        displayMemoryBar();
     }
+
+    private static void displayMemoryBar() {
+        long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        long maxMemory = Runtime.getRuntime().maxMemory();
+        int barLength = 30;
+        int usedBars = (int) ((double) usedMemory / maxMemory * barLength);
+        StringBuilder bar = new StringBuilder("Memory: [");
+
+        for (int i = 0; i < barLength; i++) {
+            bar.append(i < usedBars ? "#" : "-");
+        }
+        bar.append("]");
+
+        message(bar.toString(), systemLayoutColor, 58, 0, out::print);
+    }
+
 
     //Color methods
     private static void displayColorSection(){
@@ -52,7 +85,7 @@ public class SettingsPage {
         out.println(title + RESET);
         for (int i = start; i <= end; i++) {
             out.print(getAnsi256BackgroundColor(i) + tableAlignment(4) + " " + i + " " + RESET);
-            if ((i - start + 1) % 8 == 0) modifyMessage('n',1);
+            if ((i - start + 1) % 8 == 0) modifyMessage('n',2);
         }
     }
 
@@ -83,17 +116,5 @@ public class SettingsPage {
     private static void changeColor(){
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter new color code: ");
-    }
-
-    //Text styles
-    private static void displayTextStylesSection(){
-        choice("Text styles", SettingsPage::displayTextStyles, systemFirstColor, systemLayoutColor, systemRejectionColor);
-    }
-
-    private static void displayTextStyles(){
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + BOLD + "Bold" + RESET);
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + UNDERLINE + "Underline" + RESET);
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + REVERSE + "Reverse" + RESET);
-        modifyMessage('n', 1);
     }
 }
