@@ -31,16 +31,7 @@ public  class InfoPage {
         choice("Description", displayAppDescription(),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n', 1);
-
-        displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
-        choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
-        modifyMessage('n', 1);
-
-        displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
-        choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
+        choice("Important links", InfoPage::displayImportantLinks,
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
         marginBorder();
     }
@@ -50,17 +41,31 @@ public  class InfoPage {
         message("OS: " + getAnsi256Color(systemFirstColor) + operatingSystem, systemLayoutColor,58,0,out::print);
     }
 
+    private static void displayImportantLinks(){
+        modifyMessage('n', 2);
+
+        choice(getAnsi256Color(27) + "G" + getAnsi256Color(160) + "m" + getAnsi256Color(220)
+                + "a" + getAnsi256Color(27) + "i"
+                + getAnsi256Color(47) + "l",
+                openUri("mailto:"+ "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
+
+        choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
+
+        choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
+    }
+
     @Contract(pure = true)
-    public static @NotNull Runnable displayAppDescription() {
+    private static @NotNull Runnable displayAppDescription() {
         return () -> {
             modifyMessage('n', 1);
             marginBorder();
             modifyMessage('n', 1);
 
-            message(getAnsi256Color(systemFirstColor) + "MultiCLIA " + RESET
-                            + getAnsi256Color(systemLayoutColor) + "[" + getAnsi256Color(systemLayoutColor)
-                            + BOLD + "Multi Command Line Interface App" + RESET
-                            + getAnsi256Color(systemLayoutColor) + "]\n\n" +
+            message( "MultiCLIA " + getAnsi256Color(systemLayoutColor) + "[" + getAnsi256Color(systemLayoutColor)
+                            + "Multi Command Line Interface App" + getAnsi256Color(systemLayoutColor) + "]\n\n" +
                             alignment(58) + "is an open-source application designed for \n" +
                             alignment(58) + "streamlined command-line interaction.\n\n" +
                             alignment(58) + "It provides a flexible, modular interface where\n" +
