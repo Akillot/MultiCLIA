@@ -21,28 +21,33 @@ public  class InfoPage {
 
     public static void displayInfo() throws InterruptedException {
         modifyMessage('n', 2);
-        message("Current version:", systemLayoutColor,58,0,out::print);
-        message(getVersion(), systemFirstColor,58,0,out::print);
+        message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
+        displayOs();
+
         modifyMessage('n', 2);
-
         displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor,systemLayoutColor,systemRejectionColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         choice("Description", displayAppDescription(),
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n', 1);
 
         displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor,systemLayoutColor,systemRejectionColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n', 1);
 
         displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor,systemLayoutColor,systemRejectionColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         marginBorder();
+    }
+
+    private static void displayOs(){
+        String operatingSystem = System.getProperty("os.name");
+        message("OS: " + getAnsi256Color(systemFirstColor) + operatingSystem, systemLayoutColor,58,0,out::print);
     }
 
     @Contract(pure = true)

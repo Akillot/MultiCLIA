@@ -24,12 +24,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"setts", "rerun",
             "ip", "info", "exit", "exitq",
-            "help", "version"};
+            "help", "version", "clear"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr",
             "/ip", "/i", "/e", "/eq",
-            "/h", "/v"};
+            "/h", "/v", "/cl"};
 
     public static String[] extensionCmds = {
             "notes", "searcher", "crypto", "clock"};
@@ -65,6 +65,7 @@ public class CommandHandler {
             case 6 -> CommandManager::terminateProgramQuick;
             case 7 -> DisplayManager::displayCommandsDescription;
             case 8 -> DisplayManager::displayCurrentVersion;
+            case 9 -> CommandManager::clearTerminal;
             default -> throw new IllegalArgumentException("Invalid command index");
         };
     }

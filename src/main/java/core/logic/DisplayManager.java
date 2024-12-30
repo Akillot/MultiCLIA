@@ -32,15 +32,16 @@ public class DisplayManager {
     };
 
     private static final String[] rules = {
-            "cmds: Show all commands [/c]",
-            "setts: Show settings of the application [/s]",
-            "rerun: Restart the app without clearing context [/rr]",
-            "ip: Show local and external IP addresses [/ip]",
-            "info: Show app information [/i]",
-            "help: Show description of all commands [/h]",
-            "exit: Terminate the application [/e]",
-            "exitq: Terminate the application quickly [/eq]",
-            "version: Show version [/v]"
+            "cmds: Shows all commands [/c]",
+            "setts: Shows settings of the application [/s]",
+            "rerun: Restarts the app without clearing context [/rr]",
+            "ip: Shows local and external IP addresses [/ip]",
+            "info: Shows app information [/i]",
+            "help: Shows description of all commands [/h]",
+            "exit: Terminates the application [/e]",
+            "exitq: Terminates the application quickly [/eq]",
+            "version: Shows version [/v]",
+            "clear: Clears recent values from terminal [/cl]"
     };
 
     public static void loadingAnimation(int frames, int duration) {

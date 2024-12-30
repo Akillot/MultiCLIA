@@ -117,14 +117,14 @@ public class CommandManager {
                     action.run();
                     modifyMessage('n', 1);
                 } catch (Exception e) {
-                    message("Error executing action", errorColor, 58, 0, out::print);
-                    message("Status: x", layoutColor, 58, 0, out::print);
+                    message("Error executing action", systemRejectionColor, 58, 0, out::print);
+                    message("Status: x", systemLayoutColor, 58, 0, out::print);
                 }
                 break;
 
             case "-":
             case "n":
-                message("Status: x", layoutColor, 58, 0, out::print);
+                message("Status: x", systemLayoutColor, 58, 0, out::print);
                 modifyMessage('n', 1);
                 break;
 
@@ -146,6 +146,20 @@ public class CommandManager {
         return randomValue < probabilityPercentage;
     }
 
+    public static void clearTerminal(){
+        try {
+            String operatingSystem = System.getProperty("os.name");
+            if (operatingSystem.contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            message("Error executing action", systemRejectionColor, 58, 0, out::print);
+            message("Status: x", systemLayoutColor, 58, 0, out::print);
+        }
+    }
 
     public static void terminateExtension() {
         message("\r   Status: ✓", systemLayoutColor,58,0,out::print);
