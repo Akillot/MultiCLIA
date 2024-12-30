@@ -14,7 +14,6 @@ import static java.lang.System.out;
 public class StartPage {
 
     public static void displayStartPage() {
-        progressbarAnimation("Processing");
         displayMenu();
         while (true) {
             try {
