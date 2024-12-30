@@ -3,9 +3,7 @@ package core.pages;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import static core.logic.BorderConfigs.border;
-import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.choice;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.message;

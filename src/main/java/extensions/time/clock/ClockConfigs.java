@@ -5,8 +5,7 @@ import org.jetbrains.annotations.Contract;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.getAnsi256Color;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.switchLogo;
 import static core.logic.TextConfigs.*;

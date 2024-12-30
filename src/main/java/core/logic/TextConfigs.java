@@ -5,8 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-import static core.logic.BorderConfigs.*;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.DisplayManager.errorAscii;
 import static java.lang.System.out;
 

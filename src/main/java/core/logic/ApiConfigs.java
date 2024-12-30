@@ -9,7 +9,7 @@ import java.net.URL;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;

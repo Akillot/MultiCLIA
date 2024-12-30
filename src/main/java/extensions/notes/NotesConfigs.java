@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;

@@ -3,8 +3,7 @@ package extensions.internet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;

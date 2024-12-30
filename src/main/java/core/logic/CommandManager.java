@@ -10,8 +10,7 @@ import java.net.*;
 import java.net.URI;
 import java.util.Random;
 
-import static core.logic.BorderConfigs.*;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.DisplayManager.*;
 
 import static core.logic.TextConfigs.*;

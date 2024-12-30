@@ -2,7 +2,7 @@ package extensions.time;
 
 import java.time.format.DateTimeFormatter;
 
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;

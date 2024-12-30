@@ -2,9 +2,7 @@ package extensions.notes;
 
 import java.util.Scanner;
 
-import static core.logic.BorderConfigs.border;
-import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;

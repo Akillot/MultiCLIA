@@ -2,8 +2,7 @@ package core.pages;
 
 import java.util.Random;
 
-import static core.logic.BorderConfigs.marginBorder;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.searchCommands;
 import static core.logic.CommandManager.switchLogo;
 import static core.logic.DisplayManager.*;

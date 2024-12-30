@@ -7,8 +7,7 @@ import java.util.Scanner;
 
 import static core.command_handling_system.CommandHandler.*;
 import static core.logic.ApiConfigs.httpRequest;
-import static core.logic.BorderConfigs.*;
-import static core.logic.ColorConfigs.*;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
