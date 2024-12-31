@@ -11,6 +11,8 @@ import static core.logic.CommandManager.switchLogoRandomly;
 import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
+//Not a final version
+
 public class ClockConfigs {
 
     private static int themeColor_1 = 177;
