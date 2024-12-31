@@ -9,6 +9,8 @@ import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
+//Not a final version
+
 public class SearcherConfigs {
 
     private static int themeColor_1 = 75;
