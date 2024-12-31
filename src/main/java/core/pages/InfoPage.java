@@ -28,6 +28,7 @@ public  class InfoPage {
         modifyMessage('n', 1);
 
         displayJavaInfo();
+        displayHomeDirectory();
 
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
@@ -58,6 +59,12 @@ public  class InfoPage {
         message("Java Version: " + getAnsi256Color(systemFirstColor) + javaVersion,
                 systemLayoutColor, 58, 0, out::print);
         message("Java Vendor: " + getAnsi256Color(systemFirstColor) + javaVendor,
+                systemLayoutColor, 58, 0, out::print);
+    }
+
+    private static void displayHomeDirectory() {
+        String userHome = System.getProperty("user.home");
+        message("Home Directory: " + getAnsi256Color(systemFirstColor) + userHome,
                 systemLayoutColor, 58, 0, out::print);
     }
 
