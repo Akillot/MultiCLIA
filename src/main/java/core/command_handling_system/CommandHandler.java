@@ -2,12 +2,12 @@ package core.command_handling_system;
 
 import core.pages.SettingsPage;
 import extensions.finance.CryptoPage;
-import extensions.notes.NotesPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
 import extensions.internet.SearcherPage;
 import core.pages.InfoPage;
 import core.pages.StartPage;
+import extensions.notes.NotesPage;
 import extensions.time.clock.ClockPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +40,7 @@ public class CommandHandler {
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
 
-        commandMap.put("notes", NotesPage::displayNotesMenu);
+        commandMap.put("notes", NotesPage::displayNotesPage);
         commandMap.put("searcher", SearcherPage::browserPage);
         commandMap.put("crypto", CryptoPage::exchangerPage);
         commandMap.put("clock", ClockPage::clockPage);
