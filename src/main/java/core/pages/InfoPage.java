@@ -21,8 +21,13 @@ public  class InfoPage {
         modifyMessage('n', 2);
         message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
+        modifyMessage('n', 1);
+
         displayOs();
         displayCpuInfo();
+        modifyMessage('n', 1);
+
+        displayJavaInfo();
 
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
@@ -46,6 +51,16 @@ public  class InfoPage {
         message("CPU Cores: " + getAnsi256Color(systemFirstColor) + availableProcessors,
                 systemLayoutColor, 58, 0, out::print);
     }
+
+    private static void displayJavaInfo() {
+        String javaVersion = System.getProperty("java.version");
+        String javaVendor = System.getProperty("java.vendor");
+        message("Java Version: " + getAnsi256Color(systemFirstColor) + javaVersion,
+                systemLayoutColor, 58, 0, out::print);
+        message("Java Vendor: " + getAnsi256Color(systemFirstColor) + javaVendor,
+                systemLayoutColor, 58, 0, out::print);
+    }
+
 
     private static void displayImportantLinks(){
         modifyMessage('n', 2);
