@@ -22,21 +22,29 @@ public  class InfoPage {
         message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         displayOs();
+        displayCpuInfo();
 
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         choice("Description", displayAppDescription(),
-                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n', 1);
         choice("Important links", InfoPage::displayImportantLinks,
-                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
-        marginBorder();
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
+        border();
+        modifyMessage('n',1);
     }
 
     private static void displayOs(){
         String operatingSystem = System.getProperty("os.name");
         message("OS: " + getAnsi256Color(systemFirstColor) + operatingSystem, systemLayoutColor,58,0,out::print);
+    }
+
+    private static void displayCpuInfo() {
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        message("CPU Cores: " + getAnsi256Color(systemFirstColor) + availableProcessors,
+                systemLayoutColor, 58, 0, out::print);
     }
 
     private static void displayImportantLinks(){
