@@ -5,9 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-import static core.logic.BorderConfigs.*;
-import static core.logic.ColorConfigs.*;
-import static core.logic.DisplayManager.errorAscii;
+import static core.logic.AppearanceConfigs.*;
+import static core.logic.DisplayManager.displayErrorAscii;
 import static java.lang.System.out;
 
 public class TextConfigs {
@@ -20,7 +19,10 @@ public class TextConfigs {
             if (i == 0) {
                 border();
             }
-            out.print(alignment(text.length() + 2) + "·" + text.substring(i, end) + "·" + RESET);
+            modifyMessage('n',1);
+            out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "You entered: ["
+                    + getAnsi256Color(systemFirstColor) + text.substring(i, end) + RESET
+                    + getAnsi256Color(systemLayoutColor) + "]" + RESET);
             if (end < text.length()) {
                 modifyMessage('n',1);
             }
@@ -40,7 +42,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again",systemDefaultRed,58,0, out::println);
+                message("Error, try again", systemRejectionColor,58,0, out::println);
             }
         }
         out.print("");
@@ -74,7 +76,7 @@ public class TextConfigs {
                 try {
                     Thread.sleep(delay);
                 } catch (InterruptedException ex) {
-                    errorAscii();
+                    displayErrorAscii();
                     return;
                 }
             }
@@ -83,18 +85,18 @@ public class TextConfigs {
         modifyMessage('n', 1);
     }
 
-    public static void messageInstruction(String preText, String instructionOne, String midText,
-                                          String instructionTwo, String postText) {
-        message(preText + " '" + getAnsi256Color(systemDefaultColor) + instructionOne + RESET +
-                getAnsi256Color(systemDefaultWhite) + "' " + midText +" '" + RESET +
-                getAnsi256Color(systemDefaultColor) + instructionTwo + RESET +
-                getAnsi256Color(systemDefaultWhite) + "' " + postText,systemDefaultWhite,58,0,out::print);
+    public static void displayConfirmation(String preText, String midText, String postText,
+                                           int acceptanceColor, int rejectionColor, int layoutColor) {
+        message(preText + " '" + getAnsi256Color(acceptanceColor) + "y" + getAnsi256Color(layoutColor) +
+                        "/" + getAnsi256Color(acceptanceColor) + "+" +
+                getAnsi256Color(layoutColor) + "' " + midText +" '" + getAnsi256Color(rejectionColor) + "n" + getAnsi256Color(layoutColor) +
+                "/" + getAnsi256Color(rejectionColor) + "-" + getAnsi256Color(layoutColor) + "' " + postText, systemLayoutColor,58,0,out::print);
     }
 
-    //unclear name
+    //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
-            errorAscii();
+            displayErrorAscii();
         }
         String output = switch(modifier){
             case 'n' -> "\n";
@@ -113,7 +115,8 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + getAnsi256Color(systemDefaultWhite) + "["  + modification + "] " + RESET
-                + getAnsi256Color(systemDefaultWhite) + text + RESET);
+        out.println(alignment(alignment) + getAnsi256Color(systemLayoutColor) + "["
+                + getAnsi256Color(systemFirstColor) + modification + getAnsi256Color(systemLayoutColor) + "] "
+                + getAnsi256Color(systemLayoutColor) + text + RESET);
     }
 }

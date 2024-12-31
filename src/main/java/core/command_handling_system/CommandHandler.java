@@ -1,20 +1,20 @@
 package core.command_handling_system;
 
 import core.pages.SettingsPage;
-import extensions.finance.CurrencyExchangerPage;
-import extensions.notes.NotesPage;
+import extensions.finance.CryptoPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
-import extensions.internet.BrowserPage;
+import extensions.internet.SearcherPage;
 import core.pages.InfoPage;
 import core.pages.StartPage;
+import extensions.notes.NotesPage;
 import extensions.time.clock.ClockPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.logic.ColorConfigs.systemDefaultRed;
+import static core.logic.AppearanceConfigs.systemRejectionColor;
 import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
@@ -22,17 +22,17 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "--cmds" ,"--setts", "--rerun",
-            "--ip", "--info", "--exit", "--exitq",
-            "--help"};
+            "cmds" ,"setts", "rerun",
+            "ip", "info", "exit", "exitq",
+            "help", "version", "clear"};
 
     public static String[] shortSystemCmds = {
-            "-c" ,"-s", "-rr",
-            "-ip", "-i", "-e", "-eq",
-            "-h"};
+            "/c" ,"/s", "/rr",
+            "/ip", "/i", "/e", "/eq",
+            "/h", "/v", "/cl"};
 
     public static String[] extensionCmds = {
-            "notes", "browser", "crypto", "clock"};
+            "notes", "searcher", "crypto", "clock"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
@@ -40,9 +40,9 @@ public class CommandHandler {
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
 
-        commandMap.put("notes", NotesPage::displayNotepad);
-        commandMap.put("browser", BrowserPage::browserPage);
-        commandMap.put("crypto", CurrencyExchangerPage::exchangerPage);
+        commandMap.put("notes", NotesPage::displayNotesPage);
+        commandMap.put("searcher", SearcherPage::browserPage);
+        commandMap.put("crypto", CryptoPage::exchangerPage);
         commandMap.put("clock", ClockPage::clockPage);
     }
 
@@ -51,19 +51,21 @@ public class CommandHandler {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
             case 1 -> SettingsPage::displaySettings;
-            case 2 -> StartPage::displayStart;
+            case 2 -> StartPage::displayStartPage;
             case 3 -> DisplayManager::displayUserIp;
             case 4 -> () -> {
                 try {
                     InfoPage.displayInfo();
                 } catch (InterruptedException e) {
-                    errorAscii();
-                    message("Error displaying info: " + e.getMessage(), systemDefaultRed, 58, 0, out::println);
+                    displayErrorAscii();
+                    message("Error displaying this page: " + e.getMessage(), systemRejectionColor, 58, 0, out::println);
                 }
             };
             case 5 -> CommandManager::terminateProgramDefault;
             case 6 -> CommandManager::terminateProgramQuick;
             case 7 -> DisplayManager::displayCommandsDescription;
+            case 8 -> DisplayManager::displayCurrentVersion;
+            case 9 -> CommandManager::clearTerminal;
             default -> throw new IllegalArgumentException("Invalid command index");
         };
     }
