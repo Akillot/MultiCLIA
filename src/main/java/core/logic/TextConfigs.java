@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.DisplayManager.errorAscii;
+import static core.logic.DisplayManager.displayErrorAscii;
 import static java.lang.System.out;
 
 public class TextConfigs {
@@ -76,7 +76,7 @@ public class TextConfigs {
                 try {
                     Thread.sleep(delay);
                 } catch (InterruptedException ex) {
-                    errorAscii();
+                    displayErrorAscii();
                     return;
                 }
             }
@@ -96,7 +96,7 @@ public class TextConfigs {
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
-            errorAscii();
+            displayErrorAscii();
         }
         String output = switch(modifier){
             case 'n' -> "\n";

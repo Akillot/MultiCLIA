@@ -30,7 +30,7 @@ public class DisplayManager {
             " "
     };
 
-    public static void errorAscii() {
+    public static void displayErrorAscii() {
         for (String line : errorAscii) {
             message(line, systemRejectionColor, -1, 0, out::print);
         }
@@ -61,7 +61,7 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder();
-            errorAscii();
+            displayErrorAscii();
             message("Unknown error occurred", systemRejectionColor, 58, 0, out::print);
         }
     }

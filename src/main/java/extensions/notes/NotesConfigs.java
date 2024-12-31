@@ -42,7 +42,7 @@ public class NotesConfigs {
             notesList.add(this);
         } catch (IOException e) {
             marginBorder();
-            errorAscii();
+            displayErrorAscii();
             message("Error saving the note: " + e.getMessage(), systemRejectionColor,58,0,out::print);
         }
     }
@@ -62,7 +62,7 @@ public class NotesConfigs {
                 content.append(line).append("\n");
             }
         } catch (IOException e) {
-            errorAscii();
+            displayErrorAscii();
             message("Error reading the note: " + e.getMessage(), systemRejectionColor,58,0,out::print);
             return null;
         }
@@ -84,7 +84,7 @@ public class NotesConfigs {
             notesList.removeIf(note -> note.getTitle().equals(title));
             return true;
         } else {
-            errorAscii();
+            displayErrorAscii();
             message("Error deleting the note!", systemRejectionColor,58,0,out::print);
             return false;
         }

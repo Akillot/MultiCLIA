@@ -57,7 +57,7 @@ public class CommandHandler {
                 try {
                     InfoPage.displayInfo();
                 } catch (InterruptedException e) {
-                    errorAscii();
+                    displayErrorAscii();
                     message("Error displaying this page: " + e.getMessage(), systemRejectionColor, 58, 0, out::println);
                 }
             };

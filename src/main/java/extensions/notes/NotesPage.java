@@ -129,7 +129,7 @@ public class NotesPage {
             }
         } else {
             marginBorder();
-            errorAscii();
+            displayErrorAscii();
             message("Note not found", systemRejectionColor,58,0,out::println);
         }
     }
@@ -144,7 +144,7 @@ public class NotesPage {
             border();
         } else {
             marginBorder();
-            errorAscii();
+            displayErrorAscii();
             message("Note not found", systemRejectionColor,58,0,out::println);
         }
     }
