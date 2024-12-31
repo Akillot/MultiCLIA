@@ -13,6 +13,8 @@ import static core.logic.TextConfigs.*;
 
 import static java.lang.System.out;
 
+//Not a final version
+
 public class CryptoConfigs {
 
     private static final LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
