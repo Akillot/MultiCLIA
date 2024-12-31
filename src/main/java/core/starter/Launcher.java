@@ -2,7 +2,7 @@ package core.starter;
 
 import core.pages.StartPage;
 
-import static core.logic.DisplayManager.progressbarAnimation;
+import static core.logic.AppearanceConfigs.*;
 import static core.logic.TextConfigs.modifyMessage;
 
 public class Launcher {

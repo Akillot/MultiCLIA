@@ -138,7 +138,7 @@ public class CryptoConfigs {
     //Main menu of extension
     public static void displayCryptoMenu() {
         modifyMessage('n', 2);
-        switchLogo(cryptoLogo,8);
+        switchLogoRandomly(cryptoLogo,8);
         marginBorder();
         modifyMessage('n', 1);
 

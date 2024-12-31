@@ -1,6 +1,7 @@
 package core.logic;
 
 import core.command_handling_system.PackageUnifier;
+import lombok.Getter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,11 +20,15 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
-    public static void switchLogo(String[] logo, int alignment) {
-        String[] colors;
+    //displaying logo
+    public static void switchLogoRandomly(String[] logo, int alignment) {
         Random rand = new Random();
         int indexOfLogo = rand.nextInt(0, 3);
+        switchLogoManualy(logo, indexOfLogo, alignment);
+    }
 
+    public static void switchLogoManualy(String[] logo, int indexOfLogo, int alignment) {
+        String[] colors;
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
                     getAnsi256Color(systemFirstColor), getAnsi256Color(56),
@@ -52,6 +57,7 @@ public class CommandManager {
         }
     }
 
+    //Searching
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {

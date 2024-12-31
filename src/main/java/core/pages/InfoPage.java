@@ -14,7 +14,7 @@ public  class InfoPage {
     @Contract(pure = true)
     public static @NotNull String getVersion() {
         String appVersion = "A-0.8.0";
-        return getAnsi256Color(systemFirstColor) + appVersion + RESET;
+        return getAnsi256Color(systemFirstColor) + appVersion;
     }
 
     public static void displayInfo() throws InterruptedException {
@@ -45,13 +45,13 @@ public  class InfoPage {
         choice(getAnsi256Color(27) + "G" + getAnsi256Color(160) + "m" + getAnsi256Color(220)
                 + "a" + getAnsi256Color(27) + "i"
                 + getAnsi256Color(47) + "l",
-                openUri("mailto:"+ "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
+                openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
 
-        choice("Github", openUri("https://github.com/Akillot/MultiCLIA"),
+        choice(getAnsi256Color(253) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
 
-        choice("MultiCLIA License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
+        choice(getAnsi256Color(253) + "MultiCLIA" + getAnsi256Color(systemLayoutColor) +" License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
     }
 

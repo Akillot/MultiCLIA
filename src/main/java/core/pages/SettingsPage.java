@@ -4,21 +4,26 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.CommandManager.choice;
+import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.message;
+import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;
 
 public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
         displayMemorySection();
-        marginBorder();
 
-        modifyMessage('n',1);
-        displayColorSection();
         border();
+        modifyMessage('n',2);
+        displayColorSection();
+
+        marginBorder();
         modifyMessage('n',1);
+        displayLogoSection();
+
+        marginBorder();
     }
 
     //Memory methods
@@ -45,6 +50,7 @@ public class SettingsPage {
             modifyMessage('n',1);
         }
         displayMemoryBar();
+        modifyMessage('n',1);
     }
 
     private static void displayMemoryBar() {
@@ -61,7 +67,6 @@ public class SettingsPage {
 
         message(bar.toString(), systemLayoutColor, 58, 0, out::print);
     }
-
 
     //Color methods
     private static void displayColorSection(){
@@ -107,12 +112,32 @@ public class SettingsPage {
     }
 
     @Contract(pure = true)
-    public static @NotNull String tableAlignment(int width) {
+    private static @NotNull String tableAlignment(int width) {
         return " ".repeat(Math.max(0, width));
     }
 
-    private static void changeColor(){
+    /*private static void changeColor(){
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter new color code: ");
+    }
+     */
+
+    //Logo
+    public static int colorVariationOfLogo = 3;
+    private static void displayLogoSection(){
+        choice("Logo", SettingsPage::displayAllLogos, systemFirstColor, systemRejectionColor, systemLayoutColor);
+    }
+
+    private static void displayAllLogos() {
+        try {
+            modifyMessage('n', 1);
+            for (int i = 0; i < colorVariationOfLogo; i++) {
+                switchLogoManualy(mainLogoAscii, i % 3, 48);
+                Thread.sleep(500);
+                modifyMessage('n', 1);
+            }
+        } catch (Exception ex) {
+            message("Error: " + ex.getMessage(), systemRejectionColor, 58, 0, out::print);
+        }
     }
 }

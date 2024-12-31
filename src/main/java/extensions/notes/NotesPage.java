@@ -13,7 +13,7 @@ public class NotesPage {
 
     public static void displayNotesMenu(){
         modifyMessage('n',2);
-        switchLogo(notesLogo,-2);
+        switchLogoRandomly(notesLogo,-2);
         marginBorder();
         modifyMessage('n', 1);
         choice("Operations",NotesPage::displayOperations,

@@ -30,6 +30,12 @@ public class DisplayManager {
             " "
     };
 
+    public static void errorAscii() {
+        for (String line : errorAscii) {
+            message(line, systemRejectionColor, -1, 0, out::print);
+        }
+    }
+
     private static final String[] rules = {
             "cmds: Shows all commands [/c]",
             "setts: Shows settings of the application [/s]",
@@ -42,58 +48,6 @@ public class DisplayManager {
             "version: Shows version [/v]",
             "clear: Clears recent values from terminal [/cl]"
     };
-
-    public static void loadingAnimation(int frames, int duration) {
-        String[] spinner = {"    |", "    /", "    —", "    \\"};
-        for (int i = 0; i < duration; i++) {
-            out.print(getAnsi256Color(systemLayoutColor) + "\r" + spinner[i % spinner.length] + RESET);
-            try {
-                Thread.sleep(frames);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        out.print(getAnsi256Color(systemLayoutColor) + "\r    ✓" + RESET);
-    }
-
-    public static void progressbarAnimation(String title) {
-        int barLength = 97;
-        int animationDuration = 3000;
-        int steps = 100;
-        int delay = animationDuration / steps;
-
-        for (int step = 0; step <= steps; step++) {
-            double progress = step / (double) steps;
-            int completed = (int) (progress * barLength);
-            StringBuilder bar = new StringBuilder("\r" + alignment(64)
-                    + getAnsi256Color(systemLayoutColor) + title + "[");
-
-            for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? "=" : " ");
-            }
-            bar.append("] ");
-            bar.append(String.format("%.2f%%", progress * 100));
-
-            System.out.print(bar.toString());
-
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
-        }
-        System.out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
-        out.print("\n".repeat(2));
-    }
-
-
-
-    public static void errorAscii() {
-        for (String line : errorAscii) {
-            message(line, systemRejectionColor, -1, 0, out::print);
-        }
-    }
 
     public static void displayCommandList() {
         try {

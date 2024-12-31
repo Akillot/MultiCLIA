@@ -22,7 +22,7 @@ public class SearcherConfigs {
     public static void searcher() {
 
         modifyMessage('n', 2);
-        switchLogo(searcherLogo,32);
+        switchLogoRandomly(searcherLogo,32);
         marginBorder();
         modifyMessage('n', 1);
         alert("Example",getAnsi256Color(layoutColor)

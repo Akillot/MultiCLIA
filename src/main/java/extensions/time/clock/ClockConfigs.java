@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.choice;
-import static core.logic.CommandManager.switchLogo;
+import static core.logic.CommandManager.switchLogoRandomly;
 import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -33,7 +33,7 @@ public class ClockConfigs {
 
     public static void displayClockMenu() {
         modifyMessage('n', 2);
-        switchLogo(clockLogo, -2);
+        switchLogoRandomly(clockLogo, -2);
         marginBorder();
         modifyMessage('n', 1);
         displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
