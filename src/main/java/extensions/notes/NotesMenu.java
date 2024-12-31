@@ -12,6 +12,8 @@ public class NotesMenu {
 
     //Not a final version
 
+    //next will be better
+
     public static void displayNotesMenu() {
         boolean running = true;
         while (running) {
