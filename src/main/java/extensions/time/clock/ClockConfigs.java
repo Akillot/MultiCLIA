@@ -20,6 +20,8 @@ public class ClockConfigs {
     private static int acceptanceColor = 46;
     private static int rejectionColor = 196;
 
+    private static double version = 1.0;
+
     private static String[] clockLogo = {
             "  .oooooo.   oooo                       oooo        ",
             " d8P'  `Y8b  `888                       `888        ",
@@ -35,9 +37,14 @@ public class ClockConfigs {
         modifyMessage('n', 2);
         switchLogoRandomly(clockLogo, -2);
         marginBorder();
+
         modifyMessage('n', 1);
         displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
-        choice("Clock", ClockConfigs::displayTime, themeColor_1, layoutColor, rejectionColor);
+        choice("Clock", ClockConfigs::displayTime, themeColor_1, rejectionColor, layoutColor);
+
+        modifyMessage('n', 1);
+
+        choice("Info", ClockConfigs::displayInfo, themeColor_1, rejectionColor, layoutColor);
         marginBorder();
     }
 
@@ -47,5 +54,13 @@ public class ClockConfigs {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
         out.println(alignment(58) + getAnsi256Color(themeColor_2) + "Current time: " + getAnsi256Color(layoutColor) + formattedTime);
+    }
+
+    private static void displayInfo(){
+        modifyMessage('n',1);
+        message("Name: clock", layoutColor,58,0,out::print);
+        message("Type: extension", layoutColor,58,0,out::print);
+        message("Version: " + version, layoutColor,58,0,out::print);
+        message("Author: Nick Zozulia", layoutColor,58,0,out::print);
     }
 }
