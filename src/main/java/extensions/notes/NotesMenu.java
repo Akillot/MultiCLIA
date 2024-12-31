@@ -10,6 +10,8 @@ import static java.lang.System.out;
 public class NotesMenu {
     private static Scanner scanner = new Scanner(System.in);
 
+    //Not a final version
+
     public static void displayNotesMenu() {
         boolean running = true;
         while (running) {
