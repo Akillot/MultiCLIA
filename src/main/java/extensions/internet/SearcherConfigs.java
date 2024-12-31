@@ -11,8 +11,8 @@ import static java.lang.System.out;
 
 public class SearcherConfigs {
 
-    private static int themeColor_1 = 165;
-    private static int themeColor_2 = 207;
+    private static int themeColor_1 = 75;
+    private static int themeColor_2 = 111;
     private static int layoutColor = 15;
 
     private static int acceptanceColor = 46;
@@ -37,13 +37,13 @@ public class SearcherConfigs {
             modifyMessage('n', 2);
 
             out.print(alignment(58) + getAnsi256Color(themeColor_1) + "Enter domain"
-                    + getAnsi256Color(layoutColor) + " (or type '" + getAnsi256Color(rejectionColor) + "exit"
+                    + getAnsi256Color(layoutColor) + " (Type '" + getAnsi256Color(rejectionColor) + "exit"
                     + getAnsi256Color(layoutColor) + "' to quit): " + RESET);
             String domainInput = scanner.nextLine().toLowerCase();
 
             modifyMessage('n', 1);
 
-            if (domainInput.equals("exit")) {
+            if (domainInput.equals("exit") || domainInput.equals("e") || domainInput.equals("quit") || domainInput.equals("q")) {
                 terminateExtension();
                 modifyMessage('n', 1);
                 break;
@@ -52,23 +52,23 @@ public class SearcherConfigs {
             String domain = "https://" + domainInput;
 
             displayConfirmation("Enter","to open and","to skip",
-                    themeColor_1,layoutColor,rejectionColor);
+                    acceptanceColor,rejectionColor,layoutColor);
             choice("Show URL", SearcherConfigs.displayFullURl(domain),
-                    systemFirstColor, systemLayoutColor, systemFirstColor);
+                    themeColor_1,rejectionColor,layoutColor);
 
             modifyMessage('n', 1);
 
             displayConfirmation("Enter","to open and","to skip",
-                    themeColor_1,layoutColor,rejectionColor);
+                    acceptanceColor,rejectionColor,layoutColor);
             choice(domainInput, openUri(domain),
-                    systemFirstColor, systemLayoutColor, systemFirstColor);
+                    themeColor_1,rejectionColor,layoutColor);
         }
     }
 
     @Contract(pure = true)
     private static @NotNull Runnable displayFullURl(String domain) {
         return () -> {
-            message("Full URL: " + getAnsi256Color(152) + domain + RESET, layoutColor, 58, 0, out::print);
+            message("Full URL: " + getAnsi256Color(75) + domain, layoutColor, 58, 0, out::print);
         };
     }
 

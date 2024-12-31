@@ -90,7 +90,7 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("Status: ✓", systemLayoutColor, 58, 0, out::print);
+                    message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
                 } else {
                     message("Error: Desktop or browse action not supported", systemRejectionColor,
                             58, 0, out::print);
@@ -133,13 +133,14 @@ public class CommandManager {
 
             case "-":
             case "n":
-                message("Status: x", systemLayoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
                 modifyMessage('n', 1);
                 break;
 
             default:
                 message("Invalid choice", errorColor, 58, 0, out::print);
-                message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(systemRejectionColor) + "x",
+                        systemLayoutColor, 58, 0, out::print);
                 modifyMessage('n', 1);
                 break;
         }
@@ -171,7 +172,7 @@ public class CommandManager {
     }
 
     public static void terminateExtension() {
-        message("\r   Status: ✓", systemLayoutColor,58,0,out::print);
+        message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
         message("Extension terminated correctly", systemFirstColor,
                 58,0,out::print);
         modifyMessage('n',2);
@@ -181,7 +182,7 @@ public class CommandManager {
     public static void terminateProgramDefault() {
         modifyMessage('n',2);
         loadingAnimation(300,10);
-        message("\r    Status: ✓", systemLayoutColor,58,0,out::print);
+        message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
         message("Program terminated correctly", systemFirstColor,
                 56,20,out::print);
         modifyMessage('n', 2);
@@ -190,7 +191,7 @@ public class CommandManager {
 
     public static void terminateProgramQuick() {
         modifyMessage('n',2);
-        message("\r    Status: ✓", systemLayoutColor,58,0,out::print);
+        message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
         message("Program terminated quickly correctly", systemFirstColor,
                 56,0,out::print);
         modifyMessage('n', 2);

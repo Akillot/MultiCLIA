@@ -79,14 +79,14 @@ public class AppearanceConfigs {
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
-            out.print(getAnsi256Color(systemLayoutColor) + "\r" + spinner[i % spinner.length] + RESET);
+            out.print(getRandom256Color() + "\r" + spinner[i % spinner.length] + RESET);
             try {
                 Thread.sleep(frames);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getAnsi256Color(systemLayoutColor) + "\r    ✓" + RESET);
+        out.print(getAnsi256Color(systemAcceptanceColor) + "\r    ✓" + RESET);
     }
 
     public static void progressbarAnimation(String title) {

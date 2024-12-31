@@ -32,7 +32,7 @@ public class StartPage {
     }
 
     private static void displayMenu() {
-        modifyMessage('n',2);
+        modifyMessage('n',1);
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
@@ -95,7 +95,7 @@ public class StartPage {
             case "31-12":
             case "01-01":
                 switchLogoRandomly(newYearAscii, 36);
-                modifyMessage('n',2);
+                modifyMessage('n',1);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor, 36,0,out::print);
                 break;
