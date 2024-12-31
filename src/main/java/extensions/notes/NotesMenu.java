@@ -2,20 +2,25 @@ package extensions.notes;
 
 import java.util.Scanner;
 
+import static core.logic.AppearanceConfigs.getAnsi256Color;
+import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.message;
+import static java.lang.System.out;
+
 public class NotesMenu {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void displayNotesMenu() {
         boolean running = true;
         while (running) {
-            System.out.println("1. Create Note");
-            System.out.println("2. Open Note");
-            System.out.println("3. Delete Note");
-            System.out.println("4. Sort Notes by Title");
-            System.out.println("5. Sort Notes by Content");
-            System.out.println("6. Exit");
-            System.out.print("> ");
-            String choice = scanner.nextLine();
+            message("1. Create Note",15,58,0,out::print);
+            message("2. Open Note",15,58,0,out::print);
+            message("3. Delete Note",15,58,0,out::print);
+            message("4. Sort Notes by Title",15,58,0,out::print);
+            message("5. Sort Notes by Content",15,58,0,out::print);
+            message("6. " + getAnsi256Color(196) + "Exit",15,58,0,out::print);
+            message("> ",15,58,0,out::print);
+            String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
                 case "1":
@@ -29,54 +34,54 @@ public class NotesMenu {
                     break;
                 case "4":
                     NotesManager.sortNotesByTitle();
-                    System.out.println("Notes sorted by title.");
+                    message("Notes sorted by title.",46,58,0,out::print);
                     break;
                 case "5":
                     NotesManager.sortNotesByContent();
-                    System.out.println("Notes sorted by content.");
+                    message("Notes sorted by content.",46,58,0,out::print);
                     break;
                 case "6":
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid choice. Try again.");
+                    message("Invalid choice. Try again.",196,58,0,out::print);
             }
         }
     }
 
     private static void createNote() {
-        System.out.print("Enter title: ");
+        out.print(alignment(58) + getAnsi256Color(15) + "Enter title: ");
         String title = scanner.nextLine();
-        System.out.print("Enter content: ");
+        out.print(alignment(58) + getAnsi256Color(15) + "Enter content: ");
         String content = scanner.nextLine();
 
         NotesConfigs note = new NotesConfigs(title, content);
         NotesManager.addNote(note);
         note.saveToFile();
-        System.out.println("Note created.");
+        message("Note created.",46,58,0,out::print);
     }
 
     private static void openNote() {
-        System.out.print("Enter title: ");
+        message("Enter title: ",15,58,0,out::print);
         String title = scanner.nextLine();
 
         NotesConfigs note = NotesConfigs.readFromFile(title);
         if (note != null) {
-            System.out.println("Content: ");
-            System.out.println(note.getContent());
+            message("Content: ",15,58,0,out::print);
+            out.println(note.getContent());
         } else {
-            System.out.println("Note not found.");
+            message("Note not found.",196,58,0,out::print);
         }
     }
 
     private static void deleteNote() {
-        System.out.print("Enter title: ");
+        message("Enter title: ",15,58,0,out::print);
         String title = scanner.nextLine();
 
         boolean deleted = NotesConfigs.deleteNoteFile(title);
         if (deleted) {
             NotesManager.deleteNoteByTitle(title);
-            System.out.println("Note deleted.");
+           message("Note deleted.",46,58,0,out::print);
         }
     }
 }
