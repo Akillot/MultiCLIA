@@ -1,7 +1,6 @@
 package core.logic;
 
 import core.command_handling_system.PackageUnifier;
-import lombok.Getter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -93,8 +92,8 @@ public class CommandManager {
                     message("Status: x", systemLayoutColor, 58, 0, out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL", systemRejectionColor, 58, 0, out::print);
-                message("Status: x", systemLayoutColor, 58, 0, out::print);
+                message("Error opening URL", systemLayoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
             }
         };
     }
@@ -107,7 +106,7 @@ public class CommandManager {
         } catch (UnknownHostException e) {
             errorAscii();
             message("IP is undefined", systemRejectionColor, 58, 0, out::print);
-            message("Status: x", systemLayoutColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
         }
     }
 
@@ -123,7 +122,7 @@ public class CommandManager {
                     modifyMessage('n', 1);
                 } catch (Exception e) {
                     message("Error executing action", systemRejectionColor, 58, 0, out::print);
-                    message("Status: x", systemLayoutColor, 58, 0, out::print);
+                    message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
                 }
                 break;
 
@@ -135,7 +134,7 @@ public class CommandManager {
 
             default:
                 message("Invalid choice", errorColor, 58, 0, out::print);
-                message("Status: x", layoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
                 modifyMessage('n', 1);
                 break;
         }
@@ -162,7 +161,7 @@ public class CommandManager {
             }
         } catch (Exception e) {
             message("Error executing action", systemRejectionColor, 58, 0, out::print);
-            message("Status: x", systemLayoutColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
         }
     }
 

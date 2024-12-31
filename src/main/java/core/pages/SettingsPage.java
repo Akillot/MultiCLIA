@@ -19,11 +19,12 @@ public class SettingsPage {
         modifyMessage('n',2);
         displayColorSection();
 
-        marginBorder();
-        modifyMessage('n',1);
+        border();
+        modifyMessage('n',2);
         displayLogoSection();
 
-        marginBorder();
+        border();
+        modifyMessage('n',1);
     }
 
     //Memory methods

@@ -102,7 +102,7 @@ public class AppearanceConfigs {
                     + getAnsi256Color(systemLayoutColor) + title + "[");
 
             for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? "=" : " ");
+                bar.append(i < completed ? getRandom256Color() + "━" + getAnsi256Color(systemLayoutColor) : " ");
             }
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));
