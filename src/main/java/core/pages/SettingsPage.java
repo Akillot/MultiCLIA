@@ -13,18 +13,19 @@ import static java.lang.System.out;
 public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
+        displayConfirmation("Enter","to open and","to skip",
+                systemFirstColor, systemRejectionColor, systemLayoutColor);
+
+        modifyMessage('n', 1);
         displayMemorySection();
 
-        border();
-        modifyMessage('n',2);
+        modifyMessage('n', 1);
         displayColorSection();
 
-        border();
-        modifyMessage('n',2);
+        modifyMessage('n', 1);
         displayLogoSection();
 
-        border();
-        modifyMessage('n',1);
+        marginBorder();
     }
 
     //Memory methods
@@ -39,6 +40,7 @@ public class SettingsPage {
         long maxMemory = Runtime.getRuntime().maxMemory();
         double usagePercentage = (double) usedMemory / maxMemory * 100;
 
+        modifyMessage('n',1);
         message("Memory used: " + (usedMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
         message("Free memory: " + (freeMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
         message("Total memory: " + (totalMemory / (1000 * 1000)) + "M", systemLayoutColor, 58, 0, out::print);
@@ -51,7 +53,8 @@ public class SettingsPage {
             modifyMessage('n',1);
         }
         displayMemoryBar();
-        modifyMessage('n',1);
+        modifyMessage('n', 2);
+        border();
     }
 
     private static void displayMemoryBar() {
@@ -62,7 +65,7 @@ public class SettingsPage {
         StringBuilder bar = new StringBuilder("Memory: [");
 
         for (int i = 0; i < barLength; i++) {
-            bar.append(i < usedBars ? "#" : "-");
+            bar.append(i < usedBars ? "■" : "-");
         }
         bar.append("]");
 
@@ -71,16 +74,18 @@ public class SettingsPage {
 
     //Color methods
     private static void displayColorSection(){
-        choice("Colors", textModification(), systemFirstColor, systemLayoutColor, systemRejectionColor);
+        choice("Colors", displayColorTable(), systemFirstColor, systemLayoutColor, systemRejectionColor);
     }
 
     @Contract(pure = true)
-    private static @NotNull Runnable textModification() {
+    private static @NotNull Runnable displayColorTable() {
         return () -> {
             printColorRange(0, systemLayoutColor, "");
             modifyMessage('n', 1);
             printColorBlock(16, 231);
             printColorRange(232, 255, "");
+            modifyMessage('n', 1);
+            border();
         };
     }
 
@@ -124,7 +129,8 @@ public class SettingsPage {
      */
 
     //Logo
-    public static int colorVariationOfLogo = 3;
+    public static int colorVariationOfLogo = 4;
+
     private static void displayLogoSection(){
         choice("Logo", SettingsPage::displayAllLogos, systemFirstColor, systemRejectionColor, systemLayoutColor);
     }
@@ -133,10 +139,14 @@ public class SettingsPage {
         try {
             modifyMessage('n', 1);
             for (int i = 0; i < colorVariationOfLogo; i++) {
-                switchLogoManualy(mainLogoAscii, i % 3, 48);
-                Thread.sleep(500);
-                modifyMessage('n', 1);
-            }
+                if(i != colorVariationOfLogo - 1 ) {
+                    switchLogoManualy(mainLogoAscii, i % colorVariationOfLogo, 48);
+                    modifyMessage('n', 1);
+                    Thread.sleep(500);
+                }
+                else{
+                    switchLogoManualy(mainLogoAscii, i % colorVariationOfLogo, 48);
+                }            }
         } catch (Exception ex) {
             message("Error: " + ex.getMessage(), systemRejectionColor, 58, 0, out::print);
         }
