@@ -25,12 +25,12 @@ public  class InfoPage {
 
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         choice("Description", displayAppDescription(),
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n', 1);
         choice("Important links", InfoPage::displayImportantLinks,
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         marginBorder();
     }
 
@@ -48,10 +48,10 @@ public  class InfoPage {
                 openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
 
-        choice(getAnsi256Color(253) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
+        choice(getAnsi256Color(systemLayoutColor) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
 
-        choice(getAnsi256Color(253) + "MultiCLIA" + getAnsi256Color(systemLayoutColor) +" License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
+        choice(getAnsi256Color(systemLayoutColor) +"License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
     }
 
