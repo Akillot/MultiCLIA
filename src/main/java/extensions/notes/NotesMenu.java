@@ -11,8 +11,8 @@ public class NotesMenu {
     private static Scanner scanner = new Scanner(System.in);
 
     //Not a final version
-
     //next will be better
+    //and bigger
 
     public static void displayNotesMenu() {
         boolean running = true;
