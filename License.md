@@ -1,7 +1,7 @@
 # MultiCLIA License  
-**Version 1.0, [2024]**
+**Version 1.1, [2025]**
 
-Copyright (C) [Mykyta Zozulia], [2024]  
+Copyright (C) [Mykyta Zozulia], [2025]  
 *(also informal form of name Nick Zozulia, nicknames: Akillot, Akilot)*  
 
 This license governs the use, reproduction, modification, and distribution of the MultiCLIA project. It is a modified version of the Mozilla Public License 2.0 (MPL 2.0), tailored to meet the specific requirements of the MultiCLIA project. By using this project, you agree to the terms outlined below.
