@@ -39,8 +39,7 @@ public  class InfoPage {
         choice("Important links", InfoPage::displayImportantLinks,
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
 
-        modifyMessage('n',1);
-        marginBorder(1,1);
+        marginBorder(2,1);
     }
 
     private static void displayOs(){
@@ -59,6 +58,7 @@ public  class InfoPage {
         String javaVendor = System.getProperty("java.vendor");
         message("Java Version: " + getAnsi256Color(systemFirstColor) + javaVersion,
                 systemLayoutColor, 58, 0, out::print);
+
         message("Java Vendor: " + getAnsi256Color(systemFirstColor) + javaVendor,
                 systemLayoutColor, 58, 0, out::print);
     }
@@ -71,7 +71,7 @@ public  class InfoPage {
 
 
     private static void displayImportantLinks(){
-        modifyMessage('n', 2);
+        modifyMessage('n', 1);
 
         choice(getAnsi256Color(27) + "G" + getAnsi256Color(160) + "m" + getAnsi256Color(220)
                 + "a" + getAnsi256Color(27) + "i"
@@ -93,10 +93,7 @@ public  class InfoPage {
     @Contract(pure = true)
     private static @NotNull Runnable displayAppDescription() {
         return () -> {
-            modifyMessage('n', 1);
-            marginBorder(1,1);
-            modifyMessage('n', 1);
-
+            marginBorder(2,2);
             message( "MultiCLIA " + getAnsi256Color(systemLayoutColor) + "[" + getAnsi256Color(systemLayoutColor)
                             + "Multi Command Line Interface App" + getAnsi256Color(systemLayoutColor) + "]\n\n" +
                             alignment(58) + "is an open-source application designed for \n" +

@@ -3,6 +3,7 @@ package extensions.time.clock;
 import org.jetbrains.annotations.Contract;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import static core.logic.AppearanceConfigs.*;
@@ -31,14 +32,13 @@ public class ClockConfigs {
             "888           888  d88' `88b  d88' `\"Y8  888 .8P'   ",
             "888           888  888   888  888        888888.    ",
             "`88b    ooo   888  888   888  888   .o8  888 `88b.  ",
-            " `Y8bood8P'  o888o `Y8bod8P'  `Y8bod8P' o888o o888o ",
-            " "
+            " `Y8bood8P'  o888o `Y8bod8P'  `Y8bod8P' o888o o888o "
     };
 
     public static void displayClockMenu() {
         modifyMessage('n', 2);
         switchLogoRandomly(clockLogo, -2);
-        marginBorder(1,1);
+        marginBorder(2,1);
 
         modifyMessage('n', 1);
         displayConfirmation("Enter","to open and","to skip", acceptanceColor, rejectionColor, layoutColor);
@@ -52,18 +52,21 @@ public class ClockConfigs {
     @Contract(pure = true)
     private static void displayTime() {
         LocalDateTime localTime = LocalDateTime.now();
+        ZoneId currentZone = ZoneId.systemDefault();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy " + "HH:mm");
         String formattedTime = localTime.format(myFormatter);
+
         modifyMessage('n',1);
-        out.println(alignment(58) + getAnsi256Color(themeColor_2) + "Current Time: " + getAnsi256Color(layoutColor) + formattedTime);
+        message("Current Time: " + getAnsi256Color(layoutColor) + formattedTime, themeColor_2,58,0, out::print);
+        message("Current Time Zone: " + getAnsi256Color(layoutColor) + currentZone, themeColor_2,58,0, out::print);
         modifyMessage('n',1);
     }
 
     private static void displayInfo(){
         modifyMessage('n',1);
-        message("Name: " + getAnsi256Color(themeColor_1) + "Clock", layoutColor,58,0,out::print);
-        message("Type: " + getAnsi256Color(themeColor_1) + "Default extension", layoutColor,58,0,out::print);
-        message("Version: " + getAnsi256Color(themeColor_1) + version, layoutColor,58,0,out::print);
-        message("Author: " + getAnsi256Color(themeColor_1) + "Nick Zozulia", layoutColor,58,0,out::print);
+        message("Name: " + getAnsi256Color(themeColor_1) + "Clock", layoutColor,58,0, out::print);
+        message("Type: " + getAnsi256Color(themeColor_1) + "Default extension", layoutColor,58,0, out::print);
+        message("Version: " + getAnsi256Color(themeColor_1) + version, layoutColor,58,0, out::print);
+        message("Author: " + getAnsi256Color(themeColor_1) + "Nick Zozulia", layoutColor,58,0, out::print);
     }
 }

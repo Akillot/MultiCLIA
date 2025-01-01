@@ -139,16 +139,14 @@ public class DisplayManager {
             out.printf(alignment(38) + getAnsi256Color(systemLayoutColor) + "%-40s"
                     + alignment(-18) + getAnsi256Color(systemLayoutColor) + "%-40s%n", systemCmd, extensionCmd);
         }
-        modifyMessage('n', 1);
-        marginBorder(1,1);
+        marginBorder(2,1);
     }
 
     public static void displayUserIp() {
-        modifyMessage('n', 2);
+        modifyMessage('n', 1);
         getUserLocalIp();
         httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
-        modifyMessage('n', 1);
-        marginBorder(1,1);
+        marginBorder(2,1);
     }
 
     public static void displayCommandsDescription() {
@@ -163,7 +161,6 @@ public class DisplayManager {
     public static void displayCurrentVersion() {
         modifyMessage('n', 2);
         message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
-        marginBorder(1,1);
+        marginBorder(2,1);
     }
 }

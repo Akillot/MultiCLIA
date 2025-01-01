@@ -19,13 +19,13 @@ public class SettingsPage {
         modifyMessage('n', 1);
         displayMemorySection();
 
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         displayColorSection();
 
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         displayLogoSection();
 
-        marginBorder(1,1);
+        marginBorder(2,1);
     }
 
     //Memory methods
