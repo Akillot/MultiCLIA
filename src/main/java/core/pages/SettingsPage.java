@@ -14,7 +14,7 @@ public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
 
         modifyMessage('n', 1);
         displayMemorySection();
