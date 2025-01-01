@@ -114,9 +114,9 @@ public class TextConfigs {
 
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
-    public static void alert(String modification ,String text, int alignment) {
-        out.println(alignment(alignment) + getAnsi256Color(systemLayoutColor) + "["
-                + getAnsi256Color(systemFirstColor) + modification + getAnsi256Color(systemLayoutColor) + "] "
-                + getAnsi256Color(systemLayoutColor) + text + RESET);
+    public static void alert(String modification ,String text, int alignment, int themeColor_1 ,int layoutColor) {
+        out.println(alignment(alignment) + getAnsi256Color(layoutColor) + "["
+                + getAnsi256Color(themeColor_1) + modification + getAnsi256Color(layoutColor) + "] "
+                + getAnsi256Color(layoutColor) + text + RESET);
     }
 }

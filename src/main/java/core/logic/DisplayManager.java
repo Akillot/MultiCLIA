@@ -52,7 +52,7 @@ public class DisplayManager {
     public static void displayCommandList() {
         try {
             modifyMessage('n', 2);
-            alert("i", "Show all lists together", 58);
+            alert("i", "Show all lists together", 58, systemFirstColor, systemLayoutColor);
 
             printOpenOrSkipPrompt();
             String choice = getUserChoice();
@@ -60,18 +60,15 @@ public class DisplayManager {
             handleUserChoice(choice);
 
         } catch (Exception e) {
-            marginBorder();
+            marginBorder(1,1);
             displayErrorAscii();
             message("Unknown error occurred", systemRejectionColor, 58, 0, out::print);
         }
     }
 
     private static void printOpenOrSkipPrompt() {
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter '" + RESET
-                + getAnsi256Color(systemFirstColor) + "+" + RESET
-                + getAnsi256Color(systemLayoutColor) + "' to open and '"
-                + RESET + getAnsi256Color(systemFirstColor) + "-" + RESET + getAnsi256Color(systemLayoutColor)
-                + "' to skip" + RESET);
+        displayConfirmation("Enter","to open and","to skip",
+                systemAcceptanceColor,systemRejectionColor,systemLayoutColor );
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Choice: " + RESET);
     }
@@ -81,19 +78,21 @@ public class DisplayManager {
     }
 
     private static void handleUserChoice(@NotNull String choice) {
-        switch (choice) {
+        switch (choice.toLowerCase()) {
             case "+":
+            case "y":
                 displayAllCommandList();
                 break;
             case "-":
+            case "n":
                 displaySubCommandLists();
                 break;
             case "exit":
-                marginBorder();
+                marginBorder(1,1);
                 break;
             default:
                 message("Invalid input", systemRejectionColor, 58, 0, out::print);
-                marginBorder();
+                marginBorder(1,1);
                 break;
         }
     }
@@ -102,9 +101,10 @@ public class DisplayManager {
         modifyMessage('n', 1);
         choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
+        modifyMessage('n', 2);
         choice("Extensions", displayCommandList(extensionCmds),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
-        marginBorder();
+        marginBorder(2,1);
     }
 
     @Contract(pure = true)
@@ -140,16 +140,14 @@ public class DisplayManager {
             out.printf(alignment(38) + getAnsi256Color(systemLayoutColor) + "%-40s"
                     + alignment(-18) + getAnsi256Color(systemLayoutColor) + "%-40s%n", systemCmd, extensionCmd);
         }
-        modifyMessage('n', 1);
-        marginBorder();
+        marginBorder(2,1);
     }
 
     public static void displayUserIp() {
         modifyMessage('n', 2);
         getUserLocalIp();
         httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
-        modifyMessage('n', 1);
-        marginBorder();
+        marginBorder(2,1);
     }
 
     public static void displayCommandsDescription() {
@@ -158,13 +156,12 @@ public class DisplayManager {
             message(rule, systemLayoutColor, 58, 0, out::print);
             modifyMessage('n', 1);
         }
-        marginBorder();
+        marginBorder(1,1);
     }
 
     public static void displayCurrentVersion() {
         modifyMessage('n', 2);
         message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
-        marginBorder();
+        marginBorder(2,1);
     }
 }

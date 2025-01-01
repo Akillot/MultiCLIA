@@ -74,12 +74,12 @@ public class CommandManager {
             if (!registry.executeCommand(nameOfFunction)) {
                 modifyMessage('n', 2);
                 displayErrorAscii();
-                marginBorder();
+                marginBorder(1,1);
             }
         } catch (Exception e) {
             modifyMessage('n', 2);
             displayErrorAscii();
-            marginBorder();
+            marginBorder(1,1);
         }
     }
 
@@ -90,11 +90,11 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
+                    message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
                 } else {
                     message("Error: Desktop or browse action not supported", systemRejectionColor,
                             58, 0, out::print);
-                    message("Status: x", systemLayoutColor, 58, 0, out::print);
+                    message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
                 }
             } catch (URISyntaxException | IOException e) {
                 message("Error opening URL", systemLayoutColor, 58, 0, out::print);
@@ -124,7 +124,6 @@ public class CommandManager {
             case "y":
                 try {
                     action.run();
-                    modifyMessage('n', 1);
                 } catch (Exception e) {
                     message("Error executing action", systemRejectionColor, 58, 0, out::print);
                     message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
@@ -134,14 +133,12 @@ public class CommandManager {
             case "-":
             case "n":
                 message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
-                modifyMessage('n', 1);
                 break;
 
             default:
                 message("Invalid choice", errorColor, 58, 0, out::print);
                 message("Status: " + getAnsi256Color(systemRejectionColor) + "x",
                         systemLayoutColor, 58, 0, out::print);
-                modifyMessage('n', 1);
                 break;
         }
     }
@@ -171,12 +168,11 @@ public class CommandManager {
         }
     }
 
-    public static void terminateExtension() {
-        message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Extension terminated correctly", systemFirstColor,
+    public static void terminateExtension(int themeColor_1,int acceptanceColor , int layoutColor) {
+        message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+        message("Extension terminated correctly", themeColor_1,
                 58,0,out::print);
-        modifyMessage('n',2);
-        border();
+        marginBorder(2,0);
     }
 
     public static void terminateProgramDefault() {

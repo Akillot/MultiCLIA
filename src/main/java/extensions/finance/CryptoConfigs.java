@@ -14,7 +14,6 @@ import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
 //Not a final version
-
 public class CryptoConfigs {
 
     private static final LinkedList<String> cryptocurrencyCodes = new LinkedList<>() {{
@@ -141,29 +140,30 @@ public class CryptoConfigs {
     public static void displayCryptoMenu() {
         modifyMessage('n', 2);
         switchLogoRandomly(cryptoLogo,8);
-        marginBorder();
-        modifyMessage('n', 1);
+        marginBorder(1,2);
 
         displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("List of cryptocurrencies", CryptoConfigs::displayListOfCryptocurrencies,
                 themeColor_1, layoutColor, rejectionColor);
 
-        modifyMessage('n', 1);
         displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("Exchanger", CryptoConfigs::exchanger,
                 themeColor_1, layoutColor, rejectionColor);
 
-        modifyMessage('n', 1);
+        modifyMessage('n',2);
+
         displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("Price tracker", CryptoConfigs::currencyPriceTracker,
                 themeColor_1, layoutColor, rejectionColor);
+        marginBorder(2,1);
     }
 
     //Exchanger method
     private static void exchanger() {
-        modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(themeColor_1) + "exit"
-                + getAnsi256Color(layoutColor) + "' to\n" + alignment(58) + "quit the extension.", 58);
+                + getAnsi256Color(layoutColor) + "' to\n" + alignment(58) + "quit the extension.",
+                58, themeColor_1, layoutColor);
+        modifyMessage('n',1);
 
         while (true) {
             modifyMessage('n', 1);
@@ -172,7 +172,7 @@ public class CryptoConfigs {
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
                 modifyMessage('n', 1);
-                terminateExtension();
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -185,7 +185,7 @@ public class CryptoConfigs {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension();
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -203,14 +203,15 @@ public class CryptoConfigs {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(rejectionColor) + "exit"
                 + getAnsi256Color(layoutColor) + "' to quit the extension at any time.\n"
-                + alignment(58) + "You cannot exit this mode while tracking is in progress.", 58);
+                + alignment(58) + "You cannot exit this mode while tracking is in progress.", 58,
+                themeColor_1, layoutColor);
         while (true) {
             modifyMessage('n', 1);
             out.print(alignment(58) + getAnsi256Color(layoutColor) + "Cryptocurrency code: " + RESET);
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension();
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -223,7 +224,7 @@ public class CryptoConfigs {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension();
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -263,7 +264,6 @@ public class CryptoConfigs {
 
     //Lists of cryptocurrencies
     private static void displayListOfCryptocurrencies() {
-        modifyMessage('n', 2);
         try {
             if (cryptocurrencyName.size() != cryptocurrencyCodes.size()) {
                 throw new IllegalStateException("Cryptocurrency lists are not synchronized.");
@@ -279,6 +279,7 @@ public class CryptoConfigs {
 
             int maxRows = Math.max(leftColumnNames.size(), rightColumnNames.size());
 
+            modifyMessage('n',1);
             out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
                     + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n",
                     getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_1) + "          Codes");
@@ -299,9 +300,7 @@ public class CryptoConfigs {
                 out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
                         + alignment(10) + getAnsi256Color(layoutColor) + "          %-40s%n", leftEntry, rightEntry);
             }
-
-            modifyMessage('n', 2);
-            border();
+            marginBorder(2,2);
         } catch (Exception e) {
             errorFormatting("Error of showing list");
         }

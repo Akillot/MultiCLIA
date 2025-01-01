@@ -69,10 +69,10 @@ public class AppearanceConfigs {
         out.println(symbolsOfBorder[borderChar]);
     }
 
-    public static void marginBorder() {
-        modifyMessage('n', 1);
+    public static void marginBorder(int upperSide, int lowerSide) {
+        modifyMessage('n', upperSide);
         border();
-        modifyMessage('n', 1);
+        modifyMessage('n', lowerSide);
     }
 
     //Animations

@@ -14,18 +14,18 @@ public class SettingsPage {
     public static void displaySettings() {
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
 
         modifyMessage('n', 1);
         displayMemorySection();
 
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         displayColorSection();
 
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         displayLogoSection();
 
-        marginBorder();
+        marginBorder(2,1);
     }
 
     //Memory methods
