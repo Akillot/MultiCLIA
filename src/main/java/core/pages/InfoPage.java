@@ -13,7 +13,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.1";
+        String appVersion = "A-0.8.1.1";
         return getAnsi256Color(systemFirstColor) + appVersion;
     }
 
@@ -25,21 +25,22 @@ public  class InfoPage {
 
         displayOs();
         displayCpuInfo();
-        modifyMessage('n', 1);
-
-        displayJavaInfo();
         displayHomeDirectory();
+
+        modifyMessage('n', 1);
+        displayJavaInfo();
 
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         choice("Description", displayAppDescription(),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         choice("Important links", InfoPage::displayImportantLinks,
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
-        border();
+
         modifyMessage('n',1);
+        marginBorder(1,1);
     }
 
     private static void displayOs(){
@@ -78,8 +79,12 @@ public  class InfoPage {
                 openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
 
+        modifyMessage('n', 2);
+
         choice(getAnsi256Color(systemLayoutColor) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
+
+        modifyMessage('n', 2);
 
         choice(getAnsi256Color(systemLayoutColor) +"License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
                 systemFirstColor, systemRejectionColor, systemLayoutColor);
@@ -89,7 +94,7 @@ public  class InfoPage {
     private static @NotNull Runnable displayAppDescription() {
         return () -> {
             modifyMessage('n', 1);
-            marginBorder();
+            marginBorder(1,1);
             modifyMessage('n', 1);
 
             message( "MultiCLIA " + getAnsi256Color(systemLayoutColor) + "[" + getAnsi256Color(systemLayoutColor)

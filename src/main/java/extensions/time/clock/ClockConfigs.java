@@ -38,17 +38,15 @@ public class ClockConfigs {
     public static void displayClockMenu() {
         modifyMessage('n', 2);
         switchLogoRandomly(clockLogo, -2);
-        marginBorder();
+        marginBorder(1,1);
 
         modifyMessage('n', 1);
         displayConfirmation("Enter","to open and","to skip", acceptanceColor, rejectionColor, layoutColor);
         choice("Clock", ClockConfigs::displayTime, themeColor_1, rejectionColor, layoutColor);
 
-        marginBorder();
-
         modifyMessage('n', 1);
         choice("Info", ClockConfigs::displayInfo, themeColor_1, rejectionColor, layoutColor);
-        marginBorder();
+        marginBorder(2,1);
     }
 
     @Contract(pure = true)
@@ -58,6 +56,7 @@ public class ClockConfigs {
         String formattedTime = localTime.format(myFormatter);
         modifyMessage('n',1);
         out.println(alignment(58) + getAnsi256Color(themeColor_2) + "Current Time: " + getAnsi256Color(layoutColor) + formattedTime);
+        modifyMessage('n',1);
     }
 
     private static void displayInfo(){

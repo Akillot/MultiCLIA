@@ -1,3 +1,4 @@
+extensions/notes/NotesMenu.class
 core/pages/SettingsPage.class
 extensions/finance/CryptoConfigs$2.class
 extensions/notes/NotesConfigs.class
@@ -6,6 +7,7 @@ core/logic/ApiConfigs.class
 core/starter/Launcher.class
 extensions/math/CalculatorPage.class
 core/logic/TextConfigs.class
+extensions/notes/NotesManager.class
 core/logic/CommandManager.class
 extensions/finance/CryptoConfigs$3.class
 core/command_handling_system/CommandHandler.class

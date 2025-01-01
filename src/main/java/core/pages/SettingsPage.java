@@ -25,7 +25,7 @@ public class SettingsPage {
         modifyMessage('n', 1);
         displayLogoSection();
 
-        marginBorder();
+        marginBorder(1,1);
     }
 
     //Memory methods

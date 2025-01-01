@@ -25,22 +25,17 @@ public class SearcherConfigs {
 
         modifyMessage('n', 2);
         switchLogoRandomly(searcherLogo,32);
-        marginBorder();
+        marginBorder(1,1);
         modifyMessage('n', 1);
         alert("Example",getAnsi256Color(layoutColor)
                 + ": '" + getAnsi256Color(themeColor_1) + "github.com"
-                + getAnsi256Color(layoutColor) + "'",58);
-
-        modifyMessage('n', 1);
+                + getAnsi256Color(layoutColor) + "'",58, themeColor_1, layoutColor);
 
         while (true) {
             modifyMessage('n', 1);
-            message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",layoutColor, 58,0,out::print);
-            modifyMessage('n', 2);
-
             out.print(alignment(58) + getAnsi256Color(themeColor_1) + "Enter domain"
                     + getAnsi256Color(layoutColor) + " (Type '" + getAnsi256Color(rejectionColor) + "exit"
-                    + getAnsi256Color(layoutColor) + "' to quit): " + RESET);
+                    + getAnsi256Color(layoutColor) + "' to quit): ");
             String domainInput = scanner.nextLine().toLowerCase();
 
             modifyMessage('n', 1);
@@ -59,11 +54,10 @@ public class SearcherConfigs {
                     themeColor_1,rejectionColor,layoutColor);
 
             modifyMessage('n', 1);
-
-            displayConfirmation("Enter","to open and","to skip",
-                    acceptanceColor,rejectionColor,layoutColor);
             choice(domainInput, openUri(domain),
                     themeColor_1,rejectionColor,layoutColor);
+
+            marginBorder(1,1);
         }
     }
 

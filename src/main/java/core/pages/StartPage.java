@@ -23,7 +23,7 @@ public class StartPage {
             try {
                 searchCommands();
             } catch (Exception ex) {
-                marginBorder();
+                marginBorder(1,1);
                 displayErrorAscii();
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
                 message(errorMessage, systemRejectionColor, 58, 0, out::print);
@@ -36,7 +36,7 @@ public class StartPage {
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
-        marginBorder();
+        marginBorder(1,1);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
         message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
@@ -45,7 +45,7 @@ public class StartPage {
         alert("i", "Enter " + "'" + getAnsi256Color(systemFirstColor) + "cmds" + RESET
                 + getAnsi256Color(systemLayoutColor) + "'\n"
                 + alignment(56) + "to show list of\n"
-                + alignment(56) + "commands", 56);
+                + alignment(56) + "commands", 56, systemFirstColor, systemLayoutColor);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
