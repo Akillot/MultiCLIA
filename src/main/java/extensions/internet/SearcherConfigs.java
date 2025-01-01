@@ -41,7 +41,7 @@ public class SearcherConfigs {
             modifyMessage('n', 1);
 
             if (domainInput.equals("exit") || domainInput.equals("e") || domainInput.equals("quit") || domainInput.equals("q")) {
-                terminateExtension();
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
                 modifyMessage('n', 1);
                 break;
             }
@@ -57,7 +57,7 @@ public class SearcherConfigs {
             choice(domainInput, openUri(domain),
                     themeColor_1,rejectionColor,layoutColor);
 
-            marginBorder(1,1);
+            marginBorder(2,1);
         }
     }
 

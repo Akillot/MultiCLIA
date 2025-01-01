@@ -101,9 +101,10 @@ public class DisplayManager {
         modifyMessage('n', 1);
         choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
+        modifyMessage('n', 2);
         choice("Extensions", displayCommandList(extensionCmds),
                 systemFirstColor, systemLayoutColor, systemFirstColor);
-        marginBorder(1,1);
+        marginBorder(2,1);
     }
 
     @Contract(pure = true)
