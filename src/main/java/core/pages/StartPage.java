@@ -94,6 +94,7 @@ public class StartPage {
         switch (actualDate){
             case "31-12":
             case "01-01":
+                modifyMessage('n',2);
                 switchLogoRandomly(newYearAscii, 36);
                 modifyMessage('n',1);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +

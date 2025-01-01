@@ -143,7 +143,7 @@ public class DisplayManager {
     }
 
     public static void displayUserIp() {
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         getUserLocalIp();
         httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
         marginBorder(2,1);

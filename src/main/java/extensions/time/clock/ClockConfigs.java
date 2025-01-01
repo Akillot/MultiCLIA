@@ -23,7 +23,7 @@ public class ClockConfigs {
     private static int acceptanceColor = 46;
     private static int rejectionColor = 196;
 
-    private static double version = 1.0;
+    private static double version = 1.1;
 
     private static String[] clockLogo = {
             "  .oooooo.   oooo                       oooo        ",
@@ -44,7 +44,7 @@ public class ClockConfigs {
         displayConfirmation("Enter","to open and","to skip", acceptanceColor, rejectionColor, layoutColor);
         choice("Clock", ClockConfigs::displayTime, themeColor_1, rejectionColor, layoutColor);
 
-        modifyMessage('n', 1);
+        modifyMessage('n', 2);
         choice("Info", ClockConfigs::displayInfo, themeColor_1, rejectionColor, layoutColor);
         marginBorder(2,1);
     }
@@ -57,16 +57,15 @@ public class ClockConfigs {
         String formattedTime = localTime.format(myFormatter);
 
         modifyMessage('n',1);
-        message("Current Time: " + getAnsi256Color(layoutColor) + formattedTime, themeColor_2,58,0, out::print);
-        message("Current Time Zone: " + getAnsi256Color(layoutColor) + currentZone, themeColor_2,58,0, out::print);
-        modifyMessage('n',1);
+        message("Current Time: " + getAnsi256Color(themeColor_2) + formattedTime, layoutColor,58,0, out::print);
+        message("Current Time Zone: " + getAnsi256Color(themeColor_2) + currentZone, layoutColor,58,0, out::print);
     }
 
     private static void displayInfo(){
         modifyMessage('n',1);
-        message("Name: " + getAnsi256Color(themeColor_1) + "Clock", layoutColor,58,0, out::print);
-        message("Type: " + getAnsi256Color(themeColor_1) + "Default extension", layoutColor,58,0, out::print);
-        message("Version: " + getAnsi256Color(themeColor_1) + version, layoutColor,58,0, out::print);
-        message("Author: " + getAnsi256Color(themeColor_1) + "Nick Zozulia", layoutColor,58,0, out::print);
+        message("Name: " + getAnsi256Color(themeColor_2) + "Clock", layoutColor,58,0, out::print);
+        message("Type: " + getAnsi256Color(themeColor_2) + "Default extension", layoutColor,58,0, out::print);
+        message("Version: " + getAnsi256Color(themeColor_2) + version, layoutColor,58,0, out::print);
+        message("Author: " + getAnsi256Color(themeColor_2) + "Nick Zozulia", layoutColor,58,0, out::print);
     }
 }
