@@ -9,6 +9,7 @@ import java.util.*;
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
+import static core.logic.DisplayManager.displayErrorAscii;
 import static core.logic.TextConfigs.*;
 
 import static java.lang.System.out;
@@ -143,16 +144,15 @@ public class CryptoConfigs {
         marginBorder(1,2);
 
         displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
+        modifyMessage('n',1);
+
         choice("List of cryptocurrencies", CryptoConfigs::displayListOfCryptocurrencies,
                 themeColor_1, layoutColor, rejectionColor);
 
-        displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("Exchanger", CryptoConfigs::exchanger,
                 themeColor_1, layoutColor, rejectionColor);
-
         modifyMessage('n',2);
 
-        displayConfirmation("Enter","to open and","to skip", themeColor_1, rejectionColor, layoutColor);
         choice("Price tracker", CryptoConfigs::currencyPriceTracker,
                 themeColor_1, layoutColor, rejectionColor);
         marginBorder(2,1);
@@ -160,6 +160,7 @@ public class CryptoConfigs {
 
     //Exchanger method
     private static void exchanger() {
+        modifyMessage('n',1);
         alert("i", "Type '" + getAnsi256Color(themeColor_1) + "exit"
                 + getAnsi256Color(layoutColor) + "' to\n" + alignment(58) + "quit the extension.",
                 58, themeColor_1, layoutColor);
@@ -211,7 +212,9 @@ public class CryptoConfigs {
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+                message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+                message("Extension terminated correctly", themeColor_1,
+                        58,0,out::print);
                 return;
             }
 
@@ -224,7 +227,9 @@ public class CryptoConfigs {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+                message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+                message("Extension terminated correctly", themeColor_1,
+                        58,0,out::print);
                 return;
             }
 
@@ -339,7 +344,7 @@ public class CryptoConfigs {
     }
 
     //Show settings
-    private static void extensionSettings(){
+   /* private static void extensionSettings(){
         modifyMessage('n', 2);
         try{
 
@@ -348,10 +353,13 @@ public class CryptoConfigs {
             errorFormatting("Unexpected error.");
         }
     }
+    */
 
     //Formating the error outputs
     private static void errorFormatting(String text) {
         modifyMessage('n', 1);
+        displayErrorAscii();
+        modifyMessage('n',1);
         message(text, rejectionColor, 58, 0, out::print);
         modifyMessage('n', 1);
     }

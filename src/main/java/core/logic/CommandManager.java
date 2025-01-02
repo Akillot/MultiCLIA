@@ -172,7 +172,8 @@ public class CommandManager {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Extension terminated correctly", themeColor_1,
                 58,0,out::print);
-        marginBorder(2,0);
+        modifyMessage('n',2);
+        border();
     }
 
     public static void terminateProgramDefault() {

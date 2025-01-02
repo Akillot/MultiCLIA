@@ -13,7 +13,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.1.1";
+        String appVersion = "A-0.8.1.2";
         return getAnsi256Color(systemFirstColor) + appVersion;
     }
 
