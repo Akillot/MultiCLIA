@@ -4,11 +4,11 @@ import core.pages.SettingsPage;
 import extensions.finance.CryptoPage;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
-import extensions.internet.SearcherPage;
+import extensions.internet.SearcherUI;
 import core.pages.InfoPage;
 import core.pages.StartPage;
 import extensions.notes.NotesPage;
-import extensions.time.clock.ClockPage;
+import extensions.time.clock.ClockUI;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -41,9 +41,9 @@ public class CommandHandler {
         }
 
         commandMap.put("notes", NotesPage::displayNotesPage);
-        commandMap.put("searcher", SearcherPage::browserPage);
+        commandMap.put("searcher", SearcherUI::displaySearcher);
         commandMap.put("crypto", CryptoPage::exchangerPage);
-        commandMap.put("clock", ClockPage::clockPage);
+        commandMap.put("clock", ClockUI::displayClockMenu);
     }
 
     @Contract(pure = true)
@@ -69,5 +69,4 @@ public class CommandHandler {
             default -> throw new IllegalArgumentException("Invalid command index");
         };
     }
-
 }

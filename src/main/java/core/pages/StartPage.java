@@ -36,6 +36,7 @@ public class StartPage {
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
+        getCurrentDate();
         marginBorder(1,1);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
@@ -75,6 +76,16 @@ public class StartPage {
         message("Everything you need. " + motto[index],15,48,0,out::print);
     }
 
+    private static void getCurrentDate(){
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedTime = localTime.format(myFormatter);
+        message("Current Date: "
+                        + getAnsi256Color(systemFirstColor) + formattedTime
+                        + getAnsi256Color(systemLayoutColor) + ".",
+                systemLayoutColor,48,0,out::print);
+    }
+
     private static String[] newYearAscii = {
             "ooooo      ooo                                 oooooo   oooo                              ",
             "`888b.     `8'                                  `888.   .8'                               ",
@@ -83,7 +94,6 @@ public class StartPage {
             " 8     `88b.8  888ooo888   `88..]88..8'            `888'     888ooo888  .oP\"888   888     ",
             " 8       `888  888    .o    `888'`888'              888      888    .o d8(  888   888     ",
             "o8o        `8  `Y8bod8P'     `8'  `8'              o888o     `Y8bod8P' `Y888\"\"8o d888b    "
-
     };
 
     private static void dateChecking(){
