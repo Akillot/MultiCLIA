@@ -22,7 +22,7 @@ public class CommandManager {
     //displaying logo
     public static void switchLogoRandomly(String[] logo, int alignment) {
         Random rand = new Random();
-        int indexOfLogo = rand.nextInt(0, 4);
+        int indexOfLogo = rand.nextInt(0, 5);
         switchLogoManualy(logo, indexOfLogo, alignment);
     }
 
@@ -48,6 +48,11 @@ public class CommandManager {
                     getAnsi256Color(84), getAnsi256Color(114),
                     getAnsi256Color(77), getAnsi256Color(48),
                     getAnsi256Color(83), getAnsi256Color(76)};
+
+            case 4 -> colors = new String[]{
+                    getAnsi256Color(57), getAnsi256Color(110),
+                    getAnsi256Color(75), getAnsi256Color(189),
+                    getAnsi256Color(223), getAnsi256Color(210)};
 
             default -> colors = new String[]{
                     getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),

@@ -1,5 +1,6 @@
 package extensions.internet;
 
+import extensions.time.clock.ClockConfigs;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,10 +36,22 @@ public class SearcherUI {
 
             choice("Show URL", () -> displayFullURL(domain), themeColor_1, rejectionColor, layoutColor);
             modifyMessage('n',1);
+
             choice(domainInput, openUri(domain), themeColor_1, rejectionColor, layoutColor);
+            modifyMessage('n',1);
+
+            choice("Info", SearcherUI::displayInfo, themeColor_1, rejectionColor, layoutColor);
 
             marginBorder(2, 1);
         }
+    }
+
+    private static void displayInfo(){
+        modifyMessage('n', 1);
+        message("Name: " + getAnsi256Color(themeColor_2) + "Searcher", layoutColor, 58, 0, out::print);
+        message("Type: " + getAnsi256Color(themeColor_2) + "Default extension", layoutColor, 58, 0, out::print);
+        message("Version: " +  getAnsi256Color(themeColor_2) + ClockConfigs.getVersion(), layoutColor, 58, 0, out::print);
+        message("Author: " + getAnsi256Color(themeColor_2) + "Nick Zozulia", layoutColor, 58, 0, out::print);
     }
 
     private static void displayExample() {

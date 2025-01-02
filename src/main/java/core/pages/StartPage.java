@@ -32,7 +32,7 @@ public class StartPage {
     }
 
     private static void displayMenu() {
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();

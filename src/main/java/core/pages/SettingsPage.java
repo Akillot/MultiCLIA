@@ -129,7 +129,7 @@ public class SettingsPage {
      */
 
     //Logo
-    public static int colorVariationOfLogo = 4;
+    public static int colorVariationOfLogo = 5;
 
     private static void displayLogoSection(){
         choice("Logo", SettingsPage::displayAllLogos, systemFirstColor, systemRejectionColor, systemLayoutColor);

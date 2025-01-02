@@ -10,7 +10,7 @@ import static java.lang.System.out;
 public class SearcherConfigs {
 
     static final int themeColor_1 = 75;
-    private static final int themeColor_2 = 111;
+    static final int themeColor_2 = 111;
     static final int layoutColor = 15;
 
     static final int acceptanceColor = 46;
@@ -32,6 +32,6 @@ public class SearcherConfigs {
 
     @Contract(pure = true)
     public static void displayFullURL(String domain) {
-        message("Full URL: " + getAnsi256Color(themeColor_1) + domain, layoutColor, 58, 0, out::print);
+        message("Full URL: " + getAnsi256Color(themeColor_2) + domain, layoutColor, 58, 0, out::print);
     }
 }
