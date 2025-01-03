@@ -96,7 +96,7 @@ public class CryptoConfigs {
     }};
 
     @Getter
-    public static String[] cryptoLogo = {
+    static String[] cryptoLogo = {
             "  .oooooo.                                       .             ",
             " d8P'  `Y8b                                    .o8             ",
             "888          oooo d8b oooo    ooo oo.ooooo.  .o888oo  .ooooo.  ",

@@ -3,27 +3,28 @@ package extensions.notes;
 import java.util.Scanner;
 
 import static core.logic.AppearanceConfigs.getAnsi256Color;
-import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.message;
+import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
-public class NotesMenu {
+public class NotesUI {
     private static Scanner scanner = new Scanner(System.in);
-
-    //Not a final version
-    //next will be better
-    //and bigger
 
     public static void displayNotesMenu() {
         boolean running = true;
         while (running) {
+
+            modifyMessage('n',1);
+
             message("1. Create Note",15,58,0,out::print);
             message("2. Open Note",15,58,0,out::print);
             message("3. Delete Note",15,58,0,out::print);
             message("4. Sort Notes by Title",15,58,0,out::print);
             message("5. Sort Notes by Content",15,58,0,out::print);
             message("6. " + getAnsi256Color(196) + "Exit",15,58,0,out::print);
-            message("> ",15,58,0,out::print);
+
+            modifyMessage('n',1);
+
+            out.print(alignment(58) + getAnsi256Color(15) + "> ");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {

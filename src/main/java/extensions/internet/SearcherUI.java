@@ -12,7 +12,7 @@ import static java.lang.System.out;
 
 public class SearcherUI {
 
-    public static void displaySearcher() {
+    public static void displaySearcherMenu() {
         modifyMessage('n', 2);
         switchLogoRandomly(searcherLogo, 32);
         marginBorder(2, 2);

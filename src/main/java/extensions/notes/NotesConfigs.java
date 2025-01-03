@@ -63,4 +63,14 @@ public class NotesConfigs {
             return false;
         }
     }
+
+    static String[] notesLogoAscii = {
+            "ooooo      ooo               .                      ",
+            "`888b.     `8'             .o8                      ",
+            " 8 `88b.    8   .ooooo.  .o888oo  .ooooo.   .oooo.o ",
+            " 8   `88b.  8  d88' `88b   888   d88' `88b d88(  \"8 ",
+            " 8     `88b.8  888   888   888   888ooo888 `\"Y88b.  ",
+            " 8       `888  888   888   888 . 888    .o o.  )88b ",
+            "o8o        `8  `Y8bod8P'   \"888\" `Y8bod8P' 8\"\"888P' "
+    };
 }

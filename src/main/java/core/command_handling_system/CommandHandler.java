@@ -7,7 +7,7 @@ import core.logic.DisplayManager;
 import extensions.internet.SearcherUI;
 import core.pages.InfoPage;
 import core.pages.StartPage;
-import extensions.notes.NotesPage;
+import extensions.notes.NotesUI;
 import extensions.time.clock.ClockUI;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +32,7 @@ public class CommandHandler {
             "/h", "/v", "/cl"};
 
     public static String[] extensionCmds = {
-            "notes", "searcher", "crypto", "clock"};
+            "searcher", "crypto", "clock"};//Add notes in first place
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
@@ -40,8 +40,8 @@ public class CommandHandler {
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
 
-        commandMap.put("notes", NotesPage::displayNotesPage);
-        commandMap.put("searcher", SearcherUI::displaySearcher);
+        //commandMap.put("notes", NotesUI::displayNotesMenu);
+        commandMap.put("searcher", SearcherUI::displaySearcherMenu);
         commandMap.put("crypto", CryptoUI::displayCryptoMenu);
         commandMap.put("clock", ClockUI::displayClockMenu);
     }
