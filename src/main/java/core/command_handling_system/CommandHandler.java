@@ -1,14 +1,14 @@
 package core.command_handling_system;
 
 import core.pages.SettingsPage;
-import extensions.finance.CryptoPage;
+import extensions.finance.CryptoUI;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
-import extensions.internet.SearcherPage;
+import extensions.internet.SearcherUI;
 import core.pages.InfoPage;
 import core.pages.StartPage;
-import extensions.notes.NotesPage;
-import extensions.time.clock.ClockPage;
+import extensions.notes.NotesUI;
+import extensions.time.clock.ClockUI;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +32,7 @@ public class CommandHandler {
             "/h", "/v", "/cl"};
 
     public static String[] extensionCmds = {
-            "notes", "searcher", "crypto", "clock"};
+            "searcher", "crypto", "clock"};//Add notes in first place
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
@@ -40,10 +40,10 @@ public class CommandHandler {
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
 
-        commandMap.put("notes", NotesPage::displayNotesPage);
-        commandMap.put("searcher", SearcherPage::browserPage);
-        commandMap.put("crypto", CryptoPage::exchangerPage);
-        commandMap.put("clock", ClockPage::clockPage);
+        //commandMap.put("notes", NotesUI::displayNotesMenu);
+        commandMap.put("searcher", SearcherUI::displaySearcherMenu);
+        commandMap.put("crypto", CryptoUI::displayCryptoMenu);
+        commandMap.put("clock", ClockUI::displayClockMenu);
     }
 
     @Contract(pure = true)
@@ -69,5 +69,4 @@ public class CommandHandler {
             default -> throw new IllegalArgumentException("Invalid command index");
         };
     }
-
 }

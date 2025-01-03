@@ -52,7 +52,7 @@ public class DisplayManager {
     public static void displayCommandList() {
         try {
             modifyMessage('n', 2);
-            alert("i", "Show all lists together", 58, systemFirstColor, systemLayoutColor);
+            alert("i", "Show all lists together", 58, systemMainColor, systemLayoutColor);
 
             printOpenOrSkipPrompt();
             String choice = getUserChoice();
@@ -92,7 +92,7 @@ public class DisplayManager {
                 break;
             default:
                 message("Invalid input", systemRejectionColor, 58, 0, out::print);
-                marginBorder(1,1);
+                marginBorder(2,1);
                 break;
         }
     }
@@ -100,10 +100,10 @@ public class DisplayManager {
     private static void displaySubCommandLists() {
         modifyMessage('n', 1);
         choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                systemMainColor, systemLayoutColor, systemMainColor);
         modifyMessage('n', 2);
         choice("Extensions", displayCommandList(extensionCmds),
-                systemFirstColor, systemLayoutColor, systemFirstColor);
+                systemMainColor, systemLayoutColor, systemMainColor);
         marginBorder(2,1);
     }
 
@@ -128,8 +128,8 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        out.println(alignment(38) + getAnsi256Color(systemFirstColor) + "System Commands"
-                + alignment(-68) + getAnsi256Color(systemFirstColor) + "Extensions");
+        out.println(alignment(38) + getAnsi256Color(systemMainColor) + "System Commands"
+                + alignment(-68) + getAnsi256Color(systemMainColor) + "Extensions");
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 

@@ -32,20 +32,22 @@ public class StartPage {
     }
 
     private static void displayMenu() {
-        modifyMessage('n',1);
+        modifyMessage('n',2);
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
+        getCurrentDate("dd-MM-yyyy HH:mm", "Application start time");
+
         marginBorder(1,1);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
         message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemFirstColor) + "cmds" + RESET
+        alert("i", "Enter " + "'" + getAnsi256Color(systemMainColor) + "cmds" + RESET
                 + getAnsi256Color(systemLayoutColor) + "'\n"
                 + alignment(56) + "to show list of\n"
-                + alignment(56) + "commands", 56, systemFirstColor, systemLayoutColor);
+                + alignment(56) + "commands", 56, systemMainColor, systemLayoutColor);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
@@ -66,13 +68,23 @@ public class StartPage {
     private static void getRandomMotto(){
         String[] motto = {"Command-driven simplicity.",
                 "Version: " + getVersion() + getAnsi256Color(systemLayoutColor) + " — Stable.",
-                "Built for you.", "Just type ‘" + getAnsi256Color(systemFirstColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
+                "Built for you.", "Just type ‘" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
                 "Optimal width of the terminal window: 117 characters and wider."};
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length);
         message("Everything you need. " + motto[index],15,48,0,out::print);
+    }
+
+    private static void getCurrentDate(String timeDataPattern, String text){
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(timeDataPattern);
+        String formattedTime = localTime.format(myFormatter);
+        message(text+ ": "
+                        + getAnsi256Color(systemMainColor) + formattedTime
+                        + getAnsi256Color(systemLayoutColor) + ".",
+                systemLayoutColor,48,0,out::print);
     }
 
     private static String[] newYearAscii = {
@@ -83,7 +95,6 @@ public class StartPage {
             " 8     `88b.8  888ooo888   `88..]88..8'            `888'     888ooo888  .oP\"888   888     ",
             " 8       `888  888    .o    `888'`888'              888      888    .o d8(  888   888     ",
             "o8o        `8  `Y8bod8P'     `8'  `8'              o888o     `Y8bod8P' `Y888\"\"8o d888b    "
-
     };
 
     private static void dateChecking(){
@@ -96,7 +107,7 @@ public class StartPage {
             case "01-01":
                 modifyMessage('n',2);
                 switchLogoRandomly(newYearAscii, 36);
-                modifyMessage('n',1);
+                modifyMessage('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor, 36,0,out::print);
                 break;

@@ -30,7 +30,7 @@ public class SettingsPage {
 
     //Memory methods
     private static void displayMemorySection(){
-        choice("Memory", SettingsPage::displayUsingMemory, systemFirstColor, systemLayoutColor, systemRejectionColor);
+        choice("Memory", SettingsPage::displayUsingMemory, systemMainColor, systemLayoutColor, systemRejectionColor);
     }
 
     private static void displayUsingMemory(){
@@ -74,7 +74,7 @@ public class SettingsPage {
 
     //Color methods
     private static void displayColorSection(){
-        choice("Colors", displayColorTable(), systemFirstColor, systemLayoutColor, systemRejectionColor);
+        choice("Colors", displayColorTable(), systemMainColor, systemLayoutColor, systemRejectionColor);
     }
 
     @Contract(pure = true)
@@ -129,10 +129,10 @@ public class SettingsPage {
      */
 
     //Logo
-    public static int colorVariationOfLogo = 4;
+    public static int colorVariationOfLogo = 5;
 
     private static void displayLogoSection(){
-        choice("Logo", SettingsPage::displayAllLogos, systemFirstColor, systemRejectionColor, systemLayoutColor);
+        choice("Logo", SettingsPage::displayAllLogos, systemMainColor, systemLayoutColor, systemRejectionColor);
     }
 
     private static void displayAllLogos() {
@@ -146,7 +146,8 @@ public class SettingsPage {
                 }
                 else{
                     switchLogoManualy(mainLogoAscii, i % colorVariationOfLogo, 48);
-                }            }
+                }
+            }
         } catch (Exception ex) {
             message("Error: " + ex.getMessage(), systemRejectionColor, 58, 0, out::print);
         }

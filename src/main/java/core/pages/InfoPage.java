@@ -13,8 +13,8 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.1.1";
-        return getAnsi256Color(systemFirstColor) + appVersion;
+        String appVersion = "A-0.8.1.2";
+        return getAnsi256Color(systemMainColor) + appVersion;
     }
 
     public static void displayInfo() throws InterruptedException {
@@ -34,38 +34,38 @@ public  class InfoPage {
         displayConfirmation("Enter","to open and","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         choice("Description", displayAppDescription(),
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemMainColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n', 2);
         choice("Important links", InfoPage::displayImportantLinks,
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemMainColor, systemRejectionColor, systemLayoutColor);
 
         marginBorder(2,1);
     }
 
     private static void displayOs(){
         String operatingSystem = System.getProperty("os.name");
-        message("OS: " + getAnsi256Color(systemFirstColor) + operatingSystem, systemLayoutColor,58,0,out::print);
+        message("OS: " + getAnsi256Color(systemMainColor) + operatingSystem, systemLayoutColor,58,0,out::print);
     }
 
     private static void displayCpuInfo() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
-        message("CPU Cores: " + getAnsi256Color(systemFirstColor) + availableProcessors,
+        message("CPU Cores: " + getAnsi256Color(systemMainColor) + availableProcessors,
                 systemLayoutColor, 58, 0, out::print);
     }
 
     private static void displayJavaInfo() {
         String javaVersion = System.getProperty("java.version");
         String javaVendor = System.getProperty("java.vendor");
-        message("Java Version: " + getAnsi256Color(systemFirstColor) + javaVersion,
+        message("Java Version: " + getAnsi256Color(systemMainColor) + javaVersion,
                 systemLayoutColor, 58, 0, out::print);
 
-        message("Java Vendor: " + getAnsi256Color(systemFirstColor) + javaVendor,
+        message("Java Vendor: " + getAnsi256Color(systemMainColor) + javaVendor,
                 systemLayoutColor, 58, 0, out::print);
     }
 
     private static void displayHomeDirectory() {
         String userHome = System.getProperty("user.home");
-        message("Home Directory: " + getAnsi256Color(systemFirstColor) + userHome,
+        message("Home Directory: " + getAnsi256Color(systemMainColor) + userHome,
                 systemLayoutColor, 58, 0, out::print);
     }
 
@@ -77,17 +77,17 @@ public  class InfoPage {
                 + "a" + getAnsi256Color(27) + "i"
                 + getAnsi256Color(47) + "l",
                 openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemMainColor, systemRejectionColor, systemLayoutColor);
 
         modifyMessage('n', 2);
 
         choice(getAnsi256Color(systemLayoutColor) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemMainColor, systemRejectionColor, systemLayoutColor);
 
         modifyMessage('n', 2);
 
         choice(getAnsi256Color(systemLayoutColor) +"License", openUri("https://github.com/Akillot/MultiCLIA?tab=License-1-ov-file"),
-                systemFirstColor, systemRejectionColor, systemLayoutColor);
+                systemMainColor, systemRejectionColor, systemLayoutColor);
     }
 
     @Contract(pure = true)
