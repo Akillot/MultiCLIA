@@ -23,7 +23,7 @@ public class SearcherUI {
             String domainInput = promptUserForDomain();
             modifyMessage('n',1);
             if (isExitCommand(domainInput)) {
-                terminateExtension(acceptanceColor, rejectionColor, layoutColor);
+                terminateExtension(themeColor_1, acceptanceColor, layoutColor);
                 modifyMessage('n',1);
                 break;
             }
@@ -40,7 +40,9 @@ public class SearcherUI {
             choice(domainInput, openUri(domain), themeColor_1, layoutColor, rejectionColor);
             marginBorder(2, 1);
         }
+        modifyMessage('n',1);
         choice("Info", SearcherUI::displayInfo, themeColor_1, layoutColor, rejectionColor);
+        marginBorder(2, 1);
     }
 
     private static void displayInfo(){

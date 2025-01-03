@@ -173,7 +173,7 @@ public class CommandManager {
         }
     }
 
-    public static void terminateExtension(int themeColor_1,int acceptanceColor , int layoutColor) {
+    public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Extension terminated correctly", themeColor_1,
                 58,0,out::print);

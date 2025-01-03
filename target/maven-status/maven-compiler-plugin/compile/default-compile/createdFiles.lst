@@ -1,13 +1,12 @@
 extensions/notes/NotesMenu.class
+extensions/finance/CryptoService.class
 core/pages/SettingsPage.class
 extensions/finance/CryptoConfigs$2.class
 extensions/notes/NotesConfigs.class
 extensions/internet/SearcherUI.class
-extensions/math/CalculatorConfig.class
 extensions/time/clock/ClockUI.class
 core/logic/ApiConfigs.class
 core/starter/Launcher.class
-extensions/math/CalculatorPage.class
 core/logic/TextConfigs.class
 extensions/notes/NotesManager.class
 core/logic/CommandManager.class
@@ -19,10 +18,10 @@ core/logic/AppearanceConfigs.class
 extensions/notes/NotesPage.class
 extensions/internet/SearcherConfigs.class
 core/pages/StartPage.class
+extensions/finance/CryptoUI.class
 core/command_handling_system/PackageUnifier.class
 extensions/time/clock/ClockConfigs.class
 extensions/finance/CryptoConfigs.class
 core/logic/DisplayManager.class
 extensions/finance/CryptoConfigs$1.class
-extensions/finance/CryptoPage.class
 core/pages/InfoPage.class

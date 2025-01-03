@@ -87,10 +87,12 @@ public class TextConfigs {
 
     public static void displayConfirmation(String preText, String midText, String postText,
                                            int acceptanceColor, int rejectionColor, int layoutColor) {
-        message(preText + " '" + getAnsi256Color(acceptanceColor) + "y" + getAnsi256Color(layoutColor) +
-                        "/" + getAnsi256Color(acceptanceColor) + "+" +
-                getAnsi256Color(layoutColor) + "' " + midText +" '" + getAnsi256Color(rejectionColor) + "n" + getAnsi256Color(layoutColor) +
-                "/" + getAnsi256Color(rejectionColor) + "-" + getAnsi256Color(layoutColor) + "' " + postText, systemLayoutColor,58,0,out::print);
+        message(preText
+                + " '" + getAnsi256Color(acceptanceColor) + "y" + getAnsi256Color(layoutColor)
+                + "/" + getAnsi256Color(acceptanceColor) + "+" + getAnsi256Color(layoutColor)
+                + "' " + midText +" '" + getAnsi256Color(rejectionColor) + "n" + getAnsi256Color(layoutColor)
+                + "/" + getAnsi256Color(rejectionColor) + "-" + getAnsi256Color(layoutColor)
+                + "' " + postText, systemLayoutColor,58,0,out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)

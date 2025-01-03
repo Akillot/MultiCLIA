@@ -85,7 +85,7 @@ public class CryptoUI {
     private static void currencyPriceTracker() {
         modifyMessage('n', 2);
         alert("i", "Type '" + getAnsi256Color(rejectionColor) + "exit"
-                        + getAnsi256Color(layoutColor) + "' to quit the extension at any time.\n"
+                        + getAnsi256Color(layoutColor) + "' to quit the extension.\n"
                         + alignment(58) + "You cannot exit this mode while tracking is in progress.",
                 58, themeColor_1, layoutColor);
 
