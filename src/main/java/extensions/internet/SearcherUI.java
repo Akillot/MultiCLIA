@@ -1,6 +1,5 @@
 package extensions.internet;
 
-import extensions.time.clock.ClockConfigs;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,7 +23,7 @@ public class SearcherUI {
             String domainInput = promptUserForDomain();
             modifyMessage('n',1);
             if (isExitCommand(domainInput)) {
-                terminateExtension(themeColor_1, acceptanceColor, layoutColor);
+                terminateExtension(acceptanceColor, rejectionColor, layoutColor);
                 modifyMessage('n',1);
                 break;
             }
@@ -33,24 +32,22 @@ public class SearcherUI {
 
             displayConfirmation("Enter", "to open and", "to skip",
                     acceptanceColor, rejectionColor, layoutColor);
-
-            choice("Show URL", () -> displayFullURL(domain), themeColor_1, rejectionColor, layoutColor);
             modifyMessage('n',1);
 
-            choice(domainInput, openUri(domain), themeColor_1, rejectionColor, layoutColor);
-            modifyMessage('n',1);
+            choice("Show URL", () -> displayFullURL(domain), themeColor_1, layoutColor, rejectionColor);
+            modifyMessage('n',2);
 
-            choice("Info", SearcherUI::displayInfo, themeColor_1, rejectionColor, layoutColor);
-
+            choice(domainInput, openUri(domain), themeColor_1, layoutColor, rejectionColor);
             marginBorder(2, 1);
         }
+        choice("Info", SearcherUI::displayInfo, themeColor_1, layoutColor, rejectionColor);
     }
 
     private static void displayInfo(){
         modifyMessage('n', 1);
         message("Name: " + getAnsi256Color(themeColor_2) + "Searcher", layoutColor, 58, 0, out::print);
         message("Type: " + getAnsi256Color(themeColor_2) + "Default extension", layoutColor, 58, 0, out::print);
-        message("Version: " +  getAnsi256Color(themeColor_2) + ClockConfigs.getVersion(), layoutColor, 58, 0, out::print);
+        message("Version: " +  getAnsi256Color(themeColor_2) + getVersion(), layoutColor, 58, 0, out::print);
         message("Author: " + getAnsi256Color(themeColor_2) + "Nick Zozulia", layoutColor, 58, 0, out::print);
     }
 

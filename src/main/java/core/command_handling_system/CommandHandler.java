@@ -1,7 +1,7 @@
 package core.command_handling_system;
 
 import core.pages.SettingsPage;
-import extensions.finance.CryptoPage;
+import extensions.finance.CryptoUI;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
 import extensions.internet.SearcherUI;
@@ -42,7 +42,7 @@ public class CommandHandler {
 
         commandMap.put("notes", NotesPage::displayNotesPage);
         commandMap.put("searcher", SearcherUI::displaySearcher);
-        commandMap.put("crypto", CryptoPage::exchangerPage);
+        commandMap.put("crypto", CryptoUI::displayCryptoMenu);
         commandMap.put("clock", ClockUI::displayClockMenu);
     }
 

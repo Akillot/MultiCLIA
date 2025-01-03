@@ -30,7 +30,7 @@ public class CommandManager {
         String[] colors;
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
-                    getAnsi256Color(systemFirstColor), getAnsi256Color(56),
+                    getAnsi256Color(systemMainColor), getAnsi256Color(56),
                     getAnsi256Color(165), getAnsi256Color(99),
                     getAnsi256Color(63), getAnsi256Color(99)};
 
@@ -50,7 +50,7 @@ public class CommandManager {
                     getAnsi256Color(83), getAnsi256Color(76)};
 
             case 4 -> colors = new String[]{
-                    getAnsi256Color(57), getAnsi256Color(110),
+                    getAnsi256Color(153), getAnsi256Color(110),
                     getAnsi256Color(75), getAnsi256Color(189),
                     getAnsi256Color(223), getAnsi256Color(210)};
 
@@ -112,7 +112,7 @@ public class CommandManager {
         try {
             InetAddress localHost = InetAddress.getLocalHost();
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
-                    + getAnsi256Color(systemFirstColor) + localHost + RESET);
+                    + getAnsi256Color(systemMainColor) + localHost + RESET);
         } catch (UnknownHostException e) {
             displayErrorAscii();
             message("IP is undefined", systemRejectionColor, 58, 0, out::print);
@@ -130,20 +130,20 @@ public class CommandManager {
                 try {
                     action.run();
                 } catch (Exception e) {
-                    message("Error executing action", systemRejectionColor, 58, 0, out::print);
-                    message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+                    message("Error executing action", errorColor, 58, 0, out::print);
+                    message("Status: " + getAnsi256Color(errorColor) + "x", layoutColor, 58, 0, out::print);
                 }
                 break;
 
             case "-":
             case "n":
-                message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(errorColor) + "x", layoutColor, 58, 0, out::print);
                 break;
 
             default:
                 message("Invalid choice", errorColor, 58, 0, out::print);
-                message("Status: " + getAnsi256Color(systemRejectionColor) + "x",
-                        systemLayoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(errorColor) + "x",
+                        layoutColor, 58, 0, out::print);
                 break;
         }
     }
@@ -185,7 +185,7 @@ public class CommandManager {
         modifyMessage('n',2);
         loadingAnimation(300,10);
         message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated correctly", systemFirstColor,
+        message("Program terminated correctly", systemMainColor,
                 56,20,out::print);
         modifyMessage('n', 2);
         exit(0);
@@ -194,7 +194,7 @@ public class CommandManager {
     public static void terminateProgramQuick() {
         modifyMessage('n',2);
         message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated quickly correctly", systemFirstColor,
+        message("Program terminated quickly correctly", systemMainColor,
                 56,0,out::print);
         modifyMessage('n', 2);
         exit(0);

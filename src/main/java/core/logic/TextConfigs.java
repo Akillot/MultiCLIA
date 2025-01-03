@@ -21,7 +21,7 @@ public class TextConfigs {
             }
             modifyMessage('n',1);
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "You entered: ["
-                    + getAnsi256Color(systemFirstColor) + text.substring(i, end) + RESET
+                    + getAnsi256Color(systemMainColor) + text.substring(i, end) + RESET
                     + getAnsi256Color(systemLayoutColor) + "]" + RESET);
             if (end < text.length()) {
                 modifyMessage('n',1);

@@ -17,7 +17,7 @@ public class SearcherConfigs {
     static final int rejectionColor = 196;
 
     @Getter
-    private static final String version = "1.1.1";
+    private static final String version = "1.1.4";
 
     @Getter
     static final String[] searcherLogo = {

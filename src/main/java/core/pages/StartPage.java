@@ -36,17 +36,18 @@ public class StartPage {
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
-        getCurrentDate();
+        getCurrentDate("dd-MM-yyyy HH:mm", "Application start time");
+
         marginBorder(1,1);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
         message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
 
-        alert("i", "Enter " + "'" + getAnsi256Color(systemFirstColor) + "cmds" + RESET
+        alert("i", "Enter " + "'" + getAnsi256Color(systemMainColor) + "cmds" + RESET
                 + getAnsi256Color(systemLayoutColor) + "'\n"
                 + alignment(56) + "to show list of\n"
-                + alignment(56) + "commands", 56, systemFirstColor, systemLayoutColor);
+                + alignment(56) + "commands", 56, systemMainColor, systemLayoutColor);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
@@ -67,7 +68,7 @@ public class StartPage {
     private static void getRandomMotto(){
         String[] motto = {"Command-driven simplicity.",
                 "Version: " + getVersion() + getAnsi256Color(systemLayoutColor) + " — Stable.",
-                "Built for you.", "Just type ‘" + getAnsi256Color(systemFirstColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
+                "Built for you.", "Just type ‘" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
                 "Optimal width of the terminal window: 117 characters and wider."};
         Random rand = new Random();
@@ -76,12 +77,12 @@ public class StartPage {
         message("Everything you need. " + motto[index],15,48,0,out::print);
     }
 
-    private static void getCurrentDate(){
+    private static void getCurrentDate(String timeDataPattern, String text){
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(timeDataPattern);
         String formattedTime = localTime.format(myFormatter);
-        message("Current Date: "
-                        + getAnsi256Color(systemFirstColor) + formattedTime
+        message(text+ ": "
+                        + getAnsi256Color(systemMainColor) + formattedTime
                         + getAnsi256Color(systemLayoutColor) + ".",
                 systemLayoutColor,48,0,out::print);
     }
@@ -106,7 +107,7 @@ public class StartPage {
             case "01-01":
                 modifyMessage('n',2);
                 switchLogoRandomly(newYearAscii, 36);
-                modifyMessage('n',1);
+                modifyMessage('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor, 36,0,out::print);
                 break;
