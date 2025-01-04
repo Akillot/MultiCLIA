@@ -120,7 +120,7 @@ public class CommandManager {
         }
     }
 
-    public static void choice(String title, Runnable action, int mainColor, int layoutColor, int errorColor) {
+    public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
         out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
@@ -130,19 +130,19 @@ public class CommandManager {
                 try {
                     action.run();
                 } catch (Exception e) {
-                    message("Error executing action", errorColor, 58, 0, out::print);
-                    message("Status: " + getAnsi256Color(errorColor) + "x", layoutColor, 58, 0, out::print);
+                    message("Error executing action", rejectionColor, 58, 0, out::print);
+                    message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
                 }
                 break;
 
             case "-":
             case "n":
-                message("Status: " + getAnsi256Color(errorColor) + "x", layoutColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
                 break;
 
             default:
-                message("Invalid choice", errorColor, 58, 0, out::print);
-                message("Status: " + getAnsi256Color(errorColor) + "x",
+                message("Invalid choice", rejectionColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(rejectionColor) + "x",
                         layoutColor, 58, 0, out::print);
                 break;
         }
