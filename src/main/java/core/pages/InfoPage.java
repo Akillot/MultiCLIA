@@ -3,6 +3,8 @@ package core.pages;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
@@ -13,7 +15,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.1.3";
+        String appVersion = "A-0.8.1.4";
         return getAnsi256Color(systemMainColor) + appVersion;
     }
 
@@ -25,7 +27,7 @@ public  class InfoPage {
 
         displayOs();
         displayCpuInfo();
-        displayHomeDirectory();
+        displayApplicationDirectory();
 
         modifyMessage('n', 1);
         displayJavaInfo();
@@ -63,11 +65,20 @@ public  class InfoPage {
                 systemLayoutColor, 58, 0, out::print);
     }
 
-    private static void displayHomeDirectory() {
-        String userHome = System.getProperty("user.home");
-        message("Home Directory: " + getAnsi256Color(systemMainColor) + userHome,
-                systemLayoutColor, 58, 0, out::print);
+    private static void displayApplicationDirectory() {
+        try {
+            String appPath = new File(
+                    StartPage.class.getProtectionDomain().getCodeSource().getLocation().toURI()
+            ).getParent();
+
+            message("Application Directory: " + getAnsi256Color(systemMainColor) + appPath,
+                    systemLayoutColor, 58, 0, out::print);
+        } catch (Exception e) {
+            message("Could not determine application directory.",
+                    systemLayoutColor, 58, 0, out::print);
+        }
     }
+
 
 
     private static void displayImportantLinks(){
