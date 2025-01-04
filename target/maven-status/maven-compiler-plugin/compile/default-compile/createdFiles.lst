@@ -1,4 +1,3 @@
-extensions/notes/NotesMenu.class
 extensions/finance/CryptoService.class
 core/pages/SettingsPage.class
 extensions/finance/CryptoConfigs$2.class
@@ -15,12 +14,12 @@ extensions/time/clock/ClockService.class
 core/command_handling_system/CommandHandler.class
 extensions/time/Reminder.class
 core/logic/AppearanceConfigs.class
-extensions/notes/NotesPage.class
 extensions/internet/SearcherConfigs.class
 core/pages/StartPage.class
 extensions/finance/CryptoUI.class
 core/command_handling_system/PackageUnifier.class
 extensions/time/clock/ClockConfigs.class
+extensions/notes/NotesUI.class
 extensions/finance/CryptoConfigs.class
 core/logic/DisplayManager.class
 extensions/finance/CryptoConfigs$1.class
