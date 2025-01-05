@@ -17,6 +17,7 @@ import static java.lang.System.*;
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
+    //displaying error art
     private static final String[] errorAscii = {
             "  .oooooo.                                           ",
             " d8P'  `Y8b                                          ",
@@ -36,6 +37,7 @@ public class DisplayManager {
         }
     }
 
+    //displaying description /h
     private static final String[] rules = {
             "cmds: Shows all commands [/c]",
             "setts: Shows settings of the application [/s]",
@@ -46,8 +48,19 @@ public class DisplayManager {
             "exit: Terminates the application [/e]",
             "exitq: Terminates the application quickly [/eq]",
             "version: Shows version [/v]",
-            "clear: Clears recent values from terminal [/cl]"
+            "clear: Clears recent values from terminal [/cl]",
+            "time: Shows current time and additional information about time [/t]"
     };
+
+    public static void displayCommandsDescription() {
+        modifyMessage('n', 2);
+        for (String rule : rules) {
+            message(rule, systemLayoutColor, 58, 0, out::print);
+            modifyMessage('n', 1);
+        }
+        marginBorder(1,1);
+    }
+
 
     public static void displayCommandList() {
         try {
@@ -64,13 +77,6 @@ public class DisplayManager {
             displayErrorAscii();
             message("Unknown error occurred", systemRejectionColor, 58, 0, out::print);
         }
-    }
-
-    private static void printOpenOrSkipPrompt() {
-        displayConfirmation("Enter","to open and","to skip",
-                systemAcceptanceColor,systemRejectionColor,systemLayoutColor );
-        modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Choice: " + RESET);
     }
 
     private static @NotNull String getUserChoice() {
@@ -100,10 +106,10 @@ public class DisplayManager {
     private static void displaySubCommandLists() {
         modifyMessage('n', 1);
         choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemMainColor, systemLayoutColor, systemRejectionColor);
         modifyMessage('n', 2);
         choice("Extensions", displayCommandList(extensionCmds),
-                systemMainColor, systemLayoutColor, systemMainColor);
+                systemMainColor, systemLayoutColor, systemRejectionColor);
         marginBorder(2,1);
     }
 
@@ -143,6 +149,15 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
+
+    private static void printOpenOrSkipPrompt() {
+        displayConfirmation("Enter","to open and","to skip",
+                systemAcceptanceColor,systemRejectionColor,systemLayoutColor );
+        modifyMessage('n', 1);
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Choice: " + RESET);
+    }
+
+    //displaying external and local IP /ip
     public static void displayUserIp() {
         modifyMessage('n', 2);
         getUserLocalIp();
@@ -150,15 +165,7 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-    public static void displayCommandsDescription() {
-        modifyMessage('n', 2);
-        for (String rule : rules) {
-            message(rule, systemLayoutColor, 58, 0, out::print);
-            modifyMessage('n', 1);
-        }
-        marginBorder(1,1);
-    }
-
+    //displaying current version of the app /v
     public static void displayCurrentVersion() {
         modifyMessage('n', 2);
         message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);

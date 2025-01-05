@@ -11,7 +11,7 @@ import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;
 
 public class SettingsPage {
-    public static void displaySettings() {
+    public static void displaySettingsPage() {
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);

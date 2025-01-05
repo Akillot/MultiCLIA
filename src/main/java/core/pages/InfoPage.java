@@ -15,7 +15,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.1.4";
+        String appVersion = "A-0.8.2";
         return getAnsi256Color(systemMainColor) + appVersion;
     }
 
@@ -78,8 +78,6 @@ public  class InfoPage {
                     systemLayoutColor, 58, 0, out::print);
         }
     }
-
-
 
     private static void displayImportantLinks(){
         modifyMessage('n', 1);
