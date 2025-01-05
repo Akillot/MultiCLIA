@@ -4,7 +4,7 @@ import java.util.List;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.CommandManager.terminateExtension;
+import static core.logic.CommandManager.terminateSection;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static extensions.finance.CryptoConfigs.*;
@@ -55,7 +55,7 @@ public class CryptoUI {
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
                 modifyMessage('n', 1);
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+                terminateSection(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -68,7 +68,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+                terminateSection(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -95,7 +95,7 @@ public class CryptoUI {
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+                terminateSection(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
@@ -108,7 +108,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+                terminateSection(themeColor_1,acceptanceColor,layoutColor);
                 return;
             }
 
