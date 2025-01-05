@@ -34,4 +34,6 @@ public class TimePage {
     private static String getCurrentTimeZone() {
         return ZoneId.systemDefault().toString();
     }
+
+   //private static String get
 }

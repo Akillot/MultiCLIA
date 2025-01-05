@@ -1,7 +1,10 @@
 package core.pages;
 
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.management.ManagementFactory;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
@@ -11,6 +14,8 @@ import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;
 
 public class SettingsPage {
+
+    //The main method of displaying the page
     public static void displaySettingsPage() {
         modifyMessage('n', 2);
         displayConfirmation("Enter","to open and","to skip",
@@ -18,6 +23,9 @@ public class SettingsPage {
 
         modifyMessage('n', 1);
         displayMemorySection();
+
+        modifyMessage('n', 2);
+        displayCpuSection();
 
         modifyMessage('n', 2);
         displayColorSection();
@@ -29,10 +37,12 @@ public class SettingsPage {
     }
 
     //Memory methods
+    @SneakyThrows
     private static void displayMemorySection(){
         choice("Memory", SettingsPage::displayUsingMemory, systemMainColor, systemLayoutColor, systemRejectionColor);
     }
 
+    @SneakyThrows
     private static void displayUsingMemory(){
         long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         long totalMemory = Runtime.getRuntime().totalMemory();
@@ -65,11 +75,34 @@ public class SettingsPage {
         StringBuilder bar = new StringBuilder("Memory: [");
 
         for (int i = 0; i < barLength; i++) {
-            bar.append(i < usedBars ? "■" : "-");
+            String color = i < usedBars ? getAnsi256Color(160) : getAnsi256Color(47);
+            bar.append(color).append(i < usedBars ? "■" : "━").append(RESET);
         }
         bar.append("]");
 
         message(bar.toString(), systemLayoutColor, 58, 0, out::print);
+    }
+
+    //CPU methods
+    private static void displayCpuSection() {
+        choice("CPU", SettingsPage::showCpuLoad, systemMainColor, systemLayoutColor, systemRejectionColor);
+    }
+
+    private static void showCpuLoad() {
+        com.sun.management.OperatingSystemMXBean osBean =
+                (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        double cpuLoad = osBean.getCpuLoad() * 100;
+        double processCpuLoad = osBean.getProcessCpuLoad() * 100;
+
+        modifyMessage('n', 1);
+        message("System CPU Load: "
+                        + getAnsi256Color(systemMainColor) + String.format("%.2f", cpuLoad) + "%",
+                systemLayoutColor, 58, 0, out::print);
+        message("Process CPU Load: "
+                        + getAnsi256Color(systemMainColor) + String.format("%.2f", processCpuLoad) + "%",
+                systemLayoutColor, 58, 0, out::print);
+        modifyMessage('n', 2);
+        border();
     }
 
     //Color methods
@@ -80,35 +113,33 @@ public class SettingsPage {
     @Contract(pure = true)
     private static @NotNull Runnable displayColorTable() {
         return () -> {
-            printColorRange(0, systemLayoutColor, "");
+            printColorRange(0, systemLayoutColor);
             modifyMessage('n', 1);
-            printColorBlock(16, 231);
-            printColorRange(232, 255, "");
+            printColorBlock();
+            printColorRange(232, 255);
             modifyMessage('n', 1);
             border();
         };
     }
 
     @Contract(pure = true)
-    private static void printColorRange(int start, int end, String title) {
-        out.println(title + RESET);
+    private static void printColorRange(int start, int end) {
+        out.println(RESET);
         for (int i = start; i <= end; i++) {
-            out.print(getAnsi256BackgroundColor(i) + tableAlignment(4) + " " + i + " " + RESET);
+            out.print(getAnsi256BackgroundColor(i) + tableAlignment() + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) modifyMessage('n',2);
         }
     }
 
     @Contract(pure = true)
-    private static void printColorBlock(int start, int end) {
+    private static void printColorBlock() {
         int columns = 6;
-        int rows = (end - start + 1) / columns;
+        int rows = (231 - 16 + 1) / columns;
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                int colorCode = start + row + col * rows;
-                if (colorCode <= end) {
-                    out.print(getAnsi256BackgroundColor(colorCode) + tableAlignment(4) + " " + colorCode + " " + RESET);
-                }
+                int colorCode = 16 + row + col * rows;
+                out.print(getAnsi256BackgroundColor(colorCode) + tableAlignment() + " " + colorCode + " " + RESET);
             }
             if(row == 11){
                 modifyMessage('n',1);
@@ -118,15 +149,9 @@ public class SettingsPage {
     }
 
     @Contract(pure = true)
-    private static @NotNull String tableAlignment(int width) {
-        return " ".repeat(Math.max(0, width));
+    private static @NotNull String tableAlignment() {
+        return " ".repeat(Math.max(0, 4));
     }
-
-    /*private static void changeColor(){
-        modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter new color code: ");
-    }
-     */
 
     //Logo
     public static int colorVariationOfLogo = 5;
