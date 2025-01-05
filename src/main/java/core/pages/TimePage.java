@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.CommandManager.terminateSection;
+import static core.logic.CommandManager.choice;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
@@ -18,57 +18,29 @@ public class TimePage {
     static Scanner scanner = new Scanner(System.in);
 
     public static void displayTimePage() {
-        modifyMessage('n', 1);
-        displayTimeMenu();
-        marginBorder(2, 1);
+            modifyMessage('n', 2);
+        displayConfirmation("Enter","to open and","to skip",
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
+
+            modifyMessage('n',1);
+            choice("Current Time", TimePage::displayTime, systemMainColor, systemLayoutColor, systemRejectionColor);
+
+            modifyMessage('n', 2);
+            choice("International Time", TimePage::displayInternationalTimes, systemMainColor, systemLayoutColor, systemRejectionColor);
+
+            modifyMessage('n', 2);
+            choice("Timer", TimePage::startTimer, systemMainColor, systemLayoutColor, systemRejectionColor);
+
+            modifyMessage('n', 2);
+            choice("Stopwatch", TimePage::startStopwatch, systemMainColor, systemLayoutColor, systemRejectionColor);
+
+            modifyMessage('n', 2);
+            choice("Change Time Zone", TimePage::displayCustomTimeZone, systemMainColor, systemLayoutColor, systemRejectionColor);
+
+            marginBorder(2,1);
     }
 
-    public static void displayTimeMenu() {
-        while (true) {
-            modifyMessage('n', 1);
-            message("Time Page Menu:", systemMainColor, 58, 0, out::print);
-            modifyMessage('n', 1);
-            message("1. Current Time [/ct]", systemLayoutColor, 58, 0, out::print);
-            message("2. International Times [/it]", systemLayoutColor, 58, 0, out::print);
-            message("3. Timer [/t]", systemLayoutColor, 58, 0, out::print);
-            message("4. Stopwatch [/sw]", systemLayoutColor, 58, 0, out::print);
-            message("5. Change Time Zone [/ctz]", systemLayoutColor, 58, 0, out::print);
-            message("6. Log Current Time [/lct]", systemLayoutColor, 58, 0, out::print);
-            message("7. " + getAnsi256Color(systemRejectionColor) + "Exit"
-                    + getAnsi256Color(systemLayoutColor) +  " [/e]", systemLayoutColor, 58, 0, out::print);
-
-            String choice = scanner.nextLine().toLowerCase();
-            switch (choice) {
-                case "1" -> displayTime();
-                case "/ct" -> displayTime();
-                case "current time" -> displayTime();
-
-                case "2" -> displayInternationalTimes();
-                case "/it" -> displayInternationalTimes();
-                case "international times" -> displayInternationalTimes();
-
-                case "3" -> startTimer(10);
-                case "/t" -> startTimer(10);
-                case "timer" -> startTimer(10);
-
-                case "4" -> startStopwatch();
-                case "/sw" -> startStopwatch();
-                case "stopwatch" -> startStopwatch();
-
-                case "5" -> displayCustomTimeZone();
-                case "/ctz" -> displayCustomTimeZone();
-                case "change time zone" -> displayCustomTimeZone();
-
-                case "6" -> logCurrentTime();
-                case "/lct" -> logCurrentTime();
-                case "log current time" -> logCurrentTime();
-
-                case "7" -> terminateSection(systemMainColor, systemAcceptanceColor, systemLayoutColor);
-                default -> message("Invalid choice! Try again.", systemRejectionColor, 58, 0, out::print);
-            }
-        }
-    }
-
+    //Current Time
     private static void displayTime() {
         modifyMessage('n', 1);
         message("Current Time: " + getAnsi256Color(systemMainColor) + getCurrentTime(), systemLayoutColor, 58, 0, out::print);
@@ -87,10 +59,10 @@ public class TimePage {
 
     private static void displayInternationalTimes() {
         String[] zones = {"UTC", "America/New_York", "Europe/London", "Asia/Tokyo", "Australia/Sydney"};
-        modifyMessage('n', 1);
         message("International Times:", systemLayoutColor, 58, 0, out::print);
         for (String zone : zones) {
             String time = getTimeInZone(zone);
+            modifyMessage('n', 1);
             message(zone + ": " + getAnsi256Color(systemMainColor) + time, systemLayoutColor, 58, 0, out::print);
         }
     }
@@ -101,22 +73,34 @@ public class TimePage {
         return time.format(formatter);
     }
 
-    private static void startTimer(int seconds) {
+    //Timer
+    private static void startTimer() {
+        modifyMessage('n', 1);
+        out.print(alignment(58) + getAnsi256Color(systemMainColor) + "Enter time"
+                + getAnsi256Color(systemLayoutColor) + ": ");
+        double seconds = scanner.nextDouble();
+
+        if(seconds < 0) {
+            message("Error", systemRejectionColor, 58, 0, out::print);
+        }
+
         modifyMessage('n', 1);
         message("Timer started for " + seconds + " seconds.", systemAcceptanceColor, 58, 0, out::print);
 
         try {
-            for (int i = seconds; i >= 0; i--) {
-                out.print("\rTime left: " + i + " seconds");
+            for (double i = seconds; i >= 0; i--) {
+                out.print(alignment(58) + getAnsi256Color(systemMainColor) + "\r   Time left: "
+                        + getAnsi256Color(systemLayoutColor) + i + " seconds");
                 Thread.sleep(1000);
             }
             out.print("\r");
-            message("Time is up!", systemRejectionColor, 58, 0, out::print);
+            message("Time is up!", systemLayoutColor, 58, 0, out::print);
         } catch (InterruptedException e) {
             message("Timer interrupted!", systemRejectionColor, 58, 0, out::print);
         }
     }
 
+    //Stopwatch
     private static void startStopwatch() {
         modifyMessage('n', 1);
         message("Stopwatch started. Press 'Enter' to stop.", systemAcceptanceColor, 58, 0, out::print);
@@ -148,6 +132,7 @@ public class TimePage {
         }
     }
 
+    //Custom Time Zone
     private static void displayCustomTimeZone() {
         modifyMessage('n', 1);
         message("Enter a time zone [e.g., Europe/Paris]:", systemLayoutColor, 58, 0, out::print);
@@ -160,15 +145,4 @@ public class TimePage {
             message("Invalid time zone!", systemRejectionColor, 58, 0, out::print);
         }
     }
-
-    private static void logCurrentTime() {
-        String logMessage = "Log Time: " + getCurrentTime() + " Time Zone: " + getCurrentTimeZone();
-        try (java.io.FileWriter writer = new java.io.FileWriter("time_log.txt", true)) {
-            writer.write(logMessage + System.lineSeparator());
-            message("Time logged successfully!", systemAcceptanceColor, 58, 0, out::print);
-        } catch (Exception e) {
-            message("Failed to log time: " + e.getMessage(), systemRejectionColor, 58, 0, out::print);
-        }
-    }
-
 }

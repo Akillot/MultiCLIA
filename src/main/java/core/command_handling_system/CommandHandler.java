@@ -33,7 +33,7 @@ public class CommandHandler {
             "/v", "/cl", "/t"};
 
     public static String[] extensionCmds = {
-            "searcher", "crypto", "clock"};//Add notes in first place
+            "searcher", "crypto"};//Add notes in first place
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
