@@ -64,7 +64,7 @@ public class DisplayManager {
 
     public static void displayCommandList() {
         try {
-            modifyMessage('n', 2);
+            marginBorder(1,2);
             alert("i", "Show all lists together", 58, systemMainColor, systemLayoutColor);
 
             printOpenOrSkipPrompt();
@@ -104,6 +104,7 @@ public class DisplayManager {
     }
 
     private static void displaySubCommandLists() {
+
         modifyMessage('n', 1);
         choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
                 systemMainColor, systemLayoutColor, systemRejectionColor);

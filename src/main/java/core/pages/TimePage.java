@@ -23,7 +23,7 @@ public class TimePage {
         displayListOfCommands(1);
 
         while (true) {
-            slowMotionText(50, 56, false,
+            slowMotionText(0, 56, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 

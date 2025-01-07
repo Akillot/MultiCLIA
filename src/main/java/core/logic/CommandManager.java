@@ -70,21 +70,17 @@ public class CommandManager {
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
-            slowMotionText(50, 56, false,
+            slowMotionText(0, 56, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
-            modifyMessage('n', 1);
-            wrapText(nameOfFunction, borderWidth - 2);
-
             if (!registry.executeCommand(nameOfFunction)) {
-                modifyMessage('n', 2);
-                displayErrorAscii();
-                marginBorder(1,1);
+                searchCommands();
             }
-        } catch (Exception e) {
+        }
+        catch(Exception e){
             modifyMessage('n', 2);
             displayErrorAscii();
-            marginBorder(1,1);
+            marginBorder(1, 1);
         }
     }
 
