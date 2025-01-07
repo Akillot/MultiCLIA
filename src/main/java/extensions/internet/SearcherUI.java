@@ -23,7 +23,7 @@ public class SearcherUI {
             String domainInput = promptUserForDomain();
             modifyMessage('n',1);
             if (isExitCommand(domainInput)) {
-                terminateSection(themeColor_1, acceptanceColor, layoutColor);
+                terminate(themeColor_1, acceptanceColor, layoutColor);
                 modifyMessage('n',1);
                 break;
             }

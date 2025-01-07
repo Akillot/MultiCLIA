@@ -165,12 +165,12 @@ public class SettingsPage {
             modifyMessage('n', 1);
             for (int i = 0; i < colorVariationOfLogo; i++) {
                 if(i != colorVariationOfLogo - 1 ) {
-                    switchLogoManualy(mainLogoAscii, i % colorVariationOfLogo, 48);
+                    switchLogoManually(mainLogoAscii, i % colorVariationOfLogo, 48);
                     modifyMessage('n', 1);
                     Thread.sleep(500);
                 }
                 else{
-                    switchLogoManualy(mainLogoAscii, i % colorVariationOfLogo, 48);
+                    switchLogoManually(mainLogoAscii, i % colorVariationOfLogo, 48);
                 }
             }
         } catch (Exception ex) {

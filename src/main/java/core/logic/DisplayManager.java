@@ -149,7 +149,6 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-
     private static void printOpenOrSkipPrompt() {
         displayConfirmation("Enter","to open and","to skip",
                 systemAcceptanceColor,systemRejectionColor,systemLayoutColor );

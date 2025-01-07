@@ -50,7 +50,7 @@ public class StartPage {
                 + alignment(56) + "commands", 56, systemMainColor, systemLayoutColor);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n',1);
     }
 
     @Getter

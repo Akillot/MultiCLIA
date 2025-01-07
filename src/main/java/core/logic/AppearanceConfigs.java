@@ -12,17 +12,14 @@ import static java.lang.System.out;
 public class AppearanceConfigs {
 
     //Colors
-    public static int systemMainColor = 99;
+    public static int systemMainColor = 147;
     public static int systemLayoutColor = 15;
 
     public static int systemAcceptanceColor = 46;
     public static int systemRejectionColor = 196;
 
     public static final String RESET = "\033[0m";
-    public static final String BOLD = "\033[1m";
-    public static final String ITALIC = "\u001b[3m";
     public static final String UNDERLINE = "\033[4m";
-    public static final String REVERSE = "\u001B[7m";
 
     @Contract(pure = true)
     static @NotNull String getColoredText(String text, int color) {

@@ -23,14 +23,14 @@ public class CommandManager {
     public static void switchLogoRandomly(String[] logo, int alignment) {
         Random rand = new Random();
         int indexOfLogo = rand.nextInt(0, 5);
-        switchLogoManualy(logo, indexOfLogo, alignment);
+        switchLogoManually(logo, indexOfLogo, alignment);
     }
 
-    public static void switchLogoManualy(String[] logo, int indexOfLogo, int alignment) {
+    public static void switchLogoManually(String[] logo, int indexOfLogo, int alignment) {
         String[] colors;
         switch (indexOfLogo) {
             case 0 -> colors = new String[]{
-                    getAnsi256Color(systemMainColor), getAnsi256Color(56),
+                    getAnsi256Color(99), getAnsi256Color(56),
                     getAnsi256Color(165), getAnsi256Color(99),
                     getAnsi256Color(63), getAnsi256Color(99)};
 
@@ -40,19 +40,19 @@ public class CommandManager {
                     getAnsi256Color(93), getAnsi256Color(171)};
 
             case 2 -> colors = new String[]{
-                    getAnsi256Color(132), getAnsi256Color(168),
-                    getAnsi256Color(204), getAnsi256Color(133),
-                    getAnsi256Color(169), getAnsi256Color(205)};
-
-            case 3 -> colors = new String[]{
                     getAnsi256Color(84), getAnsi256Color(114),
                     getAnsi256Color(77), getAnsi256Color(48),
                     getAnsi256Color(83), getAnsi256Color(76)};
 
-            case 4 -> colors = new String[]{
+            case 3 -> colors = new String[]{
                     getAnsi256Color(153), getAnsi256Color(110),
                     getAnsi256Color(75), getAnsi256Color(189),
                     getAnsi256Color(223), getAnsi256Color(210)};
+
+            case 4 -> colors = new String[]{
+                    getAnsi256Color(219), getAnsi256Color(183),
+                    getAnsi256Color(147), getAnsi256Color(218),
+                    getAnsi256Color(182), getAnsi256Color(218)};
 
             default -> colors = new String[]{
                     getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
@@ -70,7 +70,7 @@ public class CommandManager {
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
-            slowMotionText(50, 56, false, true,
+            slowMotionText(50, 56, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
             modifyMessage('n', 1);
@@ -173,9 +173,9 @@ public class CommandManager {
         }
     }
 
-    public static void terminateSection(int themeColor_1, int acceptanceColor, int layoutColor) {
+    public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
-        message("Extension terminated correctly", themeColor_1,
+        message("Terminated correctly", themeColor_1,
                 58,0,out::print);
         modifyMessage('n',2);
         border();

@@ -31,11 +31,10 @@ public class TextConfigs {
     }
 
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
-                                      boolean isItalicActive, String mainText, String additionalText) {
+                                      String mainText, String additionalText) {
         TextConfigs.alignment = alignment;
         String formattedText = alignment(alignment) +
-                (isUnderlineActive ? UNDERLINE : "") +
-                (isItalicActive ? ITALIC : "") + mainText + RESET + additionalText;
+                (isUnderlineActive ? UNDERLINE : "") + mainText + RESET + additionalText;
 
         for (char ch : formattedText.toCharArray()) {
             out.print(ch);

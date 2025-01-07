@@ -4,7 +4,7 @@ import java.util.List;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.CommandManager.terminateSection;
+import static core.logic.CommandManager.terminate;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static extensions.finance.CryptoConfigs.*;
@@ -55,8 +55,7 @@ public class CryptoUI {
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
                 modifyMessage('n', 1);
-                terminateSection(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
@@ -68,8 +67,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateSection(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (fiatCurrencyCode.isEmpty()) {
@@ -95,8 +93,7 @@ public class CryptoUI {
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
-                terminateSection(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
@@ -108,8 +105,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateSection(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (fiatCurrencyCode.isEmpty()) {
