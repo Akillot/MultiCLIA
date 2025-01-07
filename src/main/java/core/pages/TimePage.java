@@ -104,10 +104,10 @@ public class TimePage {
                 if (isTimerRunning) {
                     isTimerRunning = false;
                     modifyMessage('n', 1);
-                    message("Stopping timer...", systemRejectionColor, 58, 0, out::print);
                 }
                 modifyMessage('n', 1);
-                terminate(systemMainColor, systemAcceptanceColor, systemLayoutColor);
+                message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
+                message("Terminated correctly", systemMainColor, 58,0,out::print);
                 break;
             }
 
@@ -118,7 +118,8 @@ public class TimePage {
                     continue;
                 }
                 if (isTimerRunning) {
-                    message("A timer is already running. Please wait or stop it.", systemRejectionColor, 58, 0, out::print);
+                    message("A timer is already running" + getAnsi256Color(systemLayoutColor) +
+                            ". Please wait or stop it.", systemRejectionColor, 58, 0, out::print);
                     continue;
                 }
                 isTimerRunning = true;
@@ -127,7 +128,8 @@ public class TimePage {
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
-                message("Invalid input. Please enter a valid number.", systemRejectionColor, 58, 0, out::print);
+                message("Invalid input" + getAnsi256Color(systemLayoutColor) +
+                        ". Please enter a valid number.", systemRejectionColor, 58, 0, out::print);
             }
         }
     }
@@ -164,8 +166,8 @@ public class TimePage {
     // /sw command
     private static void displayStopwatch() {
         modifyMessage('n',1);
-        message("Press 'Enter' to start stopwatch and '" + getAnsi256Color(systemMainColor)
-                + "Enter" + getAnsi256Color(systemLayoutColor) + "' again to stop.",
+        message("Press '"+ getAnsi256Color(systemMainColor) + "Enter"
+                        + getAnsi256Color(systemLayoutColor) + "' to start stopwatch and again to stop.",
                 systemLayoutColor, 58, 0, out::print);
         scanner.nextLine(); // Wait for enter
         long startTime = System.currentTimeMillis();
@@ -173,7 +175,8 @@ public class TimePage {
         message("Stopwatch started", systemMainColor, 58, 0, out::print);
         scanner.nextLine(); // Wait for enter again
         long elapsedTime = (System.currentTimeMillis() - startTime) / 1000;
-        message("Elapsed Time: " + elapsedTime + " seconds.", systemAcceptanceColor, 58, 0, out::print);
+        message("Elapsed Time: " + getAnsi256Color(systemMainColor) + elapsedTime
+                + getAnsi256Color(systemLayoutColor) + " sec.", systemLayoutColor, 58, 0, out::print);
     }
 
     // /ctz command
@@ -203,7 +206,7 @@ public class TimePage {
     private static void displayCustomDateTimeFormat() {
         modifyMessage('n',1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor)
-                + "Enter your custom format [e.g., dd/MM/yyyy HH:mm]: ");
+                + "Enter your custom format [e.g., " + getAnsi256Color(systemMainColor) + "dd" + getAnsi256Color(systemLayoutColor) + "/MM/yyyy HH:mm]: ");
         String format = scanner.nextLine();
         try {
             DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(format);
