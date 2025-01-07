@@ -79,7 +79,6 @@ public class CommandManager {
         }
         catch(Exception e){
             modifyMessage('n', 2);
-            displayErrorAscii();
             marginBorder(1, 1);
         }
     }
@@ -110,7 +109,6 @@ public class CommandManager {
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
                     + getAnsi256Color(systemMainColor) + localHost + RESET);
         } catch (UnknownHostException e) {
-            displayErrorAscii();
             message("IP is undefined", systemRejectionColor, 58, 0, out::print);
             message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
         }

@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.DisplayManager.displayErrorAscii;
 import static java.lang.System.out;
 
 public class TextConfigs {
@@ -75,7 +74,6 @@ public class TextConfigs {
                 try {
                     Thread.sleep(delay);
                 } catch (InterruptedException ex) {
-                    displayErrorAscii();
                     return;
                 }
             }
@@ -84,20 +82,21 @@ public class TextConfigs {
         modifyMessage('n', 1);
     }
 
-    public static void displayConfirmation(String preText, String midText, String postText,
-                                           int acceptanceColor, int rejectionColor, int layoutColor) {
+    public static void displayConfirmation(String preText, String confirmation_1, String confirmation_2,
+                                           String midText, String rejection_1, String rejection_2,
+                                           String postText, int acceptanceColor, int rejectionColor, int layoutColor) {
         message(preText
-                + " '" + getAnsi256Color(acceptanceColor) + "y" + getAnsi256Color(layoutColor)
-                + "/" + getAnsi256Color(acceptanceColor) + "+" + getAnsi256Color(layoutColor)
-                + "' " + midText +" '" + getAnsi256Color(rejectionColor) + "n" + getAnsi256Color(layoutColor)
-                + "/" + getAnsi256Color(rejectionColor) + "-" + getAnsi256Color(layoutColor)
+                + " '" + getAnsi256Color(acceptanceColor) + confirmation_1 + getAnsi256Color(layoutColor)
+                + "/" + getAnsi256Color(acceptanceColor) + confirmation_2 + getAnsi256Color(layoutColor)
+                + "' " + midText +" '" + getAnsi256Color(rejectionColor) + rejection_1 + getAnsi256Color(layoutColor)
+                + "/" + getAnsi256Color(rejectionColor) + rejection_2 + getAnsi256Color(layoutColor)
                 + "' " + postText, systemLayoutColor,58,0,out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
-            displayErrorAscii();
+            message("Error, number of modifiers is less than 0", systemRejectionColor,58,0, out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";

@@ -18,7 +18,8 @@ public class SettingsPage {
     //The main method of displaying the page
     public static void displaySettingsPage() {
         modifyMessage('n', 2);
-        displayConfirmation("Enter","to open and","to skip",
+        displayConfirmation("Enter","y","+",
+                "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
 
         modifyMessage('n', 1);

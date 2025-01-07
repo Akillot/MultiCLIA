@@ -33,7 +33,8 @@ public  class InfoPage {
         displayJavaInfo();
 
         modifyMessage('n', 2);
-        displayConfirmation("Enter","to open and","to skip",
+        displayConfirmation("Enter","y","+",
+                "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         choice("Description", displayAppDescription(),
                 systemMainColor, systemLayoutColor,systemRejectionColor);

@@ -20,7 +20,9 @@ public class CryptoUI {
         switchLogoRandomly(cryptoLogo,8);
         marginBorder(1,2);
 
-        displayConfirmation("Enter","to open and","to skip", acceptanceColor, rejectionColor, layoutColor);
+        displayConfirmation("Enter","y","+",
+                "to open and","n","-","to skip",
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n',1);
 
         choice("List of cryptocurrencies", CryptoUI::displayListOfCryptocurrencies,

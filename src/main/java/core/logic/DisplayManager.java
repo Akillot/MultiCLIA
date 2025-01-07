@@ -1,8 +1,5 @@
 package core.logic;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
 
 import static core.command_handling_system.CommandHandler.*;
@@ -16,26 +13,6 @@ import static java.lang.System.*;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
-
-    //displaying error art
-    private static final String[] errorAscii = {
-            "  .oooooo.                                           ",
-            " d8P'  `Y8b                                          ",
-            "888      888   .ooooo.   .ooooo.  oo.ooooo.   .oooo.o ",
-            "888      888  d88' `88b d88' `88b  888' `88b d88(  \"8 ",
-            "888      888  888   888 888   888  888   888 `\"Y88b.  ",
-            "`88b    d88'  888   888 888   888  888   888 o.  )88b ",
-            " `Y8bood8P'   `Y8bod8P' `Y8bod8P'  888bod8P' 8\"\"888P' ",
-            "                                   888                 ",
-            "                                  o888o                ",
-            " "
-    };
-
-    public static void displayErrorAscii() {
-        for (String line : errorAscii) {
-            message(line, systemRejectionColor, -1, 0, out::print);
-        }
-    }
 
     //displaying description /h
     private static final String[] rules = {
@@ -61,76 +38,15 @@ public class DisplayManager {
         marginBorder(1,1);
     }
 
-
     public static void displayCommandList() {
         try {
-            marginBorder(1,2);
-            alert("i", "Show all lists together", 58, systemMainColor, systemLayoutColor);
-
-            printOpenOrSkipPrompt();
-            String choice = getUserChoice();
-
-            handleUserChoice(choice);
+            marginBorder(1,1);
+            displayAllCommandList();
 
         } catch (Exception e) {
             marginBorder(1,1);
-            displayErrorAscii();
             message("Unknown error occurred", systemRejectionColor, 58, 0, out::print);
         }
-    }
-
-    private static @NotNull String getUserChoice() {
-        return scanner.nextLine().trim();
-    }
-
-    private static void handleUserChoice(@NotNull String choice) {
-        switch (choice.toLowerCase()) {
-            case "+":
-            case "y":
-                displayAllCommandList();
-                break;
-            case "-":
-            case "n":
-                displaySubCommandLists();
-                break;
-            case "exit":
-                marginBorder(1,1);
-                break;
-            default:
-                message("Invalid input", systemRejectionColor, 58, 0, out::print);
-                marginBorder(2,1);
-                break;
-        }
-    }
-
-    private static void displaySubCommandLists() {
-
-        modifyMessage('n', 1);
-        choice("System", displayCommandList(fullSystemCmds, shortSystemCmds),
-                systemMainColor, systemLayoutColor, systemRejectionColor);
-        modifyMessage('n', 2);
-        choice("Extensions", displayCommandList(extensionCmds),
-                systemMainColor, systemLayoutColor, systemRejectionColor);
-        marginBorder(2,1);
-    }
-
-    @Contract(pure = true)
-    private static @NotNull Runnable displayCommandList(String[] commands) {
-        return () -> {
-            for (String command : commands) {
-                message("· " + command, systemLayoutColor, 58, 0, out::print);
-            }
-        };
-    }
-
-    @Contract(pure = true)
-    private static @NotNull Runnable displayCommandList(String[] fullCommands, String[] shortCommands) {
-        return () -> {
-            for (int i = 0; i < fullCommands.length; i++) {
-                String shortCmd = i < shortCommands.length ? shortCommands[i] : "";
-                message("· " + fullCommands[i] + " [" + shortCmd + "]", systemLayoutColor, 58, 0, out::print);
-            }
-        };
     }
 
     private static void displayAllCommandList() {
@@ -148,13 +64,6 @@ public class DisplayManager {
                     + alignment(-18) + getAnsi256Color(systemLayoutColor) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
-    }
-
-    private static void printOpenOrSkipPrompt() {
-        displayConfirmation("Enter","to open and","to skip",
-                systemAcceptanceColor,systemRejectionColor,systemLayoutColor );
-        modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Choice: " + RESET);
     }
 
     //displaying external and local IP /ip

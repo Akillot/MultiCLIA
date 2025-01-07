@@ -30,8 +30,9 @@ public class SearcherUI {
 
             String domain = buildDomain(domainInput);
 
-            displayConfirmation("Enter", "to open and", "to skip",
-                    acceptanceColor, rejectionColor, layoutColor);
+            displayConfirmation("Enter","y","+",
+                    "to open and","n","-","to skip",
+                    systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
             modifyMessage('n',1);
 
             choice("Show URL", () -> displayFullURL(domain), themeColor_1, layoutColor, rejectionColor);

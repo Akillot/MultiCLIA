@@ -15,7 +15,6 @@ import java.util.Map;
 
 import static core.logic.AppearanceConfigs.getAnsi256Color;
 import static core.logic.AppearanceConfigs.systemRejectionColor;
-import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.alignment;
 import static core.logic.TextConfigs.message;
 import static java.lang.System.out;
@@ -57,7 +56,6 @@ public class CommandHandler {
                 try {
                     InfoPage.displayInfo();
                 } catch (InterruptedException e) {
-                    displayErrorAscii();
                     message("Error displaying this page: " + e.getMessage(), systemRejectionColor, 58, 0, out::println);
                 }
             };
