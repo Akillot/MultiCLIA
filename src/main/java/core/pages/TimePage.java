@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.CommandManager.terminate;
 import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -49,26 +48,26 @@ public class TimePage {
 
     private static void displayListOfCommands(){
         modifyMessage('n',1);
-        message("·  Current Time [/" + getAnsi256Color(systemMainColor)
-                + "ct" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Current Time [" + getAnsi256Color(systemMainColor)
+                + "/ct" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  Timer [/" + getAnsi256Color(systemMainColor)
-                + "t" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Timer [" + getAnsi256Color(systemMainColor)
+                + "/t" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  Stopwatch [/"  + getAnsi256Color(systemMainColor)
-                + "sw" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Stopwatch ["  + getAnsi256Color(systemMainColor)
+                + "/sw" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  Change Time Zone [/" + getAnsi256Color(systemMainColor)
-                + "ctz" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Change Time Zone [" + getAnsi256Color(systemMainColor)
+                + "/ctz" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  Custom Time Format [/" + getAnsi256Color(systemMainColor)
-                + "ctf" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Custom Time Format [" + getAnsi256Color(systemMainColor)
+                + "/ctf" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  List Commands [/" + getAnsi256Color(systemMainColor)
-                + "lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  List Commands [" + getAnsi256Color(systemMainColor)
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  Exit [/" + getAnsi256Color(systemRejectionColor)
-                + "e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
     }
 
     private static void displayTime() {
@@ -144,7 +143,7 @@ public class TimePage {
                     }
                     out.print("\r" + alignment(58) + getAnsi256Color(systemLayoutColor)
                             + "Time left: " + getAnsi256Color(systemMainColor)
-                            + i + getAnsi256Color(systemLayoutColor) + " seconds");
+                            + i + getAnsi256Color(systemLayoutColor) + " sec");
                     Thread.sleep(1000);
                 }
                 if (isTimerRunning) {
@@ -206,7 +205,11 @@ public class TimePage {
     private static void displayCustomDateTimeFormat() {
         modifyMessage('n',1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor)
-                + "Enter your custom format [e.g., " + getAnsi256Color(systemMainColor) + "dd" + getAnsi256Color(systemLayoutColor) + "/MM/yyyy HH:mm]: ");
+                + "Enter your custom format [e.g., "
+                + getAnsi256Color(systemMainColor) + "dd" + getAnsi256Color(systemLayoutColor) + "/"
+                + getAnsi256Color(systemMainColor) + "MM" + getAnsi256Color(systemLayoutColor) + "/"
+                + getAnsi256Color(systemMainColor) + "yyyy HH" + getAnsi256Color(systemLayoutColor) + ":"
+                + getAnsi256Color(systemMainColor) +"mm" + getAnsi256Color(systemLayoutColor) + "]: ");
         String format = scanner.nextLine();
         try {
             DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(format);

@@ -14,7 +14,7 @@ import static java.lang.System.*;
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    //displaying description /h
+    //displaying description /h command
     private static final String[] rules = {
             "cmds: Shows all commands [/c]",
             "setts: Shows settings of the application [/s]",
@@ -38,6 +38,7 @@ public class DisplayManager {
         marginBorder(1,1);
     }
 
+    // displaying command list /c command
     public static void displayCommandList() {
         try {
             marginBorder(1,1);
@@ -57,11 +58,12 @@ public class DisplayManager {
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
         for (int i = 0; i < maxRows; i++) {
-            String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " [" + shortSystemCmds[i] + "]" : "";
+            String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " ["
+                    + getAnsi256Color(systemMainColor) + shortSystemCmds[i] + getAnsi256Color(systemLayoutColor) + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
             out.printf(alignment(38) + getAnsi256Color(systemLayoutColor) + "%-40s"
-                    + alignment(-18) + getAnsi256Color(systemLayoutColor) + "%-40s%n", systemCmd, extensionCmd);
+                    + alignment(-18) + getAnsi256Color(systemLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
     }

@@ -11,24 +11,6 @@ import static java.lang.System.out;
 public class TextConfigs {
 
     public static int alignment;
-
-    public static void wrapText(@NotNull String text, int width) {
-        for (int i = 0; i < text.length(); i += width) {
-            int end = Math.min(i + width, text.length());
-            if (i == 0) {
-                border();
-            }
-            modifyMessage('n',1);
-            out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "You entered: ["
-                    + getAnsi256Color(systemMainColor) + text.substring(i, end) + RESET
-                    + getAnsi256Color(systemLayoutColor) + "]" + RESET);
-            if (end < text.length()) {
-                modifyMessage('n',1);
-            }
-        }
-        modifyMessage('n',1);
-    }
-
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
                                       String mainText, String additionalText) {
         TextConfigs.alignment = alignment;
@@ -110,6 +92,10 @@ public class TextConfigs {
         for (int i = 0; i < amount; i++) {
             out.print(output);
         }
+    }
+
+    public static @NotNull String horizontalMargining(int steps) {
+        return " ".repeat(Math.max(0, steps));
     }
 
     /*Show a message with [x], where x is a special character.
