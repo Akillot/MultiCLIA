@@ -19,72 +19,81 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
-    //displaying logo
     public static void switchLogoRandomly(String[] logo, int alignment) {
-        Random rand = new Random();
-        int indexOfLogo = rand.nextInt(0, 5);
-        switchLogoManualy(logo, indexOfLogo, alignment);
+        int indexOfLogo = getRandomIndexWithProbability();
+        switchLogoManually(logo, indexOfLogo, alignment);
     }
 
-    public static void switchLogoManualy(String[] logo, int indexOfLogo, int alignment) {
-        String[] colors;
-        switch (indexOfLogo) {
-            case 0 -> colors = new String[]{
-                    getAnsi256Color(systemMainColor), getAnsi256Color(56),
+    public static void switchLogoManually(String @NotNull [] logo, int indexOfLogo, int alignment) {
+        String[] colors = getColorsForLogo(indexOfLogo);
+
+        for (int i = 0; i < logo.length; i++) {
+            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+            message(coloredText, systemLayoutColor, alignment, 0, System.out::print);
+        }
+    }
+
+    private static String @NotNull [] getColorsForLogo(int indexOfLogo) {
+        return switch (indexOfLogo) {
+            case 0 -> new String[]{
+                    getAnsi256Color(99), getAnsi256Color(56),
                     getAnsi256Color(165), getAnsi256Color(99),
                     getAnsi256Color(63), getAnsi256Color(99)};
 
-            case 1 -> colors = new String[]{
+            case 1 -> new String[]{
                     getAnsi256Color(140), getAnsi256Color(98),
                     getAnsi256Color(134), getAnsi256Color(129),
                     getAnsi256Color(93), getAnsi256Color(171)};
 
-            case 2 -> colors = new String[]{
-                    getAnsi256Color(132), getAnsi256Color(168),
-                    getAnsi256Color(204), getAnsi256Color(133),
-                    getAnsi256Color(169), getAnsi256Color(205)};
-
-            case 3 -> colors = new String[]{
+            case 2 -> new String[]{
                     getAnsi256Color(84), getAnsi256Color(114),
                     getAnsi256Color(77), getAnsi256Color(48),
                     getAnsi256Color(83), getAnsi256Color(76)};
 
-            case 4 -> colors = new String[]{
+            case 3 -> new String[]{
                     getAnsi256Color(153), getAnsi256Color(110),
                     getAnsi256Color(75), getAnsi256Color(189),
                     getAnsi256Color(223), getAnsi256Color(210)};
 
-            default -> colors = new String[]{
+            case 4 -> new String[]{
+                    getAnsi256Color(219), getAnsi256Color(183),
+                    getAnsi256Color(147), getAnsi256Color(218),
+                    getAnsi256Color(182), getAnsi256Color(218)};
+
+            default -> new String[]{
                     getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
                     getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
                     getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor)};
-        }
+        };
+    }
 
-        for (int i = 0; i < logo.length; i++) {
-            String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, i % colors.length, alignment, 0, System.out::print);
+    private static int getRandomIndexWithProbability() {
+        double[] probabilities = {5, 5, 5, 5, 80};
+        double randomValue = new Random().nextDouble() * 100;
+        double cumulativeProbability = 0;
+
+        for (int i = 0; i < probabilities.length; i++) {
+            cumulativeProbability += probabilities[i];
+            if (randomValue < cumulativeProbability) {
+                return i;
+            }
         }
+        return probabilities.length - 1;
     }
 
     //Searching
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
-            slowMotionText(50, 56, false, true,
+            slowMotionText(0, 56, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
-            modifyMessage('n', 1);
-            wrapText(nameOfFunction, borderWidth - 2);
-
             if (!registry.executeCommand(nameOfFunction)) {
-                modifyMessage('n', 2);
-                displayErrorAscii();
-                marginBorder(1,1);
+                searchCommands();
             }
-        } catch (Exception e) {
-            modifyMessage('n', 2);
-            displayErrorAscii();
-            marginBorder(1,1);
+        }
+        catch(Exception e){
+            out.print("");
         }
     }
 
@@ -114,7 +123,6 @@ public class CommandManager {
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
                     + getAnsi256Color(systemMainColor) + localHost + RESET);
         } catch (UnknownHostException e) {
-            displayErrorAscii();
             message("IP is undefined", systemRejectionColor, 58, 0, out::print);
             message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
         }
@@ -148,16 +156,6 @@ public class CommandManager {
         }
     }
 
-    public static boolean executeWithProbability(double probabilityPercentage) throws IllegalArgumentException {
-        if (probabilityPercentage < 0 || probabilityPercentage > 100) {
-           message("Probability must be between 0 and 100.",
-                   systemRejectionColor,58,0,out::print);
-        }
-        Random rand = new Random();
-        double randomValue = rand.nextDouble() * 100;
-        return randomValue < probabilityPercentage;
-    }
-
     public static void clearTerminal(){
         try {
             String operatingSystem = System.getProperty("os.name");
@@ -173,9 +171,9 @@ public class CommandManager {
         }
     }
 
-    public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
+    public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
-        message("Extension terminated correctly", themeColor_1,
+        message("Terminated correctly", themeColor_1,
                 58,0,out::print);
         modifyMessage('n',2);
         border();

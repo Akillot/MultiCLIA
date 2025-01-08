@@ -13,7 +13,7 @@ import static java.lang.System.out;
 public class SearcherUI {
 
     public static void displaySearcherMenu() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         switchLogoRandomly(searcherLogo, 32);
         marginBorder(2, 2);
 
@@ -23,16 +23,16 @@ public class SearcherUI {
             String domainInput = promptUserForDomain();
             modifyMessage('n',1);
             if (isExitCommand(domainInput)) {
-                terminateExtension(themeColor_1, acceptanceColor, layoutColor);
+                terminate(themeColor_1, acceptanceColor, layoutColor);
                 modifyMessage('n',1);
                 break;
             }
 
             String domain = buildDomain(domainInput);
 
-            displayConfirmation("Enter", "to open and", "to skip",
-                    acceptanceColor, rejectionColor, layoutColor);
-            modifyMessage('n',1);
+            displayConfirmation("Enter","y","+",
+                    "to open and","n","-","to skip",
+                    systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
 
             choice("Show URL", () -> displayFullURL(domain), themeColor_1, layoutColor, rejectionColor);
             modifyMessage('n',2);

@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.getAnsi256Color;
-import static core.logic.DisplayManager.displayErrorAscii;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.modifyMessage;
 import static extensions.finance.CryptoConfigs.*;
@@ -50,8 +49,6 @@ public class CryptoService {
     //Formating the error outputs
     static void errorFormatting(String text) {
         modifyMessage('n', 1);
-        displayErrorAscii();
-        modifyMessage('n',1);
         message(text, rejectionColor, 58, 0, out::print);
         modifyMessage('n', 1);
     }

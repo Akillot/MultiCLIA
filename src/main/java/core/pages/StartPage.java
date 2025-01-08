@@ -9,7 +9,6 @@ import java.util.Random;
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.searchCommands;
 import static core.logic.CommandManager.switchLogoRandomly;
-import static core.logic.DisplayManager.*;
 import static core.logic.TextConfigs.*;
 import static core.pages.InfoPage.getVersion;
 import static java.lang.System.out;
@@ -24,7 +23,6 @@ public class StartPage {
                 searchCommands();
             } catch (Exception ex) {
                 marginBorder(1,1);
-                displayErrorAscii();
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
                 message(errorMessage, systemRejectionColor, 58, 0, out::print);
             }
@@ -36,7 +34,7 @@ public class StartPage {
         switchLogoRandomly(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
-        getCurrentDate("dd-MM-yyyy HH:mm", "Application start time");
+        getCurrentDate();
 
         marginBorder(1,1);
 
@@ -50,7 +48,7 @@ public class StartPage {
                 + alignment(56) + "commands", 56, systemMainColor, systemLayoutColor);
 
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
+        modifyMessage('n',1);
     }
 
     @Getter
@@ -67,7 +65,6 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String[] motto = {"Command-driven simplicity.",
-                "Version: " + getVersion() + getAnsi256Color(systemLayoutColor) + " — Stable.",
                 "Built for you.", "Just type ‘" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
                 "Optimal width of the terminal window: 117 characters and wider."};
@@ -77,11 +74,11 @@ public class StartPage {
         message("Everything you need. " + motto[index],15,48,0,out::print);
     }
 
-    private static void getCurrentDate(String timeDataPattern, String text){
+    private static void getCurrentDate(){
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern(timeDataPattern);
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String formattedTime = localTime.format(myFormatter);
-        message(text+ ": "
+        message("Application start time" + ": "
                         + getAnsi256Color(systemMainColor) + formattedTime
                         + getAnsi256Color(systemLayoutColor) + ".",
                 systemLayoutColor,48,0,out::print);
@@ -112,5 +109,11 @@ public class StartPage {
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor, 36,0,out::print);
                 break;
         }
+    }
+
+    public static void mainMenuReload(){
+        modifyMessage('n',1);
+        border();
+        displayMenu();
     }
 }

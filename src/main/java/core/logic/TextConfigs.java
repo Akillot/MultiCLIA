@@ -6,36 +6,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.DisplayManager.displayErrorAscii;
 import static java.lang.System.out;
 
 public class TextConfigs {
 
     public static int alignment;
-
-    public static void wrapText(@NotNull String text, int width) {
-        for (int i = 0; i < text.length(); i += width) {
-            int end = Math.min(i + width, text.length());
-            if (i == 0) {
-                border();
-            }
-            modifyMessage('n',1);
-            out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "You entered: ["
-                    + getAnsi256Color(systemMainColor) + text.substring(i, end) + RESET
-                    + getAnsi256Color(systemLayoutColor) + "]" + RESET);
-            if (end < text.length()) {
-                modifyMessage('n',1);
-            }
-        }
-        modifyMessage('n',1);
-    }
-
     public static void slowMotionText(int delay, int alignment, boolean isUnderlineActive,
-                                      boolean isItalicActive, String mainText, String additionalText) {
+                                      String mainText, String additionalText) {
         TextConfigs.alignment = alignment;
         String formattedText = alignment(alignment) +
-                (isUnderlineActive ? UNDERLINE : "") +
-                (isItalicActive ? ITALIC : "") + mainText + RESET + additionalText;
+                (isUnderlineActive ? UNDERLINE : "") + mainText + RESET + additionalText;
 
         for (char ch : formattedText.toCharArray()) {
             out.print(ch);
@@ -76,7 +56,6 @@ public class TextConfigs {
                 try {
                     Thread.sleep(delay);
                 } catch (InterruptedException ex) {
-                    displayErrorAscii();
                     return;
                 }
             }
@@ -85,20 +64,21 @@ public class TextConfigs {
         modifyMessage('n', 1);
     }
 
-    public static void displayConfirmation(String preText, String midText, String postText,
-                                           int acceptanceColor, int rejectionColor, int layoutColor) {
+    public static void displayConfirmation(String preText, String confirmation_1, String confirmation_2,
+                                           String midText, String rejection_1, String rejection_2,
+                                           String postText, int acceptanceColor, int rejectionColor, int layoutColor) {
         message(preText
-                + " '" + getAnsi256Color(acceptanceColor) + "y" + getAnsi256Color(layoutColor)
-                + "/" + getAnsi256Color(acceptanceColor) + "+" + getAnsi256Color(layoutColor)
-                + "' " + midText +" '" + getAnsi256Color(rejectionColor) + "n" + getAnsi256Color(layoutColor)
-                + "/" + getAnsi256Color(rejectionColor) + "-" + getAnsi256Color(layoutColor)
+                + " '" + getAnsi256Color(acceptanceColor) + confirmation_1 + getAnsi256Color(layoutColor)
+                + "/" + getAnsi256Color(acceptanceColor) + confirmation_2 + getAnsi256Color(layoutColor)
+                + "' " + midText +" '" + getAnsi256Color(rejectionColor) + rejection_1 + getAnsi256Color(layoutColor)
+                + "/" + getAnsi256Color(rejectionColor) + rejection_2 + getAnsi256Color(layoutColor)
                 + "' " + postText, systemLayoutColor,58,0,out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
         if(amount <= 0){
-            displayErrorAscii();
+            message("Error, number of modifiers is less than 0", systemRejectionColor,58,0, out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";
@@ -112,6 +92,10 @@ public class TextConfigs {
         for (int i = 0; i < amount; i++) {
             out.print(output);
         }
+    }
+
+    public static @NotNull String horizontalMargining(int steps) {
+        return " ".repeat(Math.max(0, steps));
     }
 
     /*Show a message with [x], where x is a special character.

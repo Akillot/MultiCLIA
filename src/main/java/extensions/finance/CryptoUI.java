@@ -4,7 +4,7 @@ import java.util.List;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.CommandManager.terminateExtension;
+import static core.logic.CommandManager.terminate;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static extensions.finance.CryptoConfigs.*;
@@ -16,11 +16,13 @@ public class CryptoUI {
 
     //Main menu of extension
     public static void displayCryptoMenu() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         switchLogoRandomly(cryptoLogo,8);
         marginBorder(1,2);
 
-        displayConfirmation("Enter","to open and","to skip", acceptanceColor, rejectionColor, layoutColor);
+        displayConfirmation("Enter","y","+",
+                "to open and","n","-","to skip",
+                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
         modifyMessage('n',1);
 
         choice("List of cryptocurrencies", CryptoUI::displayListOfCryptocurrencies,
@@ -55,8 +57,7 @@ public class CryptoUI {
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
                 modifyMessage('n', 1);
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
@@ -68,8 +69,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (fiatCurrencyCode.isEmpty()) {
@@ -95,8 +95,7 @@ public class CryptoUI {
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
@@ -108,8 +107,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
-                return;
+                terminate(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (fiatCurrencyCode.isEmpty()) {

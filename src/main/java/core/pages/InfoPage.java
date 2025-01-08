@@ -3,6 +3,8 @@ package core.pages;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
@@ -13,32 +15,34 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.1.3";
+        String appVersion = "A-0.8.2";
         return getAnsi256Color(systemMainColor) + appVersion;
     }
 
     public static void displayInfo() throws InterruptedException {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
 
         displayOs();
         displayCpuInfo();
-        displayHomeDirectory();
+        displayApplicationDirectory();
 
         modifyMessage('n', 1);
         displayJavaInfo();
 
         modifyMessage('n', 2);
-        displayConfirmation("Enter","to open and","to skip",
+        displayConfirmation("Enter","y","+",
+                "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
+
         choice("Description", displayAppDescription(),
                 systemMainColor, systemLayoutColor,systemRejectionColor);
+
         modifyMessage('n', 2);
         choice("Important links", InfoPage::displayImportantLinks,
                 systemMainColor, systemLayoutColor,systemRejectionColor);
-
         marginBorder(2,1);
     }
 
@@ -63,12 +67,19 @@ public  class InfoPage {
                 systemLayoutColor, 58, 0, out::print);
     }
 
-    private static void displayHomeDirectory() {
-        String userHome = System.getProperty("user.home");
-        message("Home Directory: " + getAnsi256Color(systemMainColor) + userHome,
-                systemLayoutColor, 58, 0, out::print);
-    }
+    private static void displayApplicationDirectory() {
+        try {
+            String appPath = new File(
+                    StartPage.class.getProtectionDomain().getCodeSource().getLocation().toURI()
+            ).getParent();
 
+            message("Application Directory: " + getAnsi256Color(systemMainColor) + appPath,
+                    systemLayoutColor, 58, 0, out::print);
+        } catch (Exception e) {
+            message("Could not determine application directory.",
+                    systemLayoutColor, 58, 0, out::print);
+        }
+    }
 
     private static void displayImportantLinks(){
         modifyMessage('n', 1);
