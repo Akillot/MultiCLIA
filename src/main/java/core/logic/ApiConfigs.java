@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
@@ -56,24 +57,6 @@ public class ApiConfigs {
         } catch (Exception e) {
             message("Error: " + e.getMessage(), systemRejectionColor,58,0,out::print);
             return null;
-        }
-    }
-
-    public static void getWeather(double latitude, double longitude, String city) {
-        String apiUrl = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&current_weather=true";
-        String response = httpRequest(apiUrl,"GET","Current Weather in " + city + ":","current_weather");
-
-        if (response != null) {
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-                JSONObject currentWeather = jsonResponse.getJSONObject("current_weather");
-                double temperature = currentWeather.getDouble("temperature");
-
-                out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Weather in " + city + " now: " + RESET
-                        + getAnsi256Color(systemMainColor) + temperature + "°C" + RESET);
-            } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(), systemRejectionColor,58,0,out::print);
-            }
         }
     }
 }

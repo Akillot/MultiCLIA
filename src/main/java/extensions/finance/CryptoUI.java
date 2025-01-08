@@ -16,7 +16,7 @@ public class CryptoUI {
 
     //Main menu of extension
     public static void displayCryptoMenu() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         switchLogoRandomly(cryptoLogo,8);
         marginBorder(1,2);
 

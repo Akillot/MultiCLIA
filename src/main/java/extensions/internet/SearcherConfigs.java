@@ -9,15 +9,15 @@ import static java.lang.System.out;
 
 public class SearcherConfigs {
 
-    static final int themeColor_1 = 75;
-    static final int themeColor_2 = 111;
+    static final int themeColor_1 = 147;
+    static final int themeColor_2 = 183;
     static final int layoutColor = 15;
 
     static final int acceptanceColor = 46;
     static final int rejectionColor = 196;
 
     @Getter
-    private static final String version = "1.1.4";
+    private static final String version = "1.1.5";
 
     @Getter
     static final String[] searcherLogo = {

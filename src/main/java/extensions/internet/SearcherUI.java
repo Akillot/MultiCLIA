@@ -13,7 +13,7 @@ import static java.lang.System.out;
 public class SearcherUI {
 
     public static void displaySearcherMenu() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         switchLogoRandomly(searcherLogo, 32);
         marginBorder(2, 2);
 
@@ -33,7 +33,6 @@ public class SearcherUI {
             displayConfirmation("Enter","y","+",
                     "to open and","n","-","to skip",
                     systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
-            modifyMessage('n',1);
 
             choice("Show URL", () -> displayFullURL(domain), themeColor_1, layoutColor, rejectionColor);
             modifyMessage('n',2);

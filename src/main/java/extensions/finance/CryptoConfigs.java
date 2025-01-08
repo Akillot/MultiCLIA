@@ -113,15 +113,15 @@ public class CryptoConfigs {
     static String cryptocurrencyCode;
     static String fiatCurrencyCode;
 
-    static int themeColor_1 = 80;
-    static int themeColor_2 = 73;
+    static int themeColor_1 = 147;
+    static int themeColor_2 = 183;
     static int layoutColor = 15;
 
     static int acceptanceColor = 46;
     static int rejectionColor = 196;
 
     @Getter
-    private static final String version = "1.1.3";
+    private static final String version = "1.1.4";
 
     static final Map<String, String> CRYPTO_MAP = new HashMap<>() {{
         for (int i = 0; i < cryptocurrencyCodes.size() && i < cryptocurrencyName.size(); i++) {
