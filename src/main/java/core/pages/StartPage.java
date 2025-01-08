@@ -65,7 +65,7 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String[] motto = {"Command-driven simplicity.",
-                "Built for you.", "Just type ‘" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "’.",
+                "Built for you.", "Just type '" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "'.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
                 "Optimal width of the terminal window: 117 characters and wider."};
         Random rand = new Random();
