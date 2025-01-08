@@ -50,7 +50,7 @@ public class CommandHandler {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
             case 1 -> SettingsPage::displaySettingsPage;
-            case 2 -> StartPage::displayStartPage;
+            case 2 -> StartPage::mainMenuReload;
             case 3 -> DisplayManager::displayUserIp;
             case 4 -> () -> {
                 try {

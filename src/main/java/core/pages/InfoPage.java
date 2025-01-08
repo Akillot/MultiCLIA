@@ -20,7 +20,7 @@ public  class InfoPage {
     }
 
     public static void displayInfo() throws InterruptedException {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
@@ -36,12 +36,13 @@ public  class InfoPage {
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
+
         choice("Description", displayAppDescription(),
                 systemMainColor, systemLayoutColor,systemRejectionColor);
+
         modifyMessage('n', 2);
         choice("Important links", InfoPage::displayImportantLinks,
                 systemMainColor, systemLayoutColor,systemRejectionColor);
-
         marginBorder(2,1);
     }
 

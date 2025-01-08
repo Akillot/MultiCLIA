@@ -17,7 +17,7 @@ public class SettingsPage {
 
     //The main method of displaying the page
     public static void displaySettingsPage() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
@@ -33,7 +33,6 @@ public class SettingsPage {
 
         modifyMessage('n', 2);
         displayLogoSection();
-
         marginBorder(2,1);
     }
 

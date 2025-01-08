@@ -110,4 +110,10 @@ public class StartPage {
                 break;
         }
     }
+
+    public static void mainMenuReload(){
+        modifyMessage('n',1);
+        border();
+        displayMenu();
+    }
 }
