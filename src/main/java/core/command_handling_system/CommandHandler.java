@@ -23,12 +23,12 @@ public class CommandHandler {
 
     public static String[] fullSystemCmds = {
             "cmds" ,"setts", "rerun",
-            "ip", "info", "exit", "exitq",
+            "ip", "info", "exit",
             "help", "version", "clear", "time"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
-            "/i", "/e", "/eq", "/h",
+            "/i", "/e", "/h",
             "/v", "/cl", "/t"};
 
     public static String[] extensionCmds = {
@@ -60,13 +60,11 @@ public class CommandHandler {
                             systemRejectionColor, 58, 0, out::println);
                 }
             };
-
-            case 5 -> CommandManager::terminateProgramDefault;
-            case 6 -> CommandManager::terminateProgramQuick;
-            case 7 -> DisplayManager::displayCommandsDescription;
-            case 8 -> DisplayManager::displayCurrentVersion;
-            case 9 -> CommandManager::clearTerminal;
-            case 10 -> TimePage::displayTimePage;
+            case 5 -> CommandManager::terminateProgram;
+            case 6 -> DisplayManager::displayCommandsDescription;
+            case 7 -> DisplayManager::displayCurrentVersion;
+            case 8 -> CommandManager::clearTerminal;
+            case 9 -> TimePage::displayTimePage;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
         };

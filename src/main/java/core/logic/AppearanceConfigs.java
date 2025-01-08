@@ -103,7 +103,7 @@ public class AppearanceConfigs {
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));
 
-            System.out.print(bar.toString());
+            System.out.print(bar);
 
             try {
                 Thread.sleep(delay);

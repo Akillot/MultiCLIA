@@ -179,18 +179,8 @@ public class CommandManager {
         border();
     }
 
-    public static void terminateProgramDefault() {
-        modifyMessage('n',2);
-        loadingAnimation(300,10);
-        message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated correctly", systemMainColor,
-                56,20,out::print);
-        modifyMessage('n', 2);
-        exit(0);
-    }
-
-    public static void terminateProgramQuick() {
-        modifyMessage('n',2);
+    public static void terminateProgram() {
+        marginBorder(1,2);
         message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
         message("Program terminated quickly correctly", systemMainColor,
                 56,0,out::print);
