@@ -1,5 +1,7 @@
 package core.logic;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 import static core.command_handling_system.CommandHandler.*;
@@ -16,26 +18,35 @@ public class DisplayManager {
 
     //displaying description /h command
     private static final String[] rules = {
-            "cmds: Shows all commands [/c]",
-            "setts: Shows settings of the application [/s]",
-            "rerun: Restarts the app without clearing context [/rr]",
-            "ip: Shows local and external IP addresses [/ip]",
-            "info: Shows app information [/i]",
-            "help: Shows description of all commands [/h]",
-            "exit: Terminates the application [/e]",
-            "exitq: Terminates the application quickly [/eq]",
-            "version: Shows version [/v]",
-            "clear: Clears recent values from terminal [/cl]",
-            "time: Shows current time and additional information about time [/t]"
+            formatCommandWithDescription("cmds", "/c", "Shows all commands"),
+            formatCommandWithDescription("setts", "/s", "Shows settings of the application"),
+            formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
+            formatCommandWithDescription("ip", "/ip", "Shows local and external IP addresses"),
+            formatCommandWithDescription("info", "/i", "Shows app information"),
+            formatCommandWithDescription("help", "/h", "Shows description of all commands"),
+            formatCommandWithDescription("version", "/v", "Shows version"),
+            formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
+            formatCommandWithDescription("time", "/t", "Shows time section"),
+            formatCommandWithDescription("exit", "/e", "Terminates the application"),
+            formatCommandWithDescription("exitq", "/eq", "Terminates the application quickly")
     };
 
+    private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
+        return formatCommand(commandName + getAnsi256Color(systemLayoutColor) + ": ", "", "") + description + " "
+                + formatCommand(shortCommand, "[", "]");
+    }
+
+    private static @NotNull String formatCommand(String command, String bracketStart, String bracketEnd) {
+        return bracketStart + getAnsi256Color(systemMainColor) + command + getAnsi256Color(systemLayoutColor) + bracketEnd;
+    }
+
     public static void displayCommandsDescription() {
-        modifyMessage('n', 2);
+        marginBorder(1, 2);
         for (String rule : rules) {
             message(rule, systemLayoutColor, 58, 0, out::print);
             modifyMessage('n', 1);
         }
-        marginBorder(1,1);
+        marginBorder(1, 1);
     }
 
     // displaying command list /c command
@@ -70,7 +81,7 @@ public class DisplayManager {
 
     //displaying external and local IP /ip
     public static void displayUserIp() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         getUserLocalIp();
         httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
         marginBorder(2,1);

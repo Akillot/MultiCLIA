@@ -19,7 +19,6 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
-    //displaying logo
     public static void switchLogoRandomly(String[] logo, int alignment) {
         Random rand = new Random();
         int indexOfLogo = rand.nextInt(0, 5);
@@ -78,8 +77,7 @@ public class CommandManager {
             }
         }
         catch(Exception e){
-            modifyMessage('n', 2);
-            marginBorder(1, 1);
+            out.print("");
         }
     }
 
