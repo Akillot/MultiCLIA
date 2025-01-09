@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
@@ -117,6 +118,7 @@ public class SettingsPage {
             modifyMessage('n', 1);
             printColorBlock();
             printColorRange(232, 255);
+            displaySystemColors();
             modifyMessage('n', 1);
             border();
         };
@@ -126,7 +128,8 @@ public class SettingsPage {
     private static void printColorRange(int start, int end) {
         out.println(RESET);
         for (int i = start; i <= end; i++) {
-            out.print(getAnsi256BackgroundColor(i) + tableAlignment() + " " + i + " " + RESET);
+            out.print(getAnsi256Color(systemLayoutColor) + getAnsi256BackgroundColor(i)
+                    + tableAlignment() + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) modifyMessage('n',2);
         }
     }
@@ -139,7 +142,8 @@ public class SettingsPage {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 int colorCode = 16 + row + col * rows;
-                out.print(getAnsi256BackgroundColor(colorCode) + tableAlignment() + " " + colorCode + " " + RESET);
+                out.print(getAnsi256Color(systemLayoutColor) + getAnsi256BackgroundColor(colorCode)
+                        + tableAlignment() + " " + colorCode + " " + RESET);
             }
             if(row == 11){
                 modifyMessage('n',1);
@@ -151,6 +155,23 @@ public class SettingsPage {
     @Contract(pure = true)
     private static @NotNull String tableAlignment() {
         return " ".repeat(Math.max(0, 4));
+    }
+
+    private static void displaySystemColors(){
+        modifyMessage('n',1);
+        message("Default Colors", systemLayoutColor, 58, 0, out::println);
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(systemMainColor);
+        colors.add(systemLayoutColor);
+        colors.add(systemAcceptanceColor);
+        colors.add(systemRejectionColor);
+
+        for (Integer color : colors) {
+            out.println(alignment(58) + getAnsi256Color(systemLayoutColor)
+                    + "· " + getAnsi256BackgroundColor(color) + "  " + RESET);
+        }
+        modifyMessage('n',1);
     }
 
     //Logo

@@ -88,8 +88,14 @@ public class DisplayManager {
 
     //displaying current version of the app /v
     public static void displayCurrentVersion() {
-        modifyMessage('n', 2);
+        marginBorder(1,2);
         message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
+        marginBorder(2,1);
+    }
+
+    public static void displaySystemColors(){
+        marginBorder(1,2);
+
         marginBorder(2,1);
     }
 }

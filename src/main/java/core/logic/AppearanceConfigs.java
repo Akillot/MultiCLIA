@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static core.logic.TextConfigs.alignment;
+import static core.logic.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
 public class AppearanceConfigs {
@@ -17,7 +18,7 @@ public class AppearanceConfigs {
     public static int systemLayoutColor = 15;
 
     public static int systemAcceptanceColor = 46;
-    public static int systemRejectionColor = 196;
+    public static int systemRejectionColor = 160;
 
     public static final String RESET = "\033[0m";
     public static final String UNDERLINE = "\033[4m";
@@ -89,21 +90,17 @@ public class AppearanceConfigs {
 
     public static void border() {
         String borderChar = borderChars.get(borderCharIndex);
-        System.out.print(borderChar);
+        out.print(getAnsi256Color(systemLayoutColor) + borderChar);
         for (int i = 0; i < 115; i++) {
-            System.out.print(borderChar);
+            out.print(getAnsi256Color(systemLayoutColor) + borderChar);
         }
-        System.out.println(borderChar);
+        out.println(getAnsi256Color(systemLayoutColor) + borderChar);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
-        for (int i = 0; i < upperSide; i++) {
-            System.out.println();
-        }
+        modifyMessage('n',upperSide);
         border();
-        for (int i = 0; i < lowerSide; i++) {
-            System.out.println();
-        }
+        modifyMessage('n',lowerSide);
     }
 
     //Animations
@@ -138,7 +135,7 @@ public class AppearanceConfigs {
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));
 
-            System.out.print(bar);
+            out.print(bar);
 
             try {
                 Thread.sleep(delay);
@@ -147,7 +144,7 @@ public class AppearanceConfigs {
                 return;
             }
         }
-        System.out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
+        out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
         out.print("\n".repeat(2));
     }
 }
