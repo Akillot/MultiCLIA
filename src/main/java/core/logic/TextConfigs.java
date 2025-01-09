@@ -30,7 +30,7 @@ public class TextConfigs {
 
     @Contract(pure = true)
     public static @NotNull String alignment(int widthOfElement) {
-        int fullWidth = borderWidth + 2;
+        int fullWidth = DEFAULT_BORDER_WIDTH + 2;
         int oneSide = (fullWidth - widthOfElement) / 2;
         return " ".repeat(Math.max(0, oneSide));
     }

@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.*;
 import java.net.URI;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.DisplayManager.*;
@@ -117,17 +119,6 @@ public class CommandManager {
         };
     }
 
-    public static void getUserLocalIp() {
-        try {
-            InetAddress localHost = InetAddress.getLocalHost();
-            out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
-                    + getAnsi256Color(systemMainColor) + localHost + RESET);
-        } catch (UnknownHostException e) {
-            message("IP is undefined", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
-        }
-    }
-
     public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
         out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
 
@@ -156,21 +147,6 @@ public class CommandManager {
         }
     }
 
-    public static void clearTerminal(){
-        try {
-            String operatingSystem = System.getProperty("os.name");
-            if (operatingSystem.contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-            }
-        } catch (Exception e) {
-            message("Error executing action", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
-        }
-    }
-
     public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Terminated correctly", themeColor_1,
@@ -179,18 +155,8 @@ public class CommandManager {
         border();
     }
 
-    public static void terminateProgramDefault() {
-        modifyMessage('n',2);
-        loadingAnimation(300,10);
-        message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated correctly", systemMainColor,
-                56,20,out::print);
-        modifyMessage('n', 2);
-        exit(0);
-    }
-
-    public static void terminateProgramQuick() {
-        modifyMessage('n',2);
+    public static void terminateProgram() {
+        marginBorder(1,2);
         message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
         message("Program terminated quickly correctly", systemMainColor,
                 56,0,out::print);

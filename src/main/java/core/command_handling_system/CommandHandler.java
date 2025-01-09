@@ -22,14 +22,14 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "cmds" ,"setts", "rerun",
-            "ip", "info", "exit", "exitq",
-            "help", "version", "clear", "time"};
+            "cmds" ,"setts", "rerun", "ip",
+            "info", "help", "clear", "time",
+            "ports", "appinfo", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
-            "/i", "/e", "/eq", "/h",
-            "/v", "/cl", "/t"};
+            "/i", "/h", "/cl", "/t",
+            "/p", "/ai", "/e"};
 
     public static String[] extensionCmds = {
             "searcher", "crypto"};//Add notes in first place
@@ -60,13 +60,12 @@ public class CommandHandler {
                             systemRejectionColor, 58, 0, out::println);
                 }
             };
-
-            case 5 -> CommandManager::terminateProgramDefault;
-            case 6 -> CommandManager::terminateProgramQuick;
-            case 7 -> DisplayManager::displayCommandsDescription;
-            case 8 -> DisplayManager::displayCurrentVersion;
-            case 9 -> CommandManager::clearTerminal;
-            case 10 -> TimePage::displayTimePage;
+            case 5 -> DisplayManager::displayCommandsDescription;
+            case 6 -> DisplayManager::clearTerminal;
+            case 7 -> TimePage::displayTimePage;
+            case 8 -> DisplayManager::multiThreadedPortScanner;
+            case 9 -> DisplayManager::displayAppInfo;
+            case 10 -> CommandManager::terminateProgram;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
         };

@@ -2,21 +2,25 @@ package core.logic;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static core.command_handling_system.CommandHandler.*;
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
-import static core.pages.InfoPage.getVersion;
+import static core.pages.InfoPage.*;
 import static java.lang.System.*;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    //displaying description /h command
+    //displaying description /h
     private static final String[] rules = {
             formatCommandWithDescription("cmds", "/c", "Shows all commands"),
             formatCommandWithDescription("setts", "/s", "Shows settings of the application"),
@@ -24,11 +28,11 @@ public class DisplayManager {
             formatCommandWithDescription("ip", "/ip", "Shows local and external IP addresses"),
             formatCommandWithDescription("info", "/i", "Shows app information"),
             formatCommandWithDescription("help", "/h", "Shows description of all commands"),
-            formatCommandWithDescription("version", "/v", "Shows version"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
+            formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
+            formatCommandWithDescription("appinfo", "/ai", "Shows app information"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
-            formatCommandWithDescription("exitq", "/eq", "Terminates the application quickly")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
@@ -49,7 +53,7 @@ public class DisplayManager {
         marginBorder(1, 1);
     }
 
-    // displaying command list /c command
+    // displaying command list /c
     public static void displayCommandList() {
         try {
             marginBorder(1,1);
@@ -82,15 +86,79 @@ public class DisplayManager {
     //displaying external and local IP /ip
     public static void displayUserIp() {
         marginBorder(1,2);
-        getUserLocalIp();
-        httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            message("Your local IP: " + getAnsi256Color(systemMainColor) + localHost, systemLayoutColor, 58, 0, out::print);
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
+        } catch (UnknownHostException e) {
+            message("IP is undefined", systemRejectionColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+        }
         marginBorder(2,1);
     }
 
-    //displaying current version of the app /v
-    public static void displayCurrentVersion() {
-        modifyMessage('n', 2);
-        message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
+    //clearing terminal
+    public static void clearTerminal() {
+        try {
+            String operatingSystem = System.getProperty("os.name");
+            if (operatingSystem.contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            message("Error executing action", systemRejectionColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+        }
+    }
+
+    //displaying currently open ports /p
+    public static void multiThreadedPortScanner() {
+        int startPort = 1;
+        int endPort = 65535;
+        int threads = 100;
+
+        ExecutorService executor = Executors.newFixedThreadPool(threads);
+
+        marginBorder(1,2);
+        slowMotionText(0,58,false,
+                getAnsi256Color(systemLayoutColor) + "Scanning ports from "
+                        + startPort + " to " + endPort + " using " + threads + " threads","");
+        modifyMessage('n',2);
+
+        for (int port = startPort; port <= endPort; port++) {
+            final int currentPort = port;
+            executor.submit(() -> {
+                try (Socket socket = new Socket("localhost", currentPort)) {
+                    message("· Port " + getAnsi256Color(systemMainColor) + currentPort
+                            + getAnsi256Color(systemLayoutColor) + " is open", systemLayoutColor, 58, 0, out::print);
+                } catch (Exception ignored) {}
+            });
+        }
+
+        executor.shutdown();
+        while (!executor.isTerminated()) {}
+        modifyMessage('n',1);
+        message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
+        marginBorder(2,1);
+    }
+
+    //displaying app info /ai
+    public static void displayAppInfo(){
+        marginBorder(1,2);
+        message("Application info", systemLayoutColor, 58, 0, out::print);
+        modifyMessage('n',1);
+        message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
+        message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
+        modifyMessage('n', 1);
+
+        displayOs();
+        displayCpuInfo();
+        displayApplicationDirectory();
+
+        modifyMessage('n', 1);
+        displayJavaInfo();
         marginBorder(2,1);
     }
 }

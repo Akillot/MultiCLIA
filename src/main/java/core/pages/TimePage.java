@@ -169,11 +169,11 @@ public class TimePage {
                         + getAnsi256Color(systemLayoutColor) + "' to start stopwatch and again to stop.",
                 systemLayoutColor, 58, 0, out::print);
         scanner.nextLine(); // Wait for enter
-        long startTime = System.currentTimeMillis();
+        double startTime = System.currentTimeMillis();
 
         message("Stopwatch started", systemMainColor, 58, 0, out::print);
         scanner.nextLine(); // Wait for enter again
-        long elapsedTime = (System.currentTimeMillis() - startTime) / 1000;
+        double elapsedTime = (System.currentTimeMillis() - startTime) / 1000;
         message("Elapsed Time: " + getAnsi256Color(systemMainColor) + elapsedTime
                 + getAnsi256Color(systemLayoutColor) + " sec.", systemLayoutColor, 58, 0, out::print);
     }

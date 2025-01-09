@@ -1,8 +1,10 @@
 package core.logic;
 
+import lombok.Getter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static core.logic.TextConfigs.alignment;
@@ -16,7 +18,7 @@ public class AppearanceConfigs {
     public static int systemLayoutColor = 15;
 
     public static int systemAcceptanceColor = 46;
-    public static int systemRejectionColor = 196;
+    public static int systemRejectionColor = 160;
 
     public static final String RESET = "\033[0m";
     public static final String UNDERLINE = "\033[4m";
@@ -52,23 +54,53 @@ public class AppearanceConfigs {
     }
 
     //Borders
-    public static final int borderWidth = 62;
-    public static int borderChar = 0;
+    public static final int DEFAULT_BORDER_WIDTH = 62;
+    private static int borderCharIndex = 0;
 
-    private static String[] symbolsOfBorder = new String[]{"━"};
+    private static final ArrayList<String> borderChars = new ArrayList<>();
+    @Getter
+    private static int borderWidth = DEFAULT_BORDER_WIDTH;
+
+    static {
+        borderChars.add("━");
+        borderChars.add("-");
+        borderChars.add("*");
+        borderChars.add("#");
+    }
+
+    public static void setBorderWidth(int width) {
+        if (width > 0) {
+            borderWidth = width;
+        }
+    }
+
+    public static boolean setBorderCharIndex(int index) {
+        if (index >= 0 && index < borderChars.size()) {
+            borderCharIndex = index;
+            return true;
+        }
+        return false;
+    }
+
+    public static void addBorderChar(String newChar) {
+        if (newChar != null && !newChar.isEmpty() && !borderChars.contains(newChar)) {
+            borderChars.add(newChar);
+        }
+    }
 
     public static void border() {
-        out.print(getAnsi256Color(systemLayoutColor) + symbolsOfBorder[borderChar]);
+        String borderChar = borderChars.get(borderCharIndex);
+        out.print(getAnsi256Color(systemLayoutColor) + borderChar);
         for (int i = 0; i < 115; i++) {
-            out.print(symbolsOfBorder[borderChar]);
+            out.print(getAnsi256Color(systemLayoutColor) + borderChar);
         }
-        out.println(symbolsOfBorder[borderChar]);
+        out.println(getAnsi256Color(systemLayoutColor) + borderChar);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
-        modifyMessage('n', upperSide);
+        modifyMessage('n',upperSide);
         border();
-        modifyMessage('n', lowerSide);
+        modifyMessage('n',lowerSide);
     }
 
     //Animations
@@ -98,12 +130,12 @@ public class AppearanceConfigs {
                     + getAnsi256Color(systemLayoutColor) + title + "[");
 
             for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? getRandom256Color() + "━" + getAnsi256Color(systemLayoutColor) : " ");
+                bar.append(i < completed ? getRandom256Color() + borderChars.get(0) + getAnsi256Color(systemLayoutColor) : " ");
             }
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));
 
-            System.out.print(bar.toString());
+            out.print(bar);
 
             try {
                 Thread.sleep(delay);
@@ -112,7 +144,7 @@ public class AppearanceConfigs {
                 return;
             }
         }
-        System.out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
+        out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
         out.print("\n".repeat(2));
     }
 }
