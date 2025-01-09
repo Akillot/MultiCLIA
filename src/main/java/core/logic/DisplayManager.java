@@ -122,7 +122,7 @@ public class DisplayManager {
         ExecutorService executor = Executors.newFixedThreadPool(threads);
 
         marginBorder(1,2);
-        slowMotionText(50,58,false,
+        slowMotionText(0,58,false,
                 getAnsi256Color(systemLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
         modifyMessage('n',2);

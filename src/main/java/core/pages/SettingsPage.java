@@ -23,7 +23,6 @@ public class SettingsPage {
                 "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
 
-        modifyMessage('n', 1);
         displayMemorySection();
 
         modifyMessage('n', 2);
