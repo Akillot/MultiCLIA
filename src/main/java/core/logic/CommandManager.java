@@ -158,51 +158,6 @@ public class CommandManager {
         }
     }
 
-    public static void clearTerminal() {
-        try {
-            String operatingSystem = System.getProperty("os.name");
-            if (operatingSystem.contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
-            }
-        } catch (Exception e) {
-            message("Error executing action", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
-        }
-    }
-
-    public static void multiThreadedPortScanner() {
-        int startPort = 1;
-        int endPort = 65535;
-        int threads = 100;
-
-        ExecutorService executor = Executors.newFixedThreadPool(threads);
-
-        marginBorder(1,2);
-        slowMotionText(50,58,false,
-                getAnsi256Color(systemLayoutColor) + "Scanning ports from "
-                        + startPort + " to " + endPort + " using " + threads + " threads","");
-        modifyMessage('n',2);
-
-        for (int port = startPort; port <= endPort; port++) {
-            final int currentPort = port;
-            executor.submit(() -> {
-                try (Socket socket = new Socket("localhost", currentPort)) {
-                    message("Port " + getAnsi256Color(systemMainColor) + currentPort
-                            + getAnsi256Color(systemLayoutColor) + " is open", systemLayoutColor, 58, 0, out::print);
-                } catch (Exception ignored) {}
-            });
-        }
-
-        executor.shutdown();
-        while (!executor.isTerminated()) {}
-        modifyMessage('n',1);
-        message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
-        marginBorder(2,1);
-    }
-
     public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Terminated correctly", themeColor_1,

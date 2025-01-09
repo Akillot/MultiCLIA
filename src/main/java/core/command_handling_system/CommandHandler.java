@@ -64,9 +64,9 @@ public class CommandHandler {
             case 5 -> CommandManager::terminateProgram;
             case 6 -> DisplayManager::displayCommandsDescription;
             case 7 -> DisplayManager::displayCurrentVersion;
-            case 8 -> CommandManager::clearTerminal;
+            case 8 -> DisplayManager::clearTerminal;
             case 9 -> TimePage::displayTimePage;
-            case 10 -> CommandManager::multiThreadedPortScanner;
+            case 10 -> DisplayManager::multiThreadedPortScanner;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
         };
