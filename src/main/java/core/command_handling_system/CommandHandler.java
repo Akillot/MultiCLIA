@@ -24,12 +24,13 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"setts", "rerun",
             "ip", "info", "exit",
-            "help", "version", "clear", "time"};
+            "help", "version", "clear",
+            "time", "ports"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
             "/i", "/e", "/h",
-            "/v", "/cl", "/t"};
+            "/v", "/cl", "/t", "/p"};
 
     public static String[] extensionCmds = {
             "searcher", "crypto"};//Add notes in first place
@@ -65,6 +66,7 @@ public class CommandHandler {
             case 7 -> DisplayManager::displayCurrentVersion;
             case 8 -> CommandManager::clearTerminal;
             case 9 -> TimePage::displayTimePage;
+            case 10 -> CommandManager::multiThreadedPortScanner;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
         };

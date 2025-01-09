@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.*;
 import java.net.URI;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.DisplayManager.*;
@@ -156,7 +158,7 @@ public class CommandManager {
         }
     }
 
-    public static void clearTerminal(){
+    public static void clearTerminal() {
         try {
             String operatingSystem = System.getProperty("os.name");
             if (operatingSystem.contains("Windows")) {
@@ -169,6 +171,36 @@ public class CommandManager {
             message("Error executing action", systemRejectionColor, 58, 0, out::print);
             message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
         }
+    }
+
+    public static void multiThreadedPortScanner() {
+        int startPort = 1;
+        int endPort = 65535;
+        int threads = 100;
+
+        ExecutorService executor = Executors.newFixedThreadPool(threads);
+
+        marginBorder(1,2);
+        slowMotionText(50,58,false,
+                getAnsi256Color(systemLayoutColor) + "Scanning ports from "
+                        + startPort + " to " + endPort + " using " + threads + " threads","");
+        modifyMessage('n',2);
+
+        for (int port = startPort; port <= endPort; port++) {
+            final int currentPort = port;
+            executor.submit(() -> {
+                try (Socket socket = new Socket("localhost", currentPort)) {
+                    message("Port " + getAnsi256Color(systemMainColor) + currentPort
+                            + getAnsi256Color(systemLayoutColor) + " is open", systemLayoutColor, 58, 0, out::print);
+                } catch (Exception ignored) {}
+            });
+        }
+
+        executor.shutdown();
+        while (!executor.isTerminated()) {}
+        modifyMessage('n',1);
+        message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
+        marginBorder(2,1);
     }
 
     public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {

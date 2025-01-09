@@ -27,6 +27,7 @@ public class DisplayManager {
             formatCommandWithDescription("version", "/v", "Shows version"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
+            formatCommandWithDescription("ports", "/p", "Shows all open ports"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
     };
 
@@ -90,12 +91,6 @@ public class DisplayManager {
     public static void displayCurrentVersion() {
         marginBorder(1,2);
         message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
-        marginBorder(2,1);
-    }
-
-    public static void displaySystemColors(){
-        marginBorder(1,2);
-
         marginBorder(2,1);
     }
 }
