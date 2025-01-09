@@ -119,17 +119,6 @@ public class CommandManager {
         };
     }
 
-    public static void getUserLocalIp() {
-        try {
-            InetAddress localHost = InetAddress.getLocalHost();
-            out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + "Your local IP: " + RESET
-                    + getAnsi256Color(systemMainColor) + localHost + RESET);
-        } catch (UnknownHostException e) {
-            message("IP is undefined", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
-        }
-    }
-
     public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
         out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
 

@@ -2,7 +2,9 @@ package core.logic;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,7 +12,6 @@ import java.util.concurrent.Executors;
 import static core.command_handling_system.CommandHandler.*;
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.*;
-import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
 import static core.pages.InfoPage.*;
@@ -27,7 +28,6 @@ public class DisplayManager {
             formatCommandWithDescription("ip", "/ip", "Shows local and external IP addresses"),
             formatCommandWithDescription("info", "/i", "Shows app information"),
             formatCommandWithDescription("help", "/h", "Shows description of all commands"),
-            formatCommandWithDescription("version", "/v", "Shows version"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
@@ -53,7 +53,7 @@ public class DisplayManager {
         marginBorder(1, 1);
     }
 
-    // displaying command list /c command
+    // displaying command list /c
     public static void displayCommandList() {
         try {
             marginBorder(1,1);
@@ -86,15 +86,14 @@ public class DisplayManager {
     //displaying external and local IP /ip
     public static void displayUserIp() {
         marginBorder(1,2);
-        getUserLocalIp();
-        httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
-        marginBorder(2,1);
-    }
-
-    //displaying current version of the app /v
-    public static void displayCurrentVersion() {
-        marginBorder(1,2);
-        message("Version: " + getVersion(), systemLayoutColor,58,0,out::print);
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            message("Your local IP: " + getAnsi256Color(systemMainColor) + localHost, systemLayoutColor, 58, 0, out::print);
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
+        } catch (UnknownHostException e) {
+            message("IP is undefined", systemRejectionColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+        }
         marginBorder(2,1);
     }
 
@@ -145,9 +144,10 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-    public static void displaySystemInfo(){
+    //displaying app info /ai
+    public static void displayAppInfo(){
         marginBorder(1,2);
-        message("System info", systemLayoutColor, 58, 0, out::print);
+        message("Application info", systemLayoutColor, 58, 0, out::print);
         modifyMessage('n',1);
         message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
         message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
