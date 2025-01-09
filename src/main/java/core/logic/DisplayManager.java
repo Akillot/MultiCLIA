@@ -31,6 +31,7 @@ public class DisplayManager {
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
+            formatCommandWithDescription("appinfo", "/ai", "Shows app information"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
     };
 
