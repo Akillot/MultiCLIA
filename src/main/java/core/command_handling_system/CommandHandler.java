@@ -22,15 +22,14 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "cmds" ,"setts", "rerun",
-            "ip", "info", "exit",
-            "help", "version", "clear",
-            "time", "ports"};
+            "cmds" ,"setts", "rerun", "ip",
+            "info", "exit", "help", "version",
+            "clear", "time", "ports", "sysinfo"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
-            "/i", "/e", "/h",
-            "/v", "/cl", "/t", "/p"};
+            "/i", "/e", "/h", "/v",
+            "/cl", "/t", "/p", "/si"};
 
     public static String[] extensionCmds = {
             "searcher", "crypto"};//Add notes in first place
@@ -67,6 +66,7 @@ public class CommandHandler {
             case 8 -> DisplayManager::clearTerminal;
             case 9 -> TimePage::displayTimePage;
             case 10 -> DisplayManager::multiThreadedPortScanner;
+            case 11 -> DisplayManager::displaySystemInfo;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
         };

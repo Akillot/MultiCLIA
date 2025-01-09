@@ -13,13 +13,13 @@ import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 
-import static core.pages.InfoPage.getVersion;
+import static core.pages.InfoPage.*;
 import static java.lang.System.*;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    //displaying description /h command
+    //displaying description /h
     private static final String[] rules = {
             formatCommandWithDescription("cmds", "/c", "Shows all commands"),
             formatCommandWithDescription("setts", "/s", "Shows settings of the application"),
@@ -30,7 +30,7 @@ public class DisplayManager {
             formatCommandWithDescription("version", "/v", "Shows version"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
-            formatCommandWithDescription("ports", "/p", "Shows all open ports"),
+            formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
     };
 
@@ -97,6 +97,7 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
+    //clearing terminal
     public static void clearTerminal() {
         try {
             String operatingSystem = System.getProperty("os.name");
@@ -112,6 +113,7 @@ public class DisplayManager {
         }
     }
 
+    //displaying currently open ports /p
     public static void multiThreadedPortScanner() {
         int startPort = 1;
         int endPort = 65535;
@@ -129,7 +131,7 @@ public class DisplayManager {
             final int currentPort = port;
             executor.submit(() -> {
                 try (Socket socket = new Socket("localhost", currentPort)) {
-                    message("Port " + getAnsi256Color(systemMainColor) + currentPort
+                    message("· Port " + getAnsi256Color(systemMainColor) + currentPort
                             + getAnsi256Color(systemLayoutColor) + " is open", systemLayoutColor, 58, 0, out::print);
                 } catch (Exception ignored) {}
             });
@@ -139,6 +141,23 @@ public class DisplayManager {
         while (!executor.isTerminated()) {}
         modifyMessage('n',1);
         message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
+        marginBorder(2,1);
+    }
+
+    public static void displaySystemInfo(){
+        marginBorder(1,2);
+        message("System info", systemLayoutColor, 58, 0, out::print);
+        modifyMessage('n',1);
+        message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
+        message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
+        modifyMessage('n', 1);
+
+        displayOs();
+        displayCpuInfo();
+        displayApplicationDirectory();
+
+        modifyMessage('n', 1);
+        displayJavaInfo();
         marginBorder(2,1);
     }
 }

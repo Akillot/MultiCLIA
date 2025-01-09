@@ -22,17 +22,8 @@ public  class InfoPage {
     public static void displayInfo() throws InterruptedException {
         marginBorder(1,2);
         message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
-        message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
         modifyMessage('n', 1);
 
-        displayOs();
-        displayCpuInfo();
-        displayApplicationDirectory();
-
-        modifyMessage('n', 1);
-        displayJavaInfo();
-
-        modifyMessage('n', 2);
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
@@ -46,18 +37,18 @@ public  class InfoPage {
         marginBorder(2,1);
     }
 
-    private static void displayOs(){
+    public static void displayOs(){
         String operatingSystem = System.getProperty("os.name");
         message("OS: " + getAnsi256Color(systemMainColor) + operatingSystem, systemLayoutColor,58,0,out::print);
     }
 
-    private static void displayCpuInfo() {
+    public static void displayCpuInfo() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
         message("CPU Cores: " + getAnsi256Color(systemMainColor) + availableProcessors,
                 systemLayoutColor, 58, 0, out::print);
     }
 
-    private static void displayJavaInfo() {
+    public static void displayJavaInfo() {
         String javaVersion = System.getProperty("java.version");
         String javaVendor = System.getProperty("java.vendor");
         message("Java Version: " + getAnsi256Color(systemMainColor) + javaVersion,
@@ -67,7 +58,7 @@ public  class InfoPage {
                 systemLayoutColor, 58, 0, out::print);
     }
 
-    private static void displayApplicationDirectory() {
+    public static void displayApplicationDirectory() {
         try {
             String appPath = new File(
                     StartPage.class.getProtectionDomain().getCodeSource().getLocation().toURI()
