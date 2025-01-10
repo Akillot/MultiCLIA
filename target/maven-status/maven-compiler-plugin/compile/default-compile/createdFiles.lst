@@ -18,6 +18,6 @@ extensions/finance/CryptoConfigs.class
 core/logic/ApiConfigs.class
 core/logic/DisplayManager.class
 extensions/finance/CryptoConfigs$1.class
-core/launcher/Launcher.class
+core/Launcher.class
 core/pages/InfoPage.class
 core/logic/TextConfigs.class
