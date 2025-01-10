@@ -11,6 +11,7 @@ import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.message;
+import static core.pages.InfoPage.displayCpuInfo;
 import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;
 
@@ -93,6 +94,9 @@ public class SettingsPage {
                 (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         double cpuLoad = osBean.getCpuLoad() * 100;
         double processCpuLoad = osBean.getProcessCpuLoad() * 100;
+
+        modifyMessage('n',1);
+        displayCpuInfo();
 
         modifyMessage('n', 1);
         message("System CPU Load: "

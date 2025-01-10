@@ -154,7 +154,6 @@ public class DisplayManager {
         modifyMessage('n', 1);
 
         displayOs();
-        displayCpuInfo();
         displayApplicationDirectory();
 
         modifyMessage('n', 1);
