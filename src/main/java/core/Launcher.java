@@ -1,4 +1,4 @@
-package core.launcher;
+package core;
 
 import core.pages.StartPage;
 

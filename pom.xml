@@ -80,7 +80,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>core.launcher.Launcher</mainClass>
+                            <mainClass>core.Launcher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
