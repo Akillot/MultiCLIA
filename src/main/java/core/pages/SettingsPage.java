@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
+import static core.logic.DisplayManager.scanner;
 import static core.logic.TextConfigs.*;
-import static core.logic.TextConfigs.message;
 import static core.pages.InfoPage.displayCpuInfo;
 import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;
@@ -20,21 +20,50 @@ public class SettingsPage {
     //The main method of displaying the page
     public static void displaySettingsPage() {
         marginBorder(1,2);
-        displayConfirmation("Enter","y","+",
-                "to open and","n","-","to skip",
-                systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
+        message("Settings:", systemLayoutColor, 58, 0, out::print);
+        displayListOfCommands();
 
-        displayMemorySection();
+        while (true) {
+            modifyMessage('n',1);
+            slowMotionText(0, 56, false,
+                    getAnsi256Color(systemLayoutColor) + "> ", "");
+            String input = scanner.nextLine().toLowerCase();
 
-        modifyMessage('n', 2);
-        displayCpuSection();
+            switch (input) {
+                case "memory", "/m" -> displayMemorySection();
+                case "cpu", "c" -> displayCpuSection();
+                case "colors", "/cl" -> displayColorSection();
+                case "logo", "/l" -> displayLogoSection();
+                case "list of commands", "/lc" -> displayListOfCommands();
+                case "exit", "/e" -> {
+                    marginBorder(2,2);
+                    message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
+                    message("Terminated correctly", systemMainColor,
+                            58,0,out::print);
+                    marginBorder(2,1);
+                    return;
+                }
+                default -> out.print("");
+            }
+        }
+    }
 
-        modifyMessage('n', 2);
-        displayColorSection();
+    private static void displayListOfCommands(){
+        modifyMessage('n',1);
+        message("·  Memory [" + getAnsi256Color(systemMainColor)
+                + "/m" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        modifyMessage('n', 2);
-        displayLogoSection();
-        marginBorder(2,1);
+        message("·  CPU [" + getAnsi256Color(systemMainColor)
+                + "/c" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Colors ["  + getAnsi256Color(systemMainColor)
+                + "/cl" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Logo [" + getAnsi256Color(systemMainColor)
+                + "/l" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
     }
 
     //Memory methods

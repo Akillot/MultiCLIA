@@ -32,7 +32,7 @@ public class TimePage {
                 case "stopwatch", "/sw" -> displayStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
                 case "custom time format", "/ctf" -> displayCustomDateTimeFormat();
-                case "list commands", "/lc" -> displayListOfCommands();
+                case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     marginBorder(2,2);
                     message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
@@ -63,7 +63,7 @@ public class TimePage {
         message("·  Custom Time Format [" + getAnsi256Color(systemMainColor)
                 + "/ctf" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  List Commands [" + getAnsi256Color(systemMainColor)
+        message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
                 + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(systemRejectionColor)
