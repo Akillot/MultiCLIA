@@ -3,14 +3,16 @@ package core.logic;
 import core.command_handling_system.PackageUnifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.json.JSONObject;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.*;
 import java.net.URI;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.DisplayManager.*;
@@ -21,6 +23,78 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
+    public static @Nullable String httpRequest(String userUri, String requestType, String text, String key) {
+        StringBuilder response = new StringBuilder();
+        try {
+            URI uri = new URI(userUri);
+            URL url = uri.toURL();
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(requestType);
+
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+
+            int statusCode = connection.getResponseCode();
+            if (statusCode != 200) {
+                message("Error: HTTP " + statusCode, systemRejectionColor, 58, 0, out::print);
+                return null;
+            }
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+
+            try {
+                JSONObject jsonResponse = new JSONObject(response.toString());
+                String value = jsonResponse.optString(key);
+
+                out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + text + " " + RESET +
+                        getAnsi256Color(systemMainColor) + value + RESET);
+            } catch (Exception e) {
+                message("Error parsing JSON response: " + e.getMessage(), systemRejectionColor,58,0,out::print);
+            }
+
+            return response.toString();
+
+        } catch (Exception e) {
+            message("Error: " + e.getMessage(), systemRejectionColor,58,0,out::print);
+            return null;
+        }
+    }
+
+    public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
+        out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
+
+        String choice = scanner.nextLine().toLowerCase();
+        switch (choice) {
+            case "+":
+            case "y":
+                try {
+                    action.run();
+                } catch (Exception e) {
+                    message("Error executing action", rejectionColor, 58, 0, out::print);
+                    message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
+                }
+                break;
+
+            case "-":
+            case "n":
+                message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
+                break;
+
+            default:
+                message("Invalid choice", rejectionColor, 58, 0, out::print);
+                message("Status: " + getAnsi256Color(rejectionColor) + "x",
+                        layoutColor, 58, 0, out::print);
+                break;
+        }
+    }
+
+    //Logo processing
     public static void switchLogoRandomly(String[] logo, int alignment) {
         int indexOfLogo = getRandomIndexWithProbability();
         switchLogoManually(logo, indexOfLogo, alignment);
@@ -119,34 +193,7 @@ public class CommandManager {
         };
     }
 
-    public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
-        out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
-
-        String choice = scanner.nextLine().toLowerCase();
-        switch (choice) {
-            case "+":
-            case "y":
-                try {
-                    action.run();
-                } catch (Exception e) {
-                    message("Error executing action", rejectionColor, 58, 0, out::print);
-                    message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
-                }
-                break;
-
-            case "-":
-            case "n":
-                message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
-                break;
-
-            default:
-                message("Invalid choice", rejectionColor, 58, 0, out::print);
-                message("Status: " + getAnsi256Color(rejectionColor) + "x",
-                        layoutColor, 58, 0, out::print);
-                break;
-        }
-    }
-
+    //Termination
     public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Terminated correctly", themeColor_1,

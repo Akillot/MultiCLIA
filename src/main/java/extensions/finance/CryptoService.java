@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.getAnsi256Color;
+import static core.logic.CommandManager.httpRequest;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.modifyMessage;
 import static extensions.finance.CryptoConfigs.*;

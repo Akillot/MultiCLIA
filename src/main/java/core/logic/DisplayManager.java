@@ -10,8 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static core.command_handling_system.CommandHandler.*;
-import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.*;
+import static core.logic.CommandManager.httpRequest;
 import static core.logic.TextConfigs.*;
 
 import static core.pages.InfoPage.*;
