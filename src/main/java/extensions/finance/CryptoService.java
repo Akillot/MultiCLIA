@@ -5,7 +5,6 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.getAnsi256Color;
 import static core.logic.CommandManager.httpRequest;
 import static core.logic.TextConfigs.*;
