@@ -193,8 +193,16 @@ public class CommandManager {
         };
     }
 
+    public static void exitPage(){
+        marginBorder(2,2);
+        message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
+        message("Terminated correctly", systemMainColor,
+                58,0,out::print);
+        marginBorder(2,1);
+    }
+
     //Termination
-    public static void terminate(int themeColor_1, int acceptanceColor, int layoutColor) {
+    public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
         message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Terminated correctly", themeColor_1,
                 58,0,out::print);

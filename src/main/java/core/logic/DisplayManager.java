@@ -22,7 +22,7 @@ public class DisplayManager {
 
     //displaying description /h
     private static final String[] rules = {
-            formatCommandWithDescription("cmds", "/c", "Shows all commands"),
+            formatCommandWithDescription("cmds", "/c", "Shows list of all commands"),
             formatCommandWithDescription("setts", "/s", "Shows settings of the application"),
             formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
             formatCommandWithDescription("ip", "/ip", "Shows local and external IP addresses"),

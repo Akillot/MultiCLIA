@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static core.logic.AppearanceConfigs.*;
+import static core.logic.CommandManager.exitPage;
 import static core.logic.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -34,11 +35,7 @@ public class TimePage {
                 case "custom time format", "/ctf" -> displayCustomDateTimeFormat();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
-                    marginBorder(2,2);
-                    message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-                    message("Terminated correctly", systemMainColor,
-                            58,0,out::print);
-                    marginBorder(2,1);
+                    exitPage();
                     return;
                 }
                 default -> out.print("");

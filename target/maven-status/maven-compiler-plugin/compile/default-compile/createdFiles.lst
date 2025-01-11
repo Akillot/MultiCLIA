@@ -15,7 +15,6 @@ core/command_handling_system/PackageUnifier.class
 extensions/internet/SearcherUI.class
 extensions/notes/NotesUI.class
 extensions/finance/CryptoConfigs.class
-core/logic/ApiConfigs.class
 core/logic/DisplayManager.class
 extensions/finance/CryptoConfigs$1.class
 core/Launcher.class
