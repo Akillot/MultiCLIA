@@ -4,11 +4,10 @@ import java.util.List;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.CommandManager.terminateExtension;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static extensions.finance.CryptoConfigs.*;
-import static extensions.finance.CryptoService.errorFormatting;
+import static extensions.finance.CryptoService.*;
 import static extensions.finance.CryptoService.getCryptocurrencyPrice;
 import static java.lang.System.out;
 

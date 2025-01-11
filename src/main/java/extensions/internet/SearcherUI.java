@@ -77,4 +77,12 @@ public class SearcherUI {
     private static String buildDomain(@NotNull String input) {
         return input.startsWith("http") ? input : "https://" + input;
     }
+
+    public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
+        message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+        message("Terminated correctly", themeColor_1,
+                58,0,out::print);
+        modifyMessage('n',2);
+        border();
+    }
 }
