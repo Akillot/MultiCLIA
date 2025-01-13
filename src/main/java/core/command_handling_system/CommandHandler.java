@@ -21,12 +21,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"setts", "rerun", "ip",
             "info", "help", "clear", "time",
-            "ports", "appinfo", "encrypt", "exit"};
+            "ports", "appinfo", "cryptography", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
             "/i", "/h", "/cl", "/t",
-            "/p", "/ai", "/ec", "/e"};
+            "/p", "/ai", "/cr", "/e"};
 
     public static String[] extensionCmds = {
             "searcher", "crypto"};//Add notes in first place

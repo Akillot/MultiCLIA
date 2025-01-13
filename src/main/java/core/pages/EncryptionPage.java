@@ -24,6 +24,7 @@ public class EncryptionPage {
     private static void passwordCreatorMenu() {
         Scanner scanner = new Scanner(System.in);
 
+        modifyMessage('n',1);
         message("Enter values", systemLayoutColor, 58, 0, out::print);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Password complexity ["
                 + getAnsi256Color(85) + "easy" + getAnsi256Color(systemLayoutColor) + ", "
@@ -71,7 +72,6 @@ public class EncryptionPage {
         return passwordBuilder.toString();
     }
 
-
     private static void encryptionMenu() {
         Scanner scanner = new Scanner(System.in);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter text to encrypt: ");
@@ -98,9 +98,28 @@ public class EncryptionPage {
         return new StringBuilder(text).reverse().toString(); // Простая расшифровка
     }
 
+    private static void displayListOfCommands(){
+        modifyMessage('n',1);
+        message("·  Password Generator [" + getAnsi256Color(systemMainColor)
+                + "/p" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Encryption [" + getAnsi256Color(systemMainColor)
+                + "/ec" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Decryption ["  + getAnsi256Color(systemMainColor)
+                + "/dc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+    }
+
     public static void displayEncryptionPage() {
         marginBorder(1, 2);
         message("Encryption Menu:", systemLayoutColor, 58, 0, out::print);
+        displayListOfCommands();
 
         while (true) {
             modifyMessage('n', 1);
@@ -109,10 +128,11 @@ public class EncryptionPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "password", "/p" -> passwordCreatorMenu();
-                case "encrypt", "/e" -> encryptionMenu();
-                case "decrypt", "/d" -> decryptionMenu();
-                case "exit", "/x" -> {
+                case "password generator", "/p" -> passwordCreatorMenu();
+                case "encrypt", "/ec" -> encryptionMenu();
+                case "decrypt", "/dc" -> decryptionMenu();
+                case "list of commands", "/lc" -> displayListOfCommands();
+                case "exit", "/e" -> {
                     exitPage();
                     return;
                 }
