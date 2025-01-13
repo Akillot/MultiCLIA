@@ -74,6 +74,8 @@ public class EncryptionPage {
 
     private static void encryptionMenu() {
         Scanner scanner = new Scanner(System.in);
+
+        modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter text to encrypt: ");
         String textToEncrypt = scanner.nextLine();
 
@@ -87,6 +89,8 @@ public class EncryptionPage {
 
     private static void decryptionMenu() {
         Scanner scanner = new Scanner(System.in);
+
+        modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter text to decrypt: ");
         String textToDecrypt = scanner.nextLine();
 
