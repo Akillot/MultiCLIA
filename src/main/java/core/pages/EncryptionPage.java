@@ -1,3 +1,5 @@
+package core.pages;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -69,6 +71,7 @@ public class EncryptionPage {
         return passwordBuilder.toString();
     }
 
+
     private static void encryptionMenu() {
         Scanner scanner = new Scanner(System.in);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter text to encrypt: ");
@@ -92,7 +95,7 @@ public class EncryptionPage {
     }
 
     private static @NotNull String decryptText(String text) {
-        return new StringBuilder(text).reverse().toString();
+        return new StringBuilder(text).reverse().toString(); // Простая расшифровка
     }
 
     public static void displayEncryptionPage() {
