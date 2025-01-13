@@ -140,7 +140,7 @@ public class EncryptionPage {
                     exitPage();
                     return;
                 }
-                default -> message("Invalid command! Try again.", systemRejectionColor, 58, 0, out::print);
+                default -> out.print("");
             }
         }
     }
