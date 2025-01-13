@@ -30,10 +30,10 @@ public class SettingsPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "memory", "/m" -> displayMemorySection();
-                case "cpu", "c" -> displayCpuSection();
-                case "colors", "/cl" -> displayColorSection();
-                case "logo", "/l" -> displayLogoSection();
+                case "memory", "/m" -> displayUsingMemory();
+                case "cpu", "/c" -> displayCpuLoad();
+                case "colors", "/cl" -> displayColorTable();
+                case "logos", "/l" -> displayLogos();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -55,7 +55,7 @@ public class SettingsPage {
         message("·  Colors ["  + getAnsi256Color(systemMainColor)
                 + "/cl" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
-        message("·  Logo [" + getAnsi256Color(systemMainColor)
+        message("·  Logos [" + getAnsi256Color(systemMainColor)
                 + "/l" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(systemRejectionColor)
@@ -63,11 +63,6 @@ public class SettingsPage {
     }
 
     //Memory methods
-    @SneakyThrows
-    private static void displayMemorySection(){
-        choice("Memory", SettingsPage::displayUsingMemory, systemMainColor, systemLayoutColor, systemRejectionColor);
-    }
-
     @SneakyThrows
     private static void displayUsingMemory(){
         long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
@@ -89,8 +84,6 @@ public class SettingsPage {
             modifyMessage('n',1);
         }
         displayMemoryBar();
-        modifyMessage('n', 2);
-        border();
     }
 
     private static void displayMemoryBar() {
@@ -110,11 +103,7 @@ public class SettingsPage {
     }
 
     //CPU methods
-    private static void displayCpuSection() {
-        choice("CPU", SettingsPage::showCpuLoad, systemMainColor, systemLayoutColor, systemRejectionColor);
-    }
-
-    private static void showCpuLoad() {
+    private static void displayCpuLoad() {
         com.sun.management.OperatingSystemMXBean osBean =
                 (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         double cpuLoad = osBean.getCpuLoad() * 100;
@@ -130,26 +119,16 @@ public class SettingsPage {
         message("Process CPU Load: "
                         + getAnsi256Color(systemMainColor) + String.format("%.2f", processCpuLoad) + "%",
                 systemLayoutColor, 58, 0, out::print);
-        modifyMessage('n', 2);
-        border();
     }
 
     //Color methods
-    private static void displayColorSection(){
-        choice("Colors", displayColorTable(), systemMainColor, systemLayoutColor, systemRejectionColor);
-    }
-
     @Contract(pure = true)
-    private static @NotNull Runnable displayColorTable() {
-        return () -> {
+    private static void displayColorTable() {
             printColorRange(0, systemLayoutColor);
             modifyMessage('n', 1);
             printColorBlock();
             printColorRange(232, 255);
             displaySystemColors();
-            modifyMessage('n', 1);
-            border();
-        };
     }
 
     @Contract(pure = true)
@@ -199,17 +178,11 @@ public class SettingsPage {
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor)
                     + "· " + getAnsi256BackgroundColor(color) + "  " + RESET);
         }
-        modifyMessage('n',1);
     }
 
     //Logo
     public static int colorVariationOfLogo = 5;
-
-    private static void displayLogoSection(){
-        choice("Logo", SettingsPage::displayAllLogos, systemMainColor, systemLayoutColor, systemRejectionColor);
-    }
-
-    private static void displayAllLogos() {
+    private static void displayLogos() {
         try {
             modifyMessage('n', 1);
             for (int i = 0; i < colorVariationOfLogo; i++) {
