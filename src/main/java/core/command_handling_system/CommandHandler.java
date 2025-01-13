@@ -1,13 +1,10 @@
 package core.command_handling_system;
 
-import core.pages.SettingsPage;
-import core.pages.TimePage;
+import core.pages.*;
 import extensions.finance.CryptoUI;
 import core.logic.CommandManager;
 import core.logic.DisplayManager;
 import extensions.internet.SearcherUI;
-import core.pages.InfoPage;
-import core.pages.StartPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,12 +21,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"setts", "rerun", "ip",
             "info", "help", "clear", "time",
-            "ports", "appinfo", "exit"};
+            "ports", "appinfo", "encrypt", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
             "/i", "/h", "/cl", "/t",
-            "/p", "/ai", "/e"};
+            "/p", "/ai", "/ec", "/e"};
 
     public static String[] extensionCmds = {
             "searcher", "crypto"};//Add notes in first place
@@ -65,7 +62,8 @@ public class CommandHandler {
             case 7 -> TimePage::displayTimePage;
             case 8 -> DisplayManager::multiThreadedPortScanner;
             case 9 -> DisplayManager::displayAppInfo;
-            case 10 -> CommandManager::terminateProgram;
+            case 10 -> EncryptionPage::displayEncryptionPage;
+            case 11 -> CommandManager::terminateProgram;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
         };
