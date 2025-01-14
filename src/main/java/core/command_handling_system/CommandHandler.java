@@ -62,7 +62,7 @@ public class CommandHandler {
             case 7 -> TimePage::displayTimePage;
             case 8 -> DisplayManager::multiThreadedPortScanner;
             case 9 -> DisplayManager::displayAppInfo;
-            case 10 -> EncryptionPage::displayEncryptionPage;
+            case 10 -> CryptographyPage::displayEncryptionPage;
             case 11 -> CommandManager::terminateProgram;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(systemRejectionColor) + "Invalid command index");
