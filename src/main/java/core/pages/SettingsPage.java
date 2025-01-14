@@ -111,8 +111,6 @@ public class SettingsPage {
 
         modifyMessage('n',1);
         displayCpuInfo();
-
-        modifyMessage('n', 1);
         message("System CPU Load: "
                         + getAnsi256Color(systemMainColor) + String.format("%.2f", cpuLoad) + "%",
                 systemLayoutColor, 58, 0, out::print);

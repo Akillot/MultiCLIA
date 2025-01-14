@@ -32,6 +32,7 @@ public class DisplayManager {
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
             formatCommandWithDescription("appinfo", "/ai", "Shows app information"),
+            formatCommandWithDescription("cryptography", "/cr", "Shows page with password generation, and de"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
     };
 
