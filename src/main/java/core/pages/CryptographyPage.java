@@ -107,7 +107,7 @@ public class CryptographyPage {
     }
 
     private static @NotNull String decryptText(String text) {
-        return new StringBuilder(text).reverse().toString(); // Простая расшифровка
+        return new StringBuilder(text).reverse().toString();
     }
 
     private static void displayListOfCommands(){

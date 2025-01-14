@@ -71,8 +71,7 @@ public class CommandManager {
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
-            case "+":
-            case "y":
+            case "+", "y":
                 try {
                     action.run();
                 } catch (Exception e) {
@@ -81,8 +80,7 @@ public class CommandManager {
                 }
                 break;
 
-            case "-":
-            case "n":
+            case "-", "n":
                 message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
                 break;
 
@@ -164,6 +162,7 @@ public class CommandManager {
             slowMotionText(0, 56, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
+
             if (!registry.executeCommand(nameOfFunction)) {
                 searchCommands();
             }
