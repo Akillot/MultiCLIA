@@ -5,8 +5,9 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static core.logic.ApiConfigs.httpRequest;
+import static core.logic.AppearanceConfigs.border;
 import static core.logic.AppearanceConfigs.getAnsi256Color;
+import static core.logic.CommandManager.httpRequest;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.modifyMessage;
 import static extensions.finance.CryptoConfigs.*;
@@ -44,6 +45,14 @@ public class CryptoService {
         } else {
             errorFormatting("Failed to fetch price. Check your network connection.");
         }
+    }
+
+    public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
+        message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+        message("Terminated correctly", themeColor_1,
+                58,0,out::print);
+        modifyMessage('n',2);
+        border();
     }
 
     //Formating the error outputs

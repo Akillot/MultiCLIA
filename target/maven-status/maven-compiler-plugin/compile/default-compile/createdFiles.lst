@@ -3,6 +3,7 @@ extensions/notes/NotesManager.class
 core/logic/CommandManager.class
 extensions/finance/CryptoConfigs$3.class
 extensions/finance/CryptoService.class
+core/pages/CryptographyPage.class
 core/pages/SettingsPage.class
 core/command_handling_system/CommandHandler.class
 extensions/finance/CryptoConfigs$2.class
@@ -15,7 +16,6 @@ core/command_handling_system/PackageUnifier.class
 extensions/internet/SearcherUI.class
 extensions/notes/NotesUI.class
 extensions/finance/CryptoConfigs.class
-core/logic/ApiConfigs.class
 core/logic/DisplayManager.class
 extensions/finance/CryptoConfigs$1.class
 core/Launcher.class

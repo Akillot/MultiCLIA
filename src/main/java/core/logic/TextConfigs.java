@@ -42,7 +42,7 @@ public class TextConfigs {
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
-    /*Modified method System.out.println(). Added text color,
+    /*Modified method out.println(). Added text color,
     alignment, delay and opportunity to move to the next line*/
     public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
 

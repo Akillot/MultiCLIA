@@ -8,14 +8,13 @@ import java.io.File;
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.logic.TextConfigs.*;
-import static core.logic.TextConfigs.alignment;
 import static java.lang.System.out;
 
 public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.2.2";
+        String appVersion = "A-0.8.3";
         return getAnsi256Color(systemMainColor) + appVersion;
     }
 

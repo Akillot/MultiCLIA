@@ -4,11 +4,10 @@ import java.util.List;
 
 import static core.logic.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.CommandManager.terminate;
 import static core.logic.TextConfigs.*;
 import static core.logic.TextConfigs.alignment;
 import static extensions.finance.CryptoConfigs.*;
-import static extensions.finance.CryptoService.errorFormatting;
+import static extensions.finance.CryptoService.*;
 import static extensions.finance.CryptoService.getCryptocurrencyPrice;
 import static java.lang.System.out;
 
@@ -56,7 +55,7 @@ public class CryptoUI {
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
                 modifyMessage('n', 1);
-                terminate(themeColor_1,acceptanceColor,layoutColor);
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
@@ -68,7 +67,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminate(themeColor_1,acceptanceColor,layoutColor);
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (fiatCurrencyCode.isEmpty()) {
@@ -94,7 +93,7 @@ public class CryptoUI {
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
-                terminate(themeColor_1,acceptanceColor,layoutColor);
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
@@ -106,7 +105,7 @@ public class CryptoUI {
             fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminate(themeColor_1,acceptanceColor,layoutColor);
+                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
             }
 
             if (fiatCurrencyCode.isEmpty()) {

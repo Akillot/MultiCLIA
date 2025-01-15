@@ -10,8 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static core.command_handling_system.CommandHandler.*;
-import static core.logic.ApiConfigs.httpRequest;
 import static core.logic.AppearanceConfigs.*;
+import static core.logic.CommandManager.httpRequest;
 import static core.logic.TextConfigs.*;
 
 import static core.pages.InfoPage.*;
@@ -22,7 +22,7 @@ public class DisplayManager {
 
     //displaying description /h
     private static final String[] rules = {
-            formatCommandWithDescription("cmds", "/c", "Shows all commands"),
+            formatCommandWithDescription("cmds", "/c", "Shows list of all commands"),
             formatCommandWithDescription("setts", "/s", "Shows settings of the application"),
             formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
             formatCommandWithDescription("ip", "/ip", "Shows local and external IP addresses"),
@@ -32,6 +32,7 @@ public class DisplayManager {
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
             formatCommandWithDescription("appinfo", "/ai", "Shows app information"),
+            formatCommandWithDescription("cryptography", "/cr", "Shows page with password generation, and de"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
     };
 
@@ -154,7 +155,6 @@ public class DisplayManager {
         modifyMessage('n', 1);
 
         displayOs();
-        displayCpuInfo();
         displayApplicationDirectory();
 
         modifyMessage('n', 1);
