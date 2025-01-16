@@ -3,8 +3,8 @@ package extensions.internet;
 import lombok.Getter;
 import org.jetbrains.annotations.Contract;
 
-import static core.logic.AppearanceConfigs.*;
-import static core.logic.TextConfigs.*;
+import static core.configs.AppearanceConfigs.*;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class SearcherConfigs {

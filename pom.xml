@@ -80,7 +80,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>core.Launcher</mainClass>
+                            <mainClass>core.init.AppLauncher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

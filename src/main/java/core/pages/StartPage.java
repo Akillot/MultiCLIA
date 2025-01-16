@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.searchCommands;
 import static core.logic.CommandManager.switchLogoRandomly;
-import static core.logic.TextConfigs.*;
+import static core.configs.TextConfigs.*;
 import static core.pages.InfoPage.getVersion;
 import static java.lang.System.out;
 
@@ -37,7 +37,6 @@ public class StartPage {
         getCurrentDate();
 
         marginBorder(1,1);
-
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
         message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
@@ -52,7 +51,7 @@ public class StartPage {
     }
 
     @Getter
-    public static String[] mainLogoAscii = {
+    static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o      .oooooo.   ooooo        ooooo         .o.       ",
             "`88.       .888'             `888    .o8    `\"'     d8P'  `Y8b  `888'        `888'        .888.      ",
             " 888b     d'888  oooo  oooo   888  .o888oo oooo    888           888          888        .8\"888.     ",
@@ -64,10 +63,13 @@ public class StartPage {
     };
 
     private static void getRandomMotto(){
+        String userName = System.getProperty("user.name");
         String[] motto = {"Command-driven simplicity.",
                 "Built for you.", "Just type '" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "'.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
-                "Optimal width of the terminal window: 117 characters and wider."};
+                "Optimal width of the terminal window: 117 characters and wider.",
+                "Hii " + getAnsi256Color(systemMainColor) + capitalizeMessage(userName)
+                        + getAnsi256Color(systemLayoutColor) + " and welcome to MultiCLIA!" };
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length);
