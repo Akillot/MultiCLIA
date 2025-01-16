@@ -1,87 +1,87 @@
-# MultiCLIA(formerly MathCLIA)
+![telegram-cloud-photo-size-2-5197248721715325323-y](https://github.com/user-attachments/assets/041b9207-2a1b-497c-ba40-17960951878f)
 
-MultiCLIA (Multi Command Line Interface Application) is a simple command-line tool for performing basic arithmetic operations. 
-It allows users to input a list of numbers separated by spaces and choose an operation to perform on them: addition, subtraction, multiplication, or division and also power.
 
-## Usage
+# MultiCLIA
 
-To use MultiCLIA, follow these steps:
+MultiCLIA is a multi-functional, user-friendly Command-Line Interface Application (CLI) designed to simplify and enhance the experience of terminal users on macOS and Linux systems. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who regularly works in terminal environments.
 
-1. Clone the repository to your local machine.
-2. Compile the Main.java file using a Java compiler.
-3. Run the compiled Java program.
-4. Enter a list of numbers separated by spaces when prompted.
-5. Choose an operation from the menu and press Enter.
-6. View the result of the operation in the console.
+## ✨ Features *
 
-## Operations
+### For System Admins and Developers:
+- **Process Management**: Simplified interface for viewing and managing system processes.
+- **System Monitoring**: Easily check CPU, memory, and disk usage with clean, color-coded output.
+- **Network Tools**: Test network connections, scan ports, and retrieve network diagnostics with ease.
+- **File Search**: Quick and intuitive search for files across your system, without the complexity of `find`.
 
-MultiCLIA supports the following operations:
+### For Terminal Enthusiasts:
+- **Custom Shortcuts**: Create custom aliases for frequently used commands.
+- **Password Generator**: Generate strong, customizable passwords in seconds.
+- **Encryption Tools**: Encrypt and decrypt text on the fly for secure communications.
+- **Interactive Menus**: A more pleasant alternative to typing long and confusing commands.
 
-1. **sum**: Add all the numbers together.
-2. **subtract**: Subtract subsequent numbers from the first one.
-3. **multi**: Multiply all the numbers together.
-4. **divide**: Divide the first number by subsequent numbers.
-5. **power**: Raise the first number to the power of each subsequent number sequentially.
+### For Everyday Users:
+- **Easy Updates**: One-command system updates for macOS and Linux.
+- **Simplified File Management**: Manage directories and files with straightforward commands.
+- **Learning Mode**: An interactive teaching mode for learning Linux commands and terminal navigation.
+- **Lightweight Automation**: Schedule tasks and automate workflows directly from the app.
 
-## Example
-```
--------------------
-Enter your numbers.
--------------------
-Use a 'SPACE' 
-To split numbers.
--------------------
-23 44.1 44
--------------------
-Operations:
-1. sum
-2. subtract
-3. multi
-4. divide
-5. power
-6. exit
--------------------
-Your choice is: multi
--------------------
-Answer: 44629.200000000004
--------------------
+---
 
--------------------
-Enter your numbers.
--------------------
-Use a 'SPACE' 
-To split numbers.
--------------------
-systemDefaultColor74 33 1 1 1 1 2 4 55
--------------------
-Operations:
-1. sum
-2. subtract
-3. multi
-4. divide
-5. exit
--------------------
-Your choice is: subtract
--------------------
-Answer: 9876.0
--------------------
+## 🎯 Target Audience
 
--------------------
-Enter your numbers.
--------------------
-Use a 'SPACE' 
-To split numbers.
--------------------
-23 44
--------------------
-Operations:
-1. sum
-2. subtract
-3. multi
-4. divide
-5. exit
--------------------
-Your choice is: exit
--------------------
-```
+MultiCLIA is designed for:
+
+1. **Developers**:
+    - Aimed at those who frequently use terminal-based tools and want a streamlined experience.
+    - Simplifies complex commands and integrates Git and other tools for ease of use.
+
+2. **System Administrators**:
+    - Makes managing Linux and macOS servers more efficient.
+    - Includes tools for system diagnostics, process management, and network configuration.
+
+3. **Beginner Terminal Users**:
+    - Provides an easy-to-use and welcoming CLI interface.
+    - Helps users learn basic terminal commands and functionality with step-by-step guidance.
+
+4. **Power Users**:
+    - Offers customization options for themes, shortcuts, and workflows.
+    - Allows advanced users to maximize productivity and automate repetitive tasks.
+
+---
+
+## 🚀 Getting Started
+
+### Requirements:
+- **Operating Systems**: macOS or Linux.
+- **Java**: Ensure Java is installed (version 11 or higher).
+- **Optional**: [Homebrew](https://brew.sh/) for easier installation (macOS).
+
+### Installation:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/MultiCLIA.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd MultiCLIA
+   ```
+3. Run the app:
+   ```bash
+   ./starter.sh
+   ```
+###  Installation via Homebrew (Coming Soon):
+   ```bash
+   brew install multiclia
+   ```
+
+---
+
+### 🤝 Acknowledgements
+
+Special thanks to the open-source community and contributors for making this project better and better every day.
+
+### 📧 Contact
+
+For any questions or feedback, feel free to reach out via email at nickzozulia@gmail.com.
+
+*Some features are not yet implemented, but they will all appear in the debut official version(A-1.0) 

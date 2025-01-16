@@ -52,7 +52,7 @@ public class StartPage {
     }
 
     @Getter
-    public static String[] mainLogoAscii = {
+    static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o      .oooooo.   ooooo        ooooo         .o.       ",
             "`88.       .888'             `888    .o8    `\"'     d8P'  `Y8b  `888'        `888'        .888.      ",
             " 888b     d'888  oooo  oooo   888  .o888oo oooo    888           888          888        .8\"888.     ",
