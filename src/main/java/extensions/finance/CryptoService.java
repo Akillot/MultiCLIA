@@ -5,11 +5,11 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static core.logic.AppearanceConfigs.border;
-import static core.logic.AppearanceConfigs.getAnsi256Color;
+import static core.configs.AppearanceConfigs.border;
+import static core.configs.AppearanceConfigs.getAnsi256Color;
 import static core.logic.CommandManager.httpRequest;
-import static core.logic.TextConfigs.*;
-import static core.logic.TextConfigs.modifyMessage;
+import static core.configs.TextConfigs.*;
+import static core.configs.TextConfigs.modifyMessage;
 import static extensions.finance.CryptoConfigs.*;
 import static java.lang.System.out;
 

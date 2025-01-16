@@ -9,10 +9,10 @@ import java.security.SecureRandom;
 import java.util.Random;
 import java.util.Scanner;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
-import static core.logic.DisplayManager.scanner;
-import static core.logic.TextConfigs.*;
+import static core.ui.DisplayManager.scanner;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class CryptographyPage {

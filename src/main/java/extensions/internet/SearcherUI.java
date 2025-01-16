@@ -3,10 +3,10 @@ package extensions.internet;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.DisplayManager.scanner;
-import static core.logic.TextConfigs.*;
+import static core.ui.DisplayManager.scanner;
+import static core.configs.TextConfigs.*;
 import static extensions.internet.SearcherConfigs.*;
 import static java.lang.System.out;
 

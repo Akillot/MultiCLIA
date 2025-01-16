@@ -1,11 +1,11 @@
-package core.logic;
+package core.configs;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static java.lang.System.out;
 
 public class TextConfigs {

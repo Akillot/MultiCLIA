@@ -2,10 +2,10 @@ package core;
 
 import core.pages.StartPage;
 
-import static core.logic.AppearanceConfigs.*;
-import static core.logic.TextConfigs.modifyMessage;
+import static core.configs.AppearanceConfigs.*;
+import static core.configs.TextConfigs.modifyMessage;
 
-public class Launcher {
+public class AppLauncher {
     public static void main(String[] args) {
         modifyMessage('n',8);
         progressbarAnimation("Processing");

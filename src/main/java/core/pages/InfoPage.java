@@ -5,16 +5,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.TextConfigs.*;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.3";
+        String appVersion = "A-0.8.3.1";
         return getAnsi256Color(systemMainColor) + appVersion;
     }
 

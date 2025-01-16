@@ -1,19 +1,19 @@
-package core.command_handling_system;
+package core.commands;
 
 import core.pages.*;
 import extensions.finance.CryptoUI;
 import core.logic.CommandManager;
-import core.logic.DisplayManager;
+import core.ui.DisplayManager;
 import extensions.internet.SearcherUI;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.logic.AppearanceConfigs.getAnsi256Color;
-import static core.logic.AppearanceConfigs.systemRejectionColor;
-import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.message;
+import static core.configs.AppearanceConfigs.getAnsi256Color;
+import static core.configs.AppearanceConfigs.systemRejectionColor;
+import static core.configs.TextConfigs.alignment;
+import static core.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {

@@ -1,4 +1,4 @@
-package core.logic;
+package core.ui;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,10 +9,10 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static core.command_handling_system.CommandHandler.*;
-import static core.logic.AppearanceConfigs.*;
+import static core.commands.CommandHandler.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.httpRequest;
-import static core.logic.TextConfigs.*;
+import static core.configs.TextConfigs.*;
 
 import static core.pages.InfoPage.*;
 import static java.lang.System.*;

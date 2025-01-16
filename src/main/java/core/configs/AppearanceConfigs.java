@@ -1,4 +1,4 @@
-package core.logic;
+package core.configs;
 
 import lombok.Getter;
 import org.jetbrains.annotations.Contract;
@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static core.logic.TextConfigs.alignment;
-import static core.logic.TextConfigs.modifyMessage;
+import static core.configs.TextConfigs.alignment;
+import static core.configs.TextConfigs.modifyMessage;
 import static java.lang.System.out;
 
 public class AppearanceConfigs {

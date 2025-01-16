@@ -1,6 +1,6 @@
 package core.logic;
 
-import core.command_handling_system.PackageUnifier;
+import core.commands.PackageUnifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,10 +14,10 @@ import java.net.*;
 import java.net.URI;
 import java.util.Random;
 
-import static core.logic.AppearanceConfigs.*;
-import static core.logic.DisplayManager.*;
+import static core.configs.AppearanceConfigs.*;
+import static core.ui.DisplayManager.*;
 
-import static core.logic.TextConfigs.*;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.exit;
 import static java.lang.System.out;
 

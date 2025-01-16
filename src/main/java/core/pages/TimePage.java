@@ -7,9 +7,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
-import static core.logic.TextConfigs.*;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class TimePage {

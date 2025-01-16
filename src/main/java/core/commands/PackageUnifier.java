@@ -1,4 +1,4 @@
-package core.command_handling_system;
+package core.commands;
 
 import java.util.HashMap;
 import java.util.Map;

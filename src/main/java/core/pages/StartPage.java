@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.searchCommands;
 import static core.logic.CommandManager.switchLogoRandomly;
-import static core.logic.TextConfigs.*;
+import static core.configs.TextConfigs.*;
 import static core.pages.InfoPage.getVersion;
 import static java.lang.System.out;
 

@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 
-import static core.logic.AppearanceConfigs.*;
+import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.logic.DisplayManager.scanner;
-import static core.logic.TextConfigs.*;
+import static core.ui.DisplayManager.scanner;
+import static core.configs.TextConfigs.*;
 import static core.pages.InfoPage.displayCpuInfo;
 import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;

@@ -2,8 +2,8 @@ package extensions.notes;
 
 import java.util.Scanner;
 
-import static core.logic.AppearanceConfigs.getAnsi256Color;
-import static core.logic.TextConfigs.*;
+import static core.configs.AppearanceConfigs.getAnsi256Color;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class NotesUI {
