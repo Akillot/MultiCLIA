@@ -24,44 +24,49 @@ import static java.lang.System.out;
 public class CommandManager {
 
     public static @Nullable String httpRequest(String userUri, String requestType, String text, String key) {
-        StringBuilder response = new StringBuilder();
         try {
-            URI uri = new URI(userUri);
-            URL url = uri.toURL();
-
+            URL url = new URI(userUri).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(requestType);
-
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
 
             int statusCode = connection.getResponseCode();
             if (statusCode != 200) {
-                message("Error: HTTP " + statusCode, systemRejectionColor, 58, 0, out::print);
+                message("HTTP error: " + getAnsi256Color(systemRejectionColor)
+                        + statusCode, systemLayoutColor, 58, 0, out::print);
                 return null;
             }
 
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
+            String response = readResponse(connection);
+            return parseJsonResponse(response, key, text);
+        } catch (URISyntaxException | IOException e) {
+            message("Request failed: " + getAnsi256Color(systemRejectionColor)
+                    + e.getMessage(), systemLayoutColor, 58, 0, out::print);
+            return null;
+        }
+    }
+
+    private static @NotNull String readResponse(HttpURLConnection connection) throws IOException {
+        StringBuilder response = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
             }
+        }
+        return response.toString();
+    }
 
-            try {
-                JSONObject jsonResponse = new JSONObject(response.toString());
-                String value = jsonResponse.optString(key);
-
-                out.println(alignment(58) + getAnsi256Color(systemLayoutColor) + text + " " + RESET +
-                        getAnsi256Color(systemMainColor) + value + RESET);
-            } catch (Exception e) {
-                message("Error parsing JSON response: " + e.getMessage(), systemRejectionColor,58,0,out::print);
-            }
-
-            return response.toString();
-
+    private static @Nullable String parseJsonResponse(String response, String key, String text) {
+        try {
+            JSONObject jsonResponse = new JSONObject(response);
+            String value = jsonResponse.optString(key, "Key not found");
+            message(text + " " + value, systemLayoutColor, 58, 0, out::print);
+            return response;
         } catch (Exception e) {
-            message("Error: " + e.getMessage(), systemRejectionColor,58,0,out::print);
+            message("JSON parsing error: " + getAnsi256Color(systemRejectionColor)
+                    + e.getMessage(), systemLayoutColor, 58, 0, out::print);
             return null;
         }
     }
@@ -92,7 +97,6 @@ public class CommandManager {
         }
     }
 
-    //Logo processing
     public static void switchLogoRandomly(String[] logo, int alignment) {
         int indexOfLogo = getRandomIndexWithProbability();
         switchLogoManually(logo, indexOfLogo, alignment);
@@ -200,7 +204,6 @@ public class CommandManager {
         marginBorder(2,1);
     }
 
-    //Termination
     public static void terminateProgram() {
         marginBorder(1,2);
         message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);

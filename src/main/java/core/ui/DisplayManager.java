@@ -37,7 +37,8 @@ public class DisplayManager {
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
-        return formatCommand(commandName + getAnsi256Color(systemLayoutColor) + ": ", "", "") + description + " "
+        return formatCommand(commandName + getAnsi256Color(systemLayoutColor)
+                + ": ", "", "") + description + " "
                 + formatCommand(shortCommand, "[", "]");
     }
 
@@ -89,11 +90,14 @@ public class DisplayManager {
         marginBorder(1,2);
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            message("Your local IP: " + getAnsi256Color(systemMainColor) + localHost, systemLayoutColor, 58, 0, out::print);
-            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:", "ip");
+            message("Your local IP: " + getAnsi256Color(systemMainColor)
+                    + localHost, systemLayoutColor, 58, 0, out::print);
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
+                    + getAnsi256Color(systemMainColor), "ip");
         } catch (UnknownHostException e) {
             message("IP is undefined", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(systemRejectionColor)
+                    + "x", systemLayoutColor, 58, 0, out::print);
         }
         marginBorder(2,1);
     }
