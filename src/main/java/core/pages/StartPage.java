@@ -37,7 +37,6 @@ public class StartPage {
         getCurrentDate();
 
         marginBorder(1,1);
-
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
         message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
@@ -64,10 +63,13 @@ public class StartPage {
     };
 
     private static void getRandomMotto(){
+        String userName = System.getProperty("user.name");
         String[] motto = {"Command-driven simplicity.",
                 "Built for you.", "Just type '" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "'.",
                 "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
-                "Optimal width of the terminal window: 117 characters and wider."};
+                "Optimal width of the terminal window: 117 characters and wider.",
+                "Hii " + getAnsi256Color(systemMainColor) + capitalizeMessage(userName)
+                        + getAnsi256Color(systemLayoutColor) + " and welcome to MultiCLIA!" };
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length);
