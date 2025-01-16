@@ -78,7 +78,7 @@ MultiCLIA is designed for:
 
 ### 🤝 Acknowledgements
 
-Special thanks to the open-source community and contributors for making this project better and better everyday.
+Special thanks to the open-source community and contributors for making this project better and better every day.
 
 ### 📧 Contact
 
