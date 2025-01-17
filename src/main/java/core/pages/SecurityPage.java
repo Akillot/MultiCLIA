@@ -18,8 +18,8 @@ import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
 
 public class SecurityPage {
-    public static void displaySecurityPage(){
-        marginBorder(1,2);
+    public static void displaySecurityPage() {
+        marginBorder(1, 2);
         message("Security: ", systemLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
@@ -41,8 +41,8 @@ public class SecurityPage {
         }
     }
 
-    private static void displayListOfCommands(){
-        modifyMessage('n',1);
+    private static void displayListOfCommands() {
+        modifyMessage('n', 1);
         message("·  Generate password [" + getAnsi256Color(systemMainColor)
                 + "/gp" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
 
@@ -57,11 +57,18 @@ public class SecurityPage {
     @Getter
     private static String password;
 
+    @Setter
+    @Getter
+    private static int passwordLength;
+
     private static void passwordCreatorMenu() {
         Scanner scanner = new Scanner(System.in);
 
-        modifyMessage('n',1);
-        message("Enter values", systemLayoutColor, 58, 0, out::print);
+        modifyMessage('n', 1);
+        out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter length of password: ");
+        passwordLength = scanner.nextInt();
+        modifyMessage('n', 1);
+
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Password complexity ["
                 + getAnsi256Color(85) + "easy" + getAnsi256Color(systemLayoutColor) + "|"
                 + getAnsi256Color(85) + "1" + getAnsi256Color(systemLayoutColor) + ", "
@@ -72,6 +79,10 @@ public class SecurityPage {
 
                 + getAnsi256Color(177) + "strong" + getAnsi256Color(systemLayoutColor)
                 + getAnsi256Color(systemLayoutColor) + "|" + getAnsi256Color(177) + "3"
+                + getAnsi256Color(systemLayoutColor) + ", "
+
+                + getAnsi256Color(201) + "extra" + getAnsi256Color(systemLayoutColor)
+                + getAnsi256Color(systemLayoutColor) + "|" + getAnsi256Color(201) + "4"
                 + getAnsi256Color(systemLayoutColor) + "]: ");
 
         String passwordComplexity = scanner.nextLine().toLowerCase();
@@ -89,18 +100,10 @@ public class SecurityPage {
         String charPool;
 
         switch (passwordComplexity) {
-            case "easy","1" -> {
-                length = 8;
-                charPool = "abcdefghijklmnopqrstuvwxyz";
-            }
-            case "normal","2" -> {
-                length = 12;
-                charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            }
-            case "strong","3" -> {
-                length = 16;
-                charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-            }
+            case "easy", "1" -> charPool = "abcdefghijklmnopqrstuvwxyz";
+            case "normal", "2" -> charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            case "strong", "3" -> charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+            case "extra", "4" -> charPool = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'`}{)(";
             default -> {
                 return null;
             }
@@ -108,7 +111,7 @@ public class SecurityPage {
 
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < passwordLength; i++) {
             int index = random.nextInt(charPool.length());
             passwordBuilder.append(charPool.charAt(index));
         }
