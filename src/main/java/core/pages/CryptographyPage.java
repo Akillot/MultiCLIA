@@ -11,6 +11,45 @@ import static java.lang.System.out;
 
 public class CryptographyPage {
 
+    public static void displayEncryptionPage() {
+        marginBorder(1, 2);
+        message("Encryption Menu:", systemLayoutColor, 58, 0, out::print);
+        displayListOfCommands();
+
+        while (true) {
+            modifyMessage('n', 1);
+            slowMotionText(0, 56, false,
+                    getAnsi256Color(systemLayoutColor) + "> ", "");
+            String input = scanner.nextLine().toLowerCase();
+
+            switch (input) {
+                case "make encrypt", "/me" -> encryptionMenu();
+                case "make decrypt", "/md" -> decryptionMenu();
+                case "list of commands", "/lc" -> displayListOfCommands();
+                case "exit", "/e" -> {
+                    exitPage();
+                    return;
+                }
+                default -> out.print("");
+            }
+        }
+    }
+
+    private static void displayListOfCommands(){
+        modifyMessage('n',1);
+        message("·  Make Encryption [" + getAnsi256Color(systemMainColor)
+                + "/me" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Make Decryption ["  + getAnsi256Color(systemMainColor)
+                + "/md" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+
+        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+    }
+
     private static void encryptionMenu() {
         Scanner scanner = new Scanner(System.in);
 
@@ -39,44 +78,5 @@ public class CryptographyPage {
 
     private static @NotNull String decryptText(String text) {
         return new StringBuilder(text).reverse().toString();
-    }
-
-    private static void displayListOfCommands(){
-        modifyMessage('n',1);
-        message("·  Encryption [" + getAnsi256Color(systemMainColor)
-                + "/ec" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-
-        message("·  Decryption ["  + getAnsi256Color(systemMainColor)
-                + "/dc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-
-        message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
-                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-
-        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
-                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-    }
-
-    public static void displayEncryptionPage() {
-        marginBorder(1, 2);
-        message("Encryption Menu:", systemLayoutColor, 58, 0, out::print);
-        displayListOfCommands();
-
-        while (true) {
-            modifyMessage('n', 1);
-            slowMotionText(0, 56, false,
-                    getAnsi256Color(systemLayoutColor) + "> ", "");
-            String input = scanner.nextLine().toLowerCase();
-
-            switch (input) {
-                case "encrypt", "/ec" -> encryptionMenu();
-                case "decrypt", "/dc" -> decryptionMenu();
-                case "list of commands", "/lc" -> displayListOfCommands();
-                case "exit", "/e" -> {
-                    exitPage();
-                    return;
-                }
-                default -> out.print("");
-            }
-        }
     }
 }
