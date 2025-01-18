@@ -32,6 +32,7 @@ public class SecurityPage {
     @Getter
     private static String charPool;
 
+    //Fix the bug with incorrect values
     private static final String CHAR_POOL_EASY = getAnsi256Color(easy_complexity_color) + "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_POOL_MEDIUM = getAnsi256Color(medium_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final String CHAR_POOL_STRONG = getAnsi256Color(strong_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
@@ -103,6 +104,7 @@ public class SecurityPage {
         if (generatedPassword != null) {
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Generated Password: "
                     + generatedPassword);
+            modifyMessage('n', 1);
         } else {
             modifyMessage('n', 1);
         }
