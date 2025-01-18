@@ -125,11 +125,12 @@ public class SettingsPage {
     //Color methods
     @Contract(pure = true)
     private static void displayColorTable() {
-            printColorRange(0, systemLayoutColor);
-            modifyMessage('n', 1);
-            printColorBlock();
-            printColorRange(232, 255);
-            displaySystemColors();
+        marginBorder(1,1);
+        printColorRange(0, systemLayoutColor);
+        modifyMessage('n', 1);
+        printColorBlock();
+        printColorRange(232, 255);
+        marginBorder(1,0);
     }
 
     @Contract(pure = true)

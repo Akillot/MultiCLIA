@@ -65,8 +65,8 @@ public class TextConfigs {
     }
 
     public static void displayConfirmation(String preText, String confirmation_1, String confirmation_2,
-                                           String midText, String rejection_1, String rejection_2,
-                                           String postText, int acceptanceColor, int rejectionColor, int layoutColor) {
+                                           String midText, String rejection_1, String rejection_2, String postText,
+                                           int acceptanceColor, int rejectionColor, int layoutColor) {
         message(preText
                 + " '" + getAnsi256Color(acceptanceColor) + confirmation_1 + getAnsi256Color(layoutColor)
                 + "/" + getAnsi256Color(acceptanceColor) + confirmation_2 + getAnsi256Color(layoutColor)
@@ -77,7 +77,7 @@ public class TextConfigs {
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
-        if(amount <= 0){
+        if(amount < 0){
             message("Error, number of modifiers is less than 0", systemRejectionColor,58,0, out::println);
         }
         String output = switch(modifier){

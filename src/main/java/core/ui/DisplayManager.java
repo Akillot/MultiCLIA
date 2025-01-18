@@ -14,7 +14,6 @@ import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.httpRequest;
 import static core.configs.TextConfigs.*;
 
-import static core.pages.InfoPage.*;
 import static java.lang.System.*;
 
 public class DisplayManager {
@@ -31,7 +30,6 @@ public class DisplayManager {
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
-            formatCommandWithDescription("about-app", "/a", "Shows app information"),
             formatCommandWithDescription("security", "/sc", "Shows page with password generation, email checking and e.t.c"),
             formatCommandWithDescription("cryptography", "/cr", "Shows page with opportunities to encode and decode messages"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
