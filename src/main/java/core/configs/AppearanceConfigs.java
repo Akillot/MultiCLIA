@@ -14,7 +14,7 @@ import static java.lang.System.out;
 public class AppearanceConfigs {
 
     //Colors
-    public static int systemMainColor = 247;
+    public static int systemMainColor = 147;
     public static int systemLayoutColor = 15;
 
     public static int systemAcceptanceColor = 46;
