@@ -14,7 +14,7 @@ public class SearcherUI {
 
     public static void displaySearcherMenu() {
         marginBorder(1,2);
-        switchLogoRandomly(searcherLogo, 32);
+        switchLogo(searcherLogo, 32);
         marginBorder(2, 2);
 
         displayExample();

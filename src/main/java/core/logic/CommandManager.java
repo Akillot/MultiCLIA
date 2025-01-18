@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.net.URI;
-import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.ui.DisplayManager.*;
@@ -23,6 +22,7 @@ import static java.lang.System.out;
 
 public class CommandManager {
 
+    //HTTP request and additional methods
     public static @Nullable String httpRequest(String userUri, String requestType, String text, String key) {
         try {
             URL url = new URI(userUri).toURL();
@@ -71,6 +71,7 @@ public class CommandManager {
         }
     }
 
+    //Request user choice
     public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
         out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
 
@@ -97,13 +98,8 @@ public class CommandManager {
         }
     }
 
-    public static void switchLogoRandomly(String[] logo, int alignment) {
-        int indexOfLogo = getRandomIndexWithProbability();
-        switchLogoManually(logo, indexOfLogo, alignment);
-    }
-
-    public static void switchLogoManually(String @NotNull [] logo, int indexOfLogo, int alignment) {
-        String[] colors = getColorsForLogo(indexOfLogo);
+    public static void switchLogo(String @NotNull [] logo, int alignment) {
+        String[] colors = getColorsForLogo();
 
         for (int i = 0; i < logo.length; i++) {
             String coloredText = colors[i % colors.length] + logo[i] + RESET;
@@ -111,59 +107,19 @@ public class CommandManager {
         }
     }
 
-    private static String @NotNull [] getColorsForLogo(int indexOfLogo) {
-        return switch (indexOfLogo) {
-            case 0 -> new String[]{
-                    getAnsi256Color(99), getAnsi256Color(56),
-                    getAnsi256Color(165), getAnsi256Color(99),
-                    getAnsi256Color(63), getAnsi256Color(99)};
-
-            case 1 -> new String[]{
-                    getAnsi256Color(140), getAnsi256Color(98),
-                    getAnsi256Color(134), getAnsi256Color(129),
-                    getAnsi256Color(93), getAnsi256Color(171)};
-
-            case 2 -> new String[]{
-                    getAnsi256Color(84), getAnsi256Color(114),
-                    getAnsi256Color(77), getAnsi256Color(48),
-                    getAnsi256Color(83), getAnsi256Color(76)};
-
-            case 3 -> new String[]{
-                    getAnsi256Color(153), getAnsi256Color(110),
-                    getAnsi256Color(75), getAnsi256Color(189),
-                    getAnsi256Color(223), getAnsi256Color(210)};
-
-            case 4 -> new String[]{
-                    getAnsi256Color(219), getAnsi256Color(183),
-                    getAnsi256Color(147), getAnsi256Color(218),
-                    getAnsi256Color(182), getAnsi256Color(218)};
-
-            default -> new String[]{
-                    getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
-                    getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor),
-                    getAnsi256Color(systemLayoutColor), getAnsi256Color(systemLayoutColor)};
+    private static String @NotNull [] getColorsForLogo() {
+        return new String[]{
+                getAnsi256Color(219), getAnsi256Color(183),
+                getAnsi256Color(147), getAnsi256Color(218),
+                getAnsi256Color(182), getAnsi256Color(218)
         };
-    }
-
-    private static int getRandomIndexWithProbability() {
-        double[] probabilities = {5, 5, 5, 5, 80};
-        double randomValue = new Random().nextDouble() * 100;
-        double cumulativeProbability = 0;
-
-        for (int i = 0; i < probabilities.length; i++) {
-            cumulativeProbability += probabilities[i];
-            if (randomValue < cumulativeProbability) {
-                return i;
-            }
-        }
-        return probabilities.length - 1;
     }
 
     //Searching
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
-            slowMotionText(0, 56, false,
+            slowMotionText(0, 48, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 

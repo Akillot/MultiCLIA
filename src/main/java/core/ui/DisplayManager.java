@@ -32,7 +32,7 @@ public class DisplayManager {
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
             formatCommandWithDescription("security", "/sc", "Shows page with password generation, email checking and e.t.c"),
             formatCommandWithDescription("cryptography", "/cr", "Shows page with opportunities to encode and decode messages"),
-            formatCommandWithDescription("exit", "/e", "Terminates the application"),
+            formatCommandWithDescription("exit", "/e", "Terminates the application")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {

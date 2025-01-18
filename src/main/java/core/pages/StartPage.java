@@ -8,8 +8,8 @@ import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.searchCommands;
-import static core.logic.CommandManager.switchLogoRandomly;
 import static core.configs.TextConfigs.*;
+import static core.logic.CommandManager.switchLogo;
 import static java.lang.System.out;
 
 public class StartPage {
@@ -30,21 +30,11 @@ public class StartPage {
 
     private static void displayMenu() {
         modifyMessage('n',2);
-        switchLogoRandomly(mainLogoAscii, 48);
+        switchLogo(mainLogoAscii, 48);
         modifyMessage('n',1);
         getRandomMotto();
         getCurrentDate();
-
         marginBorder(1,1);
-        message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
-
-        alert("i", "Enter " + "'" + getAnsi256Color(systemMainColor) + "cmds" + RESET
-                + getAnsi256Color(systemLayoutColor) + "'\n"
-                + alignment(56) + "to show list of\n"
-                + alignment(56) + "commands", 56, systemMainColor, systemLayoutColor);
-
-        message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0,out::print);
-        modifyMessage('n',1);
     }
 
     @Getter
@@ -62,15 +52,15 @@ public class StartPage {
     private static void getRandomMotto(){
         String userName = System.getProperty("user.name");
         String[] motto = {"Command-driven simplicity.",
-                "Built for you.", "Just type '" + getAnsi256Color(systemMainColor) + "cmds" + getAnsi256Color(systemLayoutColor) + "'.",
-                "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.","It starts with a command.",
-                "Optimal width of the terminal window: 117 characters and wider.",
-                "Hii " + getAnsi256Color(systemMainColor) + capitalizeMessage(userName)
-                        + getAnsi256Color(systemLayoutColor) + " and welcome to MultiCLIA!" };
+                "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
+                "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
+                "Hi " + getAnsi256Color(systemMainColor) + capitalizeMessage(userName)
+                        + getAnsi256Color(systemLayoutColor) + " and welcome to MultiCLIA!", "Everything you need."};
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length);
-        message("Everything you need. " + motto[index],15,48,0,out::print);
+        message("Just type '" + getAnsi256Color(systemMainColor)
+                + "cmds" + getAnsi256Color(systemLayoutColor) + "'. " + motto[index],15,48,0,out::print);
     }
 
     private static void getCurrentDate(){
@@ -102,7 +92,7 @@ public class StartPage {
             case "31-12":
             case "01-01":
                 modifyMessage('n',2);
-                switchLogoRandomly(newYearAscii, 36);
+                switchLogo(newYearAscii, 36);
                 modifyMessage('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor, 36,0,out::print);
