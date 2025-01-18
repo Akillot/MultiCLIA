@@ -53,7 +53,7 @@ MultiCLIA is designed for:
 
 ### Requirements:
 - **Operating Systems**: macOS or Linux.
-- **Java**: Ensure Java is installed (version 11 or higher).
+- **Java**: Ensure Java is installed (version 17 or higher).
 - **Optional**: [Homebrew](https://brew.sh/) for easier installation (macOS).
 
 ### Installation:
