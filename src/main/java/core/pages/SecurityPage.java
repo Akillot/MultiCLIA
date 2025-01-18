@@ -36,7 +36,7 @@ public class SecurityPage {
     private static final String CHAR_POOL_EASY = getAnsi256Color(easy_complexity_color) + "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_POOL_MEDIUM = getAnsi256Color(medium_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final String CHAR_POOL_STRONG = getAnsi256Color(strong_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-    private static final String CHAR_POOL_EXTRA = getAnsi256Color(extra_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'`}{)(";
+    private static final String CHAR_POOL_EXTRA = getAnsi256Color(extra_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'}{)(";
 
     @Setter @Getter private static String password;
     @Setter @Getter private static int passwordLength;
@@ -83,7 +83,7 @@ public class SecurityPage {
 
         //Add checking for an empty value
 
-        if (passwordLength <= 0) {
+        if (passwordLength <= 0 || password.length() < passwordLength || password.length() > 80) {
             return;
         }
         scanner.nextLine();
