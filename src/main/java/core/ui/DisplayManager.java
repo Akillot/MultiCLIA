@@ -31,8 +31,9 @@ public class DisplayManager {
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
-            formatCommandWithDescription("appinfo", "/ai", "Shows app information"),
-            formatCommandWithDescription("cryptography", "/cr", "Shows page with password generation, and de"),
+            formatCommandWithDescription("about-app", "/a", "Shows app information"),
+            formatCommandWithDescription("security", "/sc", "Shows page with password generation, email checking and e.t.c"),
+            formatCommandWithDescription("cryptography", "/cr", "Shows page with opportunities to encode and decode messages"),
             formatCommandWithDescription("exit", "/e", "Terminates the application"),
     };
 
@@ -137,7 +138,8 @@ public class DisplayManager {
             executor.submit(() -> {
                 try (Socket socket = new Socket("localhost", currentPort)) {
                     message("· Port " + getAnsi256Color(systemMainColor) + currentPort
-                            + getAnsi256Color(systemLayoutColor) + " is open", systemLayoutColor, 58, 0, out::print);
+                            + getAnsi256Color(systemLayoutColor) + " [" + getAnsi256Color(systemAcceptanceColor) + "OPEN"
+                            + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
                 } catch (Exception ignored) {}
             });
         }
@@ -149,7 +151,7 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-    //displaying app info /ai
+    //displaying app info /a
     public static void displayAppInfo(){
         marginBorder(1,2);
         message("Application info", systemLayoutColor, 58, 0, out::print);
