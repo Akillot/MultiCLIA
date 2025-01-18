@@ -29,10 +29,13 @@ public class SecurityPage {
     @Getter
     private static int extra_complexity_color = 201;
 
-    private static final String CHAR_POOL_EASY = "abcdefghijklmnopqrstuvwxyz";
-    private static final String CHAR_POOL_MEDIUM = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private static final String CHAR_POOL_STRONG = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
-    private static final String CHAR_POOL_EXTRA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'`}{)(";
+    @Getter
+    private static String charPool;
+
+    private static final String CHAR_POOL_EASY = getAnsi256Color(easy_complexity_color) + "abcdefghijklmnopqrstuvwxyz";
+    private static final String CHAR_POOL_MEDIUM = getAnsi256Color(medium_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final String CHAR_POOL_STRONG = getAnsi256Color(strong_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    private static final String CHAR_POOL_EXTRA = getAnsi256Color(extra_complexity_color) + "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'`}{)(";
 
     @Setter @Getter private static String password;
     @Setter @Getter private static int passwordLength;
@@ -48,22 +51,26 @@ public class SecurityPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "generate password", "/gp" -> passwordCreatorMenu();
+                case "generate password", "/gp", "/p" -> passwordCreatorMenu();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
                     return;
                 }
-                default -> out.print("");
+                default -> modifyMessage('n', 1);
             }
         }
     }
 
     private static void displayListOfCommands() {
         modifyMessage('n', 1);
-        message("·  Generate password [" + getAnsi256Color(systemMainColor) + "/gp" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-        message("·  List Of Commands [" + getAnsi256Color(systemMainColor) + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-        message("·  Exit [" + getAnsi256Color(systemRejectionColor) + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Generate password [" + getAnsi256Color(systemMainColor) + "/gp"
+                + getAnsi256Color(systemLayoutColor) +" or " + getAnsi256Color(systemMainColor) + "/p"
+                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  List Of Commands [" + getAnsi256Color(systemMainColor) + "/lc"
+                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Exit [" + getAnsi256Color(systemRejectionColor) + "/e"
+                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
     }
 
     private static void passwordCreatorMenu() {
@@ -72,6 +79,12 @@ public class SecurityPage {
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter length of password: ");
         passwordLength = scanner.nextInt();
+
+        //Add checking for an empty value
+
+        if (passwordLength <= 0) {
+            return;
+        }
         scanner.nextLine();
 
         modifyMessage('n', 1);
@@ -88,25 +101,14 @@ public class SecurityPage {
         String passwordComplexity = scanner.nextLine().toLowerCase();
         String generatedPassword = createPassword(passwordComplexity);
         if (generatedPassword != null) {
-            message("Generated Password: " + getAnsi256Color(systemMainColor) + generatedPassword,
-                    systemLayoutColor, 58, 0, out::print);
+            out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Generated Password: "
+                    + generatedPassword);
         } else {
-            out.print("");
+            modifyMessage('n', 1);
         }
-    }
-
-    private static @NotNull String displayFullPassword() {
-        StringBuilder passwordBuilder = new StringBuilder();
-        Random random = new SecureRandom();
-        for (int i = 0; i < passwordLength; i++) {
-            int index = random.nextInt(password.length());
-            passwordBuilder.append(password.charAt(index));
-        }
-        return passwordBuilder.toString();
     }
 
     private static @Nullable String createPassword(@NotNull String passwordComplexity) {
-        String charPool;
 
         switch (passwordComplexity) {
             case "easy", "1" -> charPool = CHAR_POOL_EASY;
@@ -125,11 +127,13 @@ public class SecurityPage {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
 
+        String passwordColor = charPool.substring(0, charPool.indexOf('a'));
+
         for (int i = 0; i < passwordLength; i++) {
             int index = random.nextInt(charPool.length());
             passwordBuilder.append(charPool.charAt(index));
         }
 
-        return passwordBuilder.toString();
+        return passwordColor + passwordBuilder;
     }
 }
