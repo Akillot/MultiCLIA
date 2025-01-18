@@ -150,21 +150,4 @@ public class DisplayManager {
         message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
         marginBorder(2,1);
     }
-
-    //displaying app info /a
-    public static void displayAppInfo(){
-        marginBorder(1,2);
-        message("Application info", systemLayoutColor, 58, 0, out::print);
-        modifyMessage('n',1);
-        message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
-        message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
-
-        displayOs();
-        displayApplicationDirectory();
-
-        modifyMessage('n', 1);
-        displayJavaInfo();
-        marginBorder(2,1);
-    }
 }

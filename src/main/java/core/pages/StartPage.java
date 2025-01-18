@@ -10,7 +10,6 @@ import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.searchCommands;
 import static core.logic.CommandManager.switchLogoRandomly;
 import static core.configs.TextConfigs.*;
-import static core.pages.InfoPage.getVersion;
 import static java.lang.System.out;
 
 public class StartPage {
@@ -37,8 +36,6 @@ public class StartPage {
         getCurrentDate();
 
         marginBorder(1,1);
-        message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
-        message("Version: " + getVersion() , systemLayoutColor,56,0, out::print);
         message("━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor,58,0, out::print);
 
         alert("i", "Enter " + "'" + getAnsi256Color(systemMainColor) + "cmds" + RESET
