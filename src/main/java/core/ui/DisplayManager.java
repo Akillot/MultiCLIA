@@ -138,7 +138,8 @@ public class DisplayManager {
             executor.submit(() -> {
                 try (Socket socket = new Socket("localhost", currentPort)) {
                     message("· Port " + getAnsi256Color(systemMainColor) + currentPort
-                            + getAnsi256Color(systemLayoutColor) + " is open", systemLayoutColor, 58, 0, out::print);
+                            + getAnsi256Color(systemLayoutColor) + " [" + getAnsi256Color(systemAcceptanceColor) + "OPEN"
+                            + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
                 } catch (Exception ignored) {}
             });
         }
