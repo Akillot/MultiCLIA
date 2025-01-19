@@ -90,7 +90,7 @@ public class TimePage {
 
     private static void displayTimer() {
         while (true) {
-            modifyMessage('n', 1);
+            modifyMessage('n',1);
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor)
                     + "Enter time in seconds (or '" + getAnsi256Color(systemRejectionColor)
                     + "exit" + getAnsi256Color(systemLayoutColor) + "' to quit): ");
@@ -101,8 +101,8 @@ public class TimePage {
                     isTimerRunning = false;
                     modifyMessage('n', 1);
                 }
-                modifyMessage('n', 1);
-                message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
+                message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓",
+                        systemLayoutColor,58,0,out::print);
                 message("Terminated correctly", systemMainColor, 58,0,out::print);
                 break;
             }
@@ -119,8 +119,6 @@ public class TimePage {
                     continue;
                 }
                 isTimerRunning = true;
-                message("Timer started for " + getAnsi256Color(systemMainColor) + seconds
-                        + getAnsi256Color(systemLayoutColor) + " sec.", systemLayoutColor, 58, 0, out::print);
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
@@ -144,8 +142,11 @@ public class TimePage {
                     Thread.sleep(1000);
                 }
                 if (isTimerRunning) {
-                    out.print("\r");
-                    message("Time is up!", systemMainColor, 58, 0, out::print);
+                    modifyMessage('r', 1);
+                    message("Time is up", systemLayoutColor, 58, 0, out::print);
+                    out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Status: "
+                            + getAnsi256Color(systemAcceptanceColor) + " ✓");
+                    modifyMessage('n', 1);
                 }
                 modifyMessage('n',1);
                 out.print(alignment(58) + getAnsi256Color(systemLayoutColor)
