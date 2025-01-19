@@ -13,6 +13,9 @@ import static java.lang.System.out;
 
 public class AppearanceConfigs {
 
+    //Alignment
+    public static int searchingLineAlignment = 48;
+
     //Colors
     public static int systemMainColor = 147;
     public static int systemLayoutColor = 15;

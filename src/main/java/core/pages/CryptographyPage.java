@@ -18,7 +18,7 @@ public class CryptographyPage {
 
         while (true) {
             modifyMessage('n', 1);
-            slowMotionText(0, 56, false,
+            slowMotionText(0, searchingLineAlignment, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -38,16 +38,16 @@ public class CryptographyPage {
     private static void displayListOfCommands(){
         modifyMessage('n',1);
         message("·  Make Encryption [" + getAnsi256Color(systemMainColor)
-                + "/me" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/me" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Make Decryption ["  + getAnsi256Color(systemMainColor)
-                + "/md" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/md" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
-                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(systemRejectionColor)
-                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
     private static void encryptionMenu() {

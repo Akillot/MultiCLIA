@@ -19,7 +19,7 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "cmds" ,"setts", "rerun", "ip",
+            "cmds" ,"settings", "rerun", "ip",
             "info", "help", "clear", "time",
             "ports", "security",
             "cryptography", "exit"};

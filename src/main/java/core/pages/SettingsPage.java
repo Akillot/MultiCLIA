@@ -23,7 +23,7 @@ public class SettingsPage {
 
         while (true) {
             modifyMessage('n',1);
-            slowMotionText(0, 56, false,
+            slowMotionText(0, searchingLineAlignment, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -44,19 +44,19 @@ public class SettingsPage {
     private static void displayListOfCommands(){
         modifyMessage('n',1);
         message("·  Memory [" + getAnsi256Color(systemMainColor)
-                + "/m" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/m" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  CPU [" + getAnsi256Color(systemMainColor)
-                + "/c" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/c" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Colors ["  + getAnsi256Color(systemMainColor)
-                + "/cl" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/cl" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands ["  + getAnsi256Color(systemMainColor)
-                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(systemRejectionColor)
-                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
     //Memory methods

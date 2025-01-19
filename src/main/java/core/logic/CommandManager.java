@@ -119,7 +119,7 @@ public class CommandManager {
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
-            slowMotionText(0, 48, false,
+            slowMotionText(0, searchingLineAlignment, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 
@@ -155,7 +155,8 @@ public class CommandManager {
     public static void exitPage(){
         marginBorder(2,2);
         message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Terminated correctly", systemMainColor,
+        message("Terminated correctly" + getAnsi256Color(systemLayoutColor) + ". "
+                        + getAnsi256Color(systemMainColor) + "You are in main menu" + getAnsi256Color(systemLayoutColor) + ".", systemMainColor,
                 58,0,out::print);
         marginBorder(2,1);
     }
@@ -163,7 +164,7 @@ public class CommandManager {
     public static void terminateProgram() {
         marginBorder(1,2);
         message("\r    Status: " + getAnsi256Color(systemAcceptanceColor) + "✓", systemLayoutColor,58,0,out::print);
-        message("Program terminated quickly correctly", systemMainColor,
+        message("Program terminated quickly correctly" + getAnsi256Color(systemLayoutColor) + ".", systemMainColor,
                 56,0,out::print);
         modifyMessage('n', 2);
         exit(0);

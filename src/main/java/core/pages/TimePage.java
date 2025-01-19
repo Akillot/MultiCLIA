@@ -23,7 +23,7 @@ public class TimePage {
 
         while (true) {
             modifyMessage('n',1);
-            slowMotionText(0, 56, false,
+            slowMotionText(0, systemAcceptanceColor, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -46,25 +46,25 @@ public class TimePage {
     private static void displayListOfCommands(){
         modifyMessage('n',1);
         message("·  Current Time [" + getAnsi256Color(systemMainColor)
-                + "/ct" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/ct" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Timer [" + getAnsi256Color(systemMainColor)
-                + "/t" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/t" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Stopwatch ["  + getAnsi256Color(systemMainColor)
-                + "/sw" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/sw" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Change Time Zone [" + getAnsi256Color(systemMainColor)
-                + "/ctz" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/ctz" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Custom Time Format [" + getAnsi256Color(systemMainColor)
-                + "/ctf" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/ctf" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
-                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(systemRejectionColor)
-                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
     private static void displayTime() {
