@@ -63,7 +63,7 @@ public class TimePage {
         message("·  List Of Commands [" + getAnsi256Color(systemMainColor)
                 + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
+        message("·  Exit [" + getAnsi256Color(systemMainColor)
                 + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
@@ -92,7 +92,7 @@ public class TimePage {
         while (true) {
             modifyMessage('n',1);
             out.print(alignment(58) + getAnsi256Color(systemLayoutColor)
-                    + "Enter time in seconds (or '" + getAnsi256Color(systemRejectionColor)
+                    + "Enter time in seconds (or '" + getAnsi256Color(systemMainColor)
                     + "exit" + getAnsi256Color(systemLayoutColor) + "' to quit): ");
             String input = scanner.nextLine();
 
@@ -101,29 +101,30 @@ public class TimePage {
                     isTimerRunning = false;
                     modifyMessage('n', 1);
                 }
+                message("Terminated correctly" + getAnsi256Color(systemLayoutColor) + ".",
+                        systemMainColor, 58,0,out::print);
                 message("\r   Status: " + getAnsi256Color(systemAcceptanceColor) + "✓",
                         systemLayoutColor,58,0,out::print);
-                message("Terminated correctly", systemMainColor, 58,0,out::print);
                 break;
             }
 
             try {
                 double seconds = Double.parseDouble(input);
                 if (seconds < 0) {
-                    message("Time cannot be negative.", systemRejectionColor, 58, 0, out::print);
+                    message("Time cannot be negative.", systemLayoutColor, 58, 0, out::print);
                     continue;
                 }
                 if (isTimerRunning) {
                     message("A timer is already running" + getAnsi256Color(systemLayoutColor) +
-                            ". Please wait or stop it.", systemRejectionColor, 58, 0, out::print);
+                            ". Please wait or stop it.",systemMainColor, 58, 0, out::print);
                     continue;
                 }
                 isTimerRunning = true;
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
-                message("Invalid input" + getAnsi256Color(systemLayoutColor) +
-                        ". Please enter a valid number.", systemRejectionColor, 58, 0, out::print);
+                out.println(alignment(58) + getAnsi256Color(systemLayoutColor)
+                        + "Invalid input. Please enter a valid number.");
             }
         }
     }
@@ -133,7 +134,7 @@ public class TimePage {
             try {
                 for (double i = seconds; i >= 0; i--) {
                     if (!isTimerRunning) {
-                        message("Timer stopped.", systemRejectionColor, 58, 0, out::print);
+                        message("Timer stopped.", systemMainColor, 58, 0, out::print);
                         return;
                     }
                     out.print("\r" + alignment(58) + getAnsi256Color(systemLayoutColor)
@@ -150,10 +151,11 @@ public class TimePage {
                 }
                 modifyMessage('n',1);
                 out.print(alignment(58) + getAnsi256Color(systemLayoutColor)
-                        + "Enter time in seconds (or '" + getAnsi256Color(systemRejectionColor)
+                        + "Enter time in seconds (or '" + getAnsi256Color(systemMainColor)
                         + "exit" + getAnsi256Color(systemLayoutColor) + "' to quit): ");
             } catch (InterruptedException e) {
-                message("Timer interrupted!", systemRejectionColor, 58, 0, out::print);
+                message("Timer interrupted" + getAnsi256Color(systemLayoutColor) + ".", systemMainColor,
+                        58, 0, out::print);
             } finally {
                 isTimerRunning = false;
             }
@@ -180,16 +182,15 @@ public class TimePage {
     private static void displayCustomTimeZone() {
         modifyMessage('n',1);
         out.print(alignment(58) + getAnsi256Color(systemLayoutColor) + "Enter a time zone [e.g., "
-                + getAnsi256Color(171) + "Europe" + getAnsi256Color(systemLayoutColor)
-                + "/" + getAnsi256Color(135) + "Paris" + getAnsi256Color(systemLayoutColor) + "]: ");
+                + getAnsi256Color(219) + "Europe" + getAnsi256Color(systemLayoutColor)
+                + "/" + getAnsi256Color(systemMainColor) + "Paris" + getAnsi256Color(systemLayoutColor) + "]: ");
         String inputZone = scanner.nextLine();
         try {
             String time = getTimeInZone(inputZone);
-            message("Time in " + inputZone + ": " + getAnsi256Color(systemMainColor) + time, systemLayoutColor, 58, 0, out::print);
+            message("Time in " + inputZone + ": " + getAnsi256Color(systemMainColor) + time
+                            + getAnsi256Color(systemLayoutColor) + ".", systemLayoutColor, 58, 0, out::print);
         } catch (Exception e) {
-            message(getAnsi256Color(systemRejectionColor) + "Invalid time zone"
-                    + getAnsi256Color(systemLayoutColor) + ". Please try again.",
-                    systemLayoutColor, 58, 0, out::print);
+            message("Invalid time zone. Please try again.", systemLayoutColor, 58, 0, out::print);
         }
     }
 
@@ -212,9 +213,10 @@ public class TimePage {
         try {
             DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(format);
             String formattedTime = LocalDateTime.now().format(customFormatter);
-            message("Formatted Time: " + getAnsi256Color(systemMainColor) + formattedTime, systemLayoutColor, 58, 0, out::print);
+            message("Formatted Time: " + getAnsi256Color(systemMainColor) + formattedTime,
+                    systemLayoutColor, 58, 0, out::print);
         } catch (Exception e) {
-            message("Invalid format! Please try again.", systemRejectionColor,58, 0, out::print);
+            message("Invalid format. Please try again.", systemLayoutColor,58, 0, out::print);
         }
     }
 }
