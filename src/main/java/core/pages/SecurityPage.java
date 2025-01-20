@@ -48,7 +48,8 @@ public class SecurityPage {
 
         while (true) {
             modifyMessage('n', 1);
-            slowMotionText(0, 56, false, getAnsi256Color(systemLayoutColor) + "> ", "");
+            slowMotionText(0, searchingLineAlignment, false, getAnsi256Color(systemLayoutColor) + "> ",
+                    "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -67,11 +68,11 @@ public class SecurityPage {
         modifyMessage('n', 1);
         message("·  Generate password [" + getAnsi256Color(systemMainColor) + "/gp"
                 + getAnsi256Color(systemLayoutColor) +" or " + getAnsi256Color(systemMainColor) + "/p"
-                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
         message("·  List Of Commands [" + getAnsi256Color(systemMainColor) + "/lc"
-                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
-        message("·  Exit [" + getAnsi256Color(systemRejectionColor) + "/e"
-                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
+        message("·  Exit [" + getAnsi256Color(systemMainColor) + "/e"
+                + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
     private static void passwordCreatorMenu() {

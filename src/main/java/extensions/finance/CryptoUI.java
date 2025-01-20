@@ -16,7 +16,7 @@ public class CryptoUI {
     //Main menu of extension
     public static void displayCryptoMenu() {
         marginBorder(1,2);
-        switchLogoRandomly(cryptoLogo,8);
+        switchLogo(cryptoLogo,8);
         marginBorder(1,2);
 
         displayConfirmation("Enter","y","+",
@@ -58,22 +58,7 @@ public class CryptoUI {
                 terminateExtension(themeColor_1,acceptanceColor,layoutColor);
             }
 
-            if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
-                message("Invalid cryptocurrency code: " + cryptocurrencyCode, rejectionColor, 58, 0, out::print);
-                continue;
-            }
-
-            out.print(alignment(58) + getAnsi256Color(layoutColor) + "Fiat currency code: " + RESET);
-            fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
-
-            if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
-            }
-
-            if (fiatCurrencyCode.isEmpty()) {
-                message("Fiat currency code cannot be empty.", rejectionColor, 58, 0, out::print);
-                continue;
-            }
+            if (checkValue()) continue;
 
             getCryptocurrencyPrice(CRYPTO_MAP.get(cryptocurrencyCode), fiatCurrencyCode);
         }
@@ -96,22 +81,7 @@ public class CryptoUI {
                 terminateExtension(themeColor_1,acceptanceColor,layoutColor);
             }
 
-            if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
-                message("Invalid cryptocurrency code: " + cryptocurrencyCode, rejectionColor, 58, 0, out::print);
-                continue;
-            }
-
-            out.print(alignment(58) + getAnsi256Color(layoutColor) + "Fiat currency code: " + RESET);
-            fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
-
-            if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
-                terminateExtension(themeColor_1,acceptanceColor,layoutColor);
-            }
-
-            if (fiatCurrencyCode.isEmpty()) {
-                message("Fiat currency code cannot be empty.", rejectionColor, 58, 0, out::print);
-                continue;
-            }
+            if (checkValue()) continue;
 
             out.print(alignment(58) + getAnsi256Color(layoutColor) + "Duration in minutes: " + RESET);
 
@@ -140,6 +110,26 @@ public class CryptoUI {
                 }
             }
         }
+    }
+
+    private static boolean checkValue() {
+        if (!CRYPTO_MAP.containsKey(cryptocurrencyCode)) {
+            message("Invalid cryptocurrency code: " + cryptocurrencyCode, rejectionColor, 58, 0, out::print);
+            return true;
+        }
+
+        out.print(alignment(58) + getAnsi256Color(layoutColor) + "Fiat currency code: " + RESET);
+        fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
+
+        if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
+            terminateExtension(themeColor_1,acceptanceColor,layoutColor);
+        }
+
+        if (fiatCurrencyCode.isEmpty()) {
+            message("Fiat currency code cannot be empty.", rejectionColor, 58, 0, out::print);
+            return true;
+        }
+        return false;
     }
 
     //Lists of cryptocurrencies

@@ -11,8 +11,6 @@ import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
-import static core.pages.InfoPage.displayCpuInfo;
-import static core.pages.StartPage.mainLogoAscii;
 import static java.lang.System.out;
 
 public class SettingsPage {
@@ -25,7 +23,7 @@ public class SettingsPage {
 
         while (true) {
             modifyMessage('n',1);
-            slowMotionText(0, 56, false,
+            slowMotionText(0, searchingLineAlignment, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -33,7 +31,6 @@ public class SettingsPage {
                 case "memory", "/m" -> displayUsingMemory();
                 case "cpu", "/c" -> displayCpuLoad();
                 case "colors", "/cl" -> displayColorTable();
-                case "logos", "/l" -> displayLogos();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -47,19 +44,19 @@ public class SettingsPage {
     private static void displayListOfCommands(){
         modifyMessage('n',1);
         message("·  Memory [" + getAnsi256Color(systemMainColor)
-                + "/m" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/m" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  CPU [" + getAnsi256Color(systemMainColor)
-                + "/c" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/c" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
         message("·  Colors ["  + getAnsi256Color(systemMainColor)
-                + "/cl" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+                + "/cl" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
-        message("·  Logos [" + getAnsi256Color(systemMainColor)
-                + "/l" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  List Of Commands ["  + getAnsi256Color(systemMainColor)
+                + "/lc" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(systemRejectionColor)
-                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 48, 0, out::print);
+        message("·  Exit [" + getAnsi256Color(systemMainColor)
+                + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
     //Memory methods
@@ -119,14 +116,21 @@ public class SettingsPage {
                 systemLayoutColor, 58, 0, out::print);
     }
 
+    private static void displayCpuInfo() {
+        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        message("CPU Cores: " + getAnsi256Color(systemMainColor) + availableProcessors,
+                systemLayoutColor, 58, 0, out::print);
+    }
+
     //Color methods
     @Contract(pure = true)
     private static void displayColorTable() {
-            printColorRange(0, systemLayoutColor);
-            modifyMessage('n', 1);
-            printColorBlock();
-            printColorRange(232, 255);
-            displaySystemColors();
+        marginBorder(1,1);
+        printColorRange(0, systemLayoutColor);
+        modifyMessage('n', 1);
+        printColorBlock();
+        printColorRange(232, 255);
+        marginBorder(1,0);
     }
 
     @Contract(pure = true)
@@ -175,26 +179,6 @@ public class SettingsPage {
         for (Integer color : colors) {
             out.println(alignment(58) + getAnsi256Color(systemLayoutColor)
                     + "· " + getAnsi256BackgroundColor(color) + "  " + RESET);
-        }
-    }
-
-    //Logo
-    public static int colorVariationOfLogo = 5;
-    private static void displayLogos() {
-        try {
-            modifyMessage('n', 1);
-            for (int i = 0; i < colorVariationOfLogo; i++) {
-                if(i != colorVariationOfLogo - 1 ) {
-                    switchLogoManually(mainLogoAscii, i % colorVariationOfLogo, 48);
-                    modifyMessage('n', 1);
-                    Thread.sleep(500);
-                }
-                else{
-                    switchLogoManually(mainLogoAscii, i % colorVariationOfLogo, 48);
-                }
-            }
-        } catch (Exception ex) {
-            message("Error: " + ex.getMessage(), systemRejectionColor, 58, 0, out::print);
         }
     }
 }

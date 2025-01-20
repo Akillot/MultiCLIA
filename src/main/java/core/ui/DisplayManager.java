@@ -14,7 +14,6 @@ import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.httpRequest;
 import static core.configs.TextConfigs.*;
 
-import static core.pages.InfoPage.*;
 import static java.lang.System.*;
 
 public class DisplayManager {
@@ -23,7 +22,7 @@ public class DisplayManager {
     //displaying description /h
     private static final String[] rules = {
             formatCommandWithDescription("cmds", "/c", "Shows list of all commands"),
-            formatCommandWithDescription("setts", "/s", "Shows settings of the application"),
+            formatCommandWithDescription("settings", "/s", "Shows settings of the application"),
             formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
             formatCommandWithDescription("ip", "/ip", "Shows local and external IP addresses"),
             formatCommandWithDescription("info", "/i", "Shows app information"),
@@ -31,10 +30,9 @@ public class DisplayManager {
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
-            formatCommandWithDescription("about-app", "/a", "Shows app information"),
             formatCommandWithDescription("security", "/sc", "Shows page with password generation, email checking and e.t.c"),
             formatCommandWithDescription("cryptography", "/cr", "Shows page with opportunities to encode and decode messages"),
-            formatCommandWithDescription("exit", "/e", "Terminates the application"),
+            formatCommandWithDescription("exit", "/e", "Terminates the application")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
@@ -148,23 +146,6 @@ public class DisplayManager {
         while (!executor.isTerminated()) {}
         modifyMessage('n',1);
         message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
-        marginBorder(2,1);
-    }
-
-    //displaying app info /a
-    public static void displayAppInfo(){
-        marginBorder(1,2);
-        message("Application info", systemLayoutColor, 58, 0, out::print);
-        modifyMessage('n',1);
-        message("Current version: " + getVersion(), systemLayoutColor,58,0,out::print);
-        message("Author: Nick Zozulia", systemLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
-
-        displayOs();
-        displayApplicationDirectory();
-
-        modifyMessage('n', 1);
-        displayJavaInfo();
         marginBorder(2,1);
     }
 }
