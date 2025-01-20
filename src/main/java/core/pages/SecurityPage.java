@@ -71,7 +71,7 @@ public class SecurityPage {
                 + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
         message("·  List Of Commands [" + getAnsi256Color(systemMainColor) + "/lc"
                 + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
-        message("·  Exit [" + getAnsi256Color(systemRejectionColor) + "/e"
+        message("·  Exit [" + getAnsi256Color(systemMainColor) + "/e"
                 + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
     }
 
