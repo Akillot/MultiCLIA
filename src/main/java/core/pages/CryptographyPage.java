@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
+import static core.pages.StartPage.mainMenuRerun;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
@@ -14,11 +15,10 @@ public class CryptographyPage {
 
     public static void displayEncryptionPage() {
         marginBorder(1, 2);
-        message("Encryption Menu:", sysLayoutColor, 58, 0, out::print);
+        message("Encryption Menu:", sysLayoutColor, 58, 0, out::println);
         displayListOfCommands();
 
         while (true) {
-            modifyMessage('n', 1);
             slowMotionText(0, searchingLineAlignment, false,
                     getAnsi256Color(sysLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
@@ -26,7 +26,8 @@ public class CryptographyPage {
             switch (input) {
                 case "make encrypt", "/me" -> encryptionMenu();
                 case "make decrypt", "/md" -> decryptionMenu();
-                case "clear terminal", "cl" -> clearTerminal();
+                case "rerun", "/rr" -> mainMenuRerun();
+                case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -38,7 +39,6 @@ public class CryptographyPage {
     }
 
     private static void displayListOfCommands() {
-        modifyMessage('n', 1);
         message("·  Make Encryption [" + getAnsi256Color(sysMainColor)
                 + "/me" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -49,7 +49,7 @@ public class CryptographyPage {
                 + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(sysMainColor)
-                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     private static void encryptionMenu() {
@@ -60,7 +60,7 @@ public class CryptographyPage {
         String textToEncrypt = scanner.nextLine();
 
         String encryptedText = encryptText(textToEncrypt);
-        message("Encrypted Text: " + encryptedText, sysMainColor, 58, 0, out::print);
+        message("Encrypted Text: " + encryptedText, sysMainColor, 58, 0, out::println);
     }
 
     private static @NotNull String encryptText(String text) {
@@ -75,7 +75,7 @@ public class CryptographyPage {
         String textToDecrypt = scanner.nextLine();
 
         String decryptedText = decryptText(textToDecrypt);
-        message("Decrypted Text: " + decryptedText, sysMainColor, 58, 0, out::print);
+        message("Decrypted Text: " + decryptedText, sysMainColor, 58, 0, out::println);
     }
 
     private static @NotNull String decryptText(String text) {

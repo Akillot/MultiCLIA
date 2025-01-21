@@ -100,9 +100,11 @@ public class StartPage {
         }
     }
 
-    public static void mainMenuReload(){
+
+
+    public static void mainMenuRerun(){
         modifyMessage('n',1);
         border();
-        displayMenu();
+        displayStartPage();
     }
 }

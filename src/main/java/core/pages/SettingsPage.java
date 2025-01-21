@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
+import static core.pages.StartPage.mainMenuRerun;
+import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
@@ -18,7 +20,7 @@ public class SettingsPage {
     //The main method of displaying the page
     public static void displaySettingsPage() {
         marginBorder(1,2);
-        message("Settings:", sysLayoutColor, 58, 0, out::print);
+        message("Settings:", sysLayoutColor, 58, 0, out::println);
         displayListOfCommands();
 
         while (true) {
@@ -29,7 +31,9 @@ public class SettingsPage {
             switch (input) {
                 case "memory", "/m" -> displayUsingMemory();
                 case "cpu", "/c" -> displayCpuLoad();
-                case "colors", "/cl" -> displayColorTable();
+                case "colors", "/col" -> displayColorTable();
+                case "rerun", "/rr" -> mainMenuRerun();
+                case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -41,7 +45,6 @@ public class SettingsPage {
     }
 
     private static void displayListOfCommands(){
-        modifyMessage('n',1);
         message("·  Memory [" + getAnsi256Color(sysMainColor)
                 + "/m" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -49,14 +52,13 @@ public class SettingsPage {
                 + "/c" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Colors ["  + getAnsi256Color(sysMainColor)
-                + "/cl" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/col" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands ["  + getAnsi256Color(sysMainColor)
                 + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Exit [" + getAnsi256Color(sysMainColor)
-                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
-        modifyMessage('n',1);
+                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     //Memory methods

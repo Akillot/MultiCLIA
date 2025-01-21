@@ -12,6 +12,8 @@ import java.util.Scanner;
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
 import static core.configs.TextConfigs.*;
+import static core.pages.StartPage.mainMenuRerun;
+import static core.ui.DisplayManager.clearTerminal;
 import static java.lang.System.out;
 
 public class TimePage {
@@ -20,7 +22,7 @@ public class TimePage {
 
     public static void displayTimePage() {
         marginBorder(1,2);
-        message("Time Page Menu:", sysLayoutColor, 58, 0, out::print);
+        message("Time Page Menu:", sysLayoutColor, 58, 0, out::println);
         displayListOfCommands();
 
         while (true) {
@@ -33,6 +35,8 @@ public class TimePage {
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
+                case "rerun", "/rr" -> mainMenuRerun();
+                case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -43,9 +47,7 @@ public class TimePage {
         }
     }
 
-    // /lc
     private static void displayListOfCommands(){
-        modifyMessage('n',1);
         message("·  Current Time [" + getAnsi256Color(sysMainColor)
                 + "/ct" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -57,9 +59,6 @@ public class TimePage {
 
         message("·  Change Time Zone [" + getAnsi256Color(sysMainColor)
                 + "/ctz" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
-
-        message("·  Clear terminal [" + getAnsi256Color(sysMainColor)
-                + "/cl" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor)
                 + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
