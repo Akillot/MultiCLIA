@@ -58,6 +58,9 @@ public class TimePage {
         message("·  Change Time Zone [" + getAnsi256Color(sysMainColor)
                 + "/ctz" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
+        message("·  Clear terminal [" + getAnsi256Color(sysMainColor)
+                + "/cl" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor)
                 + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -153,7 +156,7 @@ public class TimePage {
     // /sw command
     private static void runStopwatch() {
         modifyMessage('n', 1);
-        message("Press '" + getAnsi256Color(sysMainColor) +  "Enter" + getAnsi256Color(sysLayoutColor)
+        message("Press '" + getAnsi256Color(sysMainColor) + "Anything" + getAnsi256Color(sysLayoutColor)
                         + "' to start stopwatch and again to stop:", sysLayoutColor, 58, 0, out::print);
         scanner.nextLine();
         long startTime = System.currentTimeMillis();
@@ -199,7 +202,7 @@ public class TimePage {
         }
     }
 
-    private static boolean exitCheck(String inputZone) {
+    private static boolean exitCheck(@NotNull String inputZone) {
         if (inputZone.equalsIgnoreCase("exit")) {
             if (isTimerRunning) {
                 isTimerRunning = false;

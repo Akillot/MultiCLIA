@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
+import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
@@ -25,6 +26,7 @@ public class CryptographyPage {
             switch (input) {
                 case "make encrypt", "/me" -> encryptionMenu();
                 case "make decrypt", "/md" -> decryptionMenu();
+                case "clear terminal", "cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -35,12 +37,12 @@ public class CryptographyPage {
         }
     }
 
-    private static void displayListOfCommands(){
-        modifyMessage('n',1);
+    private static void displayListOfCommands() {
+        modifyMessage('n', 1);
         message("·  Make Encryption [" + getAnsi256Color(sysMainColor)
                 + "/me" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Make Decryption ["  + getAnsi256Color(sysMainColor)
+        message("·  Make Decryption [" + getAnsi256Color(sysMainColor)
                 + "/md" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor)
