@@ -36,19 +36,19 @@ public class DisplayManager {
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
-        return formatCommand(commandName + getAnsi256Color(systemLayoutColor)
+        return formatCommand(commandName + getAnsi256Color(sysLayoutColor)
                 + ": ", "", "") + description + " "
                 + formatCommand(shortCommand, "[", "]");
     }
 
     private static @NotNull String formatCommand(String command, String bracketStart, String bracketEnd) {
-        return bracketStart + getAnsi256Color(systemMainColor) + command + getAnsi256Color(systemLayoutColor) + bracketEnd;
+        return bracketStart + getAnsi256Color(sysMainColor) + command + getAnsi256Color(sysLayoutColor) + bracketEnd;
     }
 
     public static void displayCommandsDescription() {
         marginBorder(1, 2);
         for (String rule : rules) {
-            message(rule, systemLayoutColor, 58, 0, out::print);
+            message(rule, sysLayoutColor, 58, 0, out::print);
             modifyMessage('n', 1);
         }
         marginBorder(1, 1);
@@ -62,24 +62,24 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", systemRejectionColor, 58, 0, out::print);
+            message("Unknown error occurred", sysRejectionColor, 58, 0, out::print);
         }
     }
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        out.println(alignment(38) + getAnsi256Color(systemMainColor) + "System Commands"
-                + alignment(-68) + getAnsi256Color(systemMainColor) + "Extensions");
+        out.println(alignment(38) + getAnsi256Color(sysMainColor) + "System Commands"
+                + alignment(-68) + getAnsi256Color(sysMainColor) + "Extensions");
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
         for (int i = 0; i < maxRows; i++) {
             String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " ["
-                    + getAnsi256Color(systemMainColor) + shortSystemCmds[i] + getAnsi256Color(systemLayoutColor) + "]" : "";
+                    + getAnsi256Color(sysMainColor) + shortSystemCmds[i] + getAnsi256Color(sysLayoutColor) + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(38) + getAnsi256Color(systemLayoutColor) + "%-40s"
-                    + alignment(-18) + getAnsi256Color(systemLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
+            out.printf(alignment(38) + getAnsi256Color(sysLayoutColor) + "%-40s"
+                    + alignment(-18) + getAnsi256Color(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
     }
@@ -89,14 +89,14 @@ public class DisplayManager {
         marginBorder(1,2);
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            message("Your local IP: " + getAnsi256Color(systemMainColor)
-                    + localHost, systemLayoutColor, 58, 0, out::print);
+            message("Your local IP: " + getAnsi256Color(sysMainColor)
+                    + localHost, sysLayoutColor, 58, 0, out::print);
             httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
-                    + getAnsi256Color(systemMainColor), "ip");
+                    + getAnsi256Color(sysMainColor), "ip");
         } catch (UnknownHostException e) {
-            message("IP is undefined", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor)
-                    + "x", systemLayoutColor, 58, 0, out::print);
+            message("IP is undefined", sysRejectionColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(sysRejectionColor)
+                    + "x", sysLayoutColor, 58, 0, out::print);
         }
         marginBorder(2,1);
     }
@@ -112,8 +112,8 @@ public class DisplayManager {
                 System.out.flush();
             }
         } catch (Exception e) {
-            message("Error executing action", systemRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(systemRejectionColor) + "x", systemLayoutColor, 58, 0, out::print);
+            message("Error executing action", sysRejectionColor, 58, 0, out::print);
+            message("Status: " + getAnsi256Color(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
         }
     }
 
@@ -127,7 +127,7 @@ public class DisplayManager {
 
         marginBorder(1,2);
         slowMotionText(0,58,false,
-                getAnsi256Color(systemLayoutColor) + "Scanning ports from "
+                getAnsi256Color(sysLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
         modifyMessage('n',2);
 
@@ -135,9 +135,9 @@ public class DisplayManager {
             final int currentPort = port;
             executor.submit(() -> {
                 try (Socket socket = new Socket("localhost", currentPort)) {
-                    message("· Port " + getAnsi256Color(systemMainColor) + currentPort
-                            + getAnsi256Color(systemLayoutColor) + " [" + getAnsi256Color(systemAcceptanceColor) + "OPEN"
-                            + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
+                    message("· Port " + getAnsi256Color(sysMainColor) + currentPort
+                            + getAnsi256Color(sysLayoutColor) + " [" + getAnsi256Color(sysAcceptanceColor) + "OPEN"
+                            + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
                 } catch (Exception ignored) {}
             });
         }
@@ -145,7 +145,7 @@ public class DisplayManager {
         executor.shutdown();
         while (!executor.isTerminated()) {}
         modifyMessage('n',1);
-        message("Scanning completed.", systemLayoutColor, 58, 0, out::print);
+        message("Scanning completed.", sysLayoutColor, 58, 0, out::print);
         marginBorder(2,1);
     }
 }

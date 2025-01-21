@@ -22,7 +22,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", systemRejectionColor,58,0, out::println);
+                message("Error, try again", sysRejectionColor,58,0, out::println);
             }
         }
         out.print("");
@@ -72,13 +72,13 @@ public class TextConfigs {
                 + "/" + getAnsi256Color(acceptanceColor) + confirmation_2 + getAnsi256Color(layoutColor)
                 + "' " + midText +" '" + getAnsi256Color(rejectionColor) + rejection_1 + getAnsi256Color(layoutColor)
                 + "/" + getAnsi256Color(rejectionColor) + rejection_2 + getAnsi256Color(layoutColor)
-                + "' " + postText, systemLayoutColor,58,0,out::print);
+                + "' " + postText, sysLayoutColor,58,0,out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void modifyMessage(char modifier, int amount) {
         if(amount < 0){
-            message("Error, number of modifiers is less than 0", systemRejectionColor,58,0, out::println);
+            message("Error, number of modifiers is less than 0", sysRejectionColor,58,0, out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";
