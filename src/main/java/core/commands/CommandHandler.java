@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 import static core.configs.AppearanceConfigs.getAnsi256Color;
-import static core.configs.AppearanceConfigs.systemRejectionColor;
+import static core.configs.AppearanceConfigs.sysRejectionColor;
 import static core.configs.TextConfigs.alignment;
 import static core.configs.TextConfigs.message;
 import static java.lang.System.out;
@@ -19,7 +19,7 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "cmds" ,"settings", "rerun", "ip",
+            "cmds" ,"settings", "rerun", "ip-address",
             "info", "help", "clear", "time",
             "ports", "security",
             "cryptography", "exit"};
@@ -48,14 +48,14 @@ public class CommandHandler {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
             case 1 -> SettingsPage::displaySettingsPage;
-            case 2 -> StartPage::mainMenuReload;
+            case 2 -> StartPage::mainMenuRerun;
             case 3 -> DisplayManager::displayUserIp;
             case 4 -> () -> {
                 try {
                     InfoPage.displayInfo();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
-                            systemRejectionColor, 58, 0, out::println);
+                            sysRejectionColor, 58, 0, out::println);
                 }
             };
             case 5 -> DisplayManager::displayCommandsDescription;
@@ -66,7 +66,7 @@ public class CommandHandler {
             case 10 -> CryptographyPage::displayEncryptionPage;
             case 11 -> CommandManager::terminateProgram;
             default -> throw new IllegalArgumentException(alignment(58)
-                    + getAnsi256Color(systemRejectionColor) + "Invalid command index");
+                    + getAnsi256Color(sysRejectionColor) + "Invalid command index");
         };
     }
 }

@@ -17,10 +17,10 @@ public class AppearanceConfigs {
     public static int searchingLineAlignment = 48;
 
     //Colors
-    public static int systemMainColor = 147;
-    public static int systemLayoutColor = 15;
-    public static int systemAcceptanceColor = 46;
-    public static int systemRejectionColor = 160;
+    public static int sysMainColor = 147;
+    public static int sysLayoutColor = 15;
+    public static int sysAcceptanceColor = 46;
+    public static int sysRejectionColor = 160;
 
     public static final String RESET = "\033[0m";
     public static final String UNDERLINE = "\033[4m";
@@ -92,11 +92,11 @@ public class AppearanceConfigs {
 
     public static void border() {
         String borderChar = borderChars.get(borderCharIndex);
-        out.print(getAnsi256Color(systemLayoutColor) + borderChar);
+        out.print(getAnsi256Color(sysLayoutColor) + borderChar);
         for (int i = 0; i < 115; i++) {
-            out.print(getAnsi256Color(systemLayoutColor) + borderChar);
+            out.print(getAnsi256Color(sysLayoutColor) + borderChar);
         }
-        out.println(getAnsi256Color(systemLayoutColor) + borderChar);
+        out.println(getAnsi256Color(sysLayoutColor) + borderChar);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
@@ -116,7 +116,7 @@ public class AppearanceConfigs {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getAnsi256Color(systemAcceptanceColor) + "\r    ✓" + RESET);
+        out.print(getAnsi256Color(sysAcceptanceColor) + "\r    ✓" + RESET);
     }
 
     public static void progressbarAnimation(String title) {
@@ -129,10 +129,10 @@ public class AppearanceConfigs {
             double progress = step / (double) steps;
             int completed = (int) (progress * barLength);
             StringBuilder bar = new StringBuilder("\r" + alignment(64)
-                    + getAnsi256Color(systemLayoutColor) + title + "[");
+                    + getAnsi256Color(sysLayoutColor) + title + "[");
 
             for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? getRandom256Color() + borderChars.get(0) + getAnsi256Color(systemLayoutColor) : " ");
+                bar.append(i < completed ? getRandom256Color() + borderChars.get(0) + getAnsi256Color(sysLayoutColor) : " ");
             }
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));

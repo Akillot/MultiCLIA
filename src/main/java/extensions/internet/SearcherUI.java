@@ -32,7 +32,7 @@ public class SearcherUI {
 
             displayConfirmation("Enter","y","+",
                     "to open and","n","-","to skip",
-                    systemAcceptanceColor, systemRejectionColor, systemLayoutColor);
+                    sysAcceptanceColor, sysRejectionColor, sysLayoutColor);
 
             choice("Show URL", () -> displayFullURL(domain), themeColor_1, layoutColor, rejectionColor);
             modifyMessage('n',2);

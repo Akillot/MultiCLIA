@@ -23,7 +23,7 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, systemRejectionColor, 58, 0, out::print);
+                message(errorMessage, sysRejectionColor, 58, 0, out::print);
             }
         }
     }
@@ -54,13 +54,13 @@ public class StartPage {
         String[] motto = {"Command-driven simplicity.",
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
-                "Hi " + getAnsi256Color(systemMainColor) + capitalizeMessage(userName)
-                        + getAnsi256Color(systemLayoutColor) + " and welcome to MultiCLIA!", "Everything you need."};
+                "Hi " + getAnsi256Color(sysMainColor) + capitalizeMessage(userName)
+                        + getAnsi256Color(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need."};
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length);
-        message("Just type '" + getAnsi256Color(systemMainColor)
-                + "cmds" + getAnsi256Color(systemLayoutColor) + "'. " + motto[index],15,48,0,out::print);
+        message("Just type '" + getAnsi256Color(sysMainColor)
+                + "cmds" + getAnsi256Color(sysLayoutColor) + "'. " + motto[index],15,48,0,out::print);
     }
 
     private static void getCurrentDate(){
@@ -68,9 +68,9 @@ public class StartPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         String formattedTime = localTime.format(myFormatter);
         message("Application start time" + ": "
-                        + getAnsi256Color(systemMainColor) + formattedTime
-                        + getAnsi256Color(systemLayoutColor) + ".",
-                systemLayoutColor,48,0,out::print);
+                        + getAnsi256Color(sysMainColor) + formattedTime
+                        + getAnsi256Color(sysLayoutColor) + ".",
+                sysLayoutColor,48,0,out::print);
     }
 
     private static String[] newYearAscii = {
@@ -95,14 +95,17 @@ public class StartPage {
                 switchLogo(newYearAscii, 36);
                 modifyMessage('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", systemLayoutColor, 36,0,out::print);
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,0,out::print);
                 break;
         }
     }
 
-    public static void mainMenuReload(){
+
+
+    public static void mainMenuRerun(){
         modifyMessage('n',1);
         border();
-        displayMenu();
+        modifyMessage('n',10);
+        displayStartPage();
     }
 }
