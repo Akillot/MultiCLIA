@@ -7,7 +7,7 @@ import static core.configs.TextConfigs.modifyMessage;
 
 public class AppLauncher {
     public static void main(String[] args) {
-        modifyMessage('n',8);
+        modifyMessage('n',10);
         progressbarAnimation("Processing");
         StartPage.displayStartPage();
     }
