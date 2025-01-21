@@ -22,7 +22,6 @@ public class SettingsPage {
         displayListOfCommands();
 
         while (true) {
-            modifyMessage('n',1);
             slowMotionText(0, searchingLineAlignment, false,
                     getAnsi256Color(systemLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
@@ -57,6 +56,7 @@ public class SettingsPage {
 
         message("·  Exit [" + getAnsi256Color(systemMainColor)
                 + "/e" + getAnsi256Color(systemLayoutColor) + "]", systemLayoutColor, 58, 0, out::print);
+        modifyMessage('n',1);
     }
 
     //Memory methods
