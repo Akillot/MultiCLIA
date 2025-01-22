@@ -15,7 +15,7 @@ public class CryptographyPage {
 
     public static void displayEncryptionPage() {
         marginBorder(1, 2);
-        message("Encryption Menu:", sysLayoutColor, 58, 0, out::println);
+        message("Cryptography:", sysLayoutColor, 58, 0, out::println);
         displayListOfCommands();
 
         while (true) {

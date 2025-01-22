@@ -40,7 +40,7 @@ public class SecurityPage {
 
     public static void displaySecurityPage() {
         marginBorder(1, 2);
-        message("Security: ", sysLayoutColor, 58, 0, out::println);
+        message("Security:", sysLayoutColor, 58, 0, out::println);
         displayListOfCommands();
 
         while (true) {

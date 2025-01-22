@@ -22,7 +22,7 @@ public class TimePage {
 
     public static void displayTimePage() {
         marginBorder(1,2);
-        message("Time Page Menu:", sysLayoutColor, 58, 0, out::println);
+        message("Time:", sysLayoutColor, 58, 0, out::println);
         displayListOfCommands();
 
         while (true) {

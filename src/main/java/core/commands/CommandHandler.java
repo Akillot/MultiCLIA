@@ -21,13 +21,13 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "ip-address",
             "info", "help", "clear", "time",
-            "ports", "security",
+            "network", "security",
             "cryptography", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
             "/i", "/h", "/cl", "/t",
-            "/p", "/sc", "/cr", "/e"};
+            "/n", "/sc", "/cr", "/e"};
 
     public static String[] extensionCmds = {
             "searcher", "crypto"};//Add notes in first place
@@ -61,7 +61,7 @@ public class CommandHandler {
             case 5 -> DisplayManager::displayCommandsDescription;
             case 6 -> DisplayManager::clearTerminal;
             case 7 -> TimePage::displayTimePage;
-            case 8 -> DisplayManager::multiThreadedPortScanner;
+            case 8 -> NetworkPage::displayNetworkPage;
             case 9 -> SecurityPage::displaySecurityPage;
             case 10 -> CryptographyPage::displayEncryptionPage;
             case 11 -> CommandManager::terminateProgram;
