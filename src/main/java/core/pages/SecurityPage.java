@@ -73,12 +73,12 @@ public class SecurityPage {
 
     private static void passwordCreatorMenu() {
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter length of password (1-80): ");
+        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter length of password [1-80]: ");
         try {
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
                 message("Invalid password length. Please enter a number between 1 and 80.",
-                        sysLayoutColor, 58, 0, out::println);
+                        sysLayoutColor, 58, 0, out::print);
                 return;
             }
         } catch (Exception e) {
