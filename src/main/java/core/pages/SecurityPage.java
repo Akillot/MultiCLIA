@@ -91,7 +91,7 @@ public class SecurityPage {
 
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Password complexity ["
-                + getAnsi256Color(easyComplexityColor) + "easy" + getAnsi256Color(sysLayoutColor) + "|"
+                + getAnsi256Color(easyComplexityColor) + "light" + getAnsi256Color(sysLayoutColor) + "|"
                 + getAnsi256Color(easyComplexityColor) + "1" + getAnsi256Color(sysLayoutColor) + ", "
                 + getAnsi256Color(mediumComplexityColor) + "medium" + getAnsi256Color(sysLayoutColor) + "|"
                 + getAnsi256Color(mediumComplexityColor) + "2" + getAnsi256Color(sysLayoutColor) + ", "
@@ -116,7 +116,7 @@ public class SecurityPage {
         int color;
 
         switch (passwordComplexity) {
-            case "easy", "1" -> {
+            case "light", "1" -> {
                 charPool = CHAR_POOL_EASY;
                 color = easyComplexityColor;
             }
