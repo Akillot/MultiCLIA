@@ -26,9 +26,9 @@ public class DisplayManager {
             formatCommandWithDescription("help", "/h", "Shows description of all commands"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
-            formatCommandWithDescription("ports", "/p", "Scans open ports on the local machine"),
-            formatCommandWithDescription("security", "/sc", "Shows page with password generation, email checking and e.t.c"),
-            formatCommandWithDescription("cryptography", "/cr", "Shows page with opportunities to encode and decode messages"),
+            formatCommandWithDescription("network", "/n", "Shows network page"),
+            formatCommandWithDescription("security", "/sc", "Shows security page"),
+            formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),
             formatCommandWithDescription("exit", "/e", "Terminates the application")
     };
 
