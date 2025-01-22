@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.AppearanceConfigs.sysLayoutColor;
@@ -19,8 +21,6 @@ import static java.lang.System.out;
 
 public class NetworkPage {
 
-    private static String host;
-
     public static void displayNetworkPage() {
         marginBorder(1, 2);
         message("Network:", sysLayoutColor, 58, 0, out::println);
@@ -33,7 +33,8 @@ public class NetworkPage {
 
             switch (input) {
                 case "internet speed test", "speed test", "/ist" -> testDownloadSpeed();
-                //case "scan ports", "/sp" -> passwordCreatorMenu();
+                case "scan ports manually", "/spm" -> scanPortsManually();
+                case "scan ports automatically", "/spa" -> scanPortsAuto();
                 case "trace rout", "/tr" -> pingHost();
                 case "rerun", "/rr" -> mainMenuRerun();
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -75,7 +76,10 @@ public class NetworkPage {
         message("·  Internet Speed Test [" + getAnsi256Color(sysMainColor) + "/ist"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Scan Ports [" + getAnsi256Color(sysMainColor) + "/sp"
+        message("·  Scan Ports Manually [" + getAnsi256Color(sysMainColor) + "/spm"
+                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Scan Ports Automatically [" + getAnsi256Color(sysMainColor) + "/spa"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Trace Rout [" + getAnsi256Color(sysMainColor) + "/tr"
@@ -92,7 +96,7 @@ public class NetworkPage {
         Scanner scanner = new Scanner(System.in);
         try {
             out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host: ");
-            host = scanner.nextLine();
+            String host = scanner.nextLine();
 
             Process process = Runtime.getRuntime().exec("ping -c 4 " + host);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -143,6 +147,37 @@ public class NetworkPage {
         } catch (Exception e) {
             message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
+    }
+
+    public static void scanPortsAuto() {
+        int startPort = 1;
+        int endPort = 65535;
+        int threads = 100;
+
+        ExecutorService executor = Executors.newFixedThreadPool(threads);
+
+        marginBorder(1,2);
+        slowMotionText(0,58,false,
+                getAnsi256Color(sysLayoutColor) + "Scanning ports from "
+                        + startPort + " to " + endPort + " using " + threads + " threads","");
+        modifyMessage('n',2);
+
+        for (int port = startPort; port <= endPort; port++) {
+            final int currentPort = port;
+            executor.submit(() -> {
+                try (Socket socket = new Socket("localhost", currentPort)) {
+                    message("· Port " + getAnsi256Color(sysMainColor) + currentPort
+                            + getAnsi256Color(sysLayoutColor) + " [" + getAnsi256Color(sysAcceptanceColor) + "OPEN"
+                            + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                } catch (Exception ignored) {}
+            });
+        }
+
+        executor.shutdown();
+        while (!executor.isTerminated()) {}
+        modifyMessage('n',1);
+        message("Scanning completed.", sysLayoutColor, 58, 0, out::print);
+        marginBorder(2,1);
     }
 }
 

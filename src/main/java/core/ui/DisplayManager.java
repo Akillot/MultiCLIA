@@ -3,11 +3,8 @@ package core.ui;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static core.commands.CommandHandler.*;
 import static core.configs.AppearanceConfigs.*;
@@ -115,37 +112,5 @@ public class DisplayManager {
             message("Error executing action", sysRejectionColor, 58, 0, out::print);
             message("Status: " + getAnsi256Color(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
         }
-    }
-
-    //displaying currently open ports /p
-    public static void multiThreadedPortScanner() {
-        int startPort = 1;
-        int endPort = 65535;
-        int threads = 100;
-
-        ExecutorService executor = Executors.newFixedThreadPool(threads);
-
-        marginBorder(1,2);
-        slowMotionText(0,58,false,
-                getAnsi256Color(sysLayoutColor) + "Scanning ports from "
-                        + startPort + " to " + endPort + " using " + threads + " threads","");
-        modifyMessage('n',2);
-
-        for (int port = startPort; port <= endPort; port++) {
-            final int currentPort = port;
-            executor.submit(() -> {
-                try (Socket socket = new Socket("localhost", currentPort)) {
-                    message("· Port " + getAnsi256Color(sysMainColor) + currentPort
-                            + getAnsi256Color(sysLayoutColor) + " [" + getAnsi256Color(sysAcceptanceColor) + "OPEN"
-                            + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
-                } catch (Exception ignored) {}
-            });
-        }
-
-        executor.shutdown();
-        while (!executor.isTerminated()) {}
-        modifyMessage('n',1);
-        message("Scanning completed.", sysLayoutColor, 58, 0, out::print);
-        marginBorder(2,1);
     }
 }
