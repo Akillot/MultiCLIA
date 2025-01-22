@@ -17,6 +17,7 @@ import static core.logic.CommandManager.exitPage;
 import static core.pages.StartPage.mainMenuRerun;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
+import static java.lang.System.currentTimeMillis;
 import static java.lang.System.out;
 
 public class NetworkPage {
@@ -48,30 +49,6 @@ public class NetworkPage {
         }
     }
 
-    public static void testDownloadSpeed() {
-        String fileUrl = "https://speed.hetzner.de/100MB.bin";
-        try {
-            long startTime = System.currentTimeMillis();
-            URL url = new URL(fileUrl);
-            InputStream inputStream = url.openStream();
-            byte[] buffer = new byte[8192];
-            int bytesRead;
-            long totalBytes = 0;
-
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                totalBytes += bytesRead;
-            }
-            inputStream.close();
-            long endTime = System.currentTimeMillis();
-
-            double timeTakenInSeconds = (endTime - startTime) / 1000.0;
-            double speedMbps = (totalBytes * 8) / (timeTakenInSeconds * 1_000_000);
-            System.out.printf("Download Speed: %.2f Mbps%n", speedMbps);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
     private static void displayListOfCommands() {
         message("·  Internet Speed Test [" + getAnsi256Color(sysMainColor) + "/ist"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
@@ -90,6 +67,30 @@ public class NetworkPage {
 
         message("·  Exit [" + getAnsi256Color(sysMainColor) + "/e"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+    }
+
+    public static void testDownloadSpeed() {
+        String fileUrl = "https://speed.hetzner.de/100MB.bin";
+        try {
+            long startTime = currentTimeMillis();
+            URL url = new URL(fileUrl);
+            InputStream inputStream = url.openStream();
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            long totalBytes = 0;
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                totalBytes += bytesRead;
+            }
+            inputStream.close();
+            long endTime = currentTimeMillis();
+
+            double timeTakenInSeconds = (endTime - startTime) / 1000.0;
+            double speedMbps = (totalBytes * 8) / (timeTakenInSeconds * 1_000_000);
+            out.printf("Download Speed: %.2f Mbps%n", speedMbps);
+        } catch (Exception e) {
+            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+        }
     }
 
     private static void pingHost() {
