@@ -152,6 +152,44 @@ public class CommandManager {
         };
     }
 
+    public static void processCommandWithHostInput(String command) {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
+            String host = scanner.nextLine().trim();
+            modifyMessage('n', 1);
+
+            if (host.isEmpty()) {
+                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
+                return;
+            }
+
+            command = command + " ";
+            command += host;
+
+            Process process = Runtime.getRuntime().exec(command);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                message(line, sysLayoutColor, 58, 0, out::print);
+            }
+
+            reader.close();
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                message("Command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
+            } else {
+                modifyMessage('n', 1);
+                message("Process completed "
+                        + getAnsi256Color(sysMainColor) + "successfully" + getAnsi256Color(sysLayoutColor)
+                        + ".", sysLayoutColor, 58, 0, out::println);
+            }
+        } catch (Exception e) {
+            message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
     public static void exitPage(){
         marginBorder(2,2);
         message("Terminated correctly" + getAnsi256Color(sysLayoutColor) + ". "

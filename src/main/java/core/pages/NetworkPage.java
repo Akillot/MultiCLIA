@@ -1,7 +1,5 @@
 package core.pages;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -12,6 +10,7 @@ import static core.configs.AppearanceConfigs.sysLayoutColor;
 import static core.configs.TextConfigs.*;
 import static core.configs.TextConfigs.message;
 import static core.logic.CommandManager.exitPage;
+import static core.logic.CommandManager.processCommandWithHostInput;
 import static core.pages.StartPage.mainMenuRerun;
 import static core.ui.DisplayManager.clearTerminal;
 import static java.lang.System.out;
@@ -102,54 +101,16 @@ public class NetworkPage {
 
     // /ph
     private static void pingHost() {
-        workWithHost("ping -c 4");
+        processCommandWithHostInput("ping -c 4");
     }
 
     // /tr
     private static void traceRout(){
-        workWithHost("traceroute");
+        processCommandWithHostInput("traceroute");
     }
 
     // /lr
     private static void nsLookUp(){
-        workWithHost("nslookup");
-    }
-
-    private static void workWithHost(String command) {
-        try {
-            modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
-            String host = scanner.nextLine().trim();
-            modifyMessage('n', 1);
-
-            if (host.isEmpty()) {
-                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
-                return;
-            }
-
-            command = command + " ";
-            command += host;
-
-            Process process = Runtime.getRuntime().exec(command);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                message(line, sysLayoutColor, 58, 0, out::print);
-            }
-
-            reader.close();
-            int exitCode = process.waitFor();
-            if (exitCode != 0) {
-                message("Command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
-            } else {
-                modifyMessage('n', 1);
-                message("Process completed "
-                        + getAnsi256Color(sysMainColor) + "successfully" + getAnsi256Color(sysLayoutColor)
-                        + ".", sysLayoutColor, 58, 0, out::println);
-            }
-        } catch (Exception e) {
-            message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
-        }
+        processCommandWithHostInput("nslookup");
     }
 }
