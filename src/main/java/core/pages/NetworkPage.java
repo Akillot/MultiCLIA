@@ -34,6 +34,7 @@ public class NetworkPage {
                 case "scan ports", "/sp" -> scanPorts();
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
+                case "look up dns records", "/lr" -> nsLookUp();
                 case "rerun", "/rr" -> mainMenuRerun();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
@@ -57,6 +58,9 @@ public class NetworkPage {
         message("·  Trace rout [" + getAnsi256Color(sysMainColor) + "/tr"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
+        message("·  look up DNS records [" + getAnsi256Color(sysMainColor) + "/lr"
+                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -64,11 +68,7 @@ public class NetworkPage {
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
-    private static void pingHost() {
-        workWithHost("ping -c 4 ");
-    }
-
-
+    // /sp
     private static void scanPorts() {
         int startPort = 1;
         int endPort = 65535;
@@ -100,14 +100,25 @@ public class NetworkPage {
         marginBorder(2,1);
     }
 
+    // /ph
+    private static void pingHost() {
+        workWithHost("ping -c 4");
+    }
+
+    // /tr
     private static void traceRout(){
-        workWithHost("traceroute ");
+        workWithHost("traceroute");
+    }
+
+    // /lr
+    private static void nsLookUp(){
+        workWithHost("nslookup");
     }
 
     private static void workWithHost(String command) {
         try {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host (e.g., google.com): ");
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
             String host = scanner.nextLine().trim();
             modifyMessage('n', 1);
 
@@ -115,6 +126,8 @@ public class NetworkPage {
                 message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
                 return;
             }
+
+            command = command + " ";
             command += host;
 
             Process process = Runtime.getRuntime().exec(command);
