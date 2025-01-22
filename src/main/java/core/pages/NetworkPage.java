@@ -3,6 +3,7 @@ package core.pages;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Socket;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -17,6 +18,9 @@ import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
 
 public class NetworkPage {
+
+    private static String host;
+
     public static void displayNetworkPage() {
         marginBorder(1, 2);
         message("Network:", sysLayoutColor, 58, 0, out::println);
@@ -84,11 +88,11 @@ public class NetworkPage {
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
-    private static void pingHost(){
+    private static void pingHost() {
         Scanner scanner = new Scanner(System.in);
         try {
             out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host: ");
-            String host = scanner.nextLine();
+            host = scanner.nextLine();
 
             Process process = Runtime.getRuntime().exec("ping -c 4 " + host);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -99,7 +103,46 @@ public class NetworkPage {
             reader.close();
             modifyMessage('n', 1);
         } catch (Exception e) {
-            message("Ping execution error: " + e.getMessage(),sysLayoutColor, 58, 0, out::println);
+            message("Ping execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    private static void scanPortsManually() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor)
+                    + "Enter host (e.g., localhost or 127.0.0.1): ");
+            String host = scanner.nextLine().toLowerCase();
+
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter start port: ");
+            int startPort = scanner.nextInt();
+
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter end port: ");
+            int endPort = scanner.nextInt();
+
+            if (startPort > endPort || startPort < 1 || endPort > 65535) {
+                message("Invalid port range. Start port must be less than or equal to end port," +
+                                " and ports must be in the range 1-65535.",
+                        sysLayoutColor, 58, 0, out::println);
+                return;
+            }
+
+            modifyMessage('n', 1);
+            message("Scanning ports on " + host + ":", sysLayoutColor, 58, 0, out::print);
+
+            for (int port = startPort; port <= endPort; port++) {
+                try (Socket socket = new Socket(host, port)) {
+                    message("Port " + port + " ["
+                            + getAnsi256Color(sysAcceptanceColor) + "OPEN" + getAnsi256Color(sysLayoutColor)
+                            + "]", sysLayoutColor, 58, 0, out::println);
+                } catch (Exception ignored) {}
+            }
+        } catch (Exception e) {
+            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
     }
 }
+
