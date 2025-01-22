@@ -8,6 +8,7 @@ extensions/notes/NotesConfigs.class
 extensions/internet/SearcherUI.class
 core/configs/TextConfigs.class
 core/commands/PackageUnifier.class
+core/pages/ExitPage.class
 core/configs/AppearanceConfigs.class
 extensions/notes/NotesManager.class
 core/logic/CommandManager.class

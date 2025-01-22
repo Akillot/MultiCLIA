@@ -18,7 +18,6 @@ import static core.pages.StartPage.displayStartPage;
 import static core.ui.DisplayManager.*;
 
 import static core.configs.TextConfigs.*;
-import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class CommandManager {
