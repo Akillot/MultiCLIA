@@ -35,7 +35,7 @@ public  class InfoPage {
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor);
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,58);
 
         choice("Important links", InfoPage::displayImportantLinks,
                 sysMainColor, sysLayoutColor, sysRejectionColor);

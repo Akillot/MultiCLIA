@@ -209,13 +209,4 @@ public class CommandManager {
                 58,0,out::println);
         marginBorder(1,1);
     }
-
-    public static void terminateProgram() {
-        marginBorder(1,2);
-        message("\r    Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
-        message("Program terminated quickly correctly" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
-                56,0,out::print);
-        modifyMessage('n', 2);
-        exit(0);
-    }
 }

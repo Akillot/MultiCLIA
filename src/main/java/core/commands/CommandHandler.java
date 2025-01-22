@@ -64,7 +64,7 @@ public class CommandHandler {
             case 8 -> NetworkPage::displayNetworkPage;
             case 9 -> SecurityPage::displaySecurityPage;
             case 10 -> CryptographyPage::displayEncryptionPage;
-            case 11 -> CommandManager::terminateProgram;
+            case 11 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getAnsi256Color(sysRejectionColor) + "Invalid command index");
         };
