@@ -9,8 +9,7 @@ import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
-import static core.logic.CommandManager.exitPage;
-import static core.pages.StartPage.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
@@ -48,7 +47,7 @@ public class SecurityPage {
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
@@ -64,8 +63,10 @@ public class SecurityPage {
         modifyMessage('n',1);
         message("·  Generate password [" + getAnsi256Color(sysMainColor) + "/gp"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  Exit [" + getAnsi256Color(sysMainColor) + "/e"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
@@ -139,6 +140,7 @@ public class SecurityPage {
         return getAnsi256Color(color) + generatePasswordFromPool(charPool);
     }
 
+    // /gp
     private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();

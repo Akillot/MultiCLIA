@@ -14,6 +14,7 @@ import java.net.*;
 import java.net.URI;
 
 import static core.configs.AppearanceConfigs.*;
+import static core.pages.StartPage.displayStartPage;
 import static core.ui.DisplayManager.*;
 
 import static core.configs.TextConfigs.*;
@@ -188,6 +189,16 @@ public class CommandManager {
         } catch (Exception e) {
             message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
+    }
+
+    public static void mainMenuRerun(){
+        marginBorder(1,10);
+        displayStartPage();
+    }
+
+    public static void mainMenuRerunMargin(){
+        modifyMessage('n',1);
+        mainMenuRerun();
     }
 
     public static void exitPage(){

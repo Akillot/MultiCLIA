@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
-import static core.pages.StartPage.mainMenuRerun;
+import static core.logic.CommandManager.mainMenuRerunMargin;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
@@ -26,7 +26,7 @@ public class CryptographyPage {
             switch (input) {
                 case "make encrypt", "/me" -> encryptionMenu();
                 case "make decrypt", "/md" -> decryptionMenu();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {

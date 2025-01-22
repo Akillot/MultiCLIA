@@ -9,9 +9,7 @@ import static core.configs.AppearanceConfigs.*;
 import static core.configs.AppearanceConfigs.sysLayoutColor;
 import static core.configs.TextConfigs.*;
 import static core.configs.TextConfigs.message;
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.processCommandWithHostInput;
-import static core.pages.StartPage.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
 import static java.lang.System.out;
 
@@ -34,7 +32,7 @@ public class NetworkPage {
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
@@ -113,4 +111,6 @@ public class NetworkPage {
     private static void nsLookUp(){
         processCommandWithHostInput("nslookup");
     }
+
+
 }
