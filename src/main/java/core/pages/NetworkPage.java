@@ -62,25 +62,40 @@ public class NetworkPage {
     private static void pingHost() {
         Scanner scanner = new Scanner(System.in);
         try {
-            modifyMessage('n',1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host: ");
-            String host = scanner.nextLine();
-            modifyMessage('n',1);
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host (e.g., google.com): ");
+            String host = scanner.nextLine().trim();
+            modifyMessage('n', 1);
 
-            if(!host.isEmpty()) {
-                Process process = Runtime.getRuntime().exec("ping -c 4 " + host);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    message(line, sysLayoutColor, 58, 0, out::print);
-                }
-                reader.close();
+            if (host.isEmpty()) {
+                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
+                return;
+            }
+
+            String os = System.getProperty("os.name").toLowerCase();
+            String command = os.contains("win") ? "ping -n 4 " + host : "ping -c 4 " + host;
+
+            Process process = Runtime.getRuntime().exec(command);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                message(line, sysLayoutColor, 58, 0, out::print);
+            }
+
+            reader.close();
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                message("Ping command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
+            } else {
                 modifyMessage('n', 1);
+                message("Ping completed successfully.", sysLayoutColor, 58, 0, out::println);
             }
         } catch (Exception e) {
             message("Ping execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
     }
+
 
     private static void scanPorts() {
         int startPort = 1;
