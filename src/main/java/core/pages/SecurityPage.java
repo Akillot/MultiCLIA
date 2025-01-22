@@ -78,7 +78,7 @@ public class SecurityPage {
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
                 message("Invalid password length. Please enter a number between 1 and 80.",
-                        sysLayoutColor, 58, 0, out::print);
+                        sysLayoutColor, 58, 0, out::println);
                 return;
             }
         } catch (Exception e) {

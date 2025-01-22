@@ -203,10 +203,10 @@ public class CommandManager {
 
     public static void exitPage(){
         marginBorder(2,2);
+        message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
         message("Terminated correctly" + getAnsi256Color(sysLayoutColor) + ". "
                         + getAnsi256Color(sysMainColor) + "You are in main menu" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
-                58,0,out::print);
-        message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::println);
+                58,0,out::println);
         marginBorder(1,1);
     }
 
