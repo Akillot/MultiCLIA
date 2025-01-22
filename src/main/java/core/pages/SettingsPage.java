@@ -20,7 +20,7 @@ public class SettingsPage {
     //The main method of displaying the page
     public static void displaySettingsPage() {
         marginBorder(1,2);
-        message("Settings:", sysLayoutColor, 58, 0, out::println);
+        message("Settings:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -45,6 +45,7 @@ public class SettingsPage {
     }
 
     private static void displayListOfCommands(){
+        modifyMessage('n',1);
         message("·  Memory [" + getAnsi256Color(sysMainColor)
                 + "/m" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 

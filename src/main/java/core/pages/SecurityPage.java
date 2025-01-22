@@ -38,7 +38,7 @@ public class SecurityPage {
 
     public static void displaySecurityPage() {
         marginBorder(1, 2);
-        message("Security:", sysLayoutColor, 58, 0, out::println);
+        message("Security:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -55,12 +55,13 @@ public class SecurityPage {
                     exitPage();
                     return;
                 }
-                default -> modifyMessage('n', 1);
+                default -> out.print("");
             }
         }
     }
 
     private static void displayListOfCommands() {
+        modifyMessage('n',1);
         message("·  Generate password [" + getAnsi256Color(sysMainColor) + "/gp"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"

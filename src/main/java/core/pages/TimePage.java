@@ -22,7 +22,7 @@ public class TimePage {
 
     public static void displayTimePage() {
         marginBorder(1,2);
-        message("Time:", sysLayoutColor, 58, 0, out::println);
+        message("Time:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -48,6 +48,7 @@ public class TimePage {
     }
 
     private static void displayListOfCommands(){
+        modifyMessage('n',1);
         message("·  Current Time [" + getAnsi256Color(sysMainColor)
                 + "/ct" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 

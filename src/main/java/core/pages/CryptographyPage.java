@@ -15,7 +15,7 @@ public class CryptographyPage {
 
     public static void displayEncryptionPage() {
         marginBorder(1, 2);
-        message("Cryptography:", sysLayoutColor, 58, 0, out::println);
+        message("Cryptography:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -39,6 +39,7 @@ public class CryptographyPage {
     }
 
     private static void displayListOfCommands() {
+        modifyMessage('n',1);
         message("·  Make Encryption [" + getAnsi256Color(sysMainColor)
                 + "/me" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
