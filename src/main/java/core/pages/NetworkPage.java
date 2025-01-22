@@ -14,10 +14,11 @@ import static core.configs.TextConfigs.message;
 import static core.logic.CommandManager.exitPage;
 import static core.pages.StartPage.mainMenuRerun;
 import static core.ui.DisplayManager.clearTerminal;
-import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
 
 public class NetworkPage {
+
+    private static Scanner scanner = new Scanner(System.in);
 
     public static void displayNetworkPage() {
         marginBorder(1, 2);
@@ -31,7 +32,8 @@ public class NetworkPage {
 
             switch (input) {
                 case "scan ports", "/sp" -> scanPorts();
-                case "trace rout", "/tr" -> pingHost();
+                case "ping host", "/ph" -> pingHost();
+                case "trace rout", "/tr" -> traceRout();
                 case "rerun", "/rr" -> mainMenuRerun();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
@@ -49,7 +51,10 @@ public class NetworkPage {
         message("·  Scan Ports [" + getAnsi256Color(sysMainColor) + "/sp"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Trace Rout [" + getAnsi256Color(sysMainColor) + "/tr"
+        message("·  Ping Host [" + getAnsi256Color(sysMainColor) + "/ph"
+                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Trace rout [" + getAnsi256Color(sysMainColor) + "/tr"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
@@ -60,40 +65,7 @@ public class NetworkPage {
     }
 
     private static void pingHost() {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host (e.g., google.com): ");
-            String host = scanner.nextLine().trim();
-            modifyMessage('n', 1);
-
-            if (host.isEmpty()) {
-                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
-                return;
-            }
-
-            String os = System.getProperty("os.name").toLowerCase();
-            String command = os.contains("win") ? "ping -n 4 " + host : "ping -c 4 " + host;
-
-            Process process = Runtime.getRuntime().exec(command);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                message(line, sysLayoutColor, 58, 0, out::print);
-            }
-
-            reader.close();
-            int exitCode = process.waitFor();
-            if (exitCode != 0) {
-                message("Ping command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
-            } else {
-                modifyMessage('n', 1);
-                message("Ping completed successfully.", sysLayoutColor, 58, 0, out::println);
-            }
-        } catch (Exception e) {
-            message("Ping execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
-        }
+        workWithHost("ping -c 4 ");
     }
 
 
@@ -127,5 +99,44 @@ public class NetworkPage {
         message("Scanning completed.", sysLayoutColor, 58, 0, out::print);
         marginBorder(2,1);
     }
-}
 
+    private static void traceRout(){
+        workWithHost("traceroute ");
+    }
+
+    private static void workWithHost(String command) {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host (e.g., google.com): ");
+            String host = scanner.nextLine().trim();
+            modifyMessage('n', 1);
+
+            if (host.isEmpty()) {
+                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
+                return;
+            }
+            command += host;
+
+            Process process = Runtime.getRuntime().exec(command);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                message(line, sysLayoutColor, 58, 0, out::print);
+            }
+
+            reader.close();
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                message("Command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
+            } else {
+                modifyMessage('n', 1);
+                message("Process completed "
+                        + getAnsi256Color(sysMainColor) + "successfully" + getAnsi256Color(sysLayoutColor)
+                        + ".", sysLayoutColor, 58, 0, out::println);
+            }
+        } catch (Exception e) {
+            message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+}
