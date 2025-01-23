@@ -32,6 +32,7 @@ public class NetworkPage {
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
+                case "network stats", "/ns" -> netStat();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
@@ -56,6 +57,9 @@ public class NetworkPage {
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  look up DNS records [" + getAnsi256Color(sysMainColor) + "/lr"
+                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Network Stats [" + getAnsi256Color(sysMainColor) + "/ns"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
@@ -112,5 +116,11 @@ public class NetworkPage {
         processCommandWithHostInput("nslookup");
     }
 
-
+    // /ns
+    private static void netStat() {
+        modifyMessage('n', 1);
+        message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::print);
+        modifyMessage('n',1);
+        executeTerminalCommand("netstat -an");
+    }
 }

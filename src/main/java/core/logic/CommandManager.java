@@ -152,21 +152,8 @@ public class CommandManager {
         };
     }
 
-    public static void processCommandWithHostInput(String command) {
+    public static void executeTerminalCommand(String command) {
         try {
-            modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
-            String host = scanner.nextLine().trim();
-            modifyMessage('n', 1);
-
-            if (host.isEmpty()) {
-                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
-                return;
-            }
-
-            command = command + " ";
-            command += host;
-
             Process process = Runtime.getRuntime().exec(command);
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
@@ -185,6 +172,30 @@ public class CommandManager {
                         + getAnsi256Color(sysMainColor) + "successfully" + getAnsi256Color(sysLayoutColor)
                         + ".", sysLayoutColor, 58, 0, out::println);
             }
+        } catch (IOException e) {
+            message("I/O Error while executing command: " + e.getMessage(), sysRejectionColor, 58, 0, out::println);
+        } catch (InterruptedException e) {
+            message("Process was interrupted: " + e.getMessage(), sysRejectionColor, 58, 0, out::println);
+            Thread.currentThread().interrupt(); // Сохранение флага прерывания
+        }
+    }
+
+    public static void processCommandWithHostInput(String command) {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
+            String host = scanner.nextLine().trim();
+            modifyMessage('n', 1);
+
+            if (host.isEmpty()) {
+                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
+                return;
+            }
+
+            command = command + " ";
+            command += host;
+
+            executeTerminalCommand(command);
         } catch (Exception e) {
             message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
