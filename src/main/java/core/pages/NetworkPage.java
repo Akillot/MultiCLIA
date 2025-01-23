@@ -56,7 +56,7 @@ public class NetworkPage {
         message("·  Trace rout [" + getAnsi256Color(sysMainColor) + "/tr"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  look up DNS records [" + getAnsi256Color(sysMainColor) + "/lr"
+        message("·  Look up DNS records [" + getAnsi256Color(sysMainColor) + "/lr"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Network Stats [" + getAnsi256Color(sysMainColor) + "/ns"

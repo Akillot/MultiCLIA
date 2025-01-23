@@ -21,7 +21,7 @@ public class DisplayManager {
             formatCommandWithDescription("cmds", "/c", "Shows list of all commands"),
             formatCommandWithDescription("settings", "/s", "Shows settings of the application"),
             formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
-            formatCommandWithDescription("ip-address", "/ip", "Shows local and external IP addresses"),
+            formatCommandWithDescription("ip address", "/ip", "Shows local and external IP addresses"),
             formatCommandWithDescription("info", "/i", "Shows app information"),
             formatCommandWithDescription("help", "/h", "Shows description of all commands"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
