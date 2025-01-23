@@ -1,7 +1,6 @@
 package core.pages;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,8 +9,7 @@ import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
-import static core.logic.CommandManager.exitPage;
-import static core.pages.StartPage.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
@@ -35,12 +33,11 @@ public class SecurityPage {
     private static final String CHAR_POOL_STRONG = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
     private static final String CHAR_POOL_EXTRA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'}{)(";
 
-    @Setter @Getter
     private static int passwordLength;
 
     public static void displaySecurityPage() {
         marginBorder(1, 2);
-        message("Security: ", sysLayoutColor, 58, 0, out::println);
+        message("Security:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -50,30 +47,33 @@ public class SecurityPage {
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
                     return;
                 }
-                default -> modifyMessage('n', 1);
+                default -> out.print("");
             }
         }
     }
 
     private static void displayListOfCommands() {
+        modifyMessage('n',1);
         message("·  Generate password [" + getAnsi256Color(sysMainColor) + "/gp"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  Exit [" + getAnsi256Color(sysMainColor) + "/e"
                 + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     private static void passwordCreatorMenu() {
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter length of password (1-80): ");
+        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter length of password [1-80]: ");
         try {
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
@@ -91,7 +91,7 @@ public class SecurityPage {
 
         modifyMessage('n', 1);
         out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Password complexity ["
-                + getAnsi256Color(easyComplexityColor) + "easy" + getAnsi256Color(sysLayoutColor) + "|"
+                + getAnsi256Color(easyComplexityColor) + "light" + getAnsi256Color(sysLayoutColor) + "|"
                 + getAnsi256Color(easyComplexityColor) + "1" + getAnsi256Color(sysLayoutColor) + ", "
                 + getAnsi256Color(mediumComplexityColor) + "medium" + getAnsi256Color(sysLayoutColor) + "|"
                 + getAnsi256Color(mediumComplexityColor) + "2" + getAnsi256Color(sysLayoutColor) + ", "
@@ -116,7 +116,7 @@ public class SecurityPage {
         int color;
 
         switch (passwordComplexity) {
-            case "easy", "1" -> {
+            case "light", "1" -> {
                 charPool = CHAR_POOL_EASY;
                 color = easyComplexityColor;
             }
@@ -140,6 +140,7 @@ public class SecurityPage {
         return getAnsi256Color(color) + generatePasswordFromPool(charPool);
     }
 
+    // /gp
     private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();

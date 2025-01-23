@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
 import static core.configs.TextConfigs.*;
-import static core.pages.StartPage.mainMenuRerun;
+import static core.logic.CommandManager.mainMenuRerunMargin;
 import static core.ui.DisplayManager.clearTerminal;
 import static java.lang.System.out;
 
@@ -22,7 +22,7 @@ public class TimePage {
 
     public static void displayTimePage() {
         marginBorder(1,2);
-        message("Time Page Menu:", sysLayoutColor, 58, 0, out::println);
+        message("Time:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -35,7 +35,7 @@ public class TimePage {
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
@@ -48,6 +48,7 @@ public class TimePage {
     }
 
     private static void displayListOfCommands(){
+        modifyMessage('n',1);
         message("·  Current Time [" + getAnsi256Color(sysMainColor)
                 + "/ct" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 

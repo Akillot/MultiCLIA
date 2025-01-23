@@ -14,10 +14,10 @@ import java.net.*;
 import java.net.URI;
 
 import static core.configs.AppearanceConfigs.*;
+import static core.pages.StartPage.displayStartPage;
 import static core.ui.DisplayManager.*;
 
 import static core.configs.TextConfigs.*;
-import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class CommandManager {
@@ -152,21 +152,71 @@ public class CommandManager {
         };
     }
 
-    public static void exitPage(){
-        marginBorder(2,2);
-        message("Terminated correctly" + getAnsi256Color(sysLayoutColor) + ". "
-                        + getAnsi256Color(sysMainColor) + "You are in main menu" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
-                58,0,out::print);
-        message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::println);
-        marginBorder(1,1);
+    public static void executeTerminalCommand(String command) {
+        try {
+            Process process = Runtime.getRuntime().exec(command);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                message(line, sysLayoutColor, 58, 0, out::print);
+            }
+
+            reader.close();
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                message("Command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
+            } else {
+                modifyMessage('n', 1);
+                message("Process completed "
+                        + getAnsi256Color(sysMainColor) + "successfully" + getAnsi256Color(sysLayoutColor)
+                        + ".", sysLayoutColor, 58, 0, out::println);
+            }
+        } catch (IOException e) {
+            message("I/O Error while executing command: " + e.getMessage(), sysRejectionColor, 58, 0, out::println);
+        } catch (InterruptedException e) {
+            message("Process was interrupted: " + e.getMessage(), sysRejectionColor, 58, 0, out::println);
+            Thread.currentThread().interrupt(); // Сохранение флага прерывания
+        }
     }
 
-    public static void terminateProgram() {
-        marginBorder(1,2);
-        message("\r    Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
-        message("Program terminated quickly correctly" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
-                56,0,out::print);
-        modifyMessage('n', 2);
-        exit(0);
+    public static void processCommandWithHostInput(String command) {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
+            String host = scanner.nextLine().trim();
+            modifyMessage('n', 1);
+
+            if (host.isEmpty()) {
+                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
+                return;
+            }
+
+            command = command + " ";
+            command += host;
+
+            executeTerminalCommand(command);
+        } catch (Exception e) {
+            message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    public static void mainMenuRerun(){
+        marginBorder(1,10);
+        displayStartPage();
+    }
+
+    public static void mainMenuRerunMargin(){
+        modifyMessage('n',1);
+        mainMenuRerun();
+    }
+
+    public static void exitPage(){
+        marginBorder(2,2);
+        message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+        message("Terminated correctly" + getAnsi256Color(sysLayoutColor) + ". "
+                        + getAnsi256Color(sysMainColor) + "You are in main menu" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
+                58,0,out::println);
+        marginBorder(1,1);
     }
 }

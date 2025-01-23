@@ -14,7 +14,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.4.2";
+        String appVersion = "A-0.8.5";
         return getAnsi256Color(sysMainColor) + appVersion;
     }
 
@@ -35,7 +35,7 @@ public  class InfoPage {
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor);
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,58);
 
         choice("Important links", InfoPage::displayImportantLinks,
                 sysMainColor, sysLayoutColor, sysRejectionColor);

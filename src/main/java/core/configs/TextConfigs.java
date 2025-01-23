@@ -66,13 +66,13 @@ public class TextConfigs {
 
     public static void displayConfirmation(String preText, String confirmation_1, String confirmation_2,
                                            String midText, String rejection_1, String rejection_2, String postText,
-                                           int acceptanceColor, int rejectionColor, int layoutColor) {
+                                           int acceptanceColor, int rejectionColor, int layoutColor, int alignment) {
         message(preText
                 + " '" + getAnsi256Color(acceptanceColor) + confirmation_1 + getAnsi256Color(layoutColor)
                 + "/" + getAnsi256Color(acceptanceColor) + confirmation_2 + getAnsi256Color(layoutColor)
                 + "' " + midText +" '" + getAnsi256Color(rejectionColor) + rejection_1 + getAnsi256Color(layoutColor)
                 + "/" + getAnsi256Color(rejectionColor) + rejection_2 + getAnsi256Color(layoutColor)
-                + "' " + postText, sysLayoutColor,58,0,out::print);
+                + "' " + postText, sysLayoutColor,alignment,0,out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)

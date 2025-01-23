@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.pages.StartPage.mainMenuRerun;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
@@ -20,7 +19,7 @@ public class SettingsPage {
     //The main method of displaying the page
     public static void displaySettingsPage() {
         marginBorder(1,2);
-        message("Settings:", sysLayoutColor, 58, 0, out::println);
+        message("Settings:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -32,7 +31,7 @@ public class SettingsPage {
                 case "memory", "/m" -> displayUsingMemory();
                 case "cpu", "/c" -> displayCpuLoad();
                 case "colors", "/col" -> displayColorTable();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
@@ -45,6 +44,7 @@ public class SettingsPage {
     }
 
     private static void displayListOfCommands(){
+        modifyMessage('n',1);
         message("·  Memory [" + getAnsi256Color(sysMainColor)
                 + "/m" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 

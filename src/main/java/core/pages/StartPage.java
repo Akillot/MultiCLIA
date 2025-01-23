@@ -99,13 +99,4 @@ public class StartPage {
                 break;
         }
     }
-
-
-
-    public static void mainMenuRerun(){
-        modifyMessage('n',1);
-        border();
-        modifyMessage('n',10);
-        displayStartPage();
-    }
 }

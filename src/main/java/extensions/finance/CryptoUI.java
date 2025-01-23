@@ -21,7 +21,7 @@ public class CryptoUI {
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor);
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,58);
 
         choice("List of cryptocurrencies", CryptoUI::displayListOfCryptocurrencies,
                 themeColor_1, layoutColor, rejectionColor);
