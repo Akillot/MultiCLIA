@@ -77,7 +77,7 @@ public class NetworkPage {
 
         ExecutorService executor = Executors.newFixedThreadPool(threads);
 
-        marginBorder(1,2);
+        modifyMessage('n',1);
         slowMotionText(0,58,false,
                 getAnsi256Color(sysLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
@@ -97,8 +97,7 @@ public class NetworkPage {
         executor.shutdown();
         while (!executor.isTerminated()) {}
         modifyMessage('n',1);
-        message("Scanning completed.", sysLayoutColor, 58, 0, out::print);
-        marginBorder(2,1);
+        message("Scanning completed.", sysLayoutColor, 58, 0, out::println);
     }
 
     // /ph
