@@ -66,7 +66,7 @@ public class DisplayManager {
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
         out.println(alignment(38) + getAnsi256Color(sysMainColor) + "System Commands"
-                + alignment(-68) + getAnsi256Color(sysMainColor) + "Extensions");
+                + alignment(-68) + getAnsi256Color(sysMainColor));
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 

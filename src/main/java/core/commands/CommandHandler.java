@@ -1,10 +1,8 @@
 package core.commands;
 
 import core.pages.*;
-import extensions.finance.CryptoUI;
 import core.logic.CommandManager;
 import core.ui.DisplayManager;
-import extensions.internet.SearcherUI;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,8 +27,7 @@ public class CommandHandler {
             "/i", "/h", "/cl", "/t",
             "/n", "/sc", "/cr", "/e"};
 
-    public static String[] extensionCmds = {
-            "searcher", "crypto"};//Add notes in first place
+    public static String[] extensionCmds = {};//Add notes in first place
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
@@ -39,8 +36,8 @@ public class CommandHandler {
         }
 
         //commandMap.put("notes", NotesUI::displayNotesMenu);
-        commandMap.put("searcher", SearcherUI::displaySearcherMenu);
-        commandMap.put("crypto", CryptoUI::displayCryptoMenu);
+        //commandMap.put("searcher", SearcherUI::displaySearcherMenu);
+        //commandMap.put("crypto", CryptoUI::displayCryptoMenu);
     }
 
     @Contract(pure = true)
