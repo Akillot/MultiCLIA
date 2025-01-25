@@ -34,10 +34,6 @@ public class CommandHandler {
             commandMap.put(fullSystemCmds[i], getCommandAction(i));
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
-
-        //commandMap.put("notes", NotesUI::displayNotesMenu);
-        //commandMap.put("searcher", SearcherUI::displaySearcherMenu);
-        //commandMap.put("crypto", CryptoUI::displayCryptoMenu);
     }
 
     @Contract(pure = true)
