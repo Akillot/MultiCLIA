@@ -22,43 +22,44 @@ public class AppearanceConfigs {
     public static int sysAcceptanceColor = 46;
     public static int sysRejectionColor = 160;
 
-    public static final String RESET = "\033[0m";
-    public static final String UNDERLINE = "\033[4m";
-
-    @Contract(pure = true)
-    static @NotNull String getColoredText(String text, int color) {
-        if (color < 0 || color > 255) {
-            throw new IllegalArgumentException("Color code must be between 0 and 255");
-        }
-        return getAnsi256Color(color) + text + RESET;
-    }
-
-    @Contract(pure = true)
-    public static @NotNull String getAnsi256Color(int colorCode) {
-        return "\033[38;5;" + colorCode + "m";
-    }
-
-    @Contract(pure = true)
-    public static @NotNull String getAnsi256BackgroundColor(int colorCode) {
-        return "\033[48;5;" + colorCode + "m";
-    }
-
-    public static @NotNull String getRandom256Color() {
-        Random rand = new Random();
-        int colorCode = rand.nextInt(256);
-        return getAnsi256Color(colorCode);
-    }
-
-    public static @NotNull String getRandom256BackgroundColor() {
-        Random rand = new Random();
-        int colorCode = rand.nextInt(256);
-        return getAnsi256BackgroundColor(colorCode);
-    }
-
     //Borders
     public static final int DEFAULT_BORDER_WIDTH = 62;
     private static int borderCharIndex = 0;
 
+    public static final String RESET = "\033[0m";
+    public static final String UNDERLINE = "\033[4m";
+
+    @Contract(pure = true)
+    public static @NotNull String getColorText(String text, int color) {
+        if (color < 0 || color > 255) {
+            throw new IllegalArgumentException("Color code must be between 0 and 255");
+        }
+        return getColor(color) + text + RESET;
+    }
+
+    @Contract(pure = true)
+    public static @NotNull String getColor(int colorCode) {
+        return "\033[38;5;" + colorCode + "m";
+    }
+
+    @Contract(pure = true)
+    public static @NotNull String getBackColor(int colorCode) {
+        return "\033[48;5;" + colorCode + "m";
+    }
+
+    public static @NotNull String getRandomColor() {
+        Random rand = new Random();
+        int colorCode = rand.nextInt(256);
+        return getColor(colorCode);
+    }
+
+    public static @NotNull String getRandomBackColor() {
+        Random rand = new Random();
+        int colorCode = rand.nextInt(256);
+        return getBackColor(colorCode);
+    }
+
+    //Border
     private static final ArrayList<String> borderChars = new ArrayList<>();
     @Getter
     private static int borderWidth = DEFAULT_BORDER_WIDTH;
@@ -92,11 +93,11 @@ public class AppearanceConfigs {
 
     public static void border() {
         String borderChar = borderChars.get(borderCharIndex);
-        out.print(getAnsi256Color(sysLayoutColor) + borderChar);
+        out.print(getColor(sysLayoutColor) + borderChar);
         for (int i = 0; i < 115; i++) {
-            out.print(getAnsi256Color(sysLayoutColor) + borderChar);
+            out.print(getColor(sysLayoutColor) + borderChar);
         }
-        out.println(getAnsi256Color(sysLayoutColor) + borderChar);
+        out.println(getColor(sysLayoutColor) + borderChar);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
@@ -109,14 +110,14 @@ public class AppearanceConfigs {
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
-            out.print(getRandom256Color() + "\r" + spinner[i % spinner.length] + RESET);
+            out.print(getRandomColor() + "\r" + spinner[i % spinner.length] + RESET);
             try {
                 Thread.sleep(frames);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getAnsi256Color(sysAcceptanceColor) + "\r    ✓" + RESET);
+        out.print(getColor(sysAcceptanceColor) + "\r    ✓" + RESET);
     }
 
     public static void progressbarAnimation(String title) {
@@ -129,10 +130,10 @@ public class AppearanceConfigs {
             double progress = step / (double) steps;
             int completed = (int) (progress * barLength);
             StringBuilder bar = new StringBuilder("\r" + alignment(64)
-                    + getAnsi256Color(sysLayoutColor) + title + "[");
+                    + getColor(sysLayoutColor) + title + "[");
 
             for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? getRandom256Color() + borderChars.get(0) + getAnsi256Color(sysLayoutColor) : " ");
+                bar.append(i < completed ? getRandomColor() + borderChars.get(0) + getColor(sysLayoutColor) : " ");
             }
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));

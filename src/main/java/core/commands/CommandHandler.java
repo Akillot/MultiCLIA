@@ -1,16 +1,14 @@
 package core.commands;
 
 import core.pages.*;
-import extensions.finance.CryptoUI;
 import core.logic.CommandManager;
 import core.ui.DisplayManager;
-import extensions.internet.SearcherUI;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.getAnsi256Color;
+import static core.configs.AppearanceConfigs.getColor;
 import static core.configs.AppearanceConfigs.sysRejectionColor;
 import static core.configs.TextConfigs.alignment;
 import static core.configs.TextConfigs.message;
@@ -22,25 +20,20 @@ public class CommandHandler {
             "cmds" ,"settings", "rerun", "ip address",
             "info", "help", "clear", "time",
             "network", "security",
-            "cryptography", "exit"};
+            "cryptography", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
             "/i", "/h", "/cl", "/t",
-            "/n", "/sc", "/cr", "/e"};
+            "/n", "/sc", "/cr", "/su", "/e"};
 
-    public static String[] extensionCmds = {
-            "searcher", "crypto"};//Add notes in first place
+    public static String[] extensionCmds = {};//Add notes in first place
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullSystemCmds.length; i++) {
             commandMap.put(fullSystemCmds[i], getCommandAction(i));
             commandMap.put(shortSystemCmds[i], getCommandAction(i));
         }
-
-        //commandMap.put("notes", NotesUI::displayNotesMenu);
-        commandMap.put("searcher", SearcherUI::displaySearcherMenu);
-        commandMap.put("crypto", CryptoUI::displayCryptoMenu);
     }
 
     @Contract(pure = true)
@@ -52,7 +45,7 @@ public class CommandHandler {
             case 3 -> DisplayManager::displayUserIp;
             case 4 -> () -> {
                 try {
-                    InfoPage.displayInfo();
+                    InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
                             sysRejectionColor, 58, 0, out::println);
@@ -64,9 +57,10 @@ public class CommandHandler {
             case 8 -> NetworkPage::displayNetworkPage;
             case 9 -> SecurityPage::displaySecurityPage;
             case 10 -> CryptographyPage::displayEncryptionPage;
-            case 11 -> ExitPage::displayExitPage;
+            case 11 -> SupportPage::displaySupportPage;
+            case 12 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(58)
-                    + getAnsi256Color(sysRejectionColor) + "Invalid command index");
+                    + getColor(sysRejectionColor) + "Invalid command index");
         };
     }
 }

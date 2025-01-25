@@ -41,7 +41,7 @@ public class SecurityPage {
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, searchingLineAlignment, false, getAnsi256Color(sysLayoutColor) + "> ",
+            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ",
                     "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -61,19 +61,19 @@ public class SecurityPage {
 
     private static void displayListOfCommands() {
         modifyMessage('n',1);
-        message("·  Generate password [" + getAnsi256Color(sysMainColor) + "/gp"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Generate password [" + getColor(sysMainColor) + "/gp"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(sysMainColor) + "/e"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+        message("·  Exit [" + getColor(sysMainColor) + "/e"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     private static void passwordCreatorMenu() {
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter length of password [1-80]: ");
+        out.print(alignment(58) + getColor(sysLayoutColor) + "Enter length of password [1-80]: ");
         try {
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
@@ -90,15 +90,15 @@ public class SecurityPage {
         scanner.nextLine();
 
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Password complexity ["
-                + getAnsi256Color(easyComplexityColor) + "light" + getAnsi256Color(sysLayoutColor) + "|"
-                + getAnsi256Color(easyComplexityColor) + "1" + getAnsi256Color(sysLayoutColor) + ", "
-                + getAnsi256Color(mediumComplexityColor) + "medium" + getAnsi256Color(sysLayoutColor) + "|"
-                + getAnsi256Color(mediumComplexityColor) + "2" + getAnsi256Color(sysLayoutColor) + ", "
-                + getAnsi256Color(strongComplexityColor) + "strong" + getAnsi256Color(sysLayoutColor) + "|"
-                + getAnsi256Color(strongComplexityColor) + "3" + getAnsi256Color(sysLayoutColor) + ", "
-                + getAnsi256Color(extraComplexityColor) + "extra" + getAnsi256Color(sysLayoutColor) + "|"
-                + getAnsi256Color(extraComplexityColor) + "4" + getAnsi256Color(sysLayoutColor) + "]: ");
+        out.print(alignment(58) + getColor(sysLayoutColor) + "Password complexity ["
+                + getColor(easyComplexityColor) + "light" + getColor(sysLayoutColor) + "|"
+                + getColor(easyComplexityColor) + "1" + getColor(sysLayoutColor) + ", "
+                + getColor(mediumComplexityColor) + "medium" + getColor(sysLayoutColor) + "|"
+                + getColor(mediumComplexityColor) + "2" + getColor(sysLayoutColor) + ", "
+                + getColor(strongComplexityColor) + "strong" + getColor(sysLayoutColor) + "|"
+                + getColor(strongComplexityColor) + "3" + getColor(sysLayoutColor) + ", "
+                + getColor(extraComplexityColor) + "extra" + getColor(sysLayoutColor) + "|"
+                + getColor(extraComplexityColor) + "4" + getColor(sysLayoutColor) + "]: ");
 
         String passwordComplexity = scanner.nextLine().toLowerCase();
         String generatedPassword = createPassword(passwordComplexity);
@@ -137,7 +137,7 @@ public class SecurityPage {
             }
         }
 
-        return getAnsi256Color(color) + generatePasswordFromPool(charPool);
+        return getColor(color) + generatePasswordFromPool(charPool);
     }
 
     // /gp

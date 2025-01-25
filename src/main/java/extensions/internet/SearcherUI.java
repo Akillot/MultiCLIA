@@ -47,25 +47,25 @@ public class SearcherUI {
 
     private static void displayInfo(){
         modifyMessage('n', 1);
-        message("Name: " + getAnsi256Color(themeColor_2) + "Searcher", layoutColor, 58, 0, out::print);
-        message("Type: " + getAnsi256Color(themeColor_2) + "Default extension", layoutColor, 58, 0, out::print);
-        message("Version: " +  getAnsi256Color(themeColor_2) + getVersion(), layoutColor, 58, 0, out::print);
-        message("Author: " + getAnsi256Color(themeColor_2) + "Nick Zozulia", layoutColor, 58, 0, out::print);
+        message("Name: " + getColor(themeColor_2) + "Searcher", layoutColor, 58, 0, out::print);
+        message("Type: " + getColor(themeColor_2) + "Default extension", layoutColor, 58, 0, out::print);
+        message("Version: " +  getColor(themeColor_2) + getVersion(), layoutColor, 58, 0, out::print);
+        message("Author: " + getColor(themeColor_2) + "Nick Zozulia", layoutColor, 58, 0, out::print);
     }
 
     private static void displayExample() {
         alert("Example", String.format("%s: '%sgithub.com%s'",
-                        getAnsi256Color(layoutColor),
-                        getAnsi256Color(themeColor_1),
-                        getAnsi256Color(layoutColor)),
+                        getColor(layoutColor),
+                        getColor(themeColor_1),
+                        getColor(layoutColor)),
                 58, themeColor_1, layoutColor);
     }
 
     private static @NotNull String promptUserForDomain() {
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(themeColor_1) + "Enter domain"
-                + getAnsi256Color(layoutColor) + " (Type '" + getAnsi256Color(rejectionColor) + "exit"
-                + getAnsi256Color(layoutColor) + "' to quit): ");
+        out.print(alignment(58) + getColor(themeColor_1) + "Enter domain"
+                + getColor(layoutColor) + " (Type '" + getColor(rejectionColor) + "exit"
+                + getColor(layoutColor) + "' to quit): ");
         return scanner.nextLine().toLowerCase();
     }
 
@@ -79,7 +79,7 @@ public class SearcherUI {
     }
 
     public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
-        message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+        message("\r   Status: " + getColor(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Terminated correctly", themeColor_1,
                 58,0,out::print);
         modifyMessage('n',2);

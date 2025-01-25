@@ -25,7 +25,7 @@ public class ExitPage {
         );
 
         message("Are you sure?", sysLayoutColor, 56, 0, out::println);
-        out.print(alignment(48) + getAnsi256Color(sysLayoutColor) + "> ");
+        out.print(alignment(48) + getColor(sysLayoutColor) + "> ");
         String answer = scanner.nextLine().trim().toLowerCase();
 
         processUserResponse(answer);
@@ -46,10 +46,10 @@ public class ExitPage {
 
     private static void terminateProgram() {
         marginBorder(2, 2);
-        message("Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,
+        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
                 56, 0, out::print);
         message(
-                "Program terminated successfully" + getAnsi256Color(sysLayoutColor) + ".",
+                "Program terminated successfully" + getColor(sysLayoutColor) + ".",
                 sysMainColor, 56, 0, out::println);
         modifyMessage('n', 1);
         exit(0);
@@ -57,12 +57,12 @@ public class ExitPage {
 
     private static void stayInProgram() {
         marginBorder(2, 2);
-        message("Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,
+        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
                 56, 0, out::print);
 
-        message("Program is still running" + getAnsi256Color(sysLayoutColor) + ". "
-                        + getAnsi256Color(sysMainColor) + "Returning to the main menu"
-                        + getAnsi256Color(sysLayoutColor) + ".",
+        message("Program is still running" + getColor(sysLayoutColor) + ". "
+                        + getColor(sysMainColor) + "Returning to the main menu"
+                        + getColor(sysLayoutColor) + ".",
                 sysMainColor, 56, 0, out::print);
 
         marginBorder(2, 1);

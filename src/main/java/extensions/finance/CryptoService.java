@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static core.configs.AppearanceConfigs.border;
-import static core.configs.AppearanceConfigs.getAnsi256Color;
+import static core.configs.AppearanceConfigs.getColor;
 import static core.logic.CommandManager.httpRequest;
 import static core.configs.TextConfigs.*;
 import static core.configs.TextConfigs.modifyMessage;
@@ -31,10 +31,10 @@ public class CryptoService {
                 JSONObject jsonResponse = new JSONObject(response);
                 if (jsonResponse.has(cryptocurrencyCode)) {
                     double price = jsonResponse.getJSONObject(cryptocurrencyCode).getDouble(fiatCurrencyCode);
-                    out.println(alignment(58) + getAnsi256Color(themeColor_1)
-                            + capitalizeMessage(cryptocurrencyCode) + getAnsi256Color(layoutColor) + " costs in "
+                    out.println(alignment(58) + getColor(themeColor_1)
+                            + capitalizeMessage(cryptocurrencyCode) + getColor(layoutColor) + " costs in "
                             + fiatCurrencyCode.toUpperCase() + ": "
-                            + getAnsi256Color(themeColor_1) + price + getAnsi256Color(layoutColor)
+                            + getColor(themeColor_1) + price + getColor(layoutColor)
                             + " [" + formattedTime + "]");
                 } else {
                     errorFormatting("Invalid response from API.");
@@ -48,7 +48,7 @@ public class CryptoService {
     }
 
     public static void terminateExtension(int themeColor_1, int acceptanceColor, int layoutColor) {
-        message("\r   Status: " + getAnsi256Color(acceptanceColor) + "✓", layoutColor,58,0,out::print);
+        message("\r   Status: " + getColor(acceptanceColor) + "✓", layoutColor,58,0,out::print);
         message("Terminated correctly", themeColor_1,
                 58,0,out::print);
         modifyMessage('n',2);

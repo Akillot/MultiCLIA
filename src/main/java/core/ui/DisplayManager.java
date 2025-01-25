@@ -29,17 +29,18 @@ public class DisplayManager {
             formatCommandWithDescription("network", "/n", "Shows network page"),
             formatCommandWithDescription("security", "/sc", "Shows security page"),
             formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),
+            formatCommandWithDescription("support", "/su", "Shows support page"),
             formatCommandWithDescription("exit", "/e", "Terminates the application")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
-        return formatCommand(commandName + getAnsi256Color(sysLayoutColor)
+        return formatCommand(commandName + getColor(sysLayoutColor)
                 + ": ", "", "") + description + " "
                 + formatCommand(shortCommand, "[", "]");
     }
 
     private static @NotNull String formatCommand(String command, String bracketStart, String bracketEnd) {
-        return bracketStart + getAnsi256Color(sysMainColor) + command + getAnsi256Color(sysLayoutColor) + bracketEnd;
+        return bracketStart + getColor(sysMainColor) + command + getColor(sysLayoutColor) + bracketEnd;
     }
 
     public static void displayCommandsDescription() {
@@ -65,18 +66,18 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        out.println(alignment(38) + getAnsi256Color(sysMainColor) + "System Commands"
-                + alignment(-68) + getAnsi256Color(sysMainColor) + "Extensions");
+        out.println(alignment(38) + getColor(sysMainColor) + "System Commands"
+                + alignment(-68) + getColor(sysMainColor));
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
         for (int i = 0; i < maxRows; i++) {
             String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " ["
-                    + getAnsi256Color(sysMainColor) + shortSystemCmds[i] + getAnsi256Color(sysLayoutColor) + "]" : "";
+                    + getColor(sysMainColor) + shortSystemCmds[i] + getColor(sysLayoutColor) + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
 
-            out.printf(alignment(38) + getAnsi256Color(sysLayoutColor) + "%-40s"
-                    + alignment(-18) + getAnsi256Color(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
+            out.printf(alignment(38) + getColor(sysLayoutColor) + "%-40s"
+                    + alignment(-18) + getColor(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
     }
@@ -86,13 +87,13 @@ public class DisplayManager {
         marginBorder(1,2);
         try {
             InetAddress localHost = InetAddress.getLocalHost();
-            message("Your local IP: " + getAnsi256Color(sysMainColor)
+            message("Your local IP: " + getColor(sysMainColor)
                     + localHost, sysLayoutColor, 58, 0, out::print);
             httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
-                    + getAnsi256Color(sysMainColor), "ip");
+                    + getColor(sysMainColor), "ip");
         } catch (UnknownHostException e) {
             message("IP is undefined", sysRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(sysRejectionColor)
+            message("Status: " + getColor(sysRejectionColor)
                     + "x", sysLayoutColor, 58, 0, out::print);
         }
         marginBorder(2,1);
@@ -110,7 +111,7 @@ public class DisplayManager {
             }
         } catch (Exception e) {
             message("Error executing action", sysRejectionColor, 58, 0, out::print);
-            message("Status: " + getAnsi256Color(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
+            message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
         }
     }
 }
