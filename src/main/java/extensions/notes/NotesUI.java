@@ -2,7 +2,7 @@ package extensions.notes;
 
 import java.util.Scanner;
 
-import static core.configs.AppearanceConfigs.getAnsi256Color;
+import static core.configs.AppearanceConfigs.getColor;
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -20,11 +20,11 @@ public class NotesUI {
             message("3. Delete Note",15,58,0,out::print);
             message("4. Sort Notes by Title",15,58,0,out::print);
             message("5. Sort Notes by Content",15,58,0,out::print);
-            message("6. " + getAnsi256Color(196) + "Exit",15,58,0,out::print);
+            message("6. " + getColor(196) + "Exit",15,58,0,out::print);
 
             modifyMessage('n',1);
 
-            out.print(alignment(58) + getAnsi256Color(15) + "> ");
+            out.print(alignment(58) + getColor(15) + "> ");
             String choice = scanner.nextLine().toLowerCase();
 
             switch (choice) {
@@ -55,9 +55,9 @@ public class NotesUI {
     }
 
     private static void createNote() {
-        out.print(alignment(58) + getAnsi256Color(15) + "Enter title: ");
+        out.print(alignment(58) + getColor(15) + "Enter title: ");
         String title = scanner.nextLine();
-        out.print(alignment(58) + getAnsi256Color(15) + "Enter content: ");
+        out.print(alignment(58) + getColor(15) + "Enter content: ");
         String content = scanner.nextLine();
 
         NotesConfigs note = new NotesConfigs(title, content);

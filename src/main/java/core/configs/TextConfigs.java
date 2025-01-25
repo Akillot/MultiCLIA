@@ -46,7 +46,7 @@ public class TextConfigs {
     alignment, delay and opportunity to move to the next line*/
     public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
 
-        String coloredText = getColoredText(text, color);
+        String coloredText = getColorText(text, color);
         String alignedText = alignment(alignment) + coloredText;
 
         StringBuilder output = new StringBuilder();
@@ -68,10 +68,10 @@ public class TextConfigs {
                                            String midText, String rejection_1, String rejection_2, String postText,
                                            int acceptanceColor, int rejectionColor, int layoutColor, int alignment) {
         message(preText
-                + " '" + getAnsi256Color(acceptanceColor) + confirmation_1 + getAnsi256Color(layoutColor)
-                + "/" + getAnsi256Color(acceptanceColor) + confirmation_2 + getAnsi256Color(layoutColor)
-                + "' " + midText +" '" + getAnsi256Color(rejectionColor) + rejection_1 + getAnsi256Color(layoutColor)
-                + "/" + getAnsi256Color(rejectionColor) + rejection_2 + getAnsi256Color(layoutColor)
+                + " '" + getColor(acceptanceColor) + confirmation_1 + getColor(layoutColor)
+                + "/" + getColor(acceptanceColor) + confirmation_2 + getColor(layoutColor)
+                + "' " + midText +" '" + getColor(rejectionColor) + rejection_1 + getColor(layoutColor)
+                + "/" + getColor(rejectionColor) + rejection_2 + getColor(layoutColor)
                 + "' " + postText, sysLayoutColor,alignment,0,out::print);
     }
 
@@ -101,8 +101,8 @@ public class TextConfigs {
     /*Show a message with [x], where x is a special character.
     Can be used as tip([i]) or a clarification([?]) or another alert message*/
     public static void alert(String modification ,String text, int alignment, int themeColor_1 ,int layoutColor) {
-        out.println(alignment(alignment) + getAnsi256Color(layoutColor) + "["
-                + getAnsi256Color(themeColor_1) + modification + getAnsi256Color(layoutColor) + "] "
-                + getAnsi256Color(layoutColor) + text + RESET);
+        out.println(alignment(alignment) + getColor(layoutColor) + "["
+                + getColor(themeColor_1) + modification + getColor(layoutColor) + "] "
+                + getColor(layoutColor) + text + RESET);
     }
 }

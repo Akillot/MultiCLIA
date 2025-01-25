@@ -23,7 +23,7 @@ public class NetworkPage {
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, searchingLineAlignment, false, getAnsi256Color(sysLayoutColor) + "> ",
+            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ",
                     "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -47,26 +47,26 @@ public class NetworkPage {
 
     private static void displayListOfCommands() {
         modifyMessage('n',1);
-        message("·  Scan Ports [" + getAnsi256Color(sysMainColor) + "/sp"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Scan Ports [" + getColor(sysMainColor) + "/sp"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Ping Host [" + getAnsi256Color(sysMainColor) + "/ph"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Ping Host [" + getColor(sysMainColor) + "/ph"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Trace rout [" + getAnsi256Color(sysMainColor) + "/tr"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Trace rout [" + getColor(sysMainColor) + "/tr"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Look up DNS records [" + getAnsi256Color(sysMainColor) + "/lr"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Look up DNS records [" + getColor(sysMainColor) + "/lr"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Network Stats [" + getAnsi256Color(sysMainColor) + "/ns"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Network Stats [" + getColor(sysMainColor) + "/ns"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  List Of Commands [" + getAnsi256Color(sysMainColor) + "/lc"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(sysMainColor) + "/e"
-                + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+        message("·  Exit [" + getColor(sysMainColor) + "/e"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     // /sp
@@ -79,7 +79,7 @@ public class NetworkPage {
 
         modifyMessage('n',1);
         slowMotionText(0,58,false,
-                getAnsi256Color(sysLayoutColor) + "Scanning ports from "
+                getColor(sysLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
         modifyMessage('n',2);
 
@@ -87,9 +87,9 @@ public class NetworkPage {
             final int currentPort = port;
             executor.submit(() -> {
                 try (Socket socket = new Socket("localhost", currentPort)) {
-                    message("· Port " + getAnsi256Color(sysMainColor) + currentPort
-                            + getAnsi256Color(sysLayoutColor) + " [" + getAnsi256Color(sysAcceptanceColor) + "OPEN"
-                            + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                    message("· Port " + getColor(sysMainColor) + currentPort
+                            + getColor(sysLayoutColor) + " [" + getColor(sysAcceptanceColor) + "OPEN"
+                            + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
                 } catch (Exception ignored) {}
             });
         }

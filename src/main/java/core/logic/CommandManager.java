@@ -33,7 +33,7 @@ public class CommandManager {
 
             int statusCode = connection.getResponseCode();
             if (statusCode != 200) {
-                message("HTTP error: " + getAnsi256Color(sysRejectionColor)
+                message("HTTP error: " + getColor(sysRejectionColor)
                         + statusCode, sysLayoutColor, 58, 0, out::print);
                 return null;
             }
@@ -41,7 +41,7 @@ public class CommandManager {
             String response = readResponse(connection);
             return parseJsonResponse(response, key, text);
         } catch (URISyntaxException | IOException e) {
-            message("Request failed: " + getAnsi256Color(sysRejectionColor)
+            message("Request failed: " + getColor(sysRejectionColor)
                     + e.getMessage(), sysLayoutColor, 58, 0, out::print);
             return null;
         }
@@ -65,7 +65,7 @@ public class CommandManager {
             message(text + " " + value, sysLayoutColor, 58, 0, out::print);
             return response;
         } catch (Exception e) {
-            message("JSON parsing error: " + getAnsi256Color(sysRejectionColor)
+            message("JSON parsing error: " + getColor(sysRejectionColor)
                     + e.getMessage(), sysLayoutColor, 58, 0, out::print);
             return null;
         }
@@ -73,7 +73,7 @@ public class CommandManager {
 
     //Request user choice
     public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
-        out.print(alignment(58) + getAnsi256Color(mainColor) + title + RESET + ": " + RESET);
+        out.print(alignment(58) + getColor(mainColor) + title + RESET + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
@@ -82,17 +82,17 @@ public class CommandManager {
                     action.run();
                 } catch (Exception e) {
                     message("Error executing action", rejectionColor, 58, 0, out::print);
-                    message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
+                    message("Status: " + getColor(rejectionColor) + "x", layoutColor, 58, 0, out::print);
                 }
                 break;
 
             case "-", "n":
-                message("Status: " + getAnsi256Color(rejectionColor) + "x", layoutColor, 58, 0, out::print);
+                message("Status: " + getColor(rejectionColor) + "x", layoutColor, 58, 0, out::print);
                 break;
 
             default:
                 message("Invalid choice", rejectionColor, 58, 0, out::print);
-                message("Status: " + getAnsi256Color(rejectionColor) + "x",
+                message("Status: " + getColor(rejectionColor) + "x",
                         layoutColor, 58, 0, out::print);
                 break;
         }
@@ -109,9 +109,9 @@ public class CommandManager {
 
     private static String @NotNull [] getColorsForLogo() {
         return new String[]{
-                getAnsi256Color(219), getAnsi256Color(183),
-                getAnsi256Color(147), getAnsi256Color(218),
-                getAnsi256Color(182), getAnsi256Color(218)
+                getColor(219), getColor(183),
+                getColor(147), getColor(218),
+                getColor(182), getColor(218)
         };
     }
 
@@ -120,7 +120,7 @@ public class CommandManager {
         PackageUnifier registry = new PackageUnifier();
         try {
             slowMotionText(0, searchingLineAlignment, false,
-                    getAnsi256Color(sysLayoutColor) + "> ", "");
+                    getColor(sysLayoutColor) + "> ", "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 
             if (!registry.executeCommand(nameOfFunction)) {
@@ -139,15 +139,15 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+                    message("\r   Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
                 } else {
                     message("Error: Desktop or browse action not supported", sysRejectionColor,
                             58, 0, out::print);
-                    message("Status: " + getAnsi256Color(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
+                    message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
                 }
             } catch (URISyntaxException | IOException e) {
                 message("Error opening URL", sysLayoutColor, 58, 0, out::print);
-                message("Status: " + getAnsi256Color(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
+                message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
             }
         };
     }
@@ -169,7 +169,7 @@ public class CommandManager {
             } else {
                 modifyMessage('n', 1);
                 message("Process completed "
-                        + getAnsi256Color(sysMainColor) + "successfully" + getAnsi256Color(sysLayoutColor)
+                        + getColor(sysMainColor) + "successfully" + getColor(sysLayoutColor)
                         + ".", sysLayoutColor, 58, 0, out::println);
             }
         } catch (IOException e) {
@@ -183,7 +183,7 @@ public class CommandManager {
     public static void processCommandWithHostInput(String command) {
         try {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter host [e.g., google.com]: ");
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter host [e.g., google.com]: ");
             String host = scanner.nextLine().trim();
             modifyMessage('n', 1);
 
@@ -213,9 +213,9 @@ public class CommandManager {
 
     public static void exitPage(){
         marginBorder(2,2);
-        message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
-        message("Terminated correctly" + getAnsi256Color(sysLayoutColor) + ". "
-                        + getAnsi256Color(sysMainColor) + "You are in main menu" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
+        message("\r   Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+        message("Terminated correctly" + getColor(sysLayoutColor) + ". "
+                        + getColor(sysMainColor) + "You are in main menu" + getColor(sysLayoutColor) + ".", sysMainColor,
                 58,0,out::println);
         marginBorder(1,1);
     }

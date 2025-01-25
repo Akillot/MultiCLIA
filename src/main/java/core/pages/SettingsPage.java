@@ -16,6 +16,23 @@ import static java.lang.System.out;
 
 public class SettingsPage {
 
+    //Java logo
+    private static String[] javaAsciiLogo = {
+            getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⠀",196),
+            getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⠟⠀⣀⣠⠄⠀⠀⠀⠀",196),
+            getColorText("⠀⠀⠀⠀⠀⠀⢠⣶⣿⠟⠁⢠⣾⠋⠁⠀⠀⠀⠀⠀",196),
+            getColorText("⠀⠀⠀⠀⠀⠀⠹⣿⡇⠀⠀⠸⣿⡄⠀⠀⠀⠀⠀⠀",196),
+            getColorText("⠀⠀⠀⠀⠀⠀⠀⠙⠷⡀⠀⠀⢹⠗⠀⠀⠀⠀⠀⠀",196),
+            getColorText("⠀⠀⢀⣤⣴⡖⠒⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠒⢶⣄",21),
+            getColorText("⠀⠀⠈⠙⢛⣻⠿⠿⠿⠟⠛⠛⠛⠋⠉⠀⠀⠀⣸⡿",21),
+            getColorText("⠀⠀⠀⠀⠛⠿⣷⣶⣶⣶⣶⣾⠿⠗⠂⠀⢀⠴⠛⠁",21),
+            getColorText("⠀⠀⠀⠀⠀⢰⣿⣦⣤⣤⣤⣴⣶⣶⠄⠀⠀⠀⠀⠀",21),
+            getColorText("⣀⣤⡤⠄⠀⠀⠈⠉⠉⠉⠉⠉⠀⠀⠀⠀⢀⡀⠀⠀",21),
+            getColorText("⠻⣿⣦⣄⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣠⣴⠾⠃⠀⢀",21),
+            getColorText("⠀⠀⠈⠉⠛⠛⠛⠛⠛⠛⠛⠛⠋⠉⠁⠀⣀⣤⡶⠋",21),
+            getColorText("⠀⠀⠀⠀⠐⠒⠀⠠⠤⠤⠤⠶⠶⠚⠛⠛⠉⠀⠀⠀",21)
+    };
+
     //The main method of displaying the page
     public static void displaySettingsPage() {
         marginBorder(1,2);
@@ -24,13 +41,14 @@ public class SettingsPage {
 
         while (true) {
             slowMotionText(0, searchingLineAlignment, false,
-                    getAnsi256Color(sysLayoutColor) + "> ", "");
+                    getColor(sysLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
                 case "memory", "/m" -> displayUsingMemory();
                 case "cpu", "/c" -> displayCpuLoad();
                 case "colors", "/col" -> displayColorTable();
+                case "java", "/j" -> displayJavaInfo();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
@@ -45,20 +63,23 @@ public class SettingsPage {
 
     private static void displayListOfCommands(){
         modifyMessage('n',1);
-        message("·  Memory [" + getAnsi256Color(sysMainColor)
-                + "/m" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Memory [" + getColor(sysMainColor)
+                + "/m" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  CPU [" + getAnsi256Color(sysMainColor)
-                + "/c" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  CPU [" + getColor(sysMainColor)
+                + "/c" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Colors ["  + getAnsi256Color(sysMainColor)
-                + "/col" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Colors ["  + getColor(sysMainColor)
+                + "/col" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  List Of Commands ["  + getAnsi256Color(sysMainColor)
-                + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Java ["  + getColor(sysMainColor)
+                + "/j" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(sysMainColor)
-                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+        message("·  List Of Commands ["  + getColor(sysMainColor)
+                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Exit [" + getColor(sysMainColor)
+                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     //Memory methods
@@ -93,7 +114,7 @@ public class SettingsPage {
         StringBuilder bar = new StringBuilder("Memory: [");
 
         for (int i = 0; i < barLength; i++) {
-            String color = i < usedBars ? getAnsi256Color(160) : getAnsi256Color(47);
+            String color = i < usedBars ? getColor(160) : getColor(47);
             bar.append(color).append(i < usedBars ? "■" : "━").append(RESET);
         }
         bar.append("]");
@@ -111,16 +132,16 @@ public class SettingsPage {
         modifyMessage('n',1);
         displayCpuInfo();
         message("System CPU Load: "
-                        + getAnsi256Color(sysMainColor) + String.format("%.2f", cpuLoad) + "%",
+                        + getColor(sysMainColor) + String.format("%.2f", cpuLoad) + "%",
                 sysLayoutColor, 58, 0, out::print);
         message("Process CPU Load: "
-                        + getAnsi256Color(sysMainColor) + String.format("%.2f", processCpuLoad) + "%",
+                        + getColor(sysMainColor) + String.format("%.2f", processCpuLoad) + "%",
                 sysLayoutColor, 58, 0, out::println);
     }
 
     private static void displayCpuInfo() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
-        message("CPU Cores: " + getAnsi256Color(sysMainColor) + availableProcessors,
+        message("CPU Cores: " + getColor(sysMainColor) + availableProcessors,
                 sysLayoutColor, 58, 0, out::print);
     }
 
@@ -139,7 +160,7 @@ public class SettingsPage {
     private static void printColorRange(int start, int end) {
         out.println(RESET);
         for (int i = start; i <= end; i++) {
-            out.print(getAnsi256Color(sysLayoutColor) + getAnsi256BackgroundColor(i)
+            out.print(getColor(sysLayoutColor) + getBackColor(i)
                     + tableAlignment() + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) modifyMessage('n',2);
         }
@@ -153,7 +174,7 @@ public class SettingsPage {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 int colorCode = 16 + row + col * rows;
-                out.print(getAnsi256Color(sysLayoutColor) + getAnsi256BackgroundColor(colorCode)
+                out.print(getColor(sysLayoutColor) + getBackColor(colorCode)
                         + tableAlignment() + " " + colorCode + " " + RESET);
             }
             if(row == 11){
@@ -179,8 +200,59 @@ public class SettingsPage {
         colors.add(sysRejectionColor);
 
         for (Integer color : colors) {
-            out.println(alignment(58) + getAnsi256Color(sysLayoutColor)
-                    + "· " + getAnsi256BackgroundColor(color) + "  " + RESET);
+            out.println(alignment(58) + getColor(sysLayoutColor)
+                    + "· " + getBackColor(color) + "  " + RESET);
         }
+    }
+
+    //java info
+    @Contract(pure = true)
+    private static void displayLogo(String @NotNull [] logo){
+        for (String s : logo) {
+            out.println(alignment(58) + s);
+        }
+    }
+
+    private static void displayJavaInfo() {
+        modifyMessage('n',1);
+        displayLogo(javaAsciiLogo);
+        message("━━━━━━━━━━━━━━━━━━━━━━",sysLayoutColor, 58, 0, out::println);
+
+        String javaVersion = System.getProperty("java.version");
+        String javaVendor = System.getProperty("java.vendor");
+        String osName = System.getProperty("os.name");
+        String osVersion = System.getProperty("os.version");
+        String osArch = System.getProperty("os.arch");
+        String javaHome = System.getProperty("java.home");
+        String jvmName = System.getProperty("java.vm.name");
+        String jvmVersion = System.getProperty("java.vm.version");
+
+        Runtime runtime = Runtime.getRuntime();
+        long maxMemory = runtime.maxMemory() / (1024 * 1024);
+        long totalMemory = runtime.totalMemory() / (1024 * 1024);
+        int processors = runtime.availableProcessors();
+
+        message("Java Version: " + getColor(sysMainColor) + javaVersion,
+                sysLayoutColor, 58, 0, out::println);
+
+        message("Java Vendor: " + getColor(sysMainColor) + javaVendor,
+                sysLayoutColor, 58, 0, out::print);
+
+        message("Java Home: " + getColor(sysMainColor) + javaHome,
+                sysLayoutColor, 58, 0, out::println);
+
+        message("JVM Name: " + getColor(sysMainColor) + jvmName,
+                sysLayoutColor, 58, 0, out::print);
+
+        message("JVM Version: " + getColor(sysMainColor) + jvmVersion,
+                sysLayoutColor, 58, 0, out::println);
+
+        message("Max Memory (JVM): " + getColor(sysMainColor) + maxMemory + " MB",
+                sysLayoutColor, 58, 0, out::print);
+
+        message("Total Memory (JVM): " + getColor(sysMainColor) + totalMemory + " MB",
+                sysLayoutColor, 58, 0, out::print);
+
+        modifyMessage('n',1);
     }
 }

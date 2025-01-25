@@ -43,14 +43,14 @@ public class CryptoUI {
     //Exchanger method
     private static void exchanger() {
         modifyMessage('n',1);
-        alert("i", "Type '" + getAnsi256Color(themeColor_1) + "exit"
-                        + getAnsi256Color(layoutColor) + "' to\n" + alignment(58) + "quit the extension.",
+        alert("i", "Type '" + getColor(themeColor_1) + "exit"
+                        + getColor(layoutColor) + "' to\n" + alignment(58) + "quit the extension.",
                 58, themeColor_1, layoutColor);
         modifyMessage('n',1);
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(layoutColor) + "Cryptocurrency code: " + RESET);
+            out.print(alignment(58) + getColor(layoutColor) + "Cryptocurrency code: " + RESET);
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
@@ -67,14 +67,14 @@ public class CryptoUI {
     //Tracker
     private static void currencyPriceTracker() {
         modifyMessage('n', 2);
-        alert("i", "Type '" + getAnsi256Color(rejectionColor) + "exit"
-                        + getAnsi256Color(layoutColor) + "' to quit the extension.\n"
+        alert("i", "Type '" + getColor(rejectionColor) + "exit"
+                        + getColor(layoutColor) + "' to quit the extension.\n"
                         + alignment(58) + "You cannot exit this mode while tracking is in progress.",
                 58, themeColor_1, layoutColor);
 
         while (true) {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getAnsi256Color(layoutColor) + "Cryptocurrency code: " + RESET);
+            out.print(alignment(58) + getColor(layoutColor) + "Cryptocurrency code: " + RESET);
             cryptocurrencyCode = scanner.nextLine().trim().toLowerCase();
 
             if (cryptocurrencyCode.equalsIgnoreCase("exit")) {
@@ -83,7 +83,7 @@ public class CryptoUI {
 
             if (checkValue()) continue;
 
-            out.print(alignment(58) + getAnsi256Color(layoutColor) + "Duration in minutes: " + RESET);
+            out.print(alignment(58) + getColor(layoutColor) + "Duration in minutes: " + RESET);
 
             double duration;
             try {
@@ -118,7 +118,7 @@ public class CryptoUI {
             return true;
         }
 
-        out.print(alignment(58) + getAnsi256Color(layoutColor) + "Fiat currency code: " + RESET);
+        out.print(alignment(58) + getColor(layoutColor) + "Fiat currency code: " + RESET);
         fiatCurrencyCode = scanner.nextLine().trim().toLowerCase();
 
         if (fiatCurrencyCode.equalsIgnoreCase("exit")) {
@@ -150,25 +150,25 @@ public class CryptoUI {
             int maxRows = Math.max(leftColumnNames.size(), rightColumnNames.size());
 
             modifyMessage('n',1);
-            out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
-                            + alignment(10) + getAnsi256Color(layoutColor) + "%-40s%n",
-                    getAnsi256Color(themeColor_1) + "Names",getAnsi256Color(themeColor_1) + "          Codes");
+            out.printf(alignment(38) + getColor(layoutColor) + "%-40s"
+                            + alignment(10) + getColor(layoutColor) + "%-40s%n",
+                    getColor(themeColor_1) + "Names", getColor(themeColor_1) + "          Codes");
 
             for (int i = 0; i < maxRows; i++) {
                 String leftEntry = i < leftColumnNames.size()
                         ? "· " + capitalizeMessage(leftColumnNames.get(i))
-                        + getAnsi256Color(themeColor_2)
+                        + getColor(themeColor_2)
                         + " [" + leftColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
                 String rightEntry = i < rightColumnNames.size()
                         ? "· " + capitalizeMessage(rightColumnNames.get(i))
-                        + getAnsi256Color(themeColor_2)
+                        + getColor(themeColor_2)
                         + " [" + rightColumnCodes.get(i).toUpperCase() + "]"
                         : "";
 
-                out.printf(alignment(38) + getAnsi256Color(layoutColor) + "%-40s"
-                        + alignment(10) + getAnsi256Color(layoutColor) + "          %-40s%n", leftEntry, rightEntry);
+                out.printf(alignment(38) + getColor(layoutColor) + "%-40s"
+                        + alignment(10) + getColor(layoutColor) + "          %-40s%n", leftEntry, rightEntry);
             }
             modifyMessage('n',2);
             border();
@@ -179,9 +179,9 @@ public class CryptoUI {
 
     public static void displayInfo() {
         modifyMessage('n', 1);
-        message("Name: " + getAnsi256Color(themeColor_2) + "Crypto", layoutColor, 58, 0, out::print);
-        message("Type: " + getAnsi256Color(themeColor_2) + "Default extension", layoutColor, 58, 0, out::print);
-        message("Version: " +  getAnsi256Color(themeColor_2) + getVersion(), layoutColor, 58, 0, out::print);
-        message("Author: " + getAnsi256Color(themeColor_2) + "Nick Zozulia", layoutColor, 58, 0, out::print);
+        message("Name: " + getColor(themeColor_2) + "Crypto", layoutColor, 58, 0, out::print);
+        message("Type: " + getColor(themeColor_2) + "Default extension", layoutColor, 58, 0, out::print);
+        message("Version: " +  getColor(themeColor_2) + getVersion(), layoutColor, 58, 0, out::print);
+        message("Author: " + getColor(themeColor_2) + "Nick Zozulia", layoutColor, 58, 0, out::print);
     }
 }

@@ -27,7 +27,7 @@ public class TimePage {
 
         while (true) {
             slowMotionText(0, sysAcceptanceColor, false,
-                    getAnsi256Color(sysLayoutColor) + "> ", "");
+                    getColor(sysLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -49,30 +49,30 @@ public class TimePage {
 
     private static void displayListOfCommands(){
         modifyMessage('n',1);
-        message("·  Current Time [" + getAnsi256Color(sysMainColor)
-                + "/ct" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Current Time [" + getColor(sysMainColor)
+                + "/ct" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Timer [" + getAnsi256Color(sysMainColor)
-                + "/t" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Timer [" + getColor(sysMainColor)
+                + "/t" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Stopwatch ["  + getAnsi256Color(sysMainColor)
-                + "/sw" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Stopwatch ["  + getColor(sysMainColor)
+                + "/sw" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Change Time Zone [" + getAnsi256Color(sysMainColor)
-                + "/ctz" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Change Time Zone [" + getColor(sysMainColor)
+                + "/ctz" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  List Of Commands [" + getAnsi256Color(sysMainColor)
-                + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  List Of Commands [" + getColor(sysMainColor)
+                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(sysMainColor)
-                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+        message("·  Exit [" + getColor(sysMainColor)
+                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     private static void displayTime() {
         modifyMessage('n',1);
-        message("Current Time: " + getAnsi256Color(sysMainColor)
+        message("Current Time: " + getColor(sysMainColor)
                 + getCurrentTime(), sysLayoutColor, 58, 0, out::print);
-        message("Current Time Zone: " + getAnsi256Color(sysMainColor)
+        message("Current Time Zone: " + getColor(sysMainColor)
                 + getCurrentTimeZone(), sysLayoutColor, 58, 0, out::println);
     }
 
@@ -92,9 +92,9 @@ public class TimePage {
     private static void runTimer() {
         while (true) {
             modifyMessage('n',1);
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor)
-                    + "Enter time in seconds (or '" + getAnsi256Color(sysMainColor)
-                    + "exit" + getAnsi256Color(sysLayoutColor) + "' to quit): ");
+            out.print(alignment(58) + getColor(sysLayoutColor)
+                    + "Enter time in seconds (or '" + getColor(sysMainColor)
+                    + "exit" + getColor(sysLayoutColor) + "' to quit): ");
             String input = scanner.nextLine();
 
             if (exitCheck(input)) break;
@@ -106,7 +106,7 @@ public class TimePage {
                     continue;
                 }
                 if (isTimerRunning) {
-                    message("A timer is already running" + getAnsi256Color(sysLayoutColor) +
+                    message("A timer is already running" + getColor(sysLayoutColor) +
                             ". Please wait or stop it.", sysMainColor, 58, 0, out::print);
                     continue;
                 }
@@ -114,7 +114,7 @@ public class TimePage {
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
-                out.println(alignment(58) + getAnsi256Color(sysLayoutColor)
+                out.println(alignment(58) + getColor(sysLayoutColor)
                         + "Invalid input. Please enter a valid number.");
             }
         }
@@ -128,24 +128,24 @@ public class TimePage {
                         message("Timer stopped.", sysMainColor, 58, 0, out::print);
                         return;
                     }
-                    out.print("\r" + alignment(58) + getAnsi256Color(sysLayoutColor)
-                            + "Time left: " + getAnsi256Color(sysMainColor)
-                            + i + getAnsi256Color(sysLayoutColor) + " sec");
+                    out.print("\r" + alignment(58) + getColor(sysLayoutColor)
+                            + "Time left: " + getColor(sysMainColor)
+                            + i + getColor(sysLayoutColor) + " sec");
                     Thread.sleep(1000);
                 }
                 if (isTimerRunning) {
                     modifyMessage('r', 1);
                     message("Time is up", sysLayoutColor, 58, 0, out::print);
-                    out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Status: "
-                            + getAnsi256Color(sysAcceptanceColor) + " ✓");
+                    out.print(alignment(58) + getColor(sysLayoutColor) + "Status: "
+                            + getColor(sysAcceptanceColor) + " ✓");
                     modifyMessage('n', 1);
                 }
                 modifyMessage('n',1);
-                out.print(alignment(58) + getAnsi256Color(sysLayoutColor)
-                        + "Enter time in seconds (or '" + getAnsi256Color(sysMainColor)
-                        + "exit" + getAnsi256Color(sysLayoutColor) + "' to quit): ");
+                out.print(alignment(58) + getColor(sysLayoutColor)
+                        + "Enter time in seconds (or '" + getColor(sysMainColor)
+                        + "exit" + getColor(sysLayoutColor) + "' to quit): ");
             } catch (InterruptedException e) {
-                message("Timer interrupted" + getAnsi256Color(sysLayoutColor) + ".", sysMainColor,
+                message("Timer interrupted" + getColor(sysLayoutColor) + ".", sysMainColor,
                         58, 0, out::print);
             } finally {
                 isTimerRunning = false;
@@ -156,15 +156,15 @@ public class TimePage {
     // /sw command
     private static void runStopwatch() {
         modifyMessage('n', 1);
-        message("Press '" + getAnsi256Color(sysMainColor) + "Anything" + getAnsi256Color(sysLayoutColor)
+        message("Press '" + getColor(sysMainColor) + "Anything" + getColor(sysLayoutColor)
                         + "' to start stopwatch and again to stop:", sysLayoutColor, 58, 0, out::print);
         scanner.nextLine();
         long startTime = System.currentTimeMillis();
-        message("Stopwatch: " + getAnsi256Color(sysAcceptanceColor) + "started", sysLayoutColor, 58, 0, out::print);
+        message("Stopwatch: " + getColor(sysAcceptanceColor) + "started", sysLayoutColor, 58, 0, out::print);
 
         scanner.nextLine();
         double elapsedTime = calculateElapsedTime(startTime);
-        message("Stopwatch: " + getAnsi256Color(sysRejectionColor) + "stopped", sysLayoutColor, 58, 0, out::println);
+        message("Stopwatch: " + getColor(sysRejectionColor) + "stopped", sysLayoutColor, 58, 0, out::println);
 
         printElapsedTime(elapsedTime);
     }
@@ -174,8 +174,8 @@ public class TimePage {
     }
 
     private static void printElapsedTime(double elapsedTime) {
-        message("Elapsed Time: " + getAnsi256Color(sysMainColor) + elapsedTime
-                + getAnsi256Color(sysLayoutColor) + " sec.", sysLayoutColor, 58, 0, out::println);
+        message("Elapsed Time: " + getColor(sysMainColor) + elapsedTime
+                + getColor(sysLayoutColor) + " sec.", sysLayoutColor, 58, 0, out::println);
     }
 
     // /ctz command
@@ -183,9 +183,9 @@ public class TimePage {
         modifyMessage('n', 1);
 
         while (true) {
-            out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter a time zone [e.g., "
-                    + getAnsi256Color(219) + "Europe" + getAnsi256Color(sysLayoutColor)
-                    + "/" + getAnsi256Color(sysMainColor) + "Paris" + getAnsi256Color(sysLayoutColor) + "]: ");
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a time zone [e.g., "
+                    + getColor(219) + "Europe" + getColor(sysLayoutColor)
+                    + "/" + getColor(sysMainColor) + "Paris" + getColor(sysLayoutColor) + "]: ");
 
             String inputZone = scanner.nextLine().trim();
 
@@ -193,8 +193,8 @@ public class TimePage {
 
             if (isValidTimeZone(inputZone)) {
                 String time = getTimeInZone(inputZone);
-                message("Time in " + inputZone + ": " + getAnsi256Color(sysMainColor) + time
-                        + getAnsi256Color(sysLayoutColor) + ".", sysLayoutColor, 58, 0, out::println);
+                message("Time in " + inputZone + ": " + getColor(sysMainColor) + time
+                        + getColor(sysLayoutColor) + ".", sysLayoutColor, 58, 0, out::println);
                 break;
             } else {
                 suggestTimeZones(inputZone);
@@ -208,11 +208,11 @@ public class TimePage {
                 isTimerRunning = false;
                 modifyMessage('n', 1);
             }
-            message("Terminated correctly" + getAnsi256Color(sysLayoutColor)
-                    + "." + getAnsi256Color(sysMainColor) + "You are in time menu"
-                    + getAnsi256Color(sysLayoutColor) + ".", sysMainColor, 58,0,out::print);
+            message("Terminated correctly" + getColor(sysLayoutColor)
+                    + "." + getColor(sysMainColor) + "You are in time menu"
+                    + getColor(sysLayoutColor) + ".", sysMainColor, 58,0,out::print);
 
-            message("\r   Status: " + getAnsi256Color(sysAcceptanceColor) + "✓",
+            message("\r   Status: " + getColor(sysAcceptanceColor) + "✓",
                     sysLayoutColor,58,0,out::println);
             return true;
         }

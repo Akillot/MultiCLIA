@@ -20,7 +20,7 @@ public class CryptographyPage {
 
         while (true) {
             slowMotionText(0, searchingLineAlignment, false,
-                    getAnsi256Color(sysLayoutColor) + "> ", "");
+                    getColor(sysLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -40,24 +40,24 @@ public class CryptographyPage {
 
     private static void displayListOfCommands() {
         modifyMessage('n',1);
-        message("·  Make Encryption [" + getAnsi256Color(sysMainColor)
-                + "/me" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Make Encryption [" + getColor(sysMainColor)
+                + "/me" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Make Decryption [" + getAnsi256Color(sysMainColor)
-                + "/md" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  Make Decryption [" + getColor(sysMainColor)
+                + "/md" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  List Of Commands [" + getAnsi256Color(sysMainColor)
-                + "/lc" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+        message("·  List Of Commands [" + getColor(sysMainColor)
+                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Exit [" + getAnsi256Color(sysMainColor)
-                + "/e" + getAnsi256Color(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+        message("·  Exit [" + getColor(sysMainColor)
+                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
     private static void encryptionMenu() {
         Scanner scanner = new Scanner(System.in);
 
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter text to encrypt: ");
+        out.print(alignment(58) + getColor(sysLayoutColor) + "Enter text to encrypt: ");
         String textToEncrypt = scanner.nextLine();
 
         String encryptedText = encryptText(textToEncrypt);
@@ -72,7 +72,7 @@ public class CryptographyPage {
         Scanner scanner = new Scanner(System.in);
 
         modifyMessage('n', 1);
-        out.print(alignment(58) + getAnsi256Color(sysLayoutColor) + "Enter text to decrypt: ");
+        out.print(alignment(58) + getColor(sysLayoutColor) + "Enter text to decrypt: ");
         String textToDecrypt = scanner.nextLine();
 
         String decryptedText = decryptText(textToDecrypt);

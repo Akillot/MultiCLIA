@@ -32,6 +32,6 @@ public class SearcherConfigs {
 
     @Contract(pure = true)
     public static void displayFullURL(String domain) {
-        message("Full URL: " + getAnsi256Color(themeColor_2) + domain, layoutColor, 58, 0, out::print);
+        message("Full URL: " + getColor(themeColor_2) + domain, layoutColor, 58, 0, out::print);
     }
 }

@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.getAnsi256Color;
+import static core.configs.AppearanceConfigs.getColor;
 import static core.configs.AppearanceConfigs.sysRejectionColor;
 import static core.configs.TextConfigs.alignment;
 import static core.configs.TextConfigs.message;
@@ -49,7 +49,7 @@ public class CommandHandler {
             case 3 -> DisplayManager::displayUserIp;
             case 4 -> () -> {
                 try {
-                    InfoPage.displayInfo();
+                    InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
                             sysRejectionColor, 58, 0, out::println);
@@ -64,7 +64,7 @@ public class CommandHandler {
             case 11 -> SupportPage::displaySupportPage;
             case 12 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(58)
-                    + getAnsi256Color(sysRejectionColor) + "Invalid command index");
+                    + getColor(sysRejectionColor) + "Invalid command index");
         };
     }
 }
