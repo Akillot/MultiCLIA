@@ -20,11 +20,9 @@ public  class InfoPage {
 
     public static void displayInfo() throws InterruptedException {
         marginBorder(1,2);
-        message("Application info", sysLayoutColor, 58, 0, out::print);
-        modifyMessage('n',1);
+        message("Application info", sysLayoutColor, 58, 0, out::println);
         message("Current version: " + getVersion(), sysLayoutColor,58,0,out::print);
-        message("Author: Nick Zozulia", sysLayoutColor,58,0,out::print);
-        modifyMessage('n', 1);
+        message("Author: Nick Zozulia", sysLayoutColor,58,0,out::println);
 
         displayOs();
         displayApplicationDirectory();
