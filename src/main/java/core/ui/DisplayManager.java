@@ -29,6 +29,7 @@ public class DisplayManager {
             formatCommandWithDescription("network", "/n", "Shows network page"),
             formatCommandWithDescription("security", "/sc", "Shows security page"),
             formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),
+            formatCommandWithDescription("support", "/su", "Shows support page"),
             formatCommandWithDescription("exit", "/e", "Terminates the application")
     };
 

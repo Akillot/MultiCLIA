@@ -7,6 +7,7 @@ core/pages/SecurityPage.class
 extensions/notes/NotesConfigs.class
 extensions/internet/SearcherUI.class
 core/configs/TextConfigs.class
+core/pages/SupportPage.class
 core/commands/PackageUnifier.class
 core/pages/ExitPage.class
 core/configs/AppearanceConfigs.class
