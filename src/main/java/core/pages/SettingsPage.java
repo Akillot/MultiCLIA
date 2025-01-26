@@ -1,5 +1,6 @@
 package core.pages;
 
+import com.sun.management.OperatingSystemMXBean;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -80,15 +81,13 @@ public class SettingsPage {
     }
 
     // Display memory information
-    private static void displayMemoryInfo() {
+    public static void displayMemoryInfo() {
         Runtime runtime = Runtime.getRuntime();
         long totalJvmMemory = runtime.totalMemory();
         long freeJvmMemory = runtime.freeMemory();
         long usedJvmMemory = totalJvmMemory - freeJvmMemory;
 
-        // RAM stats
-        com.sun.management.OperatingSystemMXBean osBean =
-                (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        OperatingSystemMXBean osBean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
         long totalOsMemory = osBean.getTotalMemorySize();
         long freeOsMemory = osBean.getFreeMemorySize();
         long usedOsMemory = totalOsMemory - freeOsMemory;
@@ -105,30 +104,15 @@ public class SettingsPage {
         message("Free JVM Memory: " + formatMemory(freeJvmMemory), sysLayoutColor, 58, 0, out::print);
         message("Total JVM Memory: " + formatMemory(totalJvmMemory), sysLayoutColor, 58, 0, out::println);
 
-        message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",sysLayoutColor, 58, 0, out::println);
-
-        // Display RAM stats
-        message("RAM Statistics", sysMainColor, 58, 0, out::println);
-        message("Used RAM: " + formatMemory(usedOsMemory), sysLayoutColor, 58, 0, out::print);
-        message("Free RAM: " + formatMemory(freeOsMemory), sysLayoutColor, 58, 0, out::print);
-        message("Total RAM: " + formatMemory(totalOsMemory), sysLayoutColor, 58, 0, out::println);
-        displayMemoryBar(usagePercentage);
+        // Display ROM stats
+        modifyMessage('n', 1);
+        message("ROM Info", sysMainColor, 58, 0, out::println);
+        executeTerminalCommand("df -h");
     }
 
     @Contract(pure = true)
     private static @NotNull String formatMemory(long memoryInBytes) {
         return String.format("%.2f GB", memoryInBytes / (1024.0 * 1024 * 1024));
-    }
-
-    private static void displayMemoryBar(double usagePercentage) {
-        int barWidth = 30;
-        int filledWidth = (int) (usagePercentage / 100 * barWidth);
-        StringBuilder bar = new StringBuilder("|");
-        for (int i = 0; i < barWidth; i++) {
-            bar.append(i < filledWidth ? "■" : " ");
-        }
-        bar.append("|");
-        message(bar + " " + String.format("%.2f", usagePercentage) + "%", sysLayoutColor, 58, 0, out::println);
     }
 
     //CPU methods
