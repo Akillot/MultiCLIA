@@ -10,8 +10,7 @@ import java.util.Random;
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.ui.DisplayManager.clearTerminal;
-import static core.ui.DisplayManager.scanner;
+import static core.ui.DisplayManager.*;
 import static java.lang.System.out;
 
 public class SecurityPage {
@@ -47,6 +46,7 @@ public class SecurityPage {
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
+                case "/xq" -> displayPrank();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();

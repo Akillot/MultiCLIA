@@ -98,16 +98,7 @@ public class CommandManager {
         }
     }
 
-    public static void switchLogo(String @NotNull [] logo, int alignment) {
-        String[] colors = getColorsForLogo();
-
-        for (int i = 0; i < logo.length; i++) {
-            String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, sysLayoutColor, alignment, 0, System.out::print);
-        }
-    }
-
-    private static String @NotNull [] getColorsForLogo() {
+    public static String @NotNull [] getColorsForLogo() {
         return new String[]{
                 getColor(219), getColor(183),
                 getColor(147), getColor(218),

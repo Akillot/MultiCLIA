@@ -1,15 +1,15 @@
 package core.pages;
 
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
-import static core.logic.CommandManager.searchCommands;
 import static core.configs.TextConfigs.*;
-import static core.logic.CommandManager.switchLogo;
+import static core.logic.CommandManager.*;
 import static java.lang.System.out;
 
 public class StartPage {
@@ -64,8 +64,12 @@ public class StartPage {
         String[] motto = {"Command-driven simplicity.",
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
-                "Hi " + getColor(sysMainColor) + capitalizeMessage(userName)
-                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need."};
+                "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
+                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.", "Try secret command '"
+                + getColor(sysMainColor) + "/xq" + getColor(sysLayoutColor) + "' in sections like "
+                + getColor(sysMainColor) + "time" + getColor(sysLayoutColor) + "/"
+                + getColor(sysMainColor) + "security" + getColor(sysLayoutColor) + "/"
+                + getColor(sysMainColor) + "etc" + getColor(sysLayoutColor) + "."};
         Random rand = new Random();
 
         int index = rand.nextInt(0, motto.length);
@@ -97,6 +101,15 @@ public class StartPage {
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,0,out::print);
                 break;
+        }
+    }
+
+    private static void switchLogo(String @NotNull [] logo, int alignment) {
+        String[] colors = getColorsForLogo();
+
+        for (int i = 0; i < logo.length; i++) {
+            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+            message(coloredText, sysLayoutColor, alignment, 0, System.out::print);
         }
     }
 }
