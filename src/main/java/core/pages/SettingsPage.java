@@ -1,11 +1,9 @@
 package core.pages;
 
-import lombok.SneakyThrows;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
@@ -16,7 +14,7 @@ import static java.lang.System.out;
 public class SettingsPage {
 
     //Java logo
-    private static String[] javaAsciiLogo = {
+    private static String[] JAVA_ASCII_LOGO = {
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⠀",196),
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⠟⠀⣀⣠⠄⠀⠀⠀⠀",196),
             getColorText("⠀⠀⠀⠀⠀⠀⢠⣶⣿⠟⠁⢠⣾⠋⠁⠀⠀⠀⠀⠀",196),
@@ -44,7 +42,7 @@ public class SettingsPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "memory", "/m" -> displayUsingMemory();
+                case "memory", "/m" -> displayMemoryInfo();
                 case "cpu", "/c" -> displayCpuLoad();
                 case "colors", "/col" -> displayColorTable();
                 case "java", "/j" -> displayJavaInfo();
@@ -81,44 +79,56 @@ public class SettingsPage {
                 + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
-    //Memory methods
-    @SneakyThrows
-    private static void displayUsingMemory(){
-        long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        long totalMemory = Runtime.getRuntime().totalMemory();
-        long freeMemory = Runtime.getRuntime().freeMemory();
-        long maxMemory = Runtime.getRuntime().maxMemory();
-        double usagePercentage = (double) usedMemory / maxMemory * 100;
+    // Display memory information
+    private static void displayMemoryInfo() {
+        Runtime runtime = Runtime.getRuntime();
+        long totalJvmMemory = runtime.totalMemory();
+        long freeJvmMemory = runtime.freeMemory();
+        long usedJvmMemory = totalJvmMemory - freeJvmMemory;
 
-        modifyMessage('n',1);
-        message("Memory used: " + (usedMemory / (1000 * 1000)) + "M", sysLayoutColor, 58, 0, out::print);
-        message("Free memory: " + (freeMemory / (1000 * 1000)) + "M", sysLayoutColor, 58, 0, out::print);
-        message("Total memory: " + (totalMemory / (1000 * 1000)) + "M", sysLayoutColor, 58, 0, out::print);
-        message("Max memory: " + (maxMemory / (1000 * 1000)) + "M", sysLayoutColor, 58, 0, out::print);
-        message("Memory usage: " + String.format("%.2f", usagePercentage) + "%", sysLayoutColor, 58, 0, out::print);
+        // RAM stats
+        com.sun.management.OperatingSystemMXBean osBean =
+                (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        long totalOsMemory = osBean.getTotalMemorySize();
+        long freeOsMemory = osBean.getFreeMemorySize();
+        long usedOsMemory = totalOsMemory - freeOsMemory;
 
-        if (usagePercentage > 80) {
-            modifyMessage('n',1);
-            message("Warning: Memory usage exceeds 80%!", sysRejectionColor, 58, 0, out::print);
-            modifyMessage('n',1);
-        }
-        displayMemoryBar();
+        long maxMemory = runtime.maxMemory() / (1024 * 1024 * 1024);
+        double usagePercentage = (double) usedOsMemory / totalOsMemory * 100;
+
+        modifyMessage('n', 1);
+        message("System Memory Statistics:", sysLayoutColor, 58, 0, out::println);
+
+        // Display JVM memory stats
+        message("JVM Memory Statistics", sysMainColor, 58, 0, out::println);
+        message("Used JVM Memory: " + formatMemory(usedJvmMemory), sysLayoutColor, 58, 0, out::print);
+        message("Free JVM Memory: " + formatMemory(freeJvmMemory), sysLayoutColor, 58, 0, out::print);
+        message("Total JVM Memory: " + formatMemory(totalJvmMemory), sysLayoutColor, 58, 0, out::println);
+
+        message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",sysLayoutColor, 58, 0, out::println);
+
+        // Display RAM stats
+        message("RAM Statistics", sysMainColor, 58, 0, out::println);
+        message("Used RAM: " + formatMemory(usedOsMemory), sysLayoutColor, 58, 0, out::print);
+        message("Free RAM: " + formatMemory(freeOsMemory), sysLayoutColor, 58, 0, out::print);
+        message("Total RAM: " + formatMemory(totalOsMemory), sysLayoutColor, 58, 0, out::println);
+        displayMemoryBar(usagePercentage);
     }
 
-    private static void displayMemoryBar() {
-        long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        long maxMemory = Runtime.getRuntime().maxMemory();
-        int barLength = 30;
-        int usedBars = (int) ((double) usedMemory / maxMemory * barLength);
-        StringBuilder bar = new StringBuilder("Memory: [");
+    @Contract(pure = true)
+    private static @NotNull String formatMemory(long memoryInBytes) {
+        return String.format("%.2f GB", memoryInBytes / (1024.0 * 1024 * 1024));
+    }
 
-        for (int i = 0; i < barLength; i++) {
-            String color = i < usedBars ? getColor(160) : getColor(47);
-            bar.append(color).append(i < usedBars ? "■" : "━").append(RESET);
+    private static void displayMemoryBar(double usagePercentage) {
+        int barWidth = 30;
+        int filledWidth = (int) (usagePercentage / 100 * barWidth);
+        StringBuilder bar = new StringBuilder("|");
+        for (int i = 0; i < barWidth; i++) {
+            bar.append(i < filledWidth ? "■" : " ");
         }
-        bar.append("]");
-
-        message(bar.toString(), sysLayoutColor, 58, 0, out::println);
+        bar.append("|");
+        message(bar + " " + String.format("%.2f", usagePercentage) + "%", sysLayoutColor, 58, 0, out::println);
     }
 
     //CPU methods
@@ -129,6 +139,7 @@ public class SettingsPage {
         double processCpuLoad = osBean.getProcessCpuLoad() * 100;
 
         modifyMessage('n',1);
+        message("System CPU Statistics:", sysLayoutColor, 58, 0, out::println);
         displayCpuInfo();
         message("System CPU Load: "
                         + getColor(sysMainColor) + String.format("%.2f", cpuLoad) + "%",
@@ -147,12 +158,11 @@ public class SettingsPage {
     //Color methods
     @Contract(pure = true)
     private static void displayColorTable() {
-        marginBorder(1,1);
+        modifyMessage('n',1);
+        message("Color Table:", sysLayoutColor, 58, 0, out::print);
         printColorRange(0, sysLayoutColor);
-        modifyMessage('n', 1);
         printColorBlock();
         printColorRange(232, 255);
-        marginBorder(1,1);
     }
 
     @Contract(pure = true)
@@ -188,22 +198,6 @@ public class SettingsPage {
         return " ".repeat(Math.max(0, 4));
     }
 
-    private static void displaySystemColors(){
-        modifyMessage('n',1);
-        message("Default Colors", sysLayoutColor, 58, 0, out::println);
-
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(sysMainColor);
-        colors.add(sysLayoutColor);
-        colors.add(sysAcceptanceColor);
-        colors.add(sysRejectionColor);
-
-        for (Integer color : colors) {
-            out.println(alignment(58) + getColor(sysLayoutColor)
-                    + "· " + getBackColor(color) + "  " + RESET);
-        }
-    }
-
     //java info
     @Contract(pure = true)
     private static void displayLogo(String @NotNull [] logo){
@@ -214,7 +208,7 @@ public class SettingsPage {
 
     private static void displayJavaInfo() {
         modifyMessage('n',1);
-        displayLogo(javaAsciiLogo);
+        displayLogo(JAVA_ASCII_LOGO);
         message("━━━━━━━━━━━━━━━━━━━━━━",sysLayoutColor, 58, 0, out::println);
 
         String javaVersion = System.getProperty("java.version");
@@ -225,11 +219,6 @@ public class SettingsPage {
         String javaHome = System.getProperty("java.home");
         String jvmName = System.getProperty("java.vm.name");
         String jvmVersion = System.getProperty("java.vm.version");
-
-        Runtime runtime = Runtime.getRuntime();
-        long maxMemory = runtime.maxMemory() / (1024 * 1024);
-        long totalMemory = runtime.totalMemory() / (1024 * 1024);
-        int processors = runtime.availableProcessors();
 
         message("Java Version: " + getColor(sysMainColor) + javaVersion,
                 sysLayoutColor, 58, 0, out::println);
@@ -245,13 +234,5 @@ public class SettingsPage {
 
         message("JVM Version: " + getColor(sysMainColor) + jvmVersion,
                 sysLayoutColor, 58, 0, out::println);
-
-        message("Max Memory (JVM): " + getColor(sysMainColor) + maxMemory + " MB",
-                sysLayoutColor, 58, 0, out::print);
-
-        message("Total Memory (JVM): " + getColor(sysMainColor) + totalMemory + " MB",
-                sysLayoutColor, 58, 0, out::print);
-
-        modifyMessage('n',1);
     }
 }
