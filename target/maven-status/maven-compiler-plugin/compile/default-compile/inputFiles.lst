@@ -1,5 +1,4 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/CommandHandler.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/notes/NotesConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/InfoPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/configs/AppearanceConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/DisplayManager.java
@@ -7,18 +6,11 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/configs/TextConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/SupportPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/ExitPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/internet/SearcherUI.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/notes/NotesUI.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/notes/NotesManager.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CryptoConfigs.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CryptoService.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/PackageUnifier.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/CryptographyPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/SettingsPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/StartPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/init/AppLauncher.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/CommandManager.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/internet/SearcherConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/TimePage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/extensions/finance/CryptoUI.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/pages/SecurityPage.java

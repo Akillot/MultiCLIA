@@ -14,7 +14,6 @@ import static core.logic.CommandManager.exitPage;
 import static core.configs.TextConfigs.*;
 import static core.logic.CommandManager.mainMenuRerunMargin;
 import static core.ui.DisplayManager.clearTerminal;
-import static core.ui.DisplayManager.displayPrank;
 import static java.lang.System.out;
 
 public class TimePage {
@@ -36,7 +35,6 @@ public class TimePage {
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
-                case "/xq" -> displayPrank();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();

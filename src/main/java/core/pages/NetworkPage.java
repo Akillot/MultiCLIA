@@ -11,7 +11,6 @@ import static core.configs.TextConfigs.*;
 import static core.configs.TextConfigs.message;
 import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
-import static core.ui.DisplayManager.displayPrank;
 import static java.lang.System.out;
 
 public class NetworkPage {
@@ -34,7 +33,6 @@ public class NetworkPage {
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
-                case "/xq" -> displayPrank();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();

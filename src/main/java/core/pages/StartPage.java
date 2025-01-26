@@ -45,7 +45,7 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, sysRejectionColor, 58, 0, out::print);
+                message(errorMessage, sysMainColor, 58, 0, out::print);
             }
         }
     }

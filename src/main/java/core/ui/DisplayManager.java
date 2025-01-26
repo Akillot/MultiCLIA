@@ -11,7 +11,6 @@ import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.httpRequest;
 import static core.configs.TextConfigs.*;
 
-import static core.logic.CommandManager.openUri;
 import static java.lang.System.*;
 
 public class DisplayManager {
@@ -114,10 +113,5 @@ public class DisplayManager {
             message("Error executing action", sysRejectionColor, 58, 0, out::print);
             message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
         }
-    }
-
-    // /xq
-    public static void displayPrank(){
-        openUri("https://youtu.be/oPLObjVAvIU?si=dADAmPESpLEzSqhk");
     }
 }

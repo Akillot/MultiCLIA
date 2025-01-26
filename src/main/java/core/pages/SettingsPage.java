@@ -48,7 +48,6 @@ public class SettingsPage {
                 case "cpu", "/c" -> displayCpuLoad();
                 case "colors", "/col" -> displayColorTable();
                 case "java", "/j" -> displayJavaInfo();
-                case "/xq" -> displayPrank();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();

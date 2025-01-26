@@ -4,7 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
-import static core.ui.DisplayManager.displayPrank;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.exit;
 import static java.lang.System.out;
@@ -27,7 +26,7 @@ public class ExitPage {
 
         message("Are you sure?", sysLayoutColor, 56, 0, out::println);
         out.print(alignment(48) + getColor(sysLayoutColor) + "> ");
-        String answer = scanner.nextLine().trim().toLowerCase();
+        String answer = scanner.nextLine().toLowerCase();
 
         processUserResponse(answer);
     }
@@ -41,7 +40,6 @@ public class ExitPage {
         switch (answer) {
             case "y", "+" -> terminateProgram();
             case "n", "-" -> stayInProgram();
-            case "/xq" -> displayPrank();
             default -> displayExitPrompt();
         }
     }

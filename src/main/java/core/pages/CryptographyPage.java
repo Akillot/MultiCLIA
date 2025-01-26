@@ -25,7 +25,6 @@ public class CryptographyPage {
             switch (input) {
                 case "make encrypt", "/me" -> encryptionMenu();
                 case "make decrypt", "/md" -> decryptionMenu();
-                case "/xq" -> displayPrank();
                 case "rerun", "/rr" -> mainMenuRerunMargin();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
