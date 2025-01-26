@@ -96,7 +96,7 @@ public class SettingsPage {
         double usagePercentage = (double) usedOsMemory / totalOsMemory * 100;
 
         modifyMessage('n', 1);
-        message("System Memory Statistics:", sysLayoutColor, 58, 0, out::println);
+        message("System Memory Info:", sysLayoutColor, 58, 0, out::println);
 
         // Display JVM memory stats
         message("JVM Memory Statistics", sysMainColor, 58, 0, out::println);
