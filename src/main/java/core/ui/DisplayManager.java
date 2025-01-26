@@ -99,7 +99,7 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-    //clearing terminal
+    // /cl
     public static void clearTerminal() {
         try {
             String operatingSystem = System.getProperty("os.name");

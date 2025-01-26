@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.ui.DisplayManager.clearTerminal;
-import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
+import static core.ui.DisplayManager.*;
 import static java.lang.System.out;
 
 public class SettingsPage {

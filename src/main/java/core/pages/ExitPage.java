@@ -26,7 +26,7 @@ public class ExitPage {
 
         message("Are you sure?", sysLayoutColor, 56, 0, out::println);
         out.print(alignment(48) + getColor(sysLayoutColor) + "> ");
-        String answer = scanner.nextLine().trim().toLowerCase();
+        String answer = scanner.nextLine().toLowerCase();
 
         processUserResponse(answer);
     }

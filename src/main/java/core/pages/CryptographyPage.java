@@ -6,9 +6,8 @@ import java.util.Scanner;
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.exitPage;
 import static core.logic.CommandManager.mainMenuRerunMargin;
-import static core.ui.DisplayManager.clearTerminal;
-import static core.ui.DisplayManager.scanner;
 import static core.configs.TextConfigs.*;
+import static core.ui.DisplayManager.*;
 import static java.lang.System.out;
 
 public class CryptographyPage {
