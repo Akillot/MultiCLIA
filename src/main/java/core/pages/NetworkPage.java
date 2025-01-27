@@ -33,7 +33,7 @@ public class NetworkPage {
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
-                case "rerun", "/rr" -> mainMenuRerunMargin();
+                case "rerun", "/rr" -> mainMenuRerun();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {

@@ -46,7 +46,7 @@ public class SecurityPage {
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "rerun", "/rr" -> mainMenuRerunMargin();
+                case "rerun", "/rr" -> mainMenuRerun();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {

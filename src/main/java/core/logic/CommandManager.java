@@ -193,18 +193,16 @@ public class CommandManager {
     }
 
     public static void mainMenuRerun(){
-        marginBorder(1,10);
+        marginBorder(1,2);
+        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+        message("Application restart" + getColor(sysLayoutColor) + ".", sysMainColor,58, 0, out::println);
+        marginBorder(1,1);
         displayStartPage();
-    }
-
-    public static void mainMenuRerunMargin(){
-        modifyMessage('n',1);
-        mainMenuRerun();
     }
 
     public static void exitPage(){
         marginBorder(2,2);
-        message("\r   Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
         message("Terminated correctly" + getColor(sysLayoutColor) + ". "
                         + getColor(sysMainColor) + "You are in main menu" + getColor(sysLayoutColor) + ".", sysMainColor,
                 58,0,out::println);
