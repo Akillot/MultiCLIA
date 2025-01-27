@@ -112,7 +112,7 @@ public class SettingsPage {
 
     @Contract(pure = true)
     private static @NotNull String formatMemory(long memoryInBytes) {
-        return String.format("%.2f GB", memoryInBytes / (1024.0 * 1024 * 1024));
+        return String.format("%.2f Gi", memoryInBytes / (1024.0 * 1024 * 1024));
     }
 
     //CPU methods
