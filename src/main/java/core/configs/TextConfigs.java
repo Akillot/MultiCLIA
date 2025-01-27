@@ -97,12 +97,4 @@ public class TextConfigs {
     public static @NotNull String horizontalMargining(int steps) {
         return " ".repeat(Math.max(0, steps));
     }
-
-    /*Show a message with [x], where x is a special character.
-    Can be used as tip([i]) or a clarification([?]) or another alert message*/
-    public static void alert(String modification ,String text, int alignment, int themeColor_1 ,int layoutColor) {
-        out.println(alignment(alignment) + getColor(layoutColor) + "["
-                + getColor(themeColor_1) + modification + getColor(layoutColor) + "] "
-                + getColor(layoutColor) + text + RESET);
-    }
 }

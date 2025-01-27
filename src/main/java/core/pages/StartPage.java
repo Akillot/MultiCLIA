@@ -65,13 +65,9 @@ public class StartPage {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
-                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.", "Try secret command '"
-                + getColor(sysMainColor) + "/xq" + getColor(sysLayoutColor) + "' in sections like "
-                + getColor(sysMainColor) + "time" + getColor(sysLayoutColor) + "/"
-                + getColor(sysMainColor) + "security" + getColor(sysLayoutColor) + "/"
-                + getColor(sysMainColor) + "etc" + getColor(sysLayoutColor) + "."};
-        Random rand = new Random();
+                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need."};
 
+        Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
         message("Just type '" + getColor(sysMainColor)
                 + "cmds" + getColor(sysLayoutColor) + "'. " + motto[index],15,48,0,out::print);
