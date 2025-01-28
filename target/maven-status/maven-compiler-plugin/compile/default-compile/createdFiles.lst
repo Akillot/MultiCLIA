@@ -5,6 +5,7 @@ core/pages/CryptographyPage.class
 core/ui/DisplayManager.class
 core/commands/CommandHandler.class
 core/pages/SettingsPage.class
+core/pages/TerminalPage.class
 core/pages/SecurityPage.class
 core/pages/NetworkPage.class
 core/pages/StartPage.class

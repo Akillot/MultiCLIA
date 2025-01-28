@@ -165,6 +165,7 @@ public class SecurityPage {
 
     private static void encryptAES() {
         try {
+            modifyMessage('n', 1);
             out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
             String plainText = scanner.nextLine();
 
@@ -179,8 +180,9 @@ public class SecurityPage {
             String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
 
             String base64Key = Base64.getEncoder().encodeToString(secretKey.getEncoded());
-            message("Encrypted Text: " + encryptedText, sysLayoutColor, 58, 0, out::println);
-            message("Key (Base64 encoded): " + base64Key, sysLayoutColor, 58, 0, out::println);
+            message("Encrypted Text: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Key [" + getColor(sysMainColor) + "Base64" + getColor(sysLayoutColor)
+                    + " encoded]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::println);
 
         } catch (Exception e) {
             message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
@@ -190,10 +192,12 @@ public class SecurityPage {
 
     private static void decryptAES() {
         try {
+            modifyMessage('n', 1);
             out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
             String encryptedText = scanner.nextLine();
 
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter key (Base64 encoded): ");
+            message("Key [" + getColor(sysMainColor) + "Base64" + getColor(sysLayoutColor)
+                    + " encoded]: ", sysLayoutColor, 58, 0, out::println);
             String base64Key = scanner.nextLine();
 
             byte[] decodedKey = Base64.getDecoder().decode(base64Key);
