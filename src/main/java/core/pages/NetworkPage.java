@@ -158,7 +158,7 @@ public class NetworkPage {
         switch (userPort) {
             case "default" -> {
                 port = 22;
-                connectionString = "ssh " + username + "@" + userHostname + " -p " + port;
+                connectionString = "ssh " + username + "@" + userHostname;
                 out.println(alignment(58) + getColor(sysLayoutColor) +
                         "Using default port: " + getColorText(String.valueOf(port), sysMainColor));
                 executeTerminalCommand(connectionString);

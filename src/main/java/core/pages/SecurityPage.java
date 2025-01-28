@@ -1,10 +1,16 @@
 package core.pages;
 
 import lombok.Getter;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.security.SecureRandom;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.*;
+import java.util.Base64;
 import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
@@ -35,19 +41,19 @@ public class SecurityPage {
     private static int passwordLength;
 
     public static void displaySecurityPage() {
+        Security.addProvider(new BouncyCastleProvider());
         marginBorder(1, 2);
         message("Security:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ",
-                    "");
+            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "rerun", "/rr" -> mainMenuRerun();
-                case "clear terminal", "/cl" -> clearTerminal();
+                case "encrypt aes", "/ea" -> encryptAES();
+                case "decrypt aes", "/da" -> decryptAES();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -59,8 +65,14 @@ public class SecurityPage {
     }
 
     private static void displayListOfCommands() {
-        modifyMessage('n',1);
+        modifyMessage('n', 1);
         message("·  Generate password [" + getColor(sysMainColor) + "/gp"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Encrypt AES [" + getColor(sysMainColor) + "/ea"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Decrypt AES [" + getColor(sysMainColor) + "/da"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
@@ -139,7 +151,6 @@ public class SecurityPage {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    // /gp
     private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
@@ -151,4 +162,53 @@ public class SecurityPage {
 
         return passwordBuilder.toString();
     }
+
+    private static void encryptAES() {
+        try {
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
+            String plainText = scanner.nextLine();
+
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(128);
+            SecretKey secretKey = keyGen.generateKey();
+
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
+            String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
+
+            String base64Key = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+            message("Encrypted Text: " + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Key (Base64 encoded): " + base64Key, sysLayoutColor, 58, 0, out::println);
+
+        } catch (Exception e) {
+            message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+
+    private static void decryptAES() {
+        try {
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
+            String encryptedText = scanner.nextLine();
+
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter key (Base64 encoded): ");
+            String base64Key = scanner.nextLine();
+
+            byte[] decodedKey = Base64.getDecoder().decode(base64Key);
+            SecretKeySpec secretKey = new SecretKeySpec(decodedKey, "AES");
+
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            String decryptedText = new String(decryptedBytes);
+
+            message("Decrypted Text: " + decryptedText, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
 }
