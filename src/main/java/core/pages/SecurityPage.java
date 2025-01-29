@@ -53,8 +53,8 @@ public class SecurityPage {
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "encrypt ", "/en" -> encryptAES();
-                case "decrypt aes", "/de" -> decryptAES();
+                case "encryption", "/en" -> encryptionMenu();
+                case "decryption", "/de" -> decryptionMenu();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -70,10 +70,10 @@ public class SecurityPage {
         message("·  Generate password [" + getColor(sysMainColor) + "/gp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Encrypt AES [" + getColor(sysMainColor) + "/ea"
+        message("·  Encryption [" + getColor(sysMainColor) + "/en"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Decrypt AES [" + getColor(sysMainColor) + "/da"
+        message("·  Decryption [" + getColor(sysMainColor) + "/de"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
