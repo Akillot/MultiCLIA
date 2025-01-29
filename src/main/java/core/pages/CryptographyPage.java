@@ -49,10 +49,10 @@ public class CryptographyPage {
 
     private static void displayListOfCommands() {
         modifyMessage('n',1);
-        message("·  Encryptionion [" + getColor(sysMainColor)
+        message("·  Encryption [" + getColor(sysMainColor)
                 + "/en" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Decryptionion [" + getColor(sysMainColor)
+        message("·  Decryption [" + getColor(sysMainColor)
                 + "/de" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor)
@@ -64,12 +64,11 @@ public class CryptographyPage {
 
     private static void encryptionMenu(){
         modifyMessage('n', 1);
-
         out.print(alignment(58) + getColor(sysLayoutColor) + "Select encryption algorithm [" +
-                getColor(sysMainColor) +"AES" + getColor(sysLayoutColor) + "/" +
-                getColor(sysMainColor) + "RSA" + getColor(sysLayoutColor) + "/" +
-                getColor(sysMainColor) + "Chacha20" + getColor(sysLayoutColor) + "/" +
-                getColor(sysMainColor) + "Blowfish" + getColor(sysLayoutColor) + "]: ");
+                getColor(sysMainColor) +"AES" + getColor(sysLayoutColor) + "|" + getColor(sysMainColor) + "1 " + getColor(sysLayoutColor) +
+                getColor(218) + "RSA" + getColor(sysLayoutColor) + "|" + getColor(218) + "2 " + getColor(sysLayoutColor) +
+                getColor(206) + "Chacha20" + getColor(sysLayoutColor) + "|" + getColor(206) + "3 " + getColor(sysLayoutColor) +
+                getColor(204) + "Blowfish" + getColor(sysLayoutColor) + "|" + getColor(204) + "4" + getColor(sysLayoutColor) + "]: ");
 
         String algorithm = scanner.nextLine().toLowerCase();
         modifyMessage('n', 1);
@@ -85,21 +84,20 @@ public class CryptographyPage {
 
     private static void decryptionMenu() {
         modifyMessage('n', 1);
-
         out.print(alignment(58) + getColor(sysLayoutColor) + "Select decryption algorithm [" +
-                getColor(sysMainColor) +"AES" + getColor(sysLayoutColor) + "/" +
-                getColor(sysMainColor) + "RSA" + getColor(sysLayoutColor) + "/" +
-                getColor(sysMainColor) + "Chacha20" + getColor(sysLayoutColor) + "/" +
-                getColor(sysMainColor) + "Blowfish" + getColor(sysLayoutColor) + "]: ");
+                getColor(sysMainColor) +"AES" + getColor(sysLayoutColor) + "|" + getColor(sysMainColor) + "1 " + getColor(sysLayoutColor) +
+                getColor(218) + "RSA" + getColor(sysLayoutColor) + "|" + getColor(218) + "2 " + getColor(sysLayoutColor) +
+                getColor(206) + "Chacha20" + getColor(sysLayoutColor) + "|" + getColor(206) + "3 " + getColor(sysLayoutColor) +
+                getColor(204) + "Blowfish" + getColor(sysLayoutColor) + "|" + getColor(204) + "4" + getColor(sysLayoutColor) + "]: ");
 
         String algorithm = scanner.nextLine().toLowerCase();
         modifyMessage('n', 1);
 
         switch (algorithm) {
-            case "aes" -> decryptAES();
-            case "rsa" -> decryptRSA();
-            case "chacha20" -> decryptChaCha20();
-            case "blowfish" -> decryptBlowfish();
+            case "aes", "1" -> decryptAES();
+            case "rsa", "2" -> decryptRSA();
+            case "chacha20", "3" -> decryptChaCha20();
+            case "blowfish", "4" -> decryptBlowfish();
             default -> out.print("");
         }
     }
@@ -177,8 +175,8 @@ public class CryptographyPage {
             String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
             String base64PrivateKey = Base64.getEncoder().encodeToString(privateKey.getEncoded());
 
-            message("Encrypted Text: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
-            message("Private Key [Base64]: " + getColor(sysMainColor) + base64PrivateKey, sysLayoutColor, 58, 0, out::println);
+            message("Encrypted Text: " + getColor(218) + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Private Key [Base64]: " + getColor(218) + base64PrivateKey, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
@@ -204,7 +202,7 @@ public class CryptographyPage {
             String decryptedText = new String(decryptedBytes);
 
             modifyMessage('n',1);
-            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Decrypted Text: " + getColor(218) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting RSA: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
@@ -235,9 +233,9 @@ public class CryptographyPage {
             String base64Key = Base64.getEncoder().encodeToString(key);
             String base64Nonce = Base64.getEncoder().encodeToString(nonce);
 
-            message("Encrypted Text [ChaCha20]: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::print);
-            message("Key [Base64]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::print);
-            message("Nonce [Base64]: " + getColor(sysMainColor) + base64Nonce, sysLayoutColor, 58, 0, out::println);
+            message("Encrypted Text [ChaCha20]: " + getColor(206) + encryptedText, sysLayoutColor, 58, 0, out::print);
+            message("Key [Base64]: " + getColor(206) + base64Key, sysLayoutColor, 58, 0, out::print);
+            message("Nonce [Base64]: " + getColor(206) + base64Nonce, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
@@ -267,7 +265,7 @@ public class CryptographyPage {
             String decryptedText = new String(decryptedBytes);
 
             modifyMessage('n',1);
-            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Decrypted Text: " + getColor(206) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
@@ -293,9 +291,9 @@ public class CryptographyPage {
 
             modifyMessage('n',1);
             message("Encrypted Text [Blowfish]: "
-                    + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::print);
+                    + getColor(204) + encryptedText, sysLayoutColor, 58, 0, out::print);
 
-            message("Key [Base64]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::println);
+            message("Key [Base64]: " + getColor(204) + base64Key, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
@@ -320,7 +318,7 @@ public class CryptographyPage {
             String decryptedText = new String(decryptedBytes);
 
             modifyMessage('n',1);
-            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Decrypted Text: " + getColor(204) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
