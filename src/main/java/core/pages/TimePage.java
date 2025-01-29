@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
-import static core.logic.CommandManager.exitPage;
 import static core.configs.TextConfigs.*;
-import static core.logic.CommandManager.mainMenuRerunMargin;
+import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
 import static java.lang.System.out;
 
@@ -35,7 +34,10 @@ public class TimePage {
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
-                case "rerun", "/rr" -> mainMenuRerunMargin();
+                case "rerun", "/rr" -> {
+                    modifyMessage('n',1);
+                    mainMenuRerun();
+                }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {

@@ -33,7 +33,10 @@ public class NetworkPage {
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
-                case "rerun", "/rr" -> mainMenuRerunMargin();
+                case "rerun", "/rr" -> {
+                    modifyMessage('n',1);
+                    mainMenuRerun();
+                }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
@@ -53,10 +56,10 @@ public class NetworkPage {
         message("·  Ping Host [" + getColor(sysMainColor) + "/ph"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Trace rout [" + getColor(sysMainColor) + "/tr"
+        message("·  Trace Rout [" + getColor(sysMainColor) + "/tr"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
-        message("·  Look up DNS records [" + getColor(sysMainColor) + "/lr"
+        message("·  Look Up DNS Records [" + getColor(sysMainColor) + "/lr"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Network Stats [" + getColor(sysMainColor) + "/ns"

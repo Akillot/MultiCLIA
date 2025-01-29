@@ -1,10 +1,10 @@
 package core.pages;
 
-import lombok.Getter;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.security.SecureRandom;
+import java.security.*;
 import java.util.Random;
 
 import static core.configs.AppearanceConfigs.*;
@@ -15,16 +15,12 @@ import static java.lang.System.out;
 
 public class SecurityPage {
 
-    @Getter
     private static final int easyComplexityColor = 85;
 
-    @Getter
     private static final int mediumComplexityColor = 214;
 
-    @Getter
     private static final int strongComplexityColor = 177;
 
-    @Getter
     private static final int extraComplexityColor = 201;
 
     private static final String CHAR_POOL_EASY = "abcdefghijklmnopqrstuvwxyz";
@@ -35,18 +31,21 @@ public class SecurityPage {
     private static int passwordLength;
 
     public static void displaySecurityPage() {
+        Security.addProvider(new BouncyCastleProvider());
         marginBorder(1, 2);
         message("Security:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ",
-                    "");
+            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ", "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "rerun", "/rr" -> mainMenuRerunMargin();
+                case "rerun", "/rr" -> {
+                    modifyMessage('n',1);
+                    mainMenuRerun();
+                }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
@@ -59,7 +58,7 @@ public class SecurityPage {
     }
 
     private static void displayListOfCommands() {
-        modifyMessage('n',1);
+        modifyMessage('n', 1);
         message("·  Generate password [" + getColor(sysMainColor) + "/gp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -139,7 +138,6 @@ public class SecurityPage {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    // /gp
     private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();

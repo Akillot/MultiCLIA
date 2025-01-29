@@ -82,7 +82,7 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-    //displaying external and local IP /ip
+    // /ip
     public static void displayUserIp() {
         marginBorder(1,2);
         try {

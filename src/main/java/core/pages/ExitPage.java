@@ -21,10 +21,10 @@ public class ExitPage {
         displayConfirmation(
                 "Enter", "y", "+", "to exit MultiCLIA and",
                 "n", "-", "to stay in",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor, 56
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor, 58
         );
 
-        message("Are you sure?", sysLayoutColor, 56, 0, out::println);
+        message("Are you sure?", sysLayoutColor, 58, 0, out::println);
         out.print(alignment(48) + getColor(sysLayoutColor) + "> ");
         String answer = scanner.nextLine().toLowerCase();
 
@@ -47,10 +47,10 @@ public class ExitPage {
     private static void terminateProgram() {
         marginBorder(2, 2);
         message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
-                56, 0, out::print);
+                58, 0, out::print);
         message(
                 "Program terminated successfully" + getColor(sysLayoutColor) + ".",
-                sysMainColor, 56, 0, out::println);
+                sysMainColor, 58, 0, out::println);
         modifyMessage('n', 1);
         exit(0);
     }
@@ -58,13 +58,13 @@ public class ExitPage {
     private static void stayInProgram() {
         marginBorder(2, 2);
         message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
-                56, 0, out::print);
+                58, 0, out::print);
 
         message("Program is still running" + getColor(sysLayoutColor) + ". "
                         + getColor(sysMainColor) + "Returning to the main menu"
                         + getColor(sysLayoutColor) + ".",
-                sysMainColor, 56, 0, out::print);
+                sysMainColor, 58, 0, out::println);
 
-        marginBorder(2, 1);
+        marginBorder(1, 1);
     }
 }
