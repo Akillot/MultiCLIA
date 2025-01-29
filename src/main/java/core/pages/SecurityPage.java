@@ -10,6 +10,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.Random;
 
@@ -52,8 +53,8 @@ public class SecurityPage {
 
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
-                case "encrypt aes", "/ea" -> encryptAES();
-                case "decrypt aes", "/da" -> decryptAES();
+                case "encrypt ", "/en" -> encryptAES();
+                case "decrypt aes", "/de" -> decryptAES();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
@@ -163,6 +164,39 @@ public class SecurityPage {
         return passwordBuilder.toString();
     }
 
+    private static void encryptionMenu(){
+        modifyMessage('n', 1);
+
+        out.print(alignment(58) + getColor(sysLayoutColor) + "Select encryption algorithm [" +
+                getColorText("AES", sysMainColor) + "/" + getColorText("DES", sysMainColor) + "/" +
+                getColorText("RSA", sysMainColor) + "]: ");
+        String algorithm = scanner.nextLine().toLowerCase();
+
+        switch (algorithm) {
+            case "aes" -> encryptAES();
+            case "des" -> encryptDES();
+            case "rsa" -> encryptRSA();
+            default -> out.print("");
+        }
+    }
+
+    private static void decryptionMenu() {
+        modifyMessage('n', 1);
+
+        out.print(alignment(58) + getColor(sysLayoutColor) + "Select decryption algorithm [" +
+                getColorText("AES", sysMainColor) + "/" + getColorText("DES", sysMainColor) + "/" +
+                getColorText("RSA", sysMainColor) + "]: ");
+        String algorithm = scanner.nextLine().toLowerCase();
+
+        switch (algorithm) {
+            case "aes" -> decryptAES();
+            case "des" -> decryptDES();
+            case "rsa" -> decryptRSA();
+            default -> out.print("");
+        }
+    }
+
+    //encrypt aes
     private static void encryptAES() {
         try {
             modifyMessage('n', 1);
@@ -189,7 +223,58 @@ public class SecurityPage {
         }
     }
 
+    //encrypt des
+    private static void encryptDES() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
+            String plainText = scanner.nextLine();
 
+            KeyGenerator keyGen = KeyGenerator.getInstance("DES");
+            SecretKey secretKey = keyGen.generateKey();
+
+            Cipher cipher = Cipher.getInstance("DES");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
+            String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
+            String base64Key = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+
+            message("Encrypted Text: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Key [Base64]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    // encrypt rsa
+    private static void encryptRSA() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
+            String plainText = scanner.nextLine();
+
+            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+            keyGen.initialize(2048);
+            KeyPair keyPair = keyGen.generateKeyPair();
+            PublicKey publicKey = keyPair.getPublic();
+            PrivateKey privateKey = keyPair.getPrivate();
+
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
+            String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
+            String base64PrivateKey = Base64.getEncoder().encodeToString(privateKey.getEncoded());
+
+            message("Encrypted Text: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Private Key [Base64]: " + getColor(sysMainColor) + base64PrivateKey, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    //decrypt aes
     private static void decryptAES() {
         try {
             modifyMessage('n', 1);
@@ -215,4 +300,54 @@ public class SecurityPage {
         }
     }
 
+    //decrypt des
+    private static void decryptDES() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
+            String encryptedText = scanner.nextLine();
+
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter DES key [Base64]: ");
+            String base64Key = scanner.nextLine();
+
+            byte[] decodedKey = Base64.getDecoder().decode(base64Key);
+            SecretKeySpec secretKey = new SecretKeySpec(decodedKey, "DES");
+
+            Cipher cipher = Cipher.getInstance("DES");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            String decryptedText = new String(decryptedBytes);
+
+            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error decrypting DES: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    //decrypt rsa
+    private static void decryptRSA() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
+            String encryptedText = scanner.nextLine();
+
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter RSA private key [Base64]: ");
+            String base64PrivateKey = scanner.nextLine();
+
+            byte[] decodedKey = Base64.getDecoder().decode(base64PrivateKey);
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PrivateKey privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(decodedKey));
+
+            Cipher cipher = Cipher.getInstance("RSA");
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            String decryptedText = new String(decryptedBytes);
+
+            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error decrypting RSA: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
 }
