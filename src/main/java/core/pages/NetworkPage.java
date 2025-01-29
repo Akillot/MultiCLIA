@@ -33,7 +33,6 @@ public class NetworkPage {
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
-                case "ssh connection", "/ssh" -> setConnectionToServer();
                 case "rerun", "/rr" -> mainMenuRerun();
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
@@ -61,9 +60,6 @@ public class NetworkPage {
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Network Stats [" + getColor(sysMainColor) + "/ns"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
-
-        message("·  SSH Connection [" + getColor(sysMainColor) + "/ssh"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
@@ -125,73 +121,5 @@ public class NetworkPage {
         message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::print);
         modifyMessage('n',1);
         executeTerminalCommand("netstat -an");
-    }
-
-    // /ssh
-    private static void setConnectionToServer() {
-        modifyMessage('n', 1);
-
-        out.print(alignment(58) + getColor(sysLayoutColor) + "Enter " +
-                getColorText("username", sysMainColor) + getColor(sysLayoutColor) +
-                " [user name on the remote computer]: ");
-        String username = scanner.nextLine().trim().toLowerCase();
-
-        out.print(alignment(58) + getColor(sysLayoutColor) + "Enter " +
-                getColorText("hostname", sysMainColor) + getColor(sysLayoutColor) +
-                " [IP address or domain name]: ");
-        String userHostname = scanner.nextLine().trim().toLowerCase();
-        modifyMessage('n', 1);
-
-        if (userHostname.isBlank()) {
-            out.println(alignment(58) + getColorText("Hostname cannot be empty. Connection aborted.", sysLayoutColor));
-            return;
-        }
-
-        out.print(alignment(58) + getColor(sysLayoutColor) + "Select port: " +
-                getColorText("Default", sysMainColor) + getColorText("/", sysLayoutColor) +
-                getColorText("Custom", sysMainColor) + getColor(sysLayoutColor) + ": ");
-        String userPort = scanner.nextLine().trim().toLowerCase();
-        modifyMessage('n', 1);
-
-        int port;
-        String connectionString;
-        switch (userPort) {
-            case "default" -> {
-                port = 22;
-                connectionString = "ssh " + username + "@" + userHostname;
-                out.println(alignment(58) + getColor(sysLayoutColor) +
-                        "Using default port: " + getColorText(String.valueOf(port), sysMainColor));
-                executeTerminalCommand(connectionString);
-            }
-            case "custom" -> {
-                out.print(alignment(58) + getColor(sysLayoutColor) +
-                        "Enter custom port number: ");
-                try {
-                    port = Integer.parseInt(scanner.nextLine().trim());
-                    if (port < 1 || port > 65535) {
-                        throw new NumberFormatException("Invalid port range");
-                    }
-                    connectionString = "ssh " + username + "@" + userHostname + " -p " + port;
-                    out.println(alignment(58) + getColor(sysLayoutColor) +
-                            "Using custom port: " + getColorText(String.valueOf(port), sysMainColor));
-                    executeTerminalCommand(connectionString);
-                } catch (NumberFormatException e) {
-                    out.println(alignment(58) + getColorText("Invalid port entered. Connection aborted.", sysLayoutColor));
-                    return;
-                }
-            }
-            default -> {
-                out.println(alignment(58) + getColorText("Invalid option. Connection aborted.", sysLayoutColor));
-                return;
-            }
-        }
-
-        try {
-            modifyMessage('n', 1);
-            out.println(alignment(58) + getColor(sysLayoutColor) +
-                    "Connection string: " + getColorText(connectionString, sysMainColor));
-        } catch (Exception e) {
-            out.println(alignment(58) + getColorText("Failed to execute SSH command. " + e.getMessage(), sysLayoutColor));
-        }
     }
 }
