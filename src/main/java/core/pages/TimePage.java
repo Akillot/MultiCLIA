@@ -34,7 +34,10 @@ public class TimePage {
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> {
+                    modifyMessage('n',1);
+                    mainMenuRerun();
+                }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {

@@ -25,7 +25,10 @@ public class TerminalPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "rerun", "/rr" -> mainMenuRerun();
+                case "rerun", "/rr" -> {
+                    modifyMessage('n',1);
+                    mainMenuRerun();
+                }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "exit", "/e" -> {
                     exitPage();
