@@ -1,6 +1,5 @@
 package core.pages;
 
-import lombok.Getter;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -8,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -22,16 +22,12 @@ import static java.lang.System.out;
 
 public class SecurityPage {
 
-    @Getter
     private static final int easyComplexityColor = 85;
 
-    @Getter
     private static final int mediumComplexityColor = 214;
 
-    @Getter
     private static final int strongComplexityColor = 177;
 
-    @Getter
     private static final int extraComplexityColor = 201;
 
     private static final String CHAR_POOL_EASY = "abcdefghijklmnopqrstuvwxyz";
@@ -168,14 +164,17 @@ public class SecurityPage {
         modifyMessage('n', 1);
 
         out.print(alignment(58) + getColor(sysLayoutColor) + "Select encryption algorithm [" +
-                getColorText("AES", sysMainColor) + "/" + getColorText("DES", sysMainColor) + "/" +
-                getColorText("RSA", sysMainColor) + "]: ");
+                getColor(sysMainColor) +"AES" + getColor(sysLayoutColor) + "/" +
+                getColor(sysMainColor) + "RSA" + getColor(sysLayoutColor) + "/" +
+                getColor(sysMainColor) + "Chacha20" + getColor(sysLayoutColor) + "/" +
+                getColor(sysMainColor) + "Blowfish" + getColor(sysLayoutColor) + "]: ");
         String algorithm = scanner.nextLine().toLowerCase();
 
         switch (algorithm) {
             case "aes" -> encryptAES();
-            case "des" -> encryptDES();
             case "rsa" -> encryptRSA();
+            case "chacha20" -> encryptChaCha20();
+            case "blowfish" -> encryptBlowfish();
             default -> out.print("");
         }
     }
@@ -184,14 +183,17 @@ public class SecurityPage {
         modifyMessage('n', 1);
 
         out.print(alignment(58) + getColor(sysLayoutColor) + "Select decryption algorithm [" +
-                getColorText("AES", sysMainColor) + "/" + getColorText("DES", sysMainColor) + "/" +
-                getColorText("RSA", sysMainColor) + "]: ");
+                getColor(sysMainColor) +"AES" + getColor(sysLayoutColor) + "/" +
+                getColor(sysMainColor) + "RSA" + getColor(sysLayoutColor) + "/" +
+                getColor(sysMainColor) + "Chacha20" + getColor(sysLayoutColor) + "/" +
+                getColor(sysMainColor) + "Blowfish" + getColor(sysLayoutColor) + "]: ");
         String algorithm = scanner.nextLine().toLowerCase();
 
         switch (algorithm) {
             case "aes" -> decryptAES();
-            case "des" -> decryptDES();
             case "rsa" -> decryptRSA();
+            case "chacha20" -> decryptChaCha20();
+            case "blowfish" -> decryptBlowfish();
             default -> out.print("");
         }
     }
@@ -223,27 +225,29 @@ public class SecurityPage {
         }
     }
 
-    //encrypt des
-    private static void encryptDES() {
+    //decrypt aes
+    private static void decryptAES() {
         try {
             modifyMessage('n', 1);
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
-            String plainText = scanner.nextLine();
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
+            String encryptedText = scanner.nextLine();
 
-            KeyGenerator keyGen = KeyGenerator.getInstance("DES");
-            SecretKey secretKey = keyGen.generateKey();
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Key [" + getColor(sysMainColor) + "Base64" + getColor(sysLayoutColor)
+                    + " encoded]: ");
+            String base64Key = scanner.nextLine();
 
-            Cipher cipher = Cipher.getInstance("DES");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            byte[] decodedKey = Base64.getDecoder().decode(base64Key);
+            SecretKeySpec secretKey = new SecretKeySpec(decodedKey, "AES");
 
-            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
-            String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
-            String base64Key = Base64.getEncoder().encodeToString(secretKey.getEncoded());
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
-            message("Encrypted Text: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
-            message("Key [Base64]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::println);
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            String decryptedText = new String(decryptedBytes);
+
+            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+            message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
     }
 
@@ -274,57 +278,6 @@ public class SecurityPage {
         }
     }
 
-    //decrypt aes
-    private static void decryptAES() {
-        try {
-            modifyMessage('n', 1);
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
-            String encryptedText = scanner.nextLine();
-
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Key [" + getColor(sysMainColor) + "Base64" + getColor(sysLayoutColor)
-                    + " encoded]: ");
-            String base64Key = scanner.nextLine();
-
-            byte[] decodedKey = Base64.getDecoder().decode(base64Key);
-            SecretKeySpec secretKey = new SecretKeySpec(decodedKey, "AES");
-
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-
-            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
-            String decryptedText = new String(decryptedBytes);
-
-            message("Decrypted Text: " + decryptedText, sysLayoutColor, 58, 0, out::println);
-        } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
-        }
-    }
-
-    //decrypt des
-    private static void decryptDES() {
-        try {
-            modifyMessage('n', 1);
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
-            String encryptedText = scanner.nextLine();
-
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter DES key [Base64]: ");
-            String base64Key = scanner.nextLine();
-
-            byte[] decodedKey = Base64.getDecoder().decode(base64Key);
-            SecretKeySpec secretKey = new SecretKeySpec(decodedKey, "DES");
-
-            Cipher cipher = Cipher.getInstance("DES");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-
-            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
-            String decryptedText = new String(decryptedBytes);
-
-            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
-        } catch (Exception e) {
-            message("Error decrypting DES: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
-        }
-    }
-
     //decrypt rsa
     private static void decryptRSA() {
         try {
@@ -348,6 +301,115 @@ public class SecurityPage {
             message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting RSA: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    // encrypt ChaCha20
+    private static void encryptChaCha20() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
+            String plainText = scanner.nextLine();
+
+            byte[] key = new byte[32];
+            Random random = new Random();
+            random.nextBytes(key);
+            byte[] nonce = new byte[12];
+            random.nextBytes(nonce);
+
+            Cipher cipher = Cipher.getInstance("ChaCha20");
+            SecretKeySpec secretKey = new SecretKeySpec(key, "ChaCha20");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(nonce));
+
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
+            String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
+            String base64Key = Base64.getEncoder().encodeToString(key);
+            String base64Nonce = Base64.getEncoder().encodeToString(nonce);
+
+            message("Encrypted Text [ChaCha20]: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Key [Base64]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::println);
+            message("Nonce [Base64]: " + getColor(sysMainColor) + base64Nonce, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    // decrypt ChaCha20
+    private static void decryptChaCha20() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
+            String encryptedText = scanner.nextLine();
+
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Key [Base64] encoded: ");
+            String base64Key = scanner.nextLine();
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Nonce [Base64] encoded: ");
+            String base64Nonce = scanner.nextLine();
+
+            byte[] key = Base64.getDecoder().decode(base64Key);
+            byte[] nonce = Base64.getDecoder().decode(base64Nonce);
+
+            Cipher cipher = Cipher.getInstance("ChaCha20");
+            SecretKeySpec secretKey = new SecretKeySpec(key, "ChaCha20");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(nonce));
+
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            String decryptedText = new String(decryptedBytes);
+
+            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    // encrypt Blowfish
+    private static void encryptBlowfish() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
+            String plainText = scanner.nextLine();
+
+            byte[] key = new byte[16];
+            Random random = new Random();
+            random.nextBytes(key);
+
+            Cipher cipher = Cipher.getInstance("Blowfish");
+            SecretKeySpec secretKey = new SecretKeySpec(key, "Blowfish");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+            byte[] encryptedBytes = cipher.doFinal(plainText.getBytes());
+            String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
+            String base64Key = Base64.getEncoder().encodeToString(key);
+
+            message("Encrypted Text [Blowfish]: " + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::println);
+            message("Key [Base64]: " + getColor(sysMainColor) + base64Key, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error encrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+        }
+    }
+
+    // decrypt Blowfish
+    private static void decryptBlowfish() {
+        try {
+            modifyMessage('n', 1);
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter encrypted text to decrypt: ");
+            String encryptedText = scanner.nextLine();
+
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Key [Base64] encoded: ");
+            String base64Key = scanner.nextLine();
+
+            byte[] key = Base64.getDecoder().decode(base64Key);
+
+            Cipher cipher = Cipher.getInstance("Blowfish");
+            SecretKeySpec secretKey = new SecretKeySpec(key, "Blowfish");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+            byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
+            String decryptedText = new String(decryptedBytes);
+
+            message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
+        } catch (Exception e) {
+            message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
     }
 }
