@@ -345,7 +345,7 @@ public class CryptographyPage {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(inputText.getBytes(StandardCharsets.UTF_8));
 
-            message("Hash [SHA256] output: " + getColor(sysMainColor) + bytesToHex(hash), sysLayoutColor, 58, 0, out::println);
+            message("Hash [" + getColor(sysMainColor) + "SHA256" + getColor(sysLayoutColor) + "] output: " + getColor(sysMainColor) + bytesToHex(hash), sysLayoutColor, 58, 0, out::println);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error hashing input.", e);
         }
