@@ -1,5 +1,10 @@
 package core.pages;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
@@ -62,21 +67,69 @@ public class TerminalPage {
     private static void executeCommand() {
         while (true) {
             try {
-                out.print(alignment(58) + getColor(sysMainColor) + "Enter command" + getColor(sysLayoutColor) + ": ");
-                String input = scanner.nextLine();
+                out.print(alignment(58) + getBackColor(33) + getColor(sysLayoutColor)
+                        + "Enter command:" + RESET + getColor(sysLayoutColor) + " ");
+                String input = scanner.nextLine().trim();
 
-                modifyMessage('n', 1);
-
-                if(input.equalsIgnoreCase("exit")) {
+                if (input.equalsIgnoreCase("exit")) {
+                    modifyMessage('n',1);
                     return;
                 }
-                else{
-                    executeTerminalCommand(input);
-                }
+                executeTerminalCommandsModified(input);
 
             } catch (Exception e) {
-                message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+                message(getBackColor(sysRejectionColor)+ "Error: " + e.getMessage() + RESET, sysLayoutColor, 58, 0, out::println);
             }
         }
+    }
+
+    public static void executeTerminalCommandsModified(@NotNull String command) {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+
+        if (command.contains(" ")) processBuilder.command(command.split(" "));
+        else processBuilder.command(command);
+        processBuilder.redirectErrorStream(true);
+
+        try {
+            Process process = processBuilder.start();
+            Thread outputThread = getOutputThread(process);
+
+            int exitCode = process.waitFor();
+            outputThread.join();
+
+            if (exitCode != 0) message(getBackColor(sysRejectionColor) + "Command failed with exit code: " + exitCode + RESET,
+                    sysLayoutColor, 58, 0, out::println);
+            else {
+                modifyMessage('n', 1);
+                message(getBackColor(40) + "Process completed successfully." + RESET,
+                        sysLayoutColor, 58, 0, out::println);
+            }
+
+        } catch (IOException e) {
+            message(getBackColor(sysRejectionColor) + "I/O Error while executing command: " + e.getMessage() + RESET,
+                    sysLayoutColor, 58, 0, out::println);
+
+        } catch (InterruptedException e) {
+            message(getBackColor(sysRejectionColor) + "Process was interrupted: " + e.getMessage() + RESET,
+                    sysLayoutColor, 58, 0, out::println);
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private static @NotNull Thread getOutputThread(Process process) {
+        Thread outputThread = new Thread(() -> {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    message(getBackColor(33) + line + RESET, sysLayoutColor, 58, 0, out::print);
+                }
+            } catch (IOException e) {
+                message(getBackColor(sysRejectionColor) + "Error reading process output: " + e.getMessage() + RESET,
+                        sysLayoutColor, 58, 0, out::println);
+            }
+        });
+
+        outputThread.start();
+        return outputThread;
     }
 }
