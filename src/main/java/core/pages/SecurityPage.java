@@ -37,7 +37,7 @@ public class SecurityPage {
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ", "");
+            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
