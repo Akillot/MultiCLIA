@@ -14,7 +14,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.6.1.1";
+        String appVersion = "A-0.8.6.1.2";
         return getColorText(appVersion, sysMainColor);
     }
 
@@ -35,6 +35,7 @@ public  class InfoPage {
                 sysMainColor, sysLayoutColor, sysRejectionColor);
         marginBorder(2,1);
     }
+
     //app directory
     private static void displayApplicationDirectory() {
         try {

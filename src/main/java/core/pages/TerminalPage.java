@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
@@ -18,6 +20,7 @@ import static java.lang.System.out;
 public class TerminalPage {
 
     private static Scanner scanner = new Scanner(System.in);
+    private static Path currentDirectory = Paths.get("").toAbsolutePath();
 
     public static void displayTerminalPage() {
         marginBorder(1, 2);
@@ -83,53 +86,51 @@ public class TerminalPage {
         }
     }
 
-    public static void executeTerminalCommandsModified(@NotNull String command) {
-        ProcessBuilder processBuilder = new ProcessBuilder();
-
-        if (command.contains(" ")) processBuilder.command(command.split(" "));
-        else processBuilder.command(command);
-        processBuilder.redirectErrorStream(true);
-
+    private static void executeTerminalCommandsModified(@NotNull String command) {
         try {
-            Process process = processBuilder.start();
-            Thread outputThread = getOutputThread(process);
+            String[] commands = command.split(" ");
 
-            int exitCode = process.waitFor();
-            outputThread.join();
-
-            if (exitCode != 0) message(getBackColor(sysRejectionColor) + "Command failed with exit code: " + exitCode + RESET,
-                    sysLayoutColor, 58, 0, out::println);
-            else {
-                modifyMessage('n', 1);
-                message(getBackColor(40) + "Process completed successfully." + RESET,
-                        sysLayoutColor, 58, 0, out::println);
+            if (commands[0].equals("cd")) {
+                if (commands.length > 1) {
+                    Path newPath = currentDirectory.resolve(commands[1]).normalize();
+                    if (newPath.toFile().exists() && newPath.toFile().isDirectory()) {
+                        currentDirectory = newPath;
+                        message(getBackColor(214) + "Directory changed to: " + currentDirectory + "." + RESET, sysLayoutColor, 58, 0, out::println);
+                    } else {
+                        message(getBackColor(sysRejectionColor) + "No such directory: " + commands[1] + "." + RESET, sysLayoutColor, 58, 0, out::println);
+                    }
+                } else {
+                    message(getBackColor(45) + "Usage: cd <directory>" + RESET, sysLayoutColor, 58, 0, out::println);
+                }
+                return;
             }
 
-        } catch (IOException e) {
-            message(getBackColor(sysRejectionColor) + "I/O Error while executing command: " + e.getMessage() + "." + RESET,
-                    sysLayoutColor, 58, 0, out::println);
+            ProcessBuilder processBuilder = new ProcessBuilder(commands);
+            processBuilder.directory(currentDirectory.toFile());
+            processBuilder.redirectErrorStream(true);
 
-        } catch (InterruptedException e) {
-            message(getBackColor(sysRejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET,
-                    sysLayoutColor, 58, 0, out::println);
-            Thread.currentThread().interrupt();
-        }
-    }
+            Process process = processBuilder.start();
 
-    private static @NotNull Thread getOutputThread(Process process) {
-        Thread outputThread = new Thread(() -> {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     message(getBackColor(67) + line + RESET, sysLayoutColor, 58, 0, out::print);
                 }
-            } catch (IOException e) {
-                message(getBackColor(sysRejectionColor) + "Error reading process output: " + e.getMessage() + "." + RESET,
-                        sysLayoutColor, 58, 0, out::println);
             }
-        });
 
-        outputThread.start();
-        return outputThread;
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                message(getBackColor(sysRejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET, sysLayoutColor, 58, 0, out::println);
+            } else {
+                modifyMessage('n', 1);
+                message(getBackColor(34) + "Process completed successfully." + RESET, sysLayoutColor, 58, 0, out::println);
+            }
+
+        } catch (IOException e) {
+            message(getBackColor(sysRejectionColor) + "I/O Error while executing command: " + e.getMessage() + "." + RESET, sysLayoutColor, 58, 0, out::println);
+        } catch (InterruptedException e) {
+            message(getBackColor(sysRejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET, sysLayoutColor, 58, 0, out::println);
+            Thread.currentThread().interrupt();
+        }
     }
 }
