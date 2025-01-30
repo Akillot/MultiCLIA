@@ -17,7 +17,8 @@ public class TerminalPage {
 
     public static void displayTerminalPage() {
         marginBorder(1, 2);
-        message("Terminal:", sysLayoutColor, 58, 0, out::println);
+        message("Terminal:", sysLayoutColor, 58, 0, out::print);
+        displayListOfCommands();
 
         while (true) {
             slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + "> ",
@@ -30,6 +31,7 @@ public class TerminalPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
+                case "list of commands", "/lc" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
                     return;
@@ -37,5 +39,17 @@ public class TerminalPage {
                 default -> out.print("");
             }
         }
+    }
+
+    private static void displayListOfCommands(){
+        modifyMessage('n',1);
+        message("·  Clear Terminal [" + getColor(sysMainColor)
+                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  List Of Commands [" + getColor(sysMainColor)
+                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  Exit [" + getColor(sysMainColor)
+                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 }

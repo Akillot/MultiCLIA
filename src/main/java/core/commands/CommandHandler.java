@@ -20,12 +20,13 @@ public class CommandHandler {
             "cmds" ,"settings", "rerun", "ip address",
             "info", "help", "clear", "time",
             "network", "security",
-            "cryptography", "support", "exit"};
+            "cryptography", "terminal", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/ip",
             "/i", "/h", "/cl", "/t",
-            "/n", "/sc", "/cr", "/su", "/e"};
+            "/n", "/sc", "/cr", "/ter",
+            "/su", "/e"};
 
     public static String[] extensionCmds = {};
 
@@ -57,8 +58,9 @@ public class CommandHandler {
             case 8 -> NetworkPage::displayNetworkPage;
             case 9 -> SecurityPage::displaySecurityPage;
             case 10 -> CryptographyPage::displayEncryptionPage;
-            case 11 -> SupportPage::displaySupportPage;
-            case 12 -> ExitPage::displayExitPage;
+            case 11 -> TerminalPage::displayTerminalPage;
+            case 12 -> SupportPage::displaySupportPage;
+            case 13 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
