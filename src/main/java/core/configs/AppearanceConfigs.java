@@ -7,8 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static core.configs.TextConfigs.alignment;
-import static core.configs.TextConfigs.modifyMessage;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class AppearanceConfigs {
@@ -24,7 +23,6 @@ public class AppearanceConfigs {
 
     //Borders
     public static final int DEFAULT_BORDER_WIDTH = 62;
-    private static int borderCharIndex = 0;
 
     public static final String RESET = "\033[0m";
     public static final String UNDERLINE = "\033[4m";
@@ -78,11 +76,7 @@ public class AppearanceConfigs {
     }
 
     public static boolean setBorderCharIndex(int index) {
-        if (index >= 0 && index < borderChars.size()) {
-            borderCharIndex = index;
-            return true;
-        }
-        return false;
+        return index >= 0 && index < borderChars.size();
     }
 
     public static void addBorderChar(String newChar) {
@@ -92,12 +86,10 @@ public class AppearanceConfigs {
     }
 
     public static void border() {
-        String borderChar = borderChars.get(borderCharIndex);
-        out.print(getColor(sysLayoutColor) + borderChar);
-        for (int i = 0; i < 115; i++) {
-            out.print(getColor(sysLayoutColor) + borderChar);
-        }
-        out.println(getColor(sysLayoutColor) + borderChar);
+        message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                sysLayoutColor,60,0,out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
