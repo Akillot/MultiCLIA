@@ -68,7 +68,7 @@ public class TerminalPage {
         while (true) {
             try {
                 out.print(alignment(58) + getBackColor(33) + getColor(sysLayoutColor)
-                        + "Enter command:" + RESET + getColor(sysLayoutColor) + " ");
+                        + "Enter command [or exit to quit]:" + RESET + getColor(sysLayoutColor) + " ");
                 String input = scanner.nextLine().trim();
 
                 if (input.equalsIgnoreCase("exit")) {
@@ -78,7 +78,7 @@ public class TerminalPage {
                 executeTerminalCommandsModified(input);
 
             } catch (Exception e) {
-                message(getBackColor(sysRejectionColor)+ "Error: " + e.getMessage() + RESET, sysLayoutColor, 58, 0, out::println);
+                message(getBackColor(sysRejectionColor)+ "Error: " + e.getMessage() + "." + RESET, sysLayoutColor, 58, 0, out::println);
             }
         }
     }
@@ -106,11 +106,11 @@ public class TerminalPage {
             }
 
         } catch (IOException e) {
-            message(getBackColor(sysRejectionColor) + "I/O Error while executing command: " + e.getMessage() + RESET,
+            message(getBackColor(sysRejectionColor) + "I/O Error while executing command: " + e.getMessage() + "." + RESET,
                     sysLayoutColor, 58, 0, out::println);
 
         } catch (InterruptedException e) {
-            message(getBackColor(sysRejectionColor) + "Process was interrupted: " + e.getMessage() + RESET,
+            message(getBackColor(sysRejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET,
                     sysLayoutColor, 58, 0, out::println);
             Thread.currentThread().interrupt();
         }
@@ -121,10 +121,10 @@ public class TerminalPage {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    message(getBackColor(33) + line + RESET, sysLayoutColor, 58, 0, out::print);
+                    message(getBackColor(67) + line + RESET, sysLayoutColor, 58, 0, out::print);
                 }
             } catch (IOException e) {
-                message(getBackColor(sysRejectionColor) + "Error reading process output: " + e.getMessage() + RESET,
+                message(getBackColor(sysRejectionColor) + "Error reading process output: " + e.getMessage() + "." + RESET,
                         sysLayoutColor, 58, 0, out::println);
             }
         });
