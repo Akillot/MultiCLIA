@@ -111,7 +111,7 @@ public class CommandManager {
         PackageUnifier registry = new PackageUnifier();
         try {
             slowMotionText(0, searchingLineAlignment, false,
-                    getColor(sysLayoutColor) + "> ", "");
+                    getColor(sysLayoutColor) + searchingArrow, "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 
             if (!registry.executeCommand(nameOfFunction)) {

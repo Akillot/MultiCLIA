@@ -39,7 +39,7 @@ public class SettingsPage {
 
         while (true) {
             slowMotionText(0, searchingLineAlignment, false,
-                    getColor(sysLayoutColor) + "> ", "");
+                    getColor(sysLayoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {

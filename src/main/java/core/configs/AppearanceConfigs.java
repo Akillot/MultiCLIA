@@ -15,6 +15,8 @@ public class AppearanceConfigs {
     //Alignment
     public static int searchingLineAlignment = 48;
 
+    public static String searchingArrow = "-> ";
+
     //Colors
     public static int sysMainColor = 147;
     public static int sysLayoutColor = 15;
