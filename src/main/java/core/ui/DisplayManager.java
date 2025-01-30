@@ -29,6 +29,7 @@ public class DisplayManager {
             formatCommandWithDescription("network", "/n", "Shows network page"),
             formatCommandWithDescription("security", "/sc", "Shows security page"),
             formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),
+            formatCommandWithDescription("terminal", "/ter", "Shows terminal page"),
             formatCommandWithDescription("support", "/su", "Shows support page"),
             formatCommandWithDescription("exit", "/e", "Terminates the application")
     };
@@ -66,17 +67,17 @@ public class DisplayManager {
 
     private static void displayAllCommandList() {
         modifyMessage('n', 1);
-        out.println(alignment(38) + getColor(sysMainColor) + "System Commands"
+        out.println(alignment(58) + getColor(sysLayoutColor) + "Commands: \n"
                 + alignment(-68) + getColor(sysMainColor));
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
 
         for (int i = 0; i < maxRows; i++) {
-            String systemCmd = i < fullSystemCmds.length ? "· " + fullSystemCmds[i] + " ["
+            String systemCmd = i < fullSystemCmds.length ? "·  " + fullSystemCmds[i] + " ["
                     + getColor(sysMainColor) + shortSystemCmds[i] + getColor(sysLayoutColor) + "]" : "";
-            String extensionCmd = i < extensionCmds.length ? "· " + extensionCmds[i] : "";
+            String extensionCmd = i < extensionCmds.length ? "·  " + extensionCmds[i] : "";
 
-            out.printf(alignment(38) + getColor(sysLayoutColor) + "%-40s"
+            out.printf(alignment(58) + getColor(sysLayoutColor) + "%-40s"
                     + alignment(-18) + getColor(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
