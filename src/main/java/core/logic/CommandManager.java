@@ -164,9 +164,9 @@ public class CommandManager {
                         + ".", sysLayoutColor, 58, 0, out::println);
             }
         } catch (IOException e) {
-            message("I/O Error while executing command: " + e.getMessage(), sysRejectionColor, 58, 0, out::println);
+            message("I/O Error while executing command: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         } catch (InterruptedException e) {
-            message("Process was interrupted: " + e.getMessage(), sysRejectionColor, 58, 0, out::println);
+            message("Process was interrupted: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
             Thread.currentThread().interrupt();
         }
     }

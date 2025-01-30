@@ -158,8 +158,8 @@ public class TimePage {
     // /sw command
     private static void runStopwatch() {
         modifyMessage('n', 1);
-        message("Press '" + getColor(sysMainColor) + "Anything" + getColor(sysLayoutColor)
-                        + "' to start stopwatch and again to stop:", sysLayoutColor, 58, 0, out::print);
+        message("Press " + getColor(sysMainColor) + "any key" + getColor(sysLayoutColor)
+                        + " to start stopwatch and again to stop:", sysLayoutColor, 58, 0, out::print);
         scanner.nextLine();
         long startTime = System.currentTimeMillis();
         message("Stopwatch: " + getColor(sysAcceptanceColor) + "started", sysLayoutColor, 58, 0, out::print);
