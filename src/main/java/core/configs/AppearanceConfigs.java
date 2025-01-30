@@ -88,8 +88,8 @@ public class AppearanceConfigs {
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                sysLayoutColor,60,0,out::print);
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                sysLayoutColor,62,0,out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
