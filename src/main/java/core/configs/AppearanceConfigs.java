@@ -95,9 +95,9 @@ public class AppearanceConfigs {
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
-        insertControlCharacters('n',upperSide);
+        insertControlChars('n',upperSide);
         border();
-        insertControlCharacters('n',lowerSide);
+        insertControlChars('n',lowerSide);
     }
 
     //Animations

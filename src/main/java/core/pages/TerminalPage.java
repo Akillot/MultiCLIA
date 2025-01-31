@@ -34,11 +34,11 @@ public class TerminalPage {
 
             switch (input) {
                 case "enter command", "/ec" -> {
-                    insertControlCharacters('n',1);
+                    insertControlChars('n',1);
                     executeCommand();
                 }
                 case "rerun", "/rr" -> {
-                    insertControlCharacters('n',1);
+                    insertControlChars('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -53,7 +53,7 @@ public class TerminalPage {
     }
 
     private static void displayListOfCommands(){
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
         message("·  Enter command [" + getColor(sysMainColor)
                 + "/ec" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -75,7 +75,7 @@ public class TerminalPage {
                 String input = scanner.nextLine().trim();
 
                 if (input.equalsIgnoreCase("exit")) {
-                    insertControlCharacters('n',1);
+                    insertControlChars('n',1);
                     return;
                 }
                 executeTerminalCommandsModified(input);
@@ -122,7 +122,7 @@ public class TerminalPage {
             if (exitCode != 0) {
                 message(getBackColor(sysRejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET, sysLayoutColor, 58, 0, out::println);
             } else {
-                insertControlCharacters('n', 1);
+                insertControlChars('n', 1);
                 message(getBackColor(34) + "Process completed successfully." + RESET, sysLayoutColor, 58, 0, out::println);
             }
 

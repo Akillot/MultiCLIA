@@ -61,7 +61,7 @@ public class TextConfigs {
             }
         }
         printMethod.accept(output.toString());
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
     }
 
     public static void displayConfirmation(String preText, String confirmation_1, String confirmation_2,
@@ -76,9 +76,9 @@ public class TextConfigs {
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)
-    public static void insertControlCharacters(char modifier, int amount) {
+    public static void insertControlChars(char modifier, int amount) {
         if(amount < 0){
-            message("Error, number of modifiers is less than 0", sysRejectionColor,58,0, out::println);
+            message("Error, number of modifiers is less than 0.", sysLayoutColor,58,0, out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";

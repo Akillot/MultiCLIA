@@ -48,7 +48,7 @@ public class DisplayManager {
         marginBorder(1, 2);
         for (String rule : rules) {
             message(rule, sysLayoutColor, 58, 0, out::print);
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
         }
         marginBorder(1, 1);
     }
@@ -66,7 +66,7 @@ public class DisplayManager {
     }
 
     private static void displayAllCommandList() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
         out.println(alignment(58) + getColor(sysLayoutColor) + "Commands: \n"
                 + alignment(-68) + getColor(sysMainColor));
 
