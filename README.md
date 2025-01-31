@@ -1,4 +1,4 @@
-![](images/MultiCLIA.b&w.2k.png)
+![](images/MultiCLIA.b&w.2k.jpg)
 
 
 # MultiCLIA
