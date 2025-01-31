@@ -48,7 +48,7 @@ public class DisplayManager {
         marginBorder(1, 2);
         for (String rule : rules) {
             message(rule, sysLayoutColor, 58, 0, out::print);
-            modifyMessage('n', 1);
+            insertControlCharacters('n', 1);
         }
         marginBorder(1, 1);
     }
@@ -66,7 +66,7 @@ public class DisplayManager {
     }
 
     private static void displayAllCommandList() {
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         out.println(alignment(58) + getColor(sysLayoutColor) + "Commands: \n"
                 + alignment(-68) + getColor(sysMainColor));
 
@@ -81,6 +81,10 @@ public class DisplayManager {
                     + alignment(-18) + getColor(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
+    }
+
+    public static @NotNull String horizontalMargining(int steps) {
+        return " ".repeat(Math.max(0, steps));
     }
 
     // /ip
@@ -114,5 +118,9 @@ public class DisplayManager {
             message("Error executing action", sysRejectionColor, 58, 0, out::print);
             message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
         }
+    }
+
+    public static void translateText(){
+
     }
 }

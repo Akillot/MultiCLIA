@@ -17,7 +17,7 @@ public class ExitPage {
     }
 
     private static void displayExitPrompt() {
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         displayConfirmation(
                 "Enter", "y", "+", "to exit MultiCLIA and",
                 "n", "-", "to stay in",
@@ -51,7 +51,7 @@ public class ExitPage {
         message(
                 "Program terminated successfully" + getColor(sysLayoutColor) + ".",
                 sysMainColor, 58, 0, out::println);
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         exit(0);
     }
 

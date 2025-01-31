@@ -48,7 +48,7 @@ public class SettingsPage {
                 case "colors", "/col" -> displayColorTable();
                 case "java", "/j" -> displayJavaInfo();
                 case "rerun", "/rr" -> {
-                    modifyMessage('n',1);
+                    insertControlCharacters('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -63,7 +63,7 @@ public class SettingsPage {
     }
 
     private static void displayListOfCommands(){
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         message("·  Memory [" + getColor(sysMainColor)
                 + "/m" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -98,7 +98,7 @@ public class SettingsPage {
         long maxMemory = runtime.maxMemory() / (1024 * 1024 * 1024);
         double usagePercentage = (double) usedOsMemory / totalOsMemory * 100;
 
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         message("System Memory Info:", sysLayoutColor, 58, 0, out::println);
 
         // Display JVM memory stats
@@ -108,7 +108,7 @@ public class SettingsPage {
         message("Total JVM Memory: " + formatMemory(totalJvmMemory), sysLayoutColor, 58, 0, out::println);
 
         // Display ROM stats
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         message("ROM Info", sysMainColor, 58, 0, out::println);
         executeTerminalCommand("df -h");
     }
@@ -125,7 +125,7 @@ public class SettingsPage {
         double cpuLoad = osBean.getCpuLoad() * 100;
         double processCpuLoad = osBean.getProcessCpuLoad() * 100;
 
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         message("System CPU Statistics:", sysLayoutColor, 58, 0, out::println);
         displayCpuInfo();
         message("System CPU Load: "
@@ -145,7 +145,7 @@ public class SettingsPage {
     //Color methods
     @Contract(pure = true)
     private static void displayColorTable() {
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         message("Color Table:", sysLayoutColor, 58, 0, out::print);
         printColorRange(0, sysLayoutColor);
         printColorBlock();
@@ -158,7 +158,7 @@ public class SettingsPage {
         for (int i = start; i <= end; i++) {
             out.print(getColor(sysLayoutColor) + getBackColor(i)
                     + tableAlignment() + " " + i + " " + RESET);
-            if ((i - start + 1) % 8 == 0) modifyMessage('n',2);
+            if ((i - start + 1) % 8 == 0) insertControlCharacters('n',2);
         }
     }
 
@@ -174,9 +174,9 @@ public class SettingsPage {
                         + tableAlignment() + " " + colorCode + " " + RESET);
             }
             if(row == 11){
-                modifyMessage('n',1);
+                insertControlCharacters('n',1);
             }
-            modifyMessage('n', 1);
+            insertControlCharacters('n', 1);
         }
     }
 
@@ -194,7 +194,7 @@ public class SettingsPage {
     }
 
     private static void displayJavaInfo() {
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         displayLogo(JAVA_ASCII_LOGO);
         message("━━━━━━━━━━━━━━━━━━━━━━",sysLayoutColor, 58, 0, out::println);
 
