@@ -14,7 +14,7 @@ public  class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.6.1.3";
+        String appVersion = "A-0.8.6.1.4";
         return getColorText(appVersion, sysMainColor);
     }
 
@@ -25,7 +25,7 @@ public  class InfoPage {
         message("Author: Nick Zozulia", sysLayoutColor,58,0,out::println);
 
         displayApplicationDirectory();
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
@@ -53,7 +53,7 @@ public  class InfoPage {
 
     //important links
     private static void displayImportantLinks(){
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
 
         choice(getColor(27) + "G" + getColor(160) + "m" + getColor(220)
                 + "a" + getColor(27) + "i"
@@ -61,7 +61,7 @@ public  class InfoPage {
                 openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
                 sysMainColor, sysLayoutColor, sysRejectionColor);
 
-        modifyMessage('n', 2);
+        insertControlCharacters('n', 2);
 
         choice(getColor(sysLayoutColor) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 sysMainColor, sysLayoutColor, sysRejectionColor);

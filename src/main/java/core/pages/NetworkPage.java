@@ -34,7 +34,7 @@ public class NetworkPage {
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
                 case "rerun", "/rr" -> {
-                    modifyMessage('n',1);
+                    insertControlCharacters('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -49,7 +49,7 @@ public class NetworkPage {
     }
 
     private static void displayListOfCommands() {
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         message("·  Scan Ports [" + getColor(sysMainColor) + "/sp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -80,11 +80,11 @@ public class NetworkPage {
 
         ExecutorService executor = Executors.newFixedThreadPool(threads);
 
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         slowMotionText(0,58,false,
                 getColor(sysLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
-        modifyMessage('n',2);
+        insertControlCharacters('n',2);
 
         for (int port = startPort; port <= endPort; port++) {
             final int currentPort = port;
@@ -99,7 +99,7 @@ public class NetworkPage {
 
         executor.shutdown();
         while (!executor.isTerminated()) {}
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         message("Scanning completed.", sysLayoutColor, 58, 0, out::println);
     }
 
@@ -120,9 +120,9 @@ public class NetworkPage {
 
     // /ns
     private static void netStat() {
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::print);
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         executeTerminalCommand("netstat -an");
     }
 }

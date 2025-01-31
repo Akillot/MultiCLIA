@@ -51,9 +51,9 @@ public class StartPage {
     }
 
     private static void displayMenu() {
-        modifyMessage('n',2);
+        insertControlCharacters('n',2);
         switchLogo(mainLogoAscii, 48);
-        modifyMessage('n',1);
+        insertControlCharacters('n',1);
         getRandomMotto();
         getCurrentDate();
         marginBorder(1,1);
@@ -91,9 +91,9 @@ public class StartPage {
         switch (actualDate){
             case "31-12":
             case "01-01":
-                modifyMessage('n',2);
+                insertControlCharacters('n',2);
                 switchLogo(newYearAscii, 36);
-                modifyMessage('n',2);
+                insertControlCharacters('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,0,out::print);
                 break;

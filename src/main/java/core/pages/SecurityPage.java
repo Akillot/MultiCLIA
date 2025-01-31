@@ -43,7 +43,7 @@ public class SecurityPage {
             switch (input) {
                 case "generate password", "/gp" -> passwordCreatorMenu();
                 case "rerun", "/rr" -> {
-                    modifyMessage('n',1);
+                    insertControlCharacters('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -58,7 +58,7 @@ public class SecurityPage {
     }
 
     private static void displayListOfCommands() {
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         message("·  Generate password [" + getColor(sysMainColor) + "/gp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -70,7 +70,7 @@ public class SecurityPage {
     }
 
     private static void passwordCreatorMenu() {
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         out.print(alignment(58) + getColor(sysLayoutColor) + "Enter length of password [1-80]: ");
         try {
             passwordLength = scanner.nextInt();
@@ -87,7 +87,7 @@ public class SecurityPage {
 
         scanner.nextLine();
 
-        modifyMessage('n', 1);
+        insertControlCharacters('n', 1);
         out.print(alignment(58) + getColor(sysLayoutColor) + "Password complexity ["
                 + getColor(easyComplexityColor) + "light" + getColor(sysLayoutColor) + "|"
                 + getColor(easyComplexityColor) + "1" + getColor(sysLayoutColor) + ", "
@@ -101,7 +101,7 @@ public class SecurityPage {
         String passwordComplexity = scanner.nextLine().toLowerCase();
         String generatedPassword = createPassword(passwordComplexity);
         if (generatedPassword != null) {
-            modifyMessage('n', 1);
+            insertControlCharacters('n', 1);
             message("Generated Password: " + generatedPassword,
                     sysLayoutColor, 58, 0, out::println);
         } else {
