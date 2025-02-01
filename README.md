@@ -71,7 +71,7 @@ MultiCLIA is designed for:
    ```bash
    ./starter.sh
    ```
-###  Installation via Homebrew (Coming Soon):
+###  Installation via Homebrew (Coming Soon)(MacOS only):
    ```bash
    brew install multiclia
    ```
