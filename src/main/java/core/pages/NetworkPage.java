@@ -144,15 +144,31 @@ public class NetworkPage {
     private static void netStat() {
         try {
             insertControlChars('n', 1);
-            message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::println);
+            while(true) {
+                message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::println);
 
-            displayConfirmation("Enter","y","+",
-                    "to open and","n","-","to skip",
-                    sysAcceptanceColor, sysRejectionColor, sysLayoutColor,58);
+                displayConfirmation("Enter", "y", "+",
+                        "to open and", "n", "-", "to skip",
+                        sysAcceptanceColor, sysRejectionColor, sysLayoutColor, 58);
 
-            executeTerminalCommand("netstat -an");
+                out.print(alignment(58) + getColor(sysLayoutColor) + "Choice: ");
+                String answer = scanner.nextLine().toLowerCase();
+                insertControlChars('n', 1);
+
+                if (answer.equals("y") || answer.equals("+")) {
+                    executeTerminalCommand("netstat -an");
+                    return;
+                }
+
+                else if (answer.equals("n") || answer.equals("-")) {
+                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
+                                    + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            58, 0, out::println);
+                    return;
+                } else out.print("");
+            }
         }
-        catch (Exception e) {
+        catch(Exception e) {
             message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
         }
     }
