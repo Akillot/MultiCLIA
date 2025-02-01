@@ -3,7 +3,6 @@ package core.logic;
 import core.commands.PackageUnifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.awt.*;
@@ -23,7 +22,7 @@ import static java.lang.System.out;
 public class CommandManager {
 
     //HTTP request and additional methods
-    public static @Nullable String httpRequest(String userUri, String requestType, String text, String key) {
+    public static void httpRequest(String userUri, String requestType, String text, String key) {
         try {
             URL url = new URI(userUri).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -35,15 +34,14 @@ public class CommandManager {
             if (statusCode != 200) {
                 message("HTTP error: " + getColor(sysRejectionColor)
                         + statusCode, sysLayoutColor, 58, 0, out::print);
-                return null;
+                return;
             }
 
             String response = readResponse(connection);
-            return parseJsonResponse(response, key, text);
+            parseJsonResponse(response, key, text);
         } catch (URISyntaxException | IOException e) {
             message("Request failed: " + getColor(sysRejectionColor)
                     + e.getMessage(), sysLayoutColor, 58, 0, out::print);
-            return null;
         }
     }
 
@@ -58,16 +56,14 @@ public class CommandManager {
         return response.toString();
     }
 
-    private static @Nullable String parseJsonResponse(String response, String key, String text) {
+    private static void parseJsonResponse(String response, String key, String text) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String value = jsonResponse.optString(key, "Key not found");
             message(text + " " + value, sysLayoutColor, 58, 0, out::print);
-            return response;
         } catch (Exception e) {
             message("JSON parsing error: " + getColor(sysRejectionColor)
                     + e.getMessage(), sysLayoutColor, 58, 0, out::print);
-            return null;
         }
     }
 
