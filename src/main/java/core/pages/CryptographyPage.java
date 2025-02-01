@@ -22,7 +22,7 @@ import static java.lang.System.out;
 
 public class CryptographyPage {
 
-    public static void displayEncryptionPage() {
+    public static void displayCryptographyPage() {
         marginBorder(1, 2);
         message("Cryptography:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();

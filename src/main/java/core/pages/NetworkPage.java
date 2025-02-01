@@ -1,6 +1,8 @@
 package core.pages;
 
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,6 +30,7 @@ public class NetworkPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
+                case "ip-address", "/ip" -> displayUserIp();
                 case "scan ports", "/sp" -> scanPorts();
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
@@ -50,6 +53,9 @@ public class NetworkPage {
 
     private static void displayListOfCommands() {
         insertControlChars('n',1);
+        message("·  IP-Address [" + getColor(sysMainColor) + "/ip"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  Scan Ports [" + getColor(sysMainColor) + "/sp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -70,6 +76,22 @@ public class NetworkPage {
 
         message("·  Exit [" + getColor(sysMainColor) + "/e"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+    }
+
+    private static void displayUserIp() {
+        try {
+            insertControlChars('n',1);
+            InetAddress localHost = InetAddress.getLocalHost();
+            message("Your local IP: " + getColor(sysMainColor)
+                    + localHost, sysLayoutColor, 58, 0, out::print);
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
+                    + getColor(sysMainColor), "ip");
+            insertControlChars('n',1);
+        } catch (UnknownHostException e) {
+            message("IP is undefined", sysRejectionColor, 58, 0, out::print);
+            message("Status: " + getColor(sysRejectionColor)
+                    + "x", sysLayoutColor, 58, 0, out::print);
+        }
     }
 
     // /sp

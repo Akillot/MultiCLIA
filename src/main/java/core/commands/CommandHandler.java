@@ -17,16 +17,14 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static String[] fullSystemCmds = {
-            "cmds" ,"settings", "rerun", "ip address",
-            "info", "help", "clear", "time",
-            "network", "security",
-            "cryptography", "terminal", "support", "exit"};
+            "cmds" ,"settings", "rerun", "help", "info",
+            "clear", "time", "network", "security", "cryptography",
+            "terminal", "support", "exit"};
 
     public static String[] shortSystemCmds = {
-            "/c" ,"/s", "/rr", "/ip",
-            "/i", "/h", "/cl", "/t",
-            "/n", "/sc", "/cr", "/ter",
-            "/su", "/e"};
+            "/c" ,"/s", "/rr", "/h", "/i",
+            "/cl", "/t", "/n", "/sc", "/cr",
+            "/ter", "/su", "/e"};
 
     public static String[] extensionCmds = {};
 
@@ -43,7 +41,7 @@ public class CommandHandler {
             case 0 -> DisplayManager::displayCommandList;
             case 1 -> SettingsPage::displaySettingsPage;
             case 2 -> CommandManager::mainMenuRerun;
-            case 3 -> DisplayManager::displayUserIp;
+            case 3 -> DisplayManager::displayCommandsDescription;
             case 4 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
@@ -52,15 +50,14 @@ public class CommandHandler {
                             sysRejectionColor, 58, 0, out::println);
                 }
             };
-            case 5 -> DisplayManager::displayCommandsDescription;
-            case 6 -> DisplayManager::clearTerminal;
-            case 7 -> TimePage::displayTimePage;
-            case 8 -> NetworkPage::displayNetworkPage;
-            case 9 -> SecurityPage::displaySecurityPage;
-            case 10 -> CryptographyPage::displayEncryptionPage;
-            case 11 -> TerminalPage::displayTerminalPage;
-            case 12 -> SupportPage::displaySupportPage;
-            case 13 -> ExitPage::displayExitPage;
+            case 5 -> DisplayManager::clearTerminal;
+            case 6 -> TimePage::displayTimePage;
+            case 7 -> NetworkPage::displayNetworkPage;
+            case 8 -> SecurityPage::displaySecurityPage;
+            case 9 -> CryptographyPage::displayCryptographyPage;
+            case 10 -> TerminalPage::displayTerminalPage;
+            case 11 -> SupportPage::displaySupportPage;
+            case 12 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(58)
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
