@@ -35,7 +35,7 @@ public class TimePage {
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
                 case "rerun", "/rr" -> {
-                    insertControlCharacters('n',1);
+                    insertControlChars('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -50,7 +50,7 @@ public class TimePage {
     }
 
     private static void displayListOfCommands(){
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
         message("·  Current Time [" + getColor(sysMainColor)
                 + "/ct" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -71,7 +71,7 @@ public class TimePage {
     }
 
     private static void displayTime() {
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
         message("Current Time: " + getColor(sysMainColor)
                 + getCurrentTime(), sysLayoutColor, 58, 0, out::print);
         message("Current Time Zone: " + getColor(sysMainColor)
@@ -93,7 +93,7 @@ public class TimePage {
 
     private static void runTimer() {
         while (true) {
-            insertControlCharacters('n',1);
+            insertControlChars('n',1);
             out.print(alignment(58) + getColor(sysLayoutColor)
                     + "Enter time in seconds (or '" + getColor(sysMainColor)
                     + "exit" + getColor(sysLayoutColor) + "' to quit): ");
@@ -136,13 +136,13 @@ public class TimePage {
                     Thread.sleep(1000);
                 }
                 if (isTimerRunning) {
-                    insertControlCharacters('r', 1);
+                    insertControlChars('r', 1);
                     message("Time is up", sysLayoutColor, 58, 0, out::print);
                     out.print(alignment(58) + getColor(sysLayoutColor) + "Status: "
                             + getColor(sysAcceptanceColor) + " ✓");
-                    insertControlCharacters('n', 1);
+                    insertControlChars('n', 1);
                 }
-                insertControlCharacters('n',1);
+                insertControlChars('n',1);
                 out.print(alignment(58) + getColor(sysLayoutColor)
                         + "Enter time in seconds (or '" + getColor(sysMainColor)
                         + "exit" + getColor(sysLayoutColor) + "' to quit): ");
@@ -157,7 +157,7 @@ public class TimePage {
 
     // /sw command
     private static void runStopwatch() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
         message("Press " + getColor(sysMainColor) + "any key" + getColor(sysLayoutColor)
                         + " to start stopwatch and again to stop:", sysLayoutColor, 58, 0, out::print);
         scanner.nextLine();
@@ -182,7 +182,7 @@ public class TimePage {
 
     // /ctz command
     private static void displayCustomTimeZone() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
 
         while (true) {
             out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a time zone [e.g., "
@@ -208,7 +208,7 @@ public class TimePage {
         if (inputZone.equalsIgnoreCase("exit")) {
             if (isTimerRunning) {
                 isTimerRunning = false;
-                insertControlCharacters('n', 1);
+                insertControlChars('n', 1);
             }
             message("Terminated correctly" + getColor(sysLayoutColor)
                     + "." + getColor(sysMainColor) + "You are in time menu"

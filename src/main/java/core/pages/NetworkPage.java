@@ -1,6 +1,8 @@
 package core.pages;
 
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,13 +30,14 @@ public class NetworkPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
+                case "ip-address", "/ip" -> displayUserIp();
                 case "scan ports", "/sp" -> scanPorts();
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
                 case "rerun", "/rr" -> {
-                    insertControlCharacters('n',1);
+                    insertControlChars('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -49,7 +52,10 @@ public class NetworkPage {
     }
 
     private static void displayListOfCommands() {
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
+        message("·  IP-Address [" + getColor(sysMainColor) + "/ip"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
         message("·  Scan Ports [" + getColor(sysMainColor) + "/sp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -72,6 +78,22 @@ public class NetworkPage {
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
     }
 
+    private static void displayUserIp() {
+        try {
+            insertControlChars('n',1);
+            InetAddress localHost = InetAddress.getLocalHost();
+            message("Your local IP: " + getColor(sysMainColor)
+                    + localHost, sysLayoutColor, 58, 0, out::print);
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
+                    + getColor(sysMainColor), "ip");
+            insertControlChars('n',1);
+        } catch (UnknownHostException e) {
+            message("IP is undefined", sysRejectionColor, 58, 0, out::print);
+            message("Status: " + getColor(sysRejectionColor)
+                    + "x", sysLayoutColor, 58, 0, out::print);
+        }
+    }
+
     // /sp
     private static void scanPorts() {
         int startPort = 1;
@@ -80,11 +102,11 @@ public class NetworkPage {
 
         ExecutorService executor = Executors.newFixedThreadPool(threads);
 
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
         slowMotionText(0,58,false,
                 getColor(sysLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
-        insertControlCharacters('n',2);
+        insertControlChars('n',2);
 
         for (int port = startPort; port <= endPort; port++) {
             final int currentPort = port;
@@ -99,7 +121,7 @@ public class NetworkPage {
 
         executor.shutdown();
         while (!executor.isTerminated()) {}
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
         message("Scanning completed.", sysLayoutColor, 58, 0, out::println);
     }
 
@@ -120,9 +142,34 @@ public class NetworkPage {
 
     // /ns
     private static void netStat() {
-        insertControlCharacters('n', 1);
-        message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::print);
-        insertControlCharacters('n',1);
-        executeTerminalCommand("netstat -an");
+        try {
+            insertControlChars('n', 1);
+            while(true) {
+                message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::println);
+
+                displayConfirmation("Enter", "y", "+",
+                        "to open and", "n", "-", "to skip",
+                        sysAcceptanceColor, sysRejectionColor, sysLayoutColor, 58);
+
+                out.print(alignment(58) + getColor(sysLayoutColor) + "Choice: ");
+                String answer = scanner.nextLine().toLowerCase();
+                insertControlChars('n', 1);
+
+                if (answer.equals("y") || answer.equals("+")) {
+                    executeTerminalCommand("netstat -an");
+                    return;
+                }
+
+                else if (answer.equals("n") || answer.equals("-")) {
+                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
+                                    + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            58, 0, out::println);
+                    return;
+                } else out.print("");
+            }
+        }
+        catch(Exception e) {
+            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+        }
     }
 }

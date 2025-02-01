@@ -98,14 +98,6 @@ public class CommandManager {
         }
     }
 
-    public static String @NotNull [] getColorsForLogo() {
-        return new String[]{
-                getColor(219), getColor(183),
-                getColor(147), getColor(218),
-                getColor(182), getColor(218)
-        };
-    }
-
     //Searching
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
@@ -158,7 +150,7 @@ public class CommandManager {
             if (exitCode != 0) {
                 message("Command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
             } else {
-                insertControlCharacters('n', 1);
+                insertControlChars('n', 1);
                 message("Process completed "
                         + getColor(sysMainColor) + "successfully" + getColor(sysLayoutColor)
                         + ".", sysLayoutColor, 58, 0, out::println);
@@ -173,10 +165,10 @@ public class CommandManager {
 
     public static void processCommandWithHostInput(String command) {
         try {
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             out.print(alignment(58) + getColor(sysLayoutColor) + "Enter host [e.g., google.com]: ");
             String host = scanner.nextLine().trim();
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
 
             if (host.isEmpty()) {
                 message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);

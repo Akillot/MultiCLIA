@@ -1,6 +1,5 @@
 package core.pages;
 
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
@@ -14,7 +13,6 @@ import static java.lang.System.out;
 
 public class StartPage {
 
-    @Getter
     private static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o      .oooooo.   ooooo        ooooo         .o.       ",
             "`88.       .888'             `888    .o8    `\"'     d8P'  `Y8b  `888'        `888'        .888.      ",
@@ -51,9 +49,9 @@ public class StartPage {
     }
 
     private static void displayMenu() {
-        insertControlCharacters('n',2);
+        insertControlChars('n',2);
         switchLogo(mainLogoAscii, 48);
-        insertControlCharacters('n',1);
+        insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
         marginBorder(1,1);
@@ -65,7 +63,7 @@ public class StartPage {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
-                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need."};
+                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.", "What you think about when you think about love?"};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
@@ -91,9 +89,9 @@ public class StartPage {
         switch (actualDate){
             case "31-12":
             case "01-01":
-                insertControlCharacters('n',2);
+                insertControlChars('n',2);
                 switchLogo(newYearAscii, 36);
-                insertControlCharacters('n',2);
+                insertControlChars('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,0,out::print);
                 break;
@@ -107,5 +105,13 @@ public class StartPage {
             String coloredText = colors[i % colors.length] + logo[i] + RESET;
             message(coloredText, sysLayoutColor, alignment, 0, System.out::print);
         }
+    }
+
+    private static String @NotNull [] getColorsForLogo() {
+        return new String[]{
+                getColor(219), getColor(183),
+                getColor(147), getColor(218),
+                getColor(182), getColor(218)
+        };
     }
 }

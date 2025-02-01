@@ -2,13 +2,10 @@ package core.ui;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import static core.commands.CommandHandler.*;
 import static core.configs.AppearanceConfigs.*;
-import static core.logic.CommandManager.httpRequest;
 import static core.configs.TextConfigs.*;
 
 import static java.lang.System.*;
@@ -21,9 +18,8 @@ public class DisplayManager {
             formatCommandWithDescription("cmds", "/c", "Shows list of all commands"),
             formatCommandWithDescription("settings", "/s", "Shows settings of the application"),
             formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
-            formatCommandWithDescription("ip address", "/ip", "Shows local and external IP addresses"),
-            formatCommandWithDescription("info", "/i", "Shows app information"),
             formatCommandWithDescription("help", "/h", "Shows description of all commands"),
+            formatCommandWithDescription("info", "/i", "Shows app information"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
             formatCommandWithDescription("network", "/n", "Shows network page"),
@@ -48,7 +44,7 @@ public class DisplayManager {
         marginBorder(1, 2);
         for (String rule : rules) {
             message(rule, sysLayoutColor, 58, 0, out::print);
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
         }
         marginBorder(1, 1);
     }
@@ -66,7 +62,7 @@ public class DisplayManager {
     }
 
     private static void displayAllCommandList() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
         out.println(alignment(58) + getColor(sysLayoutColor) + "Commands: \n"
                 + alignment(-68) + getColor(sysMainColor));
 
@@ -85,23 +81,6 @@ public class DisplayManager {
 
     public static @NotNull String horizontalMargining(int steps) {
         return " ".repeat(Math.max(0, steps));
-    }
-
-    // /ip
-    public static void displayUserIp() {
-        marginBorder(1,2);
-        try {
-            InetAddress localHost = InetAddress.getLocalHost();
-            message("Your local IP: " + getColor(sysMainColor)
-                    + localHost, sysLayoutColor, 58, 0, out::print);
-            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
-                    + getColor(sysMainColor), "ip");
-        } catch (UnknownHostException e) {
-            message("IP is undefined", sysRejectionColor, 58, 0, out::print);
-            message("Status: " + getColor(sysRejectionColor)
-                    + "x", sysLayoutColor, 58, 0, out::print);
-        }
-        marginBorder(2,1);
     }
 
     // /cl

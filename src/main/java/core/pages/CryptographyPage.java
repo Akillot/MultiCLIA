@@ -22,7 +22,7 @@ import static java.lang.System.out;
 
 public class CryptographyPage {
 
-    public static void displayEncryptionPage() {
+    public static void displayCryptographyPage() {
         marginBorder(1, 2);
         message("Cryptography:", sysLayoutColor, 58, 0, out::print);
         displayListOfCommands();
@@ -37,7 +37,7 @@ public class CryptographyPage {
                 case "decryption", "/de" -> decryptionMenu();
                 case "hashing", "/ha" -> hashSHA256();
                 case "rerun", "/rr" -> {
-                    insertControlCharacters('n', 1);
+                    insertControlChars('n', 1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -52,7 +52,7 @@ public class CryptographyPage {
     }
 
     private static void displayListOfCommands() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
         message("·  Encryption [" + getColor(sysMainColor)
                 + "/en" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
@@ -70,7 +70,7 @@ public class CryptographyPage {
     }
 
     private static void encryptionMenu() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
         out.print(alignment(58) + getColor(sysLayoutColor) + "Select encryption algorithm [" +
                 getColor(sysMainColor) + "AES" + getColor(sysLayoutColor) + "|" + getColor(sysMainColor) + "1 " + getColor(sysLayoutColor) +
                 getColor(218) + "RSA" + getColor(sysLayoutColor) + "|" + getColor(218) + "2 " + getColor(sysLayoutColor) +
@@ -78,7 +78,7 @@ public class CryptographyPage {
                 getColor(204) + "Blowfish" + getColor(sysLayoutColor) + "|" + getColor(204) + "4" + getColor(sysLayoutColor) + "]: ");
 
         String algorithm = scanner.nextLine().toLowerCase();
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
 
         switch (algorithm) {
             case "aes", "1" -> encryptAES();
@@ -90,7 +90,7 @@ public class CryptographyPage {
     }
 
     private static void decryptionMenu() {
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
         out.print(alignment(58) + getColor(sysLayoutColor) + "Select decryption algorithm [" +
                 getColor(sysMainColor) + "AES" + getColor(sysLayoutColor) + "|" + getColor(sysMainColor) + "1 " + getColor(sysLayoutColor) +
                 getColor(218) + "RSA" + getColor(sysLayoutColor) + "|" + getColor(218) + "2 " + getColor(sysLayoutColor) +
@@ -98,7 +98,7 @@ public class CryptographyPage {
                 getColor(204) + "Blowfish" + getColor(sysLayoutColor) + "|" + getColor(204) + "4" + getColor(sysLayoutColor) + "]: ");
 
         String algorithm = scanner.nextLine().toLowerCase();
-        insertControlCharacters('n', 1);
+        insertControlChars('n', 1);
 
         switch (algorithm) {
             case "aes", "1" -> decryptAES();
@@ -127,7 +127,7 @@ public class CryptographyPage {
 
             String base64Key = Base64.getEncoder().encodeToString(secretKey.getEncoded());
 
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             message("Encrypted Text [ECB]: "
                     + getColor(sysMainColor) + encryptedText, sysLayoutColor, 58, 0, out::print);
             message("Key [Base64 encoded]: " + getColor(sysMainColor)
@@ -156,7 +156,7 @@ public class CryptographyPage {
             byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
             String decryptedText = new String(decryptedBytes);
 
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             message("Decrypted Text: " + getColor(sysMainColor) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
@@ -208,7 +208,7 @@ public class CryptographyPage {
             byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
             String decryptedText = new String(decryptedBytes);
 
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             message("Decrypted Text: " + getColor(218) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting RSA: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
@@ -220,7 +220,7 @@ public class CryptographyPage {
         try {
             out.print(alignment(58) + getColor(sysLayoutColor) + "Enter plain text to encrypt: ");
             String plainText = scanner.nextLine();
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
 
             byte[] key = new byte[32];
             byte[] nonce = new byte[12];
@@ -271,7 +271,7 @@ public class CryptographyPage {
             byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
             String decryptedText = new String(decryptedBytes);
 
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             message("Decrypted Text: " + getColor(206) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
@@ -296,7 +296,7 @@ public class CryptographyPage {
             String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
             String base64Key = Base64.getEncoder().encodeToString(key);
 
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             message("Encrypted Text [Blowfish]: "
                     + getColor(204) + encryptedText, sysLayoutColor, 58, 0, out::print);
 
@@ -324,7 +324,7 @@ public class CryptographyPage {
             byte[] decryptedBytes = cipher.doFinal(Base64.getDecoder().decode(encryptedText));
             String decryptedText = new String(decryptedBytes);
 
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             message("Decrypted Text: " + getColor(204) + decryptedText, sysLayoutColor, 58, 0, out::println);
         } catch (Exception e) {
             message("Error decrypting text: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
@@ -333,7 +333,7 @@ public class CryptographyPage {
 
     private static void hashSHA256() {
         try {
-            insertControlCharacters('n', 1);
+            insertControlChars('n', 1);
             out.print(alignment(58) + getColor(sysLayoutColor) + "Enter value to hash: ");
             String inputText = scanner.nextLine();
 
