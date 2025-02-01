@@ -142,9 +142,18 @@ public class NetworkPage {
 
     // /ns
     private static void netStat() {
-        insertControlChars('n', 1);
-        message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::print);
-        insertControlChars('n',1);
-        executeTerminalCommand("netstat -an");
+        try {
+            insertControlChars('n', 1);
+            message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::println);
+
+            displayConfirmation("Enter","y","+",
+                    "to open and","n","-","to skip",
+                    sysAcceptanceColor, sysRejectionColor, sysLayoutColor,58);
+
+            executeTerminalCommand("netstat -an");
+        }
+        catch (Exception e) {
+            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+        }
     }
 }

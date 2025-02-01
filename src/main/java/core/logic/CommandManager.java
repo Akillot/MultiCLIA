@@ -98,14 +98,6 @@ public class CommandManager {
         }
     }
 
-    public static String @NotNull [] getColorsForLogo() {
-        return new String[]{
-                getColor(219), getColor(183),
-                getColor(147), getColor(218),
-                getColor(182), getColor(218)
-        };
-    }
-
     //Searching
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
