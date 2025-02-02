@@ -159,6 +159,7 @@ public class NetworkPage {
                 }
 
                 else if (choice.equals("n") || choice.equals("-")) {
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
                     message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
                                     + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
                             58, 0, out::println);
@@ -175,10 +176,11 @@ public class NetworkPage {
         insertControlChars('n', 1);
         try {
             while (true) {
-                out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a URL: ");
+                out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a URL [or exit to quit]: ");
                 String link = scanner.nextLine().toLowerCase();
 
                 if(link.equalsIgnoreCase("exit")){
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
                     message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
                                     + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
                             58, 0, out::println);
@@ -189,8 +191,8 @@ public class NetworkPage {
                 String requestType = scanner.nextLine().toUpperCase();
 
                 if(requestType.equalsIgnoreCase("exit")){
-                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
-                                    + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+                    message("You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
                             58, 0, out::println);
                     return;
                 }

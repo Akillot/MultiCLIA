@@ -38,7 +38,8 @@ public class CommandManager {
                 }
             }
 
-            if (!text.isEmpty() && ("POST".equalsIgnoreCase(requestType) || "PUT".equalsIgnoreCase(requestType) || "PATCH".equalsIgnoreCase(requestType))) {
+            if (!text.isEmpty() && ("POST".equalsIgnoreCase(requestType)
+                    || "PUT".equalsIgnoreCase(requestType) || "PATCH".equalsIgnoreCase(requestType))) {
                 try (OutputStream os = connection.getOutputStream()) {
                     os.write(text.getBytes(StandardCharsets.UTF_8));
                 }
