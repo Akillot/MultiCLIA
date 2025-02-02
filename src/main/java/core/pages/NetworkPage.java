@@ -34,6 +34,7 @@ public class NetworkPage {
                 case "scan ports", "/sp" -> scanPorts();
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
+                case "http request testing", "/hrt" -> displayHttpTesting();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
                 case "rerun", "/rr" -> {
@@ -66,6 +67,9 @@ public class NetworkPage {
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Look Up DNS Records [" + getColor(sysMainColor) + "/lr"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+
+        message("·  HTTP Request Testing [" + getColor(sysMainColor) + "/hrt"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
 
         message("·  Network Stats [" + getColor(sysMainColor) + "/ns"
@@ -152,21 +156,36 @@ public class NetworkPage {
                         sysAcceptanceColor, sysRejectionColor, sysLayoutColor, 58);
 
                 out.print(alignment(58) + getColor(sysLayoutColor) + "Choice: ");
-                String answer = scanner.nextLine().toLowerCase();
+                String choice = scanner.nextLine().toLowerCase();
                 insertControlChars('n', 1);
 
-                if (answer.equals("y") || answer.equals("+")) {
+                if (choice.equals("y") || choice.equals("+")) {
                     executeTerminalCommand("netstat -an");
                     return;
                 }
 
-                else if (answer.equals("n") || answer.equals("-")) {
+                else if (choice.equals("n") || choice.equals("-")) {
                     message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
                                     + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
                             58, 0, out::println);
                     return;
                 } else out.print("");
             }
+        }
+        catch(Exception e) {
+            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+        }
+    }
+
+    private static void displayHttpTesting(){
+        insertControlChars('n', 1);
+        try{
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a link: ");
+            String link = scanner.nextLine().toLowerCase();
+
+            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a type of request: ");
+            String requestType = scanner.nextLine().toLowerCase();
+
         }
         catch(Exception e) {
             message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);

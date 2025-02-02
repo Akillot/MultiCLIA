@@ -10,7 +10,7 @@ import static core.logic.CommandManager.*;
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
-public  class InfoPage {
+public class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
