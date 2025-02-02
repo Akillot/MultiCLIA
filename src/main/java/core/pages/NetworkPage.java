@@ -89,7 +89,7 @@ public class NetworkPage {
             message("Your local IP: " + getColor(sysMainColor)
                     + localHost, sysLayoutColor, 58, 0, out::print);
             httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
-                    + getColor(sysMainColor), "ip");
+                    + getColor(sysMainColor), "ip",null);
             insertControlChars('n',1);
         } catch (UnknownHostException e) {
             message("IP is undefined", sysRejectionColor, 58, 0, out::print);
@@ -130,19 +130,13 @@ public class NetworkPage {
     }
 
     // /ph
-    private static void pingHost() {
-        processCommandWithHostInput("ping -c 4");
-    }
+    private static void pingHost() {processCommandWithHostInput("ping -c 4");}
 
     // /tr
-    private static void traceRout(){
-        processCommandWithHostInput("traceroute");
-    }
+    private static void traceRout(){processCommandWithHostInput("traceroute");}
 
     // /lr
-    private static void nsLookUp(){
-        processCommandWithHostInput("nslookup");
-    }
+    private static void nsLookUp(){processCommandWithHostInput("nslookup");}
 
     // /ns
     private static void netStat() {
@@ -179,16 +173,35 @@ public class NetworkPage {
 
     private static void displayHttpTesting(){
         insertControlChars('n', 1);
-        try{
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a link: ");
-            String link = scanner.nextLine().toLowerCase();
+        try {
+            while (true) {
+                out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a URL: ");
+                String link = scanner.nextLine().toLowerCase();
 
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a type of request: ");
-            String requestType = scanner.nextLine().toLowerCase();
+                if(link.equalsIgnoreCase("exit")){
+                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
+                                    + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            58, 0, out::println);
+                    return;
+                }
 
+                out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a type of request: ");
+                String requestType = scanner.nextLine().toUpperCase();
+
+                if(requestType.equalsIgnoreCase("exit")){
+                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
+                                    + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            58, 0, out::println);
+                    return;
+                }
+
+                httpRequest(link, requestType, "Response: ", "", null);
+                insertControlChars('n', 1);
+            }
         }
         catch(Exception e) {
-            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+            insertControlChars('n', 1);
+            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
         }
     }
 }

@@ -6,11 +6,11 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.pages.StartPage.displayStartPage;
@@ -22,32 +22,50 @@ import static java.lang.System.out;
 public class CommandManager {
 
     //HTTP request and additional methods
-    public static void httpRequest(String userUri, String requestType, String text, String key) {
+    public static void httpRequest(String userUri, @NotNull String requestType, @NotNull String text,
+                                   String key, Map<String, String> headers) {
         try {
             URL url = new URI(userUri).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(requestType);
+            connection.setRequestMethod(requestType.toUpperCase());
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
+            connection.setDoOutput(!text.isEmpty());
 
-            int statusCode = connection.getResponseCode();
-            if (statusCode != 200) {
-                message("HTTP error: " + getColor(sysRejectionColor)
-                        + statusCode, sysLayoutColor, 58, 0, out::print);
-                return;
+            if (headers != null) {
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
             }
 
-            String response = readResponse(connection);
-            parseJsonResponse(response, key, text);
+            if (!text.isEmpty() && ("POST".equalsIgnoreCase(requestType) || "PUT".equalsIgnoreCase(requestType) || "PATCH".equalsIgnoreCase(requestType))) {
+                try (OutputStream os = connection.getOutputStream()) {
+                    os.write(text.getBytes(StandardCharsets.UTF_8));
+                }
+            }
+
+            int statusCode = connection.getResponseCode();
+            InputStream responseStream = (statusCode >= 200 && statusCode < 300)
+                    ? connection.getInputStream()
+                    : connection.getErrorStream();
+
+            String response = (responseStream != null) ? readResponse(responseStream) : "No response";
+
+            String contentType = connection.getContentType();
+            if (contentType != null && contentType.contains("application/json")) {
+                parseJsonResponse(response, key);
+            } else {
+                message("Response:\n" + response, sysLayoutColor, 58, 0, out::print);
+            }
+
         } catch (URISyntaxException | IOException e) {
-            message("Request failed: " + getColor(sysRejectionColor)
-                    + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+            message("Request failed: " + getColor(sysRejectionColor) + e.getMessage(), sysLayoutColor, 58, 0, out::print);
         }
     }
 
-    private static @NotNull String readResponse(HttpURLConnection connection) throws IOException {
+    private static @NotNull String readResponse(InputStream stream) throws IOException {
         StringBuilder response = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
@@ -56,16 +74,16 @@ public class CommandManager {
         return response.toString();
     }
 
-    private static void parseJsonResponse(String response, String key, String text) {
+    private static void parseJsonResponse(String response, String key) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String value = jsonResponse.optString(key, "Key not found");
-            message(text + " " + value, sysLayoutColor, 58, 0, out::print);
+            message("JSON Key [" + key + "]: " + value, sysLayoutColor, 58, 0, out::print);
         } catch (Exception e) {
-            message("JSON parsing error: " + getColor(sysRejectionColor)
-                    + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+            message("JSON parsing error: " + getColor(sysRejectionColor) + e.getMessage(), sysLayoutColor, 58, 0, out::print);
         }
     }
+
 
     //Request user choice
     public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
