@@ -137,9 +137,7 @@ public class CommandManager {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
 
-            while ((line = reader.readLine()) != null) {
-                message(line, sysLayoutColor, 58, 0, out::print);
-            }
+            while ((line = reader.readLine()) != null) message(line, sysLayoutColor, 58, 0, out::print);
 
             reader.close();
             int exitCode = process.waitFor();
