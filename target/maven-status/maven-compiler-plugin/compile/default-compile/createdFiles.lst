@@ -1,4 +1,5 @@
 core/pages/TimePage.class
+core/logic/ChatGPTClient.class
 core/logic/CommandManager.class
 core/init/AppLauncher.class
 core/pages/CryptographyPage.class
@@ -15,3 +16,4 @@ core/commands/PackageUnifier.class
 core/pages/ExitPage.class
 core/configs/AppearanceConfigs.class
 core/pages/InfoPage.class
+core/pages/ChatGptPage.class

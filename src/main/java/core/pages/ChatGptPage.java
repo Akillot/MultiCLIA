@@ -12,7 +12,7 @@ public class ChatGptPage {
         Scanner scanner = new Scanner(System.in);
         try {
             marginBorder(1,2);
-            message("· " + getColor(sysMainColor) + "POWERED BY OPENAI CHATGPT" + getColor(sysLayoutColor) + " ·"
+            message("··· " + getColor(sysMainColor) + "Powered by OpenAI ChatGPT" + RESET + getColor(sysLayoutColor) + " ···"
                     , sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
             while (true) {
@@ -22,9 +22,10 @@ public class ChatGptPage {
                 String userMessage = scanner.nextLine();
 
                 if (userMessage.equalsIgnoreCase("exit")) {
-                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
-                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor) + "You are in network page"
-                            + getColor(sysLayoutColor) + ".", sysMainColor, getDefaultTextAlignment(), 0, out::println);
+                    marginBorder(2,2);
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                    message("You are in main menu" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            getDefaultTextAlignment(), 0, out::println);
                     marginBorder(1,1);
                     break;
                 }
@@ -37,7 +38,11 @@ public class ChatGptPage {
                 }
 
                 String response = sendMessage(userMessage);
-                out.println(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "ChatGPT: " + response);
+
+                insertControlChars('n', 1);
+                out.print(alignment(getDefaultTextAlignment()) + getColor(204) + "ChatGPT:");
+                slowMotionText(50, getDefaultTextAlignment(),false,
+                        getColor(sysMainColor) + response,"");
             }
         } catch (Exception e) {
             insertControlChars('n', 1);
