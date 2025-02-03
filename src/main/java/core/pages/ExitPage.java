@@ -48,8 +48,8 @@ public class ExitPage {
         marginBorder(2, 2);
         message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
                 58, 0, out::print);
-        message(
-                "Program terminated successfully" + getColor(sysLayoutColor) + ".",
+        message("Program terminated successfully" + getColor(sysLayoutColor) + ". " +
+                       getColor(sysMainColor) + "You are back in Terminal" + getColor(sysLayoutColor) + ".",
                 sysMainColor, 58, 0, out::println);
         insertControlChars('n', 1);
         exit(0);
