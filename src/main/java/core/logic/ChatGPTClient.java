@@ -4,23 +4,11 @@ import com.theokanning.openai.service.OpenAiService;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import io.github.cdimascio.dotenv.Dotenv;
-import lombok.Getter;
-import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
-import static core.configs.TextConfigs.formatResponse;
-
 public class ChatGPTClient {
     private static final String API_KEY;
-
-    @Getter
-    private static String model = "gpt-3.5-turbo";
-    @Getter @Setter
-    private static int maxTokens = 200;
-    @Getter @Setter
-    private static double temperature = 0.7;
 
     static {
         Dotenv dotenv = Dotenv.load();
@@ -31,26 +19,16 @@ public class ChatGPTClient {
         }
     }
 
-    public static @NotNull String sendMessage(String message) {
-        try {
-            OpenAiService service = new OpenAiService(API_KEY);
+    public static String sendMessage(String message) {
+        OpenAiService service = new OpenAiService(API_KEY);
 
-            ChatCompletionRequest request = ChatCompletionRequest.builder()
-                    .model(model)
-                    .messages(Collections.singletonList(new ChatMessage("user", message)))
-                    .maxTokens(maxTokens)
-                    .temperature(temperature)
-                    .build();
+        ChatCompletionRequest request = ChatCompletionRequest.builder()
+                .model("gpt-3.5-turbo")
+                .messages(Collections.singletonList(new ChatMessage("user", message)))
+                .maxTokens(200)
+                .temperature(0.7)
+                .build();
 
-            String response = service.createChatCompletion(request)
-                    .getChoices()
-                    .get(0)
-                    .getMessage()
-                    .getContent();
-
-            return formatResponse(response, 93, "ChatGPT: ");
-        } catch (Exception e) {
-            return "Error: Failed to get response from ChatGPT.";
-        }
+        return service.createChatCompletion(request).getChoices().get(0).getMessage().getContent();
     }
 }
