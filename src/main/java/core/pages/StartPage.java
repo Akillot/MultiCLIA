@@ -67,7 +67,10 @@ public class StartPage {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
-                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.", "What you think about when you think about love?"};
+                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
+                "What you think about when you think about love?",
+                "Find a bug or have an idea? Go to nickzozulia@gmail.com.",
+                "Did you know that you can use /rr and /cl commands in every section."};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
