@@ -88,7 +88,7 @@ public class NetworkPage {
             InetAddress localHost = InetAddress.getLocalHost();
             message("Your local IP: " + getColor(sysMainColor)
                     + localHost, sysLayoutColor, 58, 0, out::print);
-            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP: "
                     + getColor(sysMainColor), "ip",null);
             insertControlChars('n',1);
         } catch (UnknownHostException e) {

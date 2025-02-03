@@ -54,7 +54,7 @@ public class CommandManager {
 
             String contentType = connection.getContentType();
             if (contentType != null && contentType.contains("application/json")) {
-                parseJsonResponse(response, key);
+                parseJsonResponse(response, key, text);
             } else {
                 message("Response:\n" + response, sysLayoutColor, 58, 0, out::print);
             }
@@ -75,11 +75,11 @@ public class CommandManager {
         return response.toString();
     }
 
-    private static void parseJsonResponse(String response, String key) {
+    private static void parseJsonResponse(String response, String key, String text) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String value = jsonResponse.optString(key, "Key not found");
-            message("JSON Key [" + key + "]: " + value, sysLayoutColor, 58, 0, out::print);
+            message(text + value, sysLayoutColor, 58, 0, out::print);
         } catch (Exception e) {
             message("JSON parsing error: " + getColor(sysRejectionColor) + e.getMessage(), sysLayoutColor, 58, 0, out::print);
         }
