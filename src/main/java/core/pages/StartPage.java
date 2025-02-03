@@ -1,5 +1,6 @@
 package core.pages;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,9 @@ import static core.logic.CommandManager.*;
 import static java.lang.System.out;
 
 public class StartPage {
+
+    @Getter
+    private static String dateAndTimeOfProgramLaunching;
 
     private static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o      .oooooo.   ooooo        ooooo         .o.       ",
@@ -43,14 +47,14 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, sysMainColor, 58, 0, out::print);
+                message(errorMessage, sysMainColor, defaultTextAlignment, 0, out::print);
             }
         }
     }
 
     private static void displayMenu() {
         insertControlChars('n',2);
-        switchLogo(mainLogoAscii, 48);
+        switchLogo(mainLogoAscii, defaultLogoAlignment);
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
@@ -73,10 +77,10 @@ public class StartPage {
 
     private static void getCurrentDate(){
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String formattedTime = localTime.format(myFormatter);
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        dateAndTimeOfProgramLaunching = localTime.format(myFormatter);
         message("Application start time" + ": "
-                        + getColor(sysMainColor) + formattedTime
+                        + getColor(sysMainColor) + dateAndTimeOfProgramLaunching
                         + getColor(sysLayoutColor) + ".",
                 sysLayoutColor,48,0,out::print);
     }

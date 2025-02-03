@@ -8,8 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.getColor;
-import static core.configs.AppearanceConfigs.sysRejectionColor;
+import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.alignment;
 import static core.configs.TextConfigs.message;
 import static java.lang.System.out;
@@ -47,7 +46,7 @@ public class CommandHandler {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
-                            sysRejectionColor, 58, 0, out::println);
+                            sysRejectionColor, defaultTextAlignment, 0, out::println);
                 }
             };
             case 5 -> DisplayManager::clearTerminal;
@@ -58,7 +57,7 @@ public class CommandHandler {
             case 10 -> TerminalPage::displayTerminalPage;
             case 11 -> SupportPage::displaySupportPage;
             case 12 -> ExitPage::displayExitPage;
-            default -> throw new IllegalArgumentException(alignment(58)
+            default -> throw new IllegalArgumentException(alignment(defaultTextAlignment)
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
     }

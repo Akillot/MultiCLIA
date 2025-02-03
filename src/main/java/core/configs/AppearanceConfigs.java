@@ -14,6 +14,8 @@ public class AppearanceConfigs {
 
     //Alignment
     public static int searchingLineAlignment = 48;
+    public static int defaultTextAlignment = 58;
+    public static int defaultLogoAlignment = 48;
 
     public static String searchingArrow = "-> ";
 

@@ -21,7 +21,7 @@ public class TimePage {
 
     public static void displayTimePage() {
         marginBorder(1,2);
-        message("Time:", sysLayoutColor, 58, 0, out::print);
+        message("Time:", sysLayoutColor, defaultTextAlignment, 0, out::print);
         displayListOfCommands();
 
         while (true) {
@@ -30,7 +30,8 @@ public class TimePage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "current time", "/ct" -> displayTime();
+                case "current time", "/ct" -> displayCurrentTime();
+                case "app runtime", "/ar" -> displayAppRuntime();
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
                 case "change time zone", "/ctz" -> displayCustomTimeZone();
@@ -52,36 +53,41 @@ public class TimePage {
     private static void displayListOfCommands(){
         insertControlChars('n',1);
         message("·  Current Time [" + getColor(sysMainColor)
-                + "/ct" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/ct" + getColor(sysLayoutColor) + "]", sysLayoutColor, defaultTextAlignment, 0, out::print);
 
         message("·  Timer [" + getColor(sysMainColor)
-                + "/t" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/t" + getColor(sysLayoutColor) + "]", sysLayoutColor, defaultTextAlignment, 0, out::print);
 
         message("·  Stopwatch ["  + getColor(sysMainColor)
-                + "/sw" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/sw" + getColor(sysLayoutColor) + "]", sysLayoutColor, defaultTextAlignment, 0, out::print);
 
         message("·  Change Time Zone [" + getColor(sysMainColor)
-                + "/ctz" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/ctz" + getColor(sysLayoutColor) + "]", sysLayoutColor, defaultTextAlignment, 0, out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor)
-                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, defaultTextAlignment, 0, out::print);
 
         message("·  Exit [" + getColor(sysMainColor)
-                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, defaultTextAlignment, 0, out::println);
     }
 
-    private static void displayTime() {
+    // /ct
+    private static void displayCurrentTime() {
         insertControlChars('n',1);
         message("Current Time: " + getColor(sysMainColor)
-                + getCurrentTime(), sysLayoutColor, 58, 0, out::print);
+                + getCurrentTime(), sysLayoutColor, defaultTextAlignment, 0, out::print);
         message("Current Time Zone: " + getColor(sysMainColor)
-                + getCurrentTimeZone(), sysLayoutColor, 58, 0, out::println);
+                + getCurrentTimeZone(), sysLayoutColor, defaultTextAlignment, 0, out::println);
     }
 
     private static @NotNull String getCurrentTime() {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return localTime.format(formatter);
+    }
+
+    private static void displayAppRuntime() {
+        insertControlChars('n',1);
     }
 
     private static String getCurrentTimeZone() {
@@ -94,7 +100,7 @@ public class TimePage {
     private static void runTimer() {
         while (true) {
             insertControlChars('n',1);
-            out.print(alignment(58) + getColor(sysLayoutColor)
+            out.print(alignment(defaultTextAlignment) + getColor(sysLayoutColor)
                     + "Enter time in seconds (or '" + getColor(sysMainColor)
                     + "exit" + getColor(sysLayoutColor) + "' to quit): ");
             String input = scanner.nextLine();
@@ -104,19 +110,19 @@ public class TimePage {
             try {
                 double seconds = Double.parseDouble(input);
                 if (seconds < 0) {
-                    message("Time cannot be negative.", sysLayoutColor, 58, 0, out::print);
+                    message("Time cannot be negative.", sysLayoutColor, defaultTextAlignment, 0, out::print);
                     continue;
                 }
                 if (isTimerRunning) {
                     message("A timer is already running" + getColor(sysLayoutColor) +
-                            ". Please wait or stop it.", sysMainColor, 58, 0, out::print);
+                            ". Please wait or stop it.", sysMainColor, defaultTextAlignment, 0, out::print);
                     continue;
                 }
                 isTimerRunning = true;
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
-                out.println(alignment(58) + getColor(sysLayoutColor)
+                out.println(alignment(defaultTextAlignment) + getColor(sysLayoutColor)
                         + "Invalid input. Please enter a valid number.");
             }
         }
@@ -127,28 +133,28 @@ public class TimePage {
             try {
                 for (double i = seconds; i >= 0; i--) {
                     if (!isTimerRunning) {
-                        message("Timer stopped.", sysMainColor, 58, 0, out::print);
+                        message("Timer stopped.", sysMainColor, defaultTextAlignment, 0, out::print);
                         return;
                     }
-                    out.print("\r" + alignment(58) + getColor(sysLayoutColor)
+                    out.print("\r" + alignment(defaultTextAlignment) + getColor(sysLayoutColor)
                             + "Time left: " + getColor(sysMainColor)
                             + i + getColor(sysLayoutColor) + " sec");
                     Thread.sleep(1000);
                 }
                 if (isTimerRunning) {
                     insertControlChars('r', 1);
-                    message("Time is up", sysLayoutColor, 58, 0, out::print);
-                    out.print(alignment(58) + getColor(sysLayoutColor) + "Status: "
+                    message("Time is up", sysLayoutColor, defaultTextAlignment, 0, out::print);
+                    out.print(alignment(defaultTextAlignment) + getColor(sysLayoutColor) + "Status: "
                             + getColor(sysAcceptanceColor) + " ✓");
                     insertControlChars('n', 1);
                 }
                 insertControlChars('n',1);
-                out.print(alignment(58) + getColor(sysLayoutColor)
+                out.print(alignment(defaultTextAlignment) + getColor(sysLayoutColor)
                         + "Enter time in seconds (or '" + getColor(sysMainColor)
                         + "exit" + getColor(sysLayoutColor) + "' to quit): ");
             } catch (InterruptedException e) {
                 message("Timer interrupted" + getColor(sysLayoutColor) + ".", sysMainColor,
-                        58, 0, out::print);
+                        defaultTextAlignment, 0, out::print);
             } finally {
                 isTimerRunning = false;
             }
@@ -159,14 +165,14 @@ public class TimePage {
     private static void runStopwatch() {
         insertControlChars('n', 1);
         message("Press " + getColor(sysMainColor) + "any key" + getColor(sysLayoutColor)
-                        + " to start stopwatch and again to stop:", sysLayoutColor, 58, 0, out::print);
+                        + " to start stopwatch and again to stop:", sysLayoutColor, defaultTextAlignment, 0, out::print);
         scanner.nextLine();
         long startTime = System.currentTimeMillis();
-        message("Stopwatch: " + getColor(sysAcceptanceColor) + "started", sysLayoutColor, 58, 0, out::print);
+        message("Stopwatch: " + getColor(sysAcceptanceColor) + "started", sysLayoutColor, defaultTextAlignment, 0, out::print);
 
         scanner.nextLine();
         double elapsedTime = calculateElapsedTime(startTime);
-        message("Stopwatch: " + getColor(sysRejectionColor) + "stopped", sysLayoutColor, 58, 0, out::println);
+        message("Stopwatch: " + getColor(sysRejectionColor) + "stopped", sysLayoutColor, defaultTextAlignment, 0, out::println);
 
         printElapsedTime(elapsedTime);
     }
@@ -177,7 +183,7 @@ public class TimePage {
 
     private static void printElapsedTime(double elapsedTime) {
         message("Elapsed Time: " + getColor(sysMainColor) + elapsedTime
-                + getColor(sysLayoutColor) + " sec.", sysLayoutColor, 58, 0, out::println);
+                + getColor(sysLayoutColor) + " sec.", sysLayoutColor, defaultTextAlignment, 0, out::println);
     }
 
     // /ctz command
@@ -185,7 +191,7 @@ public class TimePage {
         insertControlChars('n', 1);
 
         while (true) {
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter a time zone [e.g., "
+            out.print(alignment(defaultTextAlignment) + getColor(sysLayoutColor) + "Enter a time zone [e.g., "
                     + getColor(219) + "Europe" + getColor(sysLayoutColor)
                     + "/" + getColor(sysMainColor) + "Paris" + getColor(sysLayoutColor) + "]: ");
 
@@ -196,7 +202,7 @@ public class TimePage {
             if (isValidTimeZone(inputZone)) {
                 String time = getTimeInZone(inputZone);
                 message("Time in " + inputZone + ": " + getColor(sysMainColor) + time
-                        + getColor(sysLayoutColor) + ".", sysLayoutColor, 58, 0, out::println);
+                        + getColor(sysLayoutColor) + ".", sysLayoutColor, defaultTextAlignment, 0, out::println);
                 break;
             } else {
                 suggestTimeZones(inputZone);
@@ -212,10 +218,10 @@ public class TimePage {
             }
             message("Terminated correctly" + getColor(sysLayoutColor)
                     + "." + getColor(sysMainColor) + "You are in time menu"
-                    + getColor(sysLayoutColor) + ".", sysMainColor, 58,0,out::print);
+                    + getColor(sysLayoutColor) + ".", sysMainColor, defaultTextAlignment,0,out::print);
 
             message("\r   Status: " + getColor(sysAcceptanceColor) + "✓",
-                    sysLayoutColor,58,0,out::println);
+                    sysLayoutColor,defaultTextAlignment,0,out::println);
             return true;
         }
         return false;
@@ -232,7 +238,7 @@ public class TimePage {
     }
 
     private static void suggestTimeZones(String inputZone) {
-        message("Invalid time zone: " + inputZone, sysLayoutColor, 58, 0, out::println);
+        message("Invalid time zone: " + inputZone, sysLayoutColor, defaultTextAlignment, 0, out::println);
 
         List<String> similarZones = ZoneId.getAvailableZoneIds().stream()
                 .filter(zone -> zone.toLowerCase().contains(inputZone.toLowerCase()))
@@ -241,10 +247,10 @@ public class TimePage {
                 .toList();
 
         if (similarZones.isEmpty()) {
-            message("No similar time zones found. Please check your input.", sysLayoutColor, 58, 0, out::println);
+            message("No similar time zones found. Please check your input.", sysLayoutColor, defaultTextAlignment, 0, out::println);
         } else {
-            message("Did you mean:", sysLayoutColor, 58, 0, out::println);
-            similarZones.forEach(zone -> message("- " + zone, sysLayoutColor, 58, 0, out::println));
+            message("Did you mean:", sysLayoutColor, defaultTextAlignment, 0, out::println);
+            similarZones.forEach(zone -> message("- " + zone, sysLayoutColor, defaultTextAlignment, 0, out::println));
         }
     }
 }
