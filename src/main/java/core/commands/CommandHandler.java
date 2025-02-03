@@ -18,12 +18,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "help", "info",
             "clear", "time", "network", "security", "cryptography",
-            "terminal", "support", "exit"};
+            "terminal", "chatgpt", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/n", "/sc", "/cr",
-            "/ter", "/su", "/e"};
+            "/ter", "/gpt", "/su", "/e"};
 
     public static String[] extensionCmds = {};
 
@@ -55,8 +55,9 @@ public class CommandHandler {
             case 8 -> SecurityPage::displaySecurityPage;
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
-            case 11 -> SupportPage::displaySupportPage;
-            case 12 -> ExitPage::displayExitPage;
+            case 11 -> ChatGptPage::displayChatGptPage;
+            case 12 -> SupportPage::displaySupportPage;
+            case 13 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
