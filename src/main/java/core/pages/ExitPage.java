@@ -12,7 +12,7 @@ public class ExitPage {
 
     public static void displayExitPage() {
         marginBorder(1, 2);
-        message("Exit:", sysLayoutColor, defaultTextAlignment, 0, out::print);
+        message("Exit:", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         displayExitPrompt();
     }
 
@@ -21,10 +21,10 @@ public class ExitPage {
         displayConfirmation(
                 "Enter", "y", "+", "to exit MultiCLIA and",
                 "n", "-", "to stay in",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor, defaultTextAlignment
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor, getDefaultTextAlignment()
         );
 
-        message("Are you sure?", sysLayoutColor, defaultTextAlignment, 0, out::println);
+        message("Are you sure?", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
         out.print(alignment(48) + getColor(sysLayoutColor) + searchingArrow);
         String answer = scanner.nextLine().toLowerCase();
 
@@ -47,10 +47,10 @@ public class ExitPage {
     private static void terminateProgram() {
         marginBorder(2, 2);
         message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
-                defaultTextAlignment, 0, out::print);
+                getDefaultTextAlignment(), 0, out::print);
         message("Program terminated successfully" + getColor(sysLayoutColor) + ". " +
                        getColor(sysMainColor) + "You are back in Terminal" + getColor(sysLayoutColor) + ".",
-                sysMainColor, defaultTextAlignment, 0, out::println);
+                sysMainColor, getDefaultTextAlignment(), 0, out::println);
         insertControlChars('n', 1);
         exit(0);
     }
@@ -58,12 +58,12 @@ public class ExitPage {
     private static void stayInProgram() {
         marginBorder(2, 2);
         message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
-                defaultTextAlignment, 0, out::print);
+                getDefaultTextAlignment(), 0, out::print);
 
         message("Program is still running" + getColor(sysLayoutColor) + ". "
                         + getColor(sysMainColor) + "Returning to the main menu"
                         + getColor(sysLayoutColor) + ".",
-                sysMainColor, defaultTextAlignment, 0, out::println);
+                sysMainColor, getDefaultTextAlignment(), 0, out::println);
 
         marginBorder(1, 1);
     }

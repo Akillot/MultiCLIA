@@ -47,14 +47,14 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, sysMainColor, defaultTextAlignment, 0, out::print);
+                message(errorMessage, sysMainColor, getDefaultTextAlignment(), 0, out::print);
             }
         }
     }
 
     private static void displayMenu() {
         insertControlChars('n',2);
-        switchLogo(mainLogoAscii, defaultLogoAlignment);
+        switchLogo(mainLogoAscii, getDefaultLogoAlignment());
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();

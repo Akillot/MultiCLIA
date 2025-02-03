@@ -43,7 +43,7 @@ public class DisplayManager {
     public static void displayCommandsDescription() {
         marginBorder(1, 2);
         for (String rule : rules) {
-            message(rule, sysLayoutColor, defaultTextAlignment, 0, out::print);
+            message(rule, sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
             insertControlChars('n', 1);
         }
         marginBorder(1, 1);
@@ -57,13 +57,13 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", sysRejectionColor, defaultTextAlignment, 0, out::print);
+            message("Unknown error occurred", sysRejectionColor, getDefaultTextAlignment(), 0, out::print);
         }
     }
 
     private static void displayAllCommandList() {
         insertControlChars('n', 1);
-        out.println(alignment(defaultTextAlignment) + getColor(sysLayoutColor) + "Commands: \n"
+        out.println(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Commands: \n"
                 + alignment(-68) + getColor(sysMainColor));
 
         int maxRows = Math.max(fullSystemCmds.length, extensionCmds.length);
@@ -73,7 +73,7 @@ public class DisplayManager {
                     + getColor(sysMainColor) + shortSystemCmds[i] + getColor(sysLayoutColor) + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "·  " + extensionCmds[i] : "";
 
-            out.printf(alignment(defaultTextAlignment) + getColor(sysLayoutColor) + "%-40s"
+            out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "%-40s"
                     + alignment(-18) + getColor(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
@@ -94,8 +94,8 @@ public class DisplayManager {
                 System.out.flush();
             }
         } catch (Exception e) {
-            message("Error executing action", sysRejectionColor, defaultTextAlignment, 0, out::print);
-            message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, defaultTextAlignment, 0, out::print);
+            message("Error executing action", sysRejectionColor, getDefaultTextAlignment(), 0, out::print);
+            message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         }
     }
 

@@ -20,16 +20,16 @@ public class InfoPage {
 
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
-        message("Application info", sysLayoutColor, defaultTextAlignment, 0, out::println);
-        message("Current version: " + getVersion(), sysLayoutColor,defaultTextAlignment,0,out::print);
-        message("Author: Nick Zozulia", sysLayoutColor,defaultTextAlignment,0,out::println);
+        message("Application info", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+        message("Current version: " + getVersion(), sysLayoutColor,getDefaultTextAlignment(),0,out::print);
+        message("Author: Nick Zozulia", sysLayoutColor,getDefaultTextAlignment(),0,out::println);
 
         displayApplicationDirectory();
         insertControlChars('n', 1);
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,defaultTextAlignment);
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,getDefaultTextAlignment());
 
         choice("Important links", InfoPage::displayImportantLinks,
                 sysMainColor, sysLayoutColor, sysRejectionColor);
@@ -44,10 +44,10 @@ public class InfoPage {
             ).getParent();
 
             message("Application Directory: " + getColor(sysMainColor) + appPath,
-                    sysLayoutColor, defaultTextAlignment, 0, out::print);
+                    sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         } catch (Exception e) {
             message("Could not determine application directory.",
-                    sysLayoutColor, defaultTextAlignment, 0, out::print);
+                    sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         }
     }
 

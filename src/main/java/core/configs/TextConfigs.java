@@ -22,7 +22,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", sysRejectionColor,defaultTextAlignment,0, out::println);
+                message("Error, try again", sysRejectionColor,getDefaultTextAlignment(),0, out::println);
             }
         }
         out.print("");
@@ -78,7 +78,7 @@ public class TextConfigs {
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void insertControlChars(char modifier, int amount) {
         if(amount < 0){
-            message("Error, number of modifiers is less than 0.", sysLayoutColor,defaultTextAlignment,0, out::println);
+            message("Error, number of modifiers is less than 0.", sysLayoutColor,getDefaultTextAlignment(),0, out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";
