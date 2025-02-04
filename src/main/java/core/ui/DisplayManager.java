@@ -26,6 +26,7 @@ public class DisplayManager {
             formatCommandWithDescription("security", "/sc", "Shows security page"),
             formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),
             formatCommandWithDescription("terminal", "/ter", "Shows terminal page"),
+            formatCommandWithDescription("ai-assistance", "/ai", "Shows page with ChatGPT"),
             formatCommandWithDescription("support", "/su", "Shows support page"),
             formatCommandWithDescription("exit", "/e", "Terminates the application")
     };

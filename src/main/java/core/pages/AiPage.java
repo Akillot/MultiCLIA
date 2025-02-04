@@ -1,10 +1,5 @@
 package core.pages;
 
-import com.theokanning.openai.model.Model;
-import com.theokanning.openai.service.OpenAiService;
-import io.github.cdimascio.dotenv.Dotenv;
-
-import java.util.List;
 import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
@@ -26,7 +21,10 @@ public class AiPage {
 
     public static void displayAiPage(){
         marginBorder(1,2);
+        message("Powered by OpenAI " + coloredChatGptLogo + RESET, sysLayoutColor,
+                getDefaultTextAlignment(), 0, out::println);
         message("AI:", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+
         displayListOfCommands();
 
         while (true) {
@@ -36,7 +34,6 @@ public class AiPage {
 
             switch (input) {
                 case "ask chatgpt", "/ac" -> runChatGpt();
-                case "info", "/i" -> displayInfo();
                 case "rerun", "/rr" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
@@ -57,8 +54,11 @@ public class AiPage {
         message("·  Ask ChatGPT ["  + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
-        message("·  Info ["  + getColor(sysMainColor)
-                + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+        message("·  Rerun ["  + getColor(sysMainColor)
+                + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+
+        message("·  Clear terminal ["  + getColor(sysMainColor)
+                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
         message("·  List Of Commands ["  + getColor(sysMainColor)
                 + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
@@ -70,10 +70,7 @@ public class AiPage {
     private static void runChatGpt() {
         Scanner scanner = new Scanner(System.in);
         try {
-            marginBorder(1, 2);
-            message("··· " + getColor(sysLayoutColor) + "Powered by OpenAI " + coloredChatGptLogo + RESET + getColor(sysLayoutColor) + " ···"
-                    , sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
-
+            insertControlChars('n',1);
             while (true) {
                 insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter prompt [or "
@@ -87,13 +84,10 @@ public class AiPage {
                     break;
                 }
 
-                if (userMessage.isEmpty()) {
-                    insertControlChars('n', 1);
-                    message("Prompt should not be empty.", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
-                    marginBorder(1, 1);
-                    continue;
+                if (userMessage.isEmpty()){
+                    insertControlChars('n',1);
+                    return;
                 }
-
                 String response = sendMessage(userMessage);
 
                 insertControlChars('n', 1);
@@ -105,20 +99,6 @@ public class AiPage {
         } catch (Exception e) {
             insertControlChars('n', 1);
             message("Error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
-        }
-    }
-
-    private static void displayInfo(){
-        insertControlChars('n',1);
-        String apiKey = Dotenv.load().get("OPENAI_API_KEY");
-        assert apiKey != null;
-        OpenAiService service = new OpenAiService(apiKey);
-
-        List<Model> models = service.listModels();
-
-        message("Models", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
-        for (Model model : models) {
-            message("·  " + model.getId(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
         }
     }
 }
