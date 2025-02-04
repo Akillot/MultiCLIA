@@ -70,7 +70,6 @@ public class AiPage {
     private static void runChatGpt() {
         Scanner scanner = new Scanner(System.in);
         try {
-            insertControlChars('n',1);
             while (true) {
                 insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter prompt [or "
