@@ -18,12 +18,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "help", "info",
             "clear", "time", "network", "security", "cryptography",
-            "terminal", "chatgpt", "support", "exit"};
+            "terminal", "ai-assistance", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/n", "/sc", "/cr",
-            "/ter", "/gpt", "/su", "/e"};
+            "/ter", "/ai", "/su", "/e"};
 
     public static String[] extensionCmds = {};
 

@@ -121,5 +121,4 @@ public class AiPage {
             message("·  " + model.getId(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
         }
     }
-
 }
