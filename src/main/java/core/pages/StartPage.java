@@ -63,7 +63,7 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String userName = System.getProperty("user.name");
-        String[] motto = {"Command-driven simplicity.",
+        String[] motto = {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
