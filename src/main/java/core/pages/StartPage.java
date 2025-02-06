@@ -28,6 +28,17 @@ public class StartPage {
             "o8o        o888o  `V88V\"V8P' o888o   \"888\" o888o    `Y8bood8P'  o888ooooood8 o888o  o88o       o8888o "
     };
 
+    private static String[] mainLogoAscii2 = {
+            getBackColor(sysMainColor) + "   " + RESET + "        " + getBackColor(sysMainColor) + "ooooo" + RESET + "             " + getBackColor(sysMainColor) + "oooo" + RESET + "      " + getBackColor(sysMainColor) + "." + RESET + "    " + getBackColor(sysMainColor) + "o8o" + RESET + "      " + getBackColor(sysMainColor) + ".oooooo." + RESET +  "   " + getBackColor(sysMainColor) + "ooooo" + RESET + "        " + getBackColor(sysMainColor) + "ooooo" + RESET + "         " + getBackColor(sysMainColor) + ".o." + RESET + "       ",
+            getBackColor(sysMainColor) + "    " + RESET + "       " + getBackColor(sysMainColor) + ".888'" + RESET + "             " + getBackColor(sysMainColor) + "`888" + RESET + "    " + getBackColor(sysMainColor) + ".o8" + RESET + "    " + getBackColor(sysMainColor) + "`\"'" + RESET + "     " + getBackColor(sysMainColor) + "d8P'" + RESET + "  " + getBackColor(sysMainColor) + "`Y8b" + RESET + "  " + getBackColor(sysMainColor) + "`888'" + RESET + "        " + getBackColor(sysMainColor) + "`888'" + RESET + "        " + getBackColor(sysMainColor) + ".888." + RESET + "      ",
+            getBackColor(sysMainColor) + "     " + RESET + "     " + getBackColor(sysMainColor) + "d'888" + RESET + "  " + getBackColor(sysMainColor) + "oooo" + RESET + "  " + getBackColor(sysMainColor) + "oooo" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET +  "  " + getBackColor(sysMainColor) + ".o888oo" + RESET + " " + getBackColor(sysMainColor) + "oooo" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "           " + getBackColor(sysMainColor) + "888" + RESET + "          " + getBackColor(sysMainColor) + "888" + RESET + "        " + getBackColor(sysMainColor) + ".8\"888." + RESET + "     " + RESET,
+            getBackColor(sysMainColor) + "          " + RESET + "  " + getBackColor(sysMainColor) + "888" + RESET + "  " + getBackColor(sysMainColor) + "`888" + RESET + "  " + getBackColor(sysMainColor) + "`888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "`888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "           " + getBackColor(sysMainColor) + "888" + RESET + "          " + getBackColor(sysMainColor) + "888" + RESET + "       " + getBackColor(sysMainColor) + ".8" + RESET + "  " + getBackColor(sysMainColor) + "`888." + RESET + "    " + RESET,
+            getBackColor(sysMainColor) + "8" + RESET + "  " + getBackColor(sysMainColor) + "`888'" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "           " + getBackColor(sysMainColor) + "888" + RESET + "          " + getBackColor(sysMainColor) + "888" + RESET + "      " + getBackColor(sysMainColor) + ".8" + RESET + "     " + getBackColor(sysMainColor) + "888." + RESET + "    ",
+            getBackColor(sysMainColor) + "8" + RESET + "    " + getBackColor(sysMainColor) + "Y" + RESET + "     " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + "           " + getBackColor(sysMainColor) + "888" + RESET + "          " + getBackColor(sysMainColor) + "888" + RESET + "     " + getBackColor(sysMainColor) + ".888oooo8888." + RESET + "   ",
+            getBackColor(sysMainColor) + "8" + RESET + "          " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "888" + RESET + " " + getBackColor(sysMainColor) + "." + RESET + "  " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + "`88b" + RESET + "    " + getBackColor(sysMainColor) + "ooo" + RESET + "   " + getBackColor(sysMainColor) + "888" + RESET + "       " + getBackColor(sysMainColor) + "o" + RESET + "  " + getBackColor(sysMainColor) + "888" + RESET + "    " + getBackColor(sysMainColor) + ".88'" + RESET + "      " + getBackColor(sysMainColor) + "`888." + RESET + "  ",
+            getBackColor(sysMainColor) + "o8o" + RESET + "        " + getBackColor(sysMainColor) + "o888o" + RESET + "  " + getBackColor(sysMainColor) + "`V88V\"V8P'" + RESET + " " + getBackColor(sysMainColor) + "o888o" + RESET + "   " + getBackColor(sysMainColor) + "\"888\"" + RESET +  " " + getBackColor(sysMainColor) + "o888o" + RESET + "    " + getBackColor(sysMainColor) + "`Y8bood8P'" + RESET + "  " + getBackColor(sysMainColor) + "o888ooooood8" + RESET + " " + getBackColor(sysMainColor) + "o888o" + RESET + "  " + getBackColor(sysMainColor) + "o88o" + RESET + "       " + getBackColor(sysMainColor) + "o8888o" + RESET + " "
+    };
+
     private static String[] newYearAscii = {
             "ooooo      ooo                                 oooooo   oooo                              ",
             "`888b.     `8'                                  `888.   .8'                               ",
@@ -54,7 +65,7 @@ public class StartPage {
 
     private static void displayMenu() {
         insertControlChars('n',2);
-        switchLogo(mainLogoAscii, getDefaultLogoAlignment());
+        switchLogo(mainLogoAscii2, getDefaultLogoAlignment());
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
@@ -106,11 +117,8 @@ public class StartPage {
     }
 
     private static void switchLogo(String @NotNull [] logo, int alignment) {
-        String[] colors = getColorsForLogo();
-
-        for (int i = 0; i < logo.length; i++) {
-            String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, sysLayoutColor, alignment, 0, System.out::print);
+        for (String s : logo) {
+            out.println(alignment(alignment) + s);
         }
     }
 
