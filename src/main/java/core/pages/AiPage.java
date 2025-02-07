@@ -19,8 +19,8 @@ public class AiPage {
                     + getColor(161) + "G" + getColor(207) + "P"
                     + getColor(217) + "T";
 
-    public static void displayAiPage(){
-        marginBorder(1,2);
+    public static void displayAiPage() {
+        marginBorder(1, 2);
         message("Powered by OpenAI " + coloredChatGptLogo + RESET, sysLayoutColor,
                 getDefaultTextAlignment(), 0, out::println);
         message("AI:", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
@@ -34,9 +34,10 @@ public class AiPage {
 
             switch (input) {
                 case "ask chatgpt", "/ac" -> runChatGpt();
+                case "personalize chatgpt", "/pc" -> configureTemperature();
                 case "info", "/i" -> displayChatGptInfo();
                 case "rerun", "/rr" -> {
-                    insertControlChars('n',1);
+                    insertControlChars('n', 1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -50,24 +51,24 @@ public class AiPage {
         }
     }
 
-    private static void displayListOfCommands(){
-        insertControlChars('n',1);
-        message("·  Ask ChatGPT ["  + getColor(sysMainColor)
+    private static void displayListOfCommands() {
+        insertControlChars('n', 1);
+        message("·  Ask ChatGPT [" + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
-        message("·  Mod ["  + getColor(sysMainColor)
+        message("·  Personalize ChatGPT [" + getColor(sysMainColor)
+                + "/pc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+
+        message("·  Info [" + getColor(sysMainColor)
                 + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
-        message("·  Info ["  + getColor(sysMainColor)
-                + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
-
-        message("·  Rerun ["  + getColor(sysMainColor)
+        message("·  Rerun [" + getColor(sysMainColor)
                 + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
-        message("·  Clear terminal ["  + getColor(sysMainColor)
+        message("·  Clear terminal [" + getColor(sysMainColor)
                 + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
-        message("·  List Of Commands ["  + getColor(sysMainColor)
+        message("·  List Of Commands [" + getColor(sysMainColor)
                 + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
         message("·  Exit [" + getColor(sysMainColor)
@@ -84,14 +85,14 @@ public class AiPage {
                 String userMessage = scanner.nextLine();
 
                 if (userMessage.equalsIgnoreCase("exit")) {
-                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,getDefaultTextAlignment(),0,out::print);
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
                     message("You are in ai page" + getColor(sysLayoutColor) + ".", sysMainColor,
                             getDefaultTextAlignment(), 0, out::println);
                     break;
                 }
 
-                if (userMessage.isEmpty()){
-                    insertControlChars('n',1);
+                if (userMessage.isEmpty()) {
+                    insertControlChars('n', 1);
                     return;
                 }
                 String response = sendMessage(userMessage);
@@ -108,19 +109,32 @@ public class AiPage {
         }
     }
 
-    private static void displayChatGptInfo(){
-        insertControlChars('n',1);
+    private static void displayChatGptInfo() {
+        insertControlChars('n', 1);
         message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
     }
 
-    private static void setTemperature(){
-        insertControlChars('n',1);
+    private static void configureTemperature() {
+        insertControlChars('n', 1);
         out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter a temperature [Choose between 0.1 and 1.2]: ");
-        double temperature = scanner.nextDouble();
-        if(temperature < 1.2 || temperature >= 0.2){
 
+        try {
+            double temperature = scanner.nextDouble();
+            scanner.nextLine();
+
+            if (temperature >= 0.1 && temperature <= 1.2) {
+                setTemperature(temperature);
+                insertControlChars('n', 1);
+                message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                message("New temperature is: " + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+            } else {
+                message("Invalid input! Please enter a value between 0.1 and 1.2.", sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
+            }
+        } catch (Exception e) {
+            scanner.nextLine();
+            message("Error: Invalid input. Please enter a number.", sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
         }
     }
 }

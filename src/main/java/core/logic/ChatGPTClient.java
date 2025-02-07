@@ -5,6 +5,7 @@ import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collections;
 
@@ -15,7 +16,7 @@ public class ChatGPTClient {
     private static String model = "gpt-3.5-turbo";
     @Getter
     private static int maxTokens = 200;
-    @Getter
+    @Getter @Setter
     private static double temperature = 0.7;
 
     static {
