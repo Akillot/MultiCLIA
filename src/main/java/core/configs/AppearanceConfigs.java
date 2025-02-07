@@ -1,44 +1,66 @@
 package core.configs;
 
+import core.logic.JsonManager;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class AppearanceConfigs {
 
-    //Alignment
-    @Getter
-    @Setter
-    private static int searchingLineAlignment = 48;
+    private static final String CONFIG_PATH = "config.json";
 
-    @Getter
-    @Setter
-    static int defaultTextAlignment = 58;
+    // Alignment
+    @Getter @Setter
+    private static int searchingLineAlignment = JsonManager.getInt("/alignment/searchingLineAlignment");
 
-    @Getter
-    @Setter
-    private static int defaultLogoAlignment = 48;
+    @Getter @Setter
+    private static int defaultTextAlignment = JsonManager.getInt("/alignment/defaultTextAlignment");
+
+    @Getter @Setter
+    private static int defaultLogoAlignment = JsonManager.getInt("/alignment/defaultLogoAlignment");
 
     public static String searchingArrow = "-> ";
 
-    //Colors
-    public static int sysMainColor = 147;
-    public static int sysLayoutColor = 15;
-    public static int sysAcceptanceColor = 46;
-    public static int sysRejectionColor = 160;
+    // Colors
+    @Getter @Setter
+    public static int sysMainColor = JsonManager.getInt("/colors/sysMainColor");
 
-    //Borders
-    public static final int DEFAULT_BORDER_WIDTH = 62;
+    @Getter @Setter
+    public static int sysLayoutColor = JsonManager.getInt("/colors/sysLayoutColor");
+
+    @Getter @Setter
+    public static int sysAcceptanceColor = JsonManager.getInt("/colors/sysAcceptanceColor");
+
+    @Getter @Setter
+    public static int sysRejectionColor = JsonManager.getInt("/colors/sysRejectionColor");
+
+    // Borders
+    public static final int DEFAULT_BORDER_WIDTH = JsonManager.getInt("/borders/defaultBorderWidth");
+
+    private static List<String> borderChars = JsonManager.getStringList("/borders/borderChars");
 
     public static final String RESET = "\033[0m";
     public static final String UNDERLINE = "\033[4m";
+
+    // Save method
+    public static void saveConfig() {
+        JsonManager.updateJson("/alignment/searchingLineAlignment", searchingLineAlignment);
+        JsonManager.updateJson("/alignment/defaultTextAlignment", defaultTextAlignment);
+        JsonManager.updateJson("/alignment/defaultLogoAlignment", defaultLogoAlignment);
+        JsonManager.updateJson("/colors/sysMainColor", sysMainColor);
+        JsonManager.updateJson("/colors/sysLayoutColor", sysLayoutColor);
+        JsonManager.updateJson("/colors/sysAcceptanceColor", sysAcceptanceColor);
+        JsonManager.updateJson("/colors/sysRejectionColor", sysRejectionColor);
+        JsonManager.updateJson("/borders/defaultBorderWidth", DEFAULT_BORDER_WIDTH);
+    }
+
 
     @Contract(pure = true)
     public static @NotNull String getColorText(String text, int color) {
@@ -70,21 +92,14 @@ public class AppearanceConfigs {
         return getBackColor(colorCode);
     }
 
-    //Border
-    private static final ArrayList<String> borderChars = new ArrayList<>();
+    // Border Methods
     @Getter
     private static int borderWidth = DEFAULT_BORDER_WIDTH;
-
-    static {
-        borderChars.add("━");
-        borderChars.add("-");
-        borderChars.add("*");
-        borderChars.add("#");
-    }
 
     public static void setBorderWidth(int width) {
         if (width > 0) {
             borderWidth = width;
+            saveConfig();
         }
     }
 
@@ -95,6 +110,7 @@ public class AppearanceConfigs {
     public static void addBorderChar(String newChar) {
         if (newChar != null && !newChar.isEmpty() && !borderChars.contains(newChar)) {
             borderChars.add(newChar);
+            saveConfig();
         }
     }
 
@@ -102,16 +118,16 @@ public class AppearanceConfigs {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                sysLayoutColor,62,0,out::print);
+                sysLayoutColor, 62, 0, out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
-        insertControlChars('n',upperSide);
+        insertControlChars('n', upperSide);
         border();
-        insertControlChars('n',lowerSide);
+        insertControlChars('n', lowerSide);
     }
 
-    //Animations
+    // Animations
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {
@@ -130,6 +146,11 @@ public class AppearanceConfigs {
         int animationDuration = 3000;
         int steps = 100;
         int delay = animationDuration / steps;
+
+
+        if (borderChars.isEmpty()) {
+            borderChars = List.of("━", "-", "*", "#");
+        }
 
         for (int step = 0; step <= steps; step++) {
             double progress = step / (double) steps;
