@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
-import static core.logic.ChatGPTClient.sendMessage;
+import static core.logic.ChatGPTClient.*;
 import static core.logic.CommandManager.exitPage;
 import static core.logic.CommandManager.mainMenuRerun;
 import static core.ui.DisplayManager.clearTerminal;
@@ -34,6 +34,7 @@ public class AiPage {
 
             switch (input) {
                 case "ask chatgpt", "/ac" -> runChatGpt();
+                case "info", "/i" -> displayChatGptInfo();
                 case "rerun", "/rr" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
@@ -53,6 +54,9 @@ public class AiPage {
         insertControlChars('n',1);
         message("·  Ask ChatGPT ["  + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+
+        message("·  Info ["  + getColor(sysMainColor)
+                + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
         message("·  Rerun ["  + getColor(sysMainColor)
                 + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
@@ -99,5 +103,12 @@ public class AiPage {
             insertControlChars('n', 1);
             message("Error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
         }
+    }
+
+    private static void displayChatGptInfo(){
+        insertControlChars('n',1);
+        message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+        message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+        message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
     }
 }
