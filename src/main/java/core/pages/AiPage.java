@@ -55,6 +55,9 @@ public class AiPage {
         message("·  Ask ChatGPT ["  + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
+        message("·  Mod ["  + getColor(sysMainColor)
+                + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+
         message("·  Info ["  + getColor(sysMainColor)
                 + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
@@ -110,5 +113,14 @@ public class AiPage {
         message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
         message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+    }
+
+    private static void setTemperature(){
+        insertControlChars('n',1);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter a temperature [Choose between 0.1 and 1.2]: ");
+        double temperature = scanner.nextDouble();
+        if(temperature < 1.2 || temperature >= 0.2){
+
+        }
     }
 }
