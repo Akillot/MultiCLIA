@@ -34,7 +34,8 @@ public class AiPage {
 
             switch (input) {
                 case "ask chatgpt", "/ac" -> runChatGpt();
-                case "personalize chatgpt", "/pc" -> configureTemperature();
+                case "modify temperature", "/mt" -> configureTemperature();
+                case "modify maximum of tokens", "/mmt" -> configureMaxTokens();
                 case "info", "/i" -> displayChatGptInfo();
                 case "rerun", "/rr" -> {
                     insertControlChars('n', 1);
@@ -56,8 +57,11 @@ public class AiPage {
         message("·  Ask ChatGPT [" + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
-        message("·  Personalize ChatGPT [" + getColor(sysMainColor)
-                + "/pc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+        message("·  Modify Temperature [" + getColor(sysMainColor)
+                + "/mt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+
+        message("·  Modify Maximum of Tokens [" + getColor(sysMainColor)
+                + "/mmt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
 
         message("·  Info [" + getColor(sysMainColor)
                 + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
@@ -116,23 +120,83 @@ public class AiPage {
 
     private static void configureTemperature() {
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter a temperature [Choose between 0.1 and 1.2]: ");
+        message("["+ getColor(sysMainColor) + "i" + getColor(sysLayoutColor) + "] The temperature of the AI controls the creativity of responses.\n" +
+                        alignment(getDefaultTextAlignment()) + "The higher the temperature," +
+                        " the more diverse and unpredictable the answers.",
+                sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
 
-        try {
-            double temperature = scanner.nextDouble();
-            scanner.nextLine();
+        double temperature;
+        while (true) {
+            out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) +
+                    "Enter a temperature [Choose between " + getColor(sysMainColor) + "0.1"
+                    + getColor(sysLayoutColor) + " and " + getColor(sysMainColor) + "1.2" + getColor(sysLayoutColor) + "]: ");
+            try {
+                temperature = scanner.nextDouble();
+                scanner.nextLine();
 
-            if (temperature >= 0.1 && temperature <= 1.2) {
-                setTemperature(temperature);
-                insertControlChars('n', 1);
-                message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
-                message("New temperature is: " + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
-            } else {
-                message("Invalid input! Please enter a value between 0.1 and 1.2.", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                if (temperature >= 0.1 && temperature <= 1.2) {
+                    setTemperature(temperature);
+                    insertControlChars('n', 1);
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
+                            getDefaultTextAlignment(), 0, out::print);
+
+                    message("New temperature is: " + getColor(sysMainColor) + getTemperature()
+                                    + getColor(sysLayoutColor) + ".", sysLayoutColor,
+                            getDefaultTextAlignment(), 0, out::println);
+                    break;
+                } else {
+                    message("Invalid input! Please enter a value between"
+                                    + getColor(sysMainColor) + " 0.1 " + getColor(sysLayoutColor) + "and" + getColor(sysMainColor)
+                                    + " 1.2" + getColor(sysLayoutColor) + ".",
+                            sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                }
+            } catch (Exception e) {
+                scanner.nextLine();
+                message("Error: Invalid input. Please enter a valid number.",
+                        sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
             }
-        } catch (Exception e) {
-            scanner.nextLine();
-            message("Error: Invalid input. Please enter a number.", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+        }
+    }
+
+    private static void configureMaxTokens() {
+        insertControlChars('n', 1);
+
+        message("Max tokens define the response length. More tokens allow longer answers.\n" +
+                alignment(getDefaultTextAlignment()) + "Choose wisely based on your needs.", sysLayoutColor,
+                getDefaultTextAlignment(), 0, out::println);
+        int maxTokens;
+
+        while (true) {
+            out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) +
+                    "Enter max amount of tokens [Choose a number between " + getColor(sysMainColor)
+                    + "1" + getColor(sysLayoutColor) + " and " + getColor(sysMainColor)
+                    + "500"  + getColor(sysLayoutColor) + "]: ");
+
+            try {
+                maxTokens = scanner.nextInt();
+                scanner.nextLine();
+
+                if (maxTokens > 0 && maxTokens <= 500) {
+                    setMaxTokens(maxTokens);
+                    insertControlChars('n', 1);
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
+                            getDefaultTextAlignment(), 0, out::print);
+
+                    message("New maximum amount of tokens is: " + getColor(sysMainColor)
+                                    + getMaxTokens() + getColor(sysLayoutColor) + ".", sysLayoutColor,
+                            getDefaultTextAlignment(), 0, out::println);
+                    break;
+                } else {
+                    message("Invalid input! Please enter a number between" + getColor(sysMainColor)
+                                    + "1" + getColor(sysLayoutColor) + " and " + getColor(sysMainColor)
+                                    + "500"  + getColor(sysLayoutColor) + ".", sysLayoutColor, getDefaultTextAlignment(),
+                            0, out::println);
+                }
+            } catch (Exception e) {
+                scanner.nextLine();
+                message("Error: Invalid input. Please enter a valid number.",
+                        sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+            }
         }
     }
 }

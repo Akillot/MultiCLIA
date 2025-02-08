@@ -17,7 +17,7 @@ public class ChatGPTClient {
 
     @Getter
     private static String model = "gpt-3.5-turbo";
-    @Getter
+    @Getter @Setter
     private static int maxTokens = 200;
     @Getter @Setter
     private static double temperature = 0.7;
@@ -32,17 +32,25 @@ public class ChatGPTClient {
     }
 
     public static @NotNull String sendMessage(String message) {
-        OpenAiService service = new OpenAiService(API_KEY);
+        try {
+            OpenAiService service = new OpenAiService(API_KEY);
 
-        ChatCompletionRequest request = ChatCompletionRequest.builder()
-                .model(model)
-                .messages(Collections.singletonList(new ChatMessage("user", message)))
-                .maxTokens(maxTokens)
-                .temperature(temperature)
-                .build();
+            ChatCompletionRequest request = ChatCompletionRequest.builder()
+                    .model(model)
+                    .messages(Collections.singletonList(new ChatMessage("user", message)))
+                    .maxTokens(maxTokens)
+                    .temperature(temperature)
+                    .build();
 
-        String response = service.createChatCompletion(request).getChoices().get(0).getMessage().getContent();
+            String response = service.createChatCompletion(request)
+                    .getChoices()
+                    .get(0)
+                    .getMessage()
+                    .getContent();
 
-        return formatResponse(response, 93);
+            return formatResponse(response, 93, "ChatGPT: ");
+        } catch (Exception e) {
+            return "Error: Failed to get response from ChatGPT.";
+        }
     }
 }
