@@ -94,20 +94,21 @@ public class TextConfigs {
         }
     }
 
-    public static @NotNull String formatResponse(@NotNull String response, int lineWidth, @NotNull String prefix) {
-        StringBuilder formatted = new StringBuilder();
-        String[] words = response.split(" ");
+    public static @NotNull String formatResponse(@NotNull String text, int maxLength, @NotNull String prefix) {
+        StringBuilder formatted = new StringBuilder(prefix);
+        int lineLength = prefix.length();
 
-        int currentLineLength = prefix.length();
-        formatted.append(prefix);
-
-        for (String word : words) {
-            if (currentLineLength + word.length() + 1 > lineWidth) {
-                formatted.append("\n").append(" ".repeat(prefix.length()));
-                currentLineLength = prefix.length();
+        for (String word : text.split(" ")) {
+            if (lineLength + word.length() + 1 > maxLength) {
+                formatted.append("\n   ");
+                lineLength = 3;
+            } else {
+                formatted.append(" ");
+                lineLength++;
             }
-            formatted.append(" ").append(word);
-            currentLineLength += word.length() + 1;
+
+            formatted.append(word);
+            lineLength += word.length();
         }
 
         return formatted.toString();

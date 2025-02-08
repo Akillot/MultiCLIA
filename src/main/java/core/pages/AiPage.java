@@ -101,7 +101,7 @@ public class AiPage {
 
                 insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + coloredChatGptLogo + getColor(sysLayoutColor) + ": ");
-                slowMotionText(50, getDefaultTextAlignment(), false,
+                slowMotionText(20, getDefaultTextAlignment(), false,
                         getColor(sysLayoutColor) + response, "");
                 insertControlChars('n', 1);
             }
