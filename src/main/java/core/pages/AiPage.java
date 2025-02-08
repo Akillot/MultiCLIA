@@ -85,15 +85,13 @@ public class AiPage {
                 String userMessage = scanner.nextLine();
 
                 if (userMessage.equalsIgnoreCase("exit")) {
-                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
-                    message("You are in ai page" + getColor(sysLayoutColor) + ".", sysMainColor,
-                            getDefaultTextAlignment(), 0, out::println);
+                    insertControlChars('n', 1);
                     break;
                 }
 
                 if (userMessage.isEmpty()) {
                     insertControlChars('n', 1);
-                    return;
+                    break;
                 }
                 String response = sendMessage(userMessage);
 
@@ -130,11 +128,11 @@ public class AiPage {
                 message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
                 message("New temperature is: " + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
             } else {
-                message("Invalid input! Please enter a value between 0.1 and 1.2.", sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
+                message("Invalid input! Please enter a value between 0.1 and 1.2.", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
             }
         } catch (Exception e) {
             scanner.nextLine();
-            message("Error: Invalid input. Please enter a number.", sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
+            message("Error: Invalid input. Please enter a number.", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
         }
     }
 }

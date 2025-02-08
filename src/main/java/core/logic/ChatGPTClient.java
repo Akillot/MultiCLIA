@@ -6,8 +6,11 @@ import com.theokanning.openai.completion.chat.ChatMessage;
 import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
+
+import static core.configs.TextConfigs.formatResponse;
 
 public class ChatGPTClient {
     private static final String API_KEY;
@@ -28,7 +31,7 @@ public class ChatGPTClient {
         }
     }
 
-    public static String sendMessage(String message) {
+    public static @NotNull String sendMessage(String message) {
         OpenAiService service = new OpenAiService(API_KEY);
 
         ChatCompletionRequest request = ChatCompletionRequest.builder()
@@ -38,6 +41,8 @@ public class ChatGPTClient {
                 .temperature(temperature)
                 .build();
 
-        return service.createChatCompletion(request).getChoices().get(0).getMessage().getContent();
+        String response = service.createChatCompletion(request).getChoices().get(0).getMessage().getContent();
+
+        return formatResponse(response, 93);
     }
 }

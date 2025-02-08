@@ -42,8 +42,8 @@ public class TextConfigs {
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
-    /*Modified method out.println(). Added text color,
-    alignment, delay and opportunity to move to the next line*/
+    //Modified method out.println(). Added text color,
+    //alignment, delay and opportunity to move to the next line
     public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColorText(text, color);
@@ -92,5 +92,20 @@ public class TextConfigs {
         for (int i = 0; i < amount; i++) {
             out.print(output);
         }
+    }
+
+    public static @NotNull String formatResponse(@NotNull String text, int maxLength) {
+        StringBuilder formattedText = new StringBuilder();
+        int length = text.length();
+
+        for (int i = 0; i < length; i += maxLength) {
+            if (i + maxLength < length) {
+                formattedText.append(text, i, i + maxLength).append("\n");
+            } else {
+                formattedText.append(alignment(getDefaultTextAlignment())).append(text.substring(i));
+            }
+        }
+
+        return formattedText.toString();
     }
 }
