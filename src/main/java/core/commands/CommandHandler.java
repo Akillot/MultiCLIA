@@ -8,8 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.getColor;
-import static core.configs.AppearanceConfigs.sysRejectionColor;
+import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.alignment;
 import static core.configs.TextConfigs.message;
 import static java.lang.System.out;
@@ -19,12 +18,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "help", "info",
             "clear", "time", "network", "security", "cryptography",
-            "terminal", "support", "exit"};
+            "terminal", "ai-assistance", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/n", "/sc", "/cr",
-            "/ter", "/su", "/e"};
+            "/ter", "/ai", "/su", "/e"};
 
     public static String[] extensionCmds = {};
 
@@ -47,7 +46,7 @@ public class CommandHandler {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
-                            sysRejectionColor, 58, 0, out::println);
+                            sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 }
             };
             case 5 -> DisplayManager::clearTerminal;
@@ -56,9 +55,10 @@ public class CommandHandler {
             case 8 -> SecurityPage::displaySecurityPage;
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
-            case 11 -> SupportPage::displaySupportPage;
-            case 12 -> ExitPage::displayExitPage;
-            default -> throw new IllegalArgumentException(alignment(58)
+            case 11 -> AiPage::displayAiPage;
+            case 12 -> SupportPage::displaySupportPage;
+            case 13 -> ExitPage::displayExitPage;
+            default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
     }

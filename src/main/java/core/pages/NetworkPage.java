@@ -21,12 +21,12 @@ public class NetworkPage {
 
     public static void displayNetworkPage() {
         marginBorder(1, 2);
-        message("Network:", sysLayoutColor, 58, 0, out::print);
+        message("Network:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, searchingLineAlignment, false, getColor(sysLayoutColor) + searchingArrow,
-                    "");
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
+                    getColor(sysLayoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -34,6 +34,7 @@ public class NetworkPage {
                 case "scan ports", "/sp" -> scanPorts();
                 case "ping host", "/ph" -> pingHost();
                 case "trace rout", "/tr" -> traceRout();
+                case "http request testing", "/hrt" -> displayHttpTesting();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
                 case "rerun", "/rr" -> {
@@ -54,28 +55,31 @@ public class NetworkPage {
     private static void displayListOfCommands() {
         insertControlChars('n',1);
         message("·  IP-Address [" + getColor(sysMainColor) + "/ip"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Scan Ports [" + getColor(sysMainColor) + "/sp"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Ping Host [" + getColor(sysMainColor) + "/ph"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Trace Rout [" + getColor(sysMainColor) + "/tr"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Look Up DNS Records [" + getColor(sysMainColor) + "/lr"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+        message("·  HTTP Request Testing [" + getColor(sysMainColor) + "/hrt"
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Network Stats [" + getColor(sysMainColor) + "/ns"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Exit [" + getColor(sysMainColor) + "/e"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::println);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void displayUserIp() {
@@ -83,14 +87,14 @@ public class NetworkPage {
             insertControlChars('n',1);
             InetAddress localHost = InetAddress.getLocalHost();
             message("Your local IP: " + getColor(sysMainColor)
-                    + localHost, sysLayoutColor, 58, 0, out::print);
-            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP:"
-                    + getColor(sysMainColor), "ip");
+                    + localHost, sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            httpRequest("https://api.ipify.org?format=json", "GET", "Your external IP: "
+                    + getColor(sysMainColor), "ip",null);
             insertControlChars('n',1);
         } catch (UnknownHostException e) {
-            message("IP is undefined", sysRejectionColor, 58, 0, out::print);
+            message("IP is undefined", sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             message("Status: " + getColor(sysRejectionColor)
-                    + "x", sysLayoutColor, 58, 0, out::print);
+                    + "x", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
@@ -103,7 +107,7 @@ public class NetworkPage {
         ExecutorService executor = Executors.newFixedThreadPool(threads);
 
         insertControlChars('n',1);
-        slowMotionText(0,58,false,
+        slowMotionText(getDefaultDelay(),getDefaultTextAlignment(),false,
                 getColor(sysLayoutColor) + "Scanning ports from "
                         + startPort + " to " + endPort + " using " + threads + " threads","");
         insertControlChars('n',2);
@@ -114,7 +118,8 @@ public class NetworkPage {
                 try (Socket socket = new Socket("localhost", currentPort)) {
                     message("· Port " + getColor(sysMainColor) + currentPort
                             + getColor(sysLayoutColor) + " [" + getColor(sysAcceptanceColor) + "OPEN"
-                            + getColor(sysLayoutColor) + "]", sysLayoutColor, 58, 0, out::print);
+                            + getColor(sysLayoutColor) + "]", sysLayoutColor,
+                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 } catch (Exception ignored) {}
             });
         }
@@ -122,54 +127,85 @@ public class NetworkPage {
         executor.shutdown();
         while (!executor.isTerminated()) {}
         insertControlChars('n',1);
-        message("Scanning completed.", sysLayoutColor, 58, 0, out::println);
+        message("Scanning completed.", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     // /ph
-    private static void pingHost() {
-        processCommandWithHostInput("ping -c 4");
-    }
+    private static void pingHost() {processCommandWithHostInput("ping -c 4");}
 
     // /tr
-    private static void traceRout(){
-        processCommandWithHostInput("traceroute");
-    }
+    private static void traceRout(){processCommandWithHostInput("traceroute");}
 
     // /lr
-    private static void nsLookUp(){
-        processCommandWithHostInput("nslookup");
-    }
+    private static void nsLookUp(){processCommandWithHostInput("nslookup");}
 
     // /ns
     private static void netStat() {
         try {
             insertControlChars('n', 1);
             while(true) {
-                message("BIG AMOUNT OF DATA, BE READY", sysMainColor, 58, 0, out::println);
+                message("BIG AMOUNT OF DATA, BE READY", sysMainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
                 displayConfirmation("Enter", "y", "+",
                         "to open and", "n", "-", "to skip",
-                        sysAcceptanceColor, sysRejectionColor, sysLayoutColor, 58);
+                        sysAcceptanceColor, sysRejectionColor, sysLayoutColor, getDefaultTextAlignment());
 
-                out.print(alignment(58) + getColor(sysLayoutColor) + "Choice: ");
-                String answer = scanner.nextLine().toLowerCase();
+                out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Choice: ");
+                String choice = scanner.nextLine().toLowerCase();
                 insertControlChars('n', 1);
 
-                if (answer.equals("y") || answer.equals("+")) {
+                if (choice.equals("y") || choice.equals("+")) {
                     executeTerminalCommand("netstat -an");
                     return;
                 }
 
-                else if (answer.equals("n") || answer.equals("-")) {
+                else if (choice.equals("n") || choice.equals("-")) {
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
+                            getDefaultTextAlignment(),getDefaultDelay(),out::print);
                     message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
                                     + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
-                            58, 0, out::println);
+                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
                 } else out.print("");
             }
         }
         catch(Exception e) {
-            message("Error: " + e.getMessage(), sysLayoutColor, 58, 0, out::print);
+            message("Error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+    }
+
+    private static void displayHttpTesting(){
+        insertControlChars('n', 1);
+        try {
+            while (true) {
+                out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter a URL [or exit to quit]: ");
+                String link = scanner.nextLine().toLowerCase();
+
+                if(link.equalsIgnoreCase("exit")){
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
+                    message("Opening skipped" + getColor(sysLayoutColor) + ". " + getColor(sysMainColor)
+                                    + "You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    return;
+                }
+
+                out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter a type of request: ");
+                String requestType = scanner.nextLine().toUpperCase();
+
+                if(requestType.equalsIgnoreCase("exit")){
+                    message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
+                    message("You are in network page" + getColor(sysLayoutColor) + ".", sysMainColor,
+                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    return;
+                }
+
+                httpRequest(link, requestType, "Response: ", "", null);
+                insertControlChars('n', 1);
+            }
+        }
+        catch(Exception e) {
+            insertControlChars('n', 1);
+            message("Error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 }

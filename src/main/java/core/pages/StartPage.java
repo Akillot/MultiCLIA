@@ -1,5 +1,6 @@
 package core.pages;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,9 @@ import static core.logic.CommandManager.*;
 import static java.lang.System.out;
 
 public class StartPage {
+
+    @Getter
+    private static String dateAndTimeOfProgramLaunching;
 
     private static String[] mainLogoAscii = {
             "ooo        ooooo             oooo      .    o8o      .oooooo.   ooooo        ooooo         .o.       ",
@@ -43,14 +47,14 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, sysMainColor, 58, 0, out::print);
+                message(errorMessage, sysMainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             }
         }
     }
 
     private static void displayMenu() {
         insertControlChars('n',2);
-        switchLogo(mainLogoAscii, 48);
+        switchLogo(mainLogoAscii, getDefaultLogoAlignment());
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
@@ -59,26 +63,30 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String userName = System.getProperty("user.name");
-        String[] motto = {"Command-driven simplicity.",
+        String[] motto = {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
-                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.", "What you think about when you think about love?"};
+                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
+                "What you think about when you think about love?",
+                "Find a bug or have an idea? Go to nickzozulia@gmail.com.",
+                "Did you know that you can use /rr and /cl commands in every section."};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
         message("Just type '" + getColor(sysMainColor)
-                + "cmds" + getColor(sysLayoutColor) + "'. " + motto[index],15,48,0,out::print);
+                + "cmds" + getColor(sysLayoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
+                getDefaultDelay(),out::print);
     }
 
     private static void getCurrentDate(){
         LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        String formattedTime = localTime.format(myFormatter);
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        dateAndTimeOfProgramLaunching = localTime.format(myFormatter);
         message("Application start time" + ": "
-                        + getColor(sysMainColor) + formattedTime
+                        + getColor(sysMainColor) + dateAndTimeOfProgramLaunching
                         + getColor(sysLayoutColor) + ".",
-                sysLayoutColor,48,0,out::print);
+                sysLayoutColor,48,getDefaultDelay(),out::print);
     }
 
     private static void dateChecking(){
@@ -93,7 +101,7 @@ public class StartPage {
                 switchLogo(newYearAscii, 36);
                 insertControlChars('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,0,out::print);
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,getDefaultDelay(),out::print);
                 break;
         }
     }
@@ -103,7 +111,7 @@ public class StartPage {
 
         for (int i = 0; i < logo.length; i++) {
             String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, sysLayoutColor, alignment, 0, System.out::print);
+            message(coloredText, sysLayoutColor, alignment, getDefaultDelay(), System.out::print);
         }
     }
 

@@ -3,15 +3,14 @@ package core.logic;
 import core.commands.PackageUnifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.*;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.pages.StartPage.displayStartPage;
@@ -23,33 +22,53 @@ import static java.lang.System.out;
 public class CommandManager {
 
     //HTTP request and additional methods
-    public static @Nullable String httpRequest(String userUri, String requestType, String text, String key) {
+    public static void httpRequest(String userUri, @NotNull String requestType, @NotNull String text,
+                                   String key, Map<String, String> headers) {
         try {
             URL url = new URI(userUri).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(requestType);
+            connection.setRequestMethod(requestType.toUpperCase());
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
+            connection.setDoOutput(!text.isEmpty());
 
-            int statusCode = connection.getResponseCode();
-            if (statusCode != 200) {
-                message("HTTP error: " + getColor(sysRejectionColor)
-                        + statusCode, sysLayoutColor, 58, 0, out::print);
-                return null;
+            if (headers != null) {
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
             }
 
-            String response = readResponse(connection);
-            return parseJsonResponse(response, key, text);
+            if (!text.isEmpty() && ("POST".equalsIgnoreCase(requestType)
+                    || "PUT".equalsIgnoreCase(requestType) || "PATCH".equalsIgnoreCase(requestType))) {
+                try (OutputStream os = connection.getOutputStream()) {
+                    os.write(text.getBytes(StandardCharsets.UTF_8));
+                }
+            }
+
+            int statusCode = connection.getResponseCode();
+            InputStream responseStream = (statusCode >= 200 && statusCode < 300)
+                    ? connection.getInputStream()
+                    : connection.getErrorStream();
+
+            String response = (responseStream != null) ? readResponse(responseStream) : "No response";
+
+            String contentType = connection.getContentType();
+            if (contentType != null && contentType.contains("application/json")) {
+                parseJsonResponse(response, key, text);
+            } else {
+                message("Response:\n" + response, sysLayoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::print);
+            }
+
         } catch (URISyntaxException | IOException e) {
-            message("Request failed: " + getColor(sysRejectionColor)
-                    + e.getMessage(), sysLayoutColor, 58, 0, out::print);
-            return null;
+            message("Request failed: " + getColor(sysRejectionColor) + e.getMessage(),
+                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
-    private static @NotNull String readResponse(HttpURLConnection connection) throws IOException {
+    private static @NotNull String readResponse(InputStream stream) throws IOException {
         StringBuilder response = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
@@ -58,22 +77,21 @@ public class CommandManager {
         return response.toString();
     }
 
-    private static @Nullable String parseJsonResponse(String response, String key, String text) {
+    private static void parseJsonResponse(String response, String key, String text) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String value = jsonResponse.optString(key, "Key not found");
-            message(text + " " + value, sysLayoutColor, 58, 0, out::print);
-            return response;
+            message(text + value, sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         } catch (Exception e) {
-            message("JSON parsing error: " + getColor(sysRejectionColor)
-                    + e.getMessage(), sysLayoutColor, 58, 0, out::print);
-            return null;
+            message("JSON parsing error: " + getColor(sysRejectionColor) + e.getMessage(),
+                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
+
     //Request user choice
     public static void choice(String title, Runnable action, int mainColor, int layoutColor, int rejectionColor) {
-        out.print(alignment(58) + getColor(mainColor) + title + RESET + ": " + RESET);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(mainColor) + title + RESET + ": " + RESET);
 
         String choice = scanner.nextLine().toLowerCase();
         switch (choice) {
@@ -81,19 +99,21 @@ public class CommandManager {
                 try {
                     action.run();
                 } catch (Exception e) {
-                    message("Error executing action", rejectionColor, 58, 0, out::print);
-                    message("Status: " + getColor(rejectionColor) + "x", layoutColor, 58, 0, out::print);
+                    message("Error executing action", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    message("Status: " + getColor(rejectionColor) + "x", layoutColor,
+                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 }
                 break;
 
             case "-", "n":
-                message("Status: " + getColor(rejectionColor) + "x", layoutColor, 58, 0, out::print);
+                message("Status: " + getColor(rejectionColor) + "x", layoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::print);
                 break;
 
             default:
-                message("Invalid choice", rejectionColor, 58, 0, out::print);
+                message("Invalid choice", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 message("Status: " + getColor(rejectionColor) + "x",
-                        layoutColor, 58, 0, out::print);
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 break;
         }
     }
@@ -102,7 +122,7 @@ public class CommandManager {
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
-            slowMotionText(0, searchingLineAlignment, false,
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
                     getColor(sysLayoutColor) + searchingArrow, "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 
@@ -122,15 +142,19 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("\r   Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+                    message("\r   Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
+                            getDefaultTextAlignment(),getDefaultDelay(),out::print);
                 } else {
                     message("Error: Desktop or browse action not supported", sysRejectionColor,
-                            58, 0, out::print);
-                    message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
+                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                    message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor,
+                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL", sysLayoutColor, 58, 0, out::print);
-                message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, 58, 0, out::print);
+                message("Error opening URL", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::print);
             }
         };
     }
@@ -141,24 +165,26 @@ public class CommandManager {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
 
-            while ((line = reader.readLine()) != null) {
-                message(line, sysLayoutColor, 58, 0, out::print);
-            }
+            while ((line = reader.readLine()) != null) message(line, sysLayoutColor, getDefaultTextAlignment(),
+                    getDefaultDelay(), out::print);
 
             reader.close();
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                message("Command failed with exit code: " + exitCode, sysLayoutColor, 58, 0, out::println);
+                message("Command failed with exit code: " + exitCode, sysLayoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::println);
             } else {
                 insertControlChars('n', 1);
                 message("Process completed "
                         + getColor(sysMainColor) + "successfully" + getColor(sysLayoutColor)
-                        + ".", sysLayoutColor, 58, 0, out::println);
+                        + ".", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         } catch (IOException e) {
-            message("I/O Error while executing command: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+            message("I/O Error while executing command: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(),
+                    getDefaultDelay(), out::println);
         } catch (InterruptedException e) {
-            message("Process was interrupted: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+            message("Process was interrupted: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(),
+                    getDefaultDelay(), out::println);
             Thread.currentThread().interrupt();
         }
     }
@@ -166,12 +192,13 @@ public class CommandManager {
     public static void processCommandWithHostInput(String command) {
         try {
             insertControlChars('n', 1);
-            out.print(alignment(58) + getColor(sysLayoutColor) + "Enter host [e.g., google.com]: ");
+            out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter host [e.g., google.com]: ");
             String host = scanner.nextLine().trim();
             insertControlChars('n', 1);
 
             if (host.isEmpty()) {
-                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, 58, 0, out::println);
+                message("Host cannot be empty. Please enter a valid host.", sysLayoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::println);
                 return;
             }
 
@@ -180,24 +207,30 @@ public class CommandManager {
 
             executeTerminalCommand(command);
         } catch (Exception e) {
-            message("Execution error: " + e.getMessage(), sysLayoutColor, 58, 0, out::println);
+            message("Execution error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(),
+                    getDefaultDelay(), out::println);
         }
     }
 
     public static void mainMenuRerun(){
         marginBorder(1,2);
-        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
-        message("Application restart" + getColor(sysLayoutColor) + ".", sysMainColor,58, 0, out::println);
+        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,getDefaultTextAlignment(),
+                getDefaultDelay(),out::print);
+
+        message("Application restart" + getColor(sysLayoutColor) + ".", sysMainColor,getDefaultTextAlignment(),
+                getDefaultDelay(), out::println);
         marginBorder(1,1);
         displayStartPage();
     }
 
     public static void exitPage(){
         marginBorder(2,2);
-        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,58,0,out::print);
+        message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,getDefaultTextAlignment(),
+                getDefaultDelay(),out::print);
+
         message("Terminated correctly" + getColor(sysLayoutColor) + ". "
                         + getColor(sysMainColor) + "You are in main menu" + getColor(sysLayoutColor) + ".", sysMainColor,
-                58,0,out::println);
+                getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
     }
 }

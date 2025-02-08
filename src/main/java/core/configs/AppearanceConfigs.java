@@ -1,6 +1,7 @@
 package core.configs;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,8 +13,19 @@ import static java.lang.System.out;
 
 public class AppearanceConfigs {
 
+    //Delay
+    @Getter @Setter
+    private static int defaultDelay = 0;
+
     //Alignment
-    public static int searchingLineAlignment = 48;
+    @Getter @Setter
+    private static int searchingLineAlignment = 48;
+
+    @Getter @Setter
+    static int defaultTextAlignment = 58;
+
+    @Getter @Setter
+    private static int defaultLogoAlignment = 48;
 
     public static String searchingArrow = "-> ";
 

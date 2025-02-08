@@ -22,7 +22,7 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", sysRejectionColor,58,0, out::println);
+                message("Error, try again", sysRejectionColor,getDefaultTextAlignment(),getDefaultDelay(), out::println);
             }
         }
         out.print("");
@@ -42,8 +42,8 @@ public class TextConfigs {
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
-    /*Modified method out.println(). Added text color,
-    alignment, delay and opportunity to move to the next line*/
+    //Modified method out.println(). Added text color,
+    //alignment, delay and opportunity to move to the next line
     public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColorText(text, color);
@@ -72,13 +72,13 @@ public class TextConfigs {
                 + "/" + getColor(acceptanceColor) + confirmation_2 + getColor(layoutColor)
                 + "' " + midText +" '" + getColor(rejectionColor) + rejection_1 + getColor(layoutColor)
                 + "/" + getColor(rejectionColor) + rejection_2 + getColor(layoutColor)
-                + "' " + postText, sysLayoutColor,alignment,0,out::print);
+                + "' " + postText, sysLayoutColor,alignment,getDefaultDelay(),out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void insertControlChars(char modifier, int amount) {
         if(amount < 0){
-            message("Error, number of modifiers is less than 0.", sysLayoutColor,58,0, out::println);
+            message("Error, number of modifiers is less than 0.", sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(), out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";
@@ -92,5 +92,25 @@ public class TextConfigs {
         for (int i = 0; i < amount; i++) {
             out.print(output);
         }
+    }
+
+    public static @NotNull String formatResponse(@NotNull String text, int maxLength, @NotNull String prefix) {
+        StringBuilder formatted = new StringBuilder(prefix);
+        int lineLength = prefix.length();
+
+        for (String word : text.split(" ")) {
+            if (lineLength + word.length() + 1 > maxLength) {
+                formatted.append("\n   ");
+                lineLength = 3;
+            } else {
+                formatted.append(" ");
+                lineLength++;
+            }
+
+            formatted.append(word);
+            lineLength += word.length();
+        }
+
+        return formatted.toString();
     }
 }

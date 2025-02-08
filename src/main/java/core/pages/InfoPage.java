@@ -10,26 +10,26 @@ import static core.logic.CommandManager.*;
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
-public  class InfoPage {
+public class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "A-0.8.6.2";
+        String appVersion = "A-0.9.0";
         return getColorText(appVersion, sysMainColor);
     }
 
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
-        message("Application info", sysLayoutColor, 58, 0, out::println);
-        message("Current version: " + getVersion(), sysLayoutColor,58,0,out::print);
-        message("Author: Nick Zozulia", sysLayoutColor,58,0,out::println);
+        message("Application info", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Current version: " + getVersion(), sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
+        message("Author: Nick Zozulia", sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
 
         displayApplicationDirectory();
         insertControlChars('n', 1);
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,58);
+                sysAcceptanceColor, sysRejectionColor, sysLayoutColor,getDefaultTextAlignment());
 
         choice("Important links", InfoPage::displayImportantLinks,
                 sysMainColor, sysLayoutColor, sysRejectionColor);
@@ -44,10 +44,10 @@ public  class InfoPage {
             ).getParent();
 
             message("Application Directory: " + getColor(sysMainColor) + appPath,
-                    sysLayoutColor, 58, 0, out::print);
+                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         } catch (Exception e) {
             message("Could not determine application directory.",
-                    sysLayoutColor, 58, 0, out::print);
+                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 

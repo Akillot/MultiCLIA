@@ -1,4 +1,5 @@
 core/pages/TimePage.class
+core/logic/ChatGPTClient.class
 core/logic/CommandManager.class
 core/init/AppLauncher.class
 core/pages/CryptographyPage.class
@@ -12,6 +13,7 @@ core/pages/StartPage.class
 core/configs/TextConfigs.class
 core/pages/SupportPage.class
 core/commands/PackageUnifier.class
+core/pages/AiPage.class
 core/pages/ExitPage.class
 core/configs/AppearanceConfigs.class
 core/pages/InfoPage.class
