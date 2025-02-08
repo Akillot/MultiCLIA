@@ -44,7 +44,7 @@ public class DisplayManager {
     public static void displayCommandsDescription() {
         marginBorder(1, 2);
         for (String rule : rules) {
-            message(rule, sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+            message(rule, sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             insertControlChars('n', 1);
         }
         marginBorder(1, 1);
@@ -58,7 +58,7 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", sysRejectionColor, getDefaultTextAlignment(), 0, out::print);
+            message("Unknown error occurred", sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
@@ -95,12 +95,11 @@ public class DisplayManager {
                 System.out.flush();
             }
         } catch (Exception e) {
-            message("Error executing action", sysRejectionColor, getDefaultTextAlignment(), 0, out::print);
-            message("Status: " + getColor(sysRejectionColor) + "x", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+            message("Error executing action",
+                    sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+            message("Status: " + getColor(sysRejectionColor) + "x",
+                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
-    }
-
-    public static void translateText(){
-
     }
 }

@@ -13,17 +13,18 @@ import static java.lang.System.out;
 
 public class AppearanceConfigs {
 
+    //Delay
+    @Getter @Setter
+    private static int defaultDelay = 0;
+
     //Alignment
-    @Getter
-    @Setter
+    @Getter @Setter
     private static int searchingLineAlignment = 48;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     static int defaultTextAlignment = 58;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private static int defaultLogoAlignment = 48;
 
     public static String searchingArrow = "-> ";

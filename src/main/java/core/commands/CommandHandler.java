@@ -46,7 +46,7 @@ public class CommandHandler {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
-                            sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
+                            sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 }
             };
             case 5 -> DisplayManager::clearTerminal;

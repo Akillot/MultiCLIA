@@ -22,13 +22,13 @@ public class AiPage {
     public static void displayAiPage() {
         marginBorder(1, 2);
         message("Powered by OpenAI " + coloredChatGptLogo + RESET, sysLayoutColor,
-                getDefaultTextAlignment(), 0, out::println);
-        message("AI:", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("AI:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, getSearchingLineAlignment(), false,
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
                     getColor(sysLayoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
@@ -55,28 +55,28 @@ public class AiPage {
     private static void displayListOfCommands() {
         insertControlChars('n', 1);
         message("·  Ask ChatGPT [" + getColor(sysMainColor)
-                + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Modify Temperature [" + getColor(sysMainColor)
-                + "/mt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/mt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Modify Maximum of Tokens [" + getColor(sysMainColor)
-                + "/mmt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/mmt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Info [" + getColor(sysMainColor)
-                + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Rerun [" + getColor(sysMainColor)
-                + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Clear terminal [" + getColor(sysMainColor)
-                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor)
-                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Exit [" + getColor(sysMainColor)
-                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void runChatGpt() {
@@ -113,9 +113,9 @@ public class AiPage {
 
     private static void displayChatGptInfo() {
         insertControlChars('n', 1);
-        message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
-        message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
-        message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+        message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void configureTemperature() {
@@ -123,7 +123,7 @@ public class AiPage {
         message("["+ getColor(sysMainColor) + "i" + getColor(sysLayoutColor) + "] The temperature of the AI controls the creativity of responses.\n" +
                         alignment(getDefaultTextAlignment()) + "The higher the temperature," +
                         " the more diverse and unpredictable the answers.",
-                sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         double temperature;
         while (true) {
@@ -138,22 +138,22 @@ public class AiPage {
                     setTemperature(temperature);
                     insertControlChars('n', 1);
                     message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
-                            getDefaultTextAlignment(), 0, out::print);
+                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
                     message("New temperature is: " + getColor(sysMainColor) + getTemperature()
                                     + getColor(sysLayoutColor) + ".", sysLayoutColor,
-                            getDefaultTextAlignment(), 0, out::println);
+                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     break;
                 } else {
                     message("Invalid input! Please enter a value between"
                                     + getColor(sysMainColor) + " 0.1 " + getColor(sysLayoutColor) + "and" + getColor(sysMainColor)
                                     + " 1.2" + getColor(sysLayoutColor) + ".",
-                            sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                            sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 }
             } catch (Exception e) {
                 scanner.nextLine();
                 message("Error: Invalid input. Please enter a valid number.",
-                        sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
     }
@@ -163,7 +163,7 @@ public class AiPage {
 
         message("Max tokens define the response length. More tokens allow longer answers.\n" +
                 alignment(getDefaultTextAlignment()) + "Choose wisely based on your needs.", sysLayoutColor,
-                getDefaultTextAlignment(), 0, out::println);
+                getDefaultTextAlignment(), getDefaultDelay(), out::println);
         int maxTokens;
 
         while (true) {
@@ -180,22 +180,22 @@ public class AiPage {
                     setMaxTokens(maxTokens);
                     insertControlChars('n', 1);
                     message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
-                            getDefaultTextAlignment(), 0, out::print);
+                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
                     message("New maximum amount of tokens is: " + getColor(sysMainColor)
                                     + getMaxTokens() + getColor(sysLayoutColor) + ".", sysLayoutColor,
-                            getDefaultTextAlignment(), 0, out::println);
+                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     break;
                 } else {
                     message("Invalid input! Please enter a number between" + getColor(sysMainColor)
                                     + "1" + getColor(sysLayoutColor) + " and " + getColor(sysMainColor)
                                     + "500"  + getColor(sysLayoutColor) + ".", sysLayoutColor, getDefaultTextAlignment(),
-                            0, out::println);
+                            getDefaultDelay(), out::println);
                 }
             } catch (Exception e) {
                 scanner.nextLine();
                 message("Error: Invalid input. Please enter a valid number.",
-                        sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
     }

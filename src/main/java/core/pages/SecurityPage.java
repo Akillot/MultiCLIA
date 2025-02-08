@@ -33,11 +33,11 @@ public class SecurityPage {
     public static void displaySecurityPage() {
         Security.addProvider(new BouncyCastleProvider());
         marginBorder(1, 2);
-        message("Security:", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+        message("Security:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(0, getSearchingLineAlignment(), false, getColor(sysLayoutColor) + searchingArrow, "");
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(sysLayoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -60,13 +60,13 @@ public class SecurityPage {
     private static void displayListOfCommands() {
         insertControlChars('n', 1);
         message("·  Generate password [" + getColor(sysMainColor) + "/gp"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Exit [" + getColor(sysMainColor) + "/e"
-                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void passwordCreatorMenu() {
@@ -76,11 +76,12 @@ public class SecurityPage {
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
                 message("Invalid password length. Please enter a number between 1 and 80.",
-                        sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 return;
             }
         } catch (Exception e) {
-            message("Invalid input. Please enter a number.", sysLayoutColor, getDefaultTextAlignment(), 0, out::print);
+            message("Invalid input. Please enter a number.", sysLayoutColor, getDefaultTextAlignment(),
+                    getDefaultDelay(), out::print);
             scanner.nextLine();
             return;
         }
@@ -103,9 +104,10 @@ public class SecurityPage {
         if (generatedPassword != null) {
             insertControlChars('n', 1);
             message("Generated Password: " + generatedPassword,
-                    sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } else {
-            message("Invalid complexity option. Please try again.", sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+            message("Invalid complexity option. Please try again.", sysLayoutColor, getDefaultTextAlignment(),
+                    getDefaultDelay(), out::println);
         }
     }
 

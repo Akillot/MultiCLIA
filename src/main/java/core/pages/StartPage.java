@@ -47,7 +47,7 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, sysMainColor, getDefaultTextAlignment(), 0, out::print);
+                message(errorMessage, sysMainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             }
         }
     }
@@ -75,7 +75,8 @@ public class StartPage {
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
         message("Just type '" + getColor(sysMainColor)
-                + "cmds" + getColor(sysLayoutColor) + "'. " + motto[index],15,48,0,out::print);
+                + "cmds" + getColor(sysLayoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
+                getDefaultDelay(),out::print);
     }
 
     private static void getCurrentDate(){
@@ -85,7 +86,7 @@ public class StartPage {
         message("Application start time" + ": "
                         + getColor(sysMainColor) + dateAndTimeOfProgramLaunching
                         + getColor(sysLayoutColor) + ".",
-                sysLayoutColor,48,0,out::print);
+                sysLayoutColor,48,getDefaultDelay(),out::print);
     }
 
     private static void dateChecking(){
@@ -100,7 +101,7 @@ public class StartPage {
                 switchLogo(newYearAscii, 36);
                 insertControlChars('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,0,out::print);
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,getDefaultDelay(),out::print);
                 break;
         }
     }
@@ -110,7 +111,7 @@ public class StartPage {
 
         for (int i = 0; i < logo.length; i++) {
             String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, sysLayoutColor, alignment, 0, System.out::print);
+            message(coloredText, sysLayoutColor, alignment, getDefaultDelay(), System.out::print);
         }
     }
 
