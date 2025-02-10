@@ -119,6 +119,9 @@ public class AiPage {
             message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } catch (Exception e) {
             insertControlChars('n', 1);
+            message("Model: " + getColor(sysMainColor) + getColor(sysRejectionColor) + "x", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Max Tokens: " + getColor(sysMainColor) + getColor(sysRejectionColor) + "x", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Temperature: " + getColor(sysMainColor) + getColor(sysRejectionColor) + "x", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             message("Error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
         }
     }

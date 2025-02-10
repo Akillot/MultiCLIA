@@ -18,12 +18,12 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "help", "info",
             "clear", "time", "network", "security", "cryptography",
-            "terminal", "chatgpt", "support", "exit"};
+            "terminal", "ai-assistance", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/n", "/sc", "/cr",
-            "/ter", "/gpt", "/su", "/e"};
+            "/ter", "/ai", "/su", "/e"};
 
     public static String[] extensionCmds = {};
 
@@ -55,7 +55,7 @@ public class CommandHandler {
             case 8 -> SecurityPage::displaySecurityPage;
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
-            case 11 -> ChatGptPage::displayChatGptPage;
+            case 11 -> AiPage::displayAiPage;
             case 12 -> SupportPage::displaySupportPage;
             case 13 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
