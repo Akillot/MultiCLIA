@@ -112,10 +112,15 @@ public class AiPage {
     }
 
     private static void displayChatGptInfo() {
-        insertControlChars('n', 1);
-        message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        try {
+            insertControlChars('n', 1);
+            message("Model: " + getColor(sysMainColor) + getModel(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Max Tokens: " + getColor(sysMainColor) + getMaxTokens(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Temperature: " + getColor(sysMainColor) + getTemperature(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        } catch (Exception e) {
+            insertControlChars('n', 1);
+            message("Error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), 0, out::println);
+        }
     }
 
     private static void configureTemperature() {

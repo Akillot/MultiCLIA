@@ -48,7 +48,7 @@ public class ChatGPTClient {
                     .getMessage()
                     .getContent();
 
-            return formatResponse(response, 93, "ChatGPT: ");
+            return formatResponse(response, 95, "");
         } catch (Exception e) {
             return "Error: Failed to get response from ChatGPT.";
         }
