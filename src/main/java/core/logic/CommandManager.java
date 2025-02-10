@@ -192,7 +192,9 @@ public class CommandManager {
     public static void processCommandWithHostInput(String command) {
         try {
             insertControlChars('n', 1);
-            out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter host [e.g., google.com]: ");
+            out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter host [e.g., "
+                    + getColor(27) + "g" + getColor(160) + "o" + getColor(220) + "o"
+                    + getColor(27) + "g" + getColor(40) + "l" + getColor(160) + "e" + getColor(sysLayoutColor) + ".com]: ");
             String host = scanner.nextLine().trim();
             insertControlChars('n', 1);
 

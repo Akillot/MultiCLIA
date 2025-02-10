@@ -100,7 +100,7 @@ public class TextConfigs {
 
         for (String word : text.split(" ")) {
             if (lineLength + word.length() + 1 > maxLength) {
-                formatted.append("\n   ");
+                formatted.append("\n").append(alignment(defaultTextAlignment)).append("   ");
                 lineLength = 3;
             } else {
                 formatted.append(" ");
