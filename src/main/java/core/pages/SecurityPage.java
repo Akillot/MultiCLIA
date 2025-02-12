@@ -4,6 +4,8 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.security.*;
 import java.util.Random;
 
@@ -16,11 +18,8 @@ import static java.lang.System.out;
 public class SecurityPage {
 
     private static final int easyComplexityColor = 85;
-
     private static final int mediumComplexityColor = 214;
-
     private static final int strongComplexityColor = 177;
-
     private static final int extraComplexityColor = 201;
 
     private static final String CHAR_POOL_EASY = "abcdefghijklmnopqrstuvwxyz";
@@ -105,6 +104,13 @@ public class SecurityPage {
             insertControlChars('n', 1);
             message("Generated Password: " + generatedPassword,
                     sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+
+            displayConfirmation("Enter","y","+",
+                    "to open and","n","-","to skip",
+                    sysAcceptanceColor, sysRejectionColor, sysLayoutColor,getDefaultTextAlignment());
+
+            choice("Copy to clipboard",copyToClipboard(generatedPassword),sysLayoutColor,sysLayoutColor,sysRejectionColor);
+            insertControlChars('n', 1);
         } else {
             message("Invalid complexity option. Please try again.", sysLayoutColor, getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
@@ -150,5 +156,21 @@ public class SecurityPage {
         }
 
         return passwordBuilder.toString();
+    }
+
+    private static @NotNull Runnable copyToClipboard(String text) {
+        return () -> {
+            try {
+                StringSelection selection = new StringSelection(text);
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+                message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::println);
+                message("Password copied " + getColor(sysAcceptanceColor) + "successfully" + getColor(sysLayoutColor) + ".",
+                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            } catch (Exception ex) {
+                insertControlChars('n', 1);
+                message("Error: " + ex.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            }
+        };
     }
 }
