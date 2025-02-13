@@ -4,8 +4,6 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.security.*;
 import java.util.Random;
 
@@ -156,21 +154,5 @@ public class SecurityPage {
         }
 
         return passwordBuilder.toString();
-    }
-
-    private static @NotNull Runnable copyToClipboard(String text) {
-        return () -> {
-            try {
-                StringSelection selection = new StringSelection(text);
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-                message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(),
-                        getDefaultDelay(), out::println);
-                message("Password copied " + getColor(sysAcceptanceColor) + "successfully" + getColor(sysLayoutColor) + ".",
-                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-            } catch (Exception ex) {
-                insertControlChars('n', 1);
-                message("Error: " + ex.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-            }
-        };
     }
 }

@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.io.*;
 import java.net.*;
 import java.net.URI;
@@ -212,6 +213,22 @@ public class CommandManager {
             message("Execution error: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
         }
+    }
+
+    public static @NotNull Runnable copyToClipboard(String text) {
+        return () -> {
+            try {
+                StringSelection selection = new StringSelection(text);
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+                message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::println);
+                message("Password copied " + getColor(sysAcceptanceColor) + "successfully" + getColor(sysLayoutColor) + ".",
+                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            } catch (Exception ex) {
+                insertControlChars('n', 1);
+                message("Error: " + ex.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            }
+        };
     }
 
     public static void mainMenuRerun(){
