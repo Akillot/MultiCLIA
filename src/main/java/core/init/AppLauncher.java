@@ -9,7 +9,7 @@ import static core.ui.DisplayManager.clearTerminal;
 public class AppLauncher {
     public static void main(String[] args) {
         clearTerminal();
-        insertControlChars('n',10);
+        insertControlChars('n',1);
         progressbarAnimation("Processing");
         StartPage.displayStartPage();
     }

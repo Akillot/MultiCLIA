@@ -3,6 +3,7 @@ package core.pages;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
@@ -69,7 +70,7 @@ public class StartPage {
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
                         + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about love?",
-                "Find a bug or have an idea? Go to nickzozulia@gmail.com.",
+                "Find a bug or have an idea? Go to" + getColor(sysMainColor) + " nickzozulia@gmail.com" + getColor(sysLayoutColor) + ".",
                 "Did you know that you can use /rr and /cl commands in every section."};
 
         Random rand = new Random();
@@ -81,10 +82,11 @@ public class StartPage {
 
     private static void getCurrentDate(){
         LocalDateTime localTime = LocalDateTime.now();
+        DayOfWeek dayOfWeek = localTime.getDayOfWeek();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        dateAndTimeOfProgramLaunching = localTime.format(myFormatter);
+        dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
         message("Application start time" + ": "
-                        + getColor(sysMainColor) + dateAndTimeOfProgramLaunching
+                        + getColor(sysMainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + dateAndTimeOfProgramLaunching
                         + getColor(sysLayoutColor) + ".",
                 sysLayoutColor,48,getDefaultDelay(),out::print);
     }
