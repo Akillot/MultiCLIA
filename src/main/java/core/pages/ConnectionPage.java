@@ -7,8 +7,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
 import static core.configs.TextConfigs.message;
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
@@ -65,6 +64,7 @@ public class ConnectionPage {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new TelegramBot());
+            
             message("Telegram Bot was successfuly started",sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
         catch (Exception e) {

@@ -18,7 +18,7 @@ public class CommandHandler {
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "help", "info",
             "clear", "time", "network", "security", "cryptography",
-            "terminal", "ai-assistance", "support", "exit"};
+            "terminal", "ai-assistance", "connection", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
