@@ -55,7 +55,7 @@ public class CommandHandler {
             case 8 -> SecurityPage::displaySecurityPage;
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
-            case 11 -> AiPage::displayAiPage;
+            case 11 -> AiPage::displayPage;
             case 12 -> SupportPage::displaySupportPage;
             case 13 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())

@@ -11,7 +11,7 @@ import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
 
-public class AiPage {
+public class AiPage extends Page {
 
     private static String coloredChatGptLogo =
             getColor(204) + "C" + getColor(110) + "h"
@@ -19,7 +19,7 @@ public class AiPage {
                     + getColor(161) + "G" + getColor(207) + "P"
                     + getColor(217) + "T";
 
-    public static void displayAiPage() {
+    public static void displayPage() {
         marginBorder(1, 2);
         message("Powered by OpenAI " + coloredChatGptLogo + RESET, sysLayoutColor,
                 getDefaultTextAlignment(), getDefaultDelay(), out::println);
@@ -52,7 +52,7 @@ public class AiPage {
         }
     }
 
-    private static void displayListOfCommands() {
+    protected static void displayListOfCommands() {
         insertControlChars('n', 1);
         message("·  Ask ChatGPT [" + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);

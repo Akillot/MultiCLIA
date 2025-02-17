@@ -3,10 +3,14 @@ core/logic/ChatGPTClient.class
 core/logic/CommandManager.class
 core/init/AppLauncher.class
 core/pages/CryptographyPage.class
+core/bots/TelegramBot.class
 core/ui/DisplayManager.class
 core/commands/CommandHandler.class
+core/logic/AsciiQrCodeGenerator.class
+core/pages/ConnectionPage.class
 core/pages/SettingsPage.class
 core/pages/TerminalPage.class
+core/bots/DiscordBot.class
 core/pages/SecurityPage.class
 core/pages/NetworkPage.class
 core/pages/StartPage.class
