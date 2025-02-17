@@ -1,6 +1,7 @@
 core/pages/TimePage.class
 core/logic/ChatGPTClient.class
 core/logic/CommandManager.class
+core/pages/Page.class
 core/init/AppLauncher.class
 core/pages/CryptographyPage.class
 core/bots/TelegramBot.class

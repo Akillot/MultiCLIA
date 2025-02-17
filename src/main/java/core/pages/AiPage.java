@@ -11,7 +11,7 @@ import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
 
-public class AiPage extends Page {
+public class AiPage{
 
     private static String coloredChatGptLogo =
             getColor(204) + "C" + getColor(110) + "h"
@@ -52,7 +52,7 @@ public class AiPage extends Page {
         }
     }
 
-    protected static void displayListOfCommands() {
+    public static void displayListOfCommands()  {
         insertControlChars('n', 1);
         message("·  Ask ChatGPT [" + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);

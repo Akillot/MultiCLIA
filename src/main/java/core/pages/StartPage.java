@@ -71,7 +71,8 @@ public class StartPage {
                         + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about love?",
                 "Find a bug or have an idea? Go to" + getColor(sysMainColor) + " nickzozulia@gmail.com" + getColor(sysLayoutColor) + ".",
-                "Did you know that you can use /rr and /cl commands in every section."};
+                "Did you know that you can use /" + getColor(sysMainColor) + "rr" + getColor(sysLayoutColor)
+                        + " and /" + getColor(sysMainColor) + "cl" + getColor(sysLayoutColor) + " commands in every section."};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);

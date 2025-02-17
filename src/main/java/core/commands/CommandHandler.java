@@ -23,7 +23,7 @@ public class CommandHandler {
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/n", "/sc", "/cr",
-            "/ter", "/ai", "/su", "/e"};
+            "/ter", "/ai", "/cn", "/su", "/e"};
 
     public static String[] extensionCmds = {};
 
@@ -56,8 +56,9 @@ public class CommandHandler {
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
             case 11 -> AiPage::displayPage;
-            case 12 -> SupportPage::displaySupportPage;
-            case 13 -> ExitPage::displayExitPage;
+            case 12 -> ConnectionPage::displayPage;
+            case 13 -> SupportPage::displaySupportPage;
+            case 14 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
