@@ -22,6 +22,7 @@ public class DisplayManager {
             formatCommandWithDescription("info", "/i", "Shows app information"),
             formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
             formatCommandWithDescription("time", "/t", "Shows time section"),
+            formatCommandWithDescription("calendar", "/ca", "Shows a calendar page"),
             formatCommandWithDescription("network", "/n", "Shows network page"),
             formatCommandWithDescription("security", "/sc", "Shows security page"),
             formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),

@@ -2,6 +2,7 @@ package core.commands;
 
 import core.pages.*;
 import core.logic.CommandManager;
+import core.pages.time.CalendarPage;
 import core.pages.time.TimePage;
 import core.ui.DisplayManager;
 import org.jetbrains.annotations.Contract;
@@ -18,12 +19,12 @@ public class CommandHandler {
 
     public static String[] fullSystemCmds = {
             "cmds" ,"settings", "rerun", "help", "info",
-            "clear", "time", "network", "security", "cryptography",
+            "clear", "time", "calendar", "network", "security", "cryptography",
             "terminal", "ai-assistance", "connection", "support", "exit"};
 
     public static String[] shortSystemCmds = {
             "/c" ,"/s", "/rr", "/h", "/i",
-            "/cl", "/t", "/n", "/sc", "/cr",
+            "/cl", "/t", "/ca", "/n", "/sc", "/cr",
             "/ter", "/ai", "/cn", "/su", "/e"};
 
     public static String[] extensionCmds = {};
@@ -52,14 +53,15 @@ public class CommandHandler {
             };
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> TimePage::displayTimePage;
-            case 7 -> NetworkPage::displayNetworkPage;
-            case 8 -> SecurityPage::displaySecurityPage;
-            case 9 -> CryptographyPage::displayCryptographyPage;
-            case 10 -> TerminalPage::displayTerminalPage;
-            case 11 -> AiPage::displayPage;
-            case 12 -> ConnectionPage::displayPage;
-            case 13 -> SupportPage::displaySupportPage;
-            case 14 -> ExitPage::displayExitPage;
+            case 7 -> CalendarPage::displayCalendarPage;
+            case 8 -> NetworkPage::displayNetworkPage;
+            case 9 -> SecurityPage::displaySecurityPage;
+            case 10 -> CryptographyPage::displayCryptographyPage;
+            case 11 -> TerminalPage::displayTerminalPage;
+            case 12 -> AiPage::displayPage;
+            case 13 -> ConnectionPage::displayPage;
+            case 14 -> SupportPage::displaySupportPage;
+            case 15 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
