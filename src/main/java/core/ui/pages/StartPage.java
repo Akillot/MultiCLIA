@@ -1,4 +1,4 @@
-package core.pages;
+package core.ui.pages;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;

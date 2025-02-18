@@ -1,6 +1,4 @@
-package core.pages;
-
-import lombok.Getter;
+package core.ui.pages;
 
 import java.util.Scanner;
 

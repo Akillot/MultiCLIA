@@ -8,7 +8,7 @@ import static core.commands.CommandHandler.*;
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
 
-import static core.pages.AiPage.coloredChatGptLogo;
+import static core.ui.pages.AiPage.coloredChatGptLogo;
 import static java.lang.System.*;
 
 public class DisplayManager {

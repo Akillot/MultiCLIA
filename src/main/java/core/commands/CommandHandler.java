@@ -1,9 +1,9 @@
 package core.commands;
 
-import core.pages.*;
+import core.ui.pages.*;
 import core.logic.CommandManager;
-import core.pages.time.CalendarPage;
-import core.pages.time.TimePage;
+import core.ui.pages.time.CalendarPage;
+import core.ui.pages.time.TimePage;
 import core.ui.DisplayManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

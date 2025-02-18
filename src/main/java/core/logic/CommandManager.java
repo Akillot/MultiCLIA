@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 import static core.configs.AppearanceConfigs.*;
-import static core.pages.StartPage.displayStartPage;
+import static core.ui.pages.StartPage.displayStartPage;
 import static core.ui.DisplayManager.*;
 
 import static core.configs.TextConfigs.*;

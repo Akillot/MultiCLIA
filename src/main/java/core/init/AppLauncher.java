@@ -1,6 +1,6 @@
 package core.init;
 
-import core.pages.StartPage;
+import core.ui.pages.StartPage;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.insertControlChars;

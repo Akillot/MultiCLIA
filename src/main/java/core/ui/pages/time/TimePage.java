@@ -1,4 +1,4 @@
-package core.pages.time;
+package core.ui.pages.time;
 
 import org.jetbrains.annotations.NotNull;
 

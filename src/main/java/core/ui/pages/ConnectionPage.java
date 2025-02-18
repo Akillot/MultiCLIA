@@ -1,4 +1,4 @@
-package core.pages;
+package core.ui.pages;
 
 import core.bots.TelegramBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;

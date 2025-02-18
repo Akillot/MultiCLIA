@@ -1,4 +1,4 @@
-package core.pages;
+package core.ui.pages;
 
 import java.net.InetAddress;
 import java.net.Socket;

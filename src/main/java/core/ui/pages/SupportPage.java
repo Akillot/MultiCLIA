@@ -1,4 +1,4 @@
-package core.pages;
+package core.ui.pages;
 
 import static core.configs.AppearanceConfigs.*;
 import static core.logic.CommandManager.choice;

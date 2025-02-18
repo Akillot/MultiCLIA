@@ -1,4 +1,4 @@
-package core.pages;
+package core.ui.pages;
 
 import com.sun.management.OperatingSystemMXBean;
 import org.jetbrains.annotations.Contract;
