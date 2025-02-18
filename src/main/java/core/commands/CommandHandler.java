@@ -2,6 +2,7 @@ package core.commands;
 
 import core.pages.*;
 import core.logic.CommandManager;
+import core.pages.time.TimePage;
 import core.ui.DisplayManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
