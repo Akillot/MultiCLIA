@@ -1,5 +1,7 @@
 package core.pages;
 
+import lombok.Getter;
+
 import java.util.Scanner;
 
 import static core.configs.AppearanceConfigs.*;
@@ -13,7 +15,7 @@ import static java.lang.System.out;
 
 public class AiPage{
 
-    private static String coloredChatGptLogo =
+    public static String coloredChatGptLogo =
             getColor(204) + "C" + getColor(110) + "h"
                     + getColor(205) + "a" + getColor(208) + "t"
                     + getColor(161) + "G" + getColor(207) + "P"
