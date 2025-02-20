@@ -5,7 +5,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/SecurityPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/time/TimePage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/StartPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/core/bots/DiscordBot.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/AsciiQrCodeGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/TerminalPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/configs/AppearanceConfigs.java
@@ -21,4 +20,3 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/time/CalendarPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/CommandManager.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/InfoPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/core/bots/TelegramBot.java

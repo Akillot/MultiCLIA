@@ -34,7 +34,7 @@ public class AiPage{
 
             switch (input) {
                 case "ask chatgpt", "/ac" -> runChatGpt();
-                case "modify temperature", "/mt" -> configureTemperature();
+                case "modify creativity", "/mc" -> configureCreativity();
                 case "modify maximum of tokens", "/mmt" -> configureMaxTokens();
                 case "info", "/i" -> displayChatGptInfo();
                 case "rerun", "/rr" -> {
@@ -57,8 +57,8 @@ public class AiPage{
         message("·  Ask ChatGPT [" + getColor(sysMainColor)
                 + "/ac" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Modify Temperature [" + getColor(sysMainColor)
-                + "/mt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Modify Creativity [" + getColor(sysMainColor)
+                + "/mc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Modify Maximum of Tokens [" + getColor(sysMainColor)
                 + "/mmt" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -126,7 +126,7 @@ public class AiPage{
         }
     }
 
-    private static void configureTemperature() {
+    private static void configureCreativity() {
         insertControlChars('n', 1);
         message("["+ getColor(sysMainColor) + "i" + getColor(sysLayoutColor) + "] The temperature of the AI controls the creativity of responses.\n" +
                         alignment(getDefaultTextAlignment()) + "The higher the temperature," +
@@ -169,7 +169,7 @@ public class AiPage{
     private static void configureMaxTokens() {
         insertControlChars('n', 1);
 
-        message("Max tokens define the response length. More tokens allow longer answers.\n" +
+        message("["+ getColor(sysMainColor) + "i" + getColor(sysLayoutColor) + "] Max tokens define the response length. More tokens allow longer answers.\n" +
                 alignment(getDefaultTextAlignment()) + "Choose wisely based on your needs.", sysLayoutColor,
                 getDefaultTextAlignment(), getDefaultDelay(), out::println);
         int maxTokens;

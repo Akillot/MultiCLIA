@@ -4,14 +4,12 @@ core/ui/pages/StartPage.class
 core/init/AppLauncher.class
 core/ui/pages/SupportPage.class
 core/ui/pages/time/CalendarPage.class
-core/bots/TelegramBot.class
 core/ui/DisplayManager.class
 core/commands/CommandHandler.class
 core/logic/AsciiQrCodeGenerator.class
 core/ui/pages/AiPage.class
 core/ui/pages/NetworkPage.class
 core/ui/pages/ConnectionPage.class
-core/bots/DiscordBot.class
 core/ui/pages/time/TimePage.class
 core/ui/pages/InfoPage.class
 core/ui/pages/ExitPage.class
