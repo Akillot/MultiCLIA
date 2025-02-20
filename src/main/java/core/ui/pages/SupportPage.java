@@ -14,8 +14,8 @@ public class SupportPage {
 
     private static void displaySupportMenu() {
         marginBorder(1,2);
-        message("I'm thrilled that you're using MultiCLIA! \uD83C\uDF89\uD83C\uDF88 " +
-                "Let's keep making great things happen together! \uD83D\uDE80✨",sysLayoutColor,getDefaultTextAlignment(),
+        message("I'm thrilled that you're using MultiCLIA!\n" + alignment(getDefaultTextAlignment()) +
+                "Let's keep making great things happen together!",sysLayoutColor,getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
 
         insertControlChars('n',1);

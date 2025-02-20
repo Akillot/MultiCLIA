@@ -13,13 +13,14 @@ public class CalendarPage {
     public static void displayCalendarPage() {
         YearMonth month = YearMonth.now();
 
-        insertControlChars('n',1);
+        marginBorder(1,2);
         out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "📅 %s %d\n\n",
                 month.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), month.getYear());
 
-        message("Mo    Tu    We    Th    Fr    Sa    Su",sysLayoutColor,getDefaultLogoAlignment() + 10,getDefaultDelay(),out::println);
+        message("Mo    Tu    We    Th    Fr    Sa    Su",sysLayoutColor,
+                getDefaultLogoAlignment() + 10,getDefaultDelay(),out::println);
 
-        int firstDayOfWeek = month.atDay(1).getDayOfWeek().getValue() % 7;
+        int firstDayOfWeek = month.atDay(7).getDayOfWeek().getValue() % 7;
         int daysInMonth = month.lengthOfMonth();
 
         for (int i = 0; i < firstDayOfWeek; i++) {
@@ -30,6 +31,6 @@ public class CalendarPage {
             out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "%2d ", day);
             if ((day + firstDayOfWeek) % 7 == 0 || day == daysInMonth) insertControlChars('n',1);
         }
-        insertControlChars('n',1);
+        marginBorder(2,1);
     }
 }
