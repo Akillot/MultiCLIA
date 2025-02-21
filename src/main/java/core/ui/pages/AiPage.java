@@ -128,15 +128,15 @@ public class AiPage{
 
     private static void configureCreativity() {
         insertControlChars('n', 1);
-        message("["+ getColor(sysMainColor) + "i" + getColor(sysLayoutColor) + "] The temperature of the AI controls the creativity of responses.\n" +
-                        alignment(getDefaultTextAlignment()) + "The higher the temperature," +
+        message("["+ getColor(sysMainColor) + "i" + getColor(sysLayoutColor) + "] The creativity of the AI controls the creativity of responses.\n" +
+                        alignment(getDefaultTextAlignment()) + "The higher the creativity," +
                         " the more diverse and unpredictable the answers.",
                 sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         double temperature;
         while (true) {
             out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) +
-                    "Enter a temperature [Choose between " + getColor(sysMainColor) + "0.1"
+                    "Enter a creativity [Choose between " + getColor(sysMainColor) + "0.1"
                     + getColor(sysLayoutColor) + " and " + getColor(sysMainColor) + "1.2" + getColor(sysLayoutColor) + "]: ");
             try {
                 temperature = scanner.nextDouble();
@@ -148,7 +148,7 @@ public class AiPage{
                     message("Status: " + getColor(sysAcceptanceColor) + "✓", sysLayoutColor,
                             getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-                    message("New temperature is: " + getColor(sysMainColor) + getTemperature()
+                    message("New creativity is: " + getColor(sysMainColor) + getTemperature()
                                     + getColor(sysLayoutColor) + ".", sysLayoutColor,
                             getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     break;
