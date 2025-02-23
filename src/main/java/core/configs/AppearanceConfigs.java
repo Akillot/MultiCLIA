@@ -29,7 +29,16 @@ public class AppearanceConfigs {
 
     public static String searchingArrow = "-> ";
 
-    //Colors
+    //Colors of logo
+
+    public static int color1 = 219;
+    public static int color2 = 183;
+    public static int color3 = 147;
+    public static int color4 = 218;
+    public static int color5 = 182;
+    public static int color6 = 218;
+
+    //System Colors
     public static int sysMainColor = 147;
     public static int sysLayoutColor = 15;
     public static int sysAcceptanceColor = 46;

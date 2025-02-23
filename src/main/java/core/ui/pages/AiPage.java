@@ -88,15 +88,11 @@ public class AiPage{
                         + getColor(sysMainColor) + "exit" + getColor(sysLayoutColor) + " to quit]: ");
                 String userMessage = scanner.nextLine();
 
-                if (userMessage.equalsIgnoreCase("exit")) {
+                if (userMessage.equalsIgnoreCase("exit") || userMessage.isEmpty()) {
                     insertControlChars('n', 1);
                     break;
                 }
 
-                if (userMessage.isEmpty()) {
-                    insertControlChars('n', 1);
-                    break;
-                }
                 String response = sendMessage(userMessage);
 
                 insertControlChars('n', 1);

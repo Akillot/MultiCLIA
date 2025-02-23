@@ -17,7 +17,7 @@ public class CalendarPage {
 
     public static void displayCalendarPage() {
         marginBorder(1, 2);
-        message("AI:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Calendar:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         displayListOfCommands();
 
@@ -27,7 +27,7 @@ public class CalendarPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "ask chatgpt", "/ac" -> displayCalendar();
+                case "calendar", "/c" -> displayCalendar();
                 case "rerun", "/rr" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
@@ -46,7 +46,7 @@ public class CalendarPage {
     public static void displayListOfCommands()  {
         insertControlChars('n', 1);
         message("·  Calendar [" + getColor(sysMainColor)
-                + "/ca" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                + "/c" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Rerun [" + getColor(sysMainColor)
                 + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);

@@ -120,9 +120,9 @@ public class StartPage {
 
     private static String @NotNull [] getColorsForLogo() {
         return new String[]{
-                getColor(219), getColor(183),
-                getColor(147), getColor(218),
-                getColor(182), getColor(218)
+                getColor(color1), getColor(color2),
+                getColor(color3), getColor(color4),
+                getColor(color5), getColor(color6)
         };
     }
 }
