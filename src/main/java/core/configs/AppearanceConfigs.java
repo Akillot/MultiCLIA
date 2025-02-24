@@ -30,7 +30,6 @@ public class AppearanceConfigs {
     public static String searchingArrow = "-> ";
 
     //Colors of logo
-
     public static int color1 = 219;
     public static int color2 = 183;
     public static int color3 = 147;
