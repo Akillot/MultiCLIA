@@ -19,7 +19,7 @@ public class AiPage{
                     + getColor(161) + "G" + getColor(207) + "P"
                     + getColor(217) + "T";
 
-    public static void displayPage() {
+    public static void displayAiPage() {
         marginBorder(1, 2);
         message("Powered by OpenAI " + coloredChatGptLogo + RESET, sysLayoutColor,
                 getDefaultTextAlignment(), getDefaultDelay(), out::println);

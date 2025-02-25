@@ -28,14 +28,14 @@ public class qrCodeGenerator {
         }
     }
 
-    public static void generateAsciiQR(String data, int size) throws Exception {
+    public static void generateAsciiQr(String data, int size) throws Exception {
         BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, size, size);
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                System.out.print(matrix.get(x, y) ? "██" : "  ");
+                out.print(matrix.get(x, y) ? "██" : "  ");
             }
-            System.out.println();
+            out.println();
         }
     }
 }
