@@ -22,6 +22,7 @@ public class ConnectionPage {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
+                case "make qr code", "/qr" -> generateQrCode();
                 case "rerun", "/rr" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
@@ -51,5 +52,9 @@ public class ConnectionPage {
 
         message("·  Exit [" + getColor(sysMainColor)
                 + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
+
+    private static void generateQrCode() {
+
     }
 }
