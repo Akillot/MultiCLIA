@@ -71,7 +71,8 @@ public class ConnectionPage {
         input = "https://" + input;
         insertControlChars('n', 1);
         try {
-            generateAsciiQr(input, 25);
+            generateAsciiQr(input, 40);
+            insertControlChars('n', 1);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

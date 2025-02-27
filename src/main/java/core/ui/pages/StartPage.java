@@ -55,7 +55,7 @@ public class StartPage {
 
     private static void displayMenu() {
         insertControlChars('n',2);
-        switchLogo(mainLogoAscii, getDefaultLogoAlignment());
+        displayLogo(mainLogoAscii, getDefaultLogoAlignment());
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
@@ -101,7 +101,7 @@ public class StartPage {
             case "31-12":
             case "01-01":
                 insertControlChars('n',2);
-                switchLogo(newYearAscii, 36);
+                displayLogo(newYearAscii, 36);
                 insertControlChars('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,getDefaultDelay(),out::print);
@@ -109,7 +109,7 @@ public class StartPage {
         }
     }
 
-    private static void switchLogo(String @NotNull [] logo, int alignment) {
+    private static void displayLogo(String @NotNull [] logo, int alignment) {
         String[] colors = getColorsForLogo();
 
         for (int i = 0; i < logo.length; i++) {

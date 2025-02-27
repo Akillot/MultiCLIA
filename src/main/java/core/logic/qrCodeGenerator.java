@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import static core.configs.AppearanceConfigs.*;
-import static core.configs.TextConfigs.insertControlChars;
-import static core.configs.TextConfigs.message;
+import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class qrCodeGenerator {
@@ -33,9 +32,9 @@ public class qrCodeGenerator {
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                out.print(matrix.get(x, y) ? "██" : "  ");
+                out.print(matrix.get(x, y) ? getColor(sysLayoutColor) + "██" : "  ");
             }
-            out.println();
+            insertControlChars('n', 1);
         }
     }
 }

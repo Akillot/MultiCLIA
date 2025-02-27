@@ -5,7 +5,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/SecurityPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/time/TimePage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/StartPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/AsciiQrCodeGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/TerminalPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/configs/AppearanceConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/DisplayManager.java
@@ -17,6 +16,7 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/CryptographyPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/PackageUnifier.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/init/AppLauncher.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/qrCodeGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/time/CalendarPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/CommandManager.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/InfoPage.java
