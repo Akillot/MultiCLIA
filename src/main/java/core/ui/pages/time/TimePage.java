@@ -40,7 +40,7 @@ public class TimePage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list of commands", "/lc" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
                     return;
@@ -64,8 +64,8 @@ public class TimePage {
         message("·  Change Time Zone [" + getColor(sysMainColor)
                 + "/ctz" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  List Of Commands [" + getColor(sysMainColor)
-                + "/lc" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  List [" + getColor(sysMainColor)
+                + "/ls" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Exit [" + getColor(sysMainColor)
                 + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);

@@ -17,13 +17,13 @@ import static java.lang.System.out;
 
 public class CommandHandler {
 
-    public static String[] fullSystemCmds = {
-            "cmds" ,"settings", "rerun", "help", "info",
+    public static final String[] fullSystemCmds = {
+            "list" ,"settings", "rerun", "help", "info",
             "clear", "time", "calendar", "network", "security", "cryptography",
             "terminal", "ai-assistance", "connection", "support", "exit"};
 
-    public static String[] shortSystemCmds = {
-            "/c" ,"/s", "/rr", "/h", "/i",
+    public static final String[] shortSystemCmds = {
+            "/ls" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/ca", "/n", "/sc", "/cr",
             "/ter", "/ai", "/cn", "/su", "/e"};
 

@@ -44,7 +44,7 @@ public class SecurityPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list of commands", "/lc" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
                     return;
@@ -59,7 +59,7 @@ public class SecurityPage {
         message("·  Generate password [" + getColor(sysMainColor) + "/gp"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  List Of Commands [" + getColor(sysMainColor) + "/lc"
+        message("·  List [" + getColor(sysMainColor) + "/ls"
                 + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Exit [" + getColor(sysMainColor) + "/e"
