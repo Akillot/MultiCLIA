@@ -7,13 +7,14 @@ import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
 
 import static core.configs.TextConfigs.alignment;
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
 
 public class CalendarPage {
+
+    private static int qrCodeColor = sysAcceptanceColor;
 
     public static void displayCalendarPage() {
         marginBorder(1, 2);
@@ -28,12 +29,13 @@ public class CalendarPage {
 
             switch (input) {
                 case "calendar", "/c" -> displayCalendar();
+                case "secret", "/scrt" -> secretCommand();
                 case "rerun", "/rr" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list of commands", "/lc" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands();
                 case "exit", "/e" -> {
                     exitPage();
                     return;
@@ -62,26 +64,41 @@ public class CalendarPage {
     }
 
     private static void displayCalendar() {
-        YearMonth month = YearMonth.now();
+        YearMonth currentMonth = YearMonth.now();
 
-        marginBorder(1,2);
+        marginBorder(1, 2);
         out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "📅 %s %d\n\n",
-                month.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), month.getYear());
+                currentMonth.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), currentMonth.getYear());
 
-        message("Mo    Tu    We    Th    Fr    Sa    Su",sysLayoutColor,
+        message("Mo      Tu      We      Th      Fr      Sa      Su",sysLayoutColor,
                 getDefaultLogoAlignment() + 10,getDefaultDelay(),out::println);
 
-        int firstDayOfWeek = month.atDay(7).getDayOfWeek().getValue() % 7;
-        int daysInMonth = month.lengthOfMonth();
+        LocalDate firstDayOfMonth = currentMonth.atDay(1);
+        int firstDayOfWeekValue = firstDayOfMonth.getDayOfWeek().getValue();
 
-        for (int i = 0; i < firstDayOfWeek; i++) {
-            out.print(alignment(getDefaultTextAlignment()) + "   ");
+
+        int initialSpacing = firstDayOfWeekValue - 1;
+        int daysInMonth = currentMonth.lengthOfMonth();
+
+        for (int i = 0; i < initialSpacing; i++) {
+            out.print(alignment(getDefaultTextAlignment()) + "     ");
         }
 
         for (int day = 1; day <= daysInMonth; day++) {
-            out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "%2d ", day);
-            if ((day + firstDayOfWeek) % 7 == 0 || day == daysInMonth) insertControlChars('n',1);
+            LocalDate date = currentMonth.atDay(day);
+            boolean isToday = date.equals(LocalDate.now());
+
+            if (isToday) {
+                out.printf(alignment(getDefaultTextAlignment()) + getColor(qrCodeColor) + "%-5d", day);
+            } else {
+                out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "%-5d", day);
+            }
+
+            int dayOfWeekValue = (firstDayOfWeekValue + day - 1) % 7;
+            if (dayOfWeekValue == 0 || day == daysInMonth) {
+                insertControlChars('n', 1);
+            }
         }
-        marginBorder(2,1);
+        marginBorder(2, 1);
     }
 }

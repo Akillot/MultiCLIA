@@ -252,4 +252,14 @@ public class CommandManager {
                 getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
     }
+
+    public static void secretCommand() {
+        try {
+            openUri("https://www.youtube.com/watch?v=xvFZjo5PgG0");
+        }
+        catch (Exception ex){
+            insertControlChars('n', 1);
+            message("Error: " + ex.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
+    }
 }
