@@ -17,15 +17,51 @@ import static java.lang.System.out;
 
 public class CommandHandler {
 
+    public static final String listFullCmnd = "list";
+    public static final String settingsFullCmnd = "settings";
+    public static final String rerunFullCmnd = "rerun";
+    public static final String helpFullCmnd = "help";
+    public static final String infoFullCmnd = "info";
+    public static final String clearFullCmnd = "clear";
+    public static final String timeFullCmnd = "time";
+    public static final String calendarFullCmnd = "calendar";
+    public static final String networkFullCmnd = "network";
+    public static final String securityFullCmnd = "security";
+    public static final String cryptographyFullCmnd = "cryptography";
+    public static final String terminalFullCmnd = "terminal";
+    public static final String aiFullCmnd = "ai-assist";
+    public static final String connectionFullCmnd = "connection";
+    public static final String quitFullCmnd = "quit";
+
+    public static String specChar = "/";
+
+    public static final String listShortCmnd = "ls";
+    public static final String settingsShortCmnd = "s";
+    public static final String rerunShortCmnd = "rr";
+    public static final String helpShortCmnd = "h";
+    public static final String infoShortCmnd = "i";
+    public static final String clearShortCmnd = "cl";
+    public static final String timeShortCmnd = "t";
+    public static final String calendarShortCmnd = "ca";
+    public static final String networkShortCmnd = "n";
+    public static final String securityShortCmnd = "sc";
+    public static final String cryptographyShortCmnd = "cr";
+    public static final String terminalShortCmnd = "tr";
+    public static final String aiShortCmnd = "ai";
+    public static final String connectionShortCmnd = "cn";
+    public static final String quitShortCmnd = "q";
+
+    public static String command = specChar + listShortCmnd;
+
     public static final String[] fullSystemCmds = {
             "list" ,"settings", "rerun", "help", "info",
             "clear", "time", "calendar", "network", "security", "cryptography",
-            "terminal", "ai-assistance", "connection", "support", "exit"};
+            "terminal", "ai-assist", "connection", "support", "quit"};
 
     public static final String[] shortSystemCmds = {
             "/ls" ,"/s", "/rr", "/h", "/i",
             "/cl", "/t", "/ca", "/n", "/sc", "/cr",
-            "/ter", "/ai", "/cn", "/su", "/e"};
+            "/ter", "/ai", "/cn", "/su", "/q"};
 
     public static String[] extensionCmds = {};
 

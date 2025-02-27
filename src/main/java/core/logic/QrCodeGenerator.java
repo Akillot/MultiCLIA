@@ -13,7 +13,7 @@ import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
-public class qrCodeGenerator {
+public class QrCodeGenerator {
 
     public static void generateQR(String data, String filePath, int width, int height) {
         try {

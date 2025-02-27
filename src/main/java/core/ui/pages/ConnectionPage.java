@@ -4,7 +4,7 @@ import static core.configs.AppearanceConfigs.*;
 import static core.configs.TextConfigs.*;
 import static core.configs.TextConfigs.message;
 import static core.logic.CommandManager.*;
-import static core.logic.qrCodeGenerator.generateAsciiQr;
+import static core.logic.QrCodeGenerator.generateAsciiQr;
 import static core.ui.DisplayManager.clearTerminal;
 import static core.ui.DisplayManager.scanner;
 import static java.lang.System.out;
