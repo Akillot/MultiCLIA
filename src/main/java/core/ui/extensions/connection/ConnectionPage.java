@@ -1,11 +1,11 @@
 package core.ui.extensions.connection;
 
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.essential.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.essential.TextConfigs.*;
 import static core.ui.extensions.connection.QrCodeGenerator.generateAsciiQr;
-import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.essential.DisplayManager.scanner;
 import static java.lang.System.out;
 
 public class ConnectionPage {

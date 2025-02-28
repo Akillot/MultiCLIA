@@ -4,10 +4,10 @@ import java.time.*;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.essential.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.essential.DisplayManager.scanner;
 import static core.ui.essential.configs.essential.TextConfigs.*;
 import static java.lang.System.out;
 
