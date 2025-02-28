@@ -1,31 +1,40 @@
 package core.commands;
 
-import core.ui.pages.*;
+import core.ui.essential.essential.pages.ExitPage;
+import core.ui.essential.essential.pages.InfoPage;
+import core.ui.essential.essential.pages.SettingsPage;
+import core.ui.essential.essential.pages.SupportPage;
 import core.logic.CommandManager;
-import core.ui.pages.time.CalendarPage;
-import core.ui.pages.time.TimePage;
-import core.ui.DisplayManager;
+import core.ui.extensions.ai.AiPage;
+import core.ui.extensions.connection.ConnectionPage;
+import core.ui.extensions.cryptography.CryptographyPage;
+import core.ui.extensions.network.NetworkPage;
+import core.ui.extensions.security.SecurityPage;
+import core.ui.extensions.terminal.emulation.TerminalPage;
+import core.ui.extensions.time.CalendarPage;
+import core.ui.extensions.time.TimePage;
+import core.ui.essential.configs.essential.DisplayManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.*;
-import static core.configs.TextConfigs.alignment;
-import static core.configs.TextConfigs.message;
+import static core.ui.essential.configs.essential.AppearanceConfigs.*;
+import static core.ui.essential.configs.essential.TextConfigs.alignment;
+import static core.ui.essential.configs.essential.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
 
     public static final String[] fullSystemCmds = {
-            "list" ,"config", "rerun", "help", "info",
-            "clear", "time", "calendar", "network", "security", "cryptography",
-            "terminal", "ai-assist", "connection", "support", "quit"};
+            "list" ,"config", "restart", "help", "info",
+            "clear", "date", "calendar", "ifconfig", "security", "crypt",
+            "terminal", "ai", "connection", "support", "quit"};
 
     public static final String[] shortSystemCmds = {
-            "/ls" ,"/с", "/rr", "/h", "/i",
-            "/cl", "/t", "/ca", "/n", "/sc", "/cr",
-            "/ter", "/ai", "/cn", "/su", "/q"};
+            "/ls" ,"/сfg", "/rs", "/h", "/i",
+            "/cl", "/dt", "/cld", "/ifc", "/sec", "/cr",
+            "/term", "/a", "/cn", "/sup", "/q"};
 
     public static String[] extensionCmds = {};
 

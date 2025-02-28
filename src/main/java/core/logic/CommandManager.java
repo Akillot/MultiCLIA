@@ -13,11 +13,11 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.*;
-import static core.ui.pages.StartPage.displayStartPage;
-import static core.ui.DisplayManager.*;
+import static core.ui.essential.configs.essential.AppearanceConfigs.*;
+import static core.ui.essential.configs.essential.DisplayManager.scanner;
+import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.essential.pages.StartPage.displayStartPage;
 
-import static core.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class CommandManager {

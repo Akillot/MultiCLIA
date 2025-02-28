@@ -1,10 +1,10 @@
 package core.init;
 
-import core.ui.pages.StartPage;
+import core.ui.essential.essential.pages.StartPage;
 
-import static core.configs.AppearanceConfigs.*;
-import static core.configs.TextConfigs.insertControlChars;
-import static core.ui.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.essential.AppearanceConfigs.progressbarAnimation;
+import static core.ui.essential.configs.essential.TextConfigs.insertControlChars;
+import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
 
 public class AppLauncher {
     public static void main(String[] args) {
