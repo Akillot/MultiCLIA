@@ -16,21 +16,21 @@ public class DisplayManager {
 
     //displaying description /h
     private static final String[] rules = {
-            formatCommandWithDescription("cmds", "/c", "Shows list of all commands"),
-            formatCommandWithDescription("settings", "/s", "Shows settings of the application"),
-            formatCommandWithDescription("rerun", "/rr", "Restarts the app without clearing context"),
-            formatCommandWithDescription("help", "/h", "Shows description of all commands"),
-            formatCommandWithDescription("info", "/i", "Shows app information"),
-            formatCommandWithDescription("clear", "/cl", "Clears recent values from terminal"),
-            formatCommandWithDescription("time", "/t", "Shows time section"),
-            formatCommandWithDescription("calendar", "/ca", "Shows a calendar page"),
-            formatCommandWithDescription("network", "/n", "Shows network page"),
-            formatCommandWithDescription("security", "/sc", "Shows security page"),
-            formatCommandWithDescription("cryptography", "/cr", "Shows cryptography page"),
-            formatCommandWithDescription("terminal", "/ter", "Shows terminal page"),
-            formatCommandWithDescription("ai-assistance", "/ai", "Shows page with " + coloredChatGptLogo + getColor(sysLayoutColor)),
-            formatCommandWithDescription("support", "/su", "Shows support page"),
-            formatCommandWithDescription("exit", "/e", "Terminates the application")
+            formatCommandWithDescription(fullSystemCmds[0], shortSystemCmds[0], "Shows list of all commands"),
+            formatCommandWithDescription(fullSystemCmds[1], shortSystemCmds[1], "Shows settings of the application"),
+            formatCommandWithDescription(fullSystemCmds[2], shortSystemCmds[2], "Restarts the app without clearing context"),
+            formatCommandWithDescription(fullSystemCmds[3], shortSystemCmds[3], "Shows description of all commands"),
+            formatCommandWithDescription(fullSystemCmds[4], shortSystemCmds[4], "Shows app information"),
+            formatCommandWithDescription(fullSystemCmds[5], shortSystemCmds[5], "Clears recent values from terminal"),
+            formatCommandWithDescription(fullSystemCmds[6], shortSystemCmds[6], "Shows time section"),
+            formatCommandWithDescription(fullSystemCmds[7], shortSystemCmds[7], "Shows a calendar page"),
+            formatCommandWithDescription(fullSystemCmds[8], shortSystemCmds[8], "Shows network page"),
+            formatCommandWithDescription(fullSystemCmds[9], shortSystemCmds[9], "Shows security page"),
+            formatCommandWithDescription(fullSystemCmds[10], shortSystemCmds[10], "Shows cryptography page"),
+            formatCommandWithDescription(fullSystemCmds[11], shortSystemCmds[11], "Shows terminal page"),
+            formatCommandWithDescription(fullSystemCmds[12], shortSystemCmds[12], "Shows page with " + coloredChatGptLogo + getColor(sysLayoutColor)),
+            formatCommandWithDescription(fullSystemCmds[13], shortSystemCmds[13], "Shows support page"),
+            formatCommandWithDescription(fullSystemCmds[14], shortSystemCmds[14], "Terminates the application")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
