@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
-import static core.ui.essential.configs.TextConfigs.formatResponse;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
+import static java.lang.System.out;
 
 public class ChatGPTClient {
     private static final String API_KEY;
@@ -26,8 +28,9 @@ public class ChatGPTClient {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("OPENAI_API_KEY");
 
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            throw new IllegalArgumentException("API key for OpenAI is missing or empty!");
+        if(API_KEY == null || API_KEY.isEmpty()) {
+            insertControlChars('n',1);
+            message("AI is unavailable.",sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
         }
     }
 
