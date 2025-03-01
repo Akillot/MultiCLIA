@@ -1,9 +1,9 @@
-package core.ui.essential.essential.pages;
+package core.ui.essential.pages;
 
 import static core.logic.CommandManager.choice;
 import static core.logic.CommandManager.openUri;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class SupportPage {

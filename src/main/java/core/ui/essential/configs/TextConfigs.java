@@ -1,11 +1,11 @@
-package core.ui.essential.configs.essential;
+package core.ui.essential.configs;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
 import static java.lang.System.out;
 
 public class TextConfigs {

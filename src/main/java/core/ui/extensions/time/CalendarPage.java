@@ -4,11 +4,11 @@ import java.time.*;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.essential.DisplayManager.scanner;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class CalendarPage {
@@ -29,13 +29,13 @@ public class CalendarPage {
             switch (input) {
                 case "calendar", "/c" -> displayCalendar();
                 case "secret", "/scr" -> secretCommand();
-                case "rerun", "/rr" -> {
+                case "restart", "/rs" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list", "/ls" -> displayListOfCommands();
-                case "exit", "/e" -> {
+                case "quit", "/q" -> {
                     exitPage();
                     return;
                 }

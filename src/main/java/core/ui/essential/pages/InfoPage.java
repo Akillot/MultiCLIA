@@ -1,13 +1,13 @@
-package core.ui.essential.essential.pages;
+package core.ui.essential.pages;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class InfoPage {

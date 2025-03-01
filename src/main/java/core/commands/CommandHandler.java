@@ -1,9 +1,9 @@
 package core.commands;
 
-import core.ui.essential.essential.pages.ExitPage;
-import core.ui.essential.essential.pages.InfoPage;
-import core.ui.essential.essential.pages.SettingsPage;
-import core.ui.essential.essential.pages.SupportPage;
+import core.ui.essential.pages.ExitPage;
+import core.ui.essential.pages.InfoPage;
+import core.ui.essential.pages.SettingsPage;
+import core.ui.essential.pages.SupportPage;
 import core.logic.CommandManager;
 import core.ui.extensions.ai.AiPage;
 import core.ui.extensions.connection.ConnectionPage;
@@ -13,15 +13,15 @@ import core.ui.extensions.security.SecurityPage;
 import core.ui.extensions.terminal.emulation.TerminalPage;
 import core.ui.extensions.time.CalendarPage;
 import core.ui.extensions.time.TimePage;
-import core.ui.essential.configs.essential.DisplayManager;
+import core.ui.essential.configs.DisplayManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.alignment;
-import static core.ui.essential.configs.essential.TextConfigs.message;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.alignment;
+import static core.ui.essential.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
@@ -36,6 +36,7 @@ public class CommandHandler {
             "/cl", "/dt", "/cld", "/ifc", "/sec", "/cr",
             "/term", "/a", "/cn", "/sup", "/q"};
 
+    // Here is another array for huge custom extensions commands
     public static String[] extensionCmds = {};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {

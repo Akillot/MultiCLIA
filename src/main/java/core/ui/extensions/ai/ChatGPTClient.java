@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
-import static core.ui.essential.configs.essential.TextConfigs.formatResponse;
+import static core.ui.essential.configs.TextConfigs.formatResponse;
 
 public class ChatGPTClient {
     private static final String API_KEY;

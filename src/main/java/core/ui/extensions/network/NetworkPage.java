@@ -7,10 +7,10 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class NetworkPage {

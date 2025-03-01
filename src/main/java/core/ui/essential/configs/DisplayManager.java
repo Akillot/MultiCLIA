@@ -1,12 +1,12 @@
-package core.ui.essential.configs.essential;
+package core.ui.essential.configs;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
 
 import static core.commands.CommandHandler.*;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 
 import static core.ui.extensions.ai.AiPage.coloredChatGptLogo;
 import static java.lang.System.*;
@@ -52,7 +52,7 @@ public class DisplayManager {
         marginBorder(1, 1);
     }
 
-    // displaying command list /c
+    // displaying command list /ls
     public static void displayCommandList() {
         try {
             marginBorder(1,1);

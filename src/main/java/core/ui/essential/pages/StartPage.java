@@ -1,4 +1,4 @@
-package core.ui.essential.essential.pages;
+package core.ui.essential.pages;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import static core.commands.CommandHandler.shortCmds;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
 import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class StartPage {

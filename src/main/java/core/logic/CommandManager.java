@@ -13,10 +13,10 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import static core.ui.essential.configs.essential.DisplayManager.scanner;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
-import static core.ui.essential.essential.pages.StartPage.displayStartPage;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.scanner;
+import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.pages.StartPage.displayStartPage;
 
 import static java.lang.System.out;
 

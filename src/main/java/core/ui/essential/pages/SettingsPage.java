@@ -1,4 +1,4 @@
-package core.ui.essential.essential.pages;
+package core.ui.essential.pages;
 
 import com.sun.management.OperatingSystemMXBean;
 import org.jetbrains.annotations.Contract;
@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.management.ManagementFactory;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.essential.DisplayManager.scanner;
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.DisplayManager.scanner;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class SettingsPage {
@@ -32,7 +32,6 @@ public class SettingsPage {
             getColorText("⠀⠀⠀⠀⠐⠒⠀⠠⠤⠤⠤⠶⠶⠚⠛⠛⠉⠀⠀⠀",21)
     };
 
-    //The main method of displaying the page
     public static void displaySettingsPage() {
         marginBorder(1,2);
         message("Settings:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -48,13 +47,13 @@ public class SettingsPage {
                 case "cpu", "/c" -> displayCpuLoad();
                 case "colors", "/col" -> displayColorTable();
                 case "java", "/j" -> displayJavaInfo();
-                case "rerun", "/rr" -> {
+                case "restart", "/rs" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list", "/ls" -> displayListOfCommands();
-                case "exit", "/e" -> {
+                case "quit", "/q" -> {
                     exitPage();
                     return;
                 }

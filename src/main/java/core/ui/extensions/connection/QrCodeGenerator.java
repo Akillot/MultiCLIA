@@ -9,9 +9,9 @@ import com.google.zxing.WriterException;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import static core.ui.essential.configs.essential.AppearanceConfigs.*;
-import static core.ui.essential.configs.essential.TextConfigs.insertControlChars;
-import static core.ui.essential.configs.essential.TextConfigs.message;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.insertControlChars;
+import static core.ui.essential.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class QrCodeGenerator {

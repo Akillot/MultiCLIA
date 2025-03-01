@@ -1,4 +1,4 @@
-package core.ui.essential.configs.essential;
+package core.ui.essential.configs;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static core.ui.essential.configs.essential.TextConfigs.*;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class AppearanceConfigs {
