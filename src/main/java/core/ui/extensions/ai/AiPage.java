@@ -85,10 +85,10 @@ public class AiPage{
             while (true) {
                 insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter prompt [or "
-                        + getColor(sysMainColor) + "exit" + getColor(sysLayoutColor) + " to quit]: ");
+                        + getColor(sysMainColor) + "/q" + getColor(sysLayoutColor) + " to exit]: ");
                 String userMessage = scanner.nextLine();
 
-                if (userMessage.equalsIgnoreCase("exit") || userMessage.isEmpty()) {
+                if (userMessage.equalsIgnoreCase("/q") || userMessage.isEmpty()) {
                     insertControlChars('n', 1);
                     break;
                 }

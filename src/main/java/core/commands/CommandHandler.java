@@ -32,7 +32,7 @@ public class CommandHandler {
             "terminal", "ai", "connection", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "/ls" ,"/сfg", "/rs", "/h", "/i",
+            "/ls" ,"/cfg", "/rs", "/h", "/i",
             "/cl", "/dt", "/cld", "/ifc", "/sec", "/cr",
             "/term", "/a", "/cn", "/sup", "/q"};
 

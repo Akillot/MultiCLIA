@@ -71,9 +71,7 @@ public class StartPage {
                 "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
                         + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about love?",
-                "Find a bug or have an idea? Go to" + getColor(sysMainColor) + " nickzozulia@gmail.com" + getColor(sysLayoutColor) + ".",
-                "Did you know that you can use " + getColor(sysMainColor) + shortCmds[2] + getColor(sysLayoutColor)
-                        + " and " + getColor(sysMainColor) + shortCmds[5] + getColor(sysLayoutColor) + " commands in every section."};
+                "Find a bug or have an idea? Go to" + getColor(sysMainColor) + " nickzozulia@gmail.com" + getColor(sysLayoutColor) + "."};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);

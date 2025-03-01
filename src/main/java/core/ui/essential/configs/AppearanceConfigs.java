@@ -164,4 +164,47 @@ public class AppearanceConfigs {
         out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
         out.print("\n".repeat(2));
     }
+
+    //Color table components
+    @Contract(pure = true)
+    public static void displayColorTable() {
+        insertControlChars('n',1);
+        message("Color Table:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        printColorRange(0, sysLayoutColor);
+        printColorBlock();
+        printColorRange(232, 255);
+    }
+
+    @Contract(pure = true)
+    private static void printColorRange(int start, int end) {
+        out.println(RESET);
+        for (int i = start; i <= end; i++) {
+            out.print(getColor(sysLayoutColor) + getBackColor(i)
+                    + tableAlignment() + " " + i + " " + RESET);
+            if ((i - start + 1) % 8 == 0) insertControlChars('n',2);
+        }
+    }
+
+    @Contract(pure = true)
+    private static void printColorBlock() {
+        int columns = 6;
+        int rows = (231 - 16 + 1) / columns;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                int colorCode = 16 + row + col * rows;
+                out.print(getColor(sysLayoutColor) + getBackColor(colorCode)
+                        + tableAlignment() + " " + colorCode + " " + RESET);
+            }
+            if(row == 11){
+                insertControlChars('n',1);
+            }
+            insertControlChars('n', 1);
+        }
+    }
+
+    @Contract(pure = true)
+    private static @NotNull String tableAlignment() {
+        return " ".repeat(Math.max(0, 4));
+    }
 }
