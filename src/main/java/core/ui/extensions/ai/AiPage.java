@@ -66,8 +66,8 @@ public class AiPage{
         message("·  Info [" + getColor(sysMainColor)
                 + "/i" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Rerun [" + getColor(sysMainColor)
-                + "/rr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Restart [" + getColor(sysMainColor)
+                + "/rs" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Clear terminal [" + getColor(sysMainColor)
                 + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -75,8 +75,8 @@ public class AiPage{
         message("·  List [" + getColor(sysMainColor)
                 + "/ls" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Exit [" + getColor(sysMainColor)
-                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Quit [" + getColor(sysMainColor)
+                + "/q" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void runChatGpt() {

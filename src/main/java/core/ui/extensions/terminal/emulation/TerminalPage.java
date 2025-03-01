@@ -26,8 +26,8 @@ public class TerminalPage {
         displayListOfCommands();
 
         while (true) {
-            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(sysLayoutColor) + searchingArrow,
-                    "");
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
+                    getColor(sysLayoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -35,13 +35,13 @@ public class TerminalPage {
                     insertControlChars('n',1);
                     executeCommand();
                 }
-                case "rerun", "/rr" -> {
+                case "restart", "/rs" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list", "/ls" -> displayListOfCommands();
-                case "exit", "/e" -> {
+                case "quit", "/q" -> {
                     exitPage();
                     return;
                 }
@@ -55,14 +55,17 @@ public class TerminalPage {
         message("·  Enter command [" + getColor(sysMainColor)
                 + "/ec" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Clear Terminal [" + getColor(sysMainColor)
+        message("·  Restart [" + getColor(sysMainColor)
+                + "/rs" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+        message("·  Clear terminal [" + getColor(sysMainColor)
                 + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  List [" + getColor(sysMainColor)
                 + "/ls" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Exit [" + getColor(sysMainColor)
-                + "/e" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Quit [" + getColor(sysMainColor)
+                + "/q" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void executeCommand() {
