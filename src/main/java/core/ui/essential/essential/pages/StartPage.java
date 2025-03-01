@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static core.commands.CommandHandler.shortSysCmds;
+import static core.commands.CommandHandler.shortCmds;
 import static core.ui.essential.configs.essential.AppearanceConfigs.*;
 import static core.ui.essential.configs.essential.TextConfigs.*;
 import static core.logic.CommandManager.*;
@@ -72,13 +72,13 @@ public class StartPage {
                         + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about love?",
                 "Find a bug or have an idea? Go to" + getColor(sysMainColor) + " nickzozulia@gmail.com" + getColor(sysLayoutColor) + ".",
-                "Did you know that you can use " + getColor(sysMainColor) + shortSysCmds[2] + getColor(sysLayoutColor)
-                        + " and " + getColor(sysMainColor) + shortSysCmds[5] + getColor(sysLayoutColor) + " commands in every section."};
+                "Did you know that you can use " + getColor(sysMainColor) + shortCmds[2] + getColor(sysLayoutColor)
+                        + " and " + getColor(sysMainColor) + shortCmds[5] + getColor(sysLayoutColor) + " commands in every section."};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
         message("Just type '" + getColor(sysMainColor)
-                + shortSysCmds[0] + getColor(sysLayoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
+                + shortCmds[0] + getColor(sysLayoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
                 getDefaultDelay(),out::print);
     }
 

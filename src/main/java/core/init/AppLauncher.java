@@ -2,7 +2,7 @@ package core.init;
 
 import core.ui.essential.essential.pages.StartPage;
 
-import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.essential.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.essential.AppearanceConfigs.progressbarAnimation;
 import static core.ui.essential.configs.essential.TextConfigs.insertControlChars;
 

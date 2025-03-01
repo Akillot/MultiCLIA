@@ -13,7 +13,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import static core.ui.essential.configs.DisplayManager.scanner;
+import static core.ui.essential.configs.essential.DisplayManager.scanner;
 import static core.ui.essential.configs.essential.AppearanceConfigs.*;
 import static core.ui.essential.configs.essential.TextConfigs.*;
 import static core.ui.essential.essential.pages.StartPage.displayStartPage;
