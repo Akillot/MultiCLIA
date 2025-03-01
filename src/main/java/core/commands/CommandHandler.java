@@ -57,7 +57,7 @@ public class CommandHandler {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
-                            sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
+                            rejectionColor, getDefaultTextAlignment(), 0, out::println);
                 }
             };
             case 5 -> DisplayManager::clearTerminal;
@@ -71,7 +71,7 @@ public class CommandHandler {
             case 13 -> SupportPage::displaySupportPage;
             case 14 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
-                    + getColor(sysRejectionColor) + "Invalid command index");
+                    + getColor(rejectionColor) + "Invalid command index");
         };
     }
 }

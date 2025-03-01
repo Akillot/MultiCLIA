@@ -22,12 +22,12 @@ public class TerminalPage {
 
     public static void displayTerminalPage() {
         marginBorder(1, 2);
-        message("Terminal:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Terminal:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands();
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(sysLayoutColor) + searchingArrow, "");
+                    getColor(layoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -52,27 +52,27 @@ public class TerminalPage {
 
     private static void displayListOfCommands(){
         insertControlChars('n',1);
-        message("·  Enter command [" + getColor(sysMainColor)
-                + "/ec" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Enter command [" + getColor(mainColor)
+                + "/ec" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Restart [" + getColor(sysMainColor)
-                + "/rs" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Restart [" + getColor(mainColor)
+                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Clear terminal [" + getColor(sysMainColor)
-                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Clear terminal [" + getColor(mainColor)
+                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  List [" + getColor(sysMainColor)
-                + "/ls" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  List [" + getColor(mainColor)
+                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Quit [" + getColor(sysMainColor)
-                + "/q" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Quit [" + getColor(mainColor)
+                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void executeCommand() {
         while (true) {
             try {
-                out.print(alignment(getDefaultTextAlignment()) + getBackColor(33) + getColor(sysLayoutColor)
-                        + "Enter command [or exit to quit]:" + RESET + getColor(sysLayoutColor) + " ");
+                out.print(alignment(getDefaultTextAlignment()) + getBackColor(33) + getColor(layoutColor)
+                        + "Enter command [or exit to quit]:" + RESET + getColor(layoutColor) + " ");
                 String input = scanner.nextLine().trim();
 
                 if (input.equalsIgnoreCase("exit")) {
@@ -82,8 +82,8 @@ public class TerminalPage {
                 executeTerminalCommandsModified(input);
 
             } catch (Exception e) {
-                message(getBackColor(sysRejectionColor)+ "Error: " + e.getMessage() + "." + RESET,
-                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message(getBackColor(rejectionColor)+ "Error: " + e.getMessage() + "." + RESET,
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
     }
@@ -98,13 +98,13 @@ public class TerminalPage {
                     if (newPath.toFile().exists() && newPath.toFile().isDirectory()) {
                         currentDirectory = newPath;
                         message(getBackColor(214) + "Directory changed to: " + currentDirectory + "." + RESET,
-                                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     } else {
-                        message(getBackColor(sysRejectionColor) + "No such directory: " + commands[1] + "." + RESET,
-                                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        message(getBackColor(rejectionColor) + "No such directory: " + commands[1] + "." + RESET,
+                                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     }
                 } else {
-                    message(getBackColor(45) + "Usage: cd <directory>" + RESET, sysLayoutColor,
+                    message(getBackColor(45) + "Usage: cd <directory>" + RESET, layoutColor,
                             getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 }
                 return;
@@ -120,26 +120,26 @@ public class TerminalPage {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     message(getBackColor(67) + line + RESET,
-                            sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 }
             }
 
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                message(getBackColor(sysRejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET,
-                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message(getBackColor(rejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET,
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             } else {
                 insertControlChars('n', 1);
                 message(getBackColor(34) + "Process completed successfully." + RESET,
-                        sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
 
         } catch (IOException e) {
-            message(getBackColor(sysRejectionColor) + "I/O Error while executing command: " + e.getMessage() + "." + RESET,
-                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message(getBackColor(rejectionColor) + "I/O Error while executing command: " + e.getMessage() + "." + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } catch (InterruptedException e) {
-            message(getBackColor(sysRejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET,
-                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message(getBackColor(rejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             Thread.currentThread().interrupt();
         }
     }

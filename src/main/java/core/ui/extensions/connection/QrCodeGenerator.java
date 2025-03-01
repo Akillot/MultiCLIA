@@ -22,9 +22,9 @@ public class QrCodeGenerator {
             MatrixToImageWriter.writeToPath(matrix, "PNG", Paths.get(filePath));
 
             insertControlChars('n', 1);
-            message("QR code saved in: " + filePath, sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("QR code saved in: " + filePath, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } catch (WriterException | IOException e) {
-            message("Error generating QR code: " + e.getMessage(), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Error generating QR code: " + e.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 
@@ -33,7 +33,7 @@ public class QrCodeGenerator {
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                out.print(matrix.get(x, y) ? getColor(sysLayoutColor) + "██" : "  ");
+                out.print(matrix.get(x, y) ? getColor(layoutColor) + "██" : "  ");
             }
             insertControlChars('n', 1);
         }

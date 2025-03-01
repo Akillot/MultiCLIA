@@ -10,19 +10,22 @@ import static java.lang.System.out;
 
 public class ConnectionPage {
 
+    private static int size = 45;
+
     public static void displayPage() {
         marginBorder(1, 2);
-        message("Connection:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Connection:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         displayListOfCommands();
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(sysLayoutColor) + searchingArrow, "");
-            String input = scanner.nextLine().toLowerCase();
+                    getColor(layoutColor) + searchingArrow, "");
+            String input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
                 case "make qr code", "/qr" -> generateQrCode();
+                case "change size", "/cs" -> modifyQrCodeSize();
                 case "restart", "/rs" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
@@ -38,42 +41,68 @@ public class ConnectionPage {
         }
     }
 
-    private static void displayListOfCommands()  {
+    private static void displayListOfCommands() {
         insertControlChars('n', 1);
-        message("·  Make qr code [" + getColor(sysMainColor)
-                + "/qr" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Restart [" + getColor(sysMainColor)
-                + "/rs" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        String[][] commands = {
+                {"Make QR code", "/qr"},
+                {"Change size", "/cs"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
 
-        message("·  Clear terminal [" + getColor(sysMainColor)
-                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(sysMainColor)
-                + "/ls" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(sysMainColor)
-                + "/q" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        out.println();
     }
 
     private static void generateQrCode() {
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Enter absolute link: "
-                + getColor(sysMainColor) + "https://");
-        String input = scanner.nextLine().toLowerCase();
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter absolute link: "
+                + getColor(mainColor) + "https://");
 
-        if(input.isEmpty()){
+        String input = scanner.nextLine().trim();
+
+        if (input.isEmpty()) {
             insertControlChars('n', 1);
-            message("Error: input is empty ", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Error: input is empty", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            return;
         }
 
         input = "https://" + input;
         insertControlChars('n', 1);
         try {
-            generateAsciiQr(input, 40);
+            generateAsciiQr(input, size);
             insertControlChars('n', 1);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            message("Error generating QR code", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
+    }
+
+    private static void modifyQrCodeSize() {
+        insertControlChars('n', 1);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter new size of QR code: ");
+
+        try {
+            int newSize = Integer.parseInt(scanner.nextLine().trim());
+
+            if (newSize <= 0 || newSize >= 100) {
+                message("Error: invalid size (must be 1-99)", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            } else {
+                size = newSize;
+                insertControlChars('n', 1);
+                message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,
+                        getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("New size is: " + getColor(mainColor) + size + getColor(layoutColor) + ".",
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            }
+        } catch (NumberFormatException e) {
+            insertControlChars('n', 1);
+            message("Error: invalid input (enter a number)", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 }

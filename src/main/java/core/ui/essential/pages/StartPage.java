@@ -49,7 +49,7 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, sysMainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message(errorMessage, mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             }
         }
     }
@@ -68,15 +68,15 @@ public class StartPage {
         String[] motto = {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
-                "Hi " + getColorText(capitalizeMessage(userName),sysMainColor)
-                        + getColor(sysLayoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
+                "Hi " + getColorText(capitalizeMessage(userName), mainColor)
+                        + getColor(layoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about love?",
-                "Find a bug or have an idea? Go to" + getColor(sysMainColor) + " nickzozulia@gmail.com" + getColor(sysLayoutColor) + "."};
+                "Find a bug or have an idea? Go to" + getColor(mainColor) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
 
         Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
-        message("Just type '" + getColor(sysMainColor)
-                + shortCmds[0] + getColor(sysLayoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
+        message("Just type '" + getColor(mainColor)
+                + shortCmds[0] + getColor(layoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
                 getDefaultDelay(),out::print);
     }
 
@@ -86,9 +86,9 @@ public class StartPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
         message("Application start time" + ": "
-                        + getColor(sysMainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + dateAndTimeOfProgramLaunching
-                        + getColor(sysLayoutColor) + ".",
-                sysLayoutColor,48,getDefaultDelay(),out::print);
+                        + getColor(mainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + dateAndTimeOfProgramLaunching
+                        + getColor(layoutColor) + ".",
+                layoutColor,48,getDefaultDelay(),out::print);
     }
 
     private static void dateChecking(){
@@ -103,7 +103,7 @@ public class StartPage {
                 displayLogo(newYearAscii, 36);
                 insertControlChars('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", sysLayoutColor, 36,getDefaultDelay(),out::print);
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", layoutColor, 36,getDefaultDelay(),out::print);
                 break;
         }
     }
@@ -113,7 +113,7 @@ public class StartPage {
 
         for (int i = 0; i < logo.length; i++) {
             String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, sysLayoutColor, alignment, getDefaultDelay(), System.out::print);
+            message(coloredText, layoutColor, alignment, getDefaultDelay(), System.out::print);
         }
     }
 

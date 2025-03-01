@@ -27,26 +27,26 @@ public class DisplayManager {
             formatCommandWithDescription(fullCmds[8], shortCmds[8], "Shows security page"),
             formatCommandWithDescription(fullCmds[9], shortCmds[9], "Shows crypt page"),
             formatCommandWithDescription(fullCmds[10], shortCmds[10], "Shows terminal page"),
-            formatCommandWithDescription(fullCmds[11], shortCmds[11], "Shows page with " + coloredChatGptLogo + getColor(sysLayoutColor)),
+            formatCommandWithDescription(fullCmds[11], shortCmds[11], "Shows page with " + coloredChatGptLogo + getColor(layoutColor)),
             formatCommandWithDescription(fullCmds[12], shortCmds[12], "Shows connection page"),
             formatCommandWithDescription(fullCmds[13], shortCmds[13], "Shows support page"),
             formatCommandWithDescription(fullCmds[14], shortCmds[14], "Terminates the application")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
-        return formatCommand(commandName + getColor(sysLayoutColor)
+        return formatCommand(commandName + getColor(layoutColor)
                 + ": ", "", "") + description + " "
                 + formatCommand(shortCommand, "[", "]");
     }
 
     private static @NotNull String formatCommand(String command, String bracketStart, String bracketEnd) {
-        return bracketStart + getColor(sysMainColor) + command + getColor(sysLayoutColor) + bracketEnd;
+        return bracketStart + getColor(mainColor) + command + getColor(layoutColor) + bracketEnd;
     }
 
     public static void displayCommandsDescription() {
         marginBorder(1, 2);
         for (String rule : rules) {
-            message(rule, sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message(rule, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             insertControlChars('n', 1);
         }
         marginBorder(1, 1);
@@ -60,24 +60,24 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Unknown error occurred", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
     private static void displayAllCommandList() {
         insertControlChars('n', 1);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "Commands: \n"
-                + alignment(-68) + getColor(sysMainColor));
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Commands: \n"
+                + alignment(-68) + getColor(mainColor));
 
         int maxRows = Math.max(fullCmds.length, extensionCmds.length);
 
         for (int i = 0; i < maxRows; i++) {
             String systemCmd = i < fullCmds.length ? "·  " + fullCmds[i] + " ["
-                    + getColor(sysMainColor) + shortCmds[i] + getColor(sysLayoutColor) + "]" : "";
+                    + getColor(mainColor) + shortCmds[i] + getColor(layoutColor) + "]" : "";
             String extensionCmd = i < extensionCmds.length ? "·  " + extensionCmds[i] : "";
 
-            out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "%-40s"
-                    + alignment(-18) + getColor(sysLayoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
+            out.printf(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "%-40s"
+                    + alignment(-18) + getColor(layoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
     }
@@ -98,10 +98,10 @@ public class DisplayManager {
             }
         } catch (Exception e) {
             message("Error executing action",
-                    sysRejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-            message("Status: " + getColor(sysRejectionColor) + "x",
-                    sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Status: " + getColor(rejectionColor) + "x",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 }

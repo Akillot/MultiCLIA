@@ -30,7 +30,7 @@ public class ChatGPTClient {
 
         if(API_KEY == null || API_KEY.isEmpty()) {
             insertControlChars('n',1);
-            message("AI is unavailable.",sysLayoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
+            message("AI is unavailable.", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
         }
     }
 

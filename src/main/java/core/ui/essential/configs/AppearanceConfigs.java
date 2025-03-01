@@ -38,10 +38,10 @@ public class AppearanceConfigs {
     public static int color6 = 218;
 
     //System Colors
-    public static int sysMainColor = 147;
-    public static int sysLayoutColor = 15;
-    public static int sysAcceptanceColor = 46;
-    public static int sysRejectionColor = 160;
+    public static int mainColor = 147;
+    public static int layoutColor = 15;
+    public static int acceptanceColor = 46;
+    public static int rejectionColor = 160;
 
     //Borders
     public static final int DEFAULT_BORDER_WIDTH = 62;
@@ -111,7 +111,7 @@ public class AppearanceConfigs {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                sysLayoutColor,62,0,out::print);
+                layoutColor,62,0,out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
@@ -131,7 +131,7 @@ public class AppearanceConfigs {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getColor(sysAcceptanceColor) + "\r    ✓" + RESET);
+        out.print(getColor(acceptanceColor) + "\r    ✓" + RESET);
     }
 
     public static void progressbarAnimation(String title) {
@@ -144,10 +144,10 @@ public class AppearanceConfigs {
             double progress = step / (double) steps;
             int completed = (int) (progress * barLength);
             StringBuilder bar = new StringBuilder("\r" + alignment(64)
-                    + getColor(sysLayoutColor) + title + "[");
+                    + getColor(layoutColor) + title + "[");
 
             for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? getRandomColor() + borderChars.get(0) + getColor(sysLayoutColor) : " ");
+                bar.append(i < completed ? getRandomColor() + borderChars.get(0) + getColor(layoutColor) : " ");
             }
             bar.append("] ");
             bar.append(String.format("%.2f%%", progress * 100));
@@ -169,8 +169,8 @@ public class AppearanceConfigs {
     @Contract(pure = true)
     public static void displayColorTable() {
         insertControlChars('n',1);
-        message("Color Table:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        printColorRange(0, sysLayoutColor);
+        message("Color Table:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        printColorRange(0, layoutColor);
         printColorBlock();
         printColorRange(232, 255);
     }
@@ -179,7 +179,7 @@ public class AppearanceConfigs {
     private static void printColorRange(int start, int end) {
         out.println(RESET);
         for (int i = start; i <= end; i++) {
-            out.print(getColor(sysLayoutColor) + getBackColor(i)
+            out.print(getColor(layoutColor) + getBackColor(i)
                     + tableAlignment() + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) insertControlChars('n',2);
         }
@@ -193,7 +193,7 @@ public class AppearanceConfigs {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 int colorCode = 16 + row + col * rows;
-                out.print(getColor(sysLayoutColor) + getBackColor(colorCode)
+                out.print(getColor(layoutColor) + getBackColor(colorCode)
                         + tableAlignment() + " " + colorCode + " " + RESET);
             }
             if(row == 11){

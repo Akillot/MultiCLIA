@@ -34,12 +34,12 @@ public class SettingsPage {
 
     public static void displaySettingsPage() {
         marginBorder(1,2);
-        message("Settings:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Settings:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands();
 
         while (true) {
             slowMotionText(0, getSearchingLineAlignment(), false,
-                    getColor(sysLayoutColor) + searchingArrow, "");
+                    getColor(layoutColor) + searchingArrow, "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -64,29 +64,29 @@ public class SettingsPage {
 
     private static void displayListOfCommands(){
         insertControlChars('n',1);
-        message("·  Memory [" + getColor(sysMainColor)
-                + "/m" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Memory [" + getColor(mainColor)
+                + "/m" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  CPU [" + getColor(sysMainColor)
-                + "/c" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  CPU [" + getColor(mainColor)
+                + "/c" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Colors ["  + getColor(sysMainColor)
-                + "/col" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Colors ["  + getColor(mainColor)
+                + "/col" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Java ["  + getColor(sysMainColor)
-                + "/j" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Java ["  + getColor(mainColor)
+                + "/j" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Restart [" + getColor(sysMainColor)
-                + "/rs" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Restart [" + getColor(mainColor)
+                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Clear terminal [" + getColor(sysMainColor)
-                + "/cl" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Clear terminal [" + getColor(mainColor)
+                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  List [" + getColor(sysMainColor)
-                + "/ls" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  List [" + getColor(mainColor)
+                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("·  Quit [" + getColor(sysMainColor)
-                + "/q" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Quit [" + getColor(mainColor)
+                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     // Display memory information
@@ -105,17 +105,17 @@ public class SettingsPage {
         double usagePercentage = (double) usedOsMemory / totalOsMemory * 100;
 
         insertControlChars('n', 1);
-        message("System Memory Info:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("System Memory Info:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         // Display JVM memory stats
-        message("JVM Memory Statistics", sysMainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        message("Used JVM Memory: " + formatMemory(usedJvmMemory), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Free JVM Memory: " + formatMemory(freeJvmMemory), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Total JVM Memory: " + formatMemory(totalJvmMemory), sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("JVM Memory Statistics", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Used JVM Memory: " + formatMemory(usedJvmMemory), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Free JVM Memory: " + formatMemory(freeJvmMemory), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Total JVM Memory: " + formatMemory(totalJvmMemory), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         // Display ROM stats
         insertControlChars('n', 1);
-        message("ROM Info", sysMainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("ROM Info", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         executeTerminalCommand("df -h");
     }
 
@@ -132,20 +132,20 @@ public class SettingsPage {
         double processCpuLoad = osBean.getProcessCpuLoad() * 100;
 
         insertControlChars('n',1);
-        message("System CPU Statistics:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("System CPU Statistics:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         displayCpuInfo();
         message("System CPU Load: "
-                        + getColor(sysMainColor) + String.format("%.2f", cpuLoad) + "%",
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                        + getColor(mainColor) + String.format("%.2f", cpuLoad) + "%",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         message("Process CPU Load: "
-                        + getColor(sysMainColor) + String.format("%.2f", processCpuLoad) + "%",
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        + getColor(mainColor) + String.format("%.2f", processCpuLoad) + "%",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void displayCpuInfo() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
-        message("CPU Cores: " + getColor(sysMainColor) + availableProcessors,
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("CPU Cores: " + getColor(mainColor) + availableProcessors,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
     //java info
@@ -159,7 +159,7 @@ public class SettingsPage {
     private static void displayJavaInfo() {
         insertControlChars('n',1);
         displayLogo(JAVA_ASCII_LOGO);
-        message("━━━━━━━━━━━━━━━━━━━━━━",sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("━━━━━━━━━━━━━━━━━━━━━━", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         String javaVersion = System.getProperty("java.version");
         String javaVendor = System.getProperty("java.vendor");
@@ -170,19 +170,19 @@ public class SettingsPage {
         String jvmName = System.getProperty("java.vm.name");
         String jvmVersion = System.getProperty("java.vm.version");
 
-        message("Java Version: " + getColor(sysMainColor) + javaVersion,
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Java Version: " + getColor(mainColor) + javaVersion,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-        message("Java Vendor: " + getColor(sysMainColor) + javaVendor,
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Java Vendor: " + getColor(mainColor) + javaVendor,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("Java Home: " + getColor(sysMainColor) + javaHome,
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Java Home: " + getColor(mainColor) + javaHome,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-        message("JVM Name: " + getColor(sysMainColor) + jvmName,
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("JVM Name: " + getColor(mainColor) + jvmName,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        message("JVM Version: " + getColor(sysMainColor) + jvmVersion,
-                sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("JVM Version: " + getColor(mainColor) + jvmVersion,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 }
