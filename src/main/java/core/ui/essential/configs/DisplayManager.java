@@ -23,12 +23,12 @@ public class DisplayManager {
             formatCommandWithDescription(fullCmds[4], shortCmds[4], "Shows app information"),
             formatCommandWithDescription(fullCmds[5], shortCmds[5], "Clears recent values from terminal"),
             formatCommandWithDescription(fullCmds[6], shortCmds[6], "Shows time section"),
-            formatCommandWithDescription(fullCmds[7], shortCmds[7], "Shows a calendar page"),
-            formatCommandWithDescription(fullCmds[8], shortCmds[8], "Shows network page"),
-            formatCommandWithDescription(fullCmds[9], shortCmds[9], "Shows security page"),
-            formatCommandWithDescription(fullCmds[10], shortCmds[10], "Shows cryptography page"),
-            formatCommandWithDescription(fullCmds[11], shortCmds[11], "Shows terminal page"),
-            formatCommandWithDescription(fullCmds[12], shortCmds[12], "Shows page with " + coloredChatGptLogo + getColor(sysLayoutColor)),
+            formatCommandWithDescription(fullCmds[7], shortCmds[7], "Shows ifconfig page"),
+            formatCommandWithDescription(fullCmds[8], shortCmds[8], "Shows security page"),
+            formatCommandWithDescription(fullCmds[9], shortCmds[9], "Shows crypt page"),
+            formatCommandWithDescription(fullCmds[10], shortCmds[10], "Shows terminal page"),
+            formatCommandWithDescription(fullCmds[11], shortCmds[11], "Shows page with " + coloredChatGptLogo + getColor(sysLayoutColor)),
+            formatCommandWithDescription(fullCmds[12], shortCmds[12], "Shows connection page"),
             formatCommandWithDescription(fullCmds[13], shortCmds[13], "Shows support page"),
             formatCommandWithDescription(fullCmds[14], shortCmds[14], "Terminates the application")
     };

@@ -2,11 +2,11 @@ package core.ui.extensions.time;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static core.logic.CommandManager.*;
@@ -31,6 +31,7 @@ public class TimePage {
 
             switch (input) {
                 case "current time", "/ct" -> displayCurrentTime();
+                case "calendar", "/c" -> displayCalendar();
                 case "app runtime", "/ar" -> displayAppRuntime();
                 case "timer", "/t" -> runTimer();
                 case "stopwatch", "/sw" -> runStopwatch();
@@ -54,6 +55,9 @@ public class TimePage {
         insertControlChars('n',1);
         message("·  Current Time [" + getColor(sysMainColor)
                 + "/ct" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+        message("·  Calendar [" + getColor(sysMainColor)
+                + "/c" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         message("·  Timer [" + getColor(sysMainColor)
                 + "/t" + getColor(sysLayoutColor) + "]", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -265,5 +269,44 @@ public class TimePage {
             message("Did you mean:", sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             similarZones.forEach(zone -> message("- " + zone, sysLayoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println));
         }
+    }
+
+    private static void displayCalendar() {
+        YearMonth currentMonth = YearMonth.now();
+
+        marginBorder(1, 2);
+        out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "📅 %s %d\n\n",
+                currentMonth.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH), currentMonth.getYear());
+
+        message("Mo      Tu      We      Th      Fr      Sa      Su",sysLayoutColor,
+                getDefaultLogoAlignment() + 10,getDefaultDelay(),out::println);
+
+        LocalDate firstDayOfMonth = currentMonth.atDay(1);
+        int firstDayOfWeekValue = firstDayOfMonth.getDayOfWeek().getValue();
+
+
+        int initialSpacing = firstDayOfWeekValue - 1;
+        int daysInMonth = currentMonth.lengthOfMonth();
+
+        for (int i = 0; i < initialSpacing; i++) {
+            out.print(alignment(getDefaultTextAlignment()) + "     ");
+        }
+
+        for (int day = 1; day <= daysInMonth; day++) {
+            LocalDate date = currentMonth.atDay(day);
+            boolean isToday = date.equals(LocalDate.now());
+
+            if (isToday) {
+                out.printf(alignment(getDefaultTextAlignment()) + getColor(sysAcceptanceColor) + "%-5d", day);
+            } else {
+                out.printf(alignment(getDefaultTextAlignment()) + getColor(sysLayoutColor) + "%-5d", day);
+            }
+
+            int dayOfWeekValue = (firstDayOfWeekValue + day - 1) % 7;
+            if (dayOfWeekValue == 0 || day == daysInMonth) {
+                insertControlChars('n', 1);
+            }
+        }
+        marginBorder(2, 1);
     }
 }

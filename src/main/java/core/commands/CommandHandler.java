@@ -11,7 +11,6 @@ import core.ui.extensions.cryptography.CryptographyPage;
 import core.ui.extensions.network.NetworkPage;
 import core.ui.extensions.security.SecurityPage;
 import core.ui.extensions.terminal.emulation.TerminalPage;
-import core.ui.extensions.time.CalendarPage;
 import core.ui.extensions.time.TimePage;
 import core.ui.essential.configs.DisplayManager;
 import org.jetbrains.annotations.Contract;
@@ -28,12 +27,12 @@ public class CommandHandler {
 
     public static final String[] fullCmds = {
             "list" ,"config", "restart", "help", "info",
-            "clear", "date", "calendar", "ifconfig", "security", "crypt",
+            "clear", "time", "ifconfig", "security", "crypt",
             "terminal", "ai", "connection", "support", "quit"};
 
     public static final String[] shortCmds = {
             "/ls" ,"/cfg", "/rs", "/h", "/i",
-            "/cl", "/dt", "/cld", "/ifc", "/sec", "/cr",
+            "/cl", "/t", "/ifc", "/sec", "/cr",
             "/term", "/a", "/cn", "/sup", "/q"};
 
     // Here is another array for huge custom extensions commands
@@ -63,15 +62,14 @@ public class CommandHandler {
             };
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> TimePage::displayTimePage;
-            case 7 -> CalendarPage::displayCalendarPage;
-            case 8 -> NetworkPage::displayNetworkPage;
-            case 9 -> SecurityPage::displaySecurityPage;
-            case 10 -> CryptographyPage::displayCryptographyPage;
-            case 11 -> TerminalPage::displayTerminalPage;
-            case 12 -> AiPage::displayAiPage;
-            case 13 -> ConnectionPage::displayPage;
-            case 14 -> SupportPage::displaySupportPage;
-            case 15 -> ExitPage::displayExitPage;
+            case 7 -> NetworkPage::displayNetworkPage;
+            case 8 -> SecurityPage::displaySecurityPage;
+            case 9 -> CryptographyPage::displayCryptographyPage;
+            case 10 -> TerminalPage::displayTerminalPage;
+            case 11 -> AiPage::displayAiPage;
+            case 12 -> ConnectionPage::displayPage;
+            case 13 -> SupportPage::displaySupportPage;
+            case 14 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(sysRejectionColor) + "Invalid command index");
         };
