@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import static core.ui.essential.configs.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
@@ -112,31 +114,95 @@ public class NetworkPage {
         int startPort = 1;
         int endPort = 65535;
         int threads = 100;
-
         ExecutorService executor = Executors.newFixedThreadPool(threads);
+        List<Future<?>> futures = new ArrayList<>();
 
-        insertControlChars('n',1);
-        slowMotionText(getDefaultDelay(),getDefaultTextAlignment(),false,
-                getColor(layoutColor) + "Scanning ports from "
-                        + startPort + " to " + endPort + " using " + threads + " threads","");
-        insertControlChars('n',2);
+        insertControlChars('n', 1);
+        slowMotionText(getDefaultDelay(), getDefaultTextAlignment(), false,
+                getColor(layoutColor) + "Scanning ports from " + startPort + " to " + endPort +
+                        " using " + threads + " threads...", "");
+        insertControlChars('n', 2);
 
-        for (int port = startPort; port <= endPort; port++) {
-            final int currentPort = port;
-            executor.submit(() -> {
-                try (Socket socket = new Socket("localhost", currentPort)) {
-                    message("· Port " + getColor(mainColor) + currentPort
-                                    + getColor(layoutColor) + " [" + getColor(acceptanceColor) + "OPEN"
-                                    + getColor(layoutColor) + "]", layoutColor,
-                            getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                } catch (Exception ignored) {}
-            });
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            Map<Integer, String> commonPorts = getCommonPorts();
+
+            for (int port = startPort; port <= endPort; port++) {
+                final int currentPort = port;
+                futures.add(executor.submit(() -> {
+                    long startTime = System.currentTimeMillis();
+                    try (Socket socket = new Socket(localHost, currentPort)) {
+                        long responseTime = System.currentTimeMillis() - startTime;
+                        String service = commonPorts.getOrDefault(currentPort, "Unknown Service");
+
+                        message("· Port " + getColor(mainColor) + currentPort +
+                                        getColor(layoutColor) + " [" + getColor(acceptanceColor) + "OPEN" +
+                                        getColor(layoutColor) + "] - Service: " + getColor(acceptanceColor) + service +
+                                        getColor(layoutColor) + " | Response Time: " + responseTime + "ms",
+                                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    } catch (IOException e) {
+                        if (isPortInUse(currentPort)) {
+                            message("· Port " + getColor(mainColor) + currentPort +
+                                            getColor(layoutColor) + " [" + getColor(acceptanceColor) + "IN USE" +
+                                            getColor(layoutColor) + "] - Service: Unknown",
+                                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                        } else {
+                            message("· Port " + getColor(mainColor) + currentPort +
+                                            getColor(layoutColor) + " [" + getColor(rejectionColor) + "CLOSED" +
+                                            getColor(layoutColor) + "]",
+                                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                        }
+                    }
+                }));
+            }
+
+            for (Future<?> future : futures) {
+                future.get();
+            }
+        } catch (Exception e) {
+            message(getBackColor(rejectionColor) + "Error: " + e.getMessage() + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        } finally {
+            executor.shutdown();
+            try {
+                if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    executor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executor.shutdownNow();
+            }
         }
 
-        executor.shutdown();
-        while (!executor.isTerminated()) {}
-        insertControlChars('n',1);
+        insertControlChars('n', 1);
+
         message("Scanning completed.", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
+
+    private static boolean isPortInUse(int port) {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            return false;
+        } catch (IOException e) {
+            return true;
+        }
+    }
+
+    private static @NotNull Map<Integer, String> getCommonPorts() {
+        Map<Integer, String> commonPorts = new HashMap<>();
+        commonPorts.put(20, "FTP Data Transfer");
+        commonPorts.put(21, "FTP Command Control");
+        commonPorts.put(22, "SSH");
+        commonPorts.put(23, "Telnet");
+        commonPorts.put(25, "SMTP");
+        commonPorts.put(53, "DNS");
+        commonPorts.put(80, "HTTP");
+        commonPorts.put(110, "POP3");
+        commonPorts.put(143, "IMAP");
+        commonPorts.put(443, "HTTPS");
+        commonPorts.put(3306, "MySQL");
+        commonPorts.put(3389, "Remote Desktop Protocol");
+        commonPorts.put(5432, "PostgreSQL");
+        commonPorts.put(8080, "Alternative HTTP");
+        return commonPorts;
     }
 
     // /ph
