@@ -1,8 +1,12 @@
 package core.ui.extensions.network;
 
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.*;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -178,38 +182,104 @@ public class NetworkPage {
         }
     }
 
-    private static void displayHttpTesting(){
+    private static void displayHttpTesting() {
         insertControlChars('n', 1);
+        Scanner scanner = new Scanner(System.in);
+
         try {
             while (true) {
                 out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter a URL [or exit to quit]: ");
-                String link = scanner.nextLine().toLowerCase();
+                String link = scanner.nextLine().trim();
 
-                if(link.equalsIgnoreCase("exit")){
-                    message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
-                    message("Opening skipped" + getColor(layoutColor) + ". " + getColor(mainColor)
-                                    + "You are in network page" + getColor(layoutColor) + ".", mainColor,
-                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                if (link.equalsIgnoreCase("exit")) {
+                    message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
                 }
 
-                out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter a type of request: ");
-                String requestType = scanner.nextLine().toUpperCase();
+                out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter request type (GET, POST, PUT, DELETE): ");
+                String requestType = scanner.nextLine().trim().toUpperCase();
 
-                if(requestType.equalsIgnoreCase("exit")){
-                    message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
-                    message("You are in network page" + getColor(layoutColor) + ".", mainColor,
-                            getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                if (requestType.equalsIgnoreCase("exit")) {
+                    message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
                 }
 
-                httpRequest(link, requestType, "Response: ", "", null);
+                Map<String, String> headers = new HashMap<>();
+
+
+
+                while (true) {
+                    out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter header (key:value) or press Enter to continue: ");
+                    String headerInput = scanner.nextLine().trim();
+
+                    if (headerInput.isEmpty()) break;
+                    String[] parts = headerInput.split(":", 2);
+                    if (parts.length == 2) {
+                        headers.put(parts[0].trim(), parts[1].trim());
+                    } else {
+                        message("Invalid header format. Use key:value", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    }
+                }
+
+                String body = "";
+                if (requestType.equals("POST") || requestType.equals("PUT")) {
+                    out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter request body (or leave empty): ");
+                    body = scanner.nextLine();
+                }
+
+
+                sendHttpRequest(link, requestType, headers, body);
                 insertControlChars('n', 1);
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             insertControlChars('n', 1);
             message("Error: " + e.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
+    }
+
+    private static void sendHttpRequest(String link, String requestType, Map<String, String> headers, String body) {
+        try {
+            URL url = new URL(link);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod(requestType);
+
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                connection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+
+            if (!body.isEmpty() && (requestType.equals("POST") || requestType.equals("PUT"))) {
+                connection.setDoOutput(true);
+                try (OutputStream os = connection.getOutputStream()) {
+                    byte[] input = body.getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
+                }
+            }
+
+            int responseCode = connection.getResponseCode();
+            InputStream responseStream = responseCode >= 400 ? connection.getErrorStream() : connection.getInputStream();
+            String response = readStream(responseStream);
+
+            insertControlChars('n', 1);
+            message("Response Code: " + getColor(mainColor) + responseCode, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Response Body: ", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            out.println(response);
+
+            connection.disconnect();
+        } catch (Exception e) {
+            message("Error sending request: " + e.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
+    }
+
+    private static @NotNull String readStream(InputStream stream) throws IOException {
+        if (stream == null) return "No response body";
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line).append("\n");
+        }
+        return response.toString();
     }
 }
