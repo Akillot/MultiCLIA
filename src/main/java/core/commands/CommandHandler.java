@@ -1,9 +1,6 @@
 package core.commands;
 
-import core.ui.essential.pages.ExitPage;
-import core.ui.essential.pages.InfoPage;
-import core.ui.essential.pages.SettingsPage;
-import core.ui.essential.pages.SupportPage;
+import core.ui.essential.pages.*;
 import core.logic.CommandManager;
 import core.ui.extensions.ai.AiPage;
 import core.ui.extensions.connection.ConnectionPage;

@@ -19,6 +19,7 @@ import static core.ui.essential.configs.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
 public class CryptographyPage {
@@ -43,6 +44,7 @@ public class CryptographyPage {
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list", "/ls" -> displayListOfCommands();
+                case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
                     return;
