@@ -29,8 +29,9 @@ public class DisplayManager {
             formatCommandWithDescription(fullCmds[10], shortCmds[10], "Shows terminal page"),
             formatCommandWithDescription(fullCmds[11], shortCmds[11], "Shows page with " + coloredChatGptLogo + getColor(layoutColor)),
             formatCommandWithDescription(fullCmds[12], shortCmds[12], "Shows connection page"),
-            formatCommandWithDescription(fullCmds[13], shortCmds[13], "Shows support page"),
-            formatCommandWithDescription(fullCmds[14], shortCmds[14], "Terminates the application")
+            formatCommandWithDescription(fullCmds[13], shortCmds[13], "Shows weather page"),
+            formatCommandWithDescription(fullCmds[14], shortCmds[14], "Shows support page"),
+            formatCommandWithDescription(fullCmds[15], shortCmds[15], "Terminates the application")
     };
 
     private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
