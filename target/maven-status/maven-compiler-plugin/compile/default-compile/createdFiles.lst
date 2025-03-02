@@ -9,6 +9,7 @@ core/ui/essential/configs/AppearanceConfigs.class
 core/commands/CommandHandler.class
 core/ui/extensions/terminal/emulation/TerminalPage.class
 core/ui/extensions/connection/ConnectionPage.class
+core/ui/essential/pages/EasterEggPage.class
 core/ui/extensions/connection/QrCodeGenerator.class
 core/ui/essential/pages/SettingsPage.class
 core/ui/extensions/ai/ChatGPTClient.class

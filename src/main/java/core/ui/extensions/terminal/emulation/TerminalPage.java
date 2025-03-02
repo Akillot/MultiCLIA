@@ -70,10 +70,10 @@ public class TerminalPage {
         while (true) {
             try {
                 out.print(alignment(getDefaultTextAlignment()) + getBackColor(33) + getColor(layoutColor)
-                        + "Enter command [or exit to quit]:" + RESET + getColor(layoutColor) + " ");
+                        + "Enter command [or /q to quit]:" + RESET + getColor(layoutColor) + " ");
                 String input = scanner.nextLine().trim();
 
-                if (input.equalsIgnoreCase("exit")) {
+                if (input.equalsIgnoreCase("/q")) {
                     insertControlChars('n', 1);
                     return;
                 }
@@ -173,7 +173,7 @@ public class TerminalPage {
 
     private static void blockNano() {
         message(getBackColor(rejectionColor) +
-                        "❌ Sorry, but this terminal is intended for command execution only and does not support file editing via nano." + RESET,
+                        "Sorry, but this terminal is intended for command execution only and does not support file editing via nano." + RESET,
                 layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
