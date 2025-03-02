@@ -67,20 +67,20 @@ public class WeatherPage {
 
     private static void displayListOfCommands() {
         insertControlChars('n', 1);
-        message("·  Local weather [" + getColor(mainColor) + "/lw" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Direct weather [" + getColor(mainColor) + "/dw" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Local weather [" + getColor(mainColor) + "/lw" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Restart [" + getColor(mainColor) + "/rs" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Clear terminal [" + getColor(mainColor) + "/cl" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  List [" + getColor(mainColor) + "/ls" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Quit [" + getColor(mainColor) + "/q" + getColor(layoutColor) + "]",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        String[][] commands = {
+                {"Local weather", "/lw"},
+                {"Direct weather", "/dw"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
+
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
     }
 
     private static class WeatherService {

@@ -3,6 +3,7 @@ core/logic/CommandManager.class
 core/ui/extensions/network/NetworkPage.class
 core/init/AppLauncher.class
 core/ui/extensions/ai/AiPage.class
+core/ui/extensions/weather/WeatherPage.class
 core/ui/essential/pages/StartPage.class
 core/ui/extensions/security/SecurityPage.class
 core/ui/essential/configs/AppearanceConfigs.class
@@ -18,5 +19,6 @@ core/ui/essential/pages/ExitPage.class
 core/ui/extensions/time/TimePage.class
 core/ui/essential/configs/DisplayManager.class
 core/commands/PackageUnifier.class
+core/ui/extensions/weather/WeatherPage$WeatherService.class
 core/ui/essential/pages/InfoPage.class
 core/ui/essential/configs/TextConfigs.class

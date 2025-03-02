@@ -52,7 +52,6 @@ public class ConnectionPage {
 
     private static void displayListOfCommands() {
         insertControlChars('n', 1);
-
         String[][] commands = {
                 {"Make QR code", "/qr"},
                 {"Save QR code as PNG", "/sq"},
@@ -67,7 +66,7 @@ public class ConnectionPage {
             message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
                     layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
-        out.println();
+        insertControlChars('n', 1);
     }
 
     private static void generateQrCode() {
@@ -108,7 +107,6 @@ public class ConnectionPage {
 
         input = "https://" + input;
 
-        // Создание директории, если её нет
         try {
             if (!Files.exists(SAVE_DIRECTORY)) {
                 Files.createDirectories(SAVE_DIRECTORY);

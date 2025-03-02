@@ -58,39 +58,26 @@ public class NetworkPage {
     }
 
     private static void displayListOfCommands() {
-        insertControlChars('n',1);
-        message("·  IP-Address [" + getColor(mainColor) + "/ip"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        insertControlChars('n', 1);
+        String[][] commands = {
+                {"IP-address", "/ip"},
+                {"Scan ports", "/sp"},
+                {"Ping host", "/ph"},
+                {"Trace rout", "/tr"},
+                {"Look up DNS records", "/lr"},
+                {"Http request testing", "/hrt"},
+                {"Network stats", "/ns"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
 
-        message("·  Scan Ports [" + getColor(mainColor) + "/sp"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Ping Host [" + getColor(mainColor) + "/ph"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Trace Rout [" + getColor(mainColor) + "/tr"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Look Up DNS Records [" + getColor(mainColor) + "/lr"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  HTTP Request Testing [" + getColor(mainColor) + "/hrt"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Network Stats [" + getColor(mainColor) + "/ns"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Restart [" + getColor(mainColor)
-                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Clear terminal [" + getColor(mainColor)
-                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(mainColor)
-                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(mainColor)
-                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
     }
 
     private static void displayUserIp() {

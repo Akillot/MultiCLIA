@@ -54,31 +54,24 @@ public class AiPage{
         }
     }
 
-    public static void displayListOfCommands()  {
+    private static void displayListOfCommands() {
         insertControlChars('n', 1);
-        message("·  Ask ChatGPT [" + getColor(mainColor)
-                + "/ac" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        String[][] commands = {
+                {"Ask ChatGPT", "/ac"},
+                {"Modify Creativity", "/mc"},
+                {"Modify Maximum of Tokens", "/mmt"},
+                {"Info", "/i"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
 
-        message("·  Modify Creativity [" + getColor(mainColor)
-                + "/mc" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Modify Maximum of Tokens [" + getColor(mainColor)
-                + "/mmt" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Info [" + getColor(mainColor)
-                + "/i" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Restart [" + getColor(mainColor)
-                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Clear terminal [" + getColor(mainColor)
-                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(mainColor)
-                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(mainColor)
-                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
     }
 
     private static void runChatGpt() {

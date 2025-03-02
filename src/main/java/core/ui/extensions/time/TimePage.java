@@ -53,34 +53,26 @@ public class TimePage {
         }
     }
 
-    private static void displayListOfCommands(){
-        insertControlChars('n',1);
-        message("·  Current Time [" + getColor(mainColor)
-                + "/ct" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    private static void displayListOfCommands() {
+        insertControlChars('n', 1);
+        String[][] commands = {
+                {"Current time", "/ct"},
+                {"Calendar", "/c"},
+                {"Timer", "/t"},
+                {"Stopwatch", "/sw"},
+                {"Change time zone", "/ctz"},
+                {"Http request testing", "/hrt"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
 
-        message("·  Calendar [" + getColor(mainColor)
-                + "/c" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Timer [" + getColor(mainColor)
-                + "/t" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Stopwatch ["  + getColor(mainColor)
-                + "/sw" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Change Time Zone [" + getColor(mainColor)
-                + "/ctz" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Restart [" + getColor(mainColor)
-                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Clear terminal [" + getColor(mainColor)
-                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(mainColor)
-                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(mainColor)
-                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
     }
 
     // /ct

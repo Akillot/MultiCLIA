@@ -13,6 +13,7 @@ import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class SecurityPage {
@@ -59,20 +60,19 @@ public class SecurityPage {
 
     private static void displayListOfCommands() {
         insertControlChars('n', 1);
-        message("·  Generate password [" + getColor(mainColor) + "/gp"
-                + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        String[][] commands = {
+                {"Generate password", "/gp"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
 
-        message("·  Restart [" + getColor(mainColor)
-                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Clear terminal [" + getColor(mainColor)
-                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(mainColor)
-                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(mainColor)
-                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
     }
 
     private static void passwordCreatorMenu() {
@@ -87,7 +87,7 @@ public class SecurityPage {
             }
         } catch (Exception e) {
             message("Invalid input. Please enter a number.", layoutColor, getDefaultTextAlignment(),
-                    getDefaultDelay(), out::print);
+                    getDefaultDelay(), out::println);
             scanner.nextLine();
             return;
         }

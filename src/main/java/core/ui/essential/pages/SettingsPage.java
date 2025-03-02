@@ -64,31 +64,24 @@ public class SettingsPage {
         }
     }
 
-    private static void displayListOfCommands(){
-        insertControlChars('n',1);
-        message("·  Memory [" + getColor(mainColor)
-                + "/m" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    private static void displayListOfCommands() {
+        insertControlChars('n', 1);
+        String[][] commands = {
+                {"Memory", "/m"},
+                {"CPU", "/c"},
+                {"Colors", "/col"},
+                {"Java", "/j"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
 
-        message("·  CPU [" + getColor(mainColor)
-                + "/c" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Colors ["  + getColor(mainColor)
-                + "/col" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Java ["  + getColor(mainColor)
-                + "/j" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Restart [" + getColor(mainColor)
-                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Clear terminal [" + getColor(mainColor)
-                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(mainColor)
-                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(mainColor)
-                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
     }
 
     // Display memory information

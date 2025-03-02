@@ -15,6 +15,7 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/connection/ConnectionPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/connection/QrCodeGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/security/SecurityPage.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/weather/WeatherPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/PackageUnifier.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/init/AppLauncher.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/InfoPage.java
