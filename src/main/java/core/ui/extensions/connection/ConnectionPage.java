@@ -7,11 +7,17 @@ import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static core.ui.extensions.connection.QrCodeGenerator.generateAsciiQr;
+import static core.ui.extensions.connection.QrCodeGenerator.generateQR;
 import static java.lang.System.out;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ConnectionPage {
 
     private static int size = 45;
+    private static final Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
 
     public static void displayPage() {
         marginBorder(1, 2);
@@ -26,6 +32,7 @@ public class ConnectionPage {
 
             switch (input) {
                 case "make qr code", "/qr" -> generateQrCode();
+                case "save qr code", "/sq" -> saveQrCodeAsImage();
                 case "change size", "/cs" -> modifyQrCodeSize();
                 case "restart", "/rs" -> {
                     insertControlChars('n', 1);
@@ -48,6 +55,7 @@ public class ConnectionPage {
 
         String[][] commands = {
                 {"Make QR code", "/qr"},
+                {"Save QR code as PNG", "/sq"},
                 {"Change size", "/cs"},
                 {"Restart", "/rs"},
                 {"Clear terminal", "/cl"},
@@ -82,6 +90,36 @@ public class ConnectionPage {
             insertControlChars('n', 1);
         } catch (Exception e) {
             message("Error generating QR code", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
+    }
+
+    private static void saveQrCodeAsImage() {
+        insertControlChars('n', 1);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter absolute link: "
+                + getColor(mainColor) + "https://");
+
+        String input = scanner.nextLine().trim();
+
+        if (input.isEmpty()) {
+            insertControlChars('n', 1);
+            message("Error: input is empty", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            return;
+        }
+
+        input = "https://" + input;
+
+        // Создание директории, если её нет
+        try {
+            if (!Files.exists(SAVE_DIRECTORY)) {
+                Files.createDirectories(SAVE_DIRECTORY);
+            }
+
+            String fileName = "qr_" + System.currentTimeMillis() + ".png";
+            Path filePath = SAVE_DIRECTORY.resolve(fileName);
+
+            generateQR(input, filePath.toString(), size, size);
+        } catch (Exception e) {
+            message("Error saving QR code: " + e.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 
