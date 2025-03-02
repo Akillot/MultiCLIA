@@ -76,6 +76,10 @@ public class WeatherPage {
     }
 
     private static class WeatherService {
+
+        //PLEASE DO NOT STEAL THIS API KEY, YOU CAN LITERALLY CREATE AN ACCOUNT
+        // IN https://home.openweathermap.org AND GET YOUR OWN API KEY FOR FREE
+
         private static final String API_KEY = "1cf3d1f3e8ee40db940c70cfac6379cc";
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final OkHttpClient client = new OkHttpClient();
