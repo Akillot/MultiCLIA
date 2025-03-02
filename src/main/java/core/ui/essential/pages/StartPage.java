@@ -88,7 +88,7 @@ public class StartPage {
         message("Application start time" + ": "
                         + getColor(mainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + dateAndTimeOfProgramLaunching
                         + getColor(layoutColor) + ".",
-                layoutColor,48,getDefaultDelay(),out::print);
+                layoutColor,getDefaultLogoAlignment(),getDefaultDelay(),out::print);
     }
 
     private static void dateChecking(){
