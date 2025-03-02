@@ -1,0 +1,107 @@
+package core.ui.extensions.weather;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
+import static core.logic.CommandManager.exitPage;
+import static core.logic.CommandManager.mainMenuRerun;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static java.lang.System.out;
+
+public class WeatherPage {
+
+    private static final Scanner scanner = new Scanner(System.in);
+    private static Path currentDirectory = Paths.get("").toAbsolutePath();
+
+    public static void displayWeatherPage() {
+        marginBorder(1, 2);
+        message("Terminal:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        displayListOfCommands();
+
+        while (true) {
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
+                    getColor(layoutColor) + searchingArrow, "");
+            String input = scanner.nextLine().toLowerCase();
+
+            switch (input) {
+                case "direct weather", "/dw" -> {
+
+                }
+                case "restart", "/rs" -> {
+                    insertControlChars('n', 1);
+                    mainMenuRerun();
+                }
+                case "clear terminal", "/cl" -> clearTerminal();
+                case "list", "/ls" -> displayListOfCommands();
+                case "easteregg", "/ee" -> displayEasterEgg();
+                case "quit", "/q" -> {
+                    exitPage();
+                    return;
+                }
+                default -> out.print("");
+            }
+        }
+    }
+
+    private static void displayListOfCommands() {
+        insertControlChars('n', 1);
+        message("·  Enter command [" + getColor(mainColor) + "/ec" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Restart [" + getColor(mainColor) + "/rs" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Clear terminal [" + getColor(mainColor) + "/cl" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  List [" + getColor(mainColor) + "/ls" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Quit [" + getColor(mainColor) + "/q" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
+
+    private static class WeatherService {
+        private static final String API_KEY = "1cf3d1f3e8ee40db940c70cfac6379cc";
+        private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
+        private static final OkHttpClient client = new OkHttpClient();
+
+        public static void getWeather(String city) {
+            String url = String.format(BASE_URL, city);
+            Request request = new Request.Builder().url(url).build();
+
+            try (Response response = client.newCall(request).execute()) {
+                if (!response.isSuccessful()) {
+                    System.out.println("Error: " + response.code());
+                    return;
+                }
+
+                assert response.body() != null;
+                String jsonData = response.body().string();
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(jsonData);
+
+                String weather = jsonNode.get("weather").get(0).get("description").asText();
+                double temp = jsonNode.get("main").get("temp").asDouble();
+                double windSpeed = jsonNode.get("wind").get("speed").asDouble();
+
+                insertControlChars('n', 1);
+                message("🌤 Weather in " + city + ": ", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("🌡 Temperature: " + temp + "°C", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("💨 Wind Speed: " + windSpeed + " m/s", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("📌 Condition: " + weather, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            } catch (IOException e) {
+                insertControlChars('n', 1);
+                message("Error fetching weather data: " + e.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            }
+        }
+    }
+}
