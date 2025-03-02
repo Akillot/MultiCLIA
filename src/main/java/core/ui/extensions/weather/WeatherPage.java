@@ -35,6 +35,10 @@ public class WeatherPage {
             String input = scanner.nextLine().toLowerCase().trim();
 
             switch (input) {
+                case "local weather", "/lw" -> {
+                    insertControlChars('n', 1);
+                    WeatherService.getWeatherByIP();
+                }
                 case "direct weather", "/dw" -> {
                     insertControlChars('n', 1);
                     out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter city name: ");
@@ -63,7 +67,11 @@ public class WeatherPage {
 
     private static void displayListOfCommands() {
         insertControlChars('n', 1);
+        message("·  Local weather [" + getColor(mainColor) + "/lw" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         message("·  Direct weather [" + getColor(mainColor) + "/dw" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Local weather [" + getColor(mainColor) + "/lw" + getColor(layoutColor) + "]",
                 layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         message("·  Restart [" + getColor(mainColor) + "/rs" + getColor(layoutColor) + "]",
                 layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -77,11 +85,9 @@ public class WeatherPage {
 
     private static class WeatherService {
 
-        //PLEASE DO NOT STEAL THIS API KEY, YOU CAN LITERALLY CREATE AN ACCOUNT
-        // IN https://home.openweathermap.org AND GET YOUR OWN API KEY FOR FREE
-
         private static final String API_KEY = "1cf3d1f3e8ee40db940c70cfac6379cc";
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
+        private static final String GEO_IP_URL = "http://ip-api.com/json";
         private static final OkHttpClient client = new OkHttpClient();
 
         public static void getWeather(String city) {
@@ -115,6 +121,32 @@ public class WeatherPage {
             } catch (IOException e) {
                 insertControlChars('n', 1);
                 message("Error fetching weather data: " + e.getMessage(), rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            }
+        }
+
+        public static void getWeatherByIP() {
+            Request request = new Request.Builder().url(GEO_IP_URL).build();
+
+            try (Response response = client.newCall(request).execute()) {
+                if (!response.isSuccessful()) {
+                    message("Error: Unable to determine location. HTTP Code: " + response.code(),
+                            rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    return;
+                }
+
+                assert response.body() != null;
+                String jsonData = response.body().string();
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(jsonData);
+
+                String city = jsonNode.get("city").asText();
+                String country = jsonNode.get("country").asText();
+
+                message("📍 Your location: " + city + ", " + country, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                getWeather(city);
+            } catch (IOException e) {
+                message("Error fetching location data: " + e.getMessage(), rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
     }
