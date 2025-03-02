@@ -18,7 +18,7 @@ import static java.lang.System.out;
 
 public class TerminalPage {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
     private static Path currentDirectory = Paths.get("").toAbsolutePath();
 
     public static void displayTerminalPage() {
@@ -33,11 +33,11 @@ public class TerminalPage {
 
             switch (input) {
                 case "enter command", "/ec" -> {
-                    insertControlChars('n',1);
+                    insertControlChars('n', 1);
                     executeCommand();
                 }
                 case "restart", "/rs" -> {
-                    insertControlChars('n',1);
+                    insertControlChars('n', 1);
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
@@ -52,22 +52,18 @@ public class TerminalPage {
         }
     }
 
-    private static void displayListOfCommands(){
-        insertControlChars('n',1);
-        message("·  Enter command [" + getColor(mainColor)
-                + "/ec" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Restart [" + getColor(mainColor)
-                + "/rs" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Clear terminal [" + getColor(mainColor)
-                + "/cl" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  List [" + getColor(mainColor)
-                + "/ls" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        message("·  Quit [" + getColor(mainColor)
-                + "/q" + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    private static void displayListOfCommands() {
+        insertControlChars('n', 1);
+        message("·  Enter command [" + getColor(mainColor) + "/ec" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Restart [" + getColor(mainColor) + "/rs" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Clear terminal [" + getColor(mainColor) + "/cl" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  List [" + getColor(mainColor) + "/ls" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Quit [" + getColor(mainColor) + "/q" + getColor(layoutColor) + "]",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void executeCommand() {
@@ -78,21 +74,50 @@ public class TerminalPage {
                 String input = scanner.nextLine().trim();
 
                 if (input.equalsIgnoreCase("exit")) {
-                    insertControlChars('n',1);
+                    insertControlChars('n', 1);
                     return;
                 }
-                executeTerminalCommandsModified(input);
+
+                if (input.equals("nano")) {
+                    openNano();
+                } else {
+                    executeTerminalCommandsModified(input);
+                }
 
             } catch (Exception e) {
-                message(getBackColor(rejectionColor)+ "Error: " + e.getMessage() + "." + RESET,
+                message(getBackColor(rejectionColor) + "Error: " + e.getMessage() + "." + RESET,
                         layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
+        }
+    }
+
+    private static void openNano() {
+        try {
+            String os = System.getProperty("os.name").toLowerCase();
+
+            if (os.contains("mac")) {
+                new ProcessBuilder("open", "-a", "Terminal", "nano").start();
+            } else if (os.contains("linux")) {
+                new ProcessBuilder("x-terminal-emulator", "-e", "nano").start();
+            } else {
+                message(getBackColor(rejectionColor) + "Unsupported OS for nano." + RESET,
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            }
+
+        } catch (IOException e) {
+            message(getBackColor(rejectionColor) + "Failed to open nano: " + e.getMessage() + "." + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 
     private static void executeTerminalCommandsModified(@NotNull String command) {
         try {
             String[] commands = command.split(" ");
+
+            if (commands[0].equals("nano")) {
+                blockNano();
+                return;
+            }
 
             if (commands[0].equals("cd")) {
                 if (commands.length > 1) {
@@ -143,6 +168,25 @@ public class TerminalPage {
             message(getBackColor(rejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET,
                     layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             Thread.currentThread().interrupt();
+        }
+    }
+
+    private static void blockNano() {
+        message(getBackColor(rejectionColor) +
+                        "❌ Sorry, but this terminal is intended for command execution only and does not support file editing via nano." + RESET,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
+
+
+    private static void changeDirectory(String newPath) {
+        Path newDir = currentDirectory.resolve(newPath).normalize();
+        if (newDir.toFile().exists() && newDir.toFile().isDirectory()) {
+            currentDirectory = newDir;
+            message(getBackColor(214) + "Directory changed to: " + currentDirectory + "." + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        } else {
+            message(getBackColor(rejectionColor) + "No such directory: " + newPath + "." + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 }
