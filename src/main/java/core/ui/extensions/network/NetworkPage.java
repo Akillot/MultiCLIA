@@ -41,6 +41,7 @@ public class NetworkPage {
                 case "http request testing", "/hrt" -> displayHttpTesting();
                 case "look up dns records", "/lr" -> nsLookUp();
                 case "network stats", "/ns" -> netStat();
+                case "network interfaces", "/ni" -> displayNetworkInterfaces();
                 case "restart", "/rs" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
@@ -67,6 +68,7 @@ public class NetworkPage {
                 {"Look up DNS records", "/lr"},
                 {"Http request testing", "/hrt"},
                 {"Network stats", "/ns"},
+                {"Network interfaces", "/ni"},
                 {"Restart", "/rs"},
                 {"Clear terminal", "/cl"},
                 {"List", "/ls"},
@@ -500,5 +502,64 @@ public class NetworkPage {
             case 504 -> "Gateway Timeout";
             default -> "Unknown Status";
         };
+    }
+
+    private static void displayNetworkInterfaces() {
+        try {
+            insertControlChars('n', 1);
+            message("Network Interfaces:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface netInterface = networkInterfaces.nextElement();
+
+                // Skip non-active interfaces if desired
+                if (!netInterface.isUp())
+                    continue;
+
+                message("·  " + getColor(mainColor) + netInterface.getDisplayName() + getColor(layoutColor),
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                // Get MAC address
+                byte[] mac = netInterface.getHardwareAddress();
+                if (mac != null) {
+                    StringBuilder macAddress = new StringBuilder();
+                    for (int i = 0; i < mac.length; i++) {
+                        macAddress.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                    }
+                    message("   MAC: " + getColor(mainColor) + macAddress + getColor(layoutColor),
+                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                } else {
+                    message("   MAC: " + getColor(rejectionColor) + "N/A" + getColor(layoutColor),
+                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                }
+
+                // Display IP addresses
+                Enumeration<InetAddress> inetAddresses = netInterface.getInetAddresses();
+                while (inetAddresses.hasMoreElements()) {
+                    InetAddress address = inetAddresses.nextElement();
+                    String addressType = address instanceof Inet4Address ? "IPv4" : "IPv6";
+                    message("   " + addressType + ": " + getColor(mainColor) + address.getHostAddress() + getColor(layoutColor),
+                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                }
+
+                message("   MTU: " + getColor(mainColor) + netInterface.getMTU() + getColor(layoutColor),
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                message("   Loopback: " + getColor(mainColor) + netInterface.isLoopback() + getColor(layoutColor),
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                message("   Point-to-point: " + getColor(mainColor) + netInterface.isPointToPoint() + getColor(layoutColor),
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                message("   Virtual: " + getColor(mainColor) + netInterface.isVirtual() + getColor(layoutColor),
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+                insertControlChars('n', 1);
+            }
+        } catch (SocketException e) {
+            message("Error retrieving network interfaces: " + e.getMessage(), rejectionColor,
+                    getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
     }
 }
