@@ -1,36 +1,48 @@
 package core.commands;
 
-import core.pages.*;
+import core.ui.essential.pages.*;
 import core.logic.CommandManager;
-import core.ui.DisplayManager;
+import core.ui.extensions.ai.AiPage;
+import core.ui.extensions.connection.ConnectionPage;
+import core.ui.extensions.cryptography.CryptographyPage;
+import core.ui.extensions.network.NetworkPage;
+import core.ui.extensions.security.SecurityPage;
+import core.ui.extensions.terminal.emulation.TerminalPage;
+import core.ui.extensions.time.TimePage;
+import core.ui.essential.configs.DisplayManager;
+import core.ui.extensions.translate.TranslatePage;
+import core.ui.extensions.weather.WeatherPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.configs.AppearanceConfigs.*;
-import static core.configs.TextConfigs.alignment;
-import static core.configs.TextConfigs.message;
+import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.TextConfigs.alignment;
+import static core.ui.essential.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
 
-    public static String[] fullSystemCmds = {
-            "cmds" ,"settings", "rerun", "help", "info",
-            "clear", "time", "network", "security", "cryptography",
-            "terminal", "ai-assistance", "support", "exit"};
+    public static final String[] fullCmds = {
+            "list" ,"config", "restart", "help", "info",
+            "clear", "time", "network", "security", "crypt",
+            "terminal", "ai", "connection", "weather",
+            "translate","support", "quit"};
 
-    public static String[] shortSystemCmds = {
-            "/c" ,"/s", "/rr", "/h", "/i",
-            "/cl", "/t", "/n", "/sc", "/cr",
-            "/ter", "/ai", "/su", "/e"};
+    public static final String[] shortCmds = {
+            "/ls" ,"/cfg", "/rs", "/h", "/i",
+            "/cl", "/t", "/n", "/sec", "/cr",
+            "/term", "/a", "/cn", "/w", "/tr",
+            "/sup", "/q"};
 
+    // Here is an array for commands from massive user extensions
     public static String[] extensionCmds = {};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
-        for (int i = 0; i < fullSystemCmds.length; i++) {
-            commandMap.put(fullSystemCmds[i], getCommandAction(i));
-            commandMap.put(shortSystemCmds[i], getCommandAction(i));
+        for (int i = 0; i < fullCmds.length; i++) {
+            commandMap.put(fullCmds[i], getCommandAction(i));
+            commandMap.put(shortCmds[i], getCommandAction(i));
         }
     }
 
@@ -46,7 +58,7 @@ public class CommandHandler {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
                     message("Error displaying this page: " + e.getMessage(),
-                            sysRejectionColor, getDefaultTextAlignment(), 0, out::println);
+                            rejectionColor, getDefaultTextAlignment(), 0, out::println);
                 }
             };
             case 5 -> DisplayManager::clearTerminal;
@@ -56,10 +68,13 @@ public class CommandHandler {
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
             case 11 -> AiPage::displayAiPage;
-            case 12 -> SupportPage::displaySupportPage;
-            case 13 -> ExitPage::displayExitPage;
+            case 12 -> ConnectionPage::displayPage;
+            case 13 -> WeatherPage::displayWeatherPage;
+            case 14 -> TranslatePage::displayTranslatePage;
+            case 15 -> SupportPage::displaySupportPage;
+            case 16 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
-                    + getColor(sysRejectionColor) + "Invalid command index");
+                    + getColor(rejectionColor) + "Invalid command index");
         };
     }
 }

@@ -38,7 +38,7 @@ Save and exit (`CTRL + X`, then `Y`, then `Enter`).
 Test if everything is set up correctly, run MultiCLIA (you can find guidelines on how to start MultiCLIA in the README file on GitHub) and enter these commands:
 
 ```sh
-/ai
+/a
 ```
 
 ```sh
