@@ -2,17 +2,20 @@ package core.ui.extensions.translate;
 
 import com.deepl.api.*;
 import io.github.cdimascio.dotenv.Dotenv;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Scanner;
 
 import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.insertControlChars;
-import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class TranslatePage {
 
     private static final String API_KEY;
+    @Setter @Getter
+    private static int translatedTextColor = 219;
 
     static {
         Dotenv dotenv = Dotenv.load();
@@ -28,17 +31,21 @@ public class TranslatePage {
     public static void displayTranslatePage() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter text to translate:");
+        insertControlChars('n',1);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter text to translate: ");
         String textToTranslate = scanner.nextLine();
 
-        System.out.println("Enter target language (e.g., 'EN' for English, 'RU' for Russian):");
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter target language" +
+                " [e.g., '" + getColor(mainColor) + "EN" + getColor(layoutColor) + "' for English, "
+                + getColor(mainColor) + "UK" + getColor(layoutColor) + " for Ukrainian]: ");
         String targetLanguage = scanner.nextLine().toUpperCase();
 
         try {
             String translatedText = translateText(textToTranslate, targetLanguage);
-            System.out.println("Translation: " + translatedText);
+            message("Translation: " + getColor(translatedTextColor) + translatedText,layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
         } catch (Exception e) {
-            System.err.println("Translation error: " + e.getMessage());
+            insertControlChars('n',1);
+            message("Translation error: " + e.getMessage(), layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
         }
     }
 
