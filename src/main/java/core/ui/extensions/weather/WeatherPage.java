@@ -2,6 +2,7 @@ package core.ui.extensions.weather;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -23,6 +24,17 @@ public class WeatherPage {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final Path currentDirectory = Paths.get("").toAbsolutePath();
+    private static final String API_KEY;
+
+    static {
+        Dotenv dotenv = Dotenv.load();
+        API_KEY = dotenv.get("OPEN_WEATHER_API_KEY");
+
+        if(API_KEY == null || API_KEY.isEmpty()) {
+            insertControlChars('n',1);
+            message("Weather is unavailable. Check your API Key.", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
+        }
+    }
 
     public static void displayWeatherPage() {
         marginBorder(1, 2);
@@ -85,7 +97,6 @@ public class WeatherPage {
 
     private static class WeatherService {
 
-        private static final String API_KEY = "1cf3d1f3e8ee40db940c70cfac6379cc";
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final String GEO_IP_URL = "http://ip-api.com/json";
         private static final OkHttpClient client = new OkHttpClient();

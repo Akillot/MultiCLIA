@@ -10,6 +10,7 @@ import core.ui.extensions.security.SecurityPage;
 import core.ui.extensions.terminal.emulation.TerminalPage;
 import core.ui.extensions.time.TimePage;
 import core.ui.essential.configs.DisplayManager;
+import core.ui.extensions.translate.TranslatePage;
 import core.ui.extensions.weather.WeatherPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -26,12 +27,14 @@ public class CommandHandler {
     public static final String[] fullCmds = {
             "list" ,"config", "restart", "help", "info",
             "clear", "time", "network", "security", "crypt",
-            "terminal", "ai", "connection", "weather", "support", "quit"};
+            "terminal", "ai", "connection", "weather",
+            "translate","support", "quit"};
 
     public static final String[] shortCmds = {
             "/ls" ,"/cfg", "/rs", "/h", "/i",
             "/cl", "/t", "/n", "/sec", "/cr",
-            "/term", "/a", "/cn", "/w", "/sup", "/q"};
+            "/term", "/a", "/cn", "/w", "/tr",
+            "/sup", "/q"};
 
     // Here is an array for commands from massive user extensions
     public static String[] extensionCmds = {};
@@ -67,8 +70,9 @@ public class CommandHandler {
             case 11 -> AiPage::displayAiPage;
             case 12 -> ConnectionPage::displayPage;
             case 13 -> WeatherPage::displayWeatherPage;
-            case 14 -> SupportPage::displaySupportPage;
-            case 15 -> ExitPage::displayExitPage;
+            case 14 -> TranslatePage::displayTranslatePage;
+            case 15 -> SupportPage::displaySupportPage;
+            case 16 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(rejectionColor) + "Invalid command index");
         };
