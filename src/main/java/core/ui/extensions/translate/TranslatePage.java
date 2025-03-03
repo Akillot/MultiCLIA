@@ -30,20 +30,20 @@ public class TranslatePage {
 
     public static void displayTranslatePage() {
         Scanner scanner = new Scanner(System.in);
+        marginBorder(1,2);
 
         while (true) {
-            marginBorder(1,2);
             out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter text to translate [Enter "
                     + getColor(mainColor) + "/q" + getColor(layoutColor) + " to quit]: ");
             String textToTranslate = scanner.nextLine();
 
             if (textToTranslate.equalsIgnoreCase("/q")) {
-                marginBorder(2,1);
+                marginBorder(2,2);
                 message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 message("Exiting Translate Page" + getColor(layoutColor) + ". "
                         + getColor(mainColor) + "You are now in main menu" + getColor(layoutColor) + ".",
-                        mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-                marginBorder(0,2);
+                        mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                marginBorder(2,1);
                 break;
             }
 
