@@ -1,10 +1,12 @@
 
 # MultiCLIA
-
+ 
 MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application (CLI) designed to simplify and enhance the terminal experience on macOS and Linux. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who frequently works in a terminal environment.
 
 ---
+`Current version: A-0.9.1.2`
 
+MultiCLIA is an AI powered a multi-functional, user-friendly Command-Line Interface Application (CLI) designed to simplify and enhance the experience of terminal users on macOS and Linux systems. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who regularly works in terminal environments.
 ## 🔥 Key Features
 
 ### 🖥️ For System Administrators & Developers:
@@ -49,6 +51,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 
 ## 🚀 Getting Started
 
+
 ### ✅ Requirements:
 - **Operating Systems**: macOS or Linux
 - **Java**: Version 11 or higher
@@ -58,6 +61,11 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-repo/MultiCLIA.git
+
+### Requirements:
+- **Operating Systems**: macOS or Linux.
+- **Java**: Ensure Java is installed (version 17 or higher).
+- **Optional**: [Homebrew](https://brew.sh/) for easier installation (macOS).
 
 ### Installation:
 1. Clone the repository:
@@ -72,7 +80,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
    ```bash
    ./starter.sh
    ```
-###  Installation via Homebrew (Coming Soon):
+###  Installation via Homebrew (Coming Soon)(MacOS only):
    ```bash
    brew install multiclia
    ```
