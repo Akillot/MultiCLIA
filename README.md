@@ -27,26 +27,6 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 
 ---
 
-## 🎯 Target Audience
-
-**🔹 Developers:**  
-💻 Designed for those who frequently use terminal-based tools and want a streamlined experience.  
-🔄 Simplifies complex commands and integrates Git and other tools for ease of use.
-
-**🔹 System Administrators:**  
-🛠️ Makes managing Linux and macOS servers more efficient.  
-📊 Includes tools for system diagnostics, process management, and network configuration.
-
-**🔹 Beginner Terminal Users:**  
-📚 Provides an easy-to-use and welcoming CLI interface.  
-🧑‍🏫 Helps users learn basic terminal commands and functionality with step-by-step guidance.
-
-**🔹 Power Users:**  
-🎨 Offers customization options for themes, shortcuts, and workflows.  
-🤖 Allows advanced users to maximize productivity and automate repetitive tasks.
-
----
-
 ## 🚀 Getting Started
 
 ### ✅ Requirements:
