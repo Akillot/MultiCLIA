@@ -23,6 +23,9 @@ Once you have the API key, store it in the `.env` file inside the cloned MultiCL
 
 ```sh
 cd MultiCLIA
+```
+
+```sh
 nano .env
 ```
 
