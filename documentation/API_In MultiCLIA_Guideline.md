@@ -1,6 +1,7 @@
 # How to use APIs in MultiCLIA
 
-MultiCLIA allows you to use different APIs for various features, but for security reasons, you must generate your own API keys. Follow these steps to set up each API.
+MultiCLIA allows you to use different APIs for various features, but for security reasons,
+you must generate your own API keys. Follow these steps to set up each API.
 
 ## Getting Started
 
@@ -129,4 +130,4 @@ If everything is set up correctly, MultiCLIA will display the translation.
 
 ## Notes
 - Never share your API keys publicly (e.g., on GitHub). Use a .gitignore file to exclude .env.
-- If an API isn't working, double-check that your key is valid and that you've added it correctly to .env.
+- If an API isn't working, double-check that your key is valid and that you've added it correctly to .env
