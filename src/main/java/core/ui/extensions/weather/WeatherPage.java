@@ -124,11 +124,11 @@ public class WeatherPage {
                 double pressure = jsonNode.get("main").get("pressure").asDouble();
 
                 insertControlChars('n', 1);
-                message("🌤 Weather in " + city + ":", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("🌡 Temperature: " + temp + "°C", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("💨 Wind Speed: " + windSpeed + " m/s", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("💧 Humidity: " + humidity + "%", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("🔽 Pressure: " + pressure + " hPa", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("🌤  Weather in " + city + ":", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("🌡  Temperature: " + temp + "°C", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("💨  Wind Speed: " + windSpeed + " m/s", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("💧  Humidity: " + humidity + "%", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("🔽  Pressure: " + pressure + " hPa", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
             } catch (IOException e) {
                 insertControlChars('n', 1);
                 message("Error fetching weather data: " + e.getMessage(), rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);

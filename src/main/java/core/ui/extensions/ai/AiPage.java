@@ -107,7 +107,7 @@ public class AiPage{
             insertControlChars('n', 1);
             message("Model: " + getColor(mainColor) + getModel(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             message("Max Tokens: " + getColor(mainColor) + getMaxTokens(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-            message("Temperature: " + getColor(mainColor) + getTemperature(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Creativity: " + getColor(mainColor) + getTemperature(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } catch (Exception e) {
             insertControlChars('n', 1);
             message("Model: " + getColor(mainColor) + getColor(rejectionColor) + "x", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
