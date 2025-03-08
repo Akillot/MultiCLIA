@@ -16,7 +16,20 @@ Otherwise, you should go to [README](https://github.com/Akillot/MultiCLIA/blob/m
 
 ### Step №1
 
+- Open MultiCLIA in your IDE (IntelliJ IDEA, Eclipse or whatever)
 
+### Step №2
+
+- Open MultiCLIA in your IDE (IntelliJ IDEA, Eclipse or whatever)
+
+### Step №3
+
+- Open  ```src/main/java/core/ui/extensions``` and create a folder with name of your extension
+
+### Step №4
+
+- In your new folder create first class with name like: XPage, where X is your name for extension
+- And also if you need 
 
 
 
