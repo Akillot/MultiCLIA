@@ -77,7 +77,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 ### Installation:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/MultiCLIA.git
+   git clone https://github.com/Akillot/MultiCLIA.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -87,9 +87,9 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
    ```bash
    ./starter.sh
    ```
-###  Installation via Homebrew (Coming Soon):
+###  Installation via Homebrew:
    ```bash
-   brew install multiclia
+   brew install akillot/multiclia/multiclia
    ```
 
 ---
