@@ -68,7 +68,7 @@ public class CommandHandler {
             case 9 -> CryptographyPage::displayCryptographyPage;
             case 10 -> TerminalPage::displayTerminalPage;
             case 11 -> AiPage::displayAiPage;
-            case 12 -> ConnectionPage::displayPage;
+            case 12 -> ConnectionPage::displayConnectionPage;
             case 13 -> WeatherPage::displayWeatherPage;
             case 14 -> TranslatePage::displayTranslatePage;
             case 15 -> SupportPage::displaySupportPage;
