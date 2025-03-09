@@ -52,11 +52,11 @@ Inside your new folder, create the following classes:
 
 ---
 
-## Step 4: Structure of the Main Class `[XPage]`
+## Step 4: Structure of the main Class `[XPage]`
 
 ### Creating a Method for Displaying the Page
 
-Your `XPage` class should include a `displayPage()` method to handle the main logic.
+Your `XPage` class should include a `displayXPage()` method to handle the main logic.
 
 ```java
 public static void displayXPage() {
@@ -71,9 +71,9 @@ public static void displayXPage() {
         String input = scanner.nextLine().trim().toLowerCase();
 
         switch (input) {
-            case "func 1", "/fn1" -> generateQrCode();
-            case "func 2", "/fn2" -> saveQrCodeAsImage();
-            case "func 3", "/fn3" -> modifyQrCodeSize();
+            case "func 1", "/fn1" -> func1();
+            case "func 2", "/fn2" -> func2();
+            case "func 3", "/fn3" -> func3();
             case "restart", "/rs" -> {
                 insertControlChars('n', 1);
                 mainMenuRerun();
@@ -88,6 +88,45 @@ public static void displayXPage() {
         }
     }
 }
+
+// Don`t forget about importing all neccessaries classes and packages.
 ```
+Where: 
 
+- ```X``` → The name of your extension.
+- ```func 1``` → The full command.
+- ```/fn1``` → The short command.
+- ```func1()``` → The method that implements the first function.
 
+### Creating a Method for Displaying all commands
+
+Your `XPage` class should include a `displayListOfCommands` method to display all commands of your extension.
+
+```java
+private static void displayListOfCommands() {
+        insertControlChars('n', 1);
+        String[][] commands = {
+                {"Func 1", "/fn1"},
+                {"Func 2", "/fn2"},
+                {"Func 3", "/fn3"},
+                {"Restart", "/rs"},
+                {"Clear terminal", "/cl"},
+                {"List", "/ls"},
+                {"Quit", "/q"}
+        };
+
+        for (String[] command : commands) {
+            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+        insertControlChars('n', 1);
+    }
+    
+// The displayListOfCommands() method should typically be placed right after displayXPage().
+```
+### Creating methods for your extension functionality implementation
+
+Your `XPage` class should include also your methods for realization of extension functions.
+
+- Your methods should be private
+- Your methods should have correct names
