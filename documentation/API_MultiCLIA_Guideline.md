@@ -130,4 +130,5 @@ If everything is set up correctly, MultiCLIA will display the translation.
 
 ## Notes
 - Never share your API keys publicly (e.g., on GitHub). Use a .gitignore file to exclude .env.
+
 - If an API isn't working, double-check that your key is valid and that you've added it correctly to .env

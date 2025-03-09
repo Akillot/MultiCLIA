@@ -19,7 +19,7 @@ public class ConnectionPage {
     private static int size = 45;
     private static final Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
 
-    public static void displayPage() {
+    public static void displayConnectionPage() {
         marginBorder(1, 2);
         message("Connection:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
@@ -45,7 +45,7 @@ public class ConnectionPage {
                     exitPage();
                     return;
                 }
-                default -> out.print("");
+                default -> insertControlChars('n', 1);
             }
         }
     }
