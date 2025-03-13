@@ -59,7 +59,7 @@ public class SettingsPage {
                     exitPage();
                     return;
                 }
-                default -> out.print("");
+                default -> insertControlChars('n',1);
             }
         }
     }
