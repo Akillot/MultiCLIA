@@ -5,3 +5,8 @@ This code is creating a unique ways to customize your application and/or make it
 This documentation made for developers from developer.
 
 # Appearance 
+
+- Go to ```core/ui/essential/configs/AppearanceConfigs.java```
+- 
+
+
