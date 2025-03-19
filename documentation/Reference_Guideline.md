@@ -6,7 +6,19 @@ This documentation made for developers from developer.
 
 # Appearance 
 
-- Go to ```core/ui/essential/configs/AppearanceConfigs.java```
-- 
+Go to ```core/ui/essential/configs/AppearanceConfigs.java```
+
+### Methods
+
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -  
+- ```getColorText``` -
 
 
