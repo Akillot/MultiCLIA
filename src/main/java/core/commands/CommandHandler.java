@@ -62,14 +62,14 @@ public class CommandHandler {
                 }
             };
             case 5 -> DisplayManager::clearTerminal;
-            case 6 -> TimePage::displayTimePage;
-            case 7 -> NetworkPage::displayNetworkPage;
-            case 8 -> SecurityPage::displaySecurityPage;
-            case 9 -> CryptographyPage::displayCryptographyPage;
-            case 10 -> TerminalPage::displayTerminalPage;
-            case 11 -> AiPage::displayAiPage;
-            case 12 -> ConnectionPage::displayConnectionPage;
-            case 13 -> WeatherPage::displayWeatherPage;
+            case 6 -> new TimePage()::displayMenu;
+            case 7 -> new NetworkPage()::displayMenu;
+            case 8 -> new SecurityPage()::displayMenu;
+            case 9 -> new CryptographyPage()::displayMenu;
+            case 10 -> new TerminalPage()::displayMenu;
+            case 11 -> new AiPage()::displayMenu;
+            case 12 -> new ConnectionPage()::displayMenu;
+            case 13 -> new WeatherPage()::displayMenu;
             case 14 -> TranslatePage::displayTranslatePage;
             case 15 -> SupportPage::displaySupportPage;
             case 16 -> ExitPage::displayExitPage;

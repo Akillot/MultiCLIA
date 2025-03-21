@@ -16,6 +16,17 @@ import static java.lang.System.out;
 
 public class SettingsPage extends Page {
 
+    private String[][] commands = {
+            {"Memory", "/m"},
+            {"CPU", "/c"},
+            {"Colors", "/col"},
+            {"Java", "/j"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
+
     //Java logo
     private static String[] JAVA_ASCII_LOGO = {
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⠀",196),
@@ -36,7 +47,7 @@ public class SettingsPage extends Page {
     public void displayMenu() {
         marginBorder(1,2);
         message("Settings:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(0, getSearchingLineAlignment(), false,
@@ -53,7 +64,7 @@ public class SettingsPage extends Page {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -65,24 +76,8 @@ public class SettingsPage extends Page {
     }
 
     @Override
-    public void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Memory", "/m"},
-                {"CPU", "/c"},
-                {"Colors", "/col"},
-                {"Java", "/j"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     // Display memory information

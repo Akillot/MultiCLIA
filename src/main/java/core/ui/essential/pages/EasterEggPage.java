@@ -5,8 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Scanner;
 
 import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.insertControlChars;
-import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class EasterEggPage {
@@ -20,14 +19,14 @@ public class EasterEggPage {
 
         while (true) {
             try {
-                out.println("MathCLIA");
-                out.println("-------------------\nEnter your numbers.");
-                out.println("-------------------\nUse a 'SPACE'\nTo split numbers.\n-------------------");
+                out.println(alignment(getDefaultTextAlignment()) + "MathCLIA");
+                out.println(alignment(getDefaultTextAlignment()) + "-------------------\nEnter your numbers.");
+                out.println(alignment(getDefaultTextAlignment()) + "-------------------\nUse a 'SPACE'\nTo split numbers.\n-------------------");
                 String mathStatementString = scanner.nextLine();
                 operationMenu();
-                out.print("Your choice is: ");
+                out.print(alignment(getDefaultTextAlignment()) + "Your choice is: ");
                 String operation = scanner.nextLine();
-                out.println("-------------------");
+                out.println(alignment(getDefaultTextAlignment()) + "-------------------");
                 switch (operation) {
                     case "sum" -> sum(mathStatementString);
                     case "sub" -> sub(mathStatementString);
@@ -40,10 +39,10 @@ public class EasterEggPage {
                         insertControlChars('n', 1);
                         return;
                     }
-                    default -> out.println("Invalid operation.\n-------------------\n ");
+                    default -> out.println(alignment(getDefaultTextAlignment()) + "Invalid operation.\n-------------------\n ");
                 }
             } catch (Exception ex) {
-                out.println("Error: " + ex.getMessage());
+                out.println(alignment(getDefaultTextAlignment()) + "Error: " + ex.getMessage());
             }
         }
     }
@@ -58,24 +57,24 @@ public class EasterEggPage {
                 double numDouble = Double.parseDouble(num);
                 result += numDouble;
             } catch (NumberFormatException e) {
-                out.println(num + " is not a number");
+                out.println(alignment(getDefaultTextAlignment()) + num + " is not a number");
                 return;
             }
         }
-        out.println("Answer: " + result + "\n-------------------\n");
+        out.println(alignment(getDefaultTextAlignment()) + "Answer: " + result + "\n-------------------\n");
     }
 
     static void sub(@NotNull String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            out.println("No numbers to subtract.");
+            out.println(alignment(getDefaultTextAlignment()) + "No numbers to subtract.");
             return;
         }
         result = 0;
         try {
             result = Double.parseDouble(nums[0]);
         } catch (NumberFormatException e) {
-            out.println(nums[0] + " is not a number");
+            out.println(alignment(getDefaultTextAlignment()) + nums[0] + " is not a number");
             return;
         }
         for (int i = 1; i < nums.length; i++) {
@@ -83,16 +82,16 @@ public class EasterEggPage {
                 double numDouble = Double.parseDouble(nums[i]);
                 result -= numDouble;
             } catch (NumberFormatException e) {
-                out.println(nums[i] + " is not a number");
+                out.println(alignment(getDefaultTextAlignment()) + nums[i] + " is not a number");
             }
         }
-        out.println("Answer: " + result + "\n-------------------\n");
+        out.println(alignment(getDefaultTextAlignment()) + "Answer: " + result + "\n-------------------\n");
     }
 
     static void multi(@NotNull String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            out.println("No numbers to multiply.");
+            out.println(alignment(getDefaultTextAlignment()) + "No numbers to multiply.");
             return;
         }
         result = 1;
@@ -101,53 +100,53 @@ public class EasterEggPage {
                 double numDouble = Double.parseDouble(num);
                 result *= numDouble;
             } catch (NumberFormatException e) {
-                out.println(num + " is not a number");
+                out.println(alignment(getDefaultTextAlignment()) + num + " is not a number");
                 return;
             }
         }
-        out.println("Answer: " + result + "\n-------------------\n");
+        out.println(alignment(getDefaultTextAlignment()) + "Answer: " + result + "\n-------------------\n");
     }
 
     static void divide(@NotNull String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            out.println("No numbers to divide.");
+            out.println(alignment(getDefaultTextAlignment()) + "No numbers to divide.");
             return;
         }
         result = 1;
         try {
             result = Double.parseDouble(nums[0]);
         } catch (NumberFormatException e) {
-            out.println(nums[0] + " is not a number");
+            out.println(alignment(getDefaultTextAlignment()) + nums[0] + " is not a number");
             return;
         }
         for (int i = 1; i < nums.length; i++) {
             try {
                 double numDouble = Double.parseDouble(nums[i]);
                 if (numDouble == 0) {
-                    out.println("Division by zero detected. Aborting operation.");
+                    out.println(alignment(getDefaultTextAlignment()) + "Division by zero detected. Aborting operation.");
                     return;
                 }
                 result /= numDouble;
             } catch (NumberFormatException e) {
-                out.println(nums[i] + " is not a number");
+                out.println(alignment(getDefaultTextAlignment()) + nums[i] + " is not a number");
                 return;
             }
         }
-        out.println("Answer: " + result + "\n-------------------\n");
+        out.println(alignment(getDefaultTextAlignment()) + "Answer: " + result + "\n-------------------\n");
     }
 
     static void pow(@NotNull String mathStatement) {
         String[] nums = mathStatement.trim().split("\\s+");
         if (nums.length == 0) {
-            out.println("No numbers to process.");
+            out.println(alignment(getDefaultTextAlignment()) + "No numbers to process.");
             return;
         }
         result = 1;
         try {
             result = Double.parseDouble(nums[0]);
         } catch (NumberFormatException e) {
-            out.println(nums[0] + " is not a number");
+            out.println(alignment(getDefaultTextAlignment()) + nums[0] + " is not a number");
             return;
         }
         for (int i = 1; i < nums.length; i++) {
@@ -155,18 +154,18 @@ public class EasterEggPage {
                 double numDouble = Double.parseDouble(nums[i]);
                 result = Math.pow(result, numDouble);
             } catch (NumberFormatException e) {
-                out.println(nums[i] + " is not a number");
+                out.println(alignment(getDefaultTextAlignment()) + nums[i] + " is not a number");
                 return;
             }
         }
-        out.println("Answer: " + result + "\n-------------------\n");
+        out.println(alignment(getDefaultTextAlignment()) + "Answer: " + result + "\n-------------------\n");
     }
 
     static void operationMenu() {
-        out.println("-------------------\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. divide[/]\n5. pow[^]\n6. info[?]\n7. exit\n-------------------");
+        out.println(alignment(getDefaultTextAlignment()) + "-------------------\nOperations:\n1. sum[+]\n2. sub[-]\n3. multi[*]\n4. divide[/]\n5. pow[^]\n6. info[?]\n7. exit\n-------------------");
     }
 
     static void versionInfo() {
-        out.println("Current version:\n0.2.1");
+        out.println(alignment(getDefaultTextAlignment()) + "Current version:\n0.2.1");
     }
 }

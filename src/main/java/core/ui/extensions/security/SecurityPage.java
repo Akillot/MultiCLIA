@@ -1,5 +1,6 @@
 package core.ui.extensions.security;
 
+import core.ui.essential.pages.Page;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +16,7 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class SecurityPage {
+public class SecurityPage extends Page {
 
     private static final int easyComplexityColor = 85;
     private static final int mediumComplexityColor = 214;
@@ -29,11 +30,19 @@ public class SecurityPage {
 
     private static int passwordLength;
 
-    public static void displaySecurityPage() {
+    private String[][] commands = {
+            {"Generate password", "/gp"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
+
+    public void displayMenu() {
         Security.addProvider(new BouncyCastleProvider());
         marginBorder(1, 2);
         message("Security:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(layoutColor) + searchingArrow, "");
@@ -46,7 +55,7 @@ public class SecurityPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -57,21 +66,9 @@ public class SecurityPage {
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Generate password", "/gp"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     private static void passwordCreatorMenu() {

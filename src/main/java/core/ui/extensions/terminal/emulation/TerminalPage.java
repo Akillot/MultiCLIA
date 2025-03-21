@@ -1,5 +1,6 @@
 package core.ui.extensions.terminal.emulation;
 
+import core.ui.essential.pages.Page;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -16,15 +17,22 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class TerminalPage {
+public class TerminalPage extends Page {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static Path currentDirectory = Paths.get("").toAbsolutePath();
+    private String[][] commands = {
+            {"Enter command", "/ec"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
-    public static void displayTerminalPage() {
+    public void displayMenu() {
         marginBorder(1, 2);
         message("Terminal:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
@@ -41,7 +49,7 @@ public class TerminalPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -52,21 +60,9 @@ public class TerminalPage {
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Enter command", "/ec"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     private static void executeCommand() {

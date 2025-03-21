@@ -1,5 +1,7 @@
 package core.ui.extensions.ai;
 
+import core.ui.essential.pages.Page;
+
 import java.util.Scanner;
 
 import static core.ui.essential.configs.AppearanceConfigs.*;
@@ -12,7 +14,18 @@ import static core.logic.CommandManager.exitPage;
 import static core.logic.CommandManager.mainMenuRerun;
 import static java.lang.System.out;
 
-public class AiPage{
+public class AiPage extends Page {
+
+    private String[][] commands = {
+            {"Ask ChatGPT", "/ac"},
+            {"Modify Creativity", "/mc"},
+            {"Modify Maximum of Tokens", "/mmt"},
+            {"Info", "/i"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
     public static String coloredChatGptLogo =
             getColor(204) + "C" + getColor(110) + "h"
@@ -20,13 +33,13 @@ public class AiPage{
                     + getColor(161) + "G" + getColor(207) + "P"
                     + getColor(217) + "T";
 
-    public static void displayAiPage() {
+    public void displayMenu() {
         marginBorder(1, 2);
         message("Powered by OpenAI " + coloredChatGptLogo + RESET, layoutColor,
                 getDefaultTextAlignment(), getDefaultDelay(), out::println);
         message("AI:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
@@ -43,7 +56,7 @@ public class AiPage{
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -54,24 +67,9 @@ public class AiPage{
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Ask ChatGPT", "/ac"},
-                {"Modify Creativity", "/mc"},
-                {"Modify Maximum of Tokens", "/mmt"},
-                {"Info", "/i"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     private static void runChatGpt() {
