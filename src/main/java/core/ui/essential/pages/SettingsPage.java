@@ -14,7 +14,7 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class SettingsPage {
+public class SettingsPage extends Page {
 
     //Java logo
     private static String[] JAVA_ASCII_LOGO = {
@@ -33,7 +33,7 @@ public class SettingsPage {
             getColorText("⠀⠀⠀⠀⠐⠒⠀⠠⠤⠤⠤⠶⠶⠚⠛⠛⠉⠀⠀⠀",21)
     };
 
-    public static void displaySettingsPage() {
+    public void displayMenu() {
         marginBorder(1,2);
         message("Settings:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands();
@@ -64,7 +64,8 @@ public class SettingsPage {
         }
     }
 
-    private static void displayListOfCommands() {
+    @Override
+    public void displayListOfCommands() {
         insertControlChars('n', 1);
         String[][] commands = {
                 {"Memory", "/m"},

@@ -14,7 +14,7 @@ public class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "1.1 - Release";
+        String appVersion = "1.2 - Release";
         return getColorText(appVersion, mainColor);
     }
 

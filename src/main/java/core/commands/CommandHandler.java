@@ -50,7 +50,7 @@ public class CommandHandler {
     private static @NotNull Runnable getCommandAction(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
-            case 1 -> SettingsPage::displaySettingsPage;
+            case 1 -> new SettingsPage()::displayMenu;
             case 2 -> CommandManager::mainMenuRerun;
             case 3 -> DisplayManager::displayCommandsDescription;
             case 4 -> () -> {
