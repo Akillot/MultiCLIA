@@ -1,4 +1,4 @@
-# **MultiCLIA Core Methods Guide**
+# **MultiCLIA Reference Guideline**
 
 ## **Introduction**
 This guide provides an overview of the core methods available in **MultiCLIA**. Developers can use these methods to interact with the system, build extensions, and enhance functionality efficiently. The methods are grouped by their purpose for easier navigation.
