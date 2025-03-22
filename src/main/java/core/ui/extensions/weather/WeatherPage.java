@@ -2,6 +2,7 @@ package core.ui.extensions.weather;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import core.ui.essential.pages.Page;
 import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -20,11 +21,19 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class WeatherPage {
+public class WeatherPage extends Page {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final Path currentDirectory = Paths.get("").toAbsolutePath();
     private static final String API_KEY;
+    private String[][] commands = {
+            {"Local weather", "/lw"},
+            {"Direct weather", "/dw"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
     static {
         Dotenv dotenv = Dotenv.load();
@@ -36,10 +45,10 @@ public class WeatherPage {
         }
     }
 
-    public static void displayWeatherPage() {
+    public void displayMenu() {
         marginBorder(1, 2);
         message("Weather:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
@@ -66,7 +75,7 @@ public class WeatherPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -77,22 +86,9 @@ public class WeatherPage {
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Local weather", "/lw"},
-                {"Direct weather", "/dw"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     private static class WeatherService {

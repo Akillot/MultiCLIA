@@ -1,5 +1,6 @@
 package core.ui.extensions.network;
 
+import core.ui.essential.pages.Page;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,14 +20,28 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class NetworkPage {
+public class NetworkPage extends Page {
 
     private static Scanner scanner = new Scanner(System.in);
+    private String[][] commands = {
+            {"IP-address", "/ip"},
+            {"Scan ports", "/sp"},
+            {"Ping host", "/ph"},
+            {"Trace rout", "/tr"},
+            {"Look up DNS records", "/lr"},
+            {"Http request testing", "/hrt"},
+            {"Network stats", "/ns"},
+            {"Network interfaces", "/ni"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
-    public static void displayNetworkPage() {
+    public void displayMenu() {
         marginBorder(1, 2);
         message("Network:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
@@ -47,39 +62,20 @@ public class NetworkPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
                     return;
                 }
-                default -> out.print("");
+                default -> insertControlChars('n',1);
             }
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"IP-address", "/ip"},
-                {"Scan ports", "/sp"},
-                {"Ping host", "/ph"},
-                {"Trace rout", "/tr"},
-                {"Look up DNS records", "/lr"},
-                {"Http request testing", "/hrt"},
-                {"Network stats", "/ns"},
-                {"Network interfaces", "/ni"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     private static void displayUserIp() {

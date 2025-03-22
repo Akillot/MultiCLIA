@@ -5,8 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Scanner;
 
 import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.insertControlChars;
-import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class EasterEggPage {

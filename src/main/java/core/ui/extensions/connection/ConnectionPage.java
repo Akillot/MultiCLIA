@@ -1,5 +1,7 @@
 package core.ui.extensions.connection;
 
+import core.ui.essential.pages.Page;
+
 import static core.ui.essential.configs.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
@@ -14,16 +16,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ConnectionPage {
+public class ConnectionPage extends Page {
+
+    private String[][] commands = {
+            {"Make QR code", "/qr"},
+            {"Save QR code as PNG", "/sq"},
+            {"Change size", "/cs"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
     private static int size = 45;
     private static final Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
 
-    public static void displayConnectionPage() {
+    public void displayMenu() {
         marginBorder(1, 2);
         message("Connection:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
@@ -39,7 +51,7 @@ public class ConnectionPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -50,23 +62,9 @@ public class ConnectionPage {
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Make QR code", "/qr"},
-                {"Save QR code as PNG", "/sq"},
-                {"Change size", "/cs"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     private static void generateQrCode() {

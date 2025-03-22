@@ -1,5 +1,6 @@
 package core.ui.extensions.time;
 
+import core.ui.essential.pages.Page;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.*;
@@ -16,14 +17,26 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class TimePage {
+public class TimePage extends Page {
 
     private static final Scanner scanner = new Scanner(System.in);
+    private String[][] commands = {
+            {"Current time", "/ct"},
+            {"Calendar", "/c"},
+            {"Timer", "/t"},
+            {"Stopwatch", "/sw"},
+            {"Change time zone", "/ctz"},
+            {"Http request testing", "/hrt"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
-    public static void displayTimePage() {
+    public void displayTimePage() {
         marginBorder(1,2);
         message("Time:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), acceptanceColor, false,
@@ -42,7 +55,7 @@ public class TimePage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
@@ -53,26 +66,9 @@ public class TimePage {
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Current time", "/ct"},
-                {"Calendar", "/c"},
-                {"Timer", "/t"},
-                {"Stopwatch", "/sw"},
-                {"Change time zone", "/ctz"},
-                {"Http request testing", "/hrt"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     // /ct

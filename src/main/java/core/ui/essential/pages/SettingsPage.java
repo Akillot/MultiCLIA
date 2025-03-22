@@ -14,7 +14,18 @@ import static core.ui.essential.configs.TextConfigs.*;
 import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static java.lang.System.out;
 
-public class SettingsPage {
+public class SettingsPage extends Page {
+
+    private String[][] commands = {
+            {"Memory", "/m"},
+            {"CPU", "/c"},
+            {"Colors", "/col"},
+            {"Java", "/j"},
+            {"Restart", "/rs"},
+            {"Clear terminal", "/cl"},
+            {"List", "/ls"},
+            {"Quit", "/q"}
+    };
 
     //Java logo
     private static String[] JAVA_ASCII_LOGO = {
@@ -33,10 +44,10 @@ public class SettingsPage {
             getColorText("⠀⠀⠀⠀⠐⠒⠀⠠⠤⠤⠤⠶⠶⠚⠛⠛⠉⠀⠀⠀",21)
     };
 
-    public static void displaySettingsPage() {
+    public void displayMenu() {
         marginBorder(1,2);
         message("Settings:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands();
+        displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(0, getSearchingLineAlignment(), false,
@@ -53,35 +64,20 @@ public class SettingsPage {
                     mainMenuRerun();
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands();
+                case "list", "/ls" -> displayListOfCommands(commands);
                 case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
                     return;
                 }
-                default -> out.print("");
+                default -> insertControlChars('n',1);
             }
         }
     }
 
-    private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Memory", "/m"},
-                {"CPU", "/c"},
-                {"Colors", "/col"},
-                {"Java", "/j"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
     }
 
     // Display memory information
