@@ -1,194 +1,137 @@
-# What is an extension in MultiCLIA?
+# **Creating an Extension in MultiCLIA**
 
-An extension is an additional mini-application inside MultiCLIA that utilizes the core development tools of the main software.
-
-Extensions introduce new features for users or simplify certain aspects of existing functionalities, enhancing the overall experience of using MultiCLIA.
-
----
-
-# How to Create an extension in MultiCLIA?
-
-## Step 0: Download MultiCLIA (If not installed)
-
-If you already have MultiCLIA installed, you can skip this step.  
-Otherwise, follow the instructions in the [README](https://github.com/Akillot/MultiCLIA/blob/master/README.md) to download and set up the application.
+## **What is an Extension in MultiCLIA?**
+An extension is a mini-application within **MultiCLIA** that adds new features or simplifies existing ones. It integrates with the core system and uses built-in development tools.
 
 ---
-
-## Step 1: Open MultiCLIA in your IDE
-Open MultiCLIA in your preferred IDE, such as **IntelliJ IDEA**, **Eclipse**, or any other Java-compatible environment.
+## **1. Installing MultiCLIA**
+If you already have **MultiCLIA** installed, skip this step. Otherwise, download and set it up following the instructions in the [README](https://github.com/Akillot/MultiCLIA/blob/master/README.md).
 
 ---
+## **2. Creating the Extension Structure**
+### **Step 1: Open the Project in an IDE**
+Use **IntelliJ IDEA**, **Eclipse**, or any Java-compatible environment.
 
-## Step 2: Navigate to the extensions folder
-
-Go to:
+### **Step 2: Create a Directory for Your Extension**
+Navigate to:
 ```sh
 src/main/java/core/ui/extensions
 ```
-Create a **new folder** with the name of your extension.
+Create a **new folder** named after your extension (e.g., `MyExtension`).
+
+### **Step 3: Create the Main Classes**
+Inside your extension folder, create the following classes:
+1. **Main Class (XPage)** – Handles the menu and command processing.
+2. **Configuration Class (XConfigs)** *(optional)* – If your extension requires settings.
+3. **Additional Classes** *(if needed)* – For supporting logic.
+
+Example structure:
+```sh
+src/main/java/core/ui/extensions/MyExtension/
+ ├── MyExtensionPage.java
+ ├── MyExtensionConfigs.java (if needed)
+ ├── SomeHelperClass.java (for additional functionality)
+```
 
 ---
+## **3. Implementing the Main Class (XPage)**
+### **Create a Class and Extend `Page`**
+```java
+public class MyExtensionPage extends Page {
+    public static void displayMenu() {
+        marginBorder(1, 2);
+        message("MyExtension:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        displayListOfCommands(commands);
 
-## Step 3: Create the necessary classes
+        while (true) {
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(layoutColor) + searchingArrow, "");
+            String input = scanner.nextLine().trim().toLowerCase();
 
-Inside your new folder, create the following classes:
+            switch (input) {
+                case "hello", "/h" -> sayHello();
+                case "restart", "/rs" -> mainMenuRerun();
+                case "clear", "/cl" -> clearTerminal();
+                case "list", "/ls" -> displayListOfCommands(commands);
+                case "quit", "/q" -> { exitPage(); return; }
+                default -> insertControlChars('n', 1);
+            }
+        }
+    }
 
-1. **Main Class**
-    - Name your first class following this format:
-      ```sh
-      XPage
-      ```
-      Where `X` is the name of your extension.
+    private static void sayHello() {
+        insertControlChars('n', 1);
+        message("Hello from MyExtension!", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    }
 
-2. **Configuration Class (If Needed)**
-    - If your extension requires configurations, create another class:
-      ```sh
-      XConfigs
-      ```
-      Where `X` is the name of your extension.
+    private static final String[][] commands = {
+        {"Say Hello", "/h"},
+        {"Restart", "/rs"},
+        {"Clear", "/cl"},
+        {"List", "/ls"},
+        {"Quit", "/q"}
+    };
 
-3. **Additional Classes (If Required)**
-    - If you need extra classes for specific functionalities, name them following the same pattern for clarity and structure.
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
+    }
+}
+```
+
+### **What's Happening Here?**
+- The `displayMenu()` method shows the extension menu and handles commands.
+- The `sayHello()` method prints a welcome message.
+- The `commands` field stores available commands.
+- The `displayListOfCommands()` method displays the list of commands.
 
 ---
-
-## Step 4: Structure of the main class `XPage`
-
-### Creating a method for displaying the page
-
-Your `XPage` class should include a `displayXPage()` method to handle the main logic.
-
-```java
-public static void displayXPage() {
-    marginBorder(1, 2);
-    message("X:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-    displayListOfCommands();
-
-    while (true) {
-        slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                getColor(layoutColor) + searchingArrow, "");
-        String input = scanner.nextLine().trim().toLowerCase();
-
-        switch (input) {
-            case "func 1", "/fn1" -> func1();
-            case "func 2", "/fn2" -> func2();
-            case "func 3", "/fn3" -> func3();
-            case "restart", "/rs" -> {
-                insertControlChars('n', 1);
-                mainMenuRerun();
-            }
-            case "clear terminal", "/cl" -> clearTerminal();
-            case "list", "/ls" -> displayListOfCommands();
-            case "quit", "/q" -> {
-                exitPage();
-                return;
-            }
-            default -> insertControlChars('n', 1);
-        }
-    }
-}
-
-// Don`t forget about importing all neccessaries classes and packages.
-```
-Where: 
-
-- ```X``` → The name of your extension.
-- ```func 1``` → The full command.
-- ```/fn1``` → The short command.
-- ```func1()``` → The method that implements the first function.
-
-### Creating a method for displaying all commands
-
-Your `XPage` class should include a `displayListOfCommands` method to display all commands of your extension.
-
-```java
-private static void displayListOfCommands() {
-        insertControlChars('n', 1);
-        String[][] commands = {
-                {"Func 1", "/fn1"},
-                {"Func 2", "/fn2"},
-                {"Func 3", "/fn3"},
-                {"Restart", "/rs"},
-                {"Clear terminal", "/cl"},
-                {"List", "/ls"},
-                {"Quit", "/q"}
-        };
-
-        for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        }
-        insertControlChars('n', 1);
-    }
-    
-// The displayListOfCommands() method should typically be placed right after displayXPage().
-```
-### Creating methods for your extension functionality implementation
-
-Your `XPage` class should include also your methods for realization of extension functions.
-
-- Your methods should be private
-- Your methods should have correct names
-
-### Creating Methods for Your Extension Functionality Implementation
-
-Your `XPage` class should also include methods for implementing the extension’s functions.
-
-#### Method Guidelines:
-- Your methods should be **private**.
-- Your methods should have **clear and descriptive names**.
-
-#### Example:
-
-```java
-private static void func1() {
-    insertControlChars('n', 1);
-    message("Executing Function 1...", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-    // Function 1 implementation here
-}
-
-private static void func2() {
-    insertControlChars('n', 1);
-    message("Executing Function 2...", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-    // Function 2 implementation here
-}
-
-private static void func3() {
-    insertControlChars('n', 1);
-    message("Executing Function 3...", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-    // Function 3 implementation here
-}
-
-// Ensure that each function performs a specific task and follows a consistent structure for readability and maintainability.
-```
-
-## Step 5: Connecting extension to main command handler class
-
-Go to:
+## **4. Connecting the Extension to `CommandHandler`**
+Navigate to:
 ```sh
 src/main/java/core/commands/CommandHandler.java
 ```
-- In ```CommandHandler.java``` go to array ```fullCmds``` and add full command for your extension,
-for example ```"extension"```, you should put this before command ```"quit"```.
-It’s not necessary to place it before ```"quit"```, but doing so maintains a more structured command order.
+### **Add the Command to Arrays**
+Find the `fullCmds` array and add your command:
+```java
+"myextension"
+```
+Find the `shortCmds` array and add a shortcut:
+```java
+"/me"
+```
 
+### **Register the Command in the Handler**
+In the `getCommandAction()` method, add:
+```java
+case Y -> MyExtensionPage::displayMenu;
+```
+Where `Y` is the index of your command in the `fullCmds` and `shortCmds` arrays.
 
-- In ```CommandHandler.java``` go to array ```shortCmds``` and add short command for your extension, for example 
-```"/ext"```, you should put this before command ```"/q"```.
-  It’s not necessary to place it before ```"/q"```, but doing so maintains a more structured command order.
-
-
-- Then in the same class go to ```getCommandAction``` and add ```case y -> XPage::displayXPage;```,
-where y is the index of your commands in  ```fullCmds``` and ```shortCmds```.
-
-## Step 6: Add a description to ```help``` command (Not necessary)
-
-Go to:
+---
+## **5. Adding a Description to the `help` Command (Optional)**
+Navigate to:
 ```sh
 src/main/java/core/ui/essential/configs/DisplayManager.java
 ```
-Find an array ```rules``` there and put ```formatCommandWithDescription(fullCmds[y], shortCmds[y], "Some text"),```
+Add a description in the `rules` array:
+```java
+formatCommandWithDescription(fullCmds[Y], shortCmds[Y], "Launches MyExtension"),
+```
+---
+## **6. Running and Testing**
+### **Run the Extension**
+1. Build and run the project.
+2. Enter `myextension` or `/me` to launch your extension.
+3. Enter `/h` to see the message `Hello from MyExtension!`.
+4. Test other commands (`/rs`, `/cl`, `/ls`, `/q`).
 
-Where ```y``` is the index of your commands in  ```fullCmds``` and ```shortCmds``` and in ```"Some text"``` you should put some description.
+### **Debugging Tips**
+If something isn't working:
+- Check that `MyExtensionPage` is correctly added to `CommandHandler`.
+- Ensure all necessary imports are included (`import static ...`).
+- Use `System.out.println()` for debugging.
+
+---
+## **Conclusion**
+Now you have a working extension for **MultiCLIA**! You can add new commands and expand functionality as needed.
+
