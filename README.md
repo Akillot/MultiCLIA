@@ -18,7 +18,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application (CLI) designed to simplify and enhance the terminal experience on macOS and Linux. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who frequently works in a terminal environment.
 
 ---
-`Current version: 1.0`
+`Current version: 1.1`
 
 ## 🔥 Key Features
 
@@ -77,7 +77,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 ### Installation:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/MultiCLIA.git
+   git clone https://github.com/Akillot/MultiCLIA.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -87,9 +87,9 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
    ```bash
    ./starter.sh
    ```
-###  Installation via Homebrew (Coming Soon):
+###  Installation via Homebrew:
    ```bash
-   brew install multiclia
+   brew install akillot/multiclia/multiclia
    ```
 
 ---
