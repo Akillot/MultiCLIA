@@ -93,8 +93,8 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
    ```
 To open MultiCLIA after installing via homebrew you should write: 
 ```bash
-   multiclia
-   ```
+multiclia
+```
 ---
 
 ### Acknowledgements
