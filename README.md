@@ -91,7 +91,10 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
    ```bash
    brew install akillot/multiclia/multiclia
    ```
-
+To open MultiCLIA after installing via homebrew you should write: 
+```bash
+   multiclia
+   ```
 ---
 
 ### Acknowledgements
