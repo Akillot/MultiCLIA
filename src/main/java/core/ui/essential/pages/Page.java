@@ -7,7 +7,6 @@ import static java.lang.System.out;
 
 public abstract class Page {
     public void displayMenu(){
-        message("Basic menu",layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     protected String[][] commands;
