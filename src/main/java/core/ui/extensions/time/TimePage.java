@@ -33,7 +33,7 @@ public class TimePage extends Page {
             {"Quit", "/q"}
     };
 
-    public void displayTimePage() {
+    public void displayMenu() {
         marginBorder(1,2);
         message("Time:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
