@@ -388,28 +388,7 @@ public class NetworkPage extends Page {
             message("Response Time: " + getColor(mainColor) + responseTime + " ms",
                     layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-            message("Response Headers: ", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-            for (Map.Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
-                if (header.getKey() != null) {
-                    message("  " + header.getKey() + ": " + String.join(", ", header.getValue()),
-                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-                }
-            }
-
             String contentType = connection.getContentType();
-            message("Response Body: ", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-
-            if (contentType != null && contentType.contains("application/json")) {
-                try {
-                    String formattedJson = formatJson(response);
-                    out.println(formattedJson);
-                } catch (Exception e) {
-                    out.println(response);
-                }
-            } else {
-                out.println(response);
-            }
-
             connection.disconnect();
         } catch (MalformedURLException e) {
             message("Error: Invalid URL format. Make sure to include http:// or https://",
