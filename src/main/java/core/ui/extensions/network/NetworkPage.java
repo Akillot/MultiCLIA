@@ -68,7 +68,7 @@ public class NetworkPage extends Page {
                     exitPage();
                     return;
                 }
-                default -> insertControlChars('n',1);
+                default -> out.print("");
             }
         }
     }
