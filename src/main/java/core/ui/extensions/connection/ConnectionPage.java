@@ -7,7 +7,6 @@ import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
 import static core.ui.extensions.connection.QrCodeGenerator.generateAsciiQr;
 import static core.ui.extensions.connection.QrCodeGenerator.generateQR;
 import static java.lang.System.out;
@@ -52,7 +51,6 @@ public class ConnectionPage extends Page {
                 }
                 case "clear terminal", "/cl" -> clearTerminal();
                 case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
                 case "quit", "/q" -> {
                     exitPage();
                     return;
