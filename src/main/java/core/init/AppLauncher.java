@@ -11,6 +11,6 @@ public class AppLauncher {
         clearTerminal();
         insertControlChars('n',1);
         progressbarAnimation("Processing");
-        StartPage.displayStartPage();
+        StartPage.displayMenu();
     }
 }

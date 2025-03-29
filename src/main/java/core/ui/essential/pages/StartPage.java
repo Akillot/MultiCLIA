@@ -40,9 +40,14 @@ public class StartPage {
             "o8o        `8  `Y8bod8P'     `8'  `8'              o888o     `Y8bod8P' `Y888\"\"8o d888b    "
     };
 
-    public static void displayStartPage() {
+    public static void displayMenu() {
         dateChecking();
-        displayMenu();
+        insertControlChars('n',2);
+        displayLogo(mainLogoAscii, getDefaultLogoAlignment());
+        insertControlChars('n',1);
+        getRandomMotto();
+        getCurrentDate();
+        marginBorder(1,1);
         while (true) {
             try {
                 searchCommands();
@@ -52,15 +57,6 @@ public class StartPage {
                 message(errorMessage, mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
             }
         }
-    }
-
-    private static void displayMenu() {
-        insertControlChars('n',2);
-        displayLogo(mainLogoAscii, getDefaultLogoAlignment());
-        insertControlChars('n',1);
-        getRandomMotto();
-        getCurrentDate();
-        marginBorder(1,1);
     }
 
     private static void getRandomMotto(){

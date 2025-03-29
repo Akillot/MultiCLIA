@@ -16,7 +16,7 @@ import java.util.Map;
 import static core.ui.essential.configs.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.StartPage.displayStartPage;
+import static core.ui.essential.pages.StartPage.displayMenu;
 
 import static java.lang.System.out;
 
@@ -239,7 +239,7 @@ public class CommandManager {
         message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
                 getDefaultDelay(), out::println);
         marginBorder(1,1);
-        displayStartPage();
+        displayMenu();
     }
 
     public static void exitPage(){
