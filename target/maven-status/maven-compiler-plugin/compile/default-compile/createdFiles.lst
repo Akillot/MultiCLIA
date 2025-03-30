@@ -20,7 +20,6 @@ core/ui/extensions/ai/AiPage.class
 core/ui/extensions/weather/WeatherPage.class
 core/ui/extensions/security/SecurityPage.class
 core/commands/CommandHandler.class
-core/ui/essential/pages/EasterEggPage.class
 core/ui/essential/pages/Page.class
 core/ui/extensions/weather/WeatherPage$WeatherService.class
 core/ui/essential/pages/InfoPage.class

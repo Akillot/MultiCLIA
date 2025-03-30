@@ -61,6 +61,7 @@ public class StartPage {
 
     private static void getRandomMotto(){
         String userName = System.getProperty("user.name");
+        Random rand = new Random();
         String[] motto = {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
@@ -69,7 +70,6 @@ public class StartPage {
                 "What you think about when you think about love?",
                 "Find a bug or have an idea? Go to" + getColor(mainColor) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
 
-        Random rand = new Random();
         int index = rand.nextInt(0, motto.length);
         message("Just type '" + getColor(mainColor)
                 + shortCmds[0] + getColor(layoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),

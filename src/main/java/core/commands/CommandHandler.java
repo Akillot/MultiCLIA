@@ -47,7 +47,7 @@ public class CommandHandler {
     }
 
     @Contract(pure = true)
-    private static @NotNull Runnable getCommandAction(int index) {
+    static @NotNull Runnable getCommandAction(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
             case 1 -> new SettingsPage()::displayMenu;

@@ -30,17 +30,27 @@ public class AppearanceConfigs {
     public static String searchingArrow = "-> ";
 
     //Colors of logo
+    @Getter @Setter
     public static int color1 = 219;
+    @Getter @Setter
     public static int color2 = 183;
+    @Getter @Setter
     public static int color3 = 147;
+    @Getter @Setter
     public static int color4 = 218;
+    @Getter @Setter
     public static int color5 = 182;
+    @Getter @Setter
     public static int color6 = 218;
 
     //System Colors
+    @Getter @Setter
     public static int mainColor = 147;
+    @Getter @Setter
     public static int layoutColor = 15;
+    @Getter @Setter
     public static int acceptanceColor = 46;
+    @Getter @Setter
     public static int rejectionColor = 160;
 
     //Borders
@@ -136,7 +146,7 @@ public class AppearanceConfigs {
 
     public static void progressbarAnimation(String title) {
         int barLength = 97;
-        int animationDuration = 3000;
+        int animationDuration = 3000; //milliseconds
         int steps = 100;
         int delay = animationDuration / steps;
 
