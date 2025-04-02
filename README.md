@@ -31,11 +31,6 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 - **Optional**: [Homebrew](https://brew.sh/) for easier installation (macOS)
 
 ### 📥 Installation:
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-repo/MultiCLIA.git
-
-### Installation:
 1. Clone the repository:
    ```bash
    git clone https://github.com/Akillot/MultiCLIA.git
