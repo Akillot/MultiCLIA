@@ -34,10 +34,10 @@ public class TranslatePage {
 
         while (true) {
             out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter text to translate [Enter "
-                    + getColor(mainColor) + "/q" + getColor(layoutColor) + " to quit]: ");
+                    + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
             String textToTranslate = scanner.nextLine();
 
-            if (textToTranslate.equalsIgnoreCase("/q")) {
+            if (textToTranslate.equalsIgnoreCase("q")) {
                 marginBorder(2,2);
                 message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 message("Exiting Translate Page" + getColor(layoutColor) + ". "

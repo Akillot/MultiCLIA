@@ -23,18 +23,18 @@ public class NetworkPage extends Page {
 
     private static Scanner scanner = new Scanner(System.in);
     private String[][] commands = {
-            {"IP-address", "/ip"},
-            {"Scan ports", "/sp"},
-            {"Ping host", "/ph"},
-            {"Trace rout", "/tr"},
-            {"Look up DNS records", "/lr"},
-            {"Http request testing", "/hrt"},
-            {"Network stats", "/ns"},
-            {"Network interfaces", "/ni"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"IP-address", "ip"},
+            {"Scan ports", "sp"},
+            {"Ping host", "ph"},
+            {"Trace rout", "tr"},
+            {"Look up DNS records", "lr"},
+            {"Http request testing", "hrt"},
+            {"Network stats", "ns"},
+            {"Network interfaces", "ni"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -48,21 +48,21 @@ public class NetworkPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "ip-address", "/ip" -> displayUserIp();
-                case "scan ports", "/sp" -> scanPorts();
-                case "ping host", "/ph" -> pingHost();
-                case "trace rout", "/tr" -> traceRout();
-                case "http request testing", "/hrt" -> displayHttpTesting();
-                case "look up dns records", "/lr" -> nsLookUp();
-                case "network stats", "/ns" -> netStat();
-                case "network interfaces", "/ni" -> displayNetworkInterfaces();
-                case "restart", "/rs" -> {
+                case "ip-address", "ip" -> displayUserIp();
+                case "scan ports", "sp" -> scanPorts();
+                case "ping host", "ph" -> pingHost();
+                case "trace rout", "tr" -> traceRout();
+                case "http request testing", "hrt" -> displayHttpTesting();
+                case "look up dns records", "lr" -> nsLookUp();
+                case "network stats", "ns" -> netStat();
+                case "network interfaces", "ni" -> displayNetworkInterfaces();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

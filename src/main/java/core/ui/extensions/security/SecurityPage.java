@@ -30,11 +30,11 @@ public class SecurityPage extends Page {
     private static int passwordLength;
 
     private String[][] commands = {
-            {"Generate password", "/gp"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Generate password", "gp"},
+            {"Restart", "rst"},
+            {"Clear terminal", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -48,14 +48,14 @@ public class SecurityPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "generate password", "/gp" -> passwordCreatorMenu();
-                case "restart", "/rs" -> {
+                case "generate password", "gp" -> passwordCreatorMenu();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

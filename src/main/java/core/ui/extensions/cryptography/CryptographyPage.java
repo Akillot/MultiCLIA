@@ -25,13 +25,13 @@ import static java.lang.System.out;
 public class CryptographyPage extends Page {
 
     private String[][] commands = {
-            {"Encryption", "/en"},
-            {"Decryption", "/de"},
-            {"Hashing", "/ha"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Encryption", "en"},
+            {"Decryption", "de"},
+            {"Hashing", "ha"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -45,16 +45,16 @@ public class CryptographyPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "encryption", "/en" -> encryptionMenu();
-                case "decryption", "/de" -> decryptionMenu();
-                case "hashing", "/ha" -> hashSHA256();
-                case "restart", "/rs" -> {
+                case "encryption", "en" -> encryptionMenu();
+                case "decryption", "de" -> decryptionMenu();
+                case "hashing", "ha" -> hashSHA256();
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

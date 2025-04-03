@@ -25,16 +25,16 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "list" ,"config", "restart", "help", "info",
+            "list" ,"config", "restart", "info",
             "clear", "time", "network", "security", "crypt",
             "terminal", "ai", "connection", "weather",
             "translate","support", "quit"};
 
     public static final String[] shortCmds = {
-            "/ls" ,"/cfg", "/rs", "/h", "/i",
-            "/cl", "/t", "/n", "/sec", "/cr",
-            "/term", "/a", "/cn", "/w", "/tr",
-            "/sup", "/q"};
+            "ls" ,"cfg", "rst", "i",
+            "cl", "t", "n", "sec", "cr",
+            "term", "a", "cn", "w", "tr",
+            "sup", "q"};
 
     // Here is an array for commands from massive user extensions
     public static String[] extensionCmds = {};
@@ -52,8 +52,7 @@ public class CommandHandler {
             case 0 -> DisplayManager::displayCommandList;
             case 1 -> new SettingsPage()::displayMenu;
             case 2 -> CommandManager::mainMenuRerun;
-            case 3 -> DisplayManager::displayCommandsDescription;
-            case 4 -> () -> {
+            case 3 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
@@ -61,18 +60,18 @@ public class CommandHandler {
                             rejectionColor, getDefaultTextAlignment(), 0, out::println);
                 }
             };
-            case 5 -> DisplayManager::clearTerminal;
-            case 6 -> new TimePage()::displayMenu;
-            case 7 -> new NetworkPage()::displayMenu;
-            case 8 -> new SecurityPage()::displayMenu;
-            case 9 -> new CryptographyPage()::displayMenu;
-            case 10 -> new TerminalPage()::displayMenu;
-            case 11 -> new AiPage()::displayMenu;
-            case 12 -> new ConnectionPage()::displayMenu;
-            case 13 -> new WeatherPage()::displayMenu;
-            case 14 -> TranslatePage::displayTranslatePage;
-            case 15 -> SupportPage::displaySupportPage;
-            case 16 -> ExitPage::displayExitPage;
+            case 4 -> DisplayManager::clearTerminal;
+            case 5 -> new TimePage()::displayMenu;
+            case 6 -> new NetworkPage()::displayMenu;
+            case 7 -> new SecurityPage()::displayMenu;
+            case 8 -> new CryptographyPage()::displayMenu;
+            case 9 -> new TerminalPage()::displayMenu;
+            case 10 -> new AiPage()::displayMenu;
+            case 11 -> new ConnectionPage()::displayMenu;
+            case 12 -> new WeatherPage()::displayMenu;
+            case 13 -> TranslatePage::displayTranslatePage;
+            case 14 -> SupportPage::displaySupportPage;
+            case 15 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(rejectionColor) + "Invalid command index");
         };

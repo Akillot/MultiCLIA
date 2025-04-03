@@ -16,14 +16,14 @@ import static java.lang.System.out;
 public class SettingsPage extends Page {
 
     private String[][] commands = {
-            {"Memory", "/m"},
-            {"CPU", "/c"},
-            {"Colors", "/col"},
-            {"Java", "/j"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Memory", "m"},
+            {"CPU", "c"},
+            {"Colors", "col"},
+            {"Java", "j"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     //Java logo
@@ -54,17 +54,17 @@ public class SettingsPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "memory", "/m" -> displayMemoryInfo();
-                case "cpu", "/c" -> displayCpuLoad();
-                case "colors", "/col" -> displayColorTable();
-                case "java", "/j" -> displayJavaInfo();
-                case "restart", "/rs" -> {
+                case "memory", "m" -> displayMemoryInfo();
+                case "cpu", "c" -> displayCpuLoad();
+                case "colors", "col" -> displayColorTable();
+                case "java", "j" -> displayJavaInfo();
+                case "restart", "rs" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

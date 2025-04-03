@@ -21,11 +21,11 @@ public class TerminalPage extends Page {
     private static final Scanner scanner = new Scanner(System.in);
     private static Path currentDirectory = Paths.get("").toAbsolutePath();
     private String[][] commands = {
-            {"Enter command", "/ec"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Enter command", "ec"},
+            {"Restart", "rs"},
+            {"Clear terminal", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -39,17 +39,17 @@ public class TerminalPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "enter command", "/ec" -> {
+                case "enter command", "ec" -> {
                     insertControlChars('n', 1);
                     executeCommand();
                 }
-                case "restart", "/rs" -> {
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

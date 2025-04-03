@@ -46,17 +46,17 @@ public class AiPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "ask chatgpt", "/ac" -> runChatGpt();
-                case "modify creativity", "/mc" -> configureCreativity();
-                case "modify maximum of tokens", "/mmt" -> configureMaxTokens();
-                case "info", "/i" -> displayChatGptInfo();
-                case "restart", "/rs" -> {
+                case "ask chatgpt", "ac" -> runChatGpt();
+                case "modify creativity", "mc" -> configureCreativity();
+                case "modify maximum of tokens", "mmt" -> configureMaxTokens();
+                case "info", "i" -> displayChatGptInfo();
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

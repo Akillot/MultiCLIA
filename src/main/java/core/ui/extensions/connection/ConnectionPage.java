@@ -18,13 +18,13 @@ import java.nio.file.Paths;
 public class ConnectionPage extends Page {
 
     private String[][] commands = {
-            {"Make QR code", "/qr"},
-            {"Save QR code as PNG", "/sq"},
-            {"Change size", "/cs"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Make QR code", "qr"},
+            {"Save QR code as PNG", "sq"},
+            {"Change size", "cs"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     private static int size = 45;
@@ -42,16 +42,16 @@ public class ConnectionPage extends Page {
             String input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
-                case "make qr code", "/qr" -> generateQrCode();
-                case "save qr code", "/sq" -> saveQrCodeAsImage();
-                case "change size", "/cs" -> modifyQrCodeSize();
-                case "restart", "/rs" -> {
+                case "make qr code", "qr" -> generateQrCode();
+                case "save qr code", "sq" -> saveQrCodeAsImage();
+                case "change size", "cs" -> modifyQrCodeSize();
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

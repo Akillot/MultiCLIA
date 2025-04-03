@@ -8,53 +8,12 @@ import static core.commands.CommandHandler.*;
 import static core.ui.essential.configs.AppearanceConfigs.*;
 import static core.ui.essential.configs.TextConfigs.*;
 
-import static core.ui.extensions.ai.AiPage.coloredChatGptLogo;
 import static java.lang.System.*;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    //displaying description /h
-    private static final String[] rules = {
-            formatCommandWithDescription(fullCmds[0], shortCmds[0], "Shows list of all commands"),
-            formatCommandWithDescription(fullCmds[1], shortCmds[1], "Shows settings of the application"),
-            formatCommandWithDescription(fullCmds[2], shortCmds[2], "Restarts the app without clearing context"),
-            formatCommandWithDescription(fullCmds[3], shortCmds[3], "Shows description of all commands"),
-            formatCommandWithDescription(fullCmds[4], shortCmds[4], "Shows app information"),
-            formatCommandWithDescription(fullCmds[5], shortCmds[5], "Clears recent values from terminal"),
-            formatCommandWithDescription(fullCmds[6], shortCmds[6], "Shows time section"),
-            formatCommandWithDescription(fullCmds[7], shortCmds[7], "Shows ifconfig page"),
-            formatCommandWithDescription(fullCmds[8], shortCmds[8], "Shows security page"),
-            formatCommandWithDescription(fullCmds[9], shortCmds[9], "Shows crypt page"),
-            formatCommandWithDescription(fullCmds[10], shortCmds[10], "Shows terminal page"),
-            formatCommandWithDescription(fullCmds[11], shortCmds[11], "Shows page with " + coloredChatGptLogo + getColor(layoutColor)),
-            formatCommandWithDescription(fullCmds[12], shortCmds[12], "Shows connection page"),
-            formatCommandWithDescription(fullCmds[13], shortCmds[13], "Shows weather page"),
-            formatCommandWithDescription(fullCmds[14], shortCmds[14], "Shows translate page"),
-            formatCommandWithDescription(fullCmds[15], shortCmds[15], "Shows support page"),
-            formatCommandWithDescription(fullCmds[16], shortCmds[16], "Terminates the application")
-    };
-
-    private static @NotNull String formatCommandWithDescription(String commandName, String shortCommand, String description) {
-        return formatCommand(commandName + getColor(layoutColor)
-                + ": ", "", "") + description + " "
-                + formatCommand(shortCommand, "[", "]");
-    }
-
-    private static @NotNull String formatCommand(String command, String bracketStart, String bracketEnd) {
-        return bracketStart + getColor(mainColor) + command + getColor(layoutColor) + bracketEnd;
-    }
-
-    public static void displayCommandsDescription() {
-        marginBorder(1, 2);
-        for (String rule : rules) {
-            message(rule, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-            insertControlChars('n', 1);
-        }
-        marginBorder(1, 1);
-    }
-
-    // displaying command list /ls
+    // displaying command list ls
     public static void displayCommandList() {
         try {
             marginBorder(1,1);
@@ -88,7 +47,7 @@ public class DisplayManager {
         return " ".repeat(Math.max(0, steps));
     }
 
-    // /cl
+    // cl
     public static void clearTerminal() {
         try {
             String operatingSystem = System.getProperty("os.name");

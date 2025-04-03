@@ -26,12 +26,12 @@ public class WeatherPage extends Page {
     private static final Path currentDirectory = Paths.get("").toAbsolutePath();
     private static final String API_KEY;
     private String[][] commands = {
-            {"Local weather", "/lw"},
-            {"Direct weather", "/dw"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Local weather", "lw"},
+            {"Direct weather", "dw"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     static {
@@ -55,11 +55,11 @@ public class WeatherPage extends Page {
             String input = scanner.nextLine().toLowerCase().trim();
 
             switch (input) {
-                case "local weather", "/lw" -> {
+                case "local weather", "lw" -> {
                     insertControlChars('n', 1);
                     WeatherService.getWeatherByIP();
                 }
-                case "direct weather", "/dw" -> {
+                case "direct weather", "dw" -> {
                     insertControlChars('n', 1);
                     out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter city name: ");
                     String city = scanner.nextLine().trim();
@@ -69,13 +69,13 @@ public class WeatherPage extends Page {
                         message("City name cannot be empty!", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     }
                 }
-                case "restart", "/rs" -> {
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear terminal", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }

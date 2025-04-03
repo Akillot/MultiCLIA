@@ -20,16 +20,16 @@ public class TimePage extends Page {
 
     private static final Scanner scanner = new Scanner(System.in);
     private String[][] commands = {
-            {"Current time", "/ct"},
-            {"Calendar", "/c"},
-            {"Timer", "/t"},
-            {"Stopwatch", "/sw"},
-            {"Change time zone", "/ctz"},
-            {"Http request testing", "/hrt"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Current time", "ct"},
+            {"Calendar", "c"},
+            {"Timer", "t"},
+            {"Stopwatch", "sw"},
+            {"Change time zone", "ctz"},
+            {"Http request testing", "hrt"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -43,19 +43,19 @@ public class TimePage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "current time", "/ct" -> displayCurrentTime();
-                case "calendar", "/c" -> displayCalendar();
-                case "app runtime", "/ar" -> displayAppRuntime();
-                case "timer", "/t" -> runTimer();
-                case "stopwatch", "/sw" -> runStopwatch();
-                case "change time zone", "/ctz" -> displayCustomTimeZone();
-                case "restart", "/rs" -> {
+                case "current time", "ct" -> displayCurrentTime();
+                case "calendar", "c" -> displayCalendar();
+                case "app runtime", "ar" -> displayAppRuntime();
+                case "timer", "t" -> runTimer();
+                case "stopwatch", "sw" -> runStopwatch();
+                case "change time zone", "ctz" -> displayCustomTimeZone();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> {
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> {
                     exitPage();
                     return;
                 }
