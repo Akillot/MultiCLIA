@@ -10,8 +10,8 @@ import java.util.Random;
 
 import static core.commands.CommandHandler.shortCmds;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class StartPage {
@@ -19,7 +19,7 @@ public class StartPage {
     @Getter
     private static String dateAndTimeOfProgramLaunching;
 
-    private static String[] mainLogoAscii = {
+    private final static String[] MAIN_LOGO_ASCII = {
             "ooo        ooooo             oooo      .    o8o      .oooooo.   ooooo        ooooo         .o.       ",
             "`88.       .888'             `888    .o8    `\"'     d8P'  `Y8b  `888'        `888'        .888.      ",
             " 888b     d'888  oooo  oooo   888  .o888oo oooo    888           888          888        .8\"888.     ",
@@ -30,7 +30,7 @@ public class StartPage {
             "o8o        o888o  `V88V\"V8P' o888o   \"888\" o888o    `Y8bood8P'  o888ooooood8 o888o  o88o       o8888o "
     };
 
-    private static String[] newYearAscii = {
+    private final static String[] NEW_YEAR_ASCII = {
             "ooooo      ooo                                 oooooo   oooo                              ",
             "`888b.     `8'                                  `888.   .8'                               ",
             " 8 `88b.    8   .ooooo.  oooo oooo    ooo        `888. .8'    .ooooo.   .oooo.   oooo d8b ",
@@ -43,7 +43,7 @@ public class StartPage {
     public static void displayMenu() {
         dateChecking();
         insertControlChars('n',2);
-        displayLogo(mainLogoAscii, getDefaultLogoAlignment());
+        displayLogo(MAIN_LOGO_ASCII, getDefaultLogoAlignment());
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
@@ -71,7 +71,7 @@ public class StartPage {
                 "Find a bug or have an idea? Go to" + getColor(mainColor) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
 
         int index = rand.nextInt(0, motto.length);
-        message("Just type '" + getColor(mainColor)
+        message("For start type '" + getColor(mainColor)
                 + shortCmds[0] + getColor(layoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
                 getDefaultDelay(),out::print);
     }
@@ -96,7 +96,7 @@ public class StartPage {
             case "31-12":
             case "01-01":
                 insertControlChars('n',2);
-                displayLogo(newYearAscii, 36);
+                displayLogo(NEW_YEAR_ASCII, 36);
                 insertControlChars('n',2);
                 message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", layoutColor, 36,getDefaultDelay(),out::print);

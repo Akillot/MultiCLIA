@@ -4,10 +4,10 @@ import core.ui.essential.pages.Page;
 
 import java.util.Scanner;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static core.ui.extensions.ai.ChatGPTClient.*;
 import static core.logic.CommandManager.exitPage;
 import static core.logic.CommandManager.mainMenuRerun;
@@ -16,14 +16,14 @@ import static java.lang.System.out;
 public class AiPage extends Page {
 
     private String[][] commands = {
-            {"Ask ChatGPT", "/ac"},
-            {"Modify Creativity", "/mc"},
-            {"Modify Maximum of Tokens", "/mmt"},
-            {"Info", "/i"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Ask ChatGPT", "ac"},
+            {"Modify Creativity", "mc"},
+            {"Modify Maximum of Tokens", "mmt"},
+            {"Info", "i"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"List", "ls"},
+            {"Quit", "q"}
     };
 
     public static String coloredChatGptLogo =

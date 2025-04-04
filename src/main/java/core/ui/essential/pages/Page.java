@@ -1,8 +1,8 @@
 package core.ui.essential.pages;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.insertControlChars;
-import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.insertControlChars;
+import static core.ui.essential.configs.appearance.TextConfigs.message;
 import static java.lang.System.out;
 
 public abstract class Page {

@@ -10,10 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class TerminalPage extends Page {

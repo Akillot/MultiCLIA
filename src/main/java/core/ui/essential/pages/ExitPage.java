@@ -2,9 +2,9 @@ package core.ui.essential.pages;
 
 import org.jetbrains.annotations.NotNull;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.exit;
 import static java.lang.System.out;
 

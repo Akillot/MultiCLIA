@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.management.ManagementFactory;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class SettingsPage extends Page {
@@ -58,7 +58,7 @@ public class SettingsPage extends Page {
                 case "cpu", "c" -> displayCpuLoad();
                 case "colors", "col" -> displayColorTable();
                 case "java", "j" -> displayJavaInfo();
-                case "restart", "rs" -> {
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
                     mainMenuRerun();
                 }

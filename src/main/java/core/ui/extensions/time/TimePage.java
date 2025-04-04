@@ -11,9 +11,9 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class TimePage extends Page {
@@ -25,7 +25,6 @@ public class TimePage extends Page {
             {"Timer", "t"},
             {"Stopwatch", "sw"},
             {"Change time zone", "ctz"},
-            {"Http request testing", "hrt"},
             {"Restart", "rst"},
             {"Clear", "cl"},
             {"List", "ls"},

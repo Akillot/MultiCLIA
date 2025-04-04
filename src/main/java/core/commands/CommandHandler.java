@@ -17,9 +17,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.alignment;
-import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.alignment;
+import static core.ui.essential.configs.appearance.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {

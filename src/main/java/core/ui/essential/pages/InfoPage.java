@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class InfoPage {

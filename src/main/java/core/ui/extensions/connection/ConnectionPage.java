@@ -2,11 +2,11 @@ package core.ui.extensions.connection;
 
 import core.ui.essential.pages.Page;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static core.ui.extensions.connection.QrCodeGenerator.generateAsciiQr;
 import static core.ui.extensions.connection.QrCodeGenerator.generateQR;
 import static java.lang.System.out;
