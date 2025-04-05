@@ -24,7 +24,7 @@ public class TerminalPage extends Page {
             {"Enter command", "ec"},
             {"Restart", "rs"},
             {"Clear terminal", "cl"},
-            {"List", "ls"},
+            {"Help", "h"},
             {"Quit", "q"}
     };
 
@@ -48,8 +48,8 @@ public class TerminalPage extends Page {
                     mainMenuRerun();
                 }
                 case "clear", "cl" -> clearTerminal();
-                case "list", "ls" -> displayListOfCommands(commands);
-                case "quit", "q" -> {
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }

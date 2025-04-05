@@ -30,7 +30,7 @@ public class WeatherPage extends Page {
             {"Direct weather", "dw"},
             {"Restart", "rst"},
             {"Clear", "cl"},
-            {"List", "ls"},
+            {"Help", "h"},
             {"Quit", "q"}
     };
 
@@ -74,8 +74,8 @@ public class WeatherPage extends Page {
                     mainMenuRerun();
                 }
                 case "clear terminal", "cl" -> clearTerminal();
-                case "list", "ls" -> displayListOfCommands(commands);
-                case "quit", "q" -> {
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }

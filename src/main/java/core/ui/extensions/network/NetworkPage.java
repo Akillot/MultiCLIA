@@ -33,7 +33,7 @@ public class NetworkPage extends Page {
             {"Network interfaces", "ni"},
             {"Restart", "rst"},
             {"Clear", "cl"},
-            {"List", "ls"},
+            {"Help", "h"},
             {"Quit", "q"}
     };
 
@@ -61,8 +61,8 @@ public class NetworkPage extends Page {
                     mainMenuRerun();
                 }
                 case "clear", "cl" -> clearTerminal();
-                case "list", "ls" -> displayListOfCommands(commands);
-                case "quit", "q" -> {
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -76,6 +76,7 @@ public class NetworkPage extends Page {
         super.displayListOfCommands(commands);
     }
 
+    //<---ip command realization--->
     private static void displayUserIp() {
         try {
             insertControlChars('n',1);
@@ -92,7 +93,7 @@ public class NetworkPage extends Page {
         }
     }
 
-    // /sp
+    //<---sp command realization pt:1--->
     private static void scanPorts() {
         int startPort = 1;
         int endPort = 65535;
@@ -148,30 +149,116 @@ public class NetworkPage extends Page {
         message("Scanning completed.", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-
+    //<---sp command realization pt:2--->
     private static @NotNull Map<Integer, String> getCommonPorts() {
         Map<Integer, String> commonPorts = new HashMap<>();
+        commonPorts.put(20, "FTP (Data)");
+        commonPorts.put(21, "FTP (Control)");
         commonPorts.put(22, "SSH");
+        commonPorts.put(23, "Telnet");
+        commonPorts.put(25, "SMTP");
         commonPorts.put(53, "DNS");
+        commonPorts.put(67, "DHCP Server");
+        commonPorts.put(68, "DHCP Client");
+        commonPorts.put(69, "TFTP");
         commonPorts.put(80, "HTTP");
+        commonPorts.put(110, "POP3");
+        commonPorts.put(123, "NTP");
+        commonPorts.put(137, "NetBIOS Name Service");
+        commonPorts.put(138, "NetBIOS Datagram Service");
+        commonPorts.put(139, "NetBIOS Session Service");
+        commonPorts.put(143, "IMAP");
+        commonPorts.put(161, "SNMP");
+        commonPorts.put(162, "SNMP Trap");
+        commonPorts.put(179, "BGP");
+        commonPorts.put(194, "IRC");
+        commonPorts.put(389, "LDAP");
         commonPorts.put(443, "HTTPS");
+        commonPorts.put(445, "SMB");
+        commonPorts.put(465, "SMTPS");
+        commonPorts.put(514, "Syslog");
+        commonPorts.put(515, "LPD");
+        commonPorts.put(587, "SMTP (Submission)");
+        commonPorts.put(636, "LDAPS");
+        commonPorts.put(873, "rsync");
+        commonPorts.put(990, "FTPS");
+        commonPorts.put(993, "IMAPS");
+        commonPorts.put(995, "POP3S");
+        commonPorts.put(1080, "SOCKS Proxy");
+        commonPorts.put(1194, "OpenVPN");
+        commonPorts.put(1433, "Microsoft SQL Server");
+        commonPorts.put(1521, "Oracle DB");
+        commonPorts.put(1723, "PPTP");
+        commonPorts.put(2049, "NFS");
+        commonPorts.put(2082, "cPanel");
+        commonPorts.put(2083, "cPanel (SSL)");
+        commonPorts.put(2086, "WHM");
+        commonPorts.put(2087, "WHM (SSL)");
+        commonPorts.put(2095, "Webmail");
+        commonPorts.put(2096, "Webmail (SSL)");
+        commonPorts.put(2181, "ZooKeeper");
+        commonPorts.put(2375, "Docker");
+        commonPorts.put(2376, "Docker (SSL)");
+        commonPorts.put(3000, "Node.js");
         commonPorts.put(3306, "MySQL");
         commonPorts.put(3389, "Remote Desktop");
+        commonPorts.put(3690, "SVN");
+        commonPorts.put(4333, "mSQL");
+        commonPorts.put(4369, "EPMD (Erlang)");
+        commonPorts.put(4789, "VXLAN");
+        commonPorts.put(4848, "GlassFish");
+        commonPorts.put(5000, "UPnP");
+        commonPorts.put(5001, "Synergy");
+        commonPorts.put(5060, "SIP");
+        commonPorts.put(5061, "SIP (TLS)");
         commonPorts.put(5432, "PostgreSQL");
+        commonPorts.put(5601, "Kibana");
+        commonPorts.put(5672, "AMQP");
+        commonPorts.put(5900, "VNC");
+        commonPorts.put(5938, "TeamViewer");
+        commonPorts.put(5984, "CouchDB");
+        commonPorts.put(6379, "Redis");
+        commonPorts.put(6443, "Kubernetes API");
+        commonPorts.put(6660, "IRC");
+        commonPorts.put(6881, "BitTorrent");
+        commonPorts.put(6969, "BitTorrent Tracker");
+        commonPorts.put(8000, "HTTP Alt");
+        commonPorts.put(8008, "HTTP Alt 2");
         commonPorts.put(8080, "HTTP Proxy");
+        commonPorts.put(8081, "HTTP Proxy Alt");
+        commonPorts.put(8088, "cPanel Alternate");
+        commonPorts.put(8443, "HTTPS Alt");
+        commonPorts.put(8888, "HTTP Alt 3");
+        commonPorts.put(9000, "PHP-FPM");
+        commonPorts.put(9001, "Tor");
+        commonPorts.put(9042, "Cassandra");
+        commonPorts.put(9090, "Prometheus");
+        commonPorts.put(9092, "Kafka");
+        commonPorts.put(9100, "Printer (RAW)");
+        commonPorts.put(9200, "Elasticsearch");
+        commonPorts.put(9300, "Elasticsearch Cluster");
+        commonPorts.put(9418, "Git");
+        commonPorts.put(9999, "JIRA");
+        commonPorts.put(10000, "Webmin");
+        commonPorts.put(11211, "Memcached");
+        commonPorts.put(27017, "MongoDB");
+        commonPorts.put(27018, "MongoDB Shard");
+        commonPorts.put(28015, "RethinkDB");
+        commonPorts.put(32400, "Plex");
+        commonPorts.put(49152, "Windows RPC");
         return commonPorts;
     }
 
-    // /ph
+    //<---ph command realization--->
     private static void pingHost() {processCommandWithHostInput("ping -c 4");}
 
-    // /tr
+    //<---tr command realization--->
     private static void traceRout(){processCommandWithHostInput("traceroute");}
 
-    // /lr
+    //<---lr command realization--->
     private static void nsLookUp(){processCommandWithHostInput("nslookup");}
 
-    // /ns
+    //<---ns command realization--->
     private static void netStat() {
         try {
             insertControlChars('n', 1);
@@ -206,6 +293,7 @@ public class NetworkPage extends Page {
         }
     }
 
+    //<---htr command realization pt:1--->
     private static void displayHttpTesting() {
         insertControlChars('n', 1);
         Scanner scanner = new Scanner(System.in);
@@ -316,6 +404,7 @@ public class NetworkPage extends Page {
         }
     }
 
+    //<---htr command realization pt:2--->
     private static void sendHttpRequest(String link, String requestType, Map<String, String> headers, String body) {
         try {
 
@@ -406,6 +495,7 @@ public class NetworkPage extends Page {
         }
     }
 
+    //<---htr command realization pt:3--->
     private static @NotNull String readStream(InputStream stream) throws IOException {
         if (stream == null) return "No response body";
 
@@ -418,6 +508,7 @@ public class NetworkPage extends Page {
         return response.toString();
     }
 
+    //<---htr command realization pt:4--->
     private static @NotNull String formatJson(String json) {
         if (json == null || json.isEmpty()) return "{}";
 
@@ -455,28 +546,77 @@ public class NetworkPage extends Page {
         return formatted.toString();
     }
 
+    //<---htr command realization pt:5--->
     @Contract(pure = true)
     private static @NotNull String getHttpStatusMessage(int statusCode) {
         return switch (statusCode) {
+            case 100 -> "Continue";
+            case 101 -> "Switching Protocols";
+            case 102 -> "Processing (WebDAV)";
+            case 103 -> "Early Hints";
             case 200 -> "OK";
             case 201 -> "Created";
+            case 202 -> "Accepted";
+            case 203 -> "Non-Authoritative Information";
             case 204 -> "No Content";
+            case 205 -> "Reset Content";
+            case 206 -> "Partial Content";
+            case 207 -> "Multi-Status (WebDAV)";
+            case 208 -> "Already Reported (WebDAV)";
+            case 226 -> "IM Used";
+            case 300 -> "Multiple Choices";
             case 301 -> "Moved Permanently";
             case 302 -> "Found";
+            case 303 -> "See Other";
             case 304 -> "Not Modified";
+            case 305 -> "Use Proxy";
+            case 307 -> "Temporary Redirect";
+            case 308 -> "Permanent Redirect";
             case 400 -> "Bad Request";
             case 401 -> "Unauthorized";
+            case 402 -> "Payment Required";
             case 403 -> "Forbidden";
             case 404 -> "Not Found";
             case 405 -> "Method Not Allowed";
+            case 406 -> "Not Acceptable";
+            case 407 -> "Proxy Authentication Required";
+            case 408 -> "Request Timeout";
+            case 409 -> "Conflict";
+            case 410 -> "Gone";
+            case 411 -> "Length Required";
+            case 412 -> "Precondition Failed";
+            case 413 -> "Payload Too Large";
+            case 414 -> "URI Too Long";
+            case 415 -> "Unsupported Media Type";
+            case 416 -> "Range Not Satisfiable";
+            case 417 -> "Expectation Failed";
+            case 418 -> "I'm a Teapot";
+            case 421 -> "Misdirected Request";
+            case 422 -> "Unprocessable Entity (WebDAV)";
+            case 423 -> "Locked (WebDAV)";
+            case 424 -> "Failed Dependency (WebDAV)";
+            case 425 -> "Too Early";
+            case 426 -> "Upgrade Required";
+            case 428 -> "Precondition Required";
+            case 429 -> "Too Many Requests";
+            case 431 -> "Request Header Fields Too Large";
+            case 451 -> "Unavailable For Legal Reasons";
             case 500 -> "Internal Server Error";
+            case 501 -> "Not Implemented";
             case 502 -> "Bad Gateway";
             case 503 -> "Service Unavailable";
             case 504 -> "Gateway Timeout";
+            case 505 -> "HTTP Version Not Supported";
+            case 506 -> "Variant Also Negotiates";
+            case 507 -> "Insufficient Storage (WebDAV)";
+            case 508 -> "Loop Detected (WebDAV)";
+            case 510 -> "Not Extended";
+            case 511 -> "Network Authentication Required";
             default -> "Unknown Status";
         };
     }
 
+    //<---ni command realization--->
     private static void displayNetworkInterfaces() {
         try {
             insertControlChars('n', 1);

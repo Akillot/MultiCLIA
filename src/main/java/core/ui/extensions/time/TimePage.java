@@ -27,7 +27,7 @@ public class TimePage extends Page {
             {"Change time zone", "ctz"},
             {"Restart", "rst"},
             {"Clear", "cl"},
-            {"List", "ls"},
+            {"Help", "h"},
             {"Quit", "q"}
     };
 
@@ -53,8 +53,8 @@ public class TimePage extends Page {
                     mainMenuRerun();
                 }
                 case "clear", "cl" -> clearTerminal();
-                case "list", "ls" -> displayListOfCommands(commands);
-                case "quit", "q" -> {
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -68,7 +68,7 @@ public class TimePage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // /ct
+    // ct
     private static void displayCurrentTime() {
         insertControlChars('n',1);
         message("Current Time: " + getColor(mainColor)
@@ -91,7 +91,7 @@ public class TimePage extends Page {
         return ZoneId.systemDefault().toString();
     }
 
-    // /t command
+    // t command
     private static volatile boolean isTimerRunning = false;
 
     private static void runTimer() {
@@ -158,7 +158,7 @@ public class TimePage extends Page {
         }).start();
     }
 
-    // /sw command
+    // sw command
     private static void runStopwatch() {
         insertControlChars('n', 1);
         message("Press " + getColor(mainColor) + "any key" + getColor(layoutColor)
@@ -187,7 +187,7 @@ public class TimePage extends Page {
                 getDefaultDelay(), out::println);
     }
 
-    // /ctz command
+    // ctz command
     private static void displayCustomTimeZone() {
         insertControlChars('n', 1);
 

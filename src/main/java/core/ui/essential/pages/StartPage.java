@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-import static core.commands.CommandHandler.shortCmds;
+import static core.commands.CommandHandler.fullCmds;
 import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.DisplayManager.apiKeyChecking;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
@@ -42,6 +42,7 @@ public class StartPage {
     };
 
     public static void displayMenu() {
+        insertControlChars('n',1);
         apiKeyChecking("OPENAI_API_KEY");
         apiKeyChecking("DEEPL_API_KEY");
         apiKeyChecking("OPEN_WEATHER_API_KEY");
@@ -72,11 +73,11 @@ public class StartPage {
                 "Hi " + getColorText(capitalizeMessage(userName), mainColor)
                         + getColor(layoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about love?",
-                "Find a bug or have an idea? Go to" + getColor(mainColor) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
+                "Find a bug or have an idea? Go to" + getColor(color1) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
 
         int index = rand.nextInt(0, motto.length);
         message("For start type '" + getColor(mainColor)
-                + shortCmds[0] + getColor(layoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
+                + fullCmds[0] + getColor(layoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
                 getDefaultDelay(),out::print);
     }
 

@@ -1,7 +1,6 @@
 package core.ui.essential.configs;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
 
@@ -45,21 +44,12 @@ public class DisplayManager {
         out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Commands: \n"
                 + alignment(-68) + getColor(mainColor));
 
-        int maxRows = Math.max(fullCmds.length, extensionCmds.length);
+        for (int i = 0; i < fullCmds.length; i++) {
+            message("·  " + fullCmds[i] + " ["
+                    + getColor(mainColor) + shortCmds[i] + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-        for (int i = 0; i < maxRows; i++) {
-            String systemCmd = i < fullCmds.length ? "·  " + fullCmds[i] + " ["
-                    + getColor(mainColor) + shortCmds[i] + getColor(layoutColor) + "]" : "";
-            String extensionCmd = i < extensionCmds.length ? "·  " + extensionCmds[i] : "";
-
-            out.printf(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "%-40s"
-                    + alignment(-18) + getColor(layoutColor) + horizontalMargining(21) + "%-40s%n", systemCmd, extensionCmd);
         }
         marginBorder(2,1);
-    }
-
-    public static @NotNull String horizontalMargining(int steps) {
-        return " ".repeat(Math.max(0, steps));
     }
 
     // cl

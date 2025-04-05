@@ -30,7 +30,7 @@ public class CryptographyPage extends Page {
             {"Hashing", "ha"},
             {"Restart", "rst"},
             {"Clear", "cl"},
-            {"List", "ls"},
+            {"Help", "h"},
             {"Quit", "q"}
     };
 
@@ -53,8 +53,8 @@ public class CryptographyPage extends Page {
                     mainMenuRerun();
                 }
                 case "clear", "cl" -> clearTerminal();
-                case "list", "ls" -> displayListOfCommands(commands);
-                case "quit", "q" -> {
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }

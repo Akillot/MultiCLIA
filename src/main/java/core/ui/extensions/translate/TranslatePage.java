@@ -37,7 +37,7 @@ public class TranslatePage {
                     + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
             String textToTranslate = scanner.nextLine();
 
-            if (textToTranslate.equalsIgnoreCase("q")) {
+            if (textToTranslate.equalsIgnoreCase("q") || textToTranslate.equalsIgnoreCase("quit")) {
                 marginBorder(2,2);
                 message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 message("Exiting Translate Page" + getColor(layoutColor) + ". "

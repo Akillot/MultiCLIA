@@ -25,19 +25,16 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "list" ,"config", "restart", "info",
+            "help" ,"config", "restart", "info",
             "clear", "time", "network", "security", "crypt",
             "terminal", "ai", "connection", "weather",
-            "translate","support", "quit"};
+            "translate","support", "quit", "exit"};
 
     public static final String[] shortCmds = {
-            "ls" ,"cfg", "rst", "i",
+            "h" ,"cfg", "rst", "i",
             "cl", "t", "n", "sec", "cr",
             "term", "a", "cn", "w", "tr",
-            "sup", "q"};
-
-    // Here is an array for commands from massive user extensions
-    public static String[] extensionCmds = {};
+            "sup", "q", "e"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
@@ -71,7 +68,7 @@ public class CommandHandler {
             case 12 -> new WeatherPage()::displayMenu;
             case 13 -> TranslatePage::displayTranslatePage;
             case 14 -> SupportPage::displaySupportPage;
-            case 15 -> ExitPage::displayExitPage;
+            case 15, 16 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(rejectionColor) + "Invalid command index");
         };
