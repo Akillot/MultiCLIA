@@ -23,7 +23,7 @@ public class TranslatePage {
 
         if (API_KEY == null || API_KEY.isEmpty()) {
             insertControlChars('n', 1);
-            message("Translate is unavailable. Check your API Key.", layoutColor,
+            message("Translate is unavailable. Check your API Key.", 220,
                     getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }

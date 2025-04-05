@@ -1,5 +1,6 @@
 package core.ui.essential.configs;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
@@ -12,6 +13,20 @@ import static java.lang.System.*;
 
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
+
+    public static void apiKeyChecking(String apiKeyName) {
+        Dotenv dotenv = Dotenv.load();
+        String API_KEY = dotenv.get(apiKeyName);
+
+        if (API_KEY == null || API_KEY.isEmpty()) {
+            message(apiKeyName + " is unavailable" + getColor(layoutColor) + ". " + getColor(220) + "Check your API Key"
+                            + getColor(layoutColor) + ".", 220, getDefaultLogoAlignment(), getDefaultDelay(), out::print);
+        }
+        else{
+            message("API Key is available " + getColor(layoutColor) + "[" + apiKeyName + "].", acceptanceColor, getDefaultLogoAlignment(),
+                    getDefaultDelay(), out::print);
+        }
+    }
 
     // displaying command list ls
     public static void displayCommandList() {

@@ -10,6 +10,7 @@ import java.util.Random;
 
 import static core.commands.CommandHandler.shortCmds;
 import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.DisplayManager.apiKeyChecking;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
@@ -41,6 +42,9 @@ public class StartPage {
     };
 
     public static void displayMenu() {
+        apiKeyChecking("OPENAI_API_KEY");
+        apiKeyChecking("DEEPL_API_KEY");
+        apiKeyChecking("OPEN_WEATHER_API_KEY");
         dateChecking();
         insertControlChars('n',2);
         displayLogo(MAIN_LOGO_ASCII, getDefaultLogoAlignment());
