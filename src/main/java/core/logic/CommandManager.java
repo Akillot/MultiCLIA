@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.*;
 import java.io.*;
 import java.net.*;
 import java.net.URI;
@@ -217,18 +217,52 @@ public class CommandManager {
 
     public static @NotNull Runnable copyToClipboard(String text) {
         return () -> {
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
             try {
+                clipboard.setContents(new StringSelection(""), new ClipboardOwner() {
+                    @Override
+                    public void lostOwnership(Clipboard clipboard, Transferable contents) {
+                    }
+                });
+
+                Thread.sleep(50);
                 StringSelection selection = new StringSelection(text);
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-                message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(),
-                        getDefaultDelay(), out::println);
-                message("Password copied " + getColor(acceptanceColor) + "successfully" + getColor(layoutColor) + ".",
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-            } catch (Exception ex) {
-                insertControlChars('n', 1);
-                message("Error: " + ex.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                clipboard.setContents(selection, selection);  // Указываем себя как владельца
+
+                try {
+                    String copiedText = (String) clipboard.getData(DataFlavor.stringFlavor);
+                    if (!text.equals(copiedText)) {
+                        throw new IllegalStateException("Clipboard verification failed");
+                    }
+                    printSuccessMessage();
+
+                } catch (Exception verificationEx) {
+                    printErrorMessage("Verification failed: " + verificationEx.getMessage());
+                }
+
+            } catch (IllegalStateException e) {
+                printErrorMessage("Clipboard is locked. Try again later");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                printErrorMessage("Operation interrupted");
+            } catch (Exception e) {
+                printErrorMessage("Copy error: " + e.getMessage());
             }
         };
+    }
+
+    private static void printSuccessMessage() {
+        message("Status: " + getColor(acceptanceColor) + "✓",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Text copied successfully" + getColor(layoutColor) + ".",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    }
+
+    private static void printErrorMessage(String error) {
+        insertControlChars('n', 1);
+        message("Error: " + error,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
     public static void mainMenuRerun(){
