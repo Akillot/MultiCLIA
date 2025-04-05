@@ -213,10 +213,10 @@ public class NetworkPage extends Page {
         try {
             while (true) {
                 out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter a URL [or "
-                        + getColor(mainColor) + "/q" + getColor(layoutColor) + " to quit]: ");
+                        + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
                 String link = scanner.nextLine().trim();
 
-                if (link.equalsIgnoreCase("/q")) {
+                if (link.equalsIgnoreCase("q")) {
                     message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
@@ -233,10 +233,10 @@ public class NetworkPage extends Page {
                         getColor(218) + "POST" + getColor(layoutColor) + "|" + getColor(218) + "2 " + getColor(layoutColor) +
                         getColor(206) + "PUT" + getColor(layoutColor) + "|" + getColor(206) + "3 " + getColor(layoutColor) +
                         getColor(204) + "DELETE" + getColor(layoutColor) + "|" + getColor(204) + "4" + getColor(layoutColor)
-                        + " or /" + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
+                        + " or " + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
                 String requestType = scanner.nextLine().trim().toUpperCase();
 
-                if (requestType.equalsIgnoreCase("/q")) {
+                if (requestType.equalsIgnoreCase("q")) {
                     insertControlChars('n', 1);
                     message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
@@ -254,7 +254,7 @@ public class NetworkPage extends Page {
                     String headerInput = scanner.nextLine().trim();
 
                     if (headerInput.isEmpty()) break;
-                    if (headerInput.equalsIgnoreCase("/q")) {
+                    if (headerInput.equalsIgnoreCase("q")) {
                         insertControlChars('n', 1);
                         message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                         message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);

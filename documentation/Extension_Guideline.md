@@ -48,11 +48,11 @@ public class MyExtensionPage extends Page {
             String input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
-                case "hello", "/h" -> sayHello();
-                case "restart", "/rs" -> mainMenuRerun();
-                case "clear", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "quit", "/q" -> { exitPage(); return; }
+                case "hello", "h" -> sayHello();
+                case "restart", "rs" -> mainMenuRerun();
+                case "clear", "cl" -> clearTerminal();
+                case "list", "ls" -> displayListOfCommands(commands);
+                case "quit", "q" -> { exitPage(); return; }
                 default -> insertControlChars('n', 1);
             }
         }
@@ -64,11 +64,11 @@ public class MyExtensionPage extends Page {
     }
 
     private static final String[][] commands = {
-        {"Say Hello", "/h"},
-        {"Restart", "/rs"},
-        {"Clear", "/cl"},
-        {"List", "/ls"},
-        {"Quit", "/q"}
+        {"Say Hello", "sh"},
+        {"Restart", "rs"},
+        {"Clear", "cl"},
+        {"List", "ls"},
+        {"Quit", "q"}
     };
 
     @Override
@@ -97,7 +97,7 @@ Find the `fullCmds` array and add your command:
 ```
 Find the `shortCmds` array and add a shortcut:
 ```java
-"/me"
+"me"
 ```
 
 ### **Register the Command in the Handler**
@@ -121,9 +121,9 @@ formatCommandWithDescription(fullCmds[Y], shortCmds[Y], "Launches MyExtension"),
 ## **6. Running and Testing**
 ### **Run the Extension**
 1. Build and run the project.
-2. Enter `myextension` or `/me` to launch your extension.
-3. Enter `/h` to see the message `Hello from MyExtension!`.
-4. Test other commands (`/rs`, `/cl`, `/ls`, `/q`).
+2. Enter `myextension` or `me` to launch your extension.
+3. Enter `h` to see the message `Hello from MyExtension!`.
+4. Test other commands (`rs`, `cl`, `ls`, `q`).
 
 ### **Debugging Tips**
 If something isn't working:

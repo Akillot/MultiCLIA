@@ -67,10 +67,10 @@ public class TerminalPage extends Page {
         while (true) {
             try {
                 out.print(alignment(getDefaultTextAlignment()) + getBackColor(33) + getColor(layoutColor)
-                        + "Enter command [or /q to quit]:" + RESET + getColor(layoutColor) + " ");
+                        + "Enter command [or q to quit]:" + RESET + getColor(layoutColor) + " ");
                 String input = scanner.nextLine().trim();
 
-                if (input.equalsIgnoreCase("/q")) {
+                if (input.equalsIgnoreCase("q")) {
                     insertControlChars('n', 1);
                     return;
                 }
