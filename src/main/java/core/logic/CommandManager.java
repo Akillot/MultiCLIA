@@ -286,15 +286,4 @@ public class CommandManager {
                 getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
     }
-
-    //В гитхаб и почту
-    public static void secretCommand() {
-        try {
-            openUri("https://www.youtube.com/watch?v=xvFZjo5PgG0");
-        }
-        catch (Exception ex){
-            insertControlChars('n', 1);
-            message("Error: " + ex.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        }
-    }
 }

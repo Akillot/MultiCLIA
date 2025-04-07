@@ -87,7 +87,7 @@ public class StartPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
         message("Application start time" + ": "
-                        + getColor(mainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + dateAndTimeOfProgramLaunching
+                        + getColor(mainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + getColor(layoutColor) + dateAndTimeOfProgramLaunching
                         + getColor(layoutColor) + ".",
                 layoutColor,getDefaultLogoAlignment(),getDefaultDelay(),out::print);
     }

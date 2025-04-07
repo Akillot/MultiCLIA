@@ -1,0 +1,239 @@
+package core.ui.extensions.connection;
+
+import core.ui.essential.pages.Page;
+import org.jetbrains.annotations.Nullable;
+
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.DisplayManager.scanner;
+import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
+import static core.ui.extensions.connection.QrCodeGenerator.generateAsciiQr;
+import static core.ui.extensions.connection.QrCodeGenerator.generateQR;
+import static java.lang.System.out;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class QrPage extends Page {
+
+    private static final Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
+    private static final String[] VALID_FORMATS = {
+            ".png", ".jpg", ".jpeg", ".gif",
+            ".bmp", ".svg", ".tiff", ".webp",
+            ".eps", ".pdf", ".ico"
+    };
+    private static final int MIN_SIZE = 10;
+    private static final int MAX_SIZE = 300;
+    private static final String DEFAULT_FORMAT = ".png";
+
+    private int size = 150;
+    private String format = DEFAULT_FORMAT;
+
+    private final String[][] commands = {
+            {"Generate QR code", "qr"},
+            {"Save QR code as image", "sq"},
+            {"Modify QR size", "ms"},
+            {"Modify image format", "mf"},
+            {"Info", "i"},
+            {"Restart", "rst"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
+    };
+
+    public void displayMenu() {
+        marginBorder(1, 2);
+        message("QR Code Generator:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        displayCurrentSettings();
+        displayListOfCommands(commands);
+
+        while (true) {
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
+                    getColor(layoutColor) + searchingArrow, "");
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            switch (input) {
+                case "generate qr code", "qr" -> generateQrCode();
+                case "save qr code as image", "sq" -> saveQrCodeAsImage();
+                case "modify qr size", "ms" -> modifyQrCodeSize();
+                case "modify image format", "mf" -> modifyQrCodeFormat();
+                case "info", "i" -> {
+                    insertControlChars('n',1);
+                    displayCurrentSettings();
+                    insertControlChars('n',1);
+                }
+                case "restart", "rst" -> restartApplication();
+                case "clear terminal", "cl" -> clearTerminal();
+                case "help", "h" -> showHelp();
+                case "quit", "q", "exit", "e" -> exitApplication();
+                default -> showInvalidCommand(input);
+            }
+        }
+    }
+
+    private void displayCurrentSettings() {
+        message("[Size: " + getColor(mainColor) + size + getColor(layoutColor) + " | Format: " + getColor(mainColor)
+                        + format + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    }
+
+    private void generateQrCode() {
+        String url = promptForUrl();
+        if (url == null) return;
+
+        try {
+            insertControlChars('n', 1);
+            generateAsciiQr(url, size);
+            insertControlChars('n', 1);
+        } catch (Exception e) {
+            showError("Error generating QR code: " + e.getMessage());
+        }
+    }
+
+    private void saveQrCodeAsImage() {
+        String url = promptForUrl();
+        if (url == null) return;
+
+        try {
+            ensureSaveDirectoryExists();
+            String fileName = "qr_" + System.currentTimeMillis() + format;
+            Path filePath = SAVE_DIRECTORY.resolve(fileName);
+
+            generateQR(url, filePath.toString(), size, size);
+            showSuccess("QR code saved successfully as: " + filePath);
+        } catch (Exception e) {
+            showError("Error saving QR code: " + e.getMessage());
+        }
+    }
+
+    private @Nullable String promptForUrl() {
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+                "Enter URL [include " + getColor(mainColor) + "http:// " + getColor(layoutColor)
+                + "or " + getColor(mainColor) + " https://" + getColor(layoutColor) + "]: ");
+
+        String input = scanner.nextLine().trim();
+        if (input.isEmpty()) {
+            showError("Error: URL cannot be empty");
+            return null;
+        }
+
+        if (!input.startsWith("http://") && !input.startsWith("https://")) {
+            input = "https://" + input;
+        }
+
+        return input;
+    }
+
+    private void modifyQrCodeSize() {
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+                String.format("Enter new size (%d-%d): ", MIN_SIZE, MAX_SIZE));
+
+        try {
+            int newSize = Integer.parseInt(scanner.nextLine().trim());
+            if (newSize < MIN_SIZE || newSize > MAX_SIZE) {
+                showError(String.format("Size must be between %d and %d", MIN_SIZE, MAX_SIZE));
+            } else {
+                size = newSize;
+                showSuccess("QR code size updated to: " + size);
+            }
+        } catch (NumberFormatException e) {
+            showError("Invalid input. Please enter a number.");
+        }
+    }
+
+    private void modifyQrCodeFormat() {
+        showFormatsHelp();
+        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+                "Enter image format [or 'help' to show formats]: ");
+
+        while (true) {
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equalsIgnoreCase("help")) {
+                showFormatsHelp();
+                out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+                        "Enter format: ");
+                continue;
+            }
+
+            if (input.isEmpty()) {
+                showError("Format cannot be empty. Using default [" + DEFAULT_FORMAT + "]");
+                return;
+            }
+
+            if (!input.startsWith(".")) {
+                input = "." + input;
+            }
+
+            for (String validFormat : VALID_FORMATS) {
+                if (input.equals(validFormat)) {
+                    format = input;
+                    showSuccess("Image format updated to: " + format);
+                    return;
+                }
+            }
+
+            showError("Unsupported format. Supported formats: " + String.join(", ", VALID_FORMATS));
+            out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+                    "Try again or 'help' for options: ");
+        }
+    }
+
+    private void showFormatsHelp() {
+        insertControlChars('n',1);
+        message("Supported formats:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  PNG [" + getColor(mainColor) + ".png"
+                + getColor(layoutColor) + "] - Best for QR codes [default]");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  JPEG [" + getColor(mainColor) + ".jpg"
+                + getColor(layoutColor) + "/" + getColor(mainColor) + ".jpeg" + getColor(layoutColor)  + "] - Smaller file size");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  GIF [" + getColor(mainColor) + ".gif"
+                + getColor(layoutColor) + "] - For animated QR codes");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  SVG [" + getColor(mainColor) + ".svg"
+                + getColor(layoutColor) + "] - Vector format [scalable]");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  WebP [" +  getColor(mainColor) + ".webp"
+                + getColor(layoutColor) + "] - Modern efficient format");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  PDF [" +  getColor(mainColor) + ".pdf"
+                + getColor(layoutColor) + "] - For document embedding");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  ICO [" +  getColor(mainColor) + ".ico"
+                + getColor(layoutColor) + "] - For website favicons\n");
+    }
+
+    private void ensureSaveDirectoryExists() throws Exception {
+        if (!Files.exists(SAVE_DIRECTORY)) {
+            Files.createDirectories(SAVE_DIRECTORY);
+        }
+    }
+
+    private void showSuccess(String message) {
+        message(getColor(acceptanceColor) + "✓ " + getColor(layoutColor) + message,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
+
+    private void showError(String message) {
+        message("Error: " + message + RESET,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
+
+    private void restartApplication() {
+        insertControlChars('n', 1);
+        mainMenuRerun();
+    }
+
+    private void exitApplication() {
+        exitPage();
+    }
+
+    private void showHelp() {
+        displayListOfCommands(commands);
+    }
+
+    private void showInvalidCommand(String input) {
+        showError("Unknown command: '" + input + "'. Type 'help' for available commands.");
+    }
+
+    @Override
+    protected void displayListOfCommands(String[][] commands) {
+        super.displayListOfCommands(commands);
+    }
+}

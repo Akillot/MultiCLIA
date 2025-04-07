@@ -3,7 +3,7 @@ package core.commands;
 import core.ui.essential.pages.*;
 import core.logic.CommandManager;
 import core.ui.extensions.ai.AiPage;
-import core.ui.extensions.connection.ConnectionPage;
+import core.ui.extensions.connection.QrPage;
 import core.ui.extensions.cryptography.CryptographyPage;
 import core.ui.extensions.network.NetworkPage;
 import core.ui.extensions.security.SecurityPage;
@@ -27,13 +27,13 @@ public class CommandHandler {
     public static final String[] fullCmds = {
             "help" ,"config", "restart", "info",
             "clear", "time", "network", "security", "crypt",
-            "terminal", "ai", "connection", "weather",
+            "terminal", "ai", "qrcode", "weather",
             "translate","support", "quit"};
 
     public static final String[] shortCmds = {
             "h" ,"cfg", "rst", "i",
             "cl", "t", "n", "sec", "cr",
-            "term", "a", "cn", "w", "tr",
+            "term", "a", "qr", "w", "tran",
             "sup", "q"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
@@ -64,7 +64,7 @@ public class CommandHandler {
             case 8 -> new CryptographyPage()::displayMenu;
             case 9 -> new TerminalPage()::displayMenu;
             case 10 -> new AiPage()::displayMenu;
-            case 11 -> new ConnectionPage()::displayMenu;
+            case 11 -> new QrPage()::displayMenu;
             case 12 -> new WeatherPage()::displayMenu;
             case 13 -> TranslatePage::displayTranslatePage;
             case 14 -> SupportPage::displaySupportPage;

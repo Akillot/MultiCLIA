@@ -30,7 +30,7 @@ public class TerminalPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("Terminal:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Terminal (Read-Only Mode):", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {
@@ -75,11 +75,7 @@ public class TerminalPage extends Page {
                     return;
                 }
 
-                if (input.equals("nano")) {
-                    openNano();
-                } else {
-                    executeTerminalCommandsModified(input);
-                }
+                executeReadOnlyCommand(input);
 
             } catch (Exception e) {
                 message(getBackColor(rejectionColor) + "Error: " + e.getMessage() + "." + RESET,
@@ -88,49 +84,27 @@ public class TerminalPage extends Page {
         }
     }
 
-    private static void openNano() {
-        try {
-            String os = System.getProperty("os.name").toLowerCase();
-
-            if (os.contains("mac")) {
-                new ProcessBuilder("open", "-a", "Terminal", "nano").start();
-            } else if (os.contains("linux")) {
-                new ProcessBuilder("x-terminal-emulator", "-e", "nano").start();
-            } else {
-                message(getBackColor(rejectionColor) + "Unsupported OS for nano." + RESET,
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-            }
-
-        } catch (IOException e) {
-            message(getBackColor(rejectionColor) + "Failed to open nano: " + e.getMessage() + "." + RESET,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        }
-    }
-
-    private static void executeTerminalCommandsModified(@NotNull String command) {
+    private static void executeReadOnlyCommand(@NotNull String command) {
         try {
             String[] commands = command.split(" ");
 
-            if (commands[0].equals("nano")) {
-                blockNano();
+            if (isEditingCommand(commands[0])) {
+                blockEditingCommand(commands[0]);
                 return;
             }
 
             if (commands[0].equals("cd")) {
                 if (commands.length > 1) {
-                    Path newPath = currentDirectory.resolve(commands[1]).normalize();
-                    if (newPath.toFile().exists() && newPath.toFile().isDirectory()) {
-                        currentDirectory = newPath;
-                        message(getBackColor(214) + "Directory changed to: " + currentDirectory + "." + RESET,
-                                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-                    } else {
-                        message(getBackColor(rejectionColor) + "No such directory: " + commands[1] + "." + RESET,
-                                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-                    }
+                    changeDirectory(commands[1]);
                 } else {
                     message(getBackColor(45) + "Usage: cd <directory>" + RESET, layoutColor,
                             getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 }
+                return;
+            }
+
+            if (isViewingCommand(commands[0])) {
+                executeViewingCommand(commands);
                 return;
             }
 
@@ -168,12 +142,55 @@ public class TerminalPage extends Page {
         }
     }
 
-    private static void blockNano() {
-        message(getBackColor(rejectionColor) +
-                        "Sorry, but this terminal is intended for command execution only and does not support file editing via nano." + RESET,
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    private static boolean isEditingCommand(String command) {
+        String[] editingCommands = {"nano", "vim", "vi", "emacs", "gedit", "pico", "ed", "sed", "awk", ">>", ">"};
+        for (String cmd : editingCommands) {
+            if (command.equals(cmd)) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    private static boolean isViewingCommand(String command) {
+        String[] viewingCommands = {"cat", "less", "more", "head", "tail", "grep", "find", "ls", "dir"};
+        for (String cmd : viewingCommands) {
+            if (command.equals(cmd)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void executeViewingCommand(String[] commands) throws IOException, InterruptedException {
+        ProcessBuilder processBuilder = new ProcessBuilder(commands);
+        processBuilder.directory(currentDirectory.toFile());
+        processBuilder.redirectErrorStream(true);
+
+        Process process = processBuilder.start();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                message(getBackColor(67) + line + RESET,
+                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            }
+        }
+
+        int exitCode = process.waitFor();
+        if (exitCode != 0) {
+            message(getBackColor(rejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET,
+                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
+    }
+
+    private static void blockEditingCommand(String command) {
+        message(getBackColor(rejectionColor) +
+                        "Sorry, this terminal is in read-only mode and does not support the '" + command + "' command." + RESET,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message(getBackColor(33) + "You can only view files using commands like cat, less, more, etc." + RESET,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+    }
 
     private static void changeDirectory(String newPath) {
         Path newDir = currentDirectory.resolve(newPath).normalize();

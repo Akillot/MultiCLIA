@@ -68,7 +68,7 @@ public class TimePage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // ct
+    // current time
     private static void displayCurrentTime() {
         insertControlChars('n',1);
         message("Current Time: " + getColor(mainColor)
@@ -91,7 +91,7 @@ public class TimePage extends Page {
         return ZoneId.systemDefault().toString();
     }
 
-    // t command
+    // timer
     private static volatile boolean isTimerRunning = false;
 
     private static void runTimer() {
@@ -99,7 +99,7 @@ public class TimePage extends Page {
             insertControlChars('n',1);
             out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor)
                     + "Enter time in seconds (or '" + getColor(mainColor)
-                    + "exit" + getColor(layoutColor) + "' to quit): ");
+                    + "quit" + getColor(layoutColor) + "' to close the timer): ");
             String input = scanner.nextLine();
 
             if (exitCheck(input)) break;
@@ -115,12 +115,16 @@ public class TimePage extends Page {
                             ". Please wait or stop it.", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     continue;
                 }
+                if(input.equalsIgnoreCase("quit")) {
+                    isTimerRunning = false;
+
+                }
                 isTimerRunning = true;
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
-                out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor)
-                        + "Invalid input. Please enter a valid number.");
+                out.println(alignment(getDefaultTextAlignment()) + getColor(rejectionColor)
+                        + "Invalid input" + getColor(layoutColor) + ". Please enter a valid number.");
             }
         }
     }
@@ -150,7 +154,7 @@ public class TimePage extends Page {
                         + "Enter time in seconds (or '" + getColor(mainColor)
                         + "exit" + getColor(layoutColor) + "' to quit): ");
             } catch (InterruptedException e) {
-                message("Timer interrupted" + getColor(layoutColor) + ".", mainColor,
+                message("Timer interrupted" + getColor(layoutColor) + ".", rejectionColor,
                         getDefaultTextAlignment(), getDefaultDelay(), out::print);
             } finally {
                 isTimerRunning = false;
@@ -158,7 +162,7 @@ public class TimePage extends Page {
         }).start();
     }
 
-    // sw command
+    // stopwatch
     private static void runStopwatch() {
         insertControlChars('n', 1);
         message("Press " + getColor(mainColor) + "any key" + getColor(layoutColor)
@@ -187,7 +191,7 @@ public class TimePage extends Page {
                 getDefaultDelay(), out::println);
     }
 
-    // ctz command
+    // change time zone
     private static void displayCustomTimeZone() {
         insertControlChars('n', 1);
 
@@ -213,13 +217,13 @@ public class TimePage extends Page {
     }
 
     private static boolean exitCheck(@NotNull String inputZone) {
-        if (inputZone.equalsIgnoreCase("exit")) {
+        if (inputZone.equalsIgnoreCase("quit")) {
             if (isTimerRunning) {
                 isTimerRunning = false;
                 insertControlChars('n', 1);
             }
             message("Terminated correctly" + getColor(layoutColor)
-                    + "." + getColor(mainColor) + "You are in time menu"
+                    + ". " + getColor(mainColor) + "You are in time menu"
                     + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(),
                     getDefaultDelay(),out::print);
 
