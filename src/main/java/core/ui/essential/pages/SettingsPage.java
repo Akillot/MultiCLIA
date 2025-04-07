@@ -22,7 +22,7 @@ public class SettingsPage extends Page {
             {"Java", "j"},
             {"Restart", "rst"},
             {"Clear", "cl"},
-            {"List", "ls"},
+            {"Help", "h"},
             {"Quit", "q"}
     };
 
@@ -63,8 +63,8 @@ public class SettingsPage extends Page {
                     mainMenuRerun();
                 }
                 case "clear", "cl" -> clearTerminal();
-                case "list", "ls" -> displayListOfCommands(commands);
-                case "quit", "q" -> {
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }

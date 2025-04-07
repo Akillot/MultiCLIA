@@ -287,6 +287,7 @@ public class CommandManager {
         marginBorder(1,1);
     }
 
+    //В гитхаб и почту
     public static void secretCommand() {
         try {
             openUri("https://www.youtube.com/watch?v=xvFZjo5PgG0");

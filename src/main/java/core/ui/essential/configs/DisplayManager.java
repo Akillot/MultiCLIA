@@ -18,8 +18,8 @@ public class DisplayManager {
         String API_KEY = dotenv.get(apiKeyName);
 
         if (API_KEY == null || API_KEY.isEmpty()) {
-            message(apiKeyName + " is unavailable" + getColor(layoutColor) + ". " + getColor(220) + "Check your API Key"
-                            + getColor(layoutColor) + ".", 220, getDefaultLogoAlignment(), getDefaultDelay(), out::print);
+            message("API Key is unavailable " + getColor(layoutColor) + "[" + apiKeyName + "].", 220, getDefaultLogoAlignment(),
+                    getDefaultDelay(), out::print);
         }
         else{
             message("API Key is available " + getColor(layoutColor) + "[" + apiKeyName + "].", acceptanceColor, getDefaultLogoAlignment(),
@@ -27,7 +27,7 @@ public class DisplayManager {
         }
     }
 
-    // displaying command list ls
+    // displaying help command
     public static void displayCommandList() {
         try {
             marginBorder(1,1);

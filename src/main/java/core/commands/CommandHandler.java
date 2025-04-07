@@ -28,13 +28,13 @@ public class CommandHandler {
             "help" ,"config", "restart", "info",
             "clear", "time", "network", "security", "crypt",
             "terminal", "ai", "connection", "weather",
-            "translate","support", "quit", "exit"};
+            "translate","support", "quit"};
 
     public static final String[] shortCmds = {
             "h" ,"cfg", "rst", "i",
             "cl", "t", "n", "sec", "cr",
             "term", "a", "cn", "w", "tr",
-            "sup", "q", "e"};
+            "sup", "q"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
@@ -68,7 +68,7 @@ public class CommandHandler {
             case 12 -> new WeatherPage()::displayMenu;
             case 13 -> TranslatePage::displayTranslatePage;
             case 14 -> SupportPage::displaySupportPage;
-            case 15, 16 -> ExitPage::displayExitPage;
+            case 15 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(rejectionColor) + "Invalid command index");
         };

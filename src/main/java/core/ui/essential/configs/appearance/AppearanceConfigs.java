@@ -144,37 +144,6 @@ public class AppearanceConfigs {
         out.print(getColor(acceptanceColor) + "\r    ✓" + RESET);
     }
 
-    public static void progressbarAnimation(String title) {
-        int barLength = 97;
-        int animationDuration = 3000; //milliseconds
-        int steps = 100;
-        int delay = animationDuration / steps;
-
-        for (int step = 0; step <= steps; step++) {
-            double progress = step / (double) steps;
-            int completed = (int) (progress * barLength);
-            StringBuilder bar = new StringBuilder("\r" + alignment(64)
-                    + getColor(layoutColor) + title + "[");
-
-            for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? getRandomColor() + borderChars.get(0) + getColor(layoutColor) : " ");
-            }
-            bar.append("] ");
-            bar.append(String.format("%.2f%%", progress * 100));
-
-            out.print(bar);
-
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
-        }
-        out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
-        out.print("\n".repeat(2));
-    }
-
     //Color table components
     @Contract(pure = true)
     public static void displayColorTable() {

@@ -72,7 +72,7 @@ public class StartPage {
                 "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName), mainColor)
                         + getColor(layoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
-                "What you think about when you think about love?",
+                "What you think about when you think about MultiCLIA?",
                 "Find a bug or have an idea? Go to" + getColor(color1) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
 
         int index = rand.nextInt(0, motto.length);
