@@ -2,8 +2,8 @@ core/logic/CommandManager$1.class
 core/ui/extensions/network/NetworkPage.class
 core/ui/essential/configs/appearance/TextConfigs.class
 core/ui/essential/pages/StartPage.class
+core/ui/extensions/connection/QrPage.class
 core/ui/extensions/terminal/emulation/TerminalPage.class
-core/ui/extensions/connection/ConnectionPage.class
 core/ui/extensions/connection/QrCodeGenerator.class
 core/ui/essential/pages/SettingsPage.class
 core/ui/extensions/ai/ChatGPTClient.class

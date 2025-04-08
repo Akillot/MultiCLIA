@@ -11,7 +11,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/time/TimePage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/ai/ChatGPTClient.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/StartPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/connection/ConnectionPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/connection/QrCodeGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/configs/appearance/AppearanceConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/configs/appearance/TextConfigs.java
@@ -20,5 +19,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/PackageUnifier.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/init/AppLauncher.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/InfoPage.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/connection/QrPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/CommandManager.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/ai/AiPage.java

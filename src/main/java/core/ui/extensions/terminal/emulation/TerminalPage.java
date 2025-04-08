@@ -22,7 +22,7 @@ public class TerminalPage extends Page {
     private static Path currentDirectory = Paths.get("").toAbsolutePath();
     private String[][] commands = {
             {"Enter command", "ec"},
-            {"Restart", "rs"},
+            {"Restart", "rst"},
             {"Clear terminal", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -30,7 +30,7 @@ public class TerminalPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("Terminal (Read-Only Mode):", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Terminal [Read-Only Mode]:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {

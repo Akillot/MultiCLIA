@@ -263,7 +263,7 @@ public class NetworkPage extends Page {
         try {
             insertControlChars('n', 1);
             while(true) {
-                message("BIG AMOUNT OF DATA, BE READY", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("BIG AMOUNT OF DATA, BE READY", 220, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
                 displayConfirmation("Enter", "y", "+",
                         "to open and", "n", "-", "to skip",
