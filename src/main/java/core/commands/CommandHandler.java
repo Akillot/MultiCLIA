@@ -25,13 +25,13 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "help" ,"config", "restart", "restart clear", "info",
+            "help", "info" , "restart", "restart clear", "config",
             "clear", "time", "network", "security", "crypt",
             "terminal", "ai", "qrcode", "weather",
             "translate","support", "quit"};
 
     public static final String[] shortCmds = {
-            "h" ,"cfg", "rst", "rcl", "i",
+            "h", "i", "rst","rcl", "cfg",
             "cl", "t", "n", "sec", "cr",
             "term", "a", "qr", "w", "tran",
             "sup", "q"};
@@ -47,10 +47,7 @@ public class CommandHandler {
     static @NotNull Runnable getCommandAction(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
-            case 1 -> new SettingsPage()::displayMenu;
-            case 2 -> CommandManager::mainMenuRestart;
-            case 3 -> CommandManager::mainMenuRestartWithClearing;
-            case 4 -> () -> {
+            case 1 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
@@ -58,6 +55,9 @@ public class CommandHandler {
                             rejectionColor, getDefaultTextAlignment(), 0, out::println);
                 }
             };
+            case 2 -> CommandManager::mainMenuRestart;
+            case 3 -> CommandManager::mainMenuRestartWithClearing;
+            case 4 -> new SettingsPage()::displayMenu;
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> new TimePage()::displayMenu;
             case 7 -> new NetworkPage()::displayMenu;

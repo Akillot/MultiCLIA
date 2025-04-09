@@ -20,7 +20,7 @@ public class InfoPage {
 
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
-        message("Application info", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Application info:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         message("Current version: " + getVersion(), layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
 
         message("Platform: Classic [" + getColor(75) + "Mac" + getColor(layoutColor) + "OS, " + getColor(74)
