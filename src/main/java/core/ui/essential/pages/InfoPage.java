@@ -22,6 +22,11 @@ public class InfoPage {
         marginBorder(1,2);
         message("Application info", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         message("Current version: " + getVersion(), layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
+
+        message("Platform: Classic [" + getColor(75) + "Mac" + getColor(layoutColor) + "OS, " + getColor(74)
+                + getColor(207) +"Linux" + getColor(layoutColor) + "]", layoutColor,
+                getDefaultTextAlignment(),getDefaultDelay(),out::print);
+
         message("Author: Nick Zozulia", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
 
         displayApplicationDirectory();

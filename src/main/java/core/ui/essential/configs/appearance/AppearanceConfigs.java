@@ -27,7 +27,7 @@ public class AppearanceConfigs {
     @Getter @Setter
     private static int defaultLogoAlignment = 48;
 
-    public static String searchingArrow = "-> ";
+    public static String searchingArrow = "> ";
 
     //Colors of logo
     @Getter @Setter

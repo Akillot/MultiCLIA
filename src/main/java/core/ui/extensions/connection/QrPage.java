@@ -28,7 +28,7 @@ public class QrPage extends Page {
     private static final int MAX_SIZE = 300;
     private static final String DEFAULT_FORMAT = ".png";
 
-    private int size = 150;
+    private int size = 50;
     private String format = DEFAULT_FORMAT;
 
     private final String[][] commands = {
@@ -108,6 +108,7 @@ public class QrPage extends Page {
     }
 
     private @Nullable String promptForUrl() {
+        insertControlChars('n', 1);
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 "Enter URL [include " + getColor(mainColor) + "http:// " + getColor(layoutColor)
                 + "or " + getColor(mainColor) + " https://" + getColor(layoutColor) + "]: ");
