@@ -26,6 +26,7 @@ public class TimePage extends Page {
             {"Stopwatch", "sw"},
             {"Change time zone", "ctz"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -50,8 +51,9 @@ public class TimePage extends Page {
                 case "change time zone", "ctz" -> displayCustomTimeZone();
                 case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

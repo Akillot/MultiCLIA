@@ -32,7 +32,8 @@ public class SecurityPage extends Page {
     private String[][] commands = {
             {"Generate password", "gp"},
             {"Restart", "rst"},
-            {"Clear terminal", "cl"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
     };
@@ -51,8 +52,9 @@ public class SecurityPage extends Page {
                 case "generate password", "gp" -> passwordCreatorMenu();
                 case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rсl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

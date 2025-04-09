@@ -14,8 +14,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.Random;
 
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
@@ -29,6 +28,7 @@ public class CryptographyPage extends Page {
             {"Decryption", "de"},
             {"Hashing", "ha"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -50,8 +50,9 @@ public class CryptographyPage extends Page {
                 case "hashing", "ha" -> hashSHA256();
                 case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

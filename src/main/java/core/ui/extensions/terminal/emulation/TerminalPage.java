@@ -23,7 +23,8 @@ public class TerminalPage extends Page {
     private String[][] commands = {
             {"Enter command", "ec"},
             {"Restart", "rst"},
-            {"Clear terminal", "cl"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
     };
@@ -45,8 +46,9 @@ public class TerminalPage extends Page {
                 }
                 case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

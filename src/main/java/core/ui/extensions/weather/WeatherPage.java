@@ -13,8 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
+import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
@@ -29,6 +28,7 @@ public class WeatherPage extends Page {
             {"Local weather", "lw"},
             {"Direct weather", "dw"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -71,9 +71,10 @@ public class WeatherPage extends Page {
                 }
                 case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "cl" -> clearTerminal();
+                case "restart clear", "rсl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
                     exitPage();

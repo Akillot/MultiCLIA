@@ -73,7 +73,8 @@ public class StartPage {
                 "Hi " + getColorText(capitalizeMessage(userName), mainColor)
                         + getColor(layoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about MultiCLIA?",
-                "Find a bug or have an idea? Go to" + getColor(color1) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
+                "Find a bug or have an idea? Go to" + getColor(color1) + " nickzozulia" + getColor(layoutColor) + "@" +
+                        getColor(color1) + "gmail.com" + getColor(layoutColor) + "."};
 
         int index = rand.nextInt(0, motto.length);
         message("For start type '" + getColor(mainColor)

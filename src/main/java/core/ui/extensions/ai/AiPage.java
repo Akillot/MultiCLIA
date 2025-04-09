@@ -4,13 +4,12 @@ import core.ui.essential.pages.Page;
 
 import java.util.Scanner;
 
+import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static core.ui.extensions.ai.ChatGPTClient.*;
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
 import static java.lang.System.out;
 
 public class AiPage extends Page {
@@ -21,6 +20,7 @@ public class AiPage extends Page {
             {"Modify Maximum of Tokens", "mmt"},
             {"Info", "i"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -52,8 +52,9 @@ public class AiPage extends Page {
                 case "info", "i" -> displayChatGptInfo();
                 case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

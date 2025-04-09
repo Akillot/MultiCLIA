@@ -21,6 +21,7 @@ public class SettingsPage extends Page {
             {"Colors", "col"},
             {"Java", "j"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -60,8 +61,9 @@ public class SettingsPage extends Page {
                 case "java", "j" -> displayJavaInfo();
                 case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

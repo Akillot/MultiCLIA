@@ -32,6 +32,7 @@ public class NetworkPage extends Page {
             {"Network stats", "ns"},
             {"Network interfaces", "ni"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -58,8 +59,9 @@ public class NetworkPage extends Page {
                 case "network interfaces", "ni" -> displayNetworkInterfaces();
                 case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

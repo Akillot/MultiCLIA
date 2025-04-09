@@ -38,6 +38,7 @@ public class QrPage extends Page {
             {"Modify image format", "mf"},
             {"Info", "i"},
             {"Restart", "rst"},
+            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -65,7 +66,8 @@ public class QrPage extends Page {
                     insertControlChars('n',1);
                 }
                 case "restart", "rst" -> restartApplication();
-                case "clear terminal", "cl" -> clearTerminal();
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> showHelp();
                 case "quit", "q", "exit", "e" -> exitApplication();
                 default -> showInvalidCommand(input);
@@ -218,7 +220,7 @@ public class QrPage extends Page {
 
     private void restartApplication() {
         insertControlChars('n', 1);
-        mainMenuRerun();
+        mainMenuRestart();
     }
 
     private void exitApplication() {

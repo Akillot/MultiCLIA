@@ -13,6 +13,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
@@ -228,7 +229,7 @@ public class CommandManager {
 
                 Thread.sleep(50);
                 StringSelection selection = new StringSelection(text);
-                clipboard.setContents(selection, selection);  // Указываем себя как владельца
+                clipboard.setContents(selection, selection);
 
                 try {
                     String copiedText = (String) clipboard.getData(DataFlavor.stringFlavor);
@@ -265,7 +266,7 @@ public class CommandManager {
                 layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
-    public static void mainMenuRerun(){
+    public static void mainMenuRestart(){
         marginBorder(1,2);
         message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
@@ -273,6 +274,18 @@ public class CommandManager {
         message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
                 getDefaultDelay(), out::println);
         marginBorder(1,1);
+        displayMenu();
+    }
+
+    public static void mainMenuRestartWithClearing(){
+        marginBorder(1,2);
+        message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
+                getDefaultDelay(),out::print);
+
+        message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
+                getDefaultDelay(), out::println);
+        marginBorder(1,20);
+        clearTerminal();
         displayMenu();
     }
 
