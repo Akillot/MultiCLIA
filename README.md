@@ -38,7 +38,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 ## 🚀 Getting Started
 
 ### ✅ Requirements:
-- **Operating Systems**: macOS or Linux
+- **Operating Systems**: MacOS or Linux
 - **Java**: Version 11 or higher
 - **Optional**: [Homebrew](https://brew.sh/) for easier installation (macOS)
 
