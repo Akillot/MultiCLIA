@@ -101,26 +101,10 @@ public class AppearanceConfigs {
         borderChars.add("#");
     }
 
-    public static void setBorderWidth(int width) {
-        if (width > 0) {
-            borderWidth = width;
-        }
-    }
-
-    public static boolean setBorderCharIndex(int index) {
-        return index >= 0 && index < borderChars.size();
-    }
-
-    public static void addBorderChar(String newChar) {
-        if (newChar != null && !newChar.isEmpty() && !borderChars.contains(newChar)) {
-            borderChars.add(newChar);
-        }
-    }
-
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
                 layoutColor,62,0,out::print);
     }
 

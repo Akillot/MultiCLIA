@@ -54,7 +54,7 @@ public class SecurityPage extends Page {
                     insertControlChars('n',1);
                     mainMenuRestart();
                 }
-                case "restart clear", "rсl" -> mainMenuRestartWithClearing();
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
