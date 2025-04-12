@@ -29,7 +29,7 @@ public class StartPage {
             "║   ██╔████╔██║██║   ██║██║     ██║   ██║██║     ██║     ██║███████║                      ║",
             "║   ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                      ║",
             "║   ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                      ║",
-            "║   ██║ ╚═╝ ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                      ║",
+            "║   ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                      ║",
             "║   ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝    v." + getVersion() + getColor(layoutColor) +"   ║",
             "║                                                                                         ║",
             "╚═════════════════════════════════════════════════════════════════════════════════════════╝"
@@ -62,7 +62,7 @@ public class StartPage {
         Random rand = new Random();
         String[] motto = {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
-                "It starts with a command.", "Optimal width of the terminal window: 117 characters and wider.",
+                "It starts with a command.", "Optimal width of the terminal window: 108 characters and wider.",
                 "Hi " + getColorText(capitalizeMessage(userName), mainColor)
                         + getColor(layoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about MultiCLIA?",

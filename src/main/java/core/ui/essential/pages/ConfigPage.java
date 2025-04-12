@@ -13,7 +13,7 @@ import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
-public class SettingsPage extends Page {
+public class ConfigPage extends Page {
 
     private String[][] commands = {
             {"Memory", "m"},
@@ -46,7 +46,7 @@ public class SettingsPage extends Page {
 
     public void displayMenu() {
         marginBorder(1,2);
-        message("Settings:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Configs:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {

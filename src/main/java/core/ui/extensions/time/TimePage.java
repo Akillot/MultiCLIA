@@ -154,7 +154,7 @@ public class TimePage extends Page {
                 insertControlChars('n',1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor)
                         + "Enter time in seconds (or '" + getColor(mainColor)
-                        + "exit" + getColor(layoutColor) + "' to quit): ");
+                        + "quit" + getColor(layoutColor) + "' to close): ");
             } catch (InterruptedException e) {
                 message("Timer interrupted" + getColor(layoutColor) + ".", rejectionColor,
                         getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -167,7 +167,7 @@ public class TimePage extends Page {
     // stopwatch
     private static void runStopwatch() {
         insertControlChars('n', 1);
-        message("Press " + getColor(mainColor) + "any key" + getColor(layoutColor)
+        message("Press " + getColor(mainColor) + "'Enter'" + getColor(layoutColor)
                         + " to start stopwatch and again to stop:", layoutColor, getDefaultTextAlignment(),
                 getDefaultDelay(), out::print);
         scanner.nextLine();

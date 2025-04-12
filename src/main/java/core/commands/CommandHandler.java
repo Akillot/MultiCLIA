@@ -57,7 +57,7 @@ public class CommandHandler {
             };
             case 2 -> CommandManager::mainMenuRestart;
             case 3 -> CommandManager::mainMenuRestartWithClearing;
-            case 4 -> new SettingsPage()::displayMenu;
+            case 4 -> new ConfigPage()::displayMenu;
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> new TimePage()::displayMenu;
             case 7 -> new NetworkPage()::displayMenu;
