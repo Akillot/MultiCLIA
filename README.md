@@ -1,6 +1,6 @@
 # MultiCLIA
 
-MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application (CLI) designed to simplify and enhance the terminal experience on macOS and Linux. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who frequently works in a terminal environment.
+MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application designed to simplify and enhance the terminal experience on macOS and Linux. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who frequently works in a terminal environment.
 
 ---
 
