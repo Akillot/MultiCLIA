@@ -13,12 +13,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class WeatherPage extends Page {
@@ -27,12 +25,13 @@ public class WeatherPage extends Page {
     private static final Path currentDirectory = Paths.get("").toAbsolutePath();
     private static final String API_KEY;
     private String[][] commands = {
-            {"Local weather", "/lw"},
-            {"Direct weather", "/dw"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Local weather", "lw"},
+            {"Direct weather", "dw"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     static {
@@ -56,11 +55,11 @@ public class WeatherPage extends Page {
             String input = scanner.nextLine().toLowerCase().trim();
 
             switch (input) {
-                case "local weather", "/lw" -> {
+                case "local weather", "lw" -> {
                     insertControlChars('n', 1);
                     WeatherService.getWeatherByIP();
                 }
-                case "direct weather", "/dw" -> {
+                case "direct weather", "dw" -> {
                     insertControlChars('n', 1);
                     out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter city name: ");
                     String city = scanner.nextLine().trim();
@@ -70,14 +69,14 @@ public class WeatherPage extends Page {
                         message("City name cannot be empty!", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     }
                 }
-                case "restart", "/rs" -> {
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rсl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -91,11 +90,11 @@ public class WeatherPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    private static class WeatherService {
+    public static class WeatherService {
 
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final String GEO_IP_URL = "http://ip-api.com/json";
-        private static final OkHttpClient client = new OkHttpClient();
+        public static OkHttpClient client = new OkHttpClient();
 
         public static void getWeather(String city) {
             String url = String.format(BASE_URL, city);

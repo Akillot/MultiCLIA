@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import java.util.Scanner;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class TranslatePage {
@@ -23,7 +23,7 @@ public class TranslatePage {
 
         if (API_KEY == null || API_KEY.isEmpty()) {
             insertControlChars('n', 1);
-            message("Translate is unavailable. Check your API Key.", layoutColor,
+            message("Translate is unavailable. Check your API Key.", 220,
                     getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
@@ -34,10 +34,10 @@ public class TranslatePage {
 
         while (true) {
             out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter text to translate [Enter "
-                    + getColor(mainColor) + "/q" + getColor(layoutColor) + " to quit]: ");
+                    + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
             String textToTranslate = scanner.nextLine();
 
-            if (textToTranslate.equalsIgnoreCase("/q")) {
+            if (textToTranslate.equalsIgnoreCase("q") || textToTranslate.equalsIgnoreCase("quit")) {
                 marginBorder(2,2);
                 message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 message("Exiting Translate Page" + getColor(layoutColor) + ". "
@@ -64,7 +64,7 @@ public class TranslatePage {
         }
     }
 
-    private static String translateText(String text, String targetLanguage) throws Exception {
+    public static String translateText(String text, String targetLanguage) throws Exception {
         Translator translator = new Translator(API_KEY);
         TextResult result = translator.translateText(text, null, targetLanguage);
         return result.getText();

@@ -14,25 +14,24 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.Random;
 
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class CryptographyPage extends Page {
 
     private String[][] commands = {
-            {"Encryption", "/en"},
-            {"Decryption", "/de"},
-            {"Hashing", "/ha"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Encryption", "en"},
+            {"Decryption", "de"},
+            {"Hashing", "ha"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -46,17 +45,17 @@ public class CryptographyPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "encryption", "/en" -> encryptionMenu();
-                case "decryption", "/de" -> decryptionMenu();
-                case "hashing", "/ha" -> hashSHA256();
-                case "restart", "/rs" -> {
+                case "encryption", "en" -> encryptionMenu();
+                case "decryption", "de" -> decryptionMenu();
+                case "hashing", "ha" -> hashSHA256();
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -357,7 +356,7 @@ public class CryptographyPage extends Page {
         }
     }
 
-    private static @NotNull String bytesToHex(byte @NotNull [] bytes) {
+    public static @NotNull String bytesToHex(byte @NotNull [] bytes) {
         StringBuilder hexString = new StringBuilder();
         for (byte b : bytes) {
             hexString.append(String.format("%02x", b));

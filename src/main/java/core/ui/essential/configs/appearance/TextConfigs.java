@@ -1,11 +1,11 @@
-package core.ui.essential.configs;
+package core.ui.essential.configs.appearance;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static java.lang.System.out;
 
 public class TextConfigs {
@@ -72,7 +72,7 @@ public class TextConfigs {
                 + "/" + getColor(acceptanceColor) + confirmation_2 + getColor(layoutColor)
                 + "' " + midText +" '" + getColor(rejectionColor) + rejection_1 + getColor(layoutColor)
                 + "/" + getColor(rejectionColor) + rejection_2 + getColor(layoutColor)
-                + "' " + postText, AppearanceConfigs.layoutColor,alignment,getDefaultDelay(),out::print);
+                + "' " + postText, layoutColor,alignment,getDefaultDelay(),out::print);
     }
 
     //make working with text easier(tabulation, next line moving and e.t.c automation)

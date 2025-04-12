@@ -4,27 +4,26 @@ import core.ui.essential.pages.Page;
 
 import java.util.Scanner;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static core.ui.extensions.ai.ChatGPTClient.*;
-import static core.logic.CommandManager.exitPage;
-import static core.logic.CommandManager.mainMenuRerun;
 import static java.lang.System.out;
 
 public class AiPage extends Page {
 
     private String[][] commands = {
-            {"Ask ChatGPT", "/ac"},
-            {"Modify Creativity", "/mc"},
-            {"Modify Maximum of Tokens", "/mmt"},
-            {"Info", "/i"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Ask ChatGPT", "ac"},
+            {"Modify Creativity", "mc"},
+            {"Modify Maximum of Tokens", "mmt"},
+            {"Info", "i"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     public static String coloredChatGptLogo =
@@ -47,18 +46,18 @@ public class AiPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "ask chatgpt", "/ac" -> runChatGpt();
-                case "modify creativity", "/mc" -> configureCreativity();
-                case "modify maximum of tokens", "/mmt" -> configureMaxTokens();
-                case "info", "/i" -> displayChatGptInfo();
-                case "restart", "/rs" -> {
+                case "ask chatgpt", "ac" -> runChatGpt();
+                case "modify creativity", "mc" -> configureCreativity();
+                case "modify maximum of tokens", "mmt" -> configureMaxTokens();
+                case "info", "i" -> displayChatGptInfo();
+                case "restart", "rst" -> {
                     insertControlChars('n', 1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -72,16 +71,16 @@ public class AiPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    private static void runChatGpt() {
+    public static void runChatGpt() {
         Scanner scanner = new Scanner(System.in);
         try {
             while (true) {
                 insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter prompt [or "
-                        + getColor(mainColor) + "/q" + getColor(layoutColor) + " to exit]: ");
+                        + getColor(mainColor) + "q" + getColor(layoutColor) + " to exit]: ");
                 String userMessage = scanner.nextLine();
 
-                if (userMessage.equalsIgnoreCase("/q") || userMessage.isEmpty()) {
+                if (userMessage.equalsIgnoreCase("q") || userMessage.isEmpty()) {
                     insertControlChars('n', 1);
                     break;
                 }
@@ -100,7 +99,7 @@ public class AiPage extends Page {
         }
     }
 
-    private static void displayChatGptInfo() {
+    public static void displayChatGptInfo() {
         try {
             insertControlChars('n', 1);
             message("Model: " + getColor(mainColor) + getModel(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -115,7 +114,7 @@ public class AiPage extends Page {
         }
     }
 
-    private static void configureCreativity() {
+    public static void configureCreativity() {
         insertControlChars('n', 1);
         message("["+ getColor(mainColor) + "i" + getColor(layoutColor) + "] The creativity of the AI controls the creativity of responses.\n" +
                         alignment(getDefaultTextAlignment()) + "The higher the creativity," +
@@ -155,7 +154,7 @@ public class AiPage extends Page {
         }
     }
 
-    private static void configureMaxTokens() {
+    public static void configureMaxTokens() {
         insertControlChars('n', 1);
 
         message("["+ getColor(mainColor) + "i" + getColor(layoutColor) + "] Max tokens define the response length. More tokens allow longer answers.\n" +

@@ -6,22 +6,27 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class InfoPage {
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
-        String appVersion = "1.2 - Release";
+        String appVersion = "1.3 " + getColor(layoutColor) + "- Release";
         return getColorText(appVersion, mainColor);
     }
 
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
-        message("Application info", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Application info:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
         message("Current version: " + getVersion(), layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::print);
+
+        message("Platform: Classic [" + getColor(75) + "Mac" + getColor(layoutColor) + "OS, " + getColor(74)
+                + getColor(207) +"Linux" + getColor(layoutColor) + "]", layoutColor,
+                getDefaultTextAlignment(),getDefaultDelay(),out::print);
+
         message("Author: Nick Zozulia", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
 
         displayApplicationDirectory();

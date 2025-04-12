@@ -9,11 +9,10 @@ import java.security.*;
 import java.util.Random;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class SecurityPage extends Page {
@@ -28,14 +27,15 @@ public class SecurityPage extends Page {
     private static final String CHAR_POOL_STRONG = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
     private static final String CHAR_POOL_EXTRA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'}{)(";
 
-    private static int passwordLength;
+    public static int passwordLength;
 
     private String[][] commands = {
-            {"Generate password", "/gp"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Generate password", "gp"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -49,15 +49,15 @@ public class SecurityPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "generate password", "/gp" -> passwordCreatorMenu();
-                case "restart", "/rs" -> {
+                case "generate password", "gp" -> passwordCreatorMenu();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -120,7 +120,7 @@ public class SecurityPage extends Page {
         }
     }
 
-    private static @Nullable String createPassword(@NotNull String passwordComplexity) {
+    public static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;
         int color;
 
@@ -149,7 +149,7 @@ public class SecurityPage extends Page {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
+    public static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
 

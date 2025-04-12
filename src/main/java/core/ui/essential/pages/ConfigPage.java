@@ -7,24 +7,24 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.management.ManagementFactory;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
-public class SettingsPage extends Page {
+public class ConfigPage extends Page {
 
     private String[][] commands = {
-            {"Memory", "/m"},
-            {"CPU", "/c"},
-            {"Colors", "/col"},
-            {"Java", "/j"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Memory", "m"},
+            {"CPU", "c"},
+            {"Colors", "col"},
+            {"Java", "j"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     //Java logo
@@ -46,7 +46,7 @@ public class SettingsPage extends Page {
 
     public void displayMenu() {
         marginBorder(1,2);
-        message("Settings:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Configs:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {
@@ -55,22 +55,22 @@ public class SettingsPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "memory", "/m" -> displayMemoryInfo();
-                case "cpu", "/c" -> displayCpuLoad();
-                case "colors", "/col" -> displayColorTable();
-                case "java", "/j" -> displayJavaInfo();
-                case "restart", "/rs" -> {
+                case "memory", "m" -> displayMemoryInfo();
+                case "cpu", "c" -> displayCpuLoad();
+                case "colors", "col" -> displayColorTable();
+                case "java", "j" -> displayJavaInfo();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
-                default -> insertControlChars('n',1);
+                default -> out.print("");
             }
         }
     }
@@ -80,7 +80,7 @@ public class SettingsPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // Display memory information
+    // Display memory information and other
     public static void displayMemoryInfo() {
         Runtime runtime = Runtime.getRuntime();
         long totalJvmMemory = runtime.totalMemory();

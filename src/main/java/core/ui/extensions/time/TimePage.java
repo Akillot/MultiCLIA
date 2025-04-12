@@ -11,26 +11,25 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class TimePage extends Page {
 
     private static final Scanner scanner = new Scanner(System.in);
     private String[][] commands = {
-            {"Current time", "/ct"},
-            {"Calendar", "/c"},
-            {"Timer", "/t"},
-            {"Stopwatch", "/sw"},
-            {"Change time zone", "/ctz"},
-            {"Http request testing", "/hrt"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"Current time", "ct"},
+            {"Calendar", "c"},
+            {"Timer", "t"},
+            {"Stopwatch", "sw"},
+            {"Change time zone", "ctz"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -44,20 +43,20 @@ public class TimePage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "current time", "/ct" -> displayCurrentTime();
-                case "calendar", "/c" -> displayCalendar();
-                case "app runtime", "/ar" -> displayAppRuntime();
-                case "timer", "/t" -> runTimer();
-                case "stopwatch", "/sw" -> runStopwatch();
-                case "change time zone", "/ctz" -> displayCustomTimeZone();
-                case "restart", "/rs" -> {
+                case "current time", "ct" -> displayCurrentTime();
+                case "calendar", "c" -> displayCalendar();
+                case "app runtime", "ar" -> displayAppRuntime();
+                case "timer", "t" -> runTimer();
+                case "stopwatch", "sw" -> runStopwatch();
+                case "change time zone", "ctz" -> displayCustomTimeZone();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
@@ -71,7 +70,7 @@ public class TimePage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // /ct
+    // current time
     private static void displayCurrentTime() {
         insertControlChars('n',1);
         message("Current Time: " + getColor(mainColor)
@@ -80,7 +79,7 @@ public class TimePage extends Page {
                 + getCurrentTimeZone(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-    private static @NotNull String getCurrentTime() {
+    public static @NotNull String getCurrentTime() {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return localTime.format(formatter);
@@ -90,19 +89,19 @@ public class TimePage extends Page {
         insertControlChars('n',1);
     }
 
-    private static String getCurrentTimeZone() {
+    public static String getCurrentTimeZone() {
         return ZoneId.systemDefault().toString();
     }
 
-    // /t command
-    private static volatile boolean isTimerRunning = false;
+    // timer
+    public static volatile boolean isTimerRunning = false;
 
     private static void runTimer() {
         while (true) {
             insertControlChars('n',1);
             out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor)
                     + "Enter time in seconds (or '" + getColor(mainColor)
-                    + "exit" + getColor(layoutColor) + "' to quit): ");
+                    + "quit" + getColor(layoutColor) + "' to close the timer): ");
             String input = scanner.nextLine();
 
             if (exitCheck(input)) break;
@@ -118,17 +117,21 @@ public class TimePage extends Page {
                             ". Please wait or stop it.", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     continue;
                 }
+                if(input.equalsIgnoreCase("quit")) {
+                    isTimerRunning = false;
+
+                }
                 isTimerRunning = true;
                 startAsyncTimer(seconds);
 
             } catch (NumberFormatException e) {
-                out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor)
-                        + "Invalid input. Please enter a valid number.");
+                out.println(alignment(getDefaultTextAlignment()) + getColor(rejectionColor)
+                        + "Invalid input" + getColor(layoutColor) + ". Please enter a valid number.");
             }
         }
     }
 
-    private static void startAsyncTimer(double seconds) {
+    public static void startAsyncTimer(double seconds) {
         new Thread(() -> {
             try {
                 for (double i = seconds; i >= 0; i--) {
@@ -151,9 +154,9 @@ public class TimePage extends Page {
                 insertControlChars('n',1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor)
                         + "Enter time in seconds (or '" + getColor(mainColor)
-                        + "exit" + getColor(layoutColor) + "' to quit): ");
+                        + "quit" + getColor(layoutColor) + "' to close): ");
             } catch (InterruptedException e) {
-                message("Timer interrupted" + getColor(layoutColor) + ".", mainColor,
+                message("Timer interrupted" + getColor(layoutColor) + ".", rejectionColor,
                         getDefaultTextAlignment(), getDefaultDelay(), out::print);
             } finally {
                 isTimerRunning = false;
@@ -161,10 +164,10 @@ public class TimePage extends Page {
         }).start();
     }
 
-    // /sw command
+    // stopwatch
     private static void runStopwatch() {
         insertControlChars('n', 1);
-        message("Press " + getColor(mainColor) + "any key" + getColor(layoutColor)
+        message("Press " + getColor(mainColor) + "'Enter'" + getColor(layoutColor)
                         + " to start stopwatch and again to stop:", layoutColor, getDefaultTextAlignment(),
                 getDefaultDelay(), out::print);
         scanner.nextLine();
@@ -180,7 +183,7 @@ public class TimePage extends Page {
         printElapsedTime(elapsedTime);
     }
 
-    private static double calculateElapsedTime(long startTime) {
+    public static double calculateElapsedTime(long startTime) {
         return (System.currentTimeMillis() - startTime) / 1000.0;
     }
 
@@ -190,7 +193,7 @@ public class TimePage extends Page {
                 getDefaultDelay(), out::println);
     }
 
-    // /ctz command
+    // change time zone
     private static void displayCustomTimeZone() {
         insertControlChars('n', 1);
 
@@ -215,14 +218,14 @@ public class TimePage extends Page {
         }
     }
 
-    private static boolean exitCheck(@NotNull String inputZone) {
-        if (inputZone.equalsIgnoreCase("exit")) {
+    public static boolean exitCheck(@NotNull String inputZone) {
+        if (inputZone.equalsIgnoreCase("quit")) {
             if (isTimerRunning) {
                 isTimerRunning = false;
                 insertControlChars('n', 1);
             }
             message("Terminated correctly" + getColor(layoutColor)
-                    + "." + getColor(mainColor) + "You are in time menu"
+                    + ". " + getColor(mainColor) + "You are in time menu"
                     + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(),
                     getDefaultDelay(),out::print);
 
@@ -234,11 +237,11 @@ public class TimePage extends Page {
         return false;
     }
 
-    private static boolean isValidTimeZone(String zoneId) {
+    public static boolean isValidTimeZone(String zoneId) {
         return ZoneId.getAvailableZoneIds().contains(zoneId);
     }
 
-    private static @NotNull String getTimeInZone(String zoneId) {
+    public static @NotNull String getTimeInZone(String zoneId) {
         ZonedDateTime time = ZonedDateTime.now(ZoneId.of(zoneId));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm 'UTC'XXX");
         return time.format(formatter);

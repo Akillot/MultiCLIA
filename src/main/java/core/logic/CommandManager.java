@@ -6,17 +6,18 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.*;
 import java.io.*;
 import java.net.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.DisplayManager.clearTerminal;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.StartPage.displayStartPage;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
+import static core.ui.essential.pages.StartPage.displayMenu;
 
 import static java.lang.System.out;
 
@@ -217,21 +218,55 @@ public class CommandManager {
 
     public static @NotNull Runnable copyToClipboard(String text) {
         return () -> {
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
             try {
+                clipboard.setContents(new StringSelection(""), new ClipboardOwner() {
+                    @Override
+                    public void lostOwnership(Clipboard clipboard, Transferable contents) {
+                    }
+                });
+
+                Thread.sleep(50);
                 StringSelection selection = new StringSelection(text);
-                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-                message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(),
-                        getDefaultDelay(), out::println);
-                message("Password copied " + getColor(acceptanceColor) + "successfully" + getColor(layoutColor) + ".",
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-            } catch (Exception ex) {
-                insertControlChars('n', 1);
-                message("Error: " + ex.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                clipboard.setContents(selection, selection);
+
+                try {
+                    String copiedText = (String) clipboard.getData(DataFlavor.stringFlavor);
+                    if (!text.equals(copiedText)) {
+                        throw new IllegalStateException("Clipboard verification failed");
+                    }
+                    printSuccessMessage();
+
+                } catch (Exception verificationEx) {
+                    printErrorMessage("Verification failed: " + verificationEx.getMessage());
+                }
+
+            } catch (IllegalStateException e) {
+                printErrorMessage("Clipboard is locked. Try again later");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                printErrorMessage("Operation interrupted");
+            } catch (Exception e) {
+                printErrorMessage("Copy error: " + e.getMessage());
             }
         };
     }
 
-    public static void mainMenuRerun(){
+    private static void printSuccessMessage() {
+        message("Status: " + getColor(acceptanceColor) + "✓",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Text copied successfully" + getColor(layoutColor) + ".",
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    }
+
+    private static void printErrorMessage(String error) {
+        insertControlChars('n', 1);
+        message("Error: " + error,
+                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+    }
+
+    public static void mainMenuRestart(){
         marginBorder(1,2);
         message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
@@ -239,7 +274,19 @@ public class CommandManager {
         message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
                 getDefaultDelay(), out::println);
         marginBorder(1,1);
-        displayStartPage();
+        displayMenu();
+    }
+
+    public static void mainMenuRestartWithClearing(){
+        marginBorder(1,2);
+        message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
+                getDefaultDelay(),out::print);
+
+        message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
+                getDefaultDelay(), out::println);
+        marginBorder(1,20);
+        clearTerminal();
+        displayMenu();
     }
 
     public static void exitPage(){
@@ -251,15 +298,5 @@ public class CommandManager {
                         + getColor(mainColor) + "You are in main menu" + getColor(layoutColor) + ".", mainColor,
                 getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
-    }
-
-    public static void secretCommand() {
-        try {
-            openUri("https://www.youtube.com/watch?v=xvFZjo5PgG0");
-        }
-        catch (Exception ex){
-            insertControlChars('n', 1);
-            message("Error: " + ex.getMessage(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        }
     }
 }

@@ -3,11 +3,11 @@ package core.commands;
 import core.ui.essential.pages.*;
 import core.logic.CommandManager;
 import core.ui.extensions.ai.AiPage;
-import core.ui.extensions.connection.ConnectionPage;
+import core.ui.extensions.qr.QrPage;
 import core.ui.extensions.cryptography.CryptographyPage;
 import core.ui.extensions.network.NetworkPage;
 import core.ui.extensions.security.SecurityPage;
-import core.ui.extensions.terminal.emulation.TerminalPage;
+import core.ui.extensions.terminal_emulation.TerminalPage;
 import core.ui.extensions.time.TimePage;
 import core.ui.essential.configs.DisplayManager;
 import core.ui.extensions.translate.TranslatePage;
@@ -17,27 +17,24 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
-import static core.ui.essential.configs.TextConfigs.alignment;
-import static core.ui.essential.configs.TextConfigs.message;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.alignment;
+import static core.ui.essential.configs.appearance.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "list" ,"config", "restart", "help", "info",
+            "help", "info" , "restart", "restart clear", "config",
             "clear", "time", "network", "security", "crypt",
-            "terminal", "ai", "connection", "weather",
+            "terminal", "ai", "qrcode", "weather",
             "translate","support", "quit"};
 
     public static final String[] shortCmds = {
-            "/ls" ,"/cfg", "/rs", "/h", "/i",
-            "/cl", "/t", "/n", "/sec", "/cr",
-            "/term", "/a", "/cn", "/w", "/tr",
-            "/sup", "/q"};
-
-    // Here is an array for commands from massive user extensions
-    public static String[] extensionCmds = {};
+            "h", "i", "rst","rcl", "cfg",
+            "cl", "t", "n", "sec", "cr",
+            "term", "a", "qr", "w", "tran",
+            "sup", "q"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
@@ -47,13 +44,10 @@ public class CommandHandler {
     }
 
     @Contract(pure = true)
-    private static @NotNull Runnable getCommandAction(int index) {
+    static @NotNull Runnable getCommandAction(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
-            case 1 -> new SettingsPage()::displayMenu;
-            case 2 -> CommandManager::mainMenuRerun;
-            case 3 -> DisplayManager::displayCommandsDescription;
-            case 4 -> () -> {
+            case 1 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
@@ -61,6 +55,9 @@ public class CommandHandler {
                             rejectionColor, getDefaultTextAlignment(), 0, out::println);
                 }
             };
+            case 2 -> CommandManager::mainMenuRestart;
+            case 3 -> CommandManager::mainMenuRestartWithClearing;
+            case 4 -> new ConfigPage()::displayMenu;
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> new TimePage()::displayMenu;
             case 7 -> new NetworkPage()::displayMenu;
@@ -68,7 +65,7 @@ public class CommandHandler {
             case 9 -> new CryptographyPage()::displayMenu;
             case 10 -> new TerminalPage()::displayMenu;
             case 11 -> new AiPage()::displayMenu;
-            case 12 -> new ConnectionPage()::displayMenu;
+            case 12 -> new QrPage()::displayMenu;
             case 13 -> new WeatherPage()::displayMenu;
             case 14 -> TranslatePage::displayTranslatePage;
             case 15 -> SupportPage::displaySupportPage;

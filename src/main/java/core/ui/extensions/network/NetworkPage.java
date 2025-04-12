@@ -13,29 +13,29 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import static core.ui.essential.configs.AppearanceConfigs.*;
+import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.logic.CommandManager.*;
-import static core.ui.essential.configs.TextConfigs.*;
-import static core.ui.essential.pages.EasterEggPage.displayEasterEgg;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class NetworkPage extends Page {
 
     private static Scanner scanner = new Scanner(System.in);
     private String[][] commands = {
-            {"IP-address", "/ip"},
-            {"Scan ports", "/sp"},
-            {"Ping host", "/ph"},
-            {"Trace rout", "/tr"},
-            {"Look up DNS records", "/lr"},
-            {"Http request testing", "/hrt"},
-            {"Network stats", "/ns"},
-            {"Network interfaces", "/ni"},
-            {"Restart", "/rs"},
-            {"Clear terminal", "/cl"},
-            {"List", "/ls"},
-            {"Quit", "/q"}
+            {"IP-address", "ip"},
+            {"Scan ports", "sp"},
+            {"Ping host", "ph"},
+            {"Trace rout", "tr"},
+            {"Look up DNS records", "lr"},
+            {"Http request testing", "hrt"},
+            {"Network stats", "ns"},
+            {"Network interfaces", "ni"},
+            {"Restart", "rst"},
+            {"Restart clear", "rcl"},
+            {"Clear", "cl"},
+            {"Help", "h"},
+            {"Quit", "q"}
     };
 
     public void displayMenu() {
@@ -49,26 +49,26 @@ public class NetworkPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "ip-address", "/ip" -> displayUserIp();
-                case "scan ports", "/sp" -> scanPorts();
-                case "ping host", "/ph" -> pingHost();
-                case "trace rout", "/tr" -> traceRout();
-                case "http request testing", "/hrt" -> displayHttpTesting();
-                case "look up dns records", "/lr" -> nsLookUp();
-                case "network stats", "/ns" -> netStat();
-                case "network interfaces", "/ni" -> displayNetworkInterfaces();
-                case "restart", "/rs" -> {
+                case "ip-address", "ip" -> displayUserIp();
+                case "scan ports", "sp" -> scanPorts();
+                case "ping host", "ph" -> pingHost();
+                case "trace rout", "tr" -> traceRout();
+                case "http request testing", "hrt" -> displayHttpTesting();
+                case "look up dns records", "lr" -> nsLookUp();
+                case "network stats", "ns" -> netStat();
+                case "network interfaces", "ni" -> displayNetworkInterfaces();
+                case "restart", "rst" -> {
                     insertControlChars('n',1);
-                    mainMenuRerun();
+                    mainMenuRestart();
                 }
-                case "clear terminal", "/cl" -> clearTerminal();
-                case "list", "/ls" -> displayListOfCommands(commands);
-                case "easteregg", "/ee" -> displayEasterEgg();
-                case "quit", "/q" -> {
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "clear", "cl" -> clearTerminal();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
                     exitPage();
                     return;
                 }
-                default -> insertControlChars('n',1);
+                default -> out.print("");
             }
         }
     }
@@ -78,7 +78,8 @@ public class NetworkPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    private static void displayUserIp() {
+    //<---ip command realization--->
+    public static void displayUserIp() {
         try {
             insertControlChars('n',1);
             InetAddress localHost = InetAddress.getLocalHost();
@@ -94,8 +95,8 @@ public class NetworkPage extends Page {
         }
     }
 
-    // /sp
-    private static void scanPorts() {
+    //<---sp command realization pt:1--->
+    public static void scanPorts() {
         int startPort = 1;
         int endPort = 65535;
         int threads = 100;
@@ -150,35 +151,121 @@ public class NetworkPage extends Page {
         message("Scanning completed.", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-
-    private static @NotNull Map<Integer, String> getCommonPorts() {
+    //<---sp command realization pt:2--->
+    public static @NotNull Map<Integer, String> getCommonPorts() {
         Map<Integer, String> commonPorts = new HashMap<>();
+        commonPorts.put(20, "FTP (Data)");
+        commonPorts.put(21, "FTP (Control)");
         commonPorts.put(22, "SSH");
+        commonPorts.put(23, "Telnet");
+        commonPorts.put(25, "SMTP");
         commonPorts.put(53, "DNS");
+        commonPorts.put(67, "DHCP Server");
+        commonPorts.put(68, "DHCP Client");
+        commonPorts.put(69, "TFTP");
         commonPorts.put(80, "HTTP");
+        commonPorts.put(110, "POP3");
+        commonPorts.put(123, "NTP");
+        commonPorts.put(137, "NetBIOS Name Service");
+        commonPorts.put(138, "NetBIOS Datagram Service");
+        commonPorts.put(139, "NetBIOS Session Service");
+        commonPorts.put(143, "IMAP");
+        commonPorts.put(161, "SNMP");
+        commonPorts.put(162, "SNMP Trap");
+        commonPorts.put(179, "BGP");
+        commonPorts.put(194, "IRC");
+        commonPorts.put(389, "LDAP");
         commonPorts.put(443, "HTTPS");
+        commonPorts.put(445, "SMB");
+        commonPorts.put(465, "SMTPS");
+        commonPorts.put(514, "Syslog");
+        commonPorts.put(515, "LPD");
+        commonPorts.put(587, "SMTP (Submission)");
+        commonPorts.put(636, "LDAPS");
+        commonPorts.put(873, "rsync");
+        commonPorts.put(990, "FTPS");
+        commonPorts.put(993, "IMAPS");
+        commonPorts.put(995, "POP3S");
+        commonPorts.put(1080, "SOCKS Proxy");
+        commonPorts.put(1194, "OpenVPN");
+        commonPorts.put(1433, "Microsoft SQL Server");
+        commonPorts.put(1521, "Oracle DB");
+        commonPorts.put(1723, "PPTP");
+        commonPorts.put(2049, "NFS");
+        commonPorts.put(2082, "cPanel");
+        commonPorts.put(2083, "cPanel (SSL)");
+        commonPorts.put(2086, "WHM");
+        commonPorts.put(2087, "WHM (SSL)");
+        commonPorts.put(2095, "Webmail");
+        commonPorts.put(2096, "Webmail (SSL)");
+        commonPorts.put(2181, "ZooKeeper");
+        commonPorts.put(2375, "Docker");
+        commonPorts.put(2376, "Docker (SSL)");
+        commonPorts.put(3000, "Node.js");
         commonPorts.put(3306, "MySQL");
         commonPorts.put(3389, "Remote Desktop");
+        commonPorts.put(3690, "SVN");
+        commonPorts.put(4333, "mSQL");
+        commonPorts.put(4369, "EPMD (Erlang)");
+        commonPorts.put(4789, "VXLAN");
+        commonPorts.put(4848, "GlassFish");
+        commonPorts.put(5000, "UPnP");
+        commonPorts.put(5001, "Synergy");
+        commonPorts.put(5060, "SIP");
+        commonPorts.put(5061, "SIP (TLS)");
         commonPorts.put(5432, "PostgreSQL");
+        commonPorts.put(5601, "Kibana");
+        commonPorts.put(5672, "AMQP");
+        commonPorts.put(5900, "VNC");
+        commonPorts.put(5938, "TeamViewer");
+        commonPorts.put(5984, "CouchDB");
+        commonPorts.put(6379, "Redis");
+        commonPorts.put(6443, "Kubernetes API");
+        commonPorts.put(6660, "IRC");
+        commonPorts.put(6881, "BitTorrent");
+        commonPorts.put(6969, "BitTorrent Tracker");
+        commonPorts.put(8000, "HTTP Alt");
+        commonPorts.put(8008, "HTTP Alt 2");
         commonPorts.put(8080, "HTTP Proxy");
+        commonPorts.put(8081, "HTTP Proxy Alt");
+        commonPorts.put(8088, "cPanel Alternate");
+        commonPorts.put(8443, "HTTPS Alt");
+        commonPorts.put(8888, "HTTP Alt 3");
+        commonPorts.put(9000, "PHP-FPM");
+        commonPorts.put(9001, "Tor");
+        commonPorts.put(9042, "Cassandra");
+        commonPorts.put(9090, "Prometheus");
+        commonPorts.put(9092, "Kafka");
+        commonPorts.put(9100, "Printer (RAW)");
+        commonPorts.put(9200, "Elasticsearch");
+        commonPorts.put(9300, "Elasticsearch Cluster");
+        commonPorts.put(9418, "Git");
+        commonPorts.put(9999, "JIRA");
+        commonPorts.put(10000, "Webmin");
+        commonPorts.put(11211, "Memcached");
+        commonPorts.put(27017, "MongoDB");
+        commonPorts.put(27018, "MongoDB Shard");
+        commonPorts.put(28015, "RethinkDB");
+        commonPorts.put(32400, "Plex");
+        commonPorts.put(49152, "Windows RPC");
         return commonPorts;
     }
 
-    // /ph
+    //<---ph command realization--->
     private static void pingHost() {processCommandWithHostInput("ping -c 4");}
 
-    // /tr
+    //<---tr command realization--->
     private static void traceRout(){processCommandWithHostInput("traceroute");}
 
-    // /lr
+    //<---lr command realization--->
     private static void nsLookUp(){processCommandWithHostInput("nslookup");}
 
-    // /ns
+    //<---ns command realization--->
     private static void netStat() {
         try {
             insertControlChars('n', 1);
             while(true) {
-                message("BIG AMOUNT OF DATA, BE READY", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("BIG AMOUNT OF DATA, BE READY", 220, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
                 displayConfirmation("Enter", "y", "+",
                         "to open and", "n", "-", "to skip",
@@ -208,6 +295,7 @@ public class NetworkPage extends Page {
         }
     }
 
+    //<---htr command realization pt:1--->
     private static void displayHttpTesting() {
         insertControlChars('n', 1);
         Scanner scanner = new Scanner(System.in);
@@ -215,10 +303,10 @@ public class NetworkPage extends Page {
         try {
             while (true) {
                 out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter a URL [or "
-                        + getColor(mainColor) + "/q" + getColor(layoutColor) + " to quit]: ");
+                        + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
                 String link = scanner.nextLine().trim();
 
-                if (link.equalsIgnoreCase("/q")) {
+                if (link.equalsIgnoreCase("q")) {
                     message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
@@ -235,10 +323,10 @@ public class NetworkPage extends Page {
                         getColor(218) + "POST" + getColor(layoutColor) + "|" + getColor(218) + "2 " + getColor(layoutColor) +
                         getColor(206) + "PUT" + getColor(layoutColor) + "|" + getColor(206) + "3 " + getColor(layoutColor) +
                         getColor(204) + "DELETE" + getColor(layoutColor) + "|" + getColor(204) + "4" + getColor(layoutColor)
-                        + " or /" + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
+                        + " or " + getColor(mainColor) + "q" + getColor(layoutColor) + " to quit]: ");
                 String requestType = scanner.nextLine().trim().toUpperCase();
 
-                if (requestType.equalsIgnoreCase("/q")) {
+                if (requestType.equalsIgnoreCase("q")) {
                     insertControlChars('n', 1);
                     message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
@@ -256,7 +344,7 @@ public class NetworkPage extends Page {
                     String headerInput = scanner.nextLine().trim();
 
                     if (headerInput.isEmpty()) break;
-                    if (headerInput.equalsIgnoreCase("/q")) {
+                    if (headerInput.equalsIgnoreCase("q")) {
                         insertControlChars('n', 1);
                         message("Status: " + getColor(acceptanceColor) + "✓", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
                         message("You are in the network page" + getColor(layoutColor) + ".", mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
@@ -318,7 +406,8 @@ public class NetworkPage extends Page {
         }
     }
 
-    private static void sendHttpRequest(String link, String requestType, Map<String, String> headers, String body) {
+    //<---htr command realization pt:2--->
+    public static void sendHttpRequest(String link, String requestType, Map<String, String> headers, String body) {
         try {
 
             String normalizedRequestType = switch (requestType.toUpperCase()) {
@@ -388,28 +477,7 @@ public class NetworkPage extends Page {
             message("Response Time: " + getColor(mainColor) + responseTime + " ms",
                     layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-            message("Response Headers: ", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-            for (Map.Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
-                if (header.getKey() != null) {
-                    message("  " + header.getKey() + ": " + String.join(", ", header.getValue()),
-                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-                }
-            }
-
             String contentType = connection.getContentType();
-            message("Response Body: ", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-
-            if (contentType != null && contentType.contains("application/json")) {
-                try {
-                    String formattedJson = formatJson(response);
-                    out.println(formattedJson);
-                } catch (Exception e) {
-                    out.println(response);
-                }
-            } else {
-                out.println(response);
-            }
-
             connection.disconnect();
         } catch (MalformedURLException e) {
             message("Error: Invalid URL format. Make sure to include http:// or https://",
@@ -429,7 +497,8 @@ public class NetworkPage extends Page {
         }
     }
 
-    private static @NotNull String readStream(InputStream stream) throws IOException {
+    //<---htr command realization pt:3--->
+    public static @NotNull String readStream(InputStream stream) throws IOException {
         if (stream == null) return "No response body";
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
@@ -441,7 +510,8 @@ public class NetworkPage extends Page {
         return response.toString();
     }
 
-    private static @NotNull String formatJson(String json) {
+    //<---htr command realization pt:4--->
+    public static @NotNull String formatJson(String json) {
         if (json == null || json.isEmpty()) return "{}";
 
         StringBuilder formatted = new StringBuilder();
@@ -478,29 +548,78 @@ public class NetworkPage extends Page {
         return formatted.toString();
     }
 
+    //<---htr command realization pt:5--->
     @Contract(pure = true)
-    private static @NotNull String getHttpStatusMessage(int statusCode) {
+    public static @NotNull String getHttpStatusMessage(int statusCode) {
         return switch (statusCode) {
+            case 100 -> "Continue";
+            case 101 -> "Switching Protocols";
+            case 102 -> "Processing (WebDAV)";
+            case 103 -> "Early Hints";
             case 200 -> "OK";
             case 201 -> "Created";
+            case 202 -> "Accepted";
+            case 203 -> "Non-Authoritative Information";
             case 204 -> "No Content";
+            case 205 -> "Reset Content";
+            case 206 -> "Partial Content";
+            case 207 -> "Multi-Status (WebDAV)";
+            case 208 -> "Already Reported (WebDAV)";
+            case 226 -> "IM Used";
+            case 300 -> "Multiple Choices";
             case 301 -> "Moved Permanently";
             case 302 -> "Found";
+            case 303 -> "See Other";
             case 304 -> "Not Modified";
+            case 305 -> "Use Proxy";
+            case 307 -> "Temporary Redirect";
+            case 308 -> "Permanent Redirect";
             case 400 -> "Bad Request";
             case 401 -> "Unauthorized";
+            case 402 -> "Payment Required";
             case 403 -> "Forbidden";
             case 404 -> "Not Found";
             case 405 -> "Method Not Allowed";
+            case 406 -> "Not Acceptable";
+            case 407 -> "Proxy Authentication Required";
+            case 408 -> "Request Timeout";
+            case 409 -> "Conflict";
+            case 410 -> "Gone";
+            case 411 -> "Length Required";
+            case 412 -> "Precondition Failed";
+            case 413 -> "Payload Too Large";
+            case 414 -> "URI Too Long";
+            case 415 -> "Unsupported Media Type";
+            case 416 -> "Range Not Satisfiable";
+            case 417 -> "Expectation Failed";
+            case 418 -> "I'm a Teapot";
+            case 421 -> "Misdirected Request";
+            case 422 -> "Unprocessable Entity (WebDAV)";
+            case 423 -> "Locked (WebDAV)";
+            case 424 -> "Failed Dependency (WebDAV)";
+            case 425 -> "Too Early";
+            case 426 -> "Upgrade Required";
+            case 428 -> "Precondition Required";
+            case 429 -> "Too Many Requests";
+            case 431 -> "Request Header Fields Too Large";
+            case 451 -> "Unavailable For Legal Reasons";
             case 500 -> "Internal Server Error";
+            case 501 -> "Not Implemented";
             case 502 -> "Bad Gateway";
             case 503 -> "Service Unavailable";
             case 504 -> "Gateway Timeout";
+            case 505 -> "HTTP Version Not Supported";
+            case 506 -> "Variant Also Negotiates";
+            case 507 -> "Insufficient Storage (WebDAV)";
+            case 508 -> "Loop Detected (WebDAV)";
+            case 510 -> "Not Extended";
+            case 511 -> "Network Authentication Required";
             default -> "Unknown Status";
         };
     }
 
-    private static void displayNetworkInterfaces() {
+    //<---ni command realization--->
+    public static void displayNetworkInterfaces() {
         try {
             insertControlChars('n', 1);
             message("Network Interfaces:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);

@@ -1,4 +1,4 @@
-package core.ui.essential.configs;
+package core.ui.essential.configs.appearance;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static core.ui.essential.configs.TextConfigs.*;
+import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
 public class AppearanceConfigs {
@@ -27,20 +27,30 @@ public class AppearanceConfigs {
     @Getter @Setter
     private static int defaultLogoAlignment = 48;
 
-    public static String searchingArrow = "-> ";
+    public static String searchingArrow = "> ";
 
     //Colors of logo
+    @Getter @Setter
     public static int color1 = 219;
+    @Getter @Setter
     public static int color2 = 183;
+    @Getter @Setter
     public static int color3 = 147;
+    @Getter @Setter
     public static int color4 = 218;
+    @Getter @Setter
     public static int color5 = 182;
+    @Getter @Setter
     public static int color6 = 218;
 
     //System Colors
+    @Getter @Setter
     public static int mainColor = 147;
+    @Getter @Setter
     public static int layoutColor = 15;
+    @Getter @Setter
     public static int acceptanceColor = 46;
+    @Getter @Setter
     public static int rejectionColor = 160;
 
     //Borders
@@ -91,26 +101,10 @@ public class AppearanceConfigs {
         borderChars.add("#");
     }
 
-    public static void setBorderWidth(int width) {
-        if (width > 0) {
-            borderWidth = width;
-        }
-    }
-
-    public static boolean setBorderCharIndex(int index) {
-        return index >= 0 && index < borderChars.size();
-    }
-
-    public static void addBorderChar(String newChar) {
-        if (newChar != null && !newChar.isEmpty() && !borderChars.contains(newChar)) {
-            borderChars.add(newChar);
-        }
-    }
-
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
                 layoutColor,62,0,out::print);
     }
 
@@ -132,37 +126,6 @@ public class AppearanceConfigs {
             }
         }
         out.print(getColor(acceptanceColor) + "\r    ✓" + RESET);
-    }
-
-    public static void progressbarAnimation(String title) {
-        int barLength = 97;
-        int animationDuration = 3000;
-        int steps = 100;
-        int delay = animationDuration / steps;
-
-        for (int step = 0; step <= steps; step++) {
-            double progress = step / (double) steps;
-            int completed = (int) (progress * barLength);
-            StringBuilder bar = new StringBuilder("\r" + alignment(64)
-                    + getColor(layoutColor) + title + "[");
-
-            for (int i = 0; i < barLength; i++) {
-                bar.append(i < completed ? getRandomColor() + borderChars.get(0) + getColor(layoutColor) : " ");
-            }
-            bar.append("] ");
-            bar.append(String.format("%.2f%%", progress * 100));
-
-            out.print(bar);
-
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return;
-            }
-        }
-        out.print("\r" + alignment(64) + " ".repeat(barLength + title.length() + 10) + "\r");
-        out.print("\n".repeat(2));
     }
 
     //Color table components
