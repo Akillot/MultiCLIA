@@ -1,4 +1,4 @@
-package core.ui.extensions.connection;
+package core.ui.extensions.qr;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;

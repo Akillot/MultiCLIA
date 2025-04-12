@@ -64,7 +64,7 @@ public class TranslatePage {
         }
     }
 
-    private static String translateText(String text, String targetLanguage) throws Exception {
+    public static String translateText(String text, String targetLanguage) throws Exception {
         Translator translator = new Translator(API_KEY);
         TextResult result = translator.translateText(text, null, targetLanguage);
         return result.getText();

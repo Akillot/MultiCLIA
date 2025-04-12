@@ -27,7 +27,7 @@ public class SecurityPage extends Page {
     private static final String CHAR_POOL_STRONG = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
     private static final String CHAR_POOL_EXTRA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'}{)(";
 
-    private static int passwordLength;
+    public static int passwordLength;
 
     private String[][] commands = {
             {"Generate password", "gp"},
@@ -120,7 +120,7 @@ public class SecurityPage extends Page {
         }
     }
 
-    private static @Nullable String createPassword(@NotNull String passwordComplexity) {
+    public static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;
         int color;
 
@@ -149,7 +149,7 @@ public class SecurityPage extends Page {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
+    public static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
 

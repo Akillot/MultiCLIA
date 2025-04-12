@@ -80,7 +80,7 @@ public class ConfigPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // Display memory information
+    // Display memory information and other
     public static void displayMemoryInfo() {
         Runtime runtime = Runtime.getRuntime();
         long totalJvmMemory = runtime.totalMemory();

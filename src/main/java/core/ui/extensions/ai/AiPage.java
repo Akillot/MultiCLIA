@@ -71,7 +71,7 @@ public class AiPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    private static void runChatGpt() {
+    public static void runChatGpt() {
         Scanner scanner = new Scanner(System.in);
         try {
             while (true) {
@@ -99,7 +99,7 @@ public class AiPage extends Page {
         }
     }
 
-    private static void displayChatGptInfo() {
+    public static void displayChatGptInfo() {
         try {
             insertControlChars('n', 1);
             message("Model: " + getColor(mainColor) + getModel(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -114,7 +114,7 @@ public class AiPage extends Page {
         }
     }
 
-    private static void configureCreativity() {
+    public static void configureCreativity() {
         insertControlChars('n', 1);
         message("["+ getColor(mainColor) + "i" + getColor(layoutColor) + "] The creativity of the AI controls the creativity of responses.\n" +
                         alignment(getDefaultTextAlignment()) + "The higher the creativity," +
@@ -154,7 +154,7 @@ public class AiPage extends Page {
         }
     }
 
-    private static void configureMaxTokens() {
+    public static void configureMaxTokens() {
         insertControlChars('n', 1);
 
         message("["+ getColor(mainColor) + "i" + getColor(layoutColor) + "] Max tokens define the response length. More tokens allow longer answers.\n" +

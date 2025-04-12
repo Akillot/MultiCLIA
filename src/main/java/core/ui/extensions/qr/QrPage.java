@@ -1,4 +1,4 @@
-package core.ui.extensions.connection;
+package core.ui.extensions.qr;
 
 import core.ui.essential.pages.Page;
 import org.jetbrains.annotations.Nullable;
@@ -8,8 +8,8 @@ import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
-import static core.ui.extensions.connection.QrCodeGenerator.generateAsciiQr;
-import static core.ui.extensions.connection.QrCodeGenerator.generateQR;
+import static core.ui.extensions.qr.QrCodeGenerator.generateAsciiQr;
+import static core.ui.extensions.qr.QrCodeGenerator.generateQR;
 import static java.lang.System.out;
 
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 
 public class QrPage extends Page {
 
-    private static final Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
+    public static Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
     private static final String[] VALID_FORMATS = {
             ".png", ".jpg", ".jpeg", ".gif",
             ".bmp", ".svg", ".tiff", ".webp",
@@ -28,8 +28,8 @@ public class QrPage extends Page {
     private static final int MAX_SIZE = 300;
     private static final String DEFAULT_FORMAT = ".png";
 
-    private int size = 50;
-    private String format = DEFAULT_FORMAT;
+    public int size = 50;
+    public String format = DEFAULT_FORMAT;
 
     private final String[][] commands = {
             {"Generate QR code", "qr"},
@@ -80,7 +80,7 @@ public class QrPage extends Page {
                         + format + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
-    private void generateQrCode() {
+    public void generateQrCode() {
         String url = promptForUrl();
         if (url == null) return;
 
@@ -109,7 +109,8 @@ public class QrPage extends Page {
         }
     }
 
-    private @Nullable String promptForUrl() {
+    @Nullable
+    public String promptForUrl() {
         insertControlChars('n', 1);
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 "Enter URL [include " + getColor(mainColor) + "http:// " + getColor(layoutColor)
@@ -128,7 +129,7 @@ public class QrPage extends Page {
         return input;
     }
 
-    private void modifyQrCodeSize() {
+    public void modifyQrCodeSize() {
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 String.format("Enter new size (%d-%d): ", MIN_SIZE, MAX_SIZE));
 
@@ -145,7 +146,7 @@ public class QrPage extends Page {
         }
     }
 
-    private void modifyQrCodeFormat() {
+    public void modifyQrCodeFormat() {
         showFormatsHelp();
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 "Enter image format [or 'help' to show formats]: ");
@@ -202,7 +203,7 @@ public class QrPage extends Page {
                 + getColor(layoutColor) + "] - For website favicons\n");
     }
 
-    private void ensureSaveDirectoryExists() throws Exception {
+    public void ensureSaveDirectoryExists() throws Exception {
         if (!Files.exists(SAVE_DIRECTORY)) {
             Files.createDirectories(SAVE_DIRECTORY);
         }

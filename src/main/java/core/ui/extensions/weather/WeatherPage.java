@@ -90,11 +90,11 @@ public class WeatherPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    private static class WeatherService {
+    public static class WeatherService {
 
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final String GEO_IP_URL = "http://ip-api.com/json";
-        private static final OkHttpClient client = new OkHttpClient();
+        public static OkHttpClient client = new OkHttpClient();
 
         public static void getWeather(String city) {
             String url = String.format(BASE_URL, city);

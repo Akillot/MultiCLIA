@@ -1,4 +1,4 @@
-package core.ui.extensions.terminal.emulation;
+package core.ui.extensions.terminal_emulation;
 
 import core.ui.essential.pages.Page;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +19,7 @@ import static java.lang.System.out;
 public class TerminalPage extends Page {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static Path currentDirectory = Paths.get("").toAbsolutePath();
+    public static Path currentDirectory = Paths.get("").toAbsolutePath();
     private String[][] commands = {
             {"Enter command", "ec"},
             {"Restart", "rst"},
@@ -86,7 +86,7 @@ public class TerminalPage extends Page {
         }
     }
 
-    private static void executeReadOnlyCommand(@NotNull String command) {
+    public static void executeReadOnlyCommand(@NotNull String command) {
         try {
             String[] commands = command.split(" ");
 
@@ -144,7 +144,7 @@ public class TerminalPage extends Page {
         }
     }
 
-    private static boolean isEditingCommand(String command) {
+    public static boolean isEditingCommand(String command) {
         String[] editingCommands = {"nano", "vim", "vi", "emacs", "gedit", "pico", "ed", "sed", "awk", ">>", ">"};
         for (String cmd : editingCommands) {
             if (command.equals(cmd)) {
@@ -154,7 +154,7 @@ public class TerminalPage extends Page {
         return false;
     }
 
-    private static boolean isViewingCommand(String command) {
+    public static boolean isViewingCommand(String command) {
         String[] viewingCommands = {"cat", "less", "more", "head", "tail", "grep", "find", "ls", "dir"};
         for (String cmd : viewingCommands) {
             if (command.equals(cmd)) {
@@ -194,7 +194,7 @@ public class TerminalPage extends Page {
                 layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-    private static void changeDirectory(String newPath) {
+    public static void changeDirectory(String newPath) {
         Path newDir = currentDirectory.resolve(newPath).normalize();
         if (newDir.toFile().exists() && newDir.toFile().isDirectory()) {
             currentDirectory = newDir;
