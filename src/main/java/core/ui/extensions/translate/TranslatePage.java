@@ -20,12 +20,6 @@ public class TranslatePage {
     static {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("DEEPL_API_KEY");
-
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            insertControlChars('n', 1);
-            message("Translate is unavailable. Check your API Key.", 220,
-                    getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        }
     }
 
     public static void displayTranslatePage() {

@@ -37,11 +37,6 @@ public class WeatherPage extends Page {
     static {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("OPEN_WEATHER_API_KEY");
-
-        if(API_KEY == null || API_KEY.isEmpty()) {
-            insertControlChars('n',1);
-            message("Weather is unavailable. Check your API Key.", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
-        }
     }
 
     public void displayMenu() {
@@ -73,7 +68,7 @@ public class WeatherPage extends Page {
                     insertControlChars('n', 1);
                     mainMenuRestart();
                 }
-                case "restart clear", "rсl" -> mainMenuRestartWithClearing();
+                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
@@ -90,7 +85,7 @@ public class WeatherPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    public static class WeatherService {
+    private static class WeatherService {
 
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final String GEO_IP_URL = "http://ip-api.com/json";
@@ -130,7 +125,7 @@ public class WeatherPage extends Page {
             }
         }
 
-        public static void getWeatherByIP() {
+        private static void getWeatherByIP() {
             Request request = new Request.Builder().url(GEO_IP_URL).build();
 
             try (Response response = client.newCall(request).execute()) {
