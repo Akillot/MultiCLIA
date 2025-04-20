@@ -32,8 +32,8 @@ public class GeneratePassword {
     }
 
     private static void generatePasswordMenu() {
-        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter length of password [1-80]: ");
         try {
+            out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter length of password [1-80]: ");
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
                 message("Invalid password length. Please enter a number between 1 and 80.",
@@ -44,7 +44,6 @@ public class GeneratePassword {
             message("Invalid input. Please enter a number.", layoutColor, getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
             scanner.nextLine();
-            return;
         }
 
         scanner.nextLine();
@@ -67,17 +66,18 @@ public class GeneratePassword {
             message("Generated Password: " + generatedPassword,
                     layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-            displayConfirmation("Enter","y","+",
-                    "to open and","n","-","to skip",
-                    acceptanceColor, rejectionColor, layoutColor,getDefaultTextAlignment());
+            displayConfirmation("Enter", "y", "+",
+                    "to open and", "n", "-", "to skip",
+                    acceptanceColor, rejectionColor, layoutColor, getDefaultTextAlignment());
 
-            choice("Copy to clipboard",copyToClipboard(generatedPassword), layoutColor, layoutColor, rejectionColor);
+            choice("Copy to clipboard", copyToClipboard(generatedPassword), layoutColor, layoutColor, rejectionColor);
             marginBorder(2, 1);
         } else {
             message("Invalid complexity option. Please try again.", layoutColor, getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
         }
     }
+
 
     private static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;
