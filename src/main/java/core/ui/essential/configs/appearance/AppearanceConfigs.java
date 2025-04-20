@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static core.ui.essential.configs.appearance.TextConfigs.*;
@@ -89,23 +88,11 @@ public class AppearanceConfigs {
         return getBackColor(colorCode);
     }
 
-    //Border
-    private static final ArrayList<String> borderChars = new ArrayList<>();
-    @Getter
-    private static int borderWidth = DEFAULT_BORDER_WIDTH;
-
-    static {
-        borderChars.add("━");
-        borderChars.add("-");
-        borderChars.add("*");
-        borderChars.add("#");
-    }
-
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                layoutColor,62,0,out::print);
+                layoutColor,DEFAULT_BORDER_WIDTH,0,out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {

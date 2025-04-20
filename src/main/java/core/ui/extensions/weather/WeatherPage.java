@@ -89,9 +89,9 @@ public class WeatherPage extends Page {
 
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final String GEO_IP_URL = "http://ip-api.com/json";
-        public static OkHttpClient client = new OkHttpClient();
+        private static OkHttpClient client = new OkHttpClient();
 
-        public static void getWeather(String city) {
+        private static void getWeather(String city) {
             String url = String.format(BASE_URL, city);
             Request request = new Request.Builder().url(url).build();
 

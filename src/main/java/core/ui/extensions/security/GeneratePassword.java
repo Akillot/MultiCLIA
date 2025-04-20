@@ -1,7 +1,5 @@
 package core.ui.extensions.security;
 
-import core.ui.essential.pages.Page;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,12 +8,11 @@ import java.util.Random;
 
 import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
-import static core.ui.essential.configs.DisplayManager.clearTerminal;
 import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
-public class SecurityPage extends Page {
+public class GeneratePassword {
 
     private static final int easyComplexityColor = 85;
     private static final int mediumComplexityColor = 214;
@@ -27,52 +24,14 @@ public class SecurityPage extends Page {
     private static final String CHAR_POOL_STRONG = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
     private static final String CHAR_POOL_EXTRA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'}{)(";
 
-    public static int passwordLength;
-
-    private String[][] commands = {
-            {"Generate password", "gp"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
-            {"Clear", "cl"},
-            {"Help", "h"},
-            {"Quit", "q"}
-    };
+    private static int passwordLength;
 
     public void displayMenu() {
-        Security.addProvider(new BouncyCastleProvider());
         marginBorder(1, 2);
-        message("Security:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        displayListOfCommands(commands);
-
-        while (true) {
-            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(layoutColor) + searchingArrow, "");
-            String input = scanner.nextLine().toLowerCase();
-
-            switch (input) {
-                case "generate password", "gp" -> passwordCreatorMenu();
-                case "restart", "rst" -> {
-                    insertControlChars('n',1);
-                    mainMenuRestart();
-                }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
-                case "clear", "cl" -> clearTerminal();
-                case "help", "h" -> displayListOfCommands(commands);
-                case "quit", "q", "exit", "e" -> {
-                    exitPage();
-                    return;
-                }
-                default -> out.print("");
-            }
-        }
+        generatePasswordMenu();
     }
 
-    @Override
-    protected void displayListOfCommands(String[][] commands) {
-        super.displayListOfCommands(commands);
-    }
-
-    private static void passwordCreatorMenu() {
-        insertControlChars('n', 1);
+    private static void generatePasswordMenu() {
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter length of password [1-80]: ");
         try {
             passwordLength = scanner.nextInt();
@@ -113,14 +72,14 @@ public class SecurityPage extends Page {
                     acceptanceColor, rejectionColor, layoutColor,getDefaultTextAlignment());
 
             choice("Copy to clipboard",copyToClipboard(generatedPassword), layoutColor, layoutColor, rejectionColor);
-            insertControlChars('n', 1);
+            marginBorder(2, 1);
         } else {
             message("Invalid complexity option. Please try again.", layoutColor, getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
         }
     }
 
-    public static @Nullable String createPassword(@NotNull String passwordComplexity) {
+    private static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;
         int color;
 
@@ -149,7 +108,7 @@ public class SecurityPage extends Page {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    public static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
+    private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();
 

@@ -86,7 +86,7 @@ public class TerminalPage extends Page {
         }
     }
 
-    public static void executeReadOnlyCommand(@NotNull String command) {
+    private static void executeReadOnlyCommand(@NotNull String command) {
         try {
             String[] commands = command.split(" ");
 
@@ -144,7 +144,7 @@ public class TerminalPage extends Page {
         }
     }
 
-    public static boolean isEditingCommand(String command) {
+    private static boolean isEditingCommand(String command) {
         String[] editingCommands = {"nano", "vim", "vi", "emacs", "gedit", "pico", "ed", "sed", "awk", ">>", ">"};
         for (String cmd : editingCommands) {
             if (command.equals(cmd)) {
@@ -154,7 +154,7 @@ public class TerminalPage extends Page {
         return false;
     }
 
-    public static boolean isViewingCommand(String command) {
+    private static boolean isViewingCommand(String command) {
         String[] viewingCommands = {"cat", "less", "more", "head", "tail", "grep", "find", "ls", "dir"};
         for (String cmd : viewingCommands) {
             if (command.equals(cmd)) {
@@ -194,7 +194,7 @@ public class TerminalPage extends Page {
                 layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-    public static void changeDirectory(String newPath) {
+    private static void changeDirectory(String newPath) {
         Path newDir = currentDirectory.resolve(newPath).normalize();
         if (newDir.toFile().exists() && newDir.toFile().isDirectory()) {
             currentDirectory = newDir;

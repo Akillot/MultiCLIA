@@ -26,7 +26,7 @@ public class AiPage extends Page {
             {"Quit", "q"}
     };
 
-    public static String coloredChatGptLogo =
+    private static String coloredChatGptLogo =
             getColor(204) + "C" + getColor(110) + "h"
                     + getColor(205) + "a" + getColor(208) + "t"
                     + getColor(161) + "G" + getColor(207) + "P"
@@ -71,7 +71,7 @@ public class AiPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    public static void runChatGpt() {
+    private static void runChatGpt() {
         Scanner scanner = new Scanner(System.in);
         try {
             while (true) {
@@ -99,7 +99,7 @@ public class AiPage extends Page {
         }
     }
 
-    public static void displayChatGptInfo() {
+    private static void displayChatGptInfo() {
         try {
             insertControlChars('n', 1);
             message("Model: " + getColor(mainColor) + getModel(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -114,7 +114,7 @@ public class AiPage extends Page {
         }
     }
 
-    public static void configureCreativity() {
+    private static void configureCreativity() {
         insertControlChars('n', 1);
         message("["+ getColor(mainColor) + "i" + getColor(layoutColor) + "] The creativity of the AI controls the creativity of responses.\n" +
                         alignment(getDefaultTextAlignment()) + "The higher the creativity," +
@@ -154,7 +154,7 @@ public class AiPage extends Page {
         }
     }
 
-    public static void configureMaxTokens() {
+    private static void configureMaxTokens() {
         insertControlChars('n', 1);
 
         message("["+ getColor(mainColor) + "i" + getColor(layoutColor) + "] Max tokens define the response length. More tokens allow longer answers.\n" +

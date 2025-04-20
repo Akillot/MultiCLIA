@@ -110,7 +110,7 @@ public class QrPage extends Page {
     }
 
     @Nullable
-    public String promptForUrl() {
+    private String promptForUrl() {
         insertControlChars('n', 1);
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 "Enter URL [include " + getColor(mainColor) + "http:// " + getColor(layoutColor)
@@ -129,7 +129,7 @@ public class QrPage extends Page {
         return input;
     }
 
-    public void modifyQrCodeSize() {
+    private void modifyQrCodeSize() {
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 String.format("Enter new size (%d-%d): ", MIN_SIZE, MAX_SIZE));
 
@@ -146,7 +146,7 @@ public class QrPage extends Page {
         }
     }
 
-    public void modifyQrCodeFormat() {
+    private void modifyQrCodeFormat() {
         showFormatsHelp();
         out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
                 "Enter image format [or 'help' to show formats]: ");
@@ -203,7 +203,7 @@ public class QrPage extends Page {
                 + getColor(layoutColor) + "] - For website favicons\n");
     }
 
-    public void ensureSaveDirectoryExists() throws Exception {
+    private void ensureSaveDirectoryExists() throws Exception {
         if (!Files.exists(SAVE_DIRECTORY)) {
             Files.createDirectories(SAVE_DIRECTORY);
         }

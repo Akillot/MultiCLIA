@@ -79,7 +79,7 @@ public class TimePage extends Page {
                 + getCurrentTimeZone(), layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-    public static @NotNull String getCurrentTime() {
+    private static @NotNull String getCurrentTime() {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         return localTime.format(formatter);
@@ -89,12 +89,12 @@ public class TimePage extends Page {
         insertControlChars('n',1);
     }
 
-    public static String getCurrentTimeZone() {
+    private static String getCurrentTimeZone() {
         return ZoneId.systemDefault().toString();
     }
 
     // timer
-    public static volatile boolean isTimerRunning = false;
+    private static volatile boolean isTimerRunning = false;
 
     private static void runTimer() {
         while (true) {
@@ -131,7 +131,7 @@ public class TimePage extends Page {
         }
     }
 
-    public static void startAsyncTimer(double seconds) {
+    private static void startAsyncTimer(double seconds) {
         new Thread(() -> {
             try {
                 for (double i = seconds; i >= 0; i--) {
@@ -183,7 +183,7 @@ public class TimePage extends Page {
         printElapsedTime(elapsedTime);
     }
 
-    public static double calculateElapsedTime(long startTime) {
+    private static double calculateElapsedTime(long startTime) {
         return (System.currentTimeMillis() - startTime) / 1000.0;
     }
 
@@ -218,7 +218,7 @@ public class TimePage extends Page {
         }
     }
 
-    public static boolean exitCheck(@NotNull String inputZone) {
+    private static boolean exitCheck(@NotNull String inputZone) {
         if (inputZone.equalsIgnoreCase("quit")) {
             if (isTimerRunning) {
                 isTimerRunning = false;
@@ -237,11 +237,11 @@ public class TimePage extends Page {
         return false;
     }
 
-    public static boolean isValidTimeZone(String zoneId) {
+    private static boolean isValidTimeZone(String zoneId) {
         return ZoneId.getAvailableZoneIds().contains(zoneId);
     }
 
-    public static @NotNull String getTimeInZone(String zoneId) {
+    private static @NotNull String getTimeInZone(String zoneId) {
         ZonedDateTime time = ZonedDateTime.now(ZoneId.of(zoneId));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm 'UTC'XXX");
         return time.format(formatter);

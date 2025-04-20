@@ -356,7 +356,7 @@ public class CryptographyPage extends Page {
         }
     }
 
-    public static @NotNull String bytesToHex(byte @NotNull [] bytes) {
+    private static @NotNull String bytesToHex(byte @NotNull [] bytes) {
         StringBuilder hexString = new StringBuilder();
         for (byte b : bytes) {
             hexString.append(String.format("%02x", b));

@@ -79,7 +79,7 @@ public class NetworkPage extends Page {
     }
 
     //<---ip command realization--->
-    public static void displayUserIp() {
+    private static void displayUserIp() {
         try {
             insertControlChars('n',1);
             InetAddress localHost = InetAddress.getLocalHost();
@@ -96,7 +96,7 @@ public class NetworkPage extends Page {
     }
 
     //<---sp command realization pt:1--->
-    public static void scanPorts() {
+    private static void scanPorts() {
         int startPort = 1;
         int endPort = 65535;
         int threads = 100;
@@ -152,7 +152,7 @@ public class NetworkPage extends Page {
     }
 
     //<---sp command realization pt:2--->
-    public static @NotNull Map<Integer, String> getCommonPorts() {
+    private static @NotNull Map<Integer, String> getCommonPorts() {
         Map<Integer, String> commonPorts = new HashMap<>();
         commonPorts.put(20, "FTP (Data)");
         commonPorts.put(21, "FTP (Control)");
@@ -407,7 +407,7 @@ public class NetworkPage extends Page {
     }
 
     //<---htr command realization pt:2--->
-    public static void sendHttpRequest(String link, String requestType, Map<String, String> headers, String body) {
+    private static void sendHttpRequest(String link, String requestType, Map<String, String> headers, String body) {
         try {
 
             String normalizedRequestType = switch (requestType.toUpperCase()) {
@@ -498,7 +498,7 @@ public class NetworkPage extends Page {
     }
 
     //<---htr command realization pt:3--->
-    public static @NotNull String readStream(InputStream stream) throws IOException {
+    private static @NotNull String readStream(InputStream stream) throws IOException {
         if (stream == null) return "No response body";
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
@@ -511,7 +511,7 @@ public class NetworkPage extends Page {
     }
 
     //<---htr command realization pt:4--->
-    public static @NotNull String formatJson(String json) {
+    private static @NotNull String formatJson(String json) {
         if (json == null || json.isEmpty()) return "{}";
 
         StringBuilder formatted = new StringBuilder();
@@ -550,7 +550,7 @@ public class NetworkPage extends Page {
 
     //<---htr command realization pt:5--->
     @Contract(pure = true)
-    public static @NotNull String getHttpStatusMessage(int statusCode) {
+    private static @NotNull String getHttpStatusMessage(int statusCode) {
         return switch (statusCode) {
             case 100 -> "Continue";
             case 101 -> "Switching Protocols";
@@ -619,7 +619,7 @@ public class NetworkPage extends Page {
     }
 
     //<---ni command realization--->
-    public static void displayNetworkInterfaces() {
+    private static void displayNetworkInterfaces() {
         try {
             insertControlChars('n', 1);
             message("Network Interfaces:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
