@@ -289,13 +289,13 @@ public class CommandManager {
         displayMenu();
     }
 
-    public static void exitPage(){
+    public static void exitPage(String text){
         marginBorder(2,2);
         message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
 
         message("Terminated correctly" + getColor(layoutColor) + ". "
-                        + getColor(mainColor) + "You are in main menu" + getColor(layoutColor) + ".", mainColor,
+                        + getColor(mainColor) + text + getColor(layoutColor) + ".", mainColor,
                 getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
     }

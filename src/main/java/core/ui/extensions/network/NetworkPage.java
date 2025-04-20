@@ -65,7 +65,7 @@ public class NetworkPage extends Page {
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage();
+                    exitPage("You are in main menu");
                     return;
                 }
                 default -> out.print("");

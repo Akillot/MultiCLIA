@@ -3,6 +3,7 @@ package core.commands;
 import core.ui.essential.pages.*;
 import core.logic.CommandManager;
 import core.ui.extensions.ai.AiPage;
+import core.ui.extensions.asciiartify.AsciiArtifyPage;
 import core.ui.extensions.qr.QrPage;
 import core.ui.extensions.cryptography.CryptographyPage;
 import core.ui.extensions.network.NetworkPage;
@@ -27,14 +28,14 @@ public class CommandHandler {
     public static final String[] fullCmds = {
             "help", "info" , "restart", "restart clear", "config",
             "clear", "time", "network", "genpass", "crypt",
-            "terminal", "ai", "qrcode", "weather",
+            "terminal", "ai", "qrcode", "weather", "asciiartify",
             "translate","support", "quit"};
 
     public static final String[] shortCmds = {
             "h", "i", "rst","rcl", "cfg",
             "cl", "t", "n", "gp", "cr",
-            "term", "a", "qr", "w", "tran",
-            "sup", "q"};
+            "term", "a", "qr", "w", "art",
+            "tran", "sup", "q"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
@@ -67,9 +68,10 @@ public class CommandHandler {
             case 11 -> new AiPage()::displayMenu;
             case 12 -> new QrPage()::displayMenu;
             case 13 -> new WeatherPage()::displayMenu;
-            case 14 -> TranslatePage::displayTranslatePage;
-            case 15 -> SupportPage::displaySupportPage;
-            case 16 -> ExitPage::displayExitPage;
+            case 14 -> new AsciiArtifyPage()::displayMenu;
+            case 15 -> TranslatePage::displayTranslatePage;
+            case 16 -> SupportPage::displaySupportPage;
+            case 17 -> ExitPage::displayExitPage;
             default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
                     + getColor(rejectionColor) + "Invalid command index");
         };

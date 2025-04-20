@@ -122,10 +122,7 @@ public class QrPage extends Page {
             return null;
         }
 
-        if (!input.startsWith("http://") && !input.startsWith("https://")) {
-            input = "https://" + input;
-        }
-
+        if (!input.startsWith("http://") && !input.startsWith("https://")) input = "https://" + input;
         return input;
     }
 
@@ -166,9 +163,7 @@ public class QrPage extends Page {
                 return;
             }
 
-            if (!input.startsWith(".")) {
-                input = "." + input;
-            }
+            if (!input.startsWith(".")) input = "." + input;
 
             for (String validFormat : VALID_FORMATS) {
                 if (input.equals(validFormat)) {
@@ -204,9 +199,7 @@ public class QrPage extends Page {
     }
 
     private void ensureSaveDirectoryExists() throws Exception {
-        if (!Files.exists(SAVE_DIRECTORY)) {
-            Files.createDirectories(SAVE_DIRECTORY);
-        }
+        if (!Files.exists(SAVE_DIRECTORY)) Files.createDirectories(SAVE_DIRECTORY);
     }
 
     private void showSuccess(String message) {
@@ -225,7 +218,7 @@ public class QrPage extends Page {
     }
 
     private void exitApplication() {
-        exitPage();
+        exitPage("You are in main menu");
     }
 
     private void showHelp() {
