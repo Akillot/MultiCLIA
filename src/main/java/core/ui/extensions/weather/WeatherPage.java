@@ -28,7 +28,7 @@ public class WeatherPage extends Page {
             {"Local weather", "lw"},
             {"Direct weather", "dw"},
             {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"Restart clean", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -68,7 +68,7 @@ public class WeatherPage extends Page {
                     insertControlChars('n', 1);
                     mainMenuRestart();
                 }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "restart clean", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

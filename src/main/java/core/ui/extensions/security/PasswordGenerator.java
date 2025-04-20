@@ -12,7 +12,7 @@ import static core.ui.essential.configs.DisplayManager.scanner;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static java.lang.System.out;
 
-public class GeneratePassword {
+public class PasswordGenerator {
 
     private static final int easyComplexityColor = 85;
     private static final int mediumComplexityColor = 214;
@@ -28,6 +28,7 @@ public class GeneratePassword {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        message("Password generator:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
         generatePasswordMenu();
     }
 
@@ -77,7 +78,6 @@ public class GeneratePassword {
                     getDefaultDelay(), out::println);
         }
     }
-
 
     private static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;

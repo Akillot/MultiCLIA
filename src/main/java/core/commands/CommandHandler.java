@@ -7,7 +7,7 @@ import core.ui.extensions.asciiartify.AsciiArtifyPage;
 import core.ui.extensions.qr.QrPage;
 import core.ui.extensions.cryptography.CryptographyPage;
 import core.ui.extensions.network.NetworkPage;
-import core.ui.extensions.security.GeneratePassword;
+import core.ui.extensions.security.PasswordGenerator;
 import core.ui.extensions.terminal_emulation.TerminalPage;
 import core.ui.extensions.time.TimePage;
 import core.ui.essential.configs.DisplayManager;
@@ -62,7 +62,7 @@ public class CommandHandler {
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> new TimePage()::displayMenu;
             case 7 -> new NetworkPage()::displayMenu;
-            case 8 -> new GeneratePassword()::displayMenu;
+            case 8 -> new PasswordGenerator()::displayMenu;
             case 9 -> new CryptographyPage()::displayMenu;
             case 10 -> new TerminalPage()::displayMenu;
             case 11 -> new AiPage()::displayMenu;
