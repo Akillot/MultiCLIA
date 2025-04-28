@@ -3,7 +3,6 @@ core/ui/extensions/asciiartify/LettersDictionary.class
 core/ui/extensions/network/NetworkPage.class
 core/ui/essential/configs/appearance/TextConfigs.class
 core/ui/essential/pages/StartPage.class
-core/ui/extensions/security/GeneratePassword.class
 core/ui/extensions/ai/ChatGPTClient.class
 core/ui/essential/configs/appearance/AppearanceConfigs.class
 core/ui/essential/pages/SupportPage.class
@@ -18,6 +17,7 @@ core/ui/extensions/cryptography/CryptographyPage.class
 core/logic/CommandManager.class
 core/ui/extensions/asciiartify/AsciiArtifyPage.class
 core/init/AppLauncher.class
+core/ui/extensions/security/PasswordGenerator.class
 core/ui/extensions/ai/AiPage.class
 core/ui/extensions/weather/WeatherPage.class
 core/commands/CommandHandler.class
