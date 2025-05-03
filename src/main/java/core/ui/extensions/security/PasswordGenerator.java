@@ -28,21 +28,21 @@ public class PasswordGenerator {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("Password generator:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Password generator:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         generatePasswordMenu();
     }
 
     private static void generatePasswordMenu() {
         try {
-            out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter length of password [1-80]: ");
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter length of password [1-80]: ");
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
                 message("Invalid password length. Please enter a number between 1 and 80.",
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 return;
             }
         } catch (Exception e) {
-            message("Invalid input. Please enter a number.", layoutColor, getDefaultTextAlignment(),
+            message("Invalid input. Please enter a number.", getLayoutColor(), getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
             scanner.nextLine();
         }
@@ -50,31 +50,31 @@ public class PasswordGenerator {
         scanner.nextLine();
 
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Password complexity ["
-                + getColor(easyComplexityColor) + "light" + getColor(layoutColor) + "|"
-                + getColor(easyComplexityColor) + "1" + getColor(layoutColor) + ", "
-                + getColor(mediumComplexityColor) + "medium" + getColor(layoutColor) + "|"
-                + getColor(mediumComplexityColor) + "2" + getColor(layoutColor) + ", "
-                + getColor(strongComplexityColor) + "strong" + getColor(layoutColor) + "|"
-                + getColor(strongComplexityColor) + "3" + getColor(layoutColor) + ", "
-                + getColor(extraComplexityColor) + "extra" + getColor(layoutColor) + "|"
-                + getColor(extraComplexityColor) + "4" + getColor(layoutColor) + "]: ");
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Password complexity ["
+                + getColor(easyComplexityColor) + "light" + getColor(getLayoutColor()) + "|"
+                + getColor(easyComplexityColor) + "1" + getColor(getLayoutColor()) + ", "
+                + getColor(mediumComplexityColor) + "medium" + getColor(getLayoutColor()) + "|"
+                + getColor(mediumComplexityColor) + "2" + getColor(getLayoutColor()) + ", "
+                + getColor(strongComplexityColor) + "strong" + getColor(getLayoutColor()) + "|"
+                + getColor(strongComplexityColor) + "3" + getColor(getLayoutColor()) + ", "
+                + getColor(extraComplexityColor) + "extra" + getColor(getLayoutColor()) + "|"
+                + getColor(extraComplexityColor) + "4" + getColor(getLayoutColor()) + "]: ");
 
         String passwordComplexity = scanner.nextLine().toLowerCase();
         String generatedPassword = createPassword(passwordComplexity);
         if (generatedPassword != null) {
             insertControlChars('n', 1);
             message("Generated Password: " + generatedPassword,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
             displayConfirmation("Enter", "y", "+",
                     "to open and", "n", "-", "to skip",
-                    acceptanceColor, rejectionColor, layoutColor, getDefaultTextAlignment());
+                    getAcceptanceColor(), getRejectionColor(), getLayoutColor(), getDefaultTextAlignment());
 
-            choice("Copy to clipboard", copyToClipboard(generatedPassword), layoutColor, layoutColor, rejectionColor);
+            choice("Copy to clipboard", copyToClipboard(generatedPassword), getLayoutColor(), getLayoutColor(), getRejectionColor());
             marginBorder(2, 1);
         } else {
-            message("Invalid complexity option. Please try again.", layoutColor, getDefaultTextAlignment(),
+            message("Invalid complexity option. Please try again.", getLayoutColor(), getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
         }
     }

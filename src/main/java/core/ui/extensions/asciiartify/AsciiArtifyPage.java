@@ -46,21 +46,21 @@ public class AsciiArtifyPage {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("ASCIIArtify:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("ASCIIArtify:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         generateArt();
     }
 
     private static void generateArt() {
         Scanner scanner = new Scanner(System.in);
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter text to convert to ASCII banner: ");
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter text to convert to ASCII banner: ");
         String text = scanner.nextLine().trim();
 
-        if (text.isEmpty()) out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +  "Error: Input text cannot be empty.");
+        if (text.isEmpty()) out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +  "Error: Input text cannot be empty.");
 
         String banner = generateBanner(text);
         insertControlChars('n', 1);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Here is your ASCII banner:");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Here is your ASCII banner:");
         insertControlChars('n', 1);
         out.println(banner);
         marginBorder(2, 1);

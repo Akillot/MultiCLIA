@@ -22,7 +22,9 @@ core/ui/extensions/ai/AiPage.class
 core/ui/extensions/weather/WeatherPage.class
 core/commands/CommandHandler.class
 core/ui/extensions/qr/QrCodeGenerator.class
+core/ui/essential/pages/LoggerPage.class
 core/ui/essential/pages/Page.class
+core/ui/essential/pages/LaunchConfigurationPage.class
 core/ui/essential/pages/ConfigPage.class
 core/ui/extensions/weather/WeatherPage$WeatherService.class
 core/ui/essential/pages/InfoPage.class

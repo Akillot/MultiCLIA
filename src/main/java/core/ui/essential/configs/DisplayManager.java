@@ -18,11 +18,11 @@ public class DisplayManager {
         String API_KEY = dotenv.get(apiKeyName);
 
         if (API_KEY == null || API_KEY.isEmpty()) {
-            message("API Key is unavailable " + getColor(layoutColor) + "[" + apiKeyName + "].", 220, getDefaultLogoAlignment(),
+            message("API Key is unavailable " + getColor(getLayoutColor()) + "[" + apiKeyName + "].", 220, getDefaultLogoAlignment(),
                     getDefaultDelay(), out::print);
         }
         else{
-            message("API Key is available " + getColor(layoutColor) + "[" + apiKeyName + "].", acceptanceColor, getDefaultLogoAlignment(),
+            message("API Key is available " + getColor(getLayoutColor()) + "[" + apiKeyName + "].", getAcceptanceColor(), getDefaultLogoAlignment(),
                     getDefaultDelay(), out::print);
         }
     }
@@ -35,18 +35,18 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
     private static void displayAllCommandList() {
         insertControlChars('n', 1);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Commands: \n"
-                + alignment(-68) + getColor(mainColor));
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Commands: \n"
+                + alignment(-68) + getColor(getMainColor()));
 
         for (int i = 0; i < fullCmds.length; i++) {
             message("·  " + fullCmds[i] + " ["
-                    + getColor(mainColor) + shortCmds[i] + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    + getColor(getMainColor()) + shortCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         }
         marginBorder(2,1);
@@ -64,10 +64,10 @@ public class DisplayManager {
             }
         } catch (Exception e) {
             message("Error executing action",
-                    rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-            message("Status: " + getColor(rejectionColor) + "x",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Status: " + getColor(getRejectionColor()) + "x",
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 }

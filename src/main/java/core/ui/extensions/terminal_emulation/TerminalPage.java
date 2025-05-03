@@ -31,12 +31,12 @@ public class TerminalPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("Terminal [Read-Only Mode]:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Terminal [Read-Only Mode]:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(layoutColor) + searchingArrow, "");
+                    getColor(getLayoutColor()) + getSearchingArrow(), "");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -68,8 +68,8 @@ public class TerminalPage extends Page {
     private static void executeCommand() {
         while (true) {
             try {
-                out.print(alignment(getDefaultTextAlignment()) + getBackColor(33) + getColor(layoutColor)
-                        + "Enter command [or q to quit]:" + RESET + getColor(layoutColor) + " ");
+                out.print(alignment(getDefaultTextAlignment()) + getBackColor(33) + getColor(getLayoutColor())
+                        + "Enter command [or q to quit]:" + RESET + getColor(getLayoutColor()) + " ");
                 String input = scanner.nextLine().trim();
 
                 if (input.equalsIgnoreCase("q")) {
@@ -80,8 +80,8 @@ public class TerminalPage extends Page {
                 executeReadOnlyCommand(input);
 
             } catch (Exception e) {
-                message(getBackColor(rejectionColor) + "Error: " + e.getMessage() + "." + RESET,
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message(getBackColor(getRejectionColor()) + "Error: " + e.getMessage() + "." + RESET,
+                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
     }
@@ -99,7 +99,7 @@ public class TerminalPage extends Page {
                 if (commands.length > 1) {
                     changeDirectory(commands[1]);
                 } else {
-                    message(getBackColor(45) + "Usage: cd <directory>" + RESET, layoutColor,
+                    message(getBackColor(45) + "Usage: cd <directory>" + RESET, getLayoutColor(),
                             getDefaultTextAlignment(), getDefaultDelay(), out::println);
                 }
                 return;
@@ -120,26 +120,26 @@ public class TerminalPage extends Page {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     message(getBackColor(67) + line + RESET,
-                            layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                            getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 }
             }
 
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                message(getBackColor(rejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET,
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message(getBackColor(getRejectionColor()) + "Command failed with exit code: " + exitCode + "." + RESET,
+                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             } else {
                 insertControlChars('n', 1);
                 message(getBackColor(34) + "Process completed successfully." + RESET,
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
 
         } catch (IOException e) {
-            message(getBackColor(rejectionColor) + "I/O Error while executing command: " + e.getMessage() + "." + RESET,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message(getBackColor(getRejectionColor()) + "I/O Error while executing command: " + e.getMessage() + "." + RESET,
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } catch (InterruptedException e) {
-            message(getBackColor(rejectionColor) + "Process was interrupted: " + e.getMessage() + "." + RESET,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message(getBackColor(getRejectionColor()) + "Process was interrupted: " + e.getMessage() + "." + RESET,
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             Thread.currentThread().interrupt();
         }
     }
@@ -175,23 +175,23 @@ public class TerminalPage extends Page {
             String line;
             while ((line = reader.readLine()) != null) {
                 message(getBackColor(67) + line + RESET,
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
             }
         }
 
         int exitCode = process.waitFor();
         if (exitCode != 0) {
-            message(getBackColor(rejectionColor) + "Command failed with exit code: " + exitCode + "." + RESET,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message(getBackColor(getRejectionColor()) + "Command failed with exit code: " + exitCode + "." + RESET,
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 
     private static void blockEditingCommand(String command) {
-        message(getBackColor(rejectionColor) +
+        message(getBackColor(getRejectionColor()) +
                         "Sorry, this terminal is in read-only mode and does not support the '" + command + "' command." + RESET,
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         message(getBackColor(33) + "You can only view files using commands like cat, less, more, etc." + RESET,
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private static void changeDirectory(String newPath) {
@@ -199,10 +199,10 @@ public class TerminalPage extends Page {
         if (newDir.toFile().exists() && newDir.toFile().isDirectory()) {
             currentDirectory = newDir;
             message(getBackColor(214) + "Directory changed to: " + currentDirectory + "." + RESET,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         } else {
-            message(getBackColor(rejectionColor) + "No such directory: " + newPath + "." + RESET,
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message(getBackColor(getRejectionColor()) + "No such directory: " + newPath + "." + RESET,
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         }
     }
 }
