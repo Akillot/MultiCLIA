@@ -42,7 +42,6 @@ public class InfoPage {
         marginBorder(2,1);
     }
 
-    //app directory
     private static void displayApplicationDirectory() {
         try {
             String appPath = new File(
@@ -57,7 +56,6 @@ public class InfoPage {
         }
     }
 
-    //important links
     private static void displayImportantLinks(){
         insertControlChars('n', 1);
 
@@ -67,7 +65,7 @@ public class InfoPage {
                 openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
                 getMainColor(), getLayoutColor(), getRejectionColor());
 
-        insertControlChars('n', 2);
+        insertControlChars('n', 1);
 
         choice(getColor(getLayoutColor()) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 getMainColor(), getLayoutColor(), getRejectionColor());

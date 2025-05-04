@@ -2,6 +2,7 @@ package core.ui.essential.configs;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static core.commands.CommandHandler.*;
@@ -13,21 +14,6 @@ import static java.lang.System.*;
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    public static void apiKeyChecking(String apiKeyName) {
-        Dotenv dotenv = Dotenv.load();
-        String API_KEY = dotenv.get(apiKeyName);
-
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            message("API Key is unavailable " + getColor(getLayoutColor()) + "[" + apiKeyName + "].", 220, getDefaultLogoAlignment(),
-                    getDefaultDelay(), out::print);
-        }
-        else{
-            message("API Key is available " + getColor(getLayoutColor()) + "[" + apiKeyName + "].", getAcceptanceColor(), getDefaultLogoAlignment(),
-                    getDefaultDelay(), out::print);
-        }
-    }
-
-    // displaying help command
     public static void displayCommandList() {
         try {
             marginBorder(1,1);
@@ -52,7 +38,6 @@ public class DisplayManager {
         marginBorder(2,1);
     }
 
-    // cl
     public static void clearTerminal() {
         try {
             String operatingSystem = System.getProperty("os.name");

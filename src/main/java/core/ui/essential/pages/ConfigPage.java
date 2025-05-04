@@ -28,7 +28,6 @@ public class ConfigPage extends Page {
             {"Quit", "q"}
     };
 
-    //Java logo
     private static String[] JAVA_ASCII_LOGO = {
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⠀",196),
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⠟⠀⣀⣠⠄⠀⠀⠀⠀",196),
@@ -82,7 +81,6 @@ public class ConfigPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // Display memory information and other
     public static void displayMemoryInfo() {
         Runtime runtime = Runtime.getRuntime();
         long totalJvmMemory = runtime.totalMemory();
@@ -100,13 +98,11 @@ public class ConfigPage extends Page {
         insertControlChars('n', 1);
         message("System Memory Info:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-        // Display JVM memory stats
         message("JVM Memory Statistics", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         message("Used JVM Memory: " + formatMemory(usedJvmMemory), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         message("Free JVM Memory: " + formatMemory(freeJvmMemory), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         message("Total JVM Memory: " + formatMemory(totalJvmMemory), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
-        // Display ROM stats
         insertControlChars('n', 1);
         message("ROM Info", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         executeTerminalCommand("df -h");
@@ -117,7 +113,6 @@ public class ConfigPage extends Page {
         return String.format("%.2f Gi", memoryInBytes / (1024.0 * 1024 * 1024));
     }
 
-    //CPU methods
     private static void displayCpuLoad() {
         com.sun.management.OperatingSystemMXBean osBean =
                 (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
@@ -141,7 +136,6 @@ public class ConfigPage extends Page {
                 getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
-    //java info
     @Contract(pure = true)
     private static void displayLogo(String @NotNull [] logo){
         for (String s : logo) {
@@ -152,7 +146,6 @@ public class ConfigPage extends Page {
     private static void displayJavaInfo() {
         insertControlChars('n',1);
         displayLogo(JAVA_ASCII_LOGO);
-        //message("━━━━━━━━━━━━━━━━━━━━━━", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         String javaVersion = System.getProperty("java.version");
         String javaVendor = System.getProperty("java.vendor");

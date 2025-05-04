@@ -24,7 +24,7 @@ public class TimePage extends Page {
             {"Calendar", "c"},
             {"Timer", "t"},
             {"Stopwatch", "sw"},
-            {"Change time zone", "ctz"},
+            {"Time zone", "tz"},
             {"Restart", "rst"},
             {"Restart clear", "rcl"},
             {"Clear", "cl"},
@@ -48,7 +48,7 @@ public class TimePage extends Page {
                 case "app runtime", "ar" -> displayAppRuntime();
                 case "timer", "t" -> runTimer();
                 case "stopwatch", "sw" -> runStopwatch();
-                case "change time zone", "ctz" -> displayCustomTimeZone();
+                case "time zone", "tz" -> displayCustomTimeZone();
                 case "restart", "rst" -> {
                     insertControlChars('n',1);
                     mainMenuRestart();
@@ -70,7 +70,6 @@ public class TimePage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // current time
     private static void displayCurrentTime() {
         insertControlChars('n',1);
         message("Current Time: " + getColor(getMainColor())
@@ -93,7 +92,6 @@ public class TimePage extends Page {
         return ZoneId.systemDefault().toString();
     }
 
-    // timer
     private static volatile boolean isTimerRunning = false;
 
     private static void runTimer() {
@@ -154,7 +152,7 @@ public class TimePage extends Page {
                 insertControlChars('n',1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
                         + "Enter time in seconds (or '" + getColor(getMainColor())
-                        + "quit" + getColor(getLayoutColor()) + "' to close): ");
+                        + "q" + getColor(getLayoutColor()) + "' to close): ");
             } catch (InterruptedException e) {
                 message("Timer interrupted" + getColor(getLayoutColor()) + ".", getRejectionColor(),
                         getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -164,7 +162,6 @@ public class TimePage extends Page {
         }).start();
     }
 
-    // stopwatch
     private static void runStopwatch() {
         insertControlChars('n', 1);
         message("Press " + getColor(getMainColor()) + "'Enter'" + getColor(getLayoutColor())
@@ -193,13 +190,12 @@ public class TimePage extends Page {
                 getDefaultDelay(), out::println);
     }
 
-    // change time zone
     private static void displayCustomTimeZone() {
         insertControlChars('n', 1);
 
         while (true) {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter a time zone [e.g., "
-                    + getColor(219) + "Europe" + getColor(getLayoutColor())
+                    + getColor(getMainColor()) + "Europe" + getColor(getLayoutColor())
                     + "/" + getColor(getMainColor()) + "Paris" + getColor(getLayoutColor()) + "]: ");
 
             String inputZone = scanner.nextLine().trim();
@@ -219,7 +215,7 @@ public class TimePage extends Page {
     }
 
     private static boolean exitCheck(@NotNull String inputZone) {
-        if (inputZone.equalsIgnoreCase("quit")) {
+        if (inputZone.equalsIgnoreCase("q")) {
             if (isTimerRunning) {
                 isTimerRunning = false;
                 insertControlChars('n', 1);
