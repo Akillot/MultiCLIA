@@ -10,10 +10,10 @@ import java.util.Random;
 
 import static core.commands.CommandHandler.fullCmds;
 import static core.logic.CommandManager.*;
+import static core.ui.essential.configs.DisplayManager.apiKeyChecking;
+import static core.ui.essential.configs.DisplayManager.apiKeyNames;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
-import static core.ui.essential.pages.ApiPage.apiKeyChecking;
-import static core.ui.essential.pages.ApiPage.apiKeyNames;
 import static core.ui.essential.pages.InfoPage.getVersion;
 import static java.lang.System.out;
 

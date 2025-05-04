@@ -19,7 +19,7 @@ public class ConfigPage extends Page {
             {"Memory", "m"},
             {"CPU", "c"},
             {"Color table", "coltab"},
-            {"Change Color", "ccol"},
+            {"Change design", "cd"},
             {"Java", "j"},
             {"Restart", "rst"},
             {"Restart clear", "rcl"},
@@ -58,7 +58,7 @@ public class ConfigPage extends Page {
                 case "memory", "m" -> displayMemoryInfo();
                 case "cpu", "c" -> displayCpuLoad();
                 case "color table", "coltab" -> displayColorTable();
-                case "change color", "ccol" -> changeColor();
+                case "change design", "cd" -> changeDesign();
                 case "java", "j" -> displayJavaInfo();
                 case "restart", "rst" -> {
                     insertControlChars('n',1);
@@ -172,8 +172,18 @@ public class ConfigPage extends Page {
                 getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
-    private static void changeColor(){
+    private static void changeDesign(){
         insertControlChars('n',1);
+        message("·  Main color code: " + getColor(getMainColor()) + getMainColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Layout color code: " + getLayoutColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Acceptance color code: " + getColor(getAcceptanceColor()) + getAcceptanceColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Rejection color code: " + getColor(getRejectionColor()) + getRejectionColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
+        message("·  Searching arrow: " + getSearchingArrow(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Delay: " + getDefaultDelay(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+
+        message("·  Default logo alignment: " + getDefaultLogoAlignment(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Default text alignment: " + getDefaultTextAlignment(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("·  Searching line alignment: " + getSearchingLineAlignment(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 }
