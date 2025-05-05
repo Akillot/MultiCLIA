@@ -28,7 +28,7 @@ public class WeatherPage extends Page {
             {"Local weather", "lw"},
             {"Direct weather", "dw"},
             {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"Restart clean", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -37,21 +37,16 @@ public class WeatherPage extends Page {
     static {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("OPEN_WEATHER_API_KEY");
-
-        if(API_KEY == null || API_KEY.isEmpty()) {
-            insertControlChars('n',1);
-            message("Weather is unavailable. Check your API Key.", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
-        }
     }
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("Weather:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Weather:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(layoutColor) + searchingArrow, "");
+                    getColor(getLayoutColor()) + getSearchingArrow(), "");
             String input = scanner.nextLine().toLowerCase().trim();
 
             switch (input) {
@@ -61,23 +56,23 @@ public class WeatherPage extends Page {
                 }
                 case "direct weather", "dw" -> {
                     insertControlChars('n', 1);
-                    out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter city name: ");
+                    out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter city name: ");
                     String city = scanner.nextLine().trim();
                     if (!city.isEmpty()) {
                         WeatherService.getWeather(city);
                     } else {
-                        message("City name cannot be empty!", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        message("City name cannot be empty!", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     }
                 }
                 case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRestart();
                 }
-                case "restart clear", "rсl" -> mainMenuRestartWithClearing();
+                case "restart clean", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage();
+                    exitPage("You are in main menu");
                     return;
                 }
                 default -> out.print("");
@@ -90,20 +85,20 @@ public class WeatherPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    public static class WeatherService {
+    private static class WeatherService {
 
         private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=" + API_KEY;
         private static final String GEO_IP_URL = "http://ip-api.com/json";
-        public static OkHttpClient client = new OkHttpClient();
+        private static OkHttpClient client = new OkHttpClient();
 
-        public static void getWeather(String city) {
+        private static void getWeather(String city) {
             String url = String.format(BASE_URL, city);
             Request request = new Request.Builder().url(url).build();
 
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) {
                     message("Error: Unable to fetch weather data. HTTP Code: " + response.code(),
-                            rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                            getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
                 }
 
@@ -119,24 +114,24 @@ public class WeatherPage extends Page {
                 double pressure = jsonNode.get("main").get("pressure").asDouble();
 
                 insertControlChars('n', 1);
-                message("🌤  Weather in " + city + ":", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("🌡  Temperature: " + temp + "°C", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("💨  Wind Speed: " + windSpeed + " m/s", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("💧  Humidity: " + humidity + "%", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("🔽  Pressure: " + pressure + " hPa", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("🌤  Weather in " + city + ":", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("🌡  Temperature: " + temp + "°C", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("💨  Wind Speed: " + windSpeed + " m/s", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("💧  Humidity: " + humidity + "%", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("🔽  Pressure: " + pressure + " hPa", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             } catch (IOException e) {
                 insertControlChars('n', 1);
-                message("Error fetching weather data: " + e.getMessage(), rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("Error fetching weather data: " + e.getMessage(), getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
 
-        public static void getWeatherByIP() {
+        private static void getWeatherByIP() {
             Request request = new Request.Builder().url(GEO_IP_URL).build();
 
             try (Response response = client.newCall(request).execute()) {
                 if (!response.isSuccessful()) {
                     message("Error: Unable to determine location. HTTP Code: " + response.code(),
-                            rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                            getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
                     return;
                 }
 
@@ -148,11 +143,11 @@ public class WeatherPage extends Page {
                 String city = jsonNode.get("city").asText();
                 String country = jsonNode.get("country").asText();
 
-                message("📍 Your location: " + city + ", " + country, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("📍 Your location: " + city + ", " + country, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
                 getWeather(city);
             } catch (IOException e) {
-                message("Error fetching location data: " + e.getMessage(), rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("Error fetching location data: " + e.getMessage(), getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         }
     }

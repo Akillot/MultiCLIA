@@ -15,16 +15,16 @@ public class SupportPage {
     private static void displaySupportMenu() {
         marginBorder(1,2);
         message("Thank you for using MultiCLIA!\n" + alignment(getDefaultTextAlignment()) +
-                "Let's keep making great things happen together!", layoutColor,getDefaultTextAlignment(),
+                "Let's keep making great things happen together!", getLayoutColor(), getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
 
         insertControlChars('n',1);
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                acceptanceColor, rejectionColor, layoutColor,getDefaultTextAlignment());
+                getAcceptanceColor(), getRejectionColor(), getLayoutColor(),getDefaultTextAlignment());
 
-        choice(getColor(layoutColor) + "☕" + getColor(mainColor) + " Buy Me A Coffee",openUri("https://buymeacoffee.com/akillot"),
-                mainColor, layoutColor, rejectionColor);
+        choice(getColor(getLayoutColor()) + "☕" + getColor(getMainColor()) + " Buy Me A Coffee",openUri("https://buymeacoffee.com/akillot"),
+                getMainColor(), getLayoutColor(), getRejectionColor());
         marginBorder(2,1);
     }
 }

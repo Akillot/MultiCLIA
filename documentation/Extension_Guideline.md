@@ -40,11 +40,11 @@ src/main/java/core/ui/extensions/MyExtension/
 public class MyExtensionPage extends Page {
     public static void displayMenu() {
         marginBorder(1, 2);
-        message("MyExtension:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("MyExtension:", getgetLayoutColor()(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         displayListOfCommands(commands);
 
         while (true) {
-            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(layoutColor) + searchingArrow, "");
+            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false, getColor(getgetLayoutColor()()) + searchingArrow, "");
             String input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
@@ -60,7 +60,7 @@ public class MyExtensionPage extends Page {
 
     private static void sayHello() {
         insertControlChars('n', 1);
-        message("Hello from MyExtension!", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Hello from MyExtension!", getgetLayoutColor()(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
     private static final String[][] commands = {

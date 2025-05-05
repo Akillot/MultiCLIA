@@ -1,11 +1,11 @@
 package core.ui.essential.configs.appearance;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.io.*;
 import java.util.Random;
 
 import static core.ui.essential.configs.appearance.TextConfigs.*;
@@ -13,48 +13,73 @@ import static java.lang.System.out;
 
 public class AppearanceConfigs {
 
-    //Delay
-    @Getter @Setter
-    private static int defaultDelay = 0;
+    private static final String CONFIG_PATH = "config.json";
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    //Alignment
-    @Getter @Setter
-    private static int searchingLineAlignment = 48;
+    private static AppearanceConfigData config = new AppearanceConfigData();
 
-    @Getter @Setter
-    private static int defaultTextAlignment = 58;
+    // Геттеры
+    public static int getDefaultDelay() { return config.defaultDelay; }
+    public static int getSearchingLineAlignment() { return config.searchingLineAlignment; }
+    public static int getDefaultTextAlignment() { return config.defaultTextAlignment; }
+    public static int getDefaultLogoAlignment() { return config.defaultLogoAlignment; }
 
-    @Getter @Setter
-    private static int defaultLogoAlignment = 48;
+    public static int getColor1() { return config.color1; }
+    public static int getColor2() { return config.color2; }
+    public static int getColor3() { return config.color3; }
+    public static int getColor4() { return config.color4; }
+    public static int getColor5() { return config.color5; }
+    public static int getColor6() { return config.color6; }
 
-    public static String searchingArrow = "> ";
+    public static int getMainColor() { return config.mainColor; }
+    public static int getLayoutColor() { return config.layoutColor; }
+    public static int getAcceptanceColor() { return config.acceptanceColor; }
+    public static int getRejectionColor() { return config.rejectionColor; }
 
-    //Colors of logo
-    @Getter @Setter
-    public static int color1 = 219;
-    @Getter @Setter
-    public static int color2 = 183;
-    @Getter @Setter
-    public static int color3 = 147;
-    @Getter @Setter
-    public static int color4 = 218;
-    @Getter @Setter
-    public static int color5 = 182;
-    @Getter @Setter
-    public static int color6 = 218;
+    public static String getSearchingArrow(){ return config.searchingArrow; }
 
-    //System Colors
-    @Getter @Setter
-    public static int mainColor = 147;
-    @Getter @Setter
-    public static int layoutColor = 15;
-    @Getter @Setter
-    public static int acceptanceColor = 46;
-    @Getter @Setter
-    public static int rejectionColor = 160;
-
-    //Borders
     public static final int DEFAULT_BORDER_WIDTH = 62;
+
+    public static void setMainColor(int color) {
+        config.mainColor = color;
+        saveConfig();
+    }
+
+    public static void loadConfig() {
+        try (Reader reader = new FileReader(CONFIG_PATH)) {
+            config = GSON.fromJson(reader, AppearanceConfigData.class);
+        } catch (IOException e) {
+            setDefaultValues();
+            saveConfig();
+        }
+    }
+
+    public static void saveConfig() {
+        try (Writer writer = new FileWriter(CONFIG_PATH)) {
+            GSON.toJson(config, writer);
+        } catch (IOException e) {}
+    }
+
+    private static void setDefaultValues() {
+        config.defaultDelay = 0;
+        config.searchingLineAlignment = 48;
+        config.defaultTextAlignment = 58;
+        config.defaultLogoAlignment = 48;
+
+        config.color1 = 219;
+        config.color2 = 183;
+        config.color3 = 147;
+        config.color4 = 218;
+        config.color5 = 182;
+        config.color6 = 218;
+
+        config.mainColor = 147;
+        config.layoutColor = 15;
+        config.acceptanceColor = 46;
+        config.rejectionColor = 160;
+
+        config.searchingArrow = "> ";
+    }
 
     public static final String RESET = "\033[0m";
     public static final String UNDERLINE = "\033[4m";
@@ -89,23 +114,11 @@ public class AppearanceConfigs {
         return getBackColor(colorCode);
     }
 
-    //Border
-    private static final ArrayList<String> borderChars = new ArrayList<>();
-    @Getter
-    private static int borderWidth = DEFAULT_BORDER_WIDTH;
-
-    static {
-        borderChars.add("━");
-        borderChars.add("-");
-        borderChars.add("*");
-        borderChars.add("#");
-    }
-
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                layoutColor,62,0,out::print);
+                getLayoutColor(),DEFAULT_BORDER_WIDTH,0,out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
@@ -125,15 +138,15 @@ public class AppearanceConfigs {
                 Thread.currentThread().interrupt();
             }
         }
-        out.print(getColor(acceptanceColor) + "\r    ✓" + RESET);
+        out.print(getColor(getAcceptanceColor()) + "\r    ✓" + RESET);
     }
 
     //Color table components
     @Contract(pure = true)
     public static void displayColorTable() {
         insertControlChars('n',1);
-        message("Color Table:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        printColorRange(0, layoutColor);
+        message("Color Table:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        printColorRange(0, getLayoutColor());
         printColorBlock();
         printColorRange(232, 255);
     }
@@ -142,7 +155,7 @@ public class AppearanceConfigs {
     private static void printColorRange(int start, int end) {
         out.println(RESET);
         for (int i = start; i <= end; i++) {
-            out.print(getColor(layoutColor) + getBackColor(i)
+            out.print(getColor(getLayoutColor()) + getBackColor(i)
                     + tableAlignment() + " " + i + " " + RESET);
             if ((i - start + 1) % 8 == 0) insertControlChars('n',2);
         }
@@ -156,7 +169,7 @@ public class AppearanceConfigs {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 int colorCode = 16 + row + col * rows;
-                out.print(getColor(layoutColor) + getBackColor(colorCode)
+                out.print(getColor(getLayoutColor()) + getBackColor(colorCode)
                         + tableAlignment() + " " + colorCode + " " + RESET);
             }
             if(row == 11){

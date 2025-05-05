@@ -41,14 +41,14 @@ OPENAI_API_KEY=your-api-key-here
 
 Save and exit (CTRL + X, then Y, then Enter).
 
-### Step 5: Run MultiCLIA
+### Step 5: Run this commands in MultiCLIA
 
 ```sh
-/a
+a
 ```
 
 ```sh
-/i
+i
 ```
 
 You should see:
@@ -120,7 +120,7 @@ Save and exit (CTRL + X, then Y, then Enter).
 ### Step 4: Run MultiCLIA Translation Command
 Start MultiCLIA and enter:
 ```sh
-/tr
+tran
 ```
 
 Enter the text to translate and the target language (e.g., EN for English, DE for German).

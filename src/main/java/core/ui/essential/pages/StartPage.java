@@ -11,6 +11,7 @@ import java.util.Random;
 import static core.commands.CommandHandler.fullCmds;
 import static core.logic.CommandManager.*;
 import static core.ui.essential.configs.DisplayManager.apiKeyChecking;
+import static core.ui.essential.configs.DisplayManager.apiKeyNames;
 import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
 import static core.ui.essential.pages.InfoPage.getVersion;
@@ -30,16 +31,15 @@ public class StartPage {
             "║   ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                      ║",
             "║   ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                      ║",
             "║   ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                      ║",
-            "║   ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝    v." + getVersion() + getColor(layoutColor) +"   ║",
+            "║   ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝    v." + getVersion() + getColor(getLayoutColor()) +"   ║",
             "║                                                                                         ║",
             "╚═════════════════════════════════════════════════════════════════════════════════════════╝"
     };
 
     public static void displayMenu() {
+        loadConfig();
         insertControlChars('n',1);
-        apiKeyChecking("OPENAI_API_KEY");
-        apiKeyChecking("DEEPL_API_KEY");
-        apiKeyChecking("OPEN_WEATHER_API_KEY");
+        apiKeyChecking(apiKeyNames);
         insertControlChars('n',1);
         displayLogo(MAIN_LOGO_ASCII, getDefaultLogoAlignment());
         insertControlChars('n',1);
@@ -52,7 +52,7 @@ public class StartPage {
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";
-                message(errorMessage, mainColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message(errorMessage, getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
             }
         }
     }
@@ -63,14 +63,14 @@ public class StartPage {
         String[] motto = {
                 "Built for you.", "Command-driven simplicity.","Fast. Smooth. Ready.", "Harmony in command.",
                 "It starts with a command.", "Optimal width of the terminal window: 108 characters and wider.",
-                "Hi " + getColorText(capitalizeMessage(userName), mainColor)
-                        + getColor(layoutColor) + " and welcome to MultiCLIA!", "Everything you need.",
+                "Hi " + getColorText(capitalizeMessage(userName), getMainColor())
+                        + getColor(getLayoutColor()) + " and welcome to MultiCLIA!", "Everything you need.",
                 "What you think about when you think about MultiCLIA?",
-                "Find a bug or have an idea? Go to" + getColor(mainColor) + " nickzozulia@gmail.com" + getColor(layoutColor) + "."};
+                "Find a bug or have an idea? Go to" + getColor(getMainColor()) + " nickzozulia@gmail.com" + getColor(getLayoutColor()) + "."};
 
         int index = rand.nextInt(0, motto.length);
-        message("For start type '" + getColor(mainColor)
-                + fullCmds[0] + getColor(layoutColor) + "'. " + motto[index],15,getDefaultLogoAlignment(),
+        message("For start type '" + getColor(getMainColor())
+                + fullCmds[0] + getColor(getLayoutColor()) + "'. " + motto[index],15,getDefaultLogoAlignment(),
                 getDefaultDelay(),out::print);
     }
 
@@ -80,9 +80,9 @@ public class StartPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
         message("Application start time" + ": "
-                        + getColor(mainColor) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + getColor(layoutColor) + dateAndTimeOfProgramLaunching
-                        + getColor(layoutColor) + ".",
-                layoutColor,getDefaultLogoAlignment(),getDefaultDelay(),out::print);
+                        + getColor(getMainColor()) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + getColor(getLayoutColor()) + dateAndTimeOfProgramLaunching
+                        + getColor(getLayoutColor()) + ".",
+                getLayoutColor(),getDefaultLogoAlignment(),getDefaultDelay(),out::print);
     }
 
     private static void displayLogo(String @NotNull [] logo, int alignment) {
@@ -90,15 +90,15 @@ public class StartPage {
 
         for (int i = 0; i < logo.length; i++) {
             String coloredText = colors[i % colors.length] + logo[i] + RESET;
-            message(coloredText, layoutColor, alignment, getDefaultDelay(), System.out::print);
+            message(coloredText, getLayoutColor(), alignment, getDefaultDelay(), System.out::print);
         }
     }
 
     private static String @NotNull [] getColorsForLogo() {
         return new String[]{
-                getColor(layoutColor), getColor(layoutColor),
-                getColor(layoutColor), getColor(layoutColor),
-                getColor(layoutColor), getColor(layoutColor),
+                getColor(getLayoutColor()), getColor(getLayoutColor()),
+                getColor(getLayoutColor()), getColor(getLayoutColor()),
+                getColor(getLayoutColor()), getColor(getLayoutColor()),
         };
     }
 }

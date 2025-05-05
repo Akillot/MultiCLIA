@@ -14,8 +14,8 @@ public abstract class Page {
     protected void displayListOfCommands(String[][] commands) {
         insertControlChars('n', 1);
         for (String[] command : commands) {
-            message("·  " + command[0] + " [" + getColor(mainColor) + command[1] + getColor(layoutColor) + "]",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("·  " + command[0] + " [" + getColor(getMainColor()) + command[1] + getColor(getLayoutColor()) + "]",
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
         insertControlChars('n', 1);
     }

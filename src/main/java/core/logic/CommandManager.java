@@ -58,13 +58,13 @@ public class CommandManager {
             if (contentType != null && contentType.contains("application/json")) {
                 parseJsonResponse(response, key, text);
             } else {
-                message("Response:\n" + response, layoutColor, getDefaultTextAlignment(),
+                message("Response:\n" + response, getLayoutColor(), getDefaultTextAlignment(),
                         getDefaultDelay(), out::print);
             }
 
         } catch (URISyntaxException | IOException e) {
-            message("Request failed: " + getColor(rejectionColor) + e.getMessage(),
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Request failed: " + getColor(getRejectionColor()) + e.getMessage(),
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
@@ -83,10 +83,10 @@ public class CommandManager {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String value = jsonResponse.optString(key, "Key not found");
-            message(text + value, layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message(text + value, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         } catch (Exception e) {
-            message("JSON parsing error: " + getColor(rejectionColor) + e.getMessage(),
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("JSON parsing error: " + getColor(getRejectionColor()) + e.getMessage(),
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 
@@ -114,18 +114,19 @@ public class CommandManager {
 
             default:
                 message("Invalid choice", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("Status: " + getColor(rejectionColor) + "x",
-                        layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("Status: " + getColor(rejectionColor) + "x", layoutColor, getDefaultTextAlignment(),
+                        getDefaultDelay(), out::print);
                 break;
         }
     }
+
 
     //Searching
     public static void searchCommands() {
         PackageUnifier registry = new PackageUnifier();
         try {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(layoutColor) + searchingArrow, "");
+                    getColor(getLayoutColor()) + getSearchingArrow(), "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 
             if (!registry.executeCommand(nameOfFunction)) {
@@ -144,18 +145,18 @@ public class CommandManager {
                 URI uri = new URI(userSite);
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(uri);
-                    message("\r   Status: " + getColor(acceptanceColor) + "✓", layoutColor,
+                    message("\r   Status: " + getColor(getAcceptanceColor()) + "✓", getLayoutColor(),
                             getDefaultTextAlignment(),getDefaultDelay(),out::print);
                 } else {
-                    message("Error: Desktop or browse action not supported", rejectionColor,
+                    message("Error: Desktop or browse action not supported", getRejectionColor(),
                             getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-                    message("Status: " + getColor(rejectionColor) + "x", layoutColor,
+                    message("Status: " + getColor(getRejectionColor()) + "x", getLayoutColor(),
                             getDefaultTextAlignment(), getDefaultDelay(), out::print);
                 }
             } catch (URISyntaxException | IOException e) {
-                message("Error opening URL", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                message("Status: " + getColor(rejectionColor) + "x", layoutColor, getDefaultTextAlignment(),
+                message("Error opening URL", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("Status: " + getColor(getRejectionColor()) + "x", getLayoutColor(), getDefaultTextAlignment(),
                         getDefaultDelay(), out::print);
             }
         };
@@ -167,25 +168,25 @@ public class CommandManager {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
 
-            while ((line = reader.readLine()) != null) message(line, layoutColor, getDefaultTextAlignment(),
+            while ((line = reader.readLine()) != null) message(line, getLayoutColor(), getDefaultTextAlignment(),
                     getDefaultDelay(), out::print);
 
             reader.close();
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                message("Command failed with exit code: " + exitCode, layoutColor, getDefaultTextAlignment(),
+                message("Command failed with exit code: " + exitCode, getLayoutColor(), getDefaultTextAlignment(),
                         getDefaultDelay(), out::println);
             } else {
                 insertControlChars('n', 1);
                 message("Process completed "
-                        + getColor(mainColor) + "successfully" + getColor(layoutColor)
-                        + ".", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        + getColor(getMainColor()) + "successfully" + getColor(getLayoutColor())
+                        + ".", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
             }
         } catch (IOException e) {
-            message("I/O Error while executing command: " + e.getMessage(), layoutColor, getDefaultTextAlignment(),
+            message("I/O Error while executing command: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
         } catch (InterruptedException e) {
-            message("Process was interrupted: " + e.getMessage(), layoutColor, getDefaultTextAlignment(),
+            message("Process was interrupted: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
             Thread.currentThread().interrupt();
         }
@@ -194,14 +195,14 @@ public class CommandManager {
     public static void processCommandWithHostInput(String command) {
         try {
             insertControlChars('n', 1);
-            out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Enter host [e.g., "
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter host [e.g., "
                     + getColor(27) + "g" + getColor(160) + "o" + getColor(220) + "o"
-                    + getColor(27) + "g" + getColor(40) + "l" + getColor(160) + "e" + getColor(layoutColor) + ".com]: ");
+                    + getColor(27) + "g" + getColor(40) + "l" + getColor(160) + "e" + getColor(getLayoutColor()) + ".com]: ");
             String host = scanner.nextLine().trim();
             insertControlChars('n', 1);
 
             if (host.isEmpty()) {
-                message("Host cannot be empty. Please enter a valid host.", layoutColor, getDefaultTextAlignment(),
+                message("Host cannot be empty. Please enter a valid host.", getLayoutColor(), getDefaultTextAlignment(),
                         getDefaultDelay(), out::println);
                 return;
             }
@@ -211,7 +212,7 @@ public class CommandManager {
 
             executeTerminalCommand(command);
         } catch (Exception e) {
-            message("Execution error: " + e.getMessage(), layoutColor, getDefaultTextAlignment(),
+            message("Execution error: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(),
                     getDefaultDelay(), out::println);
         }
     }
@@ -254,24 +255,24 @@ public class CommandManager {
     }
 
     private static void printSuccessMessage() {
-        message("Status: " + getColor(acceptanceColor) + "✓",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        message("Text copied successfully" + getColor(layoutColor) + ".",
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Status: " + getColor(getAcceptanceColor()) + "✓",
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Text copied successfully" + getColor(getLayoutColor()) + ".",
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
     private static void printErrorMessage(String error) {
         insertControlChars('n', 1);
         message("Error: " + error,
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
     public static void mainMenuRestart(){
         marginBorder(1,2);
-        message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
+        message("Status: " + getColor(getAcceptanceColor()) + "✓", getLayoutColor(),getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
 
-        message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
+        message("Application restart" + getColor(getLayoutColor()) + ".", getMainColor(),getDefaultTextAlignment(),
                 getDefaultDelay(), out::println);
         marginBorder(1,1);
         displayMenu();
@@ -279,23 +280,23 @@ public class CommandManager {
 
     public static void mainMenuRestartWithClearing(){
         marginBorder(1,2);
-        message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
+        message("Status: " + getColor(getAcceptanceColor()) + "✓", getLayoutColor(),getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
 
-        message("Application restart" + getColor(layoutColor) + ".", mainColor,getDefaultTextAlignment(),
+        message("Application restart" + getColor(getLayoutColor()) + ".", getMainColor(),getDefaultTextAlignment(),
                 getDefaultDelay(), out::println);
         marginBorder(1,20);
         clearTerminal();
         displayMenu();
     }
 
-    public static void exitPage(){
+    public static void exitPage(String text){
         marginBorder(2,2);
-        message("Status: " + getColor(acceptanceColor) + "✓", layoutColor,getDefaultTextAlignment(),
+        message("Status: " + getColor(getAcceptanceColor()) + "✓", getLayoutColor(), getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);
 
-        message("Terminated correctly" + getColor(layoutColor) + ". "
-                        + getColor(mainColor) + "You are in main menu" + getColor(layoutColor) + ".", mainColor,
+        message("Terminated correctly" + getColor(getLayoutColor()) + ". "
+                        + getColor(getMainColor()) + text + getColor(getLayoutColor()) + ".", getMainColor(),
                 getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
     }

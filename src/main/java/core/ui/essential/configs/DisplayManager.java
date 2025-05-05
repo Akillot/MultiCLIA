@@ -1,7 +1,9 @@
 package core.ui.essential.configs;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static core.commands.CommandHandler.*;
@@ -13,21 +15,8 @@ import static java.lang.System.*;
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    public static void apiKeyChecking(String apiKeyName) {
-        Dotenv dotenv = Dotenv.load();
-        String API_KEY = dotenv.get(apiKeyName);
+    public static ArrayList<String> apiKeyNames = new ArrayList<>();
 
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            message("API Key is unavailable " + getColor(layoutColor) + "[" + apiKeyName + "].", 220, getDefaultLogoAlignment(),
-                    getDefaultDelay(), out::print);
-        }
-        else{
-            message("API Key is available " + getColor(layoutColor) + "[" + apiKeyName + "].", acceptanceColor, getDefaultLogoAlignment(),
-                    getDefaultDelay(), out::print);
-        }
-    }
-
-    // displaying help command
     public static void displayCommandList() {
         try {
             marginBorder(1,1);
@@ -35,24 +24,49 @@ public class DisplayManager {
 
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+    }
+
+    static {
+        apiKeyNames.add("OPENAI_API_KEY");
+        apiKeyNames.add("DEEPL_API_KEY");
+        apiKeyNames.add("OPEN_WEATHER_API_KEY");
+    }
+
+    public static void apiKeyChecking(@NotNull ArrayList<String> apiKeyNames) {
+        Dotenv dotenv = Dotenv.load();
+        boolean allKeysValid = true;
+
+        for (String apiKeyName : apiKeyNames) {
+            String API_KEY = dotenv.get(apiKeyName);
+            if (API_KEY == null || API_KEY.isEmpty()) {
+                allKeysValid = false;
+            }
+        }
+
+        if (allKeysValid) {
+            out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor())
+                    + "All API keys are valid " + getColor(getAcceptanceColor()) + "✓");
+        } else {
+            out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor())
+                    + "Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
         }
     }
 
     private static void displayAllCommandList() {
         insertControlChars('n', 1);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "Commands: \n"
-                + alignment(-68) + getColor(mainColor));
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Commands: \n"
+                + alignment(-68) + getColor(getMainColor()));
 
         for (int i = 0; i < fullCmds.length; i++) {
             message("·  " + fullCmds[i] + " ["
-                    + getColor(mainColor) + shortCmds[i] + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    + getColor(getMainColor()) + shortCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
         }
         marginBorder(2,1);
     }
 
-    // cl
     public static void clearTerminal() {
         try {
             String operatingSystem = System.getProperty("os.name");
@@ -64,10 +78,10 @@ public class DisplayManager {
             }
         } catch (Exception e) {
             message("Error executing action",
-                    rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-            message("Status: " + getColor(rejectionColor) + "x",
-                    layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Status: " + getColor(getRejectionColor()) + "x",
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
     }
 }

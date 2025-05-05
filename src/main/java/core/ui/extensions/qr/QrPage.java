@@ -46,13 +46,13 @@ public class QrPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("QR Code Generator:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("QR Code Generator:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
         displayCurrentSettings();
         displayListOfCommands(commands);
 
         while (true) {
             slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(layoutColor) + searchingArrow, "");
+                    getColor(getLayoutColor()) + getSearchingArrow(), "");
             String input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
@@ -76,8 +76,8 @@ public class QrPage extends Page {
     }
 
     private void displayCurrentSettings() {
-        message("[Size: " + getColor(mainColor) + size + getColor(layoutColor) + " | Format: " + getColor(mainColor)
-                        + format + getColor(layoutColor) + "]", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("[Size: " + getColor(getMainColor()) + size + getColor(getLayoutColor()) + " | Format: " + getColor(getMainColor())
+                        + format + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
     public void generateQrCode() {
@@ -110,11 +110,11 @@ public class QrPage extends Page {
     }
 
     @Nullable
-    public String promptForUrl() {
+    private String promptForUrl() {
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
-                "Enter URL [include " + getColor(mainColor) + "http:// " + getColor(layoutColor)
-                + "or " + getColor(mainColor) + " https://" + getColor(layoutColor) + "]: ");
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +
+                "Enter URL [include " + getColor(getMainColor()) + "http:// " + getColor(getLayoutColor())
+                + "or " + getColor(getMainColor()) + " https://" + getColor(getLayoutColor()) + "]: ");
 
         String input = scanner.nextLine().trim();
         if (input.isEmpty()) {
@@ -122,15 +122,12 @@ public class QrPage extends Page {
             return null;
         }
 
-        if (!input.startsWith("http://") && !input.startsWith("https://")) {
-            input = "https://" + input;
-        }
-
+        if (!input.startsWith("http://") && !input.startsWith("https://")) input = "https://" + input;
         return input;
     }
 
-    public void modifyQrCodeSize() {
-        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+    private void modifyQrCodeSize() {
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +
                 String.format("Enter new size (%d-%d): ", MIN_SIZE, MAX_SIZE));
 
         try {
@@ -146,9 +143,9 @@ public class QrPage extends Page {
         }
     }
 
-    public void modifyQrCodeFormat() {
+    private void modifyQrCodeFormat() {
         showFormatsHelp();
-        out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +
                 "Enter image format [or 'help' to show formats]: ");
 
         while (true) {
@@ -156,7 +153,7 @@ public class QrPage extends Page {
 
             if (input.equalsIgnoreCase("help")) {
                 showFormatsHelp();
-                out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+                out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +
                         "Enter format: ");
                 continue;
             }
@@ -166,9 +163,7 @@ public class QrPage extends Page {
                 return;
             }
 
-            if (!input.startsWith(".")) {
-                input = "." + input;
-            }
+            if (!input.startsWith(".")) input = "." + input;
 
             for (String validFormat : VALID_FORMATS) {
                 if (input.equals(validFormat)) {
@@ -179,44 +174,42 @@ public class QrPage extends Page {
             }
 
             showError("Unsupported format. Supported formats: " + String.join(", ", VALID_FORMATS));
-            out.print(alignment(getDefaultTextAlignment()) + getColor(layoutColor) +
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +
                     "Try again or 'help' for options: ");
         }
     }
 
     private void showFormatsHelp() {
         insertControlChars('n',1);
-        message("Supported formats:", layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  PNG [" + getColor(mainColor) + ".png"
-                + getColor(layoutColor) + "] - Best for QR codes [default]");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  JPEG [" + getColor(mainColor) + ".jpg"
-                + getColor(layoutColor) + "/" + getColor(mainColor) + ".jpeg" + getColor(layoutColor)  + "] - Smaller file size");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  GIF [" + getColor(mainColor) + ".gif"
-                + getColor(layoutColor) + "] - For animated QR codes");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  SVG [" + getColor(mainColor) + ".svg"
-                + getColor(layoutColor) + "] - Vector format [scalable]");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  WebP [" +  getColor(mainColor) + ".webp"
-                + getColor(layoutColor) + "] - Modern efficient format");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  PDF [" +  getColor(mainColor) + ".pdf"
-                + getColor(layoutColor) + "] - For document embedding");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(layoutColor) + "·  ICO [" +  getColor(mainColor) + ".ico"
-                + getColor(layoutColor) + "] - For website favicons\n");
+        message("Supported formats:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  PNG [" + getColor(getMainColor()) + ".png"
+                + getColor(getLayoutColor()) + "] - Best for QR codes [default]");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  JPEG [" + getColor(getMainColor()) + ".jpg"
+                + getColor(getLayoutColor()) + "/" + getColor(getMainColor()) + ".jpeg" + getColor(getLayoutColor())  + "] - Smaller file size");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  GIF [" + getColor(getMainColor()) + ".gif"
+                + getColor(getLayoutColor()) + "] - For animated QR codes");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  SVG [" + getColor(getMainColor()) + ".svg"
+                + getColor(getLayoutColor()) + "] - Vector format [scalable]");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  WebP [" +  getColor(getMainColor()) + ".webp"
+                + getColor(getLayoutColor()) + "] - Modern efficient format");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  PDF [" +  getColor(getMainColor()) + ".pdf"
+                + getColor(getLayoutColor()) + "] - For document embedding");
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  ICO [" +  getColor(getMainColor()) + ".ico"
+                + getColor(getLayoutColor()) + "] - For website favicons\n");
     }
 
-    public void ensureSaveDirectoryExists() throws Exception {
-        if (!Files.exists(SAVE_DIRECTORY)) {
-            Files.createDirectories(SAVE_DIRECTORY);
-        }
+    private void ensureSaveDirectoryExists() throws Exception {
+        if (!Files.exists(SAVE_DIRECTORY)) Files.createDirectories(SAVE_DIRECTORY);
     }
 
     private void showSuccess(String message) {
-        message(getColor(acceptanceColor) + "✓ " + getColor(layoutColor) + message,
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message(getColor(getAcceptanceColor()) + "✓ " + getColor(getLayoutColor()) + message,
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private void showError(String message) {
         message("Error: " + message + RESET,
-                layoutColor, getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
     }
 
     private void restartApplication() {
@@ -225,7 +218,7 @@ public class QrPage extends Page {
     }
 
     private void exitApplication() {
-        exitPage();
+        exitPage("You are in main menu");
     }
 
     private void showHelp() {

@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
-import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
 import static core.ui.essential.configs.appearance.TextConfigs.*;
-import static java.lang.System.out;
 
 public class ChatGPTClient {
     private static final String API_KEY;
@@ -27,11 +25,6 @@ public class ChatGPTClient {
     static {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("OPENAI_API_KEY");
-
-        if(API_KEY == null || API_KEY.isEmpty()) {
-            insertControlChars('n',1);
-            message("AI is unavailable. Check your API Key.", layoutColor,getDefaultTextAlignment(),getDefaultDelay(),out::println);
-        }
     }
 
     public static @NotNull String sendMessage(String message) {
