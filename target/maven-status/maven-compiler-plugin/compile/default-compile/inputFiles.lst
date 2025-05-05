@@ -1,7 +1,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/asciiartify/LettersDictionary.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/asciiartify/AsciiArtifyPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/Page.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/LoggerPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/SupportPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/network/NetworkPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/ConfigPage.java
@@ -10,6 +9,7 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/StartPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/configs/appearance/AppearanceConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/weather/WeatherPage.java
+/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/configs/appearance/AppearanceConfigData.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/PackageUnifier.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/InfoPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/logic/CommandManager.java
@@ -22,7 +22,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/security/PasswordGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/configs/appearance/TextConfigs.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/qr/QrPage.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/essential/pages/LaunchConfigurationPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/init/AppLauncher.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/qr/QrCodeGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/extensions/ai/AiPage.java
