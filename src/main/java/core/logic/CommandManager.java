@@ -13,11 +13,11 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import static core.ui.essential.configs.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
-import static core.ui.essential.configs.DisplayManager.scanner;
-import static core.ui.essential.configs.appearance.TextConfigs.*;
-import static core.ui.essential.pages.StartPage.displayMenu;
+import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.DisplayManager.clearTerminal;
+import static core.ui.configs.DisplayManager.scanner;
+import static core.ui.configs.TextConfigs.*;
+import static core.ui.pages.StartPage.displayMenu;
 
 import static java.lang.System.out;
 

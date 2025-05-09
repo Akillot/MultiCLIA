@@ -1,26 +1,29 @@
 package core.commands;
 
-import core.ui.essential.pages.*;
 import core.logic.CommandManager;
-import core.ui.extensions.ai.AiPage;
-import core.ui.extensions.asciiartify.AsciiArtifyPage;
-import core.ui.extensions.qr.QrPage;
-import core.ui.extensions.cryptography.CryptographyPage;
-import core.ui.extensions.network.NetworkPage;
-import core.ui.extensions.security.PasswordGenerator;
-import core.ui.extensions.terminal_emulation.TerminalPage;
-import core.ui.extensions.time.TimePage;
-import core.ui.essential.configs.DisplayManager;
-import core.ui.extensions.translate.TranslatePage;
-import core.ui.extensions.weather.WeatherPage;
+import core.ui.pages.SettingsPage;
+import core.ui.pages.ExitPage;
+import core.ui.pages.InfoPage;
+import core.ui.pages.SupportPage;
+import plugins.ai.AiPage;
+import plugins.asciiartify.AsciiArtifyPage;
+import plugins.qr.QrPage;
+import plugins.cryptography.CryptographyPage;
+import plugins.network.NetworkPage;
+import plugins.security.PasswordGenerator;
+import plugins.terminal_emulation.TerminalPage;
+import plugins.time.TimePage;
+import core.ui.configs.DisplayManager;
+import plugins.translate.TranslatePage;
+import plugins.weather.WeatherPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
-import static core.ui.essential.configs.appearance.TextConfigs.alignment;
-import static core.ui.essential.configs.appearance.TextConfigs.message;
+import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.TextConfigs.alignment;
+import static core.ui.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
@@ -58,7 +61,7 @@ public class CommandHandler {
             };
             case 2 -> CommandManager::mainMenuRestart;
             case 3 -> CommandManager::mainMenuRestartWithClearing;
-            case 4 -> new ConfigPage()::displayMenu;
+            case 4 -> new SettingsPage()::displayMenu;
             case 5 -> DisplayManager::clearTerminal;
             case 6 -> new TimePage()::displayMenu;
             case 7 -> new NetworkPage()::displayMenu;
