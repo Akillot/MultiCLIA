@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.TextConfigs.*;

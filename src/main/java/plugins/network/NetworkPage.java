@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 

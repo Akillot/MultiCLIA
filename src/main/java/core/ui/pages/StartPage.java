@@ -9,9 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import static core.commands.CommandHandler.fullCmds;
-import static core.logic.CommandManager.*;
-import static core.ui.configs.DisplayManager.apiKeyChecking;
-import static core.ui.configs.DisplayManager.apiKeyNames;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.InfoPage.getVersion;
@@ -23,25 +21,28 @@ public class StartPage {
     private static String dateAndTimeOfProgramLaunching;
 
     private final static String[] MAIN_LOGO_ASCII = {
-            "╔═════════════════════════════════════════════════════════════════════════════════════════╗",
-            "║                                                                                         ║",
-            "║   ███╗   ███╗██╗   ██╗██╗  ████████╗██╗ ██████╗██╗     ██╗ █████╗                       ║",
-            "║   ████╗ ████║██║   ██║██║  ╚══██╔══╝██║██╔════╝██║     ██║██╔══██╗                      ║",
-            "║   ██╔████╔██║██║   ██║██║     ██║   ██║██║     ██║     ██║███████║                      ║",
-            "║   ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                      ║",
-            "║   ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                      ║",
-            "║   ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                      ║",
-            "║   ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝    v." + getVersion() + getColor(getLayoutColor()) +"   ║",
-            "║                                                                                         ║",
-            "╚═════════════════════════════════════════════════════════════════════════════════════════╝"
+            "╔════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
+            "║                                                                                                        ║",
+            "║                                                                                                        ║",
+            "║                                                                                                        ║",
+            "║                    ███╗   ███╗██╗   ██╗██╗  ████████╗██╗ ██████╗██╗     ██╗ █████╗                     ║",
+            "║                    ████╗ ████║██║   ██║██║  ╚══██╔══╝██║██╔════╝██║     ██║██╔══██╗                    ║",
+            "║                    ██╔████╔██║██║   ██║██║     ██║   ██║██║     ██║     ██║███████║                    ║",
+            "║                    ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                    ║",
+            "║                    ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                    ║",
+            "║                    ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                    ║",
+            "║                    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝   v." + getVersion() + getColor(getLayoutColor()) + "           ║",
+            "║                                                                                                        ║",
+            "║                                                                                                        ║",
+            "║                                                                                                        ║",
+            "╚════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
     };
 
     public static void displayMenu() {
         loadConfig();
+        //apiKeyChecking(apiKeyNames);
         insertControlChars('n',1);
-        apiKeyChecking(apiKeyNames);
-        insertControlChars('n',1);
-        displayLogo(MAIN_LOGO_ASCII, getDefaultLogoAlignment());
+        displayLogo(MAIN_LOGO_ASCII, getDefaultTextAlignment() + 4);
         insertControlChars('n',1);
         getRandomMotto();
         getCurrentDate();
@@ -79,7 +80,7 @@ public class StartPage {
         DayOfWeek dayOfWeek = localTime.getDayOfWeek();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
-        message("Application start time" + ": "
+        message("Current session started: "
                         + getColor(getMainColor()) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + getColor(getLayoutColor()) + dateAndTimeOfProgramLaunching
                         + getColor(getLayoutColor()) + ".",
                 getLayoutColor(),getDefaultLogoAlignment(),getDefaultDelay(),out::print);

@@ -1,6 +1,6 @@
 package core.commands;
 
-import core.logic.CommandManager;
+import core.CommandManager;
 import core.ui.pages.SettingsPage;
 import core.ui.pages.ExitPage;
 import core.ui.pages.InfoPage;

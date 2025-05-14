@@ -14,7 +14,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.Random;
 
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.DisplayManager.scanner;

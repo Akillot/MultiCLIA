@@ -1,7 +1,7 @@
 package core.ui.pages;
 
-import static core.logic.CommandManager.choice;
-import static core.logic.CommandManager.openUri;
+import static core.CommandManager.choice;
+import static core.CommandManager.openUri;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;

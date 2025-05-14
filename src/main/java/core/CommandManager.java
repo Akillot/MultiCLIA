@@ -1,4 +1,4 @@
-package core.logic;
+package core;
 
 import core.commands.PackageUnifier;
 import org.jetbrains.annotations.Contract;

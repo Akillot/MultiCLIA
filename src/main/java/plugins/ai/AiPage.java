@@ -6,7 +6,7 @@ import core.ui.pages.Page;
 
 import java.util.Scanner;
 
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.DisplayManager.scanner;
 import static plugins.ai.ChatGPTClient.*;

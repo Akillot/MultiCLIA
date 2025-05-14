@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
@@ -15,7 +15,7 @@ public class InfoPage {
     @Contract(pure = true)
     public static @NotNull String getVersion() {
         loadConfig();
-        String appVersion = "1.5 " + getColor(getLayoutColor()) + "- Release";
+        String appVersion = "1" + getColor(getLayoutColor()) + "." + getColor(getMainColor()) + "5 ";
         return getColorText(appVersion, getMainColor());
     }
 

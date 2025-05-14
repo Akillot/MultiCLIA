@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import java.security.*;
 import java.util.Random;
 
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.scanner;
 import static core.ui.configs.TextConfigs.*;

@@ -1,4 +1,4 @@
-package core.init;
+package core;
 
 import core.ui.pages.StartPage;
 

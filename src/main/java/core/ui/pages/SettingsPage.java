@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.management.ManagementFactory;
 
-import static core.logic.CommandManager.*;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.DisplayManager.scanner;

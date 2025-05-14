@@ -150,7 +150,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>core.init.AppLauncher</mainClass>
+                            <mainClass>core.AppLauncher</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
