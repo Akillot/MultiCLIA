@@ -29,29 +29,40 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "help", "info" , "restart", "restart clear", "config",
-            "clear", "time", "network", "genpass", "crypt",
-            "terminal", "ai", "qrcode", "weather", "asciiartify",
-            "translate","support", "quit"};
+            "help", "plugins", "info" , "restart", "restart clear",
+            "config", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "i", "rst","rcl", "cfg",
-            "cl", "t", "n", "gp", "cr",
-            "term", "a", "qr", "w", "art",
-            "tran", "sup", "q"};
+            "h", "plg", "i", "rst","rcl", "cfg",
+            "cl", "sup", "q"};
+
+    public static final String[] fullPluginCmds = {
+            "time", "network", "genpass", "crypt",
+            "terminal", "ai", "qrcode", "weather",
+            "asciiartify", "translate"};
+
+    public static final String[] shortPluginCmds = {
+            "t", "n", "gp", "cr", "term", "a", "qr", "w", "art", "tran"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
-            commandMap.put(fullCmds[i], getCommandAction(i));
-            commandMap.put(shortCmds[i], getCommandAction(i));
+            commandMap.put(fullCmds[i], ExecuteCommand(i));
+            commandMap.put(shortCmds[i], ExecuteCommand(i));
+        }
+
+        int offset = fullCmds.length;
+        for (int i = 0; i < fullPluginCmds.length; i++) {
+            commandMap.put(fullPluginCmds[i], ExecuteCommand(i + offset));
+            commandMap.put(shortPluginCmds[i], ExecuteCommand(i + offset));
         }
     }
 
     @Contract(pure = true)
-    static @NotNull Runnable getCommandAction(int index) {
+    static @NotNull Runnable ExecuteCommand(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
-            case 1 -> () -> {
+            case 1 -> DisplayManager::displayPluginCommandList;
+            case 2 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
@@ -59,24 +70,26 @@ public class CommandHandler {
                             getRejectionColor(), getDefaultTextAlignment(), 0, out::println);
                 }
             };
-            case 2 -> CommandManager::mainMenuRestart;
-            case 3 -> CommandManager::mainMenuRestartWithClearing;
-            case 4 -> new SettingsPage()::displayMenu;
-            case 5 -> DisplayManager::clearTerminal;
-            case 6 -> new TimePage()::displayMenu;
-            case 7 -> new NetworkPage()::displayMenu;
-            case 8 -> new PasswordGenerator()::displayMenu;
-            case 9 -> new CryptographyPage()::displayMenu;
-            case 10 -> new TerminalPage()::displayMenu;
-            case 11 -> new AiPage()::displayMenu;
-            case 12 -> new QrPage()::displayMenu;
-            case 13 -> new WeatherPage()::displayMenu;
-            case 14 -> new AsciiArtifyPage()::displayMenu;
-            case 15 -> TranslatePage::displayTranslatePage;
-            case 16 -> SupportPage::displaySupportPage;
-            case 17 -> ExitPage::displayExitPage;
-            default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
-                    + getColor(getRejectionColor()) + "Invalid command index");
+            case 3 -> CommandManager::mainMenuRestart;
+            case 4 -> CommandManager::mainMenuRestartWithClearing;
+            case 5 -> new SettingsPage()::displayMenu;
+            case 6 -> DisplayManager::clearTerminal;
+            case 7 -> SupportPage::displaySupportPage;
+            case 8 -> ExitPage::displayExitPage;
+
+            case 9  -> new TimePage()::displayMenu;
+            case 10 -> new NetworkPage()::displayMenu;
+            case 11 -> new PasswordGenerator()::displayMenu;
+            case 12 -> new CryptographyPage()::displayMenu;
+            case 13 -> new TerminalPage()::displayMenu;
+            case 14 -> new AiPage()::displayMenu;
+            case 15 -> new QrPage()::displayMenu;
+            case 16 -> new WeatherPage()::displayMenu;
+            case 17 -> new AsciiArtifyPage()::displayMenu;
+            case 18 -> TranslatePage::displayTranslatePage;
+
+            default -> throw new IllegalArgumentException(
+                    alignment(getDefaultTextAlignment()) + getColor(getRejectionColor()) + "Invalid command index");
         };
     }
 }

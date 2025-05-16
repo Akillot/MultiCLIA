@@ -19,9 +19,32 @@ public class DisplayManager {
 
     public static void displayCommandList() {
         try {
-            marginBorder(1,1);
-            displayAllCommandList();
+            marginBorder(1,2);
+            out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "List of basic commands: \n"
+                    + alignment(getDefaultTextAlignment()) + getColor(getMainColor()));
 
+            for (int i = 0; i < fullCmds.length; i++) {
+                message("·  " + fullCmds[i] + " ["
+                        + getColor(getMainColor()) + shortCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            }
+            marginBorder(2,1);
+        } catch (Exception e) {
+            marginBorder(1,1);
+            message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
+    }
+
+    public static void displayPluginCommandList() {
+        try {
+            marginBorder(1,2);
+            out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "List of available plugins: \n"
+                    + alignment(getDefaultTextAlignment()) + getColor(getMainColor()));
+
+            for (int i = 0; i < fullPluginCmds.length; i++) {
+                message("·  " + fullPluginCmds[i] + " ["
+                        + getColor(getMainColor()) + shortPluginCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            }
+            marginBorder(2,1);
         } catch (Exception e) {
             marginBorder(1,1);
             message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
@@ -52,19 +75,6 @@ public class DisplayManager {
             out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor())
                     + "Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
         }
-    }
-
-    private static void displayAllCommandList() {
-        insertControlChars('n', 1);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Commands: \n"
-                + alignment(-68) + getColor(getMainColor()));
-
-        for (int i = 0; i < fullCmds.length; i++) {
-            message("·  " + fullCmds[i] + " ["
-                    + getColor(getMainColor()) + shortCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-
-        }
-        marginBorder(2,1);
     }
 
     public static void clearTerminal() {

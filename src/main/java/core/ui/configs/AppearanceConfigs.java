@@ -18,7 +18,6 @@ public class AppearanceConfigs {
 
     private static AppearanceConfigData config = new AppearanceConfigData();
 
-    // Геттеры
     public static int getDefaultDelay() { return config.defaultDelay; }
     public static int getSearchingLineAlignment() { return config.searchingLineAlignment; }
     public static int getDefaultTextAlignment() { return config.defaultTextAlignment; }
@@ -127,7 +126,6 @@ public class AppearanceConfigs {
         insertControlChars('n',lowerSide);
     }
 
-    //Animations
     public static void loadingAnimation(int frames, int duration) {
         String[] spinner = {"    |", "    /", "    —", "    \\"};
         for (int i = 0; i < duration; i++) {

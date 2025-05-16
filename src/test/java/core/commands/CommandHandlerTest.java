@@ -38,7 +38,7 @@ class CommandHandlerTest {
     @Test
     void testInvalidCommandIndex() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            CommandHandler.getCommandAction(999).run();
+            CommandHandler.ExecuteCommand(999).run();
         });
 
         assertTrue(exception.getMessage().contains("Invalid command index"));
