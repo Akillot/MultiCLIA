@@ -11,6 +11,7 @@ import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.InfoPage.getVersion;
+import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class StartPage {
@@ -19,33 +20,67 @@ public class StartPage {
     private static String dateAndTimeOfProgramLaunching;
 
     private final static String[] MAIN_LOGO_ASCII = {
-            "╔════════════════════════════════════════════════════════════════════════════════════════════════════════╗",
-            "║                                                                                                        ║",
-            "║                                                                                                        ║",
-            "║                                                                                                        ║",
-            "║                    ███╗   ███╗██╗   ██╗██╗  ████████╗██╗ ██████╗██╗     ██╗ █████╗                     ║",
-            "║                    ████╗ ████║██║   ██║██║  ╚══██╔══╝██║██╔════╝██║     ██║██╔══██╗                    ║",
-            "║                    ██╔████╔██║██║   ██║██║     ██║   ██║██║     ██║     ██║███████║                    ║",
-            "║                    ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                    ║",
-            "║                    ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                    ║",
-            "║                    ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                    ║",
-            "║                    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝   v." + getVersion() + getColor(getLayoutColor()) + "           ║",
-            "║                                                                                                        ║",
-            "║                           Terminal Plugin Framework | Open-source | Modular.                           ║",
-            "║                                                                                                        ║",
-            "║                                                                                                        ║",
-            "║                                                                                                        ║",
-            "╚════════════════════════════════════════════════════════════════════════════════════════════════════════╝"
+            "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓",
+            "┃                                                                                                        ┃",
+            "┃                                                                                                        ┃",
+            "┃                                                                                                        ┃",
+            "┃                    ███╗   ███╗██╗   ██╗██╗  ████████╗██╗ ██████╗██╗     ██╗ █████╗                     ┃",
+            "┃                    ████╗ ████║██║   ██║██║  ╚══██╔══╝██║██╔════╝██║     ██║██╔══██╗                    ┃",
+            "┃                    ██╔████╔██║██║   ██║██║     ██║   ██║██║     ██║     ██║███████║                    ┃",
+            "┃                    ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                    ┃",
+            "┃                    ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                    ┃",
+            "┃                    ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                    ┃",
+            "┃                    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝   v." + getVersion() + getColor(getLayoutColor()) + "           ┃",
+            "┃                                                                                                        ┃",
+            "┃                           Terminal Plugin Framework | Open-source | Modular.                           ┃",
+            "┃                                                                                                        ┃",
+            "┃                                                                                                        ┃",
+            "┃                                                                                                        ┃",
+            "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
     };
 
     public static void displayMenu() {
         loadConfig();
-        //apiKeyChecking(apiKeyNames);
         insertControlChars('n',1);
         displayLogo(MAIN_LOGO_ASCII, getDefaultTextAlignment() + 4);
         insertControlChars('n',1);
+
+        message("Hi, " +  getColor(getMainColor()) + capitalizeMessage(System.getProperty("user.name"))
+                        + getColor(getLayoutColor()) + "!",getLayoutColor(), getDefaultTextAlignment(),
+                getDefaultDelay(), out::print);
+
         getCurrentDate();
+
+        message("Platform: " + getColor(getMainColor()) + capitalizeMessage(System.getProperty("os.name"))
+                        + getColor(getLayoutColor()) + "   |   Theme: Default (type " + getColor(getMainColor())
+                        + "theme"  + getColor(getLayoutColor()) + " to switch)",getLayoutColor(),getDefaultTextAlignment(),
+                getDefaultDelay(), out::print);
+
         marginBorder(1,1);
+        checkApiKeys(apiKeyNames.toArray(new String[0]));
+        marginBorder(1,1);
+        message("Tips:",getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::println);
+
+        message(" - Type '" + getColor(getMainColor()) + "help" + getColor(getLayoutColor()) + "' to explore basic commands",
+                getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::print);
+
+        message(" - Type '" + getColor(getMainColor()) + "plugins" + getColor(getLayoutColor()) + "' to explore or install mini apps",
+                getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::print);
+
+        message(" - Type '" + getColor(getMainColor()) + "info" + getColor(getLayoutColor()) + "' to see information about MultiCLIA",
+                getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::print);
+        insertControlChars('n',1);
+
+        message("[" + getColor(getMainColor()) + "t" + getColor(getLayoutColor()) + "] Theme     ["
+                        + getColor(getMainColor()) + "c" + getColor(getLayoutColor()) + "] APIs     ["
+                        + getColor(getMainColor()) + "p" + getColor(getLayoutColor()) + "] Plugins     ["
+                        + getColor(getMainColor()) + "h" + getColor(getLayoutColor()) + "] Help     ["
+                        + getColor(getMainColor()) + "i" + getColor(getLayoutColor()) + "] Info     ["
+                        + getColor(getMainColor()) + "r" + getColor(getLayoutColor()) + "] Restart    ["
+                        + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + "] Quit",
+                getLayoutColor(), getDefaultLogoAlignment(), getDefaultDelay(), out::println);
+
+        marginBorder(0,1);
         while (true) {
             try {
                 searchCommands();
@@ -63,7 +98,8 @@ public class StartPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
         message("Current session started: "
-                        + getColor(getMainColor()) + capitalizeMessage(String.valueOf(dayOfWeek)) + " " + getColor(getLayoutColor()) + dateAndTimeOfProgramLaunching
+                        + getColor(getMainColor()) + capitalizeMessage(String.valueOf(dayOfWeek)) + " "
+                        + getColor(getLayoutColor()) + dateAndTimeOfProgramLaunching
                         + getColor(getLayoutColor()) + ".",
                 getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::print);
     }

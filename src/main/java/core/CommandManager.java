@@ -11,17 +11,25 @@ import java.io.*;
 import java.net.*;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Map;
 
 import static core.ui.configs.AppearanceConfigs.*;
-import static core.ui.configs.DisplayManager.clearTerminal;
-import static core.ui.configs.DisplayManager.scanner;
+import static core.ui.configs.DisplayManager.*;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.StartPage.displayMenu;
 
 import static java.lang.System.out;
 
 public class CommandManager {
+
+    public static ArrayList<String> apiKeyNames = new ArrayList<>();
+
+    static {
+        apiKeyNames.add("OPENAI_API_KEY");
+        apiKeyNames.add("DEEPL_API_KEY");
+        apiKeyNames.add("OPEN_WEATHER_API_KEY");
+    }
 
     //HTTP request and additional methods
     public static void httpRequest(String userUri, @NotNull String requestType, @NotNull String text,
@@ -129,9 +137,7 @@ public class CommandManager {
                     getColor(getLayoutColor()) + getSearchingArrow(), "");
             String nameOfFunction = scanner.nextLine().toLowerCase();
 
-            if (!registry.executeCommand(nameOfFunction)) {
-                searchCommands();
-            }
+            if (!registry.executeCommand(nameOfFunction)) searchCommands();
         }
         catch(Exception e){
             out.print("");
@@ -274,7 +280,6 @@ public class CommandManager {
 
         message("Application restart" + getColor(getLayoutColor()) + ".", getMainColor(),getDefaultTextAlignment(),
                 getDefaultDelay(), out::println);
-        marginBorder(1,1);
         displayMenu();
     }
 
@@ -299,5 +304,21 @@ public class CommandManager {
                         + getColor(getMainColor()) + text + getColor(getLayoutColor()) + ".", getMainColor(),
                 getDefaultTextAlignment(),getDefaultDelay(),out::println);
         marginBorder(1,1);
+    }
+
+    public static void checkApiKeys(String @NotNull [] apiKeys) {
+        message("API Status: ", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+
+        for (String apiKey : apiKeys) {
+            String statusMark;
+            if (apiKey != null && apiKey.length() > 10) {
+                statusMark = getColor(getAcceptanceColor()) + "✓";
+            } else {
+                statusMark = getColor(getRejectionColor()) + "✗";
+            }
+
+            message("[" + statusMark + getColor(getLayoutColor()) + "] " + apiKey, getLayoutColor(),
+                    getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        }
     }
 }

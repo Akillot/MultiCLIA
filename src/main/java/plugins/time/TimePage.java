@@ -99,7 +99,7 @@ public class TimePage extends Page {
             insertControlChars('n',1);
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
                     + "Enter time in seconds (or '" + getColor(getMainColor())
-                    + "quit" + getColor(getLayoutColor()) + "' to close the timer): ");
+                    + "q" + getColor(getLayoutColor()) + "' to close the timer): ");
             String input = scanner.nextLine();
 
             if (exitCheck(input)) break;
@@ -115,7 +115,7 @@ public class TimePage extends Page {
                             ". Please wait or stop it.", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
                     continue;
                 }
-                if(input.equalsIgnoreCase("quit")) {
+                if(input.equalsIgnoreCase("q")) {
                     isTimerRunning = false;
 
                 }

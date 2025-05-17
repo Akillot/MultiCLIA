@@ -37,8 +37,9 @@ public class InfoPage {
                 "to open and","n","-","to skip",
                 getAcceptanceColor(), getRejectionColor(), getLayoutColor(),getDefaultTextAlignment());
 
-        choice("Important links", InfoPage::displayImportantLinks,
+        choice(getColor(getLayoutColor()) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
                 getMainColor(), getLayoutColor(), getRejectionColor());
+
         marginBorder(2,1);
     }
 
@@ -54,20 +55,5 @@ public class InfoPage {
             message("Could not determine application directory.",
                     getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
-    }
-
-    private static void displayImportantLinks(){
-        insertControlChars('n', 1);
-
-        choice(getColor(27) + "G" + getColor(160) + "m" + getColor(220)
-                + "a" + getColor(27) + "i"
-                + getColor(47) + "l",
-                openUri("mailto:" + "nickzozulia@gmail.com?subject=Hello&body=I%20have%20a%20question."),
-                getMainColor(), getLayoutColor(), getRejectionColor());
-
-        insertControlChars('n', 1);
-
-        choice(getColor(getLayoutColor()) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
-                getMainColor(), getLayoutColor(), getRejectionColor());
     }
 }

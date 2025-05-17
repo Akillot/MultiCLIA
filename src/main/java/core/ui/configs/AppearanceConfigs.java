@@ -56,7 +56,7 @@ public class AppearanceConfigs {
     public static void saveConfig() {
         try (Writer writer = new FileWriter(CONFIG_PATH)) {
             GSON.toJson(config, writer);
-        } catch (IOException e) {}
+        } catch (IOException ignored) {}
     }
 
     private static void setDefaultValues() {
@@ -116,7 +116,7 @@ public class AppearanceConfigs {
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
                         "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━",
                 getLayoutColor(),DEFAULT_BORDER_WIDTH,0,out::print);
     }
 
@@ -124,19 +124,6 @@ public class AppearanceConfigs {
         insertControlChars('n',upperSide);
         border();
         insertControlChars('n',lowerSide);
-    }
-
-    public static void loadingAnimation(int frames, int duration) {
-        String[] spinner = {"    |", "    /", "    —", "    \\"};
-        for (int i = 0; i < duration; i++) {
-            out.print(getRandomColor() + "\r" + spinner[i % spinner.length] + RESET);
-            try {
-                Thread.sleep(frames);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
-        out.print(getColor(getAcceptanceColor()) + "\r    ✓" + RESET);
     }
 
     //Color table components

@@ -15,8 +15,6 @@ import static java.lang.System.*;
 public class DisplayManager {
     public static Scanner scanner = new Scanner(in);
 
-    public static ArrayList<String> apiKeyNames = new ArrayList<>();
-
     public static void displayCommandList() {
         try {
             marginBorder(1,2);
@@ -49,12 +47,6 @@ public class DisplayManager {
             marginBorder(1,1);
             message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
         }
-    }
-
-    static {
-        apiKeyNames.add("OPENAI_API_KEY");
-        apiKeyNames.add("DEEPL_API_KEY");
-        apiKeyNames.add("OPEN_WEATHER_API_KEY");
     }
 
     public static void apiKeyChecking(@NotNull ArrayList<String> apiKeyNames) {
