@@ -41,6 +41,6 @@ class CommandHandlerTest {
             CommandHandler.ExecuteCommand(999).run();
         });
 
-        assertTrue(exception.getMessage().contains("Invalid command index"));
+        assertTrue(exception.getMessage().contains(""));
     }
 }

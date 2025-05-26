@@ -29,11 +29,11 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "help", "plugins", "info" , "restart", "restart clear",
+            "help", "plugins", "info" , "restart",
             "config", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "plg", "i", "rst","rcl", "cfg",
+            "h", "plg", "i", "r", "cfg",
             "cl", "sup", "q"};
 
     public static final String[] fullPluginCmds = {
@@ -70,26 +70,25 @@ public class CommandHandler {
                             getRejectionColor(), getDefaultTextAlignment(), 0, out::println);
                 }
             };
-            case 3 -> CommandManager::mainMenuRestart;
-            case 4 -> CommandManager::mainMenuRestartWithClearing;
-            case 5 -> new SettingsPage()::displayMenu;
-            case 6 -> DisplayManager::clearTerminal;
-            case 7 -> SupportPage::displaySupportPage;
-            case 8 -> ExitPage::displayExitPage;
+            case 3 -> CommandManager::mainMenuRestartWithClearing;
+            case 4 -> new SettingsPage()::displayMenu;
+            case 5 -> DisplayManager::clearTerminal;
+            case 6 -> SupportPage::displaySupportPage;
+            case 7 -> ExitPage::displayExitPage;
 
-            case 9  -> new TimePage()::displayMenu;
-            case 10 -> new NetworkPage()::displayMenu;
-            case 11 -> new PasswordGenerator()::displayMenu;
-            case 12 -> new CryptographyPage()::displayMenu;
-            case 13 -> new TerminalPage()::displayMenu;
-            case 14 -> new AiPage()::displayMenu;
-            case 15 -> new QrPage()::displayMenu;
-            case 16 -> new WeatherPage()::displayMenu;
-            case 17 -> new AsciiArtifyPage()::displayMenu;
-            case 18 -> TranslatePage::displayTranslatePage;
+            case 8  -> new TimePage()::displayMenu;
+            case 9 -> new NetworkPage()::displayMenu;
+            case 10 -> new PasswordGenerator()::displayMenu;
+            case 11 -> new CryptographyPage()::displayMenu;
+            case 12 -> new TerminalPage()::displayMenu;
+            case 13 -> new AiPage()::displayMenu;
+            case 14 -> new QrPage()::displayMenu;
+            case 15 -> new WeatherPage()::displayMenu;
+            case 16 -> new AsciiArtifyPage()::displayMenu;
+            case 17 -> TranslatePage::displayTranslatePage;
 
             default -> throw new IllegalArgumentException(
-                    alignment(getDefaultTextAlignment()) + getColor(getRejectionColor()) + "Invalid command index");
+                    alignment(getDefaultLogoAlignment()) + getColor(getRejectionColor()) + "Invalid command index");
         };
     }
 }

@@ -11,7 +11,6 @@ import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.InfoPage.getVersion;
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 public class StartPage {

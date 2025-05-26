@@ -15,7 +15,7 @@ import static java.lang.System.out;
 
 public class SettingsPage extends Page {
 
-    private String[][] commands = {
+    private final String[][] commands = {
             {"Memory", "m"},
             {"CPU", "c"},
             {"Color table", "coltab"},
@@ -28,7 +28,7 @@ public class SettingsPage extends Page {
             {"Quit", "q"}
     };
 
-    private static String[] JAVA_ASCII_LOGO = {
+    private final static String[] JAVA_ASCII_LOGO = {
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⠀",196),
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⠟⠀⣀⣠⠄⠀⠀⠀⠀",196),
             getColorText("⠀⠀⠀⠀⠀⠀⢠⣶⣿⠟⠁⢠⣾⠋⠁⠀⠀⠀⠀⠀",196),

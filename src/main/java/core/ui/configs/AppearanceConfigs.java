@@ -114,10 +114,8 @@ public class AppearanceConfigs {
     }
 
     public static void border() {
-        message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                        "━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                getLayoutColor(),DEFAULT_BORDER_WIDTH,0,out::print);
+        message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", getLayoutColor(),DEFAULT_BORDER_WIDTH,0,out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
