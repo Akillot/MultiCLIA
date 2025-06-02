@@ -9,11 +9,8 @@ import static java.lang.System.out;
 public class SupportPage {
 
     public static void displaySupportPage() {
-        displaySupportMenu();
-    }
-
-    private static void displaySupportMenu() {
         marginBorder(1,2);
+
         message("Thank you for using MultiCLIA!\n" + alignment(getDefaultTextAlignment()) +
                 "Let's keep making great things happen together!", getLayoutColor(), getDefaultTextAlignment(),
                 getDefaultDelay(),out::print);

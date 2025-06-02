@@ -10,7 +10,6 @@ import plugins.asciiartify.AsciiArtifyPage;
 import plugins.qr.QrPage;
 import plugins.cryptography.CryptographyPage;
 import plugins.network.NetworkPage;
-import plugins.security.PasswordGenerator;
 import plugins.terminal_emulation.TerminalPage;
 import plugins.time.TimePage;
 import core.ui.configs.DisplayManager;
@@ -30,19 +29,19 @@ public class CommandHandler {
 
     public static final String[] fullCmds = {
             "help", "plugins", "info" , "restart",
-            "config", "clear", "support", "quit"};
+            "conf", "apiconf", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "plg", "i", "r", "cfg",
-            "cl", "sup", "q"};
+            "h", "p", "i", "r", "cf",
+            "acf", "cl", "sup", "q"};
 
     public static final String[] fullPluginCmds = {
-            "time", "network", "genpass", "crypt",
+            "time", "network", "crypt",
             "terminal", "ai", "qrcode", "weather",
             "asciiartify", "translate"};
 
     public static final String[] shortPluginCmds = {
-            "t", "n", "gp", "cr", "term", "a", "qr", "w", "art", "tran"};
+            "t", "n", "cr", "term", "a", "qr", "w", "art", "tran"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
@@ -72,13 +71,13 @@ public class CommandHandler {
             };
             case 3 -> CommandManager::mainMenuRestartWithClearing;
             case 4 -> new SettingsPage()::displayMenu;
-            case 5 -> DisplayManager::clearTerminal;
-            case 6 -> SupportPage::displaySupportPage;
-            case 7 -> ExitPage::displayExitPage;
+            case 5 -> CommandManager::mainMenuRestart;
+            case 6 -> DisplayManager::clearTerminal;
+            case 7 -> SupportPage::displaySupportPage;
+            case 8 -> ExitPage::displayExitPage;
 
-            case 8  -> new TimePage()::displayMenu;
-            case 9 -> new NetworkPage()::displayMenu;
-            case 10 -> new PasswordGenerator()::displayMenu;
+            case 9  -> new TimePage()::displayMenu;
+            case 10 -> new NetworkPage()::displayMenu;
             case 11 -> new CryptographyPage()::displayMenu;
             case 12 -> new TerminalPage()::displayMenu;
             case 13 -> new AiPage()::displayMenu;

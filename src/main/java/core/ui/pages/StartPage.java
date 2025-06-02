@@ -17,7 +17,6 @@ public class StartPage {
 
     @Getter
     private static String dateAndTimeOfProgramLaunching;
-
     private final static String[] MAIN_LOGO_ASCII = {
             "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓",
             "┃                                                                                                        ┃",
@@ -41,7 +40,7 @@ public class StartPage {
     public static void displayMenu() {
         loadConfig();
         insertControlChars('n',1);
-        displayLogo(MAIN_LOGO_ASCII, getDefaultTextAlignment() + 4);
+        displayLogo(getDefaultTextAlignment() + 4);
         insertControlChars('n',1);
 
         message("Hi, " +  getColor(getMainColor()) + capitalizeMessage(System.getProperty("user.name"))
@@ -58,6 +57,7 @@ public class StartPage {
         marginBorder(1,1);
         checkApiKeys(apiKeyNames.toArray(new String[0]));
         marginBorder(1,1);
+
         message("Tips:",getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::println);
 
         message(" - Type '" + getColor(getMainColor()) + "help" + getColor(getLayoutColor()) + "' to explore basic commands",
@@ -71,7 +71,7 @@ public class StartPage {
         insertControlChars('n',1);
 
         message("[" + getColor(getMainColor()) + "t" + getColor(getLayoutColor()) + "] Theme     ["
-                        + getColor(getMainColor()) + "c" + getColor(getLayoutColor()) + "] APIs     ["
+                        + getColor(getMainColor()) + "acf" + getColor(getLayoutColor()) + "] APIs     ["
                         + getColor(getMainColor()) + "p" + getColor(getLayoutColor()) + "] Plugins     ["
                         + getColor(getMainColor()) + "h" + getColor(getLayoutColor()) + "] Help     ["
                         + getColor(getMainColor()) + "i" + getColor(getLayoutColor()) + "] Info     ["
@@ -80,6 +80,7 @@ public class StartPage {
                 getLayoutColor(), getDefaultLogoAlignment(), getDefaultDelay(), out::println);
 
         marginBorder(0,1);
+
         while (true) {
             try {
                 searchCommands();
@@ -103,11 +104,11 @@ public class StartPage {
                 getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::print);
     }
 
-    private static void displayLogo(String @NotNull [] logo, int alignment) {
+    private static void displayLogo(int alignment) {
         String[] colors = getColorsForLogo();
 
-        for (int i = 0; i < logo.length; i++) {
-            String coloredText = colors[i % colors.length] + logo[i] + RESET;
+        for (int i = 0; i < StartPage.MAIN_LOGO_ASCII.length; i++) {
+            String coloredText = colors[i % colors.length] + StartPage.MAIN_LOGO_ASCII[i] + RESET;
             message(coloredText, getLayoutColor(), alignment, getDefaultDelay(), System.out::print);
         }
     }

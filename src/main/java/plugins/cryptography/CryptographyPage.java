@@ -2,6 +2,7 @@ package plugins.cryptography;
 
 import core.ui.pages.Page;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -23,10 +24,23 @@ import static java.lang.System.out;
 
 public class CryptographyPage extends Page {
 
+    private static final int easyComplexityColor = 85;
+    private static final int mediumComplexityColor = 214;
+    private static final int strongComplexityColor = 177;
+    private static final int extraComplexityColor = 201;
+
+    private static final String CHAR_POOL_EASY = "abcdefghijklmnopqrstuvwxyz";
+    private static final String CHAR_POOL_MEDIUM = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private static final String CHAR_POOL_STRONG = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    private static final String CHAR_POOL_EXTRA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>.,/|\\?!+-*&^%$#@!~'}{)(";
+
+    private static int passwordLength;
+
     private String[][] commands = {
             {"Encryption", "en"},
             {"Decryption", "de"},
             {"Hashing", "ha"},
+            {"Generate password", "genpass"},
             {"Restart", "rst"},
             {"Restart clear", "rcl"},
             {"Clear", "cl"},
@@ -48,6 +62,7 @@ public class CryptographyPage extends Page {
                 case "encryption", "en" -> encryptionMenu();
                 case "decryption", "de" -> decryptionMenu();
                 case "hashing", "ha" -> hashSHA256();
+                case "generate password", "genpass" -> generatePassword();
                 case "restart", "rst" -> {
                     insertControlChars('n', 1);
                     mainMenuRestart();
@@ -334,6 +349,7 @@ public class CryptographyPage extends Page {
         }
     }
 
+    //hashing
     private static void hashSHA256() {
         try {
             insertControlChars('n', 1);
@@ -362,5 +378,97 @@ public class CryptographyPage extends Page {
             hexString.append(String.format("%02x", b));
         }
         return hexString.toString();
+    }
+
+    private static void generatePassword(){
+        insertControlChars('n', 1);
+        message("Password generator:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        try {
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter length of password [1-80]: ");
+            passwordLength = scanner.nextInt();
+            if (passwordLength <= 0 || passwordLength > 80) {
+                message("Invalid password length. Please enter a number between 1 and 80.",
+                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                return;
+            }
+        } catch (Exception e) {
+            message("Invalid input. Please enter a number.", getLayoutColor(), getDefaultTextAlignment(),
+                    getDefaultDelay(), out::println);
+            scanner.nextLine();
+        }
+
+        scanner.nextLine();
+
+        insertControlChars('n', 1);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Password complexity ["
+                + getColor(easyComplexityColor) + "light" + getColor(getLayoutColor()) + "|"
+                + getColor(easyComplexityColor) + "1" + getColor(getLayoutColor()) + ", "
+                + getColor(mediumComplexityColor) + "medium" + getColor(getLayoutColor()) + "|"
+                + getColor(mediumComplexityColor) + "2" + getColor(getLayoutColor()) + ", "
+                + getColor(strongComplexityColor) + "strong" + getColor(getLayoutColor()) + "|"
+                + getColor(strongComplexityColor) + "3" + getColor(getLayoutColor()) + ", "
+                + getColor(extraComplexityColor) + "extra" + getColor(getLayoutColor()) + "|"
+                + getColor(extraComplexityColor) + "4" + getColor(getLayoutColor()) + "]: ");
+
+        String passwordComplexity = scanner.nextLine().toLowerCase();
+        String generatedPassword = createPassword(passwordComplexity);
+        if (generatedPassword != null) {
+            insertControlChars('n', 1);
+            message("Generated Password: " + generatedPassword,
+                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+
+            displayConfirmation("Enter", "y", "+",
+                    "to open and", "n", "-", "to skip",
+                    getAcceptanceColor(), getRejectionColor(), getLayoutColor(), getDefaultTextAlignment());
+
+            choice("Copy to clipboard", copyToClipboard(generatedPassword), getLayoutColor(), getLayoutColor(), getRejectionColor());
+            marginBorder(2, 1);
+        } else {
+            message("Invalid complexity option. Please try again.", getLayoutColor(), getDefaultTextAlignment(),
+                    getDefaultDelay(), out::println);
+        }
+    }
+
+    //Managing password difficulty
+    private static @Nullable String createPassword(@NotNull String passwordComplexity) {
+        String charPool;
+        int color;
+
+        switch (passwordComplexity) {
+            case "light", "1" -> {
+                charPool = CHAR_POOL_EASY;
+                color = easyComplexityColor;
+            }
+            case "medium", "2" -> {
+                charPool = CHAR_POOL_MEDIUM;
+                color = mediumComplexityColor;
+            }
+            case "strong", "3" -> {
+                charPool = CHAR_POOL_STRONG;
+                color = strongComplexityColor;
+            }
+            case "extra", "4" -> {
+                charPool = CHAR_POOL_EXTRA;
+                color = extraComplexityColor;
+            }
+            default -> {
+                return null;
+            }
+        }
+
+        return getColor(color) + generatePasswordFromPool(charPool);
+    }
+
+    //Generating password from the exact char pool
+    private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
+        StringBuilder passwordBuilder = new StringBuilder();
+        Random random = new SecureRandom();
+
+        for (int i = 0; i < passwordLength; i++) {
+            int index = random.nextInt(charPool.length());
+            passwordBuilder.append(charPool.charAt(index));
+        }
+
+        return passwordBuilder.toString();
     }
 }

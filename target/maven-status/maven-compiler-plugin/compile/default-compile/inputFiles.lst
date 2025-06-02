@@ -1,3 +1,4 @@
+/Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/ApiSettingsPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/pages/Page.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/plugins/terminal_emulation/TerminalPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/plugins/ai/ChatGPTClient.java
@@ -10,7 +11,6 @@
 /Users/nick/Desktop/MultiCLIA/src/main/java/plugins/translate/TranslatePage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/plugins/network/NetworkPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/PackageUnifier.java
-/Users/nick/Desktop/MultiCLIA/src/main/java/plugins/security/PasswordGenerator.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/plugins/qr/QrPage.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/ui/configs/DisplayManager.java
 /Users/nick/Desktop/MultiCLIA/src/main/java/core/commands/CommandHandler.java

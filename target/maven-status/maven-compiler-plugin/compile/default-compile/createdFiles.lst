@@ -9,6 +9,7 @@ core/ui/configs/TextConfigs.class
 plugins/network/NetworkPage.class
 core/CommandManager$1.class
 core/commands/PackageUnifier.class
+core/ui/pages/ApiSettingsPage.class
 core/ui/pages/SettingsPage.class
 plugins/asciiartify/AsciiArtifyPage.class
 plugins/cryptography/CryptographyPage.class
@@ -23,7 +24,6 @@ core/AppLauncher.class
 plugins/terminal_emulation/TerminalPage.class
 plugins/ai/ChatGPTClient.class
 core/ui/pages/Page.class
-plugins/security/PasswordGenerator.class
 core/ui/pages/ExitPage.class
 core/ui/configs/AppearanceConfigs.class
 core/CommandManager.class

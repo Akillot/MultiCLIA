@@ -23,13 +23,6 @@ public class AppearanceConfigs {
     public static int getDefaultTextAlignment() { return config.defaultTextAlignment; }
     public static int getDefaultLogoAlignment() { return config.defaultLogoAlignment; }
 
-    public static int getColor1() { return config.color1; }
-    public static int getColor2() { return config.color2; }
-    public static int getColor3() { return config.color3; }
-    public static int getColor4() { return config.color4; }
-    public static int getColor5() { return config.color5; }
-    public static int getColor6() { return config.color6; }
-
     public static int getMainColor() { return config.mainColor; }
     public static int getLayoutColor() { return config.layoutColor; }
     public static int getAcceptanceColor() { return config.acceptanceColor; }
@@ -161,6 +154,8 @@ public class AppearanceConfigs {
             insertControlChars('n', 1);
         }
     }
+
+
 
     @Contract(pure = true)
     private static @NotNull String tableAlignment() {
