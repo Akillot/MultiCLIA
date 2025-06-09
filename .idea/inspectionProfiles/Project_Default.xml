@@ -59,15 +59,36 @@
       <option name="ignoredModules">
         <list>
           <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
+          <option value="MultiCLIA" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="org.jetbrains.kotlin:kotlin-stdlib:1.4.0" />
+          <option value="com.squareup.okio:okio:2.8.0" />
+          <option value="org.jetbrains.kotlin:kotlin-stdlib:1.4.10" />
+          <option value="org.jline:jline:3.23.0" />
+          <option value="org.bouncycastle:bcprov-jdk18on:1.76" />
+          <option value="org.json:json:20230618" />
+          <option value="ch.qos.logback:logback-core:1.4.14" />
+          <option value="io.github.classgraph:classgraph:4.8.21" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>

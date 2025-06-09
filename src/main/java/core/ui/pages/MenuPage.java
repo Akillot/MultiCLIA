@@ -30,7 +30,7 @@ public class MenuPage {
             "┃                    ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                    ┃",
             "┃                    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝   v." + getVersion() + getColor(getLayoutColor()) + "           ┃",
             "┃                                                                                                        ┃",
-            "┃                           Terminal Plugin Framework | Open-source | Modular.                           ┃",
+            "┃                                    Terminal Tool App | Open-source.                                    ┃",
             "┃                                                                                                        ┃",
             "┃                                                                                                        ┃",
             "┃                                                                                                        ┃",
@@ -85,7 +85,7 @@ public class MenuPage {
                 out::print);
 
         message(" - Type '"
-                        + getColor(getMainColor()) + "plugins"
+                        + getColor(getMainColor()) + "tools"
                         + getColor(getLayoutColor()) + "' to explore or install mini apps",
                 getLayoutColor(),
                 getDefaultTextAlignment(),

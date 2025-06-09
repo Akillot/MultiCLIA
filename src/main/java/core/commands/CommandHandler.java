@@ -5,16 +5,16 @@ import core.ui.pages.SettingsPage;
 import core.ui.pages.ExitPage;
 import core.ui.pages.InfoPage;
 import core.ui.pages.SupportPage;
-import plugins.ai.AiPage;
-import plugins.asciiartify.AsciiArtifyPage;
-import plugins.qr.QrPage;
-import plugins.cryptography.CryptographyPage;
-import plugins.network.NetworkPage;
-import plugins.terminal_emulation.TerminalPage;
-import plugins.time.TimePage;
+import tools.ai.AiPage;
+import tools.asciiartify.AsciiArtifyPage;
+import tools.qr.QrPage;
+import tools.cryptography.CryptographyPage;
+import tools.network.NetworkPage;
+import tools.terminal_emulation.TerminalPage;
+import tools.time.TimePage;
 import core.ui.configs.DisplayManager;
-import plugins.translate.TranslatePage;
-import plugins.weather.WeatherPage;
+import tools.translate.TranslatePage;
+import tools.weather.WeatherPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,17 +28,17 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "help", "plugins", "info" , "restart",
+            "help", "tools", "info" , "restart",
             "conf", "apiconf", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "p", "i", "r", "cf",
+            "h", "tl", "i", "r", "cf",
             "acf", "cl", "sup", "q"};
 
     public static final String[] fullPluginCmds = {
-            "time", "network", "crypt",
-            "terminal", "ai", "qrcode", "weather",
-            "asciiartify", "translate"};
+            "time", "network", "crypt", "terminal",
+            "ai", "qrcode", "weather", "asciiartify",
+            "translate"};
 
     public static final String[] shortPluginCmds = {
             "t", "n", "cr", "term", "a", "qr", "w", "art", "tran"};
