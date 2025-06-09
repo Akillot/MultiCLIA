@@ -1,6 +1,6 @@
 package plugins.qr;
 
-import core.ui.pages.Page;
+import core.Page;
 import org.jetbrains.annotations.Nullable;
 
 import static core.ui.configs.AppearanceConfigs.*;

@@ -1,6 +1,6 @@
 package plugins.time;
 
-import core.ui.pages.Page;
+import core.Page;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.*;

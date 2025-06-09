@@ -3,9 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
+    <groupId>app</groupId>
     <artifactId>MultiCLIA</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>time</module>
+    </modules>
 
     <properties>
         <java.version>17</java.version>
@@ -126,6 +130,12 @@
             <artifactId>mockito-inline</artifactId>
             <version>5.2.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

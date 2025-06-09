@@ -1,6 +1,6 @@
 package plugins.cryptography;
 
-import core.ui.pages.Page;
+import core.Page;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

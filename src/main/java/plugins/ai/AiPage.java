@@ -2,7 +2,7 @@ package plugins.ai;
 
 import core.ui.configs.AppearanceConfigs;
 import core.ui.configs.TextConfigs;
-import core.ui.pages.Page;
+import core.Page;
 
 import java.util.Scanner;
 

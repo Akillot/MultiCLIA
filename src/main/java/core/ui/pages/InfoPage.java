@@ -21,24 +21,47 @@ public class InfoPage {
 
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
-        message("Application info:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        message("Current version: " + getVersion(), getLayoutColor(),getDefaultTextAlignment(),getDefaultDelay(),out::print);
+        message("Application info:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
-        message("Platform: Classic [" + getColor(75) + "Mac" + getColor(getLayoutColor()) + "OS, " + getColor(74)
-                + getColor(207) +"Linux" + getColor(getLayoutColor()) + "]", getLayoutColor(),
-                getDefaultTextAlignment(),getDefaultDelay(),out::print);
+        message("Current version: " + getVersion(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
 
-        message("Author: Nick Zozulia", getLayoutColor(), getDefaultTextAlignment(),getDefaultDelay(),out::println);
+        message("Platform: Classic [" + getColor(75) + "Mac"
+                        + getColor(getLayoutColor()) + "OS, " + getColor(74)
+                        + getColor(207) +"Linux" + getColor(getLayoutColor()) + "]",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("Author: Nick Zozulia",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
         displayApplicationDirectory();
         insertControlChars('n', 1);
 
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
-                getAcceptanceColor(), getRejectionColor(), getLayoutColor(),getDefaultTextAlignment());
+                getAcceptanceColor(),
+                getRejectionColor(),
+                getLayoutColor(),
+                getDefaultTextAlignment());
 
-        choice(getColor(getLayoutColor()) + "Github", openUri("https://github.com/Akillot/MultiCLIA"),
-                getMainColor(), getLayoutColor(), getRejectionColor());
+        choice(getColor(getLayoutColor()) + "Github",
+                openUri("https://github.com/Akillot/MultiCLIA"),
+                getMainColor(),
+                getLayoutColor(),
+                getRejectionColor());
 
         marginBorder(2,1);
     }
@@ -46,14 +69,21 @@ public class InfoPage {
     private static void displayApplicationDirectory() {
         try {
             String appPath = new File(
-                    StartPage.class.getProtectionDomain().getCodeSource().getLocation().toURI()
+                    MenuPage.class.getProtectionDomain().getCodeSource().getLocation().toURI()
             ).getParent();
 
             message("Application Directory: " + getColor(getMainColor()) + appPath,
-                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
+
         } catch (Exception e) {
             message("Could not determine application directory.",
-                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
         }
     }
 }

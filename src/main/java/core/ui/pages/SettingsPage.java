@@ -1,6 +1,7 @@
 package core.ui.pages;
 
 import com.sun.management.OperatingSystemMXBean;
+import core.Page;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +47,12 @@ public class SettingsPage extends Page {
 
     public void displayMenu() {
         marginBorder(1,2);
-        message("Settings:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Settings:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
         displayListOfCommands(commands);
 
         while (true) {
