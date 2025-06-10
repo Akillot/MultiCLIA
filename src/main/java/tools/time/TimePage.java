@@ -34,12 +34,21 @@ public class TimePage extends Page {
 
     public void displayMenu() {
         marginBorder(1,2);
-        message("Time:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Time:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
         displayListOfCommands(commands);
 
         while (true) {
-            slowMotionText(getDefaultDelay(), getAcceptanceColor(), false,
-                    getColor(getLayoutColor()) + getSearchingArrow(), "");
+            slowMotionText(getDefaultDelay(),
+                    getAcceptanceColor(),
+                    false,
+                    getColor(getLayoutColor()) + getSearchingArrow(),
+                    "");
+
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -49,11 +58,10 @@ public class TimePage extends Page {
                 case "timer", "t" -> runTimer();
                 case "stopwatch", "sw" -> runStopwatch();
                 case "time zone", "tz" -> displayCustomTimeZone();
-                case "restart", "rst" -> {
+                case "restart", "r" -> {
                     insertControlChars('n',1);
-                    mainMenuRestart();
+                    mainMenuRestartWithClearing();
                 }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
@@ -72,10 +80,17 @@ public class TimePage extends Page {
 
     private static void displayCurrentTime() {
         insertControlChars('n',1);
-        message("Current Time: " + getColor(getMainColor())
-                + getCurrentTime(), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Current Time Zone: " + getColor(getMainColor())
-                + getCurrentTimeZone(), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Current Time: " + getColor(getMainColor()) + getCurrentTime(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("Current Time Zone: " + getColor(getMainColor()) + getCurrentTimeZone(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private static @NotNull String getCurrentTime() {
@@ -100,6 +115,7 @@ public class TimePage extends Page {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
                     + "Enter time in seconds (or '" + getColor(getMainColor())
                     + "q" + getColor(getLayoutColor()) + "' to close the timer): ");
+
             String input = scanner.nextLine();
 
             if (exitCheck(input)) break;
@@ -107,12 +123,21 @@ public class TimePage extends Page {
             try {
                 double seconds = Double.parseDouble(input);
                 if (seconds < 0) {
-                    message("Time cannot be negative.", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    message("Time cannot be negative.",
+                            getLayoutColor(),
+                            getDefaultTextAlignment(),
+                            getDefaultDelay(),
+                            out::print);
+
                     continue;
                 }
                 if (isTimerRunning) {
-                    message("A timer is already running" + getColor(getLayoutColor()) +
-                            ". Please wait or stop it.", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    message("A timer is already running" + getColor(getLayoutColor())
+                                    + ". Please wait or stop it.",
+                            getMainColor(),
+                            getDefaultTextAlignment(),
+                            getDefaultDelay(),
+                            out::print);
                     continue;
                 }
                 if(input.equalsIgnoreCase("q")) {
@@ -134,7 +159,11 @@ public class TimePage extends Page {
             try {
                 for (double i = seconds; i >= 0; i--) {
                     if (!isTimerRunning) {
-                        message("Timer stopped.", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                        message("Timer stopped.",
+                                getMainColor(),
+                                getDefaultTextAlignment(),
+                                getDefaultDelay(),
+                                out::print);
                         return;
                     }
                     out.print("\r" + alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
@@ -143,19 +172,32 @@ public class TimePage extends Page {
                     Thread.sleep(1000);
                 }
                 if (isTimerRunning) {
+
                     insertControlChars('r', 1);
-                    message("Time is up", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-                    out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Status: "
+                    message("Time is up",
+                            getLayoutColor(),
+                            getDefaultTextAlignment(),
+                            getDefaultDelay(),
+                            out::print);
+
+                    out.print(alignment(getDefaultTextAlignment())
+                            + getColor(getLayoutColor()) + "Status: "
                             + getColor(getAcceptanceColor()) + " ✓");
+
                     insertControlChars('n', 1);
                 }
+
                 insertControlChars('n',1);
-                out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
-                        + "Enter time in seconds (or '" + getColor(getMainColor())
-                        + "q" + getColor(getLayoutColor()) + "' to close): ");
+                out.print(alignment(getDefaultTextAlignment())
+                        + getColor(getLayoutColor()) + "Enter time in seconds (or '"
+                        + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + "' to close): ");
+
             } catch (InterruptedException e) {
-                message("Timer interrupted" + getColor(getLayoutColor()) + ".", getRejectionColor(),
-                        getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("Timer interrupted" + getColor(getLayoutColor()) + ".",
+                        getRejectionColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::print);
             } finally {
                 isTimerRunning = false;
             }
@@ -165,17 +207,27 @@ public class TimePage extends Page {
     private static void runStopwatch() {
         insertControlChars('n', 1);
         message("Press " + getColor(getMainColor()) + "'Enter'" + getColor(getLayoutColor())
-                        + " to start stopwatch and again to stop:", getLayoutColor(), getDefaultTextAlignment(),
-                getDefaultDelay(), out::print);
+                        + " to start stopwatch and again to stop:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
         scanner.nextLine();
         long startTime = System.currentTimeMillis();
-        message("Stopwatch: " + getColor(getAcceptanceColor()) + "started", getLayoutColor(), getDefaultTextAlignment(),
-                getDefaultDelay(), out::print);
+        message("Stopwatch: " + getColor(getAcceptanceColor()) + "started",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
 
         scanner.nextLine();
         double elapsedTime = calculateElapsedTime(startTime);
-        message("Stopwatch: " + getColor(getRejectionColor()) + "stopped", getLayoutColor(), getDefaultTextAlignment(),
-                getDefaultDelay(), out::println);
+        message("Stopwatch: " + getColor(getRejectionColor()) + "stopped",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
         printElapsedTime(elapsedTime);
     }
@@ -186,17 +238,21 @@ public class TimePage extends Page {
 
     private static void printElapsedTime(double elapsedTime) {
         message("Elapsed Time: " + getColor(getMainColor()) + elapsedTime
-                + getColor(getLayoutColor()) + " sec.", getLayoutColor(), getDefaultTextAlignment(),
-                getDefaultDelay(), out::println);
+                + getColor(getLayoutColor()) + " sec.",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private static void displayCustomTimeZone() {
         insertControlChars('n', 1);
 
         while (true) {
-            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter a time zone [e.g., "
-                    + getColor(getMainColor()) + "Europe" + getColor(getLayoutColor())
-                    + "/" + getColor(getMainColor()) + "Paris" + getColor(getLayoutColor()) + "]: ");
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                    + "Enter a time zone [e.g., " + getColor(getMainColor()) + "Europe"
+                    + getColor(getLayoutColor()) + "/" + getColor(getMainColor()) + "Paris"
+                    + getColor(getLayoutColor()) + "]: ");
 
             String inputZone = scanner.nextLine().trim();
 
@@ -205,8 +261,11 @@ public class TimePage extends Page {
             if (isValidTimeZone(inputZone)) {
                 String time = getTimeInZone(inputZone);
                 message("Time in " + inputZone + ": " + getColor(getMainColor()) + time
-                        + getColor(getLayoutColor()) + ".", getLayoutColor(), getDefaultTextAlignment(),
-                        getDefaultDelay(), out::println);
+                        + getColor(getLayoutColor()) + ".",
+                        getLayoutColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::println);
                 break;
             } else {
                 suggestTimeZones(inputZone);
@@ -220,14 +279,19 @@ public class TimePage extends Page {
                 isTimerRunning = false;
                 insertControlChars('n', 1);
             }
-            message("Terminated correctly" + getColor(getLayoutColor())
-                    + ". " + getColor(getMainColor()) + "You are in time menu"
-                    + getColor(getLayoutColor()) + ".", getMainColor(), getDefaultTextAlignment(),
-                    getDefaultDelay(),out::print);
+            message("Terminated correctly"
+                            + getColor(getLayoutColor()) + ". " + getColor(getMainColor())
+                            + "You are in time menu" + getColor(getLayoutColor()) + ".",
+                    getMainColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
 
             message("\r   Status: " + getColor(getAcceptanceColor()) + "✓",
-                    getLayoutColor(),getDefaultTextAlignment(),
-                    getDefaultDelay(),out::println);
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
             return true;
         }
         return false;
@@ -244,7 +308,11 @@ public class TimePage extends Page {
     }
 
     private static void suggestTimeZones(String inputZone) {
-        message("Invalid time zone: " + inputZone, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Invalid time zone: " + inputZone,
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
         List<String> similarZones = ZoneId.getAvailableZoneIds().stream()
                 .filter(zone -> zone.toLowerCase().contains(inputZone.toLowerCase()))
@@ -253,10 +321,23 @@ public class TimePage extends Page {
                 .toList();
 
         if (similarZones.isEmpty()) {
-            message("No similar time zones found. Please check your input.", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("No similar time zones found. Please check your input.",
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         } else {
-            message("Did you mean:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
-            similarZones.forEach(zone -> message("- " + zone, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println));
+            message("Did you mean:",
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+
+            similarZones.forEach(zone -> message("- " + zone,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println));
         }
     }
 

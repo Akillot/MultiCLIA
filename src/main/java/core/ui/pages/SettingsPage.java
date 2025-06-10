@@ -166,8 +166,12 @@ public class SettingsPage extends Page {
 
     private static void displayCpuInfo() {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
+
         message("CPU Cores: " + getColor(getMainColor()) + availableProcessors,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
     }
 
     private static void displayJavaInfo() {
@@ -185,19 +189,34 @@ public class SettingsPage extends Page {
         String jvmVersion = System.getProperty("java.vm.version");
 
         message("Java Version: " + getColor(getMainColor()) + javaVersion,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
         message("Java Vendor: " + getColor(getMainColor()) + javaVendor,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
 
         message("Java Home: " + getColor(getMainColor()) + javaHome,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
         message("JVM Name: " + getColor(getMainColor()) + jvmName,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
 
         message("JVM Version: " + getColor(getMainColor()) + jvmVersion,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private static void displayDesignInfo(){
