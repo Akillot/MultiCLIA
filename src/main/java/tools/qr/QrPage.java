@@ -36,8 +36,7 @@ public class QrPage extends Page {
             {"Modify QR size", "ms"},
             {"Modify image format", "mf"},
             {"Info", "i"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -45,13 +44,22 @@ public class QrPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("QR Code Generator:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("QR Code Generator:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
         displayCurrentSettings();
         displayListOfCommands(commands);
 
         while (true) {
-            slowMotionText(getDefaultDelay(), getSearchingLineAlignment(), false,
-                    getColor(getLayoutColor()) + getSearchingArrow(), "");
+            slowMotionText(getDefaultDelay(),
+                    getSearchingLineAlignment(),
+                    false,
+                    getColor(getLayoutColor()) + getSearchingArrow(),
+                    "");
+
             String input = scanner.nextLine().trim().toLowerCase();
 
             switch (input) {
@@ -64,22 +72,32 @@ public class QrPage extends Page {
                     displayCurrentSettings();
                     insertControlChars('n',1);
                 }
-                case "restart", "rst" -> {
+
+                case "restart", "r" -> {
                     insertControlChars('n',1);
-                    mainMenuRestart();
+                    mainMenuRestartWithClearing();
                 }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+
                 case "clear", "cl" -> clearTerminal();
-                case "help", "h" -> showHelp();
-                case "quit", "q", "exit", "e" -> exitApplication();
+                case "help", "h" -> displayListOfCommands(commands);
+                case "quit", "q", "exit", "e" -> {
+                    exitPage("You are in main menu");
+                    return;
+                }
                 default -> showInvalidCommand(input);
             }
         }
     }
 
     private void displayCurrentSettings() {
-        message("[Size: " + getColor(getMainColor()) + size + getColor(getLayoutColor()) + " | Format: " + getColor(getMainColor())
-                        + format + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("[Size: "
+                        + getColor(getMainColor()) + size + getColor(getLayoutColor())
+                        + " | Format: " + getColor(getMainColor())
+                        + format + getColor(getLayoutColor()) + "]",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
     }
 
     public void generateQrCode() {
@@ -114,9 +132,11 @@ public class QrPage extends Page {
     @Nullable
     private String promptForUrl() {
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +
-                "Enter URL [include " + getColor(getMainColor()) + "http:// " + getColor(getLayoutColor())
-                + "or " + getColor(getMainColor()) + " https://" + getColor(getLayoutColor()) + "]: ");
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "Enter URL [include " + getColor(getMainColor())
+                + "http:// " + getColor(getLayoutColor()) + "or " + getColor(getMainColor())
+                + " https://" + getColor(getLayoutColor()) + "]: ");
 
         String input = scanner.nextLine().trim();
         if (input.isEmpty()) {
@@ -124,8 +144,8 @@ public class QrPage extends Page {
             return null;
         }
 
-        if (!input.startsWith("http://") && !input.startsWith("https://")) input = "https://" + input;
-        return input;
+        if (!input.startsWith("http://") && !input.startsWith("https://"))
+            input = "https://" + input; return input;
     }
 
     private void modifyQrCodeSize() {
@@ -184,19 +204,33 @@ public class QrPage extends Page {
     private void showFormatsHelp() {
         insertControlChars('n',1);
         message("Supported formats:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  PNG [" + getColor(getMainColor()) + ".png"
-                + getColor(getLayoutColor()) + "] - Best for QR codes [default]");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  JPEG [" + getColor(getMainColor()) + ".jpg"
-                + getColor(getLayoutColor()) + "/" + getColor(getMainColor()) + ".jpeg" + getColor(getLayoutColor())  + "] - Smaller file size");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  GIF [" + getColor(getMainColor()) + ".gif"
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  PNG [" + getColor(getMainColor()) + ".png" + getColor(getLayoutColor())
+                + "] - Best for QR codes [default]");
+
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  JPEG [" + getColor(getMainColor()) + ".jpg"
+                + getColor(getLayoutColor()) + "/" + getColor(getMainColor())
+                + ".jpeg" + getColor(getLayoutColor())  + "] - Smaller file size");
+
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  GIF [" + getColor(getMainColor()) + ".gif"
                 + getColor(getLayoutColor()) + "] - For animated QR codes");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  SVG [" + getColor(getMainColor()) + ".svg"
+
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  SVG [" + getColor(getMainColor()) + ".svg"
                 + getColor(getLayoutColor()) + "] - Vector format [scalable]");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  WebP [" +  getColor(getMainColor()) + ".webp"
+
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  WebP [" +  getColor(getMainColor()) + ".webp"
                 + getColor(getLayoutColor()) + "] - Modern efficient format");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  PDF [" +  getColor(getMainColor()) + ".pdf"
+
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  PDF [" +  getColor(getMainColor()) + ".pdf"
                 + getColor(getLayoutColor()) + "] - For document embedding");
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "·  ICO [" +  getColor(getMainColor()) + ".ico"
+
+        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                + "·  ICO [" +  getColor(getMainColor()) + ".ico"
                 + getColor(getLayoutColor()) + "] - For website favicons\n");
     }
 
@@ -206,11 +240,18 @@ public class QrPage extends Page {
 
     private void showSuccess(String message) {
         message(getColor(getAcceptanceColor()) + "✓ " + getColor(getLayoutColor()) + message,
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private void showError(String message) {
-        message("Error: " + message + RESET, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("Error: " + message + RESET,
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private void exitApplication() {

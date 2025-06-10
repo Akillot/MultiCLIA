@@ -1,7 +1,6 @@
 package core.ui.pages;
 
 import lombok.Getter;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -10,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import static core.CommandManager.*;
 import static core.commands.SearchingManager.search;
 import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.InfoPage.getVersion;
 import static java.lang.System.out;
@@ -42,7 +42,7 @@ public class MenuPage {
         loadConfig();
 
         insertControlChars('n',1);
-        displayLogo(getDefaultTextAlignment() + 4);
+        displayLogo(getDefaultTextAlignment() + 4, MAIN_LOGO_ASCII);
         insertControlChars('n',1);
 
         message("Hi, "
@@ -144,26 +144,5 @@ public class MenuPage {
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
                 out::print);
-    }
-
-    private static void displayLogo(int alignment) {
-        String[] colors = getColorsForLogo();
-
-        for (int i = 0; i < MenuPage.MAIN_LOGO_ASCII.length; i++) {
-            String coloredText = colors[i % colors.length] + MenuPage.MAIN_LOGO_ASCII[i] + RESET;
-            message(coloredText,
-                    getLayoutColor(),
-                    alignment,
-                    getDefaultDelay(),
-                    out::print);
-        }
-    }
-
-    private static String @NotNull [] getColorsForLogo() {
-        return new String[]{
-                getColor(getLayoutColor()), getColor(getLayoutColor()),
-                getColor(getLayoutColor()), getColor(getLayoutColor()),
-                getColor(getLayoutColor()), getColor(getLayoutColor()),
-        };
     }
 }

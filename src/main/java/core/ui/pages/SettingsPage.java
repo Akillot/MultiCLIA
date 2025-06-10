@@ -9,8 +9,7 @@ import java.lang.management.ManagementFactory;
 
 import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
-import static core.ui.configs.DisplayManager.clearTerminal;
-import static core.ui.configs.DisplayManager.scanner;
+import static core.ui.configs.DisplayManager.*;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -102,15 +101,44 @@ public class SettingsPage extends Page {
         double usagePercentage = (double) usedOsMemory / totalOsMemory * 100;
 
         insertControlChars('n', 1);
-        message("System Memory Info:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("System Memory Info:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
-        message("JVM Memory Statistics", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
-        message("Used JVM Memory: " + formatMemory(usedJvmMemory), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Free JVM Memory: " + formatMemory(freeJvmMemory), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("Total JVM Memory: " + formatMemory(totalJvmMemory), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("JVM Memory Statistics",
+                getMainColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
+        message("Used JVM Memory: " + formatMemory(usedJvmMemory),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("Free JVM Memory: " + formatMemory(freeJvmMemory),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("Total JVM Memory: " + formatMemory(totalJvmMemory),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
 
         insertControlChars('n', 1);
-        message("ROM Info", getMainColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+
+        message("ROM Info",
+                getMainColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
         executeTerminalCommand("df -h");
     }
 
@@ -142,16 +170,9 @@ public class SettingsPage extends Page {
                 getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
     }
 
-    @Contract(pure = true)
-    private static void displayLogo(String @NotNull [] logo){
-        for (String s : logo) {
-            out.println(alignment(getDefaultTextAlignment()) + s);
-        }
-    }
-
     private static void displayJavaInfo() {
         insertControlChars('n',1);
-        displayLogo(JAVA_ASCII_LOGO);
+        displayLogo(getDefaultTextAlignment(), JAVA_ASCII_LOGO);
         insertControlChars('n',1);
 
         String javaVersion = System.getProperty("java.version");
@@ -181,21 +202,63 @@ public class SettingsPage extends Page {
 
     private static void displayDesignInfo(){
         insertControlChars('n',1);
-        message("·  Main color code: " + getColor(getMainColor()) + getMainColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Layout color code: " + getLayoutColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Acceptance color code: " + getColor(getAcceptanceColor()) + getAcceptanceColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Rejection color code: " + getColor(getRejectionColor()) + getRejectionColor(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Main color code: " + getColor(getMainColor()) + getMainColor(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
 
-        message("·  Searching arrow: " + getSearchingArrow(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Delay: " + getDefaultDelay(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Layout color code: " + getLayoutColor(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
 
-        message("·  Default logo alignment: " + getDefaultLogoAlignment(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Default text alignment: " + getDefaultTextAlignment(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
-        message("·  Searching line alignment: " + getSearchingLineAlignment(),getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("·  Acceptance color code: " + getColor(getAcceptanceColor()) + getAcceptanceColor(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("·  Rejection color code: " + getColor(getRejectionColor()) + getRejectionColor(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
+        message("·  Searching arrow: " + getSearchingArrow(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("·  Delay: " + getDefaultDelay(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
+        message("·  Default logo alignment: " + getDefaultLogoAlignment(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("·  Default text alignment: " + getDefaultTextAlignment(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        message("·  Searching line alignment: " + getSearchingLineAlignment(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private static void modifyDesign(){
         insertControlChars('n',1);
-
+        // In progress
     }
 }
