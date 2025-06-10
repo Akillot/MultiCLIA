@@ -7,7 +7,7 @@ import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
-public class AsciiArtifyPage {
+public class AsciiArtGenPage {
     private static Scanner scanner = new Scanner(System.in);
 
     private static @NotNull String generateBanner(String text) {
@@ -46,21 +46,31 @@ public class AsciiArtifyPage {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("ASCIIArtify:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("ASCIIArtify:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
         generateArt();
     }
 
     private static void generateArt() {
         Scanner scanner = new Scanner(System.in);
         insertControlChars('n', 1);
-        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter text to convert to ASCII banner: ");
+        out.print(alignment(getDefaultTextAlignment())
+                + getColor(getLayoutColor()) + "Enter text to convert to ASCII banner: ");
         String text = scanner.nextLine().trim();
 
-        if (text.isEmpty()) out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) +  "Error: Input text cannot be empty.");
+        if (text.isEmpty()) out.println(alignment(getDefaultTextAlignment())
+                + getColor(getLayoutColor()) +  "Error: Input text cannot be empty.");
 
         String banner = generateBanner(text);
         insertControlChars('n', 1);
-        out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Here is your ASCII banner:");
+
+        out.println(alignment(getDefaultTextAlignment())
+                + getColor(getLayoutColor()) + "Here is your ASCII banner:");
+
         insertControlChars('n', 1);
         out.println(banner);
         marginBorder(2, 1);

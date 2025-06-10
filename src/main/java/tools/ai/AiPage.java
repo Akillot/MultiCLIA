@@ -85,7 +85,8 @@ public class AiPage extends Page {
         try {
             while (true) {
                 insertControlChars('n', 1);
-                out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter prompt [or "
+                out.print(alignment(getDefaultTextAlignment())
+                        + getColor(getLayoutColor()) + "Enter prompt [or "
                         + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + " to exit]: ");
                 String userMessage = scanner.nextLine();
 
@@ -98,6 +99,7 @@ public class AiPage extends Page {
 
                 insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + coloredChatGptLogo + getColor(getLayoutColor()) + ": ");
+
                 slowMotionText(20,
                         getDefaultTextAlignment(),
                         false,

@@ -50,12 +50,20 @@ public class CryptographyPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
-        message("Cryptography:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Cryptography:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
         displayListOfCommands(commands);
 
         while (true) {
-            slowMotionText(0, getSearchingLineAlignment(), false,
-                    getColor(getLayoutColor()) + getSearchingArrow(), "");
+            slowMotionText(0,
+                    getSearchingLineAlignment(),
+                    false,
+                    getColor(getLayoutColor()) + getSearchingArrow(),
+                    "");
+
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -124,10 +132,11 @@ public class CryptographyPage extends Page {
         }
     }
 
-    //encrypt aes
+    // Encrypt aes
     private static void encryptAES() {
         try {
-            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
+            out.print(alignment(getDefaultTextAlignment())
+                    + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
             String plainText = scanner.nextLine();
 
             KeyGenerator keyGen = KeyGenerator.getInstance("AES");
@@ -144,17 +153,29 @@ public class CryptographyPage extends Page {
 
             insertControlChars('n', 1);
             message("Encrypted Text [ECB]: "
-                    + getColor(getMainColor()) + encryptedText, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    + getColor(getMainColor()) + encryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
+
             message("Key [Base64 encoded]: " + getColor(getMainColor())
-                    + base64Key, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    + base64Key,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
 
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(),
-                    getDefaultDelay(), out::println);
+            message("Error encrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         }
     }
 
-    //decrypt aes
+    // Decrypt aes
     private static void decryptAES() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -173,13 +194,22 @@ public class CryptographyPage extends Page {
             String decryptedText = new String(decryptedBytes);
 
             insertControlChars('n', 1);
-            message("Decrypted Text: " + getColor(getMainColor()) + decryptedText, getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Decrypted Text: " + getColor(getMainColor()) + decryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
+
         } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Error decrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
         }
     }
 
-    // encrypt rsa
+    // Encrypt rsa
     private static void encryptRSA() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
@@ -198,14 +228,28 @@ public class CryptographyPage extends Page {
             String encryptedText = Base64.getEncoder().encodeToString(encryptedBytes);
             String base64PrivateKey = Base64.getEncoder().encodeToString(privateKey.getEncoded());
 
-            message("Encrypted Text: " + getColor(218) + encryptedText, getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
-            message("Private Key [Base64]: " + getColor(218) + base64PrivateKey, getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Encrypted Text: " + getColor(218) + encryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
+
+            message("Private Key [Base64]: " + getColor(218) + base64PrivateKey,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
+
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Error encrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
         }
     }
 
-    //decrypt rsa
+    // Decrypt rsa
     private static void decryptRSA() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -225,13 +269,22 @@ public class CryptographyPage extends Page {
             String decryptedText = new String(decryptedBytes);
 
             insertControlChars('n', 1);
-            message("Decrypted Text: " + getColor(218) + decryptedText, getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Decrypted Text: " + getColor(218) + decryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
+
         } catch (Exception e) {
-            message("Error decrypting RSA: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Error decrypting RSA: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
         }
     }
 
-    // encrypt ChaCha20
+    // Encrypt ChaCha20
     private static void encryptChaCha20() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
@@ -256,15 +309,34 @@ public class CryptographyPage extends Page {
             String base64Key = Base64.getEncoder().encodeToString(key);
             String base64Nonce = Base64.getEncoder().encodeToString(nonce);
 
-            message("Encrypted Text [ChaCha20]: " + getColor(206) + encryptedText, getLayoutColor(), getDefaultTextAlignment(), 0, out::print);
-            message("Key [Base64]: " + getColor(206) + base64Key, getLayoutColor(), getDefaultTextAlignment(), 0, out::print);
-            message("Nonce [Base64]: " + getColor(206) + base64Nonce, getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Encrypted Text [ChaCha20]: " + getColor(206) + encryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::print);
+
+            message("Key [Base64]: " + getColor(206) + base64Key,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::print);
+
+            message("Nonce [Base64]: " + getColor(206) + base64Nonce,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
+
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            message("Error encrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    0,
+                    out::println);
         }
     }
 
-    // decrypt ChaCha20
+    // Decrypt ChaCha20
     private static void decryptChaCha20() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -288,15 +360,22 @@ public class CryptographyPage extends Page {
             String decryptedText = new String(decryptedBytes);
 
             insertControlChars('n', 1);
-            message("Decrypted Text: " + getColor(206) + decryptedText, getLayoutColor(),
-                    getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Decrypted Text: " + getColor(206) + decryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+
         } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(),
-                    getDefaultDelay(), out::println);
+            message("Error decrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         }
     }
 
-    // encrypt Blowfish
+    // Encrypt Blowfish
     private static void encryptBlowfish() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
@@ -316,15 +395,27 @@ public class CryptographyPage extends Page {
 
             insertControlChars('n', 1);
             message("Encrypted Text [Blowfish]: "
-                    + getColor(204) + encryptedText, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    + getColor(204) + encryptedText, getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
 
-            message("Key [Base64]: " + getColor(204) + base64Key, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Key [Base64]: " + getColor(204) + base64Key,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Error encrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         }
     }
 
-    // decrypt Blowfish
+    // Decrypt Blowfish
     private static void decryptBlowfish() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -343,13 +434,22 @@ public class CryptographyPage extends Page {
             String decryptedText = new String(decryptedBytes);
 
             insertControlChars('n', 1);
-            message("Decrypted Text: " + getColor(204) + decryptedText, getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Decrypted Text: " + getColor(204) + decryptedText,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+
         } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Error decrypting text: " + e.getMessage(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         }
     }
 
-    //hashing
+    // Hashing
     private static void hashSHA256() {
         try {
             insertControlChars('n', 1);
@@ -357,16 +457,24 @@ public class CryptographyPage extends Page {
             String inputText = scanner.nextLine();
 
             if(inputText.isEmpty()) {
-                message("The value should not to be empty.", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("The value should not to be empty.",
+                        getLayoutColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::println);
                 return;
             }
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(inputText.getBytes(StandardCharsets.UTF_8));
 
-            message("Hash [" + getColor(getMainColor()) + "SHA256" + getColor(getLayoutColor()) + "] output: "
-                    + getColor(getMainColor()) + bytesToHex(hash), getLayoutColor(), getDefaultTextAlignment(),
-                    getDefaultDelay(), out::println);
+            message("Hash [" + getColor(getMainColor())
+                            + "SHA256" + getColor(getLayoutColor()) + "] output: "
+                            + getColor(getMainColor()) + bytesToHex(hash),
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error hashing input.", e);
         }
@@ -382,18 +490,28 @@ public class CryptographyPage extends Page {
 
     private static void generatePassword(){
         insertControlChars('n', 1);
-        message("Password generator:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Password generator:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter length of password [1-80]: ");
             passwordLength = scanner.nextInt();
             if (passwordLength <= 0 || passwordLength > 80) {
                 message("Invalid password length. Please enter a number between 1 and 80.",
-                        getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                        getLayoutColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::println);
                 return;
             }
         } catch (Exception e) {
-            message("Invalid input. Please enter a number.", getLayoutColor(), getDefaultTextAlignment(),
-                    getDefaultDelay(), out::println);
+            message("Invalid input. Please enter a number.",
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
             scanner.nextLine();
         }
 
@@ -412,20 +530,35 @@ public class CryptographyPage extends Page {
 
         String passwordComplexity = scanner.nextLine().toLowerCase();
         String generatedPassword = createPassword(passwordComplexity);
+
         if (generatedPassword != null) {
             insertControlChars('n', 1);
             message("Generated Password: " + generatedPassword,
-                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
 
             displayConfirmation("Enter", "y", "+",
                     "to open and", "n", "-", "to skip",
-                    getAcceptanceColor(), getRejectionColor(), getLayoutColor(), getDefaultTextAlignment());
+                    getAcceptanceColor(),
+                    getRejectionColor(),
+                    getLayoutColor(),
+                    getDefaultTextAlignment());
 
-            choice("Copy to clipboard", copyToClipboard(generatedPassword), getLayoutColor(), getLayoutColor(), getRejectionColor());
+            choice("Copy to clipboard",
+                    copyToClipboard(generatedPassword),
+                    getLayoutColor(),
+                    getLayoutColor(),
+                    getRejectionColor());
+
             marginBorder(2, 1);
         } else {
-            message("Invalid complexity option. Please try again.", getLayoutColor(), getDefaultTextAlignment(),
-                    getDefaultDelay(), out::println);
+            message("Invalid complexity option. Please try again.",
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         }
     }
 
@@ -459,7 +592,7 @@ public class CryptographyPage extends Page {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    //Generating password from the exact char pool
+    // Generating password from the exact char pool
     private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();

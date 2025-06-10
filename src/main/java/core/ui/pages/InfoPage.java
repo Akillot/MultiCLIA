@@ -15,7 +15,7 @@ public class InfoPage {
     @Contract(pure = true)
     public static @NotNull String getVersion() {
         loadConfig();
-        String appVersion = "2" + getColor(getLayoutColor()) + "." + getColor(getMainColor()) + "0 ";
+        String appVersion = "3" + getColor(getLayoutColor()) + "." + getColor(getMainColor()) + "0 ";
         return getColorText(appVersion, getMainColor());
     }
 

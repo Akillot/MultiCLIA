@@ -7,7 +7,7 @@ import core.ui.pages.ExitPage;
 import core.ui.pages.InfoPage;
 import core.ui.pages.SupportPage;
 import tools.ai.AiPage;
-import tools.asciiartify.AsciiArtifyPage;
+import tools.asciiartify.AsciiArtGenPage;
 import tools.qr.QrPage;
 import tools.cryptography.CryptographyPage;
 import tools.network.NetworkPage;
@@ -83,7 +83,7 @@ public class CommandHandler {
             case 13 -> new AiPage()::displayMenu;
             case 14 -> new QrPage()::displayMenu;
             case 15 -> new WeatherPage()::displayMenu;
-            case 16 -> new AsciiArtifyPage()::displayMenu;
+            case 16 -> new AsciiArtGenPage()::displayMenu;
             case 17 -> TranslatePage::displayTranslatePage;
 
             default -> throw new InvalidCommandIndexException();
