@@ -1,6 +1,5 @@
 package core;
 
-import core.commands.PackageUnifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -19,6 +18,7 @@ import static core.ui.configs.DisplayManager.*;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.MenuPage.displayMenu;
 
+import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class CommandManager {
@@ -31,12 +31,13 @@ public class CommandManager {
         apiKeyNames.add("OPEN_WEATHER_API_KEY");
     }
 
-    //HTTP request and additional methods
+    // HTTP request and additional methods
     public static void httpRequest(String userUri,
                                    @NotNull String requestType,
                                    @NotNull String text,
                                    String key,
                                    Map<String, String> headers) {
+
         try {
 
             URL url = new URI(userUri).toURL();
@@ -161,24 +162,6 @@ public class CommandManager {
         }
     }
 
-
-    //Searching
-    public static void searchCommands() {
-        PackageUnifier registry = new PackageUnifier();
-        try {
-            slowMotionText(getDefaultDelay(),
-                    getSearchingLineAlignment(),
-                    false,
-                    getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
-
-            String nameOfFunction = scanner.nextLine().toLowerCase();
-            if (!registry.executeCommand(nameOfFunction)) searchCommands();
-        }
-        catch(Exception e){
-            out.print("");
-        }
-    }
 
     @Contract(pure = true)
     public static @NotNull Runnable openUri(String userSite) {
@@ -314,10 +297,7 @@ public class CommandManager {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
             try {
-                clipboard.setContents(new StringSelection(""), new ClipboardOwner() {
-                    @Override
-                    public void lostOwnership(Clipboard clipboard, Transferable contents) {
-                    }
+                clipboard.setContents(new StringSelection(""), (clipboard1, contents) -> {
                 });
 
                 Thread.sleep(50);
@@ -346,6 +326,7 @@ public class CommandManager {
         };
     }
 
+    //rework
     private static void printSuccessMessage() {
         message("Status: " + getColor(getAcceptanceColor()) + "✓",
                 getLayoutColor(),
@@ -442,5 +423,26 @@ public class CommandManager {
                     getDefaultDelay(),
                     out::print);
         }
+    }
+
+    public static void terminateProgram() {
+        marginBorder(2, 2);
+        message("Status: " + getColor(getAcceptanceColor()) + "✓",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                0,
+                out::print);
+
+        message("Program terminated successfully"
+                        + getColor(getLayoutColor()) + ". "
+                        + getColor(getMainColor()) + "You are back in Terminal"
+                        + getColor(getLayoutColor()) + ".",
+                getMainColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
+        insertControlChars('n', 1);
+        exit(0);
     }
 }

@@ -108,20 +108,37 @@ public class AppearanceConfigs {
 
     public static void border() {
         message("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" +
-                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━", getLayoutColor(),DEFAULT_BORDER_WIDTH,0,out::print);
+                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+                getLayoutColor(),
+                DEFAULT_BORDER_WIDTH,
+                0,
+                out::print);
     }
 
     public static void marginBorder(int upperSide, int lowerSide) {
-        insertControlChars('n',upperSide);
-        border();
-        insertControlChars('n',lowerSide);
+        if (upperSide >= 0 && lowerSide >= 0) {
+            insertControlChars('n', upperSide);
+            border();
+            insertControlChars('n', lowerSide);
+        }
+        else{
+            message("Negative amount",
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+        }
     }
 
     //Color table components
     @Contract(pure = true)
     public static void displayColorTable() {
         insertControlChars('n',1);
-        message("Color Table:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+        message("Color Table:",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
         printColorRange(0, getLayoutColor());
         printColorBlock();
         printColorRange(232, 255);

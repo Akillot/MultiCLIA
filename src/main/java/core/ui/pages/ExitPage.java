@@ -2,10 +2,10 @@ package core.ui.pages;
 
 import org.jetbrains.annotations.NotNull;
 
+import static core.CommandManager.terminateProgram;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.scanner;
 import static core.ui.configs.TextConfigs.*;
-import static java.lang.System.exit;
 import static java.lang.System.out;
 
 public class ExitPage {
@@ -54,27 +54,6 @@ public class ExitPage {
             case "n", "-" -> stayInProgram();
             default -> displayExitPrompt();
         }
-    }
-
-    private static void terminateProgram() {
-        marginBorder(2, 2);
-        message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                0,
-                out::print);
-
-        message("Program terminated successfully"
-                        + getColor(getLayoutColor()) + ". "
-                        + getColor(getMainColor()) + "You are back in Terminal"
-                        + getColor(getLayoutColor()) + ".",
-                getMainColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-
-        insertControlChars('n', 1);
-        exit(0);
     }
 
     private static void stayInProgram() {

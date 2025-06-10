@@ -18,29 +18,47 @@ public class DisplayManager {
     public static void displayCommandList() {
         try {
             marginBorder(1,2);
-            out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "List of basic commands: \n"
+            out.println(alignment(getDefaultTextAlignment())
+                    + getColor(getLayoutColor()) + "List of basic commands: \n"
                     + alignment(getDefaultTextAlignment()) + getColor(getMainColor()));
 
             for (int i = 0; i < fullCmds.length; i++) {
-                message("·  " + fullCmds[i] + " ["
-                        + getColor(getMainColor()) + shortCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                message("·  "
+                                + fullCmds[i] + " ["
+                                + getColor(getMainColor()) + shortCmds[i]
+                                + getColor(getLayoutColor()) + "]",
+                        getLayoutColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::print);
             }
             marginBorder(2,1);
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Unknown error occurred",
+                    getRejectionColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
         }
     }
 
-    public static void displayPluginCommandList() {
+    public static void displayToolsCommandList() {
         try {
             marginBorder(1,2);
-            out.println(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "List of available plugins: \n"
+            out.println(alignment(getDefaultTextAlignment())
+                    + getColor(getLayoutColor()) + "List of available tools: \n"
                     + alignment(getDefaultTextAlignment()) + getColor(getMainColor()));
 
-            for (int i = 0; i < fullPluginCmds.length; i++) {
-                message("·  " + fullPluginCmds[i] + " ["
-                        + getColor(getMainColor()) + shortPluginCmds[i] + getColor(getLayoutColor()) + "]", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            for (int i = 0; i < fullToolCmds.length; i++) {
+                message("·  "
+                                + fullToolCmds[i] + " ["
+                                + getColor(getMainColor()) + shortToolCmds[i]
+                                + getColor(getLayoutColor()) + "]",
+                        getLayoutColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::print);
             }
             marginBorder(2,1);
         } catch (Exception e) {
@@ -61,11 +79,11 @@ public class DisplayManager {
         }
 
         if (allKeysValid) {
-            out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor())
-                    + "All API keys are valid " + getColor(getAcceptanceColor()) + "✓");
+            out.print(alignment(getDefaultLogoAlignment()) + getBackColor(getRejectionColor())
+                    + getColor(getLayoutColor()) + " All API keys are valid " + getColor(getAcceptanceColor()) + "✓");
         } else {
-            out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor())
-                    + "Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
+            out.print(alignment(getDefaultLogoAlignment()) + getBackColor(getRejectionColor())
+                    + getColor(getLayoutColor()) + " Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
         }
     }
 
@@ -80,10 +98,16 @@ public class DisplayManager {
             }
         } catch (Exception e) {
             message("Error executing action",
-                    getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    getRejectionColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
 
             message("Status: " + getColor(getRejectionColor()) + "x",
-                    getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
         }
     }
 }

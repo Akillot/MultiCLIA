@@ -1,6 +1,7 @@
 package core.commands;
 
 import core.CommandManager;
+import core.InvalidCommandIndexException;
 import core.ui.pages.SettingsPage;
 import core.ui.pages.ExitPage;
 import core.ui.pages.InfoPage;
@@ -21,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 import static core.ui.configs.AppearanceConfigs.*;
-import static core.ui.configs.TextConfigs.alignment;
 import static core.ui.configs.TextConfigs.message;
 import static java.lang.System.out;
 
@@ -35,12 +35,12 @@ public class CommandHandler {
             "h", "tl", "i", "r", "cf",
             "acf", "cl", "sup", "q"};
 
-    public static final String[] fullPluginCmds = {
+    public static final String[] fullToolCmds = {
             "time", "network", "crypt", "terminal",
             "ai", "qrcode", "weather", "asciiartify",
             "translate"};
 
-    public static final String[] shortPluginCmds = {
+    public static final String[] shortToolCmds = {
             "t", "n", "cr", "term", "a", "qr", "w", "art", "tran"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
@@ -50,9 +50,9 @@ public class CommandHandler {
         }
 
         int offset = fullCmds.length;
-        for (int i = 0; i < fullPluginCmds.length; i++) {
-            commandMap.put(fullPluginCmds[i], ExecuteCommand(i + offset));
-            commandMap.put(shortPluginCmds[i], ExecuteCommand(i + offset));
+        for (int i = 0; i < fullToolCmds.length; i++) {
+            commandMap.put(fullToolCmds[i], ExecuteCommand(i + offset));
+            commandMap.put(shortToolCmds[i], ExecuteCommand(i + offset));
         }
     }
 
@@ -60,7 +60,7 @@ public class CommandHandler {
     static @NotNull Runnable ExecuteCommand(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
-            case 1 -> DisplayManager::displayPluginCommandList;
+            case 1 -> DisplayManager::displayToolsCommandList;
             case 2 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
@@ -86,8 +86,7 @@ public class CommandHandler {
             case 16 -> new AsciiArtifyPage()::displayMenu;
             case 17 -> TranslatePage::displayTranslatePage;
 
-            default -> throw new IllegalArgumentException(
-                    alignment(getDefaultLogoAlignment()) + getColor(getRejectionColor()) + "Invalid command index");
+            default -> throw new InvalidCommandIndexException();
         };
     }
 }

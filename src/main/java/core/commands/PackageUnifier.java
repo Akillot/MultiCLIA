@@ -3,6 +3,8 @@ package core.commands;
 import java.util.HashMap;
 import java.util.Map;
 
+import static core.commands.CommandHandler.registerCommands;
+
 public class PackageUnifier {
     private final Map<String, Runnable> listOfMenuCommands = new HashMap<>();
 
@@ -11,7 +13,7 @@ public class PackageUnifier {
     }
 
     private void initializeCommands() {
-        CommandHandler.registerCommands(listOfMenuCommands);
+        registerCommands(listOfMenuCommands);
     }
 
     public boolean executeCommand(String command) {

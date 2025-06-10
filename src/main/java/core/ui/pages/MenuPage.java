@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static core.CommandManager.*;
+import static core.commands.SearchingManager.search;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.InfoPage.getVersion;
@@ -117,7 +118,7 @@ public class MenuPage {
 
         while (true) {
             try {
-                searchCommands();
+                search();
             } catch (Exception ex) {
                 marginBorder(1,1);
                 String errorMessage = (ex.getMessage() != null) ? ex.getMessage() : "Unknown error occurred";

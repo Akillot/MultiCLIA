@@ -22,7 +22,11 @@ public class TextConfigs {
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException ex) {
-                message("Error, try again", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                message("Error, try again",
+                        getRejectionColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::println);
             }
         }
         out.print("");
@@ -78,7 +82,11 @@ public class TextConfigs {
     //make working with text easier(tabulation, next line moving and e.t.c automation)
     public static void insertControlChars(char modifier, int amount) {
         if(amount < 0){
-            message("Error, number of modifiers is less than 0.", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            message("Error, number of modifiers is less than 0.",
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
         }
         String output = switch(modifier){
             case 'n' -> "\n";
@@ -94,7 +102,10 @@ public class TextConfigs {
         }
     }
 
-    public static @NotNull String formatResponse(@NotNull String text, int maxLength, @NotNull String prefix) {
+    public static @NotNull String formatResponse(@NotNull String text,
+                                                 int maxLength,
+                                                 @NotNull String prefix) {
+
         StringBuilder formatted = new StringBuilder(prefix);
         int lineLength = prefix.length();
 
