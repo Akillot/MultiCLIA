@@ -34,6 +34,7 @@ public class TimePage extends Page {
 
     public void displayMenu() {
         marginBorder(1,2);
+        clearTerminal();
         message("Time:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -58,10 +59,7 @@ public class TimePage extends Page {
                 case "timer", "t" -> runTimer();
                 case "stopwatch", "sw" -> runStopwatch();
                 case "time zone", "tz" -> displayCustomTimeZone();
-                case "restart", "r" -> {
-                    insertControlChars('n',1);
-                    mainMenuRestartWithClearing();
-                }
+                case "restart", "r" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

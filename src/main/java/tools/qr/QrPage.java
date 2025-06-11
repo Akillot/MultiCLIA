@@ -44,6 +44,7 @@ public class QrPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        clearTerminal();
         message("QR Code Generator:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -73,11 +74,7 @@ public class QrPage extends Page {
                     insertControlChars('n',1);
                 }
 
-                case "restart", "r" -> {
-                    insertControlChars('n',1);
-                    mainMenuRestartWithClearing();
-                }
-
+                case "restart", "r" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

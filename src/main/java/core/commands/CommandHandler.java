@@ -71,7 +71,7 @@ public class CommandHandler {
             };
             case 3 -> CommandManager::mainMenuRestartWithClearing;
             case 4 -> new SettingsPage()::displayMenu;
-            case 5 -> CommandManager::mainMenuRestart;
+            case 5 -> CommandManager::mainMenuRestartWithClearing;
             case 6 -> DisplayManager::clearTerminal;
             case 7 -> SupportPage::displaySupportPage;
             case 8 -> ExitPage::displayExitPage;

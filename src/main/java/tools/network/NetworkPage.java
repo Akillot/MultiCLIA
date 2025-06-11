@@ -30,8 +30,7 @@ public class NetworkPage extends Page {
             {"Http request testing", "hrt"},
             {"Network stats", "ns"},
             {"Network interfaces", "ni"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -39,6 +38,7 @@ public class NetworkPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        clearTerminal();
         message("Network:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -65,11 +65,7 @@ public class NetworkPage extends Page {
                 case "look up dns records", "lr" -> nsLookUp();
                 case "network stats", "ns" -> netStat();
                 case "network interfaces", "ni" -> displayNetworkInterfaces();
-                case "restart", "rst" -> {
-                    insertControlChars('n',1);
-                    mainMenuRestart();
-                }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

@@ -41,8 +41,7 @@ public class CryptographyPage extends Page {
             {"Decryption", "de"},
             {"Hashing", "ha"},
             {"Generate password", "genpass"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -50,6 +49,7 @@ public class CryptographyPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        clearTerminal();
         message("Cryptography:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -71,11 +71,7 @@ public class CryptographyPage extends Page {
                 case "decryption", "de" -> decryptionMenu();
                 case "hashing", "ha" -> hashSHA256();
                 case "generate password", "genpass" -> generatePassword();
-                case "restart", "rst" -> {
-                    insertControlChars('n', 1);
-                    mainMenuRestart();
-                }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

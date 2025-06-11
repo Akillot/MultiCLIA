@@ -27,8 +27,7 @@ public class WeatherPage extends Page {
     private String[][] commands = {
             {"Local weather", "lw"},
             {"Direct weather", "dw"},
-            {"Restart", "rst"},
-            {"Restart clean", "rcl"},
+            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -41,6 +40,7 @@ public class WeatherPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        clearTerminal();
         message("Weather:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -79,11 +79,7 @@ public class WeatherPage extends Page {
                                 out::println);
                     }
                 }
-                case "restart", "rst" -> {
-                    insertControlChars('n', 1);
-                    mainMenuRestart();
-                }
-                case "restart clean", "rcl" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

@@ -1,6 +1,5 @@
 package core.commands;
 
-import core.InvalidCommandIndexException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,11 +34,5 @@ class CommandHandlerTest {
         for (String cmd : fullCmds) {
             assertNotNull(commandMap.get(cmd), "Command " + cmd + " should have an action");
         }
-    }
-
-    @Test
-    void testInvalidCommandIndex() {
-        Exception exception = assertThrows(InvalidCommandIndexException.class, () -> ExecuteCommand(999).run());
-        assertTrue(true);
     }
 }

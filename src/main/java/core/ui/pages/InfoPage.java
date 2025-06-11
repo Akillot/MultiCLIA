@@ -7,6 +7,7 @@ import java.io.File;
 
 import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -21,6 +22,7 @@ public class InfoPage {
 
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
+        clearTerminal();
         message("Application info:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -50,6 +52,7 @@ public class InfoPage {
         displayApplicationDirectory();
         insertControlChars('n', 1);
 
+        // Move to separate command
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 getAcceptanceColor(),
@@ -66,6 +69,7 @@ public class InfoPage {
         marginBorder(2,1);
     }
 
+    // Move to settings
     private static void displayApplicationDirectory() {
         try {
             String appPath = new File(

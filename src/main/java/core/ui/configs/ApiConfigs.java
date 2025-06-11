@@ -27,12 +27,13 @@ public class ApiConfigs {
             }
         }
 
-        if (allKeysValid) {
-            out.print(alignment(getDefaultLogoAlignment()) + getBackColor(getRejectionColor())
-                    + getColor(getLayoutColor()) + " All API keys are valid " + getColor(getAcceptanceColor()) + "✓");
-        } else {
-            out.print(alignment(getDefaultLogoAlignment()) + getBackColor(getRejectionColor())
-                    + getColor(getLayoutColor()) + " Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
-        }
+        if (allKeysValid)
+            out.print(alignment(getDefaultLogoAlignment())
+                    + getBackColor(getRejectionColor()) + getColor(getLayoutColor())
+                    + " All API keys are valid " + getColor(getAcceptanceColor()) + "✓");
+        else
+            out.print(alignment(getDefaultLogoAlignment())
+                    + getBackColor(getRejectionColor()) + getColor(getLayoutColor())
+                    + " Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
     }
 }

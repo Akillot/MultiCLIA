@@ -18,8 +18,7 @@ public class AiPage extends Page {
             {"Modify Creativity", "mc"},
             {"Modify Maximum of Tokens", "mmt"},
             {"Info", "i"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -33,6 +32,7 @@ public class AiPage extends Page {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        clearTerminal();
         message("Powered by OpenAI " + coloredChatGptLogo + RESET,
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -59,11 +59,7 @@ public class AiPage extends Page {
                 case "modify creativity", "mc" -> configureCreativity();
                 case "modify maximum of tokens", "mmt" -> configureMaxTokens();
                 case "info", "i" -> displayChatGptInfo();
-                case "restart", "rst" -> {
-                    insertControlChars('n', 1);
-                    mainMenuRestart();
-                }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> mainMenuRestartWithClearing();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

@@ -3,6 +3,7 @@ package core.ui.pages;
 import static core.CommandManager.choice;
 import static core.CommandManager.openUri;
 import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -10,6 +11,7 @@ public class SupportPage {
 
     public static void displaySupportPage() {
         marginBorder(1,2);
+        clearTerminal();
         message("Thank you for using MultiCLIA!\n"
                         + alignment(getDefaultTextAlignment())
                         + "Let's keep making great things happen together!",

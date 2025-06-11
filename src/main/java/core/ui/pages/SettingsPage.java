@@ -46,6 +46,7 @@ public class SettingsPage extends Page {
 
     public void displayMenu() {
         marginBorder(1,2);
+        clearTerminal();
         message("Settings:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),

@@ -7,11 +7,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static core.CommandManager.*;
+import static core.commands.CommandHandler.fullCmds;
 import static core.commands.SearchingManager.search;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static core.ui.pages.InfoPage.getVersion;
+import static java.lang.System.getProperty;
 import static java.lang.System.out;
 
 public class MenuPage {
@@ -46,8 +48,7 @@ public class MenuPage {
         insertControlChars('n',1);
 
         message("Hi, "
-                        + getColor(getMainColor())
-                        + capitalizeMessage(System.getProperty("user.name"))
+                        + capitalizeMessage(getProperty("user.name"))
                         + getColor(getLayoutColor()) + "!",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
@@ -56,65 +57,18 @@ public class MenuPage {
 
         getCurrentDate();
 
-        message("Platform: "
-                        + getColor(getMainColor())
-                        + capitalizeMessage(System.getProperty("os.name"))
-                        + getColor(getLayoutColor())
-                        + "   |   Theme: Default (type " + getColor(getMainColor())
-                        + "theme" + getColor(getLayoutColor()) + " to switch)",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        marginBorder(1,1);
-        checkApiKeys(apiKeyNames.toArray(new String[0]));
-        marginBorder(1,1);
-
-        message("Tips:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-
-        message(" - Type '"
-                        + getColor(getMainColor()) + "help"
-                        + getColor(getLayoutColor()) + "' to explore basic commands",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        message(" - Type '"
-                        + getColor(getMainColor()) + "tools"
-                        + getColor(getLayoutColor()) + "' to explore or install mini apps",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        message(" - Type '"
-                        + getColor(getMainColor()) + "info"
-                        + getColor(getLayoutColor()) + "' to see information about MultiCLIA",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
         insertControlChars('n',1);
-
-        message("[" + getColor(getMainColor()) + "t" + getColor(getLayoutColor()) + "] Theme     ["
-                        + getColor(getMainColor()) + "acf" + getColor(getLayoutColor()) + "] APIs     ["
-                        + getColor(getMainColor()) + "p" + getColor(getLayoutColor()) + "] Plugins     ["
-                        + getColor(getMainColor()) + "h" + getColor(getLayoutColor()) + "] Help     ["
-                        + getColor(getMainColor()) + "i" + getColor(getLayoutColor()) + "] Info     ["
-                        + getColor(getMainColor()) + "r" + getColor(getLayoutColor()) + "] Restart    ["
-                        + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + "] Quit",
+        message("Enter " + getColor(getMainColor())
+                        + fullCmds[0] + getColor(getLayoutColor()) + " to see basic commands | sections.",
                 getLayoutColor(),
-                getDefaultLogoAlignment(),
-                getDefaultDelay(),
-                out::println);
+                getDefaultTextAlignment(),
+                getDefaultDelay(),out::println);
 
         marginBorder(0,1);
+
+        // Fix
+        checkApiKeys(apiKeyNames.toArray(new String[0]));
+        marginBorder(1,1);
 
         while (true) {
             try {

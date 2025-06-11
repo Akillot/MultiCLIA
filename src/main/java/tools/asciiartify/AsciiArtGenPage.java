@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Scanner;
 
 import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -46,6 +47,7 @@ public class AsciiArtGenPage {
 
     public void displayMenu() {
         marginBorder(1, 2);
+        clearTerminal();
         message("ASCIIArtify:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),

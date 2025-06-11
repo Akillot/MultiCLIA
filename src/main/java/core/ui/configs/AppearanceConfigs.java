@@ -100,6 +100,15 @@ public class AppearanceConfigs {
         return getColor(colorCode);
     }
 
+    public static @NotNull String getRangedRandomColor(int origin, int bound) {
+        Random rand = new Random();
+        int colorCode = 0;
+        if (origin < bound && bound <= 256 && bound >= 0 && origin > 0) {
+            colorCode = rand.nextInt(origin, bound);
+        }
+        return getColor(colorCode);
+    }
+
     public static @NotNull String getRandomBackColor() {
         Random rand = new Random();
         int colorCode = rand.nextInt(256);
@@ -171,8 +180,6 @@ public class AppearanceConfigs {
             insertControlChars('n', 1);
         }
     }
-
-
 
     @Contract(pure = true)
     private static @NotNull String tableAlignment() {
