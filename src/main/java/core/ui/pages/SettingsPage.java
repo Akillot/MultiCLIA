@@ -28,6 +28,19 @@ public class SettingsPage extends Page {
             {"Quit", "q"}
     };
 
+    private static final String[] SETTINGS_ASCII_LOGO = {
+            "╔════════════════════════════════════════════════════════════════════╗",
+            "║                                                                    ║",
+            "║  ███████╗███████╗████████╗████████╗██╗███╗   ██╗ ██████╗ ███████╗  ║",
+            "║  ██╔════╝██╔════╝╚══██╔══╝╚══██╔══╝██║████╗  ██║██╔════╝ ██╔════╝  ║",
+            "║  ███████╗█████╗     ██║      ██║   ██║██╔██╗ ██║██║  ███╗███████╗  ║",
+            "║  ╚════██║██╔══╝     ██║      ██║   ██║██║╚██╗██║██║   ██║╚════██║  ║",
+            "║  ███████║███████╗   ██║      ██║   ██║██║ ╚████║╚██████╔╝███████║  ║",
+            "║  ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝  ║",
+            "║                                                                    ║",
+            "╚════════════════════════════════════════════════════════════════════╝"
+    };
+
     private final static String[] JAVA_ASCII_LOGO = {
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⠀",196),
             getColorText("⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⠟⠀⣀⣠⠄⠀⠀⠀⠀",196),
@@ -47,11 +60,8 @@ public class SettingsPage extends Page {
     public void displayMenu() {
         marginBorder(1,2);
         clearTerminal();
-        message("Settings:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
+        displayLogo(getDefaultTextAlignment(), SETTINGS_ASCII_LOGO);
+        insertControlChars('n',1);
 
         displayListOfCommands(commands);
 
@@ -66,15 +76,11 @@ public class SettingsPage extends Page {
                 case "color table", "coltab" -> displayColorTable();
                 case "design info", "di" -> displayDesignInfo();
                 case "java", "j" -> displayJavaInfo();
-                case "restart", "rst" -> {
-                    insertControlChars('n',1);
-                    mainMenuRestart();
-                }
-                case "restart clear", "rcl" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage("You are in main menu");
+                    exitPageFormatting("You are in main menu");
                     return;
                 }
                 default -> out.print("");
@@ -155,14 +161,25 @@ public class SettingsPage extends Page {
         double processCpuLoad = osBean.getProcessCpuLoad() * 100;
 
         insertControlChars('n',1);
-        message("System CPU Statistics:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        message("System CPU Statistics:", getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
         displayCpuInfo();
         message("System CPU Load: "
                         + getColor(getMainColor()) + String.format("%.2f", cpuLoad) + "%",
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
         message("Process CPU Load: "
                         + getColor(getMainColor()) + String.format("%.2f", processCpuLoad) + "%",
-                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
     }
 
     private static void displayCpuInfo() {

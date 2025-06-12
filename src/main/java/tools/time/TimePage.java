@@ -59,11 +59,11 @@ public class TimePage extends Page {
                 case "timer", "t" -> runTimer();
                 case "stopwatch", "sw" -> runStopwatch();
                 case "time zone", "tz" -> displayCustomTimeZone();
-                case "restart", "r" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage("You are in main menu");
+                    exitPageFormatting("You are in main menu");
                     return;
                 }
                 default -> out.print("");
@@ -204,8 +204,8 @@ public class TimePage extends Page {
 
     private static void runStopwatch() {
         insertControlChars('n', 1);
-        message("Press " + getColor(getMainColor()) + "'Enter'" + getColor(getLayoutColor())
-                        + " to start stopwatch and again to stop:",
+        message("Press [" + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor())
+                        + "] to start stopwatch and again to stop:",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),

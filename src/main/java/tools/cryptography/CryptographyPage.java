@@ -71,11 +71,11 @@ public class CryptographyPage extends Page {
                 case "decryption", "de" -> decryptionMenu();
                 case "hashing", "ha" -> hashSHA256();
                 case "generate password", "genpass" -> generatePassword();
-                case "restart", "r" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage("You are in main menu");
+                    exitPageFormatting("You are in main menu");
                     return;
                 }
                 default -> out.print("");

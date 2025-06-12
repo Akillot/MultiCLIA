@@ -39,7 +39,6 @@ public class CommandManager {
                                    Map<String, String> headers) {
 
         try {
-
             URL url = new URI(userUri).toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(requestType.toUpperCase());
@@ -107,6 +106,7 @@ public class CommandManager {
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::print);
+
         } catch (Exception e) {
             message("JSON parsing error: " + getColor(getRejectionColor()) + e.getMessage(),
                     getLayoutColor(),
@@ -117,7 +117,7 @@ public class CommandManager {
     }
 
 
-    //Request user choice
+    // Request user choice
     public static void choice(String title,
                               Runnable action,
                               int mainColor,
@@ -131,7 +131,12 @@ public class CommandManager {
                 try {
                     action.run();
                 } catch (Exception e) {
-                    message("Error executing action", rejectionColor, getDefaultTextAlignment(), getDefaultDelay(), out::print);
+                    message("Error executing action",
+                            rejectionColor,
+                            getDefaultTextAlignment(),
+                            getDefaultDelay(),
+                            out::print);
+
                     message("Status: " + getColor(rejectionColor) + "x",
                             layoutColor,
                             getDefaultTextAlignment(),
@@ -153,6 +158,7 @@ public class CommandManager {
                         getDefaultTextAlignment(),
                         getDefaultDelay(),
                         out::print);
+
                 message("Status: " + getColor(rejectionColor) + "x",
                         layoutColor,
                         getDefaultTextAlignment(),
@@ -326,7 +332,7 @@ public class CommandManager {
         };
     }
 
-    //rework
+    // Rework
     private static void printSuccessMessage() {
         message("Status: " + getColor(getAcceptanceColor()) + "✓",
                 getLayoutColor(),
@@ -350,23 +356,7 @@ public class CommandManager {
                 out::print);
     }
 
-    public static void mainMenuRestart(){
-        marginBorder(1,2);
-        message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        message("Application restart" + getColor(getLayoutColor()) + ".",
-                getMainColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-        displayMenu();
-    }
-
-    public static void mainMenuRestartWithClearing(){
+    public static void clearAndRestartApp(){
         marginBorder(1,2);
         message("Status: " + getColor(getAcceptanceColor()) + "✓",
                 getLayoutColor(),
@@ -385,21 +375,21 @@ public class CommandManager {
         displayMenu();
     }
 
-    public static void exitPage(String text){
-        marginBorder(2,2);
+    public static void exitPageFormatting(String text){
+        insertControlChars('n', 2);
         message("Status: " + getColor(getAcceptanceColor()) + "✓",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
                 out::print);
 
-        message("Terminated correctly" + getColor(getLayoutColor()) + ". "
-                        + getColor(getMainColor()) + text + getColor(getLayoutColor()) + ".",
+        message(text + getColor(getLayoutColor()) + ".",
                 getMainColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
-                out::println);
-        marginBorder(1,1);
+                out::print);
+
+        marginBorder(2,1);
     }
 
     public static void checkApiKeys(String @NotNull [] apiKeys) {

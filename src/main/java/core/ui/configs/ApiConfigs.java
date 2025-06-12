@@ -22,9 +22,7 @@ public class ApiConfigs {
 
         for (String apiKeyName : apiKeyNames) {
             String API_KEY = dotenv.get(apiKeyName);
-            if (API_KEY == null || API_KEY.isEmpty()) {
-                allKeysValid = false;
-            }
+            if (API_KEY == null || API_KEY.isEmpty()) allKeysValid = false;
         }
 
         if (allKeysValid)

@@ -1,4 +1,4 @@
-package tools.asciiartify;
+package tools.generate_art;
 
 import java.util.HashMap;
 import java.util.Map;

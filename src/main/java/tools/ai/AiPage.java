@@ -59,11 +59,11 @@ public class AiPage extends Page {
                 case "modify creativity", "mc" -> configureCreativity();
                 case "modify maximum of tokens", "mmt" -> configureMaxTokens();
                 case "info", "i" -> displayChatGptInfo();
-                case "restart", "r" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage("You are in main menu");
+                    exitPageFormatting("You are in main menu");
                     return;
                 }
                 default -> out.print("");

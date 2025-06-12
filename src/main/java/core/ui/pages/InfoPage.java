@@ -5,13 +5,27 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static core.CommandManager.*;
+import static core.CommandManager.exitPageFormatting;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
+import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
 public class InfoPage {
+
+    private static final String[] INFO_ASCII_LOGO = {
+            "╔══════════════════════════════════╗",
+            "║                                  ║",
+            "║  ██╗███╗   ██╗███████╗ ██████╗   ║",
+            "║  ██║████╗  ██║██╔════╝██╔═══██╗  ║",
+            "║  ██║██╔██╗ ██║█████╗  ██║   ██║  ║",
+            "║  ██║██║╚██╗██║██╔══╝  ██║   ██║  ║",
+            "║  ██║██║ ╚████║██║     ╚██████╔╝  ║",
+            "║  ╚═╝╚═╝  ╚═══╝╚═╝      ╚═════╝   ║",
+            "║                                  ║",
+            "╚══════════════════════════════════╝"
+    };
 
     @Contract(pure = true)
     public static @NotNull String getVersion() {
@@ -23,21 +37,24 @@ public class InfoPage {
     public static void displayInfoPage() throws InterruptedException {
         marginBorder(1,2);
         clearTerminal();
-        message("Application info:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
+        displayLogo(getDefaultTextAlignment(),INFO_ASCII_LOGO);
+        insertControlChars('n',1);
 
-        message("Current version: " + getVersion(),
+        message("Version name: " + getColor(getMainColor()) + "Highland",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
                 out::print);
 
-        message("Platform: Classic [" + getColor(75) + "Mac"
+        message("Version number: " + getVersion(),
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::println);
+
+        message("Platform: " + getColor(75) + "Mac"
                         + getColor(getLayoutColor()) + "OS, " + getColor(74)
-                        + getColor(207) +"Linux" + getColor(getLayoutColor()) + "]",
+                        + getColor(207) +"Linux",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
@@ -50,9 +67,9 @@ public class InfoPage {
                 out::println);
 
         displayApplicationDirectory();
-        insertControlChars('n', 1);
 
-        // Move to separate command
+        /*
+        Move to separate command
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 getAcceptanceColor(),
@@ -65,8 +82,8 @@ public class InfoPage {
                 getMainColor(),
                 getLayoutColor(),
                 getRejectionColor());
-
-        marginBorder(2,1);
+         */
+        exitPageFormatting("You are in main menu");
     }
 
     // Move to settings

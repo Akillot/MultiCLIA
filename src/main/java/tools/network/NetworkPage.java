@@ -65,11 +65,11 @@ public class NetworkPage extends Page {
                 case "look up dns records", "lr" -> nsLookUp();
                 case "network stats", "ns" -> netStat();
                 case "network interfaces", "ni" -> displayNetworkInterfaces();
-                case "restart", "r" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage("You are in main menu");
+                    exitPageFormatting("You are in main menu");
                     return;
                 }
                 default -> out.print("");

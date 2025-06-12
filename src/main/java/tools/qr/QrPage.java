@@ -74,11 +74,11 @@ public class QrPage extends Page {
                     insertControlChars('n',1);
                 }
 
-                case "restart", "r" -> mainMenuRestartWithClearing();
+                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPage("You are in main menu");
+                    exitPageFormatting("You are in main menu");
                     return;
                 }
                 default -> showInvalidCommand(input);
@@ -252,7 +252,7 @@ public class QrPage extends Page {
     }
 
     private void exitApplication() {
-        exitPage("You are in main menu");
+        exitPageFormatting("You are in main menu");
     }
 
     private void showHelp() {

@@ -7,7 +7,7 @@ import core.ui.pages.ExitPage;
 import core.ui.pages.InfoPage;
 import core.ui.pages.SupportPage;
 import tools.ai.AiPage;
-import tools.asciiartify.AsciiArtGenPage;
+import tools.generate_art.AsciiArtGenPage;
 import tools.qr.QrPage;
 import tools.cryptography.CryptographyPage;
 import tools.network.NetworkPage;
@@ -37,7 +37,7 @@ public class CommandHandler {
 
     public static final String[] fullToolCmds = {
             "time", "network", "crypt", "terminal",
-            "ai", "qrcode", "weather", "asciiartify",
+            "ai", "qrcode", "weather", "genart",
             "translate"};
 
     public static final String[] shortToolCmds = {
@@ -69,9 +69,9 @@ public class CommandHandler {
                             getRejectionColor(), getDefaultTextAlignment(), 0, out::println);
                 }
             };
-            case 3 -> CommandManager::mainMenuRestartWithClearing;
+            case 3 -> CommandManager::clearAndRestartApp;
             case 4 -> new SettingsPage()::displayMenu;
-            case 5 -> CommandManager::mainMenuRestartWithClearing;
+            case 5 -> CommandManager::clearAndRestartApp;
             case 6 -> DisplayManager::clearTerminal;
             case 7 -> SupportPage::displaySupportPage;
             case 8 -> ExitPage::displayExitPage;
