@@ -68,7 +68,7 @@ public class InfoPage {
 
         displayApplicationDirectory();
 
-
+        insertControlChars('n',1);
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 getAcceptanceColor(),

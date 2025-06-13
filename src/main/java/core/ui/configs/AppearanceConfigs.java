@@ -100,6 +100,15 @@ public class AppearanceConfigs {
         return getColor(colorCode);
     }
 
+    public static @NotNull String getRangedRandomBackColor(int origin, int bound) {
+        Random rand = new Random();
+        int colorCode = 0;
+        if (origin < bound && bound <= 256 && bound >= 0 && origin > 0) {
+            colorCode = rand.nextInt(origin, bound);
+        }
+        return getBackColor(colorCode);
+    }
+
     public static @NotNull String getRangedRandomColor(int origin, int bound) {
         Random rand = new Random();
         int colorCode = 0;

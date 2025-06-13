@@ -17,9 +17,9 @@ public class ChatGPTClient {
     @Getter
     private static String model = "gpt-3.5-turbo";
     @Getter @Setter
-    private static int maxTokens = 200;
+    private static int maxTokens = 500;
     @Getter @Setter
-    private static double temperature = 0.7;
+    private static double temperature = 1.2;
 
     static {
         Dotenv dotenv = Dotenv.load();

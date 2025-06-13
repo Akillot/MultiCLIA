@@ -1,12 +1,13 @@
 package tools.ai;
 
 import core.Page;
+
+import java.util.Random;
 import java.util.Scanner;
 
 import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
-import static core.ui.configs.DisplayManager.clearTerminal;
-import static core.ui.configs.DisplayManager.scanner;
+import static core.ui.configs.DisplayManager.*;
 import static core.ui.configs.TextConfigs.*;
 import static tools.ai.ChatGPTClient.*;
 import static java.lang.System.out;
@@ -14,9 +15,7 @@ import static java.lang.System.out;
 public class AiPage extends Page {
 
     private String[][] commands = {
-            {"Ask ChatGPT", "ac"},
-            {"Modify Creativity", "mc"},
-            {"Modify Maximum of Tokens", "mmt"},
+            {"Ask", "a"},
             {"Info", "i"},
             {"Restart", "r"},
             {"Clear", "cl"},
@@ -24,25 +23,26 @@ public class AiPage extends Page {
             {"Quit", "q"}
     };
 
-    private static String coloredChatGptLogo =
-            getColor(204) + "C" + getColor(110) + "h"
-                    + getColor(205) + "a" + getColor(208) + "t"
-                    + getColor(161) + "G" + getColor(207) + "P"
-                    + getColor(217) + "T";
+    private static final String[] AI_ASCII_LOGO = {
+            "╔═══════════════╗",
+            "║               ║",
+            "║   █████╗ ██╗  ║",
+            "║  ██╔══██╗██║  ║",
+            "║  ███████║██║  ║",
+            "║  ██╔══██║██║  ║",
+            "║  ██║  ██║██║  ║",
+            "║  ╚═╝  ╚═╝╚═╝  ║",
+            "║               ║",
+            "╚═══════════════╝"
+    };
 
     public void displayMenu() {
-        marginBorder(1, 2);
+        marginBorder(1, 0);
         clearTerminal();
-        message("Powered by OpenAI " + coloredChatGptLogo + RESET,
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-        message("AI:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
+        insertControlChars('n', 2);
+
+        displayLogo(getDefaultTextAlignment(), AI_ASCII_LOGO);
+        insertControlChars('n', 1);
 
         displayListOfCommands(commands);
 
@@ -55,9 +55,7 @@ public class AiPage extends Page {
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
-                case "ask chatgpt", "ac" -> runChatGpt();
-                case "modify creativity", "mc" -> configureCreativity();
-                case "modify maximum of tokens", "mmt" -> configureMaxTokens();
+                case "ask", "a" -> runChatGpt();
                 case "info", "i" -> displayChatGptInfo();
                 case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
@@ -77,36 +75,39 @@ public class AiPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    private static void runChatGpt() {
+    private void runChatGpt() {
         Scanner scanner = new Scanner(System.in);
         try {
             while (true) {
-                insertControlChars('n', 1);
+                clearTerminal();
+                drawEllipse();
+                insertControlChars('n', 2);
+
                 out.print(alignment(getDefaultTextAlignment())
                         + getColor(getLayoutColor()) + "Enter prompt [or "
-                        + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + " to exit]: ");
+                        + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + " to quit]: ");
+
                 String userMessage = scanner.nextLine();
 
-                if (userMessage.equalsIgnoreCase("q") || userMessage.isEmpty()) {
-                    insertControlChars('n', 1);
+                if (userMessage.isEmpty()) {
+                    displayMenu();
                     break;
                 }
 
                 String response = sendMessage(userMessage);
 
-                insertControlChars('n', 1);
-                out.print(alignment(getDefaultTextAlignment()) + coloredChatGptLogo + getColor(getLayoutColor()) + ": ");
-
+                insertControlChars('n', 2);
                 slowMotionText(20,
                         getDefaultTextAlignment(),
                         false,
                         getColor(getLayoutColor()) + response, "");
 
                 insertControlChars('n', 1);
+                scanner.nextLine();
+                clearTerminal();
             }
         } catch (Exception e) {
-            insertControlChars('n', 1);
-            message("Error: " + e.getMessage(), getLayoutColor(), getDefaultTextAlignment(), 0, out::println);
+            insertControlChars('n', 2);
         }
     }
 
@@ -130,152 +131,32 @@ public class AiPage extends Page {
                     getDefaultDelay(), out::println);
 
         } catch (Exception e) {
+            insertControlChars('n', 2);
+        }
+    }
+
+    private static void drawEllipse() {
+        double centerY = 10 / 2.0;
+        double centerX = 10 / 2.0;
+        double radiusY = 10 / 2.0 - 0.5;
+        double radiusX = 10 / 2.0 - 0.5;
+
+        Random rand = new Random();
+
+        int[] colorStartNumber = new int[]{17,53,89,125,161,197};
+        int pickedColorIndex = rand.nextInt(colorStartNumber.length);
+        int pickedColor = colorStartNumber[pickedColorIndex];
+
+        for (int i = 0; i < 10; i++) {
+            out.print(alignment(getDefaultTextAlignment() + 4));
+            for (int j = 0; j < 10; j++) {
+                double normY = (i - centerY) / radiusY;
+                double normX = (j - centerX) / radiusX;
+                if (normX * normX + normY * normY <= 1.0) {
+                    out.print(getRangedRandomBackColor(pickedColor, pickedColor + 35) + "  " + RESET);
+                } else out.print("  ");
+            }
             insertControlChars('n', 1);
-            message("Model: " + getColor(getMainColor()) + getColor(getRejectionColor()) + "x",
-                    getLayoutColor(),
-                    getDefaultTextAlignment(),
-                    getDefaultDelay(),
-                    out::print);
-
-            message("Max Tokens: " + getColor(getMainColor()) + getColor(getRejectionColor()) + "x",
-                    getLayoutColor(),
-                    getDefaultTextAlignment(),
-                    getDefaultDelay(),
-                    out::print);
-
-            message("Temperature: " + getColor(getMainColor()) + getColor(getRejectionColor()) + "x",
-                    getLayoutColor(),
-                    getDefaultTextAlignment(),
-                    getDefaultDelay(),
-                    out::println);
-
-            message("Error: " + e.getMessage(),
-                    getLayoutColor(),
-                    getDefaultTextAlignment(),
-                    0,
-                    out::println);
-        }
-    }
-
-    private static void configureCreativity() {
-        insertControlChars('n', 1);
-        message("["+ getColor(getMainColor()) + "i"
-                        + getColor(getLayoutColor()) + "] The creativity of the AI controls the creativity of responses.\n"
-                        + alignment(getDefaultTextAlignment()) + "The higher the creativity, the more diverse and unpredictable the answers.",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-
-        double temperature;
-        while (true) {
-            out.print(alignment(getDefaultTextAlignment())
-                    + getColor(getLayoutColor()) + "Enter a creativity [Choose between "
-                    + getColor(getMainColor()) + "0.1"
-                    + getColor(getLayoutColor()) + " and "
-                    + getColor(getMainColor()) + "1.2" + getColor(getLayoutColor()) + "]: ");
-            try {
-                temperature = scanner.nextDouble();
-                scanner.nextLine();
-
-                if (temperature >= 0.1 && temperature <= 1.2) {
-                    setTemperature(temperature);
-                    insertControlChars('n', 1);
-                    message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::print);
-
-                    message("New creativity is: " + getColor(getMainColor())
-                                    + getTemperature() + getColor(getLayoutColor()) + ".",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
-                    break;
-                } else {
-                    message("Invalid input! Please enter a value between"
-                                    + getColor(getMainColor()) + " 0.1 " + getColor(getLayoutColor())
-                                    + "and" + getColor(getMainColor())
-                                    + " 1.2" + getColor(getLayoutColor()) + ".",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
-                }
-            } catch (Exception e) {
-                scanner.nextLine();
-                message("Error: Invalid input. Please enter a valid number.",
-                        getLayoutColor(),
-                        getDefaultTextAlignment(),
-                        getDefaultDelay(),
-                        out::println);
-            }
-        }
-    }
-
-    private static void configureMaxTokens() {
-        insertControlChars('n', 1);
-
-        message("["+ getColor(getMainColor()) + "i"
-                        + getColor(getLayoutColor())
-                        + "] Max tokens define the response length. More tokens allow longer answers.\n"
-                        + alignment(getDefaultTextAlignment()) + "Choose wisely based on your needs.",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-
-        int maxTokens;
-
-        while (true) {
-            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
-                    + "Enter max amount of tokens [Choose a number between " + getColor(getMainColor())
-                    + "1" + getColor(getLayoutColor()) + " and " + getColor(getMainColor())
-                    + "500"  + getColor(getLayoutColor()) + "]: ");
-
-            try {
-                maxTokens = scanner.nextInt();
-                scanner.nextLine();
-
-                if (maxTokens > 0 && maxTokens <= 500) {
-                    setMaxTokens(maxTokens);
-                    insertControlChars('n', 1);
-                    message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::print);
-
-                    message("New maximum amount of tokens is: "
-                                    + getColor(getMainColor())
-                                    + getMaxTokens() + getColor(getLayoutColor()) + ".",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
-                    break;
-                } else {
-                    message("Invalid input! Please enter a number between"
-                                    + getColor(getMainColor())
-                                    + "1" + getColor(getLayoutColor())
-                                    + " and " + getColor(getMainColor())
-                                    + "500"  + getColor(getLayoutColor())
-                                    + ".",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
-                }
-            } catch (Exception e) {
-                scanner.nextLine();
-                message("Error: Invalid input. Please enter a valid number.",
-                        getLayoutColor(),
-                        getDefaultTextAlignment(),
-                        getDefaultDelay(),
-                        out::println);
-            }
         }
     }
 }

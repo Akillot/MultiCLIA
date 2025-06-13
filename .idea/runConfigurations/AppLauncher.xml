@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="AppLauncher" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="core.AppLauncher" />
+    <option name="MAIN_CLASS_NAME" value="core.init.AppLauncher" />
     <module name="MultiCLIA" />
     <extension name="net.ashald.envfile">
       <option name="IS_ENABLED" value="false" />

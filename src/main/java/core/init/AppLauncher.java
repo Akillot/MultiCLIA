@@ -1,4 +1,4 @@
-package core;
+package core.init;
 
 import core.ui.pages.MenuPage;
 
