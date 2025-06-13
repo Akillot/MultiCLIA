@@ -5,13 +5,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static core.ui.configs.AppearanceConfigs.getAcceptanceColor;
-import static core.ui.configs.AppearanceConfigs.getBackColor;
-import static core.ui.configs.AppearanceConfigs.getColor;
-import static core.ui.configs.AppearanceConfigs.getDefaultLogoAlignment;
-import static core.ui.configs.AppearanceConfigs.getLayoutColor;
-import static core.ui.configs.AppearanceConfigs.getRejectionColor;
+import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.AppearanceConfigs.getDefaultDelay;
+import static core.ui.configs.AppearanceConfigs.getDefaultTextAlignment;
 import static core.ui.configs.TextConfigs.alignment;
+import static core.ui.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class ApiConfigs {
@@ -33,5 +31,28 @@ public class ApiConfigs {
             out.print(alignment(getDefaultLogoAlignment())
                     + getBackColor(getRejectionColor()) + getColor(getLayoutColor())
                     + " Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
+    }
+
+    public static void checkApiKeys(String @NotNull [] apiKeys) {
+        message("API Status: ",
+                getLayoutColor(),
+                getDefaultTextAlignment(),
+                getDefaultDelay(),
+                out::print);
+
+        for (String apiKey : apiKeys) {
+            String statusMark;
+            if (apiKey != null && apiKey.length() > 10) {
+                statusMark = getColor(getAcceptanceColor()) + "✓";
+            } else {
+                statusMark = getColor(getRejectionColor()) + "✗";
+            }
+
+            message("[" + statusMark + getColor(getLayoutColor()) + "] " + apiKey,
+                    getLayoutColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
+        }
     }
 }

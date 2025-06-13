@@ -16,6 +16,7 @@ import java.util.Scanner;
 import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
+import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -33,6 +34,19 @@ public class WeatherPage extends Page {
             {"Quit", "q"}
     };
 
+    private static final String[] WEATHER_ASCII_LOGO = {
+            "╔═══════════════════════════════════════════════════════════════╗",
+            "║                                                               ║",
+            "║  ██╗    ██╗███████╗ █████╗ ████████╗██╗  ██╗███████╗██████╗   ║",
+            "║  ██║    ██║██╔════╝██╔══██╗╚══██╔══╝██║  ██║██╔════╝██╔══██╗  ║",
+            "║  ██║ █╗ ██║█████╗  ███████║   ██║   ███████║█████╗  ██████╔╝  ║",
+            "║  ██║███╗██║██╔══╝  ██╔══██║   ██║   ██╔══██║██╔══╝  ██╔══██╗  ║",
+            "║  ╚███╔███╔╝███████╗██║  ██║   ██║   ██║  ██║███████╗██║  ██║  ║",
+            "║   ╚══╝╚══╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝  ║",
+            "║                                                               ║",
+            "╚═══════════════════════════════════════════════════════════════╝"
+    };
+
     static {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("OPEN_WEATHER_API_KEY");
@@ -41,11 +55,8 @@ public class WeatherPage extends Page {
     public void displayMenu() {
         marginBorder(1, 2);
         clearTerminal();
-        message("Weather:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
+        displayLogo(getDefaultTextAlignment(),WEATHER_ASCII_LOGO);
+        insertControlChars('n',1);
 
         displayListOfCommands(commands);
 
@@ -83,7 +94,8 @@ public class WeatherPage extends Page {
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPageFormatting("You are in main menu");
+                    exitPageFormatting();
+                    clearAndRestartApp();
                     return;
                 }
                 default -> out.print("");

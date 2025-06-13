@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import static core.CommandManager.*;
 import static core.commands.CommandHandler.fullCmds;
 import static core.commands.SearchingManager.search;
+import static core.ui.configs.ApiConfigs.checkApiKeys;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
@@ -42,7 +43,6 @@ public class MenuPage {
 
     public static void displayMenu() {
         loadConfig();
-
         insertControlChars('n',1);
         displayLogo(getDefaultTextAlignment() + 4, MAIN_LOGO_ASCII);
         insertControlChars('n',1);
@@ -58,8 +58,8 @@ public class MenuPage {
         getCurrentDate();
 
         insertControlChars('n',1);
-        message("Enter " + getColor(getMainColor())
-                        + fullCmds[0] + getColor(getLayoutColor()) + " to see basic commands | sections.",
+        message("Enter [" + getColor(getMainColor())
+                        + fullCmds[0] + getColor(getLayoutColor()) + "] to see basic commands | sections.",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),out::println);
@@ -91,8 +91,8 @@ public class MenuPage {
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         dateAndTimeOfProgramLaunching = localTime.format(myFormatter).toLowerCase();
         message("Current session started: "
-                        + getColor(getMainColor()) + capitalizeMessage(String.valueOf(dayOfWeek)) + " "
-                        + getColor(getLayoutColor()) + dateAndTimeOfProgramLaunching
+                        + getColor(getMainColor()) + capitalizeMessage(String.valueOf(dayOfWeek))
+                        + " " + getColor(getLayoutColor()) + dateAndTimeOfProgramLaunching
                         + getColor(getLayoutColor()) + ".",
                 getLayoutColor(),
                 getDefaultTextAlignment(),

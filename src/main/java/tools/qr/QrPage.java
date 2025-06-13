@@ -18,17 +18,18 @@ import java.nio.file.Paths;
 public class QrPage extends Page {
 
     public static Path SAVE_DIRECTORY = Paths.get("saved_qr_codes");
-    private static final String[] VALID_FORMATS = {
-            ".png", ".jpg", ".jpeg", ".gif",
-            ".bmp", ".svg", ".tiff", ".webp",
-            ".eps", ".pdf", ".ico"
-    };
     private static final int MIN_SIZE = 10;
     private static final int MAX_SIZE = 300;
     private static final String DEFAULT_FORMAT = ".png";
 
     public int size = 50;
     public String format = DEFAULT_FORMAT;
+
+    private static final String[] VALID_FORMATS = {
+            ".png", ".jpg", ".jpeg", ".gif",
+            ".bmp", ".svg", ".tiff", ".webp",
+            ".eps", ".pdf", ".ico"
+    };
 
     private final String[][] commands = {
             {"Generate QR code", "qr"},
@@ -42,14 +43,24 @@ public class QrPage extends Page {
             {"Quit", "q"}
     };
 
+    private static final String[] QR_ASCII_LOGO = {
+            "╔═════════════════════╗",
+            "║                     ║",
+            "║   ██████╗ ██████╗   ║",
+            "║  ██╔═══██╗██╔══██╗  ║",
+            "║  ██║   ██║██████╔╝  ║",
+            "║  ██║▄▄ ██║██╔══██╗  ║",
+            "║  ╚██████╔╝██║  ██║  ║",
+            "║   ╚══▀▀═╝ ╚═╝  ╚═╝  ║",
+            "║                     ║",
+            "╚═════════════════════╝"
+    };
+
     public void displayMenu() {
         marginBorder(1, 2);
         clearTerminal();
-        message("QR Code Generator:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
+        displayLogo(getDefaultTextAlignment(), QR_ASCII_LOGO);
+        insertControlChars('n',2);
 
         displayCurrentSettings();
         displayListOfCommands(commands);
@@ -78,7 +89,8 @@ public class QrPage extends Page {
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPageFormatting("You are in main menu");
+                    exitPageFormatting();
+                    clearAndRestartApp();
                     return;
                 }
                 default -> showInvalidCommand(input);
@@ -252,7 +264,7 @@ public class QrPage extends Page {
     }
 
     private void exitApplication() {
-        exitPageFormatting("You are in main menu");
+        exitPageFormatting();
     }
 
     private void showHelp() {

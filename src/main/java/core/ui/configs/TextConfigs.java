@@ -48,7 +48,8 @@ public class TextConfigs {
 
     //Modified method out.println(). Added text color,
     //alignment, delay and opportunity to move to the next line
-    public static void message(String text, int color, int alignment, int delay, Consumer<String> printMethod) {
+    public static void message(String text, int color,
+                               int alignment, int delay, Consumer<String> printMethod) {
 
         String coloredText = getColorText(text, color);
         String alignedText = alignment(alignment) + coloredText;

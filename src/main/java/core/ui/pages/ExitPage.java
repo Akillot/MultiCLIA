@@ -2,7 +2,7 @@ package core.ui.pages;
 
 import org.jetbrains.annotations.NotNull;
 
-import static core.CommandManager.terminateProgram;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.scanner;
 import static core.ui.configs.TextConfigs.*;
@@ -51,27 +51,11 @@ public class ExitPage {
 
         switch (answer) {
             case "y", "+" -> terminateProgram();
-            case "n", "-" -> stayInProgram();
+            case "n", "-" -> {
+                exitPageFormatting();
+                clearAndRestartApp();
+            }
             default -> displayExitPrompt();
         }
-    }
-
-    private static void stayInProgram() {
-        marginBorder(2, 2);
-        message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        message("Program is still running" + getColor(getLayoutColor()) + ". "
-                        + getColor(getMainColor()) + "Returning to the main menu"
-                        + getColor(getLayoutColor()) + ".",
-                getMainColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-
-        marginBorder(1, 1);
     }
 }

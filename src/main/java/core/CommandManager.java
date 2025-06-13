@@ -123,6 +123,7 @@ public class CommandManager {
                               int mainColor,
                               int layoutColor,
                               int rejectionColor) {
+
         out.print(alignment(getDefaultTextAlignment()) + getColor(mainColor) + title + RESET + ": " + RESET);
         String choice = scanner.nextLine().toLowerCase();
 
@@ -332,7 +333,6 @@ public class CommandManager {
         };
     }
 
-    // Rework
     private static void printSuccessMessage() {
         message("Status: " + getColor(getAcceptanceColor()) + "✓",
                 getLayoutColor(),
@@ -357,62 +357,35 @@ public class CommandManager {
     }
 
     public static void clearAndRestartApp(){
-        marginBorder(1,2);
-        message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        message("Application restart" + getColor(getLayoutColor()) + ".",
-                getMainColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::println);
-
         marginBorder(1,20);
         clearTerminal();
         displayMenu();
     }
 
-    public static void exitPageFormatting(String text){
+    public static void exitPageFormatting(){
         insertControlChars('n', 2);
-        message("Status: " + getColor(getAcceptanceColor()) + "✓",
+
+        out.println(alignment(getDefaultTextAlignment())
+                + getColor(getLayoutColor()) + "┏━━━━━━━━━━━━━━━━━━━━━━━┓");
+
+        message("┃ Status: " + getColor(getAcceptanceColor()) + "✓" + getColor(getLayoutColor())
+                        + "             ┃",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
                 out::print);
 
-        message(text + getColor(getLayoutColor()) + ".",
-                getMainColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        marginBorder(2,1);
-    }
-
-    public static void checkApiKeys(String @NotNull [] apiKeys) {
-        message("API Status: ",
+        message("┃ " + getColor(getMainColor()) + "You are in main menu"
+                        + getColor(getLayoutColor()) + ". ┃",
                 getLayoutColor(),
                 getDefaultTextAlignment(),
                 getDefaultDelay(),
                 out::print);
 
-        for (String apiKey : apiKeys) {
-            String statusMark;
-            if (apiKey != null && apiKey.length() > 10) {
-                statusMark = getColor(getAcceptanceColor()) + "✓";
-            } else {
-                statusMark = getColor(getRejectionColor()) + "✗";
-            }
+        out.println(alignment(getDefaultTextAlignment())
+                + getColor(getLayoutColor()) + "┗━━━━━━━━━━━━━━━━━━━━━━━┛");
 
-            message("[" + statusMark + getColor(getLayoutColor()) + "] " + apiKey,
-                    getLayoutColor(),
-                    getDefaultTextAlignment(),
-                    getDefaultDelay(),
-                    out::print);
-        }
+        insertControlChars('n', 1);
     }
 
     public static void terminateProgram() {

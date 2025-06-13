@@ -7,7 +7,11 @@ import lombok.Setter;
 
 import java.util.Scanner;
 
+import static core.CommandManager.clearAndRestartApp;
+import static core.CommandManager.exitPageFormatting;
 import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.DisplayManager.clearTerminal;
+import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -18,6 +22,19 @@ public class TranslatePage {
     @Setter @Getter
     private static int translatedTextColor = 219;
 
+    private static final String[] TRANSLATE_ASCII_LOGO = {
+            "╔════════════════════════════════════════════════════════════════════════════════╗",
+            "║                                                                                ║",
+            "║  ████████╗██████╗  █████╗ ███╗   ██╗███████╗██╗      █████╗ ████████╗███████╗  ║",
+            "║  ╚══██╔══╝██╔══██╗██╔══██╗████╗  ██║██╔════╝██║     ██╔══██╗╚══██╔══╝██╔════╝  ║",
+            "║     ██║   ██████╔╝███████║██╔██╗ ██║███████╗██║     ███████║   ██║   █████╗    ║",
+            "║     ██║   ██╔══██╗██╔══██║██║╚██╗██║╚════██║██║     ██╔══██║   ██║   ██╔══╝    ║",
+            "║     ██║   ██║  ██║██║  ██║██║ ╚████║███████║███████╗██║  ██║   ██║   ███████╗  ║",
+            "║     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝  ║",
+            "║                                                                                ║",
+            "╚════════════════════════════════════════════════════════════════════════════════╝"
+    };
+
     static {
         Dotenv dotenv = Dotenv.load();
         API_KEY = dotenv.get("DEEPL_API_KEY");
@@ -26,6 +43,9 @@ public class TranslatePage {
     public static void displayTranslatePage() {
         Scanner scanner = new Scanner(System.in);
         marginBorder(1,2);
+        clearTerminal();
+        displayLogo(getDefaultTextAlignment(),TRANSLATE_ASCII_LOGO);
+        insertControlChars('n',2);
 
         while (true) {
             out.print(alignment(getDefaultTextAlignment())
@@ -37,23 +57,8 @@ public class TranslatePage {
             if (textToTranslate.equalsIgnoreCase("q")
                     || textToTranslate.equalsIgnoreCase("quit")) {
 
-                marginBorder(2,2);
-                message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                        getLayoutColor(),
-                        getDefaultTextAlignment(),
-                        getDefaultDelay(),
-                        out::print);
-
-                message("Exiting Translate Page"
-                                + getColor(getLayoutColor()) + ". "
-                                + getColor(getMainColor()) + "You are now in main menu"
-                                + getColor(getLayoutColor()) + ".",
-                        getMainColor(),
-                        getDefaultTextAlignment(),
-                        getDefaultDelay(),
-                        out::print);
-
-                marginBorder(2,1);
+                exitPageFormatting();
+                clearAndRestartApp();
                 break;
             }
 

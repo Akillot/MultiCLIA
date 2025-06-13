@@ -13,6 +13,7 @@ import java.util.Scanner;
 import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
+import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 
@@ -32,15 +33,24 @@ public class TimePage extends Page {
             {"Quit", "q"}
     };
 
+    private static final String[] TIME_ASCII_LOGO = {
+            "╔═══════════════════════════════════╗",
+            "║                                   ║",
+            "║  ████████╗██╗███╗   ███╗███████╗  ║",
+            "║  ╚══██╔══╝██║████╗ ████║██╔════╝  ║",
+            "║     ██║   ██║██╔████╔██║█████╗    ║",
+            "║     ██║   ██║██║╚██╔╝██║██╔══╝    ║",
+            "║     ██║   ██║██║ ╚═╝ ██║███████╗  ║",
+            "║     ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝  ║",
+            "║                                   ║",
+            "╚═══════════════════════════════════╝"
+    };
+
     public void displayMenu() {
         marginBorder(1,2);
         clearTerminal();
-        message("Time:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
+        displayLogo(getDefaultTextAlignment(),TIME_ASCII_LOGO);
+        insertControlChars('n',1);
         displayListOfCommands(commands);
 
         while (true) {
@@ -63,7 +73,8 @@ public class TimePage extends Page {
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPageFormatting("You are in main menu");
+                    exitPageFormatting();
+                    clearAndRestartApp();
                     return;
                 }
                 default -> out.print("");

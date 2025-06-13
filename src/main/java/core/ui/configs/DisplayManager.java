@@ -82,7 +82,11 @@ public class DisplayManager {
             marginBorder(2,1);
         } catch (Exception e) {
             marginBorder(1,1);
-            message("Unknown error occurred", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
+            message("Unknown error occurred",
+                    getRejectionColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::print);
         }
     }
 

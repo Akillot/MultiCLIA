@@ -3,6 +3,7 @@ package tools.generate_art;
 import org.jetbrains.annotations.NotNull;
 import java.util.Scanner;
 
+import static core.CommandManager.clearAndRestartApp;
 import static core.CommandManager.exitPageFormatting;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
@@ -30,6 +31,7 @@ public class AsciiArtGenPage {
         marginBorder(1, 2);
         clearTerminal();
         displayLogo(getDefaultTextAlignment(), ART_ASCII_LOGO);
+        insertControlChars('n',1);
         generateArt();
     }
 
@@ -73,12 +75,13 @@ public class AsciiArtGenPage {
             insertControlChars('n', 1);
             out.print(alignment(getDefaultTextAlignment())
                     + getColor(getLayoutColor()) + "Enter text to convert to ASCII banner or click ["
-                    + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + "] to exit : ");
+                    + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + "] to quit : ");
             String text = scanner.nextLine().trim();
             String banner = generateBanner(text);
 
             if(text.isEmpty()){
-                exitPageFormatting("You are in main menu");
+                exitPageFormatting();
+                clearAndRestartApp();
                 return;
             }
 

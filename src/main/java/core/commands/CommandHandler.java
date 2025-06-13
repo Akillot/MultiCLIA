@@ -28,16 +28,16 @@ import static java.lang.System.out;
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "help", "tools", "info" , "restart",
-            "conf", "apiconf", "clear", "support", "quit"};
+            "help", "tools", "info", "restart",
+            "settings", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "tl", "i", "r", "cf",
-            "acf", "cl", "sup", "q"};
+            "h", "tl", "i", "r", "s",
+            "cl", "sup", "q"};
 
     public static final String[] fullToolCmds = {
             "time", "network", "crypt", "terminal",
-            "ai", "qrcode", "weather", "genart",
+            "ai", "genqr", "weather", "genart",
             "translate"};
 
     public static final String[] shortToolCmds = {
@@ -71,20 +71,19 @@ public class CommandHandler {
             };
             case 3 -> CommandManager::clearAndRestartApp;
             case 4 -> new SettingsPage()::displayMenu;
-            case 5 -> CommandManager::clearAndRestartApp;
-            case 6 -> DisplayManager::clearTerminal;
-            case 7 -> SupportPage::displaySupportPage;
-            case 8 -> ExitPage::displayExitPage;
+            case 5 -> DisplayManager::clearTerminal;
+            case 6 -> SupportPage::displaySupportPage;
+            case 7 -> ExitPage::displayExitPage;
 
-            case 9  -> new TimePage()::displayMenu;
-            case 10 -> new NetworkPage()::displayMenu;
-            case 11 -> new CryptographyPage()::displayMenu;
-            case 12 -> new TerminalPage()::displayMenu;
-            case 13 -> new AiPage()::displayMenu;
-            case 14 -> new QrPage()::displayMenu;
-            case 15 -> new WeatherPage()::displayMenu;
-            case 16 -> new AsciiArtGenPage()::displayMenu;
-            case 17 -> TranslatePage::displayTranslatePage;
+            case 8  -> new TimePage()::displayMenu;
+            case 9 -> new NetworkPage()::displayMenu;
+            case 10 -> new CryptographyPage()::displayMenu;
+            case 11 -> new TerminalPage()::displayMenu;
+            case 12 -> new AiPage()::displayMenu;
+            case 13 -> new QrPage()::displayMenu;
+            case 14 -> new WeatherPage()::displayMenu;
+            case 15 -> new AsciiArtGenPage()::displayMenu;
+            case 16 -> TranslatePage::displayTranslatePage;
 
             default -> throw new InvalidCommandIndexException();
         };

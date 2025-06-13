@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.CommandManager.*;
+import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
 import static java.lang.System.out;
 import static tools.network.HttpRequestTester.displayHttpTesting;
@@ -36,14 +37,24 @@ public class NetworkPage extends Page {
             {"Quit", "q"}
     };
 
+    private static final String[] NETWORK_ASCII_LOGO = {
+            "╔══════════════════════════════════════════════════════════════════╗",
+            "║                                                                  ║",
+            "║  ███╗   ██╗███████╗████████╗██╗    ██╗ ██████╗ ██████╗ ██╗  ██╗  ║",
+            "║  ████╗  ██║██╔════╝╚══██╔══╝██║    ██║██╔═══██╗██╔══██╗██║ ██╔╝  ║",
+            "║  ██╔██╗ ██║█████╗     ██║   ██║ █╗ ██║██║   ██║██████╔╝█████╔╝   ║",
+            "║  ██║╚██╗██║██╔══╝     ██║   ██║███╗██║██║   ██║██╔══██╗██╔═██╗   ║",
+            "║  ██║ ╚████║███████╗   ██║   ╚███╔███╔╝╚██████╔╝██║  ██║██║  ██╗  ║",
+            "║  ╚═╝  ╚═══╝╚══════╝   ╚═╝    ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ║",
+            "║                                                                  ║",
+            "╚══════════════════════════════════════════════════════════════════╝"
+    };
+
     public void displayMenu() {
         marginBorder(1, 2);
         clearTerminal();
-        message("Network:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
+        displayLogo(getDefaultTextAlignment(), NETWORK_ASCII_LOGO);
+        insertControlChars('n',1);
 
         displayListOfCommands(commands);
 
@@ -69,7 +80,8 @@ public class NetworkPage extends Page {
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPageFormatting("You are in main menu");
+                    exitPageFormatting();
+                    clearAndRestartApp();
                     return;
                 }
                 default -> out.print("");

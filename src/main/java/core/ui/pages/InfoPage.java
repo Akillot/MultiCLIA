@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static core.CommandManager.exitPageFormatting;
+import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.clearTerminal;
 import static core.ui.configs.DisplayManager.displayLogo;
@@ -38,7 +38,7 @@ public class InfoPage {
         marginBorder(1,2);
         clearTerminal();
         displayLogo(getDefaultTextAlignment(),INFO_ASCII_LOGO);
-        insertControlChars('n',1);
+        insertControlChars('n',2);
 
         message("Version name: " + getColor(getMainColor()) + "Highland",
                 getLayoutColor(),
@@ -68,8 +68,7 @@ public class InfoPage {
 
         displayApplicationDirectory();
 
-        /*
-        Move to separate command
+
         displayConfirmation("Enter","y","+",
                 "to open and","n","-","to skip",
                 getAcceptanceColor(),
@@ -82,11 +81,11 @@ public class InfoPage {
                 getMainColor(),
                 getLayoutColor(),
                 getRejectionColor());
-         */
-        exitPageFormatting("You are in main menu");
+
+        exitPageFormatting();
+        clearAndRestartApp();
     }
 
-    // Move to settings
     private static void displayApplicationDirectory() {
         try {
             String appPath = new File(

@@ -80,8 +80,10 @@ public class SettingsPage extends Page {
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
-                    exitPageFormatting("You are in main menu");
+                    exitPageFormatting();
+                    clearAndRestartApp();
                     return;
+
                 }
                 default -> out.print("");
             }

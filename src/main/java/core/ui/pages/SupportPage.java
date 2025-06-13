@@ -27,7 +27,7 @@ public class SupportPage {
         clearTerminal();
 
         displayLogo(getDefaultTextAlignment(), SUPPORT_ASCII_LOGO);
-        insertControlChars('n',1);
+        insertControlChars('n',2);
 
         message("Thank you for using MultiCLIA!\n"
                         + alignment(getDefaultTextAlignment())
@@ -60,6 +60,7 @@ public class SupportPage {
                 getRejectionColor()
         );
 
-        exitPageFormatting("You are in main menu");
+        exitPageFormatting();
+        clearAndRestartApp();
     }
 }
