@@ -57,6 +57,11 @@ To open MultiCLIA after installing via homebrew you should write:
 ```bash
 multiclia
 ```
+
+⚠ MultiCLIA via Homebrew:  
+Some users may experience issues when running MultiCLIA installed via Homebrew.  
+Contributions to improve the formula are welcome!
+
 ---
 
 ### Acknowledgements
