@@ -21,7 +21,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 
 ---
 
-`Current version: 1.4`
+`Version: 3.0`
 
 ---
 
