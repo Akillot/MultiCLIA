@@ -22,7 +22,6 @@ import static java.lang.System.out;
 
 public class HttpRequestTester {
 
-    // Http requester 1
     static void displayHttpTesting() {
         Scanner scanner = new Scanner(System.in);
 
@@ -108,7 +107,7 @@ public class HttpRequestTester {
 
                     out.print(alignment(getDefaultTextAlignment())
                             + getColor(getLayoutColor()) + "Enter request body [or press " + getColor(getMainColor()) + "Enter"
-                            + getColor(getLayoutColor()) +  " leave empty]: ");
+                            + getColor(getLayoutColor()) + " leave empty]: ");
                     body = scanner.nextLine();
 
                     if (headers.getOrDefault("Content-Type", "").contains("json")
@@ -125,8 +124,8 @@ public class HttpRequestTester {
                 sendHttpRequest(link, requestType, headers, body);
                 insertControlChars('n', 1);
 
-                displayConfirmation("Enter","y","+",
-                        "to open and","n","-","to skip",
+                displayConfirmation("Enter", "y", "+",
+                        "to open and", "n", "-", "to skip",
                         getAcceptanceColor(),
                         getRejectionColor(),
                         getLayoutColor(),
@@ -153,7 +152,6 @@ public class HttpRequestTester {
         }
     }
 
-    // Http requester 2
     private static void sendHttpRequest(String link,
                                         String requestType,
                                         Map<String, String> headers,
@@ -288,7 +286,6 @@ public class HttpRequestTester {
         }
     }
 
-    // Http requester 3
     private static @NotNull String readStream(InputStream stream) throws IOException {
         if (stream == null) return alignment(getDefaultTextAlignment())
                 + getColor(getAcceptanceColor()) + "No response body" + getColor(getLayoutColor()) + ".";
@@ -301,7 +298,6 @@ public class HttpRequestTester {
         return response.toString();
     }
 
-    // Http requester 4
     private static @NotNull String formatJson(String json) {
         if (json == null || json.isEmpty()) return "{}";
 
@@ -327,8 +323,7 @@ public class HttpRequestTester {
                 } else if (c == ',') {
                     formatted.append(c).append("\n");
                     formatted.append("  ".repeat(Math.max(0, indentLevel)));
-                }
-                else if (c == ':') formatted.append(c).append(" ");
+                } else if (c == ':') formatted.append(c).append(" ");
                 else formatted.append(c);
 
             } else formatted.append(c);
@@ -337,7 +332,6 @@ public class HttpRequestTester {
         return formatted.toString();
     }
 
-    // Http requester 5
     @Contract(pure = true)
     private static @NotNull String getHttpStatusMessage(int statusCode) {
         return switch (statusCode) {

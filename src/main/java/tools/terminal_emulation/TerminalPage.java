@@ -54,7 +54,7 @@ public class TerminalPage extends Page {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String input = scanner.nextLine().toLowerCase();
 

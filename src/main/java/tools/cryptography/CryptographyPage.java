@@ -72,7 +72,7 @@ public class CryptographyPage extends Page {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String input = scanner.nextLine().toLowerCase();
 
@@ -138,7 +138,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Encrypt aes
     private static void encryptAES() {
         try {
             out.print(alignment(getDefaultTextAlignment())
@@ -182,7 +181,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Decrypt aes
     private static void decryptAES() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -217,7 +215,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Encrypt rsa
     private static void encryptRSA() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
@@ -258,7 +255,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Decrypt rsa
     private static void decryptRSA() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -294,7 +290,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Encrypt ChaCha20
     private static void encryptChaCha20() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
@@ -347,7 +342,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Decrypt ChaCha20
     private static void decryptChaCha20() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -387,7 +381,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Encrypt Blowfish
     private static void encryptBlowfish() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter plain text to encrypt: ");
@@ -428,7 +421,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Decrypt Blowfish
     private static void decryptBlowfish() {
         try {
             out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter encrypted text to decrypt: ");
@@ -463,7 +455,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Hashing
     private static void hashSHA256() {
         try {
             insertControlChars('n', 1);
@@ -579,7 +570,6 @@ public class CryptographyPage extends Page {
         }
     }
 
-    // Managing password difficulty
     private static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;
         int color;
@@ -609,7 +599,6 @@ public class CryptographyPage extends Page {
         return getColor(color) + generatePasswordFromPool(charPool);
     }
 
-    // Generating password from the exact char pool
     private static @NotNull String generatePasswordFromPool(@NotNull String charPool) {
         StringBuilder passwordBuilder = new StringBuilder();
         Random random = new SecureRandom();

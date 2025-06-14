@@ -69,7 +69,7 @@ public class QrPage extends Page {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String input = scanner.nextLine().trim().toLowerCase();
 

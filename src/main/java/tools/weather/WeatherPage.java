@@ -53,7 +53,7 @@ public class WeatherPage extends Page {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String input = scanner.nextLine().toLowerCase().trim();
 
@@ -95,4 +95,3 @@ public class WeatherPage extends Page {
         super.displayListOfCommands(commands);
     }
 }
-

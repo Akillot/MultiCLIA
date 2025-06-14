@@ -148,15 +148,8 @@ public class AppearanceConfigs {
         }
     }
 
-    //Color table components
     @Contract(pure = true)
     public static void displayColorTable() {
-        insertControlChars('n',1);
-        message("Color Table:",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
         printColorRange(0, getLayoutColor());
         printColorBlock();
         printColorRange(232, 255);

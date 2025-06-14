@@ -76,7 +76,7 @@ public class SettingsPage extends Page {
 
         while (true) {
             slowMotionText(0, getSearchingLineAlignment(), false,
-                    getColor(getLayoutColor()) + getSearchingArrow(), "");
+                    getColor(getLayoutColor()) + getSearchingArrow(), " ");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {
@@ -197,8 +197,6 @@ public class SettingsPage extends Page {
                     out::println);
         }
     }
-
-
 
     @Override
     protected void displayListOfCommands(String[][] commands) {
@@ -408,8 +406,8 @@ public class SettingsPage extends Page {
 
     private static void changeDesign() {
         insertControlChars('n', 1);
-        message("Design customization [enter [" + getColor(getMainColor()) + "default"
-                        + getColor(getLayoutColor()) + "] to apply defaults]:",
+        message("Design customization [enter " + getColor(getMainColor()) + "default"
+                        + getColor(getLayoutColor()) + " to apply defaults]:",
                 getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
 
         out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new main color [0-255]: ");

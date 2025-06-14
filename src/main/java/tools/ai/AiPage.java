@@ -50,7 +50,7 @@ public class AiPage extends Page {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
             String input = scanner.nextLine().toLowerCase();
 
             switch (input) {

@@ -75,7 +75,7 @@ public class AsciiArtGenPage {
             insertControlChars('n', 1);
             out.print(alignment(getDefaultTextAlignment())
                     + getColor(getLayoutColor()) + "Enter text to convert to ASCII banner or click ["
-                    + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + "] to quit : ");
+                    + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + "] to quit: ");
             String text = scanner.nextLine().trim();
             String banner = generateBanner(text);
 

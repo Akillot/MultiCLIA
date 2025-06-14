@@ -56,7 +56,7 @@ public class TimePage extends Page {
                     getAcceptanceColor(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String input = scanner.nextLine().toLowerCase();
 
@@ -108,11 +108,9 @@ public class TimePage extends Page {
     private static void displayAppRuntime() {
         insertControlChars('n',1);
     }
-
     private static String getCurrentTimeZone() {
         return ZoneId.systemDefault().toString();
     }
-
     private static volatile boolean isTimerRunning = false;
 
     private static void runTimer() {

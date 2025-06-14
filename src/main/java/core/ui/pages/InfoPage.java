@@ -30,8 +30,8 @@ public class InfoPage {
     @Contract(pure = true)
     public static @NotNull String getVersion() {
         loadConfig();
-        String appVersion = "3" + getColor(getLayoutColor()) + "." + getColor(getMainColor()) + "0 ";
-        return getColorText(appVersion, getMainColor());
+        String appVersion = "3.0 ";
+        return getColorText(appVersion, getLayoutColor());
     }
 
     public static void displayInfoPage() throws InterruptedException {
@@ -76,7 +76,7 @@ public class InfoPage {
                 getLayoutColor(),
                 getDefaultTextAlignment());
 
-        choice(getColor(getLayoutColor()) + "Github",
+        choice(getColor(getMainColor()) + "Github",
                 openUri("https://github.com/Akillot/MultiCLIA"),
                 getMainColor(),
                 getLayoutColor(),

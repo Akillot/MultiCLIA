@@ -31,7 +31,6 @@ public class CommandManager {
         apiKeyNames.add("OPEN_WEATHER_API_KEY");
     }
 
-    // HTTP request and additional methods
     public static void httpRequest(String userUri,
                                    @NotNull String requestType,
                                    @NotNull String text,
@@ -116,8 +115,6 @@ public class CommandManager {
         }
     }
 
-
-    // Request user choice
     public static void choice(String title,
                               Runnable action,
                               int mainColor,

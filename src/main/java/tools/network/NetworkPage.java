@@ -62,7 +62,7 @@ public class NetworkPage extends Page {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String input = scanner.nextLine().toLowerCase();
 
@@ -92,7 +92,6 @@ public class NetworkPage extends Page {
         super.displayListOfCommands(commands);
     }
 
-    // IP
     private static void displayUserIp() {
         try {
             insertControlChars('n',1);
@@ -126,7 +125,6 @@ public class NetworkPage extends Page {
         }
     }
 
-    // Scan ports 1
     private static void scanPorts() {
         int startPort = 1;
         int endPort = 65535;
@@ -194,7 +192,6 @@ public class NetworkPage extends Page {
                 out::println);
     }
 
-    // Scan ports 2
     private static @NotNull Map<Integer, String> getCommonPorts() {
         Map<Integer, String> commonPorts = new HashMap<>();
         commonPorts.put(20, "FTP (Data)");
@@ -294,16 +291,10 @@ public class NetworkPage extends Page {
         return commonPorts;
     }
 
-    // Ping host
     private static void pingHost() {processCommandWithHostInput("ping -c 4");}
-
-    // Trace rout
     private static void traceRout(){processCommandWithHostInput("traceroute");}
-
-    // Look up DNS records
     private static void nsLookUp(){processCommandWithHostInput("nslookup");}
 
-    // Network stats
     private static void netStat() {
         try {
             insertControlChars('n', 1);
@@ -344,7 +335,6 @@ public class NetworkPage extends Page {
         }
     }
 
-    // Network Interfaces
     private static void displayNetworkInterfaces() {
         try {
             insertControlChars('n', 1);
@@ -358,7 +348,6 @@ public class NetworkPage extends Page {
             while (networkInterfaces.hasMoreElements()) {
                 NetworkInterface netInterface = networkInterfaces.nextElement();
 
-                // Skip non-active interfaces if desired
                 if (!netInterface.isUp()) continue;
                 message("·  " + getColor(getMainColor())
                                 + netInterface.getDisplayName() + getColor(getLayoutColor()),
@@ -367,7 +356,6 @@ public class NetworkPage extends Page {
                         getDefaultDelay(),
                         out::print);
 
-                // Get MAC address
                 byte[] mac = netInterface.getHardwareAddress();
                 if (mac != null) {
                     StringBuilder macAddress = new StringBuilder();
@@ -388,7 +376,6 @@ public class NetworkPage extends Page {
                             out::print);
                 }
 
-                // Display IP addresses
                 Enumeration<InetAddress> inetAddresses = netInterface.getInetAddresses();
                 while (inetAddresses.hasMoreElements()) {
                     InetAddress address = inetAddresses.nextElement();

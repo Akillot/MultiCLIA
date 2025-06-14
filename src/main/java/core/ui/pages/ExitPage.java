@@ -37,7 +37,7 @@ public class ExitPage {
                 getDefaultDelay(),
                 out::println);
 
-        out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor()) + getSearchingArrow());
+        out.print(alignment(getDefaultLogoAlignment()) + getColor(getLayoutColor()) + getSearchingArrow() + " ");
         String answer = scanner.nextLine().toLowerCase();
 
         processUserResponse(answer);

@@ -12,7 +12,6 @@ import static core.ui.configs.ApiConfigs.checkApiKeys;
 import static core.ui.configs.AppearanceConfigs.*;
 import static core.ui.configs.DisplayManager.displayLogo;
 import static core.ui.configs.TextConfigs.*;
-import static core.ui.pages.InfoPage.getVersion;
 import static java.lang.System.getProperty;
 import static java.lang.System.out;
 
@@ -31,7 +30,7 @@ public class MenuPage {
             "┃                    ██║╚██╔╝██║██║   ██║██║     ██║   ██║██║     ██║     ██║██╔══██║                    ┃",
             "┃                    ██║ ╚═╝ ██║██║   ██║██║     ██║   ██║██║     ██║     ██║██║  ██║                    ┃",
             "┃                    ██║     ██║╚██████╔╝███████╗██║   ██║╚██████╗███████╗██║██║  ██║                    ┃",
-            "┃                    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝   v." + getVersion() + getColor(getLayoutColor()) + "           ┃",
+            "┃                    ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝   v.3.0            ┃",
             "┃                                                                                                        ┃",
             "┃                                    Terminal Tool App | Open-source.                                    ┃",
             "┃                                                                                                        ┃",
@@ -65,7 +64,6 @@ public class MenuPage {
 
         marginBorder(0,1);
 
-        // Fix
         checkApiKeys();
         marginBorder(1,1);
 

@@ -15,12 +15,11 @@ public class SearchingManager {
                     getSearchingLineAlignment(),
                     false,
                     getColor(getLayoutColor()) + getSearchingArrow(),
-                    "");
+                    " ");
 
             String nameOfFunction = scanner.nextLine().toLowerCase();
             if (!registry.executeCommand(nameOfFunction)) search();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             out.print("");
         }
     }
