@@ -10,5 +10,8 @@
         <module name="MultiCLIA" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="time" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

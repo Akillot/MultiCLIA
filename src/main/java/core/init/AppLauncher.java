@@ -1,14 +1,14 @@
 package core.init;
 
-import core.ui.essential.pages.StartPage;
+import core.ui.pages.MenuPage;
 
-import static core.ui.essential.configs.DisplayManager.clearTerminal;
-import static core.ui.essential.configs.appearance.TextConfigs.insertControlChars;
+import static core.ui.configs.DisplayManager.clearTerminal;
+import static core.ui.configs.TextConfigs.insertControlChars;
 
 public class AppLauncher {
     public static void main(String[] args) {
         clearTerminal();
         insertControlChars('n',1);
-        StartPage.displayMenu();
+        MenuPage.displayMenu();
     }
 }

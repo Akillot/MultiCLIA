@@ -1,0 +1,17 @@
+{
+  "defaultDelay": 0,
+  "searchingLineAlignment": 48,
+  "defaultTextAlignment": 58,
+  "defaultLogoAlignment": 48,
+  "color1": 219,
+  "color2": 183,
+  "color3": 147,
+  "color4": 218,
+  "color5": 182,
+  "color6": 218,
+  "mainColor": 147,
+  "layoutColor": 15,
+  "acceptanceColor": 46,
+  "rejectionColor": 160,
+  "searchingArrow": "\u003e "
+}

@@ -1,79 +1,91 @@
 package core.commands;
 
-import core.ui.essential.pages.*;
-import core.logic.CommandManager;
-import core.ui.extensions.ai.AiPage;
-import core.ui.extensions.asciiartify.AsciiArtifyPage;
-import core.ui.extensions.qr.QrPage;
-import core.ui.extensions.cryptography.CryptographyPage;
-import core.ui.extensions.network.NetworkPage;
-import core.ui.extensions.security.PasswordGenerator;
-import core.ui.extensions.terminal_emulation.TerminalPage;
-import core.ui.extensions.time.TimePage;
-import core.ui.essential.configs.DisplayManager;
-import core.ui.extensions.translate.TranslatePage;
-import core.ui.extensions.weather.WeatherPage;
+import core.CommandManager;
+import core.InvalidCommandIndexException;
+import core.ui.pages.SettingsPage;
+import core.ui.pages.ExitPage;
+import core.ui.pages.InfoPage;
+import core.ui.pages.SupportPage;
+import tools.ai.AiPage;
+import tools.generate_art.AsciiArtGenPage;
+import tools.qr.QrPage;
+import tools.cryptography.CryptographyPage;
+import tools.network.NetworkPage;
+import tools.terminal_emulation.TerminalPage;
+import tools.time.TimePage;
+import core.ui.configs.DisplayManager;
+import tools.translate.TranslatePage;
+import tools.weather.WeatherPage;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static core.ui.essential.configs.appearance.AppearanceConfigs.*;
-import static core.ui.essential.configs.appearance.TextConfigs.alignment;
-import static core.ui.essential.configs.appearance.TextConfigs.message;
+import static core.ui.configs.AppearanceConfigs.*;
+import static core.ui.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class CommandHandler {
 
     public static final String[] fullCmds = {
-            "help", "info" , "restart", "restart clear", "config",
-            "clear", "time", "network", "genpass", "crypt",
-            "terminal", "ai", "qrcode", "weather", "asciiartify",
-            "translate","support", "quit"};
+            "help", "tools", "info", "restart",
+            "settings", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "i", "rst","rcl", "cfg",
-            "cl", "t", "n", "gp", "cr",
-            "term", "a", "qr", "w", "art",
-            "tran", "sup", "q"};
+            "h", "t", "i", "r", "s",
+            "c", "sp", "q"};
+
+    public static final String[] fullToolCmds = {
+            "time", "network", "crypt", "terminal",
+            "ai", "genqr", "weather", "genart",
+            "translate"};
+
+    public static final String[] shortToolCmds = {
+            "tm", "n", "cr", "term", "a", "qr", "w", "art", "tran"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
-            commandMap.put(fullCmds[i], getCommandAction(i));
-            commandMap.put(shortCmds[i], getCommandAction(i));
+            commandMap.put(fullCmds[i], ExecuteCommand(i));
+            commandMap.put(shortCmds[i], ExecuteCommand(i));
+        }
+
+        int offset = fullCmds.length;
+        for (int i = 0; i < fullToolCmds.length; i++) {
+            commandMap.put(fullToolCmds[i], ExecuteCommand(i + offset));
+            commandMap.put(shortToolCmds[i], ExecuteCommand(i + offset));
         }
     }
 
     @Contract(pure = true)
-    static @NotNull Runnable getCommandAction(int index) {
+    static @NotNull Runnable ExecuteCommand(int index) {
         return switch (index) {
             case 0 -> DisplayManager::displayCommandList;
-            case 1 -> () -> {
+            case 1 -> DisplayManager::displayToolsCommandList;
+            case 2 -> () -> {
                 try {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
-                    message("Error displaying this page: " + e.getMessage(),
+                    message("Error " + getColor(getLayoutColor()) + "displaying this page." ,
                             getRejectionColor(), getDefaultTextAlignment(), 0, out::println);
                 }
             };
-            case 2 -> CommandManager::mainMenuRestart;
-            case 3 -> CommandManager::mainMenuRestartWithClearing;
-            case 4 -> new ConfigPage()::displayMenu;
+            case 3 -> CommandManager::clearAndRestartApp;
+            case 4 -> new SettingsPage()::displayMenu;
             case 5 -> DisplayManager::clearTerminal;
-            case 6 -> new TimePage()::displayMenu;
-            case 7 -> new NetworkPage()::displayMenu;
-            case 8 -> new PasswordGenerator()::displayMenu;
-            case 9 -> new CryptographyPage()::displayMenu;
-            case 10 -> new TerminalPage()::displayMenu;
-            case 11 -> new AiPage()::displayMenu;
-            case 12 -> new QrPage()::displayMenu;
-            case 13 -> new WeatherPage()::displayMenu;
-            case 14 -> new AsciiArtifyPage()::displayMenu;
-            case 15 -> TranslatePage::displayTranslatePage;
-            case 16 -> SupportPage::displaySupportPage;
-            case 17 -> ExitPage::displayExitPage;
-            default -> throw new IllegalArgumentException(alignment(getDefaultTextAlignment())
-                    + getColor(getRejectionColor()) + "Invalid command index");
+            case 6 -> SupportPage::displaySupportPage;
+            case 7 -> ExitPage::displayExitPage;
+
+            case 8  -> new TimePage()::displayMenu;
+            case 9 -> new NetworkPage()::displayMenu;
+            case 10 -> new CryptographyPage()::displayMenu;
+            case 11 -> new TerminalPage()::displayMenu;
+            case 12 -> new AiPage()::displayMenu;
+            case 13 -> new QrPage()::displayMenu;
+            case 14 -> new WeatherPage()::displayMenu;
+            case 15 -> new AsciiArtGenPage()::displayMenu;
+            case 16 -> TranslatePage::displayTranslatePage;
+
+            default -> throw new InvalidCommandIndexException();
         };
     }
 }

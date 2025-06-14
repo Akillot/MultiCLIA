@@ -8,6 +8,11 @@
         <option value="$PROJECT_DIR$/src/main/java/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/time/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="PWA">
     <option name="enabled" value="true" />
