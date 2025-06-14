@@ -45,7 +45,7 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
    ```
 3. Run the app:
    ```bash
-   ./starter.sh
+   ./start.sh
    ```
 ###  Installation via Homebrew:
    ```bash
