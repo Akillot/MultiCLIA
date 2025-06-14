@@ -381,7 +381,7 @@ public class NetworkPage extends Page {
                             out::print);
                 } else {
                     message("   MAC: " + getBackColor(getRejectionColor())
-                                    + getColor(getLayoutColor()) + "N/A" + getColor(getLayoutColor()),
+                                    + getColor(getLayoutColor()) + " N/A " + getColor(getLayoutColor()),
                             getLayoutColor(),
                             getDefaultTextAlignment(),
                             getDefaultDelay(),

@@ -24,11 +24,11 @@ public class HttpRequestTester {
 
     // Http requester 1
     static void displayHttpTesting() {
-        insertControlChars('n', 1);
         Scanner scanner = new Scanner(System.in);
 
         try {
             while (true) {
+                insertControlChars('n', 1);
                 out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter a URL [or "
                         + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + " to quit]: ");
                 String link = scanner.nextLine().trim();
@@ -45,8 +45,7 @@ public class HttpRequestTester {
                         getColor(getMainColor()) + "GET" + getColor(getLayoutColor()) + "|" + getColor(getMainColor()) + "1 " + getColor(getLayoutColor()) +
                         getColor(218) + "POST" + getColor(getLayoutColor()) + "|" + getColor(218) + "2 " + getColor(getLayoutColor()) +
                         getColor(206) + "PUT" + getColor(getLayoutColor()) + "|" + getColor(206) + "3 " + getColor(getLayoutColor()) +
-                        getColor(204) + "DELETE" + getColor(getLayoutColor()) + "|" + getColor(204) + "4" + getColor(getLayoutColor())
-                        + " or " + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + " to quit]: ");
+                        getColor(204) + "DELETE" + getColor(getLayoutColor()) + "|" + getColor(204) + "4" + getColor(getLayoutColor()) + "]: ");
 
                 if (link.equalsIgnoreCase("q")) {
                     insertControlChars('n', 1);
@@ -141,7 +140,6 @@ public class HttpRequestTester {
 
                 if (!continueChoice.equalsIgnoreCase("y")
                         && !continueChoice.equalsIgnoreCase("+")) {
-                    insertControlChars('n', 1);
                     return;
                 }
             }
@@ -237,7 +235,7 @@ public class HttpRequestTester {
                     getLayoutColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
-                    out::println);
+                    out::print);
 
             message("Response Time: " + getColor(getMainColor()) + responseTime + " ms",
                     getLayoutColor(),

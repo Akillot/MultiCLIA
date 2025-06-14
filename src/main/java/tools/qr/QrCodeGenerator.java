@@ -29,8 +29,8 @@ public class QrCodeGenerator {
                     out::println);
 
         } catch (WriterException | IOException e) {
-            message("Error generating QR code: " + e.getMessage(),
-                    getLayoutColor(),
+            message("Error " + getColor(getLayoutColor()) + "generating QR code: " + e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);

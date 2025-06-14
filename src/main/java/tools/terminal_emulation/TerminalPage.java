@@ -186,7 +186,8 @@ public class TerminalPage extends Page {
     }
 
     private static boolean isEditingCommand(String command) {
-        String[] editingCommands = {"nano", "vim", "vi", "emacs", "gedit", "pico", "ed", "sed", "awk", ">>", ">"};
+        String[] editingCommands = {"nano", "vim", "vi", "emacs", "gedit",
+                "pico", "ed", "sed", "awk", ">>", ">", "multiclia"};
         for (String cmd : editingCommands) if (command.equals(cmd)) return true;
         return false;
     }

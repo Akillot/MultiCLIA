@@ -143,7 +143,7 @@ public class QrPage extends Page {
         out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
                 + "Enter URL [include " + getColor(getMainColor())
                 + "http:// " + getColor(getLayoutColor()) + "or " + getColor(getMainColor())
-                + " https://" + getColor(getLayoutColor()) + "]: ");
+                + "https://" + getColor(getLayoutColor()) + "]: ");
 
         String input = scanner.nextLine().trim();
         if (input.isEmpty()) {
