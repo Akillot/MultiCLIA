@@ -2,10 +2,12 @@ package core.ui.pages;
 
 import com.sun.management.OperatingSystemMXBean;
 import core.Page;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.management.ManagementFactory;
+import java.util.Objects;
 
 import static core.CommandManager.*;
 import static core.ui.configs.AppearanceConfigs.*;
@@ -15,14 +17,20 @@ import static java.lang.System.out;
 
 public class SettingsPage extends Page {
 
+    private static final String API_KEY;
+
+    static {
+        Dotenv dotenv = Dotenv.load();
+        API_KEY = dotenv.get("OPEN_WEATHER_API_KEY");
+    }
+
     private final String[][] commands = {
             {"Memory", "m"},
             {"CPU", "c"},
             {"Color table", "coltab"},
             {"Design info", "di"},
             {"Java", "j"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
+            {"API", "a"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -76,7 +84,11 @@ public class SettingsPage extends Page {
                 case "color table", "coltab" -> displayColorTable();
                 case "design info", "di" -> displayDesignInfo();
                 case "java", "j" -> displayJavaInfo();
-                case "restart", "r" -> clearAndRestartApp();
+                case "api", "a" -> {
+                    insertControlChars('n',1);
+                    displayApiSettings();
+                    insertControlChars('n',1);
+                }
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
@@ -89,6 +101,102 @@ public class SettingsPage extends Page {
             }
         }
     }
+
+    private static boolean isApiKeyValid(String apiKey) {
+        return apiKey != null && !apiKey.isBlank();
+    }
+
+    private void displayApiSettings() {
+        Dotenv dotenv = Dotenv.load();
+
+        java.util.Map<String, String> keys = java.util.Map.of(
+                "OPEN_WEATHER_API_KEY", Objects.requireNonNull(dotenv.get("OPEN_WEATHER_API_KEY")),
+                "DEEPL_API_KEY", Objects.requireNonNull(dotenv.get("DEEPL_API_KEY")),
+                "OPENAI_API_KEY", Objects.requireNonNull(dotenv.get("OPENAI_API_KEY"))
+        );
+
+        keys.forEach((name, value) -> {
+            if (isApiKeyValid(value)) {
+                out.println(alignment(getDefaultTextAlignment())
+                        + getColor(getLayoutColor()) + name + ": "
+                        + getColor(getMainColor()) + value);
+            } else {
+                out.println(alignment(getDefaultTextAlignment())
+                        + getColor(getLayoutColor()) + name + " is missing or invalid.");
+            }
+        });
+
+        insertControlChars('n', 1);
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Do you want to change an API key? ["
+                + getColor(getAcceptanceColor()) + "yes" + getColor(getLayoutColor()) + "|" + getColor(getRejectionColor())
+                + "no" + getColor(getLayoutColor()) + "]: ");
+
+        String input = scanner.nextLine().trim().toLowerCase();
+
+        if (input.equals("yes") || input.equals("y")) {
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor())
+                            + "Enter key name [OPEN_WEATHER_API_KEY | DEEPL_API_KEY | OPENAI_API_KEY]: ");
+
+            String keyName = scanner.nextLine().trim();
+
+            if (!keys.containsKey(keyName)) {
+                insertControlChars('n', 1);
+                message("Unknown key name" + getColor(getLayoutColor()) + ". Update cancelled.",
+                        getRejectionColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::print);
+                return;
+            }
+
+            out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new API key: ");
+            String newKey = scanner.nextLine().trim();
+
+            if (isApiKeyValid(newKey)) {
+                replaceApiKey(keyName, newKey);
+                insertControlChars('n', 1);
+                message("API key updated" + getColor(getLayoutColor()) + ". Please restart the app to apply changes.",
+                        getAcceptanceColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::print);
+            } else {
+                insertControlChars('n', 1);
+                message("Invalid API key" + getColor(getLayoutColor()) + ". Update cancelled.",
+                        getRejectionColor(),
+                        getDefaultTextAlignment(),
+                        getDefaultDelay(),
+                        out::print);
+            }
+        }
+    }
+
+    private static void replaceApiKey(String keyName, String apiKey) {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(".env");
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            boolean found = false;
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).startsWith(keyName + "=")) {
+                    lines.set(i, keyName + "=" + apiKey);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) lines.add(keyName + "=" + apiKey);
+
+            java.nio.file.Files.write(path, lines);
+        } catch (Exception e) {
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) + " while saving API key: " + e.getMessage(),
+                    getRejectionColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+        }
+    }
+
+
 
     @Override
     protected void displayListOfCommands(String[][] commands) {
