@@ -6,7 +6,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static core.CommandManager.*;
 import static core.commands.CommandHandler.fullCmds;
 import static core.commands.SearchingManager.search;
 import static core.ui.configs.ApiConfigs.checkApiKeys;
@@ -67,7 +66,7 @@ public class MenuPage {
         marginBorder(0,1);
 
         // Fix
-        checkApiKeys(apiKeyNames.toArray(new String[0]));
+        checkApiKeys();
         marginBorder(1,1);
 
         while (true) {

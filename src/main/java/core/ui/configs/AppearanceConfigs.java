@@ -16,7 +16,7 @@ public class AppearanceConfigs {
     private static final String CONFIG_PATH = "config.json";
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    private static AppearanceConfigData config = new AppearanceConfigData();
+    public static AppearanceConfigData config = new AppearanceConfigData();
 
     public static int getDefaultDelay() { return config.defaultDelay; }
     public static int getSearchingLineAlignment() { return config.searchingLineAlignment; }
@@ -52,7 +52,7 @@ public class AppearanceConfigs {
         } catch (IOException ignored) {}
     }
 
-    private static void setDefaultValues() {
+    public static void setDefaultValues() {
         config.defaultDelay = 0;
         config.searchingLineAlignment = 48;
         config.defaultTextAlignment = 58;

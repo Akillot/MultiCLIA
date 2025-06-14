@@ -579,7 +579,7 @@ public class CryptographyPage extends Page {
         }
     }
 
-    //Managing password difficulty
+    // Managing password difficulty
     private static @Nullable String createPassword(@NotNull String passwordComplexity) {
         String charPool;
         int color;

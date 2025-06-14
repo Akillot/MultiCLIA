@@ -28,9 +28,10 @@ public class SettingsPage extends Page {
             {"Memory", "m"},
             {"CPU", "c"},
             {"Color table", "coltab"},
-            {"Design info", "di"},
             {"Java", "j"},
             {"API", "a"},
+            {"Appearance info", "apri"},
+            {"Appearance", "apr"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -82,13 +83,14 @@ public class SettingsPage extends Page {
                 case "memory", "m" -> displayMemoryInfo();
                 case "cpu", "c" -> displayCpuLoad();
                 case "color table", "coltab" -> displayColorTable();
-                case "design info", "di" -> displayDesignInfo();
                 case "java", "j" -> displayJavaInfo();
                 case "api", "a" -> {
                     insertControlChars('n',1);
                     displayApiSettings();
                     insertControlChars('n',1);
                 }
+                case "appearance info", "apri" -> displayDesignInfo();
+                case "appearance", "apr" -> changeDesign();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
@@ -404,8 +406,119 @@ public class SettingsPage extends Page {
                 out::println);
     }
 
-    private static void modifyDesign(){
-        insertControlChars('n',1);
-        // In progress
+    private static void changeDesign() {
+        insertControlChars('n', 1);
+        message("Design customization [enter [" + getColor(getMainColor()) + "default"
+                        + getColor(getLayoutColor()) + "] to apply defaults]:",
+                getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new main color [0-255]: ");
+        String mainColorInput = scanner.nextLine().trim();
+
+        if (mainColorInput.equalsIgnoreCase("default")) {
+            setDefaultValues();
+            saveConfig();
+            message("Default design applied and saved" + getColor(getLayoutColor()) + ".",
+                    getAcceptanceColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            clearAndRestartApp();
+            return;
+        }
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new layout color [0-255]: ");
+        String layoutColorInput = scanner.nextLine().trim();
+
+        if (layoutColorInput.equalsIgnoreCase("default")) {
+            setDefaultValues();
+            saveConfig();
+            message("Default design applied and saved" + getColor(getLayoutColor()) + ".",
+                    getAcceptanceColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            clearAndRestartApp();
+            return;
+        }
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new acceptance color [0-255]: ");
+        String acceptanceColorInput = scanner.nextLine().trim();
+
+        if (acceptanceColorInput.equalsIgnoreCase("default")) {
+            setDefaultValues();
+            saveConfig();
+            message("Default design applied and saved" + getColor(getLayoutColor()) + ".", getAcceptanceColor(),
+                    getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            clearAndRestartApp();
+            return;
+        }
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new rejection color [0-255]: ");
+        String rejectionColorInput = scanner.nextLine().trim();
+
+        if (rejectionColorInput.equalsIgnoreCase("default")) {
+            setDefaultValues();
+            saveConfig();
+            message("Default design applied and saved" + getColor(getLayoutColor()) + ".",
+                    getAcceptanceColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            clearAndRestartApp();
+            return;
+        }
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new delay [ms]: ");
+        String delayInput = scanner.nextLine().trim();
+
+        if (delayInput.equalsIgnoreCase("default")) {
+            setDefaultValues();
+            saveConfig();
+            message("Default design applied and saved" + getColor(getLayoutColor()) + ".",
+                    getAcceptanceColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            clearAndRestartApp();
+            return;
+        }
+
+        out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter new searching arrow: ");
+        String arrowInput = scanner.nextLine().trim();
+
+        if (arrowInput.equalsIgnoreCase("default")) {
+            setDefaultValues();
+            saveConfig();
+            message("Default design applied and saved" + getColor(getLayoutColor()) + ".", getAcceptanceColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            return;
+        }
+
+        if (arrowInput.isEmpty()) {
+            insertControlChars('n', 1);
+            message("Searching arrow cannot be empty" + getColor(getLayoutColor()) + ". Update cancelled.",
+                    getRejectionColor(),
+                    getDefaultTextAlignment(),
+                    getDefaultDelay(),
+                    out::println);
+            return;
+        }
+
+        try {
+            int mainColor = Integer.parseInt(mainColorInput);
+            int layoutColor = Integer.parseInt(layoutColorInput);
+            int acceptanceColor = Integer.parseInt(acceptanceColorInput);
+            int rejectionColor = Integer.parseInt(rejectionColorInput);
+            int delay = Integer.parseInt(delayInput);
+
+            if (isValidColor(mainColor) && isValidColor(layoutColor) && isValidColor(acceptanceColor) && isValidColor(rejectionColor)) {
+                config.mainColor = mainColor;
+                config.layoutColor = layoutColor;
+                config.acceptanceColor = acceptanceColor;
+                config.rejectionColor = rejectionColor;
+                config.defaultDelay = delay;
+                config.searchingArrow = arrowInput;
+                saveConfig();
+                message("Design updated and saved" + getColor(getLayoutColor()) + ".",
+                        getAcceptanceColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+                clearAndRestartApp();
+            } else {
+                message("Invalid color values" + getColor(getLayoutColor()) + ". Update cancelled.", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+            }
+        } catch (NumberFormatException e) {
+            message("Invalid input" + getColor(getLayoutColor()) + ". Update cancelled.", getRejectionColor(), getDefaultTextAlignment(), getDefaultDelay(), out::println);
+        }
+    }
+
+    private static boolean isValidColor(int colorCode) {
+        return colorCode >= 0 && colorCode <= 255;
     }
 }

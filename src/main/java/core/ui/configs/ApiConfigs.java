@@ -1,58 +1,40 @@
 package core.ui.configs;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.Objects;
 
 import static core.ui.configs.AppearanceConfigs.*;
-import static core.ui.configs.AppearanceConfigs.getDefaultDelay;
-import static core.ui.configs.AppearanceConfigs.getDefaultTextAlignment;
-import static core.ui.configs.TextConfigs.alignment;
 import static core.ui.configs.TextConfigs.message;
 import static java.lang.System.out;
 
 public class ApiConfigs {
-    public static void apiKeyChecking(@NotNull ArrayList<String> apiKeyNames) {
 
+    public static void checkApiKeys() {
         Dotenv dotenv = Dotenv.load();
-        boolean allKeysValid = true;
 
-        for (String apiKeyName : apiKeyNames) {
-            String API_KEY = dotenv.get(apiKeyName);
-            if (API_KEY == null || API_KEY.isEmpty()) allKeysValid = false;
-        }
+        Map<String, String> keys = Map.of(
+                "OPEN_WEATHER_API_KEY", Objects.requireNonNull(dotenv.get("OPEN_WEATHER_API_KEY")),
+                "DEEPL_API_KEY", Objects.requireNonNull(dotenv.get("DEEPL_API_KEY")),
+                "OPENAI_API_KEY", Objects.requireNonNull(dotenv.get("OPENAI_API_KEY"))
+        );
 
-        if (allKeysValid)
-            out.print(alignment(getDefaultLogoAlignment())
-                    + getBackColor(getRejectionColor()) + getColor(getLayoutColor())
-                    + " All API keys are valid " + getColor(getAcceptanceColor()) + "✓");
-        else
-            out.print(alignment(getDefaultLogoAlignment())
-                    + getBackColor(getRejectionColor()) + getColor(getLayoutColor())
-                    + " Some API keys are missing or invalid " + getColor(getRejectionColor()) + "✗");
-    }
+        message("API Status:", getLayoutColor(), getDefaultTextAlignment(), getDefaultDelay(), out::print);
 
-    public static void checkApiKeys(String @NotNull [] apiKeys) {
-        message("API Status: ",
-                getLayoutColor(),
-                getDefaultTextAlignment(),
-                getDefaultDelay(),
-                out::print);
-
-        for (String apiKey : apiKeys) {
+        keys.forEach((name, value) -> {
             String statusMark;
-            if (apiKey != null && apiKey.length() > 10) {
-                statusMark = getColor(getAcceptanceColor()) + "✓";
-            } else {
-                statusMark = getColor(getRejectionColor()) + "✗";
-            }
+            if (value != null && value.length() > 10)
+                statusMark = "[" + getColor(getAcceptanceColor()) + "✓" + getColor(getLayoutColor()) + "]";
+            else
+                statusMark = "[" + getColor(getRejectionColor()) + "✗" + getColor(getLayoutColor()) + "]";
 
-            message("[" + statusMark + getColor(getLayoutColor()) + "] " + apiKey,
+
+            message(statusMark + " " + name,
                     getLayoutColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::print);
-        }
+        });
     }
 }
