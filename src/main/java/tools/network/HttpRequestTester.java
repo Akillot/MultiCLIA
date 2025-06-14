@@ -34,29 +34,12 @@ public class HttpRequestTester {
                 String link = scanner.nextLine().trim();
 
                 if (link.equalsIgnoreCase("q")) {
-                    message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::print);
-
-                    message("You are in the network page" + getColor(getLayoutColor()) + ".",
-                            getMainColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
+                    insertControlChars('n', 1);
                     return;
                 }
 
-                if (!link.toLowerCase().startsWith("http://") && !link.toLowerCase().startsWith("https://")) {
-                    message("Warning: URL should start with http:// or https://. Adding https:// prefix.",
-                            getMainColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
-
+                if (!link.toLowerCase().startsWith("http://") && !link.toLowerCase().startsWith("https://"))
                     link = "https://" + link;
-                }
 
                 out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Select request type [" +
                         getColor(getMainColor()) + "GET" + getColor(getLayoutColor()) + "|" + getColor(getMainColor()) + "1 " + getColor(getLayoutColor()) +
@@ -65,26 +48,16 @@ public class HttpRequestTester {
                         getColor(204) + "DELETE" + getColor(getLayoutColor()) + "|" + getColor(204) + "4" + getColor(getLayoutColor())
                         + " or " + getColor(getMainColor()) + "q" + getColor(getLayoutColor()) + " to quit]: ");
 
-                String requestType = scanner.nextLine().trim().toUpperCase();
-
-                if (requestType.equalsIgnoreCase("q")) {
+                if (link.equalsIgnoreCase("q")) {
                     insertControlChars('n', 1);
-                    message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::print);
-
-                    message("You are in the network page" + getColor(getLayoutColor()) + ".",
-                            getMainColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
                     return;
                 }
 
+                String requestType = scanner.nextLine().trim().toUpperCase();
+
                 Map<String, String> headers = new HashMap<>();
 
+                insertControlChars('n', 1);
                 message("Common headers: Content-Type, Authorization, User-Agent, Accept",
                         getLayoutColor(),
                         getDefaultTextAlignment(),
@@ -92,27 +65,13 @@ public class HttpRequestTester {
                         out::println);
 
                 while (true) {
-                    out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter header [key:value] or press '"
-                            + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + "' to continue: ");
+                    out.print(alignment(getDefaultTextAlignment()) + getColor(getLayoutColor()) + "Enter header [key:value] or press "
+                            + getColor(getMainColor()) + "Enter" + getColor(getLayoutColor()) + " to continue: ");
 
                     String headerInput = scanner.nextLine().trim();
 
                     if (headerInput.isEmpty()) break;
-                    if (headerInput.equalsIgnoreCase("q")) {
-                        insertControlChars('n', 1);
-                        message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                                getLayoutColor(),
-                                getDefaultTextAlignment(),
-                                getDefaultDelay(),
-                                out::print);
-
-                        message("You are in the network page" + getColor(getLayoutColor()) + ".",
-                                getMainColor(),
-                                getDefaultTextAlignment(),
-                                getDefaultDelay(),
-                                out::println);
-                        return;
-                    }
+                    if (headerInput.equalsIgnoreCase("q")) return;
 
                     String[] parts = headerInput.split(":", 2);
                     if (parts.length == 2) {
@@ -123,7 +82,8 @@ public class HttpRequestTester {
                                 getDefaultDelay(),
                                 out::println);
                     } else {
-                        message("Invalid header format. Use key:value",
+                        insertControlChars('n', 1);
+                        message("Invalid header format" + getColor(getLayoutColor()) + ". Use key:value.",
                                 getRejectionColor(),
                                 getDefaultTextAlignment(),
                                 getDefaultDelay(),
@@ -138,8 +98,8 @@ public class HttpRequestTester {
                         || requestType.equalsIgnoreCase("3")) {
 
                     if (!headers.containsKey("Content-Type")) {
-                        message("No Content-Type specified. Using application/json by default.",
-                                getMainColor(),
+                        message("No Content-Type specified" + getColor(getLayoutColor()) + ". Using application/json by default.",
+                                getRejectionColor(),
                                 getDefaultTextAlignment(),
                                 getDefaultDelay(),
                                 out::println);
@@ -148,15 +108,15 @@ public class HttpRequestTester {
                     }
 
                     out.print(alignment(getDefaultTextAlignment())
-                            + getColor(getLayoutColor()) + "Enter request body [or leave empty]: ");
+                            + getColor(getLayoutColor()) + "Enter request body [or press " + getColor(getMainColor()) + "Enter"
+                            + getColor(getLayoutColor()) +  " leave empty]: ");
                     body = scanner.nextLine();
 
                     if (headers.getOrDefault("Content-Type", "").contains("json")
                             && !body.trim().startsWith("{")
                             && !body.isEmpty()) {
-                        message("Warning: Content-Type is application/JSON " +
-                                        "but body doesn't appear to be JSON format.",
-                                getRejectionColor(),
+                        message("Warning: Content-Type is application/JSON, but body doesn't appear to be JSON format.",
+                                getLayoutColor(),
                                 getDefaultTextAlignment(),
                                 getDefaultDelay(),
                                 out::println);
@@ -182,25 +142,13 @@ public class HttpRequestTester {
                 if (!continueChoice.equalsIgnoreCase("y")
                         && !continueChoice.equalsIgnoreCase("+")) {
                     insertControlChars('n', 1);
-                    message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::print);
-
-                    message("You are in the network page" + getColor(getLayoutColor()) + ".",
-                            getMainColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
-
                     return;
                 }
             }
         } catch (Exception e) {
             insertControlChars('n', 1);
-            message("Error: " + e.getMessage(),
-                    getLayoutColor(),
+            message("Error: " + getColor(getLayoutColor()) + e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);
@@ -220,8 +168,8 @@ public class HttpRequestTester {
                 case "3", "PUT" -> "PUT";
                 case "4", "DELETE" -> "DELETE";
                 default -> {
-                    message("Invalid request type. Using GET as default.",
-                            getMainColor(),
+                    message("Invalid request type." + getColor(getLayoutColor()) + " Using GET as default.",
+                            getRejectionColor(),
                             getDefaultTextAlignment(),
                             getDefaultDelay(),
                             out::println);
@@ -247,7 +195,7 @@ public class HttpRequestTester {
                 connection.setRequestProperty("User-Agent", "NetworkPage HTTP Tester");
                 connection.setRequestProperty("Accept", "*/*");
                 message("Using default headers: User-Agent: NetworkPage HTTP Tester, Accept: */*",
-                        getMainColor(),
+                        getLayoutColor(),
                         getDefaultTextAlignment(),
                         getDefaultDelay(),
                         out::println);
@@ -279,13 +227,9 @@ public class HttpRequestTester {
             insertControlChars('n', 1);
 
             String statusColor;
-            if (responseCode >= 200 && responseCode < 300) {
-                statusColor = String.valueOf(getAcceptanceColor());
-            } else if (responseCode >= 300 && responseCode < 400) {
-                statusColor = String.valueOf(getMainColor());
-            } else {
-                statusColor = String.valueOf(getRejectionColor());
-            }
+            if (responseCode >= 200 && responseCode < 300) statusColor = String.valueOf(getAcceptanceColor());
+            else if (responseCode >= 300 && responseCode < 400) statusColor = String.valueOf(getMainColor());
+            else statusColor = String.valueOf(getRejectionColor());
 
             message("Response Code: " + getColor(Integer.parseInt(statusColor))
                             + responseCode + getColor(getLayoutColor()) +
@@ -303,36 +247,42 @@ public class HttpRequestTester {
 
             String contentType = connection.getContentType();
             connection.disconnect();
+
         } catch (MalformedURLException e) {
-            message("Error: Invalid URL format. Make sure to include http:// or https://",
+            message("Error" + getColor(getLayoutColor())
+                            + ": Invalid URL format. Make sure to include http:// or https://",
                     getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);
 
         } catch (UnknownHostException e) {
-            message("Error: Unknown host. Please check the domain name or your internet connection.",
+            message("Error" + getColor(getLayoutColor())
+                            + ": Unknown host. Please check the domain name or your internet connection.",
                     getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);
 
         } catch (ConnectException e) {
-            message("Error: Could not connect to the server. Server may be down or unreachable.",
+            message("Error" + getColor(getLayoutColor())
+                            + ": Could not connect to the server. Server may be down or unreachable.",
                     getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);
 
         } catch (SocketTimeoutException e) {
-            message("Error: Connection timed out. The server took too long to respond.",
+            message("Error" + getColor(getLayoutColor())
+                            + ": Connection timed out. The server took too long to respond.",
                     getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);
 
         } catch (Exception e) {
-            message("Error sending request: " + e.getMessage(),
+            message("Error" + getColor(getLayoutColor())
+                            + " sending request: " + e.getMessage(),
                     getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
@@ -348,9 +298,8 @@ public class HttpRequestTester {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
         StringBuilder response = new StringBuilder();
         String line;
-        while ((line = reader.readLine()) != null) {
-            response.append(line).append("\n");
-        }
+
+        while ((line = reader.readLine()) != null) response.append(line).append("\n");
         return response.toString();
     }
 

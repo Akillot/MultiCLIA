@@ -23,7 +23,6 @@ public class TerminalPage extends Page {
     public static Path currentDirectory = Paths.get("").toAbsolutePath();
     private String[][] commands = {
             {"Enter command", "ec"},
-            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -64,7 +63,6 @@ public class TerminalPage extends Page {
                     insertControlChars('n', 1);
                     executeCommand();
                 }
-                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

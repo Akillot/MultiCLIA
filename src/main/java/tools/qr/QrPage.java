@@ -37,7 +37,6 @@ public class QrPage extends Page {
             {"Modify QR size", "ms"},
             {"Modify image format", "mf"},
             {"Info", "i"},
-            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -85,7 +84,6 @@ public class QrPage extends Page {
                     insertControlChars('n',1);
                 }
 
-                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

@@ -41,7 +41,6 @@ public class CryptographyPage extends Page {
             {"Decryption", "de"},
             {"Hashing", "ha"},
             {"Generate password", "genpass"},
-            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -82,7 +81,6 @@ public class CryptographyPage extends Page {
                 case "decryption", "de" -> decryptionMenu();
                 case "hashing", "ha" -> hashSHA256();
                 case "generate password", "genpass" -> generatePassword();
-                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
@@ -175,10 +173,11 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" encrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
-                    getDefaultDelay(),
+                    0,
                     out::println);
         }
     }
@@ -209,8 +208,9 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" decrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     0,
                     out::println);
@@ -249,8 +249,9 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" encrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     0,
                     out::println);
@@ -284,8 +285,9 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error decrypting RSA: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" decrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     0,
                     out::println);
@@ -336,8 +338,9 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" encrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     0,
                     out::println);
@@ -375,10 +378,11 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" decrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
-                    getDefaultDelay(),
+                    0,
                     out::println);
         }
     }
@@ -415,10 +419,11 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error encrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" encrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
-                    getDefaultDelay(),
+                    0,
                     out::println);
         }
     }
@@ -449,10 +454,11 @@ public class CryptographyPage extends Page {
                     out::println);
 
         } catch (Exception e) {
-            message("Error decrypting text: " + e.getMessage(),
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Error" + getColor(getLayoutColor()) +" decrypting text: " +  e.getMessage(),
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
-                    getDefaultDelay(),
+                    0,
                     out::println);
         }
     }
@@ -484,7 +490,9 @@ public class CryptographyPage extends Page {
                     getDefaultDelay(),
                     out::println);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Error hashing input.", e);
+            insertControlChars('n', 1);
+            throw new RuntimeException(getColor(getRejectionColor()) + "Error" +
+                    getColor(getLayoutColor()) + " hashing input.", e);
         }
     }
 
@@ -515,8 +523,8 @@ public class CryptographyPage extends Page {
                 return;
             }
         } catch (Exception e) {
-            message("Invalid input. Please enter a number.",
-                    getLayoutColor(),
+            message("Invalid input" + getColor(getLayoutColor()) + ". Please enter a number.",
+                   getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);
@@ -562,8 +570,9 @@ public class CryptographyPage extends Page {
 
             marginBorder(2, 1);
         } else {
-            message("Invalid complexity option. Please try again.",
-                    getLayoutColor(),
+            insertControlChars('n', 1);
+            message("Invalid complexity option" + getColor(getLayoutColor()) + ". Please try again.",
+                    getRejectionColor(),
                     getDefaultTextAlignment(),
                     getDefaultDelay(),
                     out::println);

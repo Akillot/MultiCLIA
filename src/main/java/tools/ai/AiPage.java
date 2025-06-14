@@ -17,7 +17,6 @@ public class AiPage extends Page {
     private String[][] commands = {
             {"Ask", "a"},
             {"Info", "i"},
-            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -57,7 +56,6 @@ public class AiPage extends Page {
             switch (input) {
                 case "ask", "a" -> runChatGpt();
                 case "info", "i" -> displayChatGptInfo();
-                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

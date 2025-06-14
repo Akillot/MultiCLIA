@@ -26,8 +26,6 @@ public class TimePage extends Page {
             {"Timer", "t"},
             {"Stopwatch", "sw"},
             {"Time zone", "tz"},
-            {"Restart", "rst"},
-            {"Restart clear", "rcl"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -69,7 +67,6 @@ public class TimePage extends Page {
                 case "timer", "t" -> runTimer();
                 case "stopwatch", "sw" -> runStopwatch();
                 case "time zone", "tz" -> displayCustomTimeZone();
-                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {

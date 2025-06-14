@@ -31,7 +31,6 @@ public class NetworkPage extends Page {
             {"Http request testing", "hrt"},
             {"Network stats", "ns"},
             {"Network interfaces", "ni"},
-            {"Restart", "r"},
             {"Clear", "cl"},
             {"Help", "h"},
             {"Quit", "q"}
@@ -76,7 +75,6 @@ public class NetworkPage extends Page {
                 case "look up dns records", "lr" -> nsLookUp();
                 case "network stats", "ns" -> netStat();
                 case "network interfaces", "ni" -> displayNetworkInterfaces();
-                case "restart", "r" -> clearAndRestartApp();
                 case "clear", "cl" -> clearTerminal();
                 case "help", "h" -> displayListOfCommands(commands);
                 case "quit", "q", "exit", "e" -> {
@@ -332,18 +330,7 @@ public class NetworkPage extends Page {
                 }
 
                 else if (choice.equals("n") || choice.equals("-")) {
-                    message("Status: " + getColor(getAcceptanceColor()) + "✓",
-                            getLayoutColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::print);
-
-                    message("Opening skipped" + getColor(getLayoutColor()) + ". " + getColor(getMainColor())
-                                    + "You are in network page" + getColor(getLayoutColor()) + ".",
-                            getMainColor(),
-                            getDefaultTextAlignment(),
-                            getDefaultDelay(),
-                            out::println);
+                    insertControlChars('n', 1);
                     return;
                 } else out.print("");
             }

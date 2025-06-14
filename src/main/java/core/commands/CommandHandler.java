@@ -32,8 +32,8 @@ public class CommandHandler {
             "settings", "clear", "support", "quit"};
 
     public static final String[] shortCmds = {
-            "h", "tl", "i", "r", "s",
-            "cl", "sup", "q"};
+            "h", "t", "i", "r", "s",
+            "c", "sp", "q"};
 
     public static final String[] fullToolCmds = {
             "time", "network", "crypt", "terminal",
@@ -41,7 +41,7 @@ public class CommandHandler {
             "translate"};
 
     public static final String[] shortToolCmds = {
-            "t", "n", "cr", "term", "a", "qr", "w", "art", "tran"};
+            "tm", "n", "cr", "term", "a", "qr", "w", "art", "tran"};
 
     public static void registerCommands(@NotNull Map<String, Runnable> commandMap) {
         for (int i = 0; i < fullCmds.length; i++) {
@@ -65,7 +65,7 @@ public class CommandHandler {
                 try {
                     InfoPage.displayInfoPage();
                 } catch (InterruptedException e) {
-                    message("Error displaying this page: " + e.getMessage(),
+                    message("Error " + getColor(getLayoutColor()) + "displaying this page." ,
                             getRejectionColor(), getDefaultTextAlignment(), 0, out::println);
                 }
             };
