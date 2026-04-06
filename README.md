@@ -1,10 +1,5 @@
-# MultiCLIA
-
-MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application designed to simplify and enhance the terminal experience on macOS and Linux. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who frequently works in a terminal environment.
-
----
-
-```
+<p align="center">
+  <pre align="center">
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
 ║ ███╗   ███╗██╗   ██╗██╗  ████████╗██╗ ██████╗██╗     ██╗ █████╗  ║
@@ -15,59 +10,122 @@ MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application
 ║ ╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝   ╚═╝ ╚═════╝╚══════╝╚═╝╚═╝  ╚═╝ ║
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
-```
+  </pre>
+</p>
 
-MultiCLIA is a multifunctional, user-friendly Command-Line Interface Application (CLI) designed to simplify and enhance the terminal experience on macOS and Linux. Its intuitive commands and interactive design make it the perfect tool for developers, sysadmins, and anyone who frequently works in a terminal environment.
+<p align="center">
+  <strong>A multifunctional CLI application that turns your terminal into a Swiss Army knife.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Akillot/MultiCLIA/releases/latest"><img src="https://img.shields.io/github/v/release/Akillot/MultiCLIA?style=flat-square&color=blue" alt="Release"></a>
+  <a href="https://github.com/Akillot/MultiCLIA/blob/master/LICENSE"><img src="https://img.shields.io/github/license/Akillot/MultiCLIA?style=flat-square" alt="License"></a>
+  <img src="https://img.shields.io/github/stars/Akillot/MultiCLIA?style=flat-square" alt="Stars">
+  <img src="https://img.shields.io/github/commit-activity/t/Akillot/MultiCLIA?style=flat-square" alt="Commits">
+  <img src="https://img.shields.io/badge/java-17+-orange?style=flat-square" alt="Java 17+">
+  <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey?style=flat-square" alt="Platform">
+</p>
 
 ---
 
-`Version: 3.0`
+## What is MultiCLIA?
 
----
+MultiCLIA is a command-line application for macOS and Linux that bundles everyday developer tools into a single interactive interface. Instead of switching between browser tabs, scripts, and CLI utilities — you get one terminal app with a navigable menu system.
 
-## 🚀 Getting Started
+## Features
 
-### ✅ Requirements:
-- **Operating Systems**: MacOS or Linux
+| Module | What it does |
+|--------|-------------|
+| **AI** | GPT-powered chat and code assistance (OpenAI API) |
+| **Translate** | Text translation via DeepL API |
+| **Cryptography** | Encryption/decryption utilities (BouncyCastle) |
+| **QR Generator** | Create QR codes from text (ZXing) |
+| **Network** | Network diagnostics and HTTP tools (OkHttp) |
+| **Weather** | Weather data lookup |
+| **Art Generator** | ASCII art generation (JFiglet) |
+| **Terminal Emulation** | Terminal simulation tools |
+| **Time** | Time and date utilities |
 
-- **Java**: Version 17 or higher
+## Quick Start
 
-- **Optional**: [Homebrew](https://brew.sh/) for easier installation (macOS)
+### Requirements
 
-### 📥 Installation:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Akillot/MultiCLIA.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd MultiCLIA
-   ```
-3. Run the app:
-   ```bash
-   ./start.sh
-   ```
-###  Installation via Homebrew:
-   ```bash
-   brew install akillot/multiclia/multiclia
-   ```
-   
-To open MultiCLIA after installing via homebrew you should write:
+- **Java 17** or higher
+- macOS or Linux
+
+### Install from source
 
 ```bash
+git clone https://github.com/Akillot/MultiCLIA.git
+cd MultiCLIA
+./start.sh
+```
+
+### Install via Homebrew (macOS)
+
+```bash
+brew install akillot/multiclia/multiclia
 multiclia
 ```
 
-⚠ MultiCLIA via Homebrew:  
-Some users may experience issues when running MultiCLIA installed via Homebrew.  
-Contributions to improve the formula are welcome!
+> **Note:** Homebrew formula may have issues on some setups. Contributions welcome.
 
----
+## Project Structure
 
-### Acknowledgements
+```
+src/main/java/
+├── core/                     # Application core
+│   ├── init/                 # App launcher and bootstrapping
+│   ├── commands/             # Command definitions
+│   ├── ui/                   # Interactive menu and navigation
+│   ├── CommandManager.java   # Command routing
+│   └── Page.java             # Page model
+└── tools/                    # Feature modules
+    ├── ai/                   # OpenAI integration
+    ├── cryptography/         # Encryption tools
+    ├── generate_art/         # ASCII art
+    ├── network/              # HTTP & network utils
+    ├── qr/                   # QR code generation
+    ├── terminal_emulation/   # Terminal tools
+    ├── time/                 # Date/time utilities
+    ├── translate/            # DeepL translation
+    └── weather/              # Weather data
+```
 
-Special thanks to the open-source community and contributors for making this project better and better every day.
+## Tech Stack
 
-### 📧 Contact
+- **Java 17** — core language
+- **Maven** — build system
+- **JLine 3** — interactive terminal I/O
+- **GraalVM JS** — JavaScript execution engine
+- **OpenAI API** — AI chat capabilities
+- **DeepL API** — translation
+- **BouncyCastle** — cryptographic operations
+- **ZXing** — QR code generation
+- **OkHttp** — HTTP client
+- **Gson / Jackson** — JSON processing
 
-For any questions or feedback, feel free to reach out via email at nickzozulia@gmail.com. 
+## Documentation
+
+Detailed guides are available in the [`/documentation`](./documentation) directory:
+
+- [API Guideline](./documentation/API_MultiCLIA_Guideline.md) — API integration reference
+- [Extension Guideline](./documentation/Extension_Guideline.md) — how to build new modules
+- [Reference Guideline](./documentation/Reference_Guideline.md) — general reference
+
+## Contributing
+
+Contributions are welcome. If you want to add a new tool module:
+
+1. Fork the repo
+2. Create a new package under `src/main/java/tools/`
+3. Register the command in `CommandManager.java`
+4. Submit a PR
+
+## License
+
+[MIT](./LICENSE) — use it however you want.
+
+## Contact
+
+**Nick Zozulia** — [nickzozulia@gmail.com](mailto:nickzozulia@gmail.com) — [@nickzozulia](https://x.com/nickzozulia)
