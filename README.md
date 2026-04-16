@@ -1,4 +1,7 @@
-![multiclia, I guess might be there](multiclia.png)
+<p align="center">
+  <img src="multiclia.png" width="750" height="800" />
+</p>
+
 
 <p align="center">
   <strong>A multifunctional CLI application that turns your terminal into a Swiss Army knife.</strong>
